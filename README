@@ -1,1 +1,9 @@
+# README
 The file, set_env.sh is only used if you need to re-generate the grammar files.
+
+## If you need to regenerate the grammar files:
+- Make sure to setup the environment
+        - `source set_env.sh`
+- Make the python files.
+	- `antlr4 -Dlanguage=Python3 <GRAMMARFILE>`
+- This all assumes that you have antlr4 properly installed.

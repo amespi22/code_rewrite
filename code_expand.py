@@ -8,7 +8,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-n", "--file_name", help="File name to look at",
             type=str, required=True)
-    parser.add_argument("-f", "--out_file", help="Function name to operate on",
+    parser.add_argument("-f", "--out_file", help="Unused, should be the output file name",
             type=str, required=True)
 
     args = parser.parse_args()

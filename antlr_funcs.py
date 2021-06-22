@@ -56,7 +56,7 @@ def get_tree_from_string(inp):
     inp = InputStream(inp)
     return get_tree(inp)
 
-def parse_tree_dot(tree,outf):
+def print_ctx_bfs(tree,outf):
     q = []
     #get first set of children
     pushq(q, list(tree.getChildren()))
@@ -155,7 +155,7 @@ def test_functs():
     for f in fns:
         print(f.getText())
         print(f"all func vars {get_all_vars(f)}")
-    parse_tree_dot(fns[0], "tmp")
+    print_ctx_bfs(fns[0], "tmp")
     print(get_func_args(fns[0]))
     """
     print("First function has the following conditionals")

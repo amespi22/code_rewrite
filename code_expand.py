@@ -98,7 +98,6 @@ def expand_func_args(ctx):
         try:
             new_vars = []
             all_types, all_vars = get_all_vars(f,True)
-            all_vars.append("string");
             pecs = find_ctx(f, "<class 'CParser.CParser.PostfixExpressionContext'>")
             pecs = [p for p in pecs if p.getChildCount() > 1]
             for p in pecs:

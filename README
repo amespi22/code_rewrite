@@ -7,3 +7,7 @@ The file, set_env.sh is only used if you need to re-generate the grammar files.
 - Make the python files.
 	- `antlr4 -Dlanguage=Python3 <GRAMMARFILE>`
 - This all assumes that you have antlr4 properly installed.
+
+## File Naming
+- Please name your files `new_<filename>.c`.
+- The .gitignore file will ignore all things named in this way.

@@ -6,9 +6,9 @@ import sys
 def main():
     #read in the function and file we weant to look at
     parser = argparse.ArgumentParser()
-    parser.add_argument("-n", "--file_name", help="File name to look at",
+    parser.add_argument("-n", "--file_name", help="Input file to look at",
             type=str, required=True)
-    parser.add_argument("-f", "--out_file", help="Unused, should be the output file name",
+    parser.add_argument("-f", "--out_file", help="Output file name",
             type=str, required=True)
 
     args = parser.parse_args()
@@ -34,7 +34,7 @@ def main():
         cur_pro = apply_changes[i](cur_pro, rewrite)
 
     #write out the new program
-    write_new_program(cur_pro,prog_name)
+    write_new_program(cur_pro, out_name)
 
 def expand_if_else(ctx):
     sel_stmt = "<class 'CParser.CParser.SelectionStatementContext'>"
@@ -304,7 +304,7 @@ def gen_dec_changes(cur_prog, rewrite):
 
 def write_new_program(p,prog_name):
     #write the new file
-    with open(f"new_{prog_name}", 'w') as outfile:
+    with open(f"{prog_name}", 'w') as outfile:
         outfile.write(p)
 
 if __name__ == "__main__":

@@ -9,7 +9,7 @@ def main():
     parser.add_argument("-n", "--file_name", help="Input file to look at",
             type=str, required=True)
     parser.add_argument("-f", "--out_file", help="Output file name",
-            type=str, required=True)
+            type=str, required=False, default="new_code_expand.c")
 
     args = parser.parse_args()
     prog_name = args.file_name

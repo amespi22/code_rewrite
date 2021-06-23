@@ -261,6 +261,8 @@ def all_tokens(ctx):
 
 #This is the quick and dirty way of doing this, but is not going
 #to affect the code enough to makem me want to make it faster
+#if someone gets bored we can do this with a linked list so we
+#don't have to reverse the list two times.
 def pushq(q, lst):
     return q.extend(lst)
 

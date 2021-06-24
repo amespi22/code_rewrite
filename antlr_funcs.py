@@ -272,6 +272,25 @@ def popq(q):
     q.reverse()
     return r
 
+#Input a file with a list of .c files to search functions for
+#Output a dictionary of functions and their arguments
+def parse_pre_process(inf):
+    #return dictionary
+    ret_d = {}
+    ret_d2 = {}
+    with open(inf, 'r') as infile:
+        cnts = infile.readlines()
+    #get rid of the new lines
+    cnts = [x.strip() for x in cnts]
+    for c in cnts:
+        #read all the files and pull out the functions from each file to return
+        p,t = get_tree_from_file(c)
+        fns = get_functions(t)
+        for f in fns:
+            ret_d[get_func_name(f)] = get_func_args(f)
+            ret_d2[get_func_name(f)] = f.getChild(0).getText()
+    return ret_d,ret_d2
+
 if __name__ == "__main__":
     main()
 

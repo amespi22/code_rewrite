@@ -10,10 +10,25 @@ def main():
             type=str, required=True)
     parser.add_argument("-f", "--out_file", help="Output file name",
             type=str, required=False, default="new_code_expand.c")
+    parser.add_argument("-p", "--pre_process", help="File with list of files for pre-processing.\
+            File names must be absolute. Only one file name per line.",
+            type=str, required=False, default="")
 
     args = parser.parse_args()
     prog_name = args.file_name
     out_name = args.out_file
+    pre_process = args.pre_process
+
+    #this global things feels really wrong, but it keeps me from breaking the
+    #way things are called in the loop at the bottom of the function
+    global funcs_and_args
+    #functions and their return types
+    global funcs_and_rts
+    if pre_process != "":
+        #This means we have a file to parse
+        #File should have a new line for each file to parse
+        #Files named should be .c files
+        funcs_and_args,funcs_and_rts = parse_pre_process(pre_process)
 
     #original program
     cur_pro = ""
@@ -39,11 +54,10 @@ def main():
 def expand_if_else(ctx):
     sel_stmt = "<class 'CParser.CParser.SelectionStatementContext'>"
     fns = get_functions(ctx)
-    funcs = {}
     rewrites = {}
     #This gives us all functions in the file and it's args
     for f in fns:
-        funcs[get_func_name(f)] = f.getChild(0).getText()
+        funcs_and_rts[get_func_name(f)] = f.getChild(0).getText()
     #for all functions
     for f in fns:
         ifs = find_ctx(f, sel_stmt)
@@ -54,14 +68,14 @@ def expand_if_else(ctx):
             #all function calls inside the if
             for c in fcs:
                 f_name = c.getChild(0).getText()
-                if f_name in funcs:
+                if f_name in funcs_and_rts:
                     func_args = c.getChild(2).getText()
                     r_vars = gen_new_vars(all_vars, 1)
                     all_vars.extend(r_vars)
                     start_loc = get_start_loc(c)
                     end_loc = get_end_loc(c)
                     dec = r_vars[0]
-                    rewrites[start_loc, end_loc] = (f"{funcs[f_name]} {dec} = {c.getText()};", dec)
+                    rewrites[start_loc, end_loc] = (f"{funcs_and_rts[f_name]} {dec} = {c.getText()};", dec)
     return rewrites
 
 def gen_if_changes(cur_prog, rewrite):
@@ -88,11 +102,10 @@ def gen_if_changes(cur_prog, rewrite):
 def expand_func_args(ctx):
     #find all functions, record their names and paramaters
     fns = get_functions(ctx)
-    funcs = {}
     rewrites = {}
     #This gives us all functions in the file and it's args
     for f in fns:
-        funcs[get_func_name(f)] = get_func_args(f)
+        funcs_and_args[get_func_name(f)] = get_func_args(f)
     #for each function find all <class 'CParser.CParser.PostfixExpressionContext'>
     for f in fns:
         try:
@@ -102,7 +115,7 @@ def expand_func_args(ctx):
             pecs = [p for p in pecs if p.getChildCount() > 1]
             for p in pecs:
                 f_name = p.getChild(0).getText()
-                if f_name in funcs:
+                if f_name in funcs_and_args:
                     #print(f"function {f_name} is present with args {p.getChild(2).getText()}")
                     func_args = [c for c in p.getChild(2).getText().split(',')]
                     if func_args == [')']:
@@ -127,7 +140,7 @@ def expand_func_args(ctx):
                         #add to the list of all variables so they are not used
                         #again in the same function on another call
                         #all_vars.extend(r_vars)
-                        fun_arg_types = funcs[f_name]
+                        fun_arg_types = funcs_and_args[f_name]
                         #print(fun_arg_types)
                         new_arg_string = f"{f_name}("
                         new_var_dec = ""

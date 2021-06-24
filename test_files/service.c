@@ -17,7 +17,7 @@ int main(int cgc_argc, char *cgc_argv[]) {
     if (cgc_transmit_all(1, HI, sizeof(HI)-1) != 0) {
         cgc__terminate(0);
     }
-    
+
     while(1){
         if (cgc_transmit_all(1, ASK, sizeof(ASK)-1) != 0) {
             cgc__terminate(0);
@@ -39,11 +39,12 @@ int main(int cgc_argc, char *cgc_argv[]) {
     }
     return 0;
 }
-
+/*
 int cgc_receive_delim(int i, char* str, int size, char* str2)
 {
     return 0;
 }
+*/
 
 int cgc_check(){
     int len = -1;
@@ -55,7 +56,7 @@ int cgc_check(){
 #ifdef PATCHED
     if (cgc_receive_delim(0, string, sizeof(string), '\n') != 0)
         return -1;
-#else    
+#else
     if (cgc_receive_delim(0, string, 128, '\n') != 0)
         return -1;
 #endif
@@ -75,6 +76,6 @@ int cgc_check(){
         if (cgc_transmit_all(1, EASTEREGG, sizeof(EASTEREGG)-1) != 0) {
             cgc__terminate(0);
         }
-    }    
+    }
     return pal;
 }

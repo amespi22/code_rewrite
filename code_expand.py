@@ -29,6 +29,9 @@ def main():
         #File should have a new line for each file to parse
         #Files named should be .c files
         funcs_and_args,funcs_and_rts = parse_pre_process(pre_process)
+    else:
+        funcs_and_rts = {}
+        funcs_and_args = {}
 
     #original program
     cur_pro = ""
@@ -108,11 +111,11 @@ def expand_func_args(ctx):
         funcs_and_args[get_func_name(f)] = get_func_args(f)
     #for each function find all <class 'CParser.CParser.PostfixExpressionContext'>
     for f in fns:
+        new_vars = []
+        all_types, all_vars = get_all_vars(f,True)
+        pecs = find_ctx(f, "<class 'CParser.CParser.PostfixExpressionContext'>")
+        pecs = [p for p in pecs if p.getChildCount() > 1]
         try:
-            new_vars = []
-            all_types, all_vars = get_all_vars(f,True)
-            pecs = find_ctx(f, "<class 'CParser.CParser.PostfixExpressionContext'>")
-            pecs = [p for p in pecs if p.getChildCount() > 1]
             for p in pecs:
                 f_name = p.getChild(0).getText()
                 if f_name in funcs_and_args:
@@ -141,7 +144,12 @@ def expand_func_args(ctx):
                         #again in the same function on another call
                         #all_vars.extend(r_vars)
                         fun_arg_types = funcs_and_args[f_name]
-                        #print(fun_arg_types)
+
+                        #This happens in nested situations and for now
+                        #I ignore it silently
+                        if len(func_args) > len(fun_arg_types):
+                            continue
+
                         new_arg_string = f"{f_name}("
                         new_var_dec = ""
                         for i in range(len(func_args)):
@@ -157,7 +165,7 @@ def expand_func_args(ctx):
                         #print (new_arg_string[:-1]+')')
                         rewrites[start_loc,end_loc] = (new_var_dec,new_arg_string[:-1]+')')
         except:
-            pass
+            continue
 
     #record the changes needed to re-write the code
     return rewrites
@@ -326,6 +334,11 @@ def write_new_program(p,prog_name):
 def fix_type(typ):
     if typ.startswith("const"):
         typ = typ.replace("const", "const ")
+    if typ.startswith("signed"):
+        typ = typ.replace("signed", "signed ")
+    if typ.startswith("unsigned"):
+        typ = typ.replace("unsigned", "unsigned ")
+
     return typ
 
 if __name__ == "__main__":

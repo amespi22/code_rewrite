@@ -280,6 +280,7 @@ def expand_decs(ctx):
                     typ = d.getChild(0).getText()
                     stmt = d.getChild(1).getText()
                     var = d.getChild(1).getChild(0).getChild(0).getText()
+                    typ = fix_type(typ)
                     #print(f"{typ} {var};")
                     #print(f"{stmt};")
                     #line_num - 1 cause I think it's not 0 indexed
@@ -318,6 +319,14 @@ def write_new_program(p,prog_name):
     #write the new file
     with open(f"{prog_name}", 'w') as outfile:
         outfile.write(p)
+
+#Other type fixes should go here
+#antlr seems to squish things together so if this happesn to you
+#just follow the example of the const fix
+def fix_type(typ):
+    if typ.startswith("const"):
+        typ = typ.replace("const", "const ")
+    return typ
 
 if __name__ == "__main__":
     main()

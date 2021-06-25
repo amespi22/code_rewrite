@@ -279,7 +279,7 @@ def expand_decs(ctx):
         for d in decs:
             #see which declarations are "compound"
             cmpd = find_ctx(d, "<class 'CParser.CParser.InitDeclaratorContext'>")
-            if (cmpd == []) or  ('=' not in d.getText()):
+            if (cmpd == []) or  ('=' not in d.getText()) or (const(d.getText())):
                 pass
                 #print("No initializer+declarations found")
             else:
@@ -338,8 +338,20 @@ def fix_type(typ):
         typ = typ.replace("signed", "signed ")
     if typ.startswith("unsigned"):
         typ = typ.replace("unsigned", "unsigned ")
-
+    if "longlong" in typ:
+        typ = typ.replace("longlong", "long long")
+    if "longint" in typ:
+        typ = typ.replace("longint", "long int")
+    if "shortint" in typ:
+        typ = typ.replace("shortint", "short int")
     return typ
+
+def const(dec):
+    types = ["int", "long", "float", "double"]
+    for t in types:
+        if t and "const" in dec:
+            return True
+    return False
 
 if __name__ == "__main__":
     main()

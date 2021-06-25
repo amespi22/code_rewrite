@@ -349,7 +349,7 @@ def fix_type(typ):
 def const(dec):
     types = ["int", "long", "float", "double"]
     for t in types:
-        if t and "const" in dec:
+        if (t in dec) and ("const" in dec):
             return True
     return False
 

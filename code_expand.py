@@ -43,8 +43,8 @@ def main():
 
     #loop to run all code transformations
     #order matters, don't re-arrange
-    change_funcs = [expand_if_else, expand_decs,expand_func_args,single_declarations,expand_decs]
-    apply_changes = [gen_if_changes, gen_dec_changes,gen_func_changes,gen_dec_changes,gen_dec_changes]
+    change_funcs = [expand_if_else,single_declarations, expand_decs,expand_func_args,expand_decs]
+    apply_changes = [gen_if_changes,gen_dec_changes, gen_dec_changes,gen_func_changes,gen_dec_changes]
     for i in range(len(change_funcs)):
         if i != 0:
             p,t = get_tree_from_string(cur_pro)
@@ -144,6 +144,10 @@ def expand_func_args(ctx):
                         #again in the same function on another call
                         #all_vars.extend(r_vars)
                         fun_arg_types = funcs_and_args[f_name]
+
+                        #added this cause we don't need functions that take
+                        #const args to make the varialbes we send them const
+                        de_const(fun_arg_types)
 
                         #This happens in nested situations and for now
                         #I ignore it silently
@@ -279,22 +283,29 @@ def expand_decs(ctx):
         for d in decs:
             #see which declarations are "compound"
             cmpd = find_ctx(d, "<class 'CParser.CParser.InitDeclaratorContext'>")
-            if (cmpd == []) or  ('=' not in d.getText()) or (const(d.getText())):
+            if (cmpd == []) or  ('=' not in d.getText()):
                 pass
                 #print("No initializer+declarations found")
             else:
-                #figure out the arguments.
-                try:
+                if (const(d.getText())):
+                    #Here if we have a const that can't be broken up
                     typ = d.getChild(0).getText()
                     stmt = d.getChild(1).getText()
-                    var = d.getChild(1).getChild(0).getChild(0).getText()
                     typ = fix_type(typ)
-                    #print(f"{typ} {var};")
-                    #print(f"{stmt};")
-                    #line_num - 1 cause I think it's not 0 indexed
-                    rewrite[(get_line_num(d)-1,get_last_line_num(d))] = f"{typ} {var};\n{stmt};\n"
-                except:
-                    continue
+                    rewrite[(get_line_num(d)-1,get_last_line_num(d))] = f"{typ} {stmt};\n"
+                else:
+                    #figure out the arguments.
+                    try:
+                        typ = d.getChild(0).getText()
+                        stmt = d.getChild(1).getText()
+                        var = d.getChild(1).getChild(0).getChild(0).getText()
+                        typ = fix_type(typ)
+                        #print(f"{typ} {var};")
+                        #print(f"{stmt};")
+                        #line_num - 1 cause I think it's not 0 indexed
+                        rewrite[(get_line_num(d)-1,get_last_line_num(d))] = f"{typ} {var};\n{stmt};\n"
+                    except:
+                        continue
     return rewrite
 
 def gen_dec_changes(cur_prog, rewrite):
@@ -332,7 +343,7 @@ def write_new_program(p,prog_name):
 #antlr seems to squish things together so if this happesn to you
 #just follow the example of the const fix
 def fix_type(typ):
-    if typ.startswith("const"):
+    if "const" in typ:
         typ = typ.replace("const", "const ")
     if typ.startswith("signed"):
         typ = typ.replace("signed", "signed ")
@@ -347,11 +358,25 @@ def fix_type(typ):
     return typ
 
 def const(dec):
+    """
     types = ["int", "long", "float", "double"]
     for t in types:
         if (t in dec) and ("const" in dec):
             return True
     return False
+    """
+    if dec.startswith("constchar*"):
+        return False
+    if "const" in dec:
+        return True
+    return False
+
+def de_const(lst):
+    for i in range(len(lst)):
+        typ = lst[i][0]
+        if const(typ):
+            lst[i] = typ.replace("const",""),lst[i][1]
+
 
 if __name__ == "__main__":
     main()

@@ -4,6 +4,7 @@ from antlr4 import *
 from CLexer import CLexer
 from CParser import CParser
 from CListener import CListener
+import linked_list
 import inspect
 import codecs
 
@@ -19,7 +20,7 @@ def main():
     walker.walk(printer, tree)
     """
     test_functs()
-    args = get_func_args_from_inp("test.c", "simple_func",'file')
+    args = get_func_args_from_inp("test_files/test.c", "simple_func",'file')
     print(args)
 
     """
@@ -57,18 +58,18 @@ def get_tree_from_string(inp):
     return get_tree(inp)
 
 def print_ctx_bfs(tree,outf):
-    q = []
+    q = linked_list.ll()
     #get first set of children
-    pushq(q, list(tree.getChildren()))
+    q.push_list(list(tree.getChildren()))
     #go through all children breadth first
     txt = ""
-    while q != []:
-        e = popq(q)
+    while q.length > 0 :
+        e = q.dequeue()
         txt += f"Text={e.getText()}\nType={type(e)}\n"
         txt += f"Child Count = {e.getChildCount()}\n"
         txt += "-------\n"
         if e.getChildCount() != 0:
-            pushq(q,list(e.getChildren()))
+            q.push_list(list(e.getChildren()))
     with open(outf, 'w') as outfile:
         outfile.write(txt)
     """
@@ -83,12 +84,9 @@ def find_ctx(tree,ctx):
     #get first set of children
     pushq(q, list(tree.getChildren()))
     #go through all children breadth first
-    txt = ""
     r = []
     while q != []:
         e = popq(q)
-        txt += f"Text={e.getText()}\nType={type(e)}\n"
-        txt += "-------\n"
         t = type(e)
         if str(t) == ctx:
             r.append(e)
@@ -149,13 +147,13 @@ def get_function(ctx, f_name):
             return f
 
 def test_functs():
-    p,t =get_tree_from_file("test.c")
+    p,t =get_tree_from_file("test_files/test.c")
     fns = get_functions(t)
     print("Found the following functions")
     for f in fns:
         print(f.getText())
-        print(f"all func vars {get_all_vars(f)}")
-    print_ctx_bfs(fns[0], "tmp")
+        print(f"all func vars {get_all_vars(f,False)}")
+    print_ctx_bfs(fns[0], "tmp2")
     print(get_func_args(fns[0]))
     """
     print("First function has the following conditionals")

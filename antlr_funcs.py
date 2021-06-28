@@ -240,7 +240,7 @@ def get_function_info(functions,global_vars):
                 values=pscope[cur]['values']
                 i+=1
             dprint(f"last scope : {get_string2(cur)}")
-            scope_vars[fname][parent_scope]={'variables':variables,'values':values,'symbol2type_lut':var_lut}
+            scope_vars[fname][p]={'variables':variables,'values':values,'symbol2type_lut':var_lut,'parent':parent_scope}
 
     print_scope_info(scope_vars)
     return scope_vars
@@ -251,9 +251,10 @@ def print_scope_info(scope):
         i=0
         for sn, s in fs.items():
             print("{")
+            parent=s['parent'] if s['parent'] else sn
             var_s=s['variables']
             val_s=s['values']
-            print(f"/* scope = {get_string2(sn)}*/")
+            print(f"/* scope = {get_string2(parent)}*/")
             for x in val_s:
                 try:
                     typ,var,varinfo,value=x
@@ -502,8 +503,11 @@ def get_decls(ctx,child_ctx,var_lut:dict,ignore_nodes:list):
         else:
             check_these_nodes.append(i)
     
+    #global debug
+    #debug=True
     for i,p in enumerate(check_these_nodes):
-        print(f"check_these_nodes[{i}]: {get_string2(p)}")
+        dprint(f"check_these_nodes[{i}]: {get_string2(p)}")
+    #debug=False
     declarations=list()
 
     val_t=list()
@@ -719,30 +723,13 @@ def get_scopes(node):
             node2parent[c]=None
     for i,c in enumerate(scopes+parents):
         compound=(c in scopes)
-        #if not compound:
-        #    print("===========================")
-        #    print(f"[c {i}]    : {type(c)} => {get_string2(c)} ")
         pc=node2parent.get(c,None)
-        #if pc and not compound:
-        #    print(f"[c {i}]    : parent : {type(pc)} => {get_string2(pc)} ")
-        #    print(f"[c {i}]    : c != parent => {c!=pc}")
-        #if not compound:
-        #    print("------------")
 
         # when the 5th parameter is False -> BFS, else DFS
         # when the last/6th parameter is False [if true, then we check (2) then (1)]
         # (1)we check to see if the node type is in the list of multctx [if so, add it to return list]
         # (2)then if its type is in the screen list or the node is in ignore nodes list, don't process any of its children
         c_i=list(find_multictx(c,okay_scope_changes,okay_scope_changes,None,True,False))
-        #if not compound:
-        #    for ci,c_ii in enumerate(c_i):
-        #        if c_ii != c:
-        #            print(f"[c {i}]{ci} : {type(c_ii)} {c_ii} \n{ci} : {get_string2(c_ii)} ")
-        #            x=f"type : ( {type(node2parent[c_ii])} ) "
-        #            x+=f" = {get_string2(node2parent[c_ii])}"
-        #            print(f"[c {i}]{ci} : parent => {x}")
-        #            print(f"[c {i}]{ci} : c_ii != c => {c_ii!=c}")
-        #            print("------------")
         cp_i=[node2parent[c_ii] for c_ii in c_i if c_ii != c ]
         node2children[c]=cp_i
         
@@ -762,17 +749,7 @@ def get_scopes(node):
         if t[0] in [CParser.BlockItemContext,CParser.FunctionDefinitionContext]:
             pass
             
-        #if not compound:
-        #    print(f"+++++++++++")
-        #    print(f"node[{i}] : {p} \nnode[{i}] : parent,node type = {t}\nnode[{i}] : value = {get_string2(p)}") 
-        #    if ancestors and len(ancestors)>0:
-        #        print(f"node[{i}] : ancestors = {[get_string2(p) for p in ancestors]}")
-        #    if child_scopes and len(child_scopes)>0:
-        #        print(f"node[{i}] : scope_children = {[get_string2(s) for s in child_scopes]}")
         ____,sibs=list(get_siblings_to_ignore(p))
-        #if not compound:
-        #    if sibs and len(sibs)>0:
-        #        print(f"node[{i}] : sibs = {[get_string2(s) for s in sibs]}")
         scopes_[p] = { 'parent':parent, 'children':child_scopes,'ignore':sibs,'scope_stack':ancestors, 'compound':compound }
 
 

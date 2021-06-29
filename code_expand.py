@@ -369,6 +369,10 @@ def const(dec):
         return False
     if "const" in dec:
         return True
+    #not technically a const, but a quick way to ignore
+    #arrays of characters that are defined like strings
+    if '[' in dec and ']' in dec:
+        return True
     return False
 
 def de_const(lst):

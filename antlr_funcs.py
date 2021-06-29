@@ -25,7 +25,7 @@ def main():
         args = get_func_args_from_inp("test_files/test.c", "simple_func",'file')
         print(args)
     p,t =get_tree_from_file("test_files/tmp_test1.c")
-    print_ctx_bfs(t,"help")
+    #print_ctx_bfs(t,"help")
     get_function_info(functions=get_functions(t),global_vars=[])
 
     """
@@ -242,7 +242,7 @@ def get_function_info(functions,global_vars):
             dprint(f"last scope : {get_string2(cur)}")
             scope_vars[fname][p]={'variables':variables,'values':values,'symbol2type_lut':var_lut,'parent':parent_scope}
 
-    print_scope_info(scope_vars)
+    #print_scope_info(scope_vars)
     return scope_vars
 
 def print_scope_info(scope):
@@ -265,12 +265,41 @@ def print_scope_info(scope):
                            or f" {def_var} " in value:
                             def_var+=def_var
                         print("\t{ "+f"{typ} {def_var}{varinfo}; {def_var}= {value}; /* {var} */"+" }") 
+                        print(f"loc to put in code = {get_end_loc(parent)}")
                 except Exception as e:
                     print(f"Exception with x={x}")
                     print(e)
                     raise
             print("}")
             i+=1
+
+def get_fix_loc_rewrites(scope):
+    rewrites = []
+    for fn,fs in scope.items():
+        i=0
+        for sn, s in fs.items():
+            parent=s['parent'] if s['parent'] else sn
+            var_s=s['variables']
+            val_s=s['values']
+            for x in val_s:
+                try:
+                    typ,var,varinfo,value=x
+                    type_info=typ
+                    def_var="i"
+                    if value:
+                        if value==def_var or value.endswith(f" {def_var}") or value.startswith(f"{def_var} ") \
+                           or f" {def_var} " in value:
+                            def_var+=def_var
+                        rep_str = ("\t{ "+f"{typ} {def_var}{varinfo}; {def_var}= {value}; /* {var} */"+" }") 
+                        loc = get_end_loc(parent)
+                        rewrites.append((rep_str,loc))
+                except Exception as e:
+                    print(f"Exception with x={x}")
+                    print(e)
+                    raise
+            #print("}")
+            i+=1
+    return rewrites
 
 def get_string2(ctx,ignore_list=None):
     if ctx==None:
@@ -479,7 +508,7 @@ def get_decls(ctx,child_ctx,var_lut:dict,ignore_nodes:list):
     rules_with_comparators=[CParser.RelationalExpressionContext,CParser.EqualityExpressionContext]
     rules_with_assignment=[CParser.InitDeclaratorContext,CParser.AssignmentExpressionContext]
     rules_with_declarations=[CParser.ForDeclarationContext,CParser.DeclarationContext]
-    ops=['=','==','<=','>=','<','>','!=']
+    ops=['==','<=','>=','<','>','!=']
     # so I needed a function that enables evaluation of the first okay_scope_changes follows screen_me
     # the point is to identify declarations, equality, etc
     a = [p for p in find_multictx(ctx, [tree.Tree.TerminalNodeImpl]+rules_with_declarations,None,ignore_me) \

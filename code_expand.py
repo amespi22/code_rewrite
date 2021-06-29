@@ -51,8 +51,24 @@ def main():
         rewrite = change_funcs[i](t)
         cur_pro = apply_changes[i](cur_pro, rewrite)
 
+    #FIX-INGREDIENTS
+    p,t = get_tree_from_string(cur_pro)
+    scope_vars = get_function_info(functions=get_functions(t),global_vars=[])
+    fix_loc_rewrites = get_fix_loc_rewrites(scope_vars)
+    cur_pro = gen_fix_loc_changes(cur_pro, fix_loc_rewrites)
+
     #write out the new program
     write_new_program(cur_pro, out_name)
+
+def gen_fix_loc_changes(cur_prog, rewrite):
+    lns = cur_prog.split('\n')
+    lns = [x+"\n" for x in lns]
+    lns = lns[:-1]
+    for r in rewrite:
+        code, loc = r
+        spaces = get_line_spaces(lns[loc[0]-2])
+        lns[loc[0]-2] += f"{spaces}{code.strip()}\n"
+    return "".join(lns)
 
 def expand_if_else(ctx):
     sel_stmt = "<class 'CParser.CParser.SelectionStatementContext'>"

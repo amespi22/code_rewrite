@@ -289,6 +289,8 @@ def get_fix_loc_rewrites(scope,def_vars=["i"]):
                 try:
                     typ,var,varinfo,value=x
                     type_info=typ
+                    def_vars = get_all_vars(fn, False)
+                    print(def_vars)
                     for def_var in def_vars:
                         if value:
                             loc = get_end_loc(parent)

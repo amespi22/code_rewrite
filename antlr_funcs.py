@@ -928,10 +928,15 @@ def get_all_vars(func_ctx, ret_types):
                 # This works for ints, longs, floats etc
                 if d.getChildCount() == 3:
                     r_vars.append(d.getChild(1).getChild(0).getChild(0).getText())
+                    #print(d.getChild(1).getChild(0).getChild(0).getText())
                     r_types.append(d.getChild(0).getChild(0).getText())
                 #This works for structs
                 if d.getChildCount() == 2:
-                    r_vars.append(d.getChild(0).getChild(1).getText())
+                    if d.getChild(0).getChildCount() == 2:
+                        r_vars.append(d.getChild(0).getChild(1).getText())
+                    if d.getChild(0).getChildCount() == 3:
+                        r_vars.append(d.getChild(0).getChild(2).getText())
+                    #r_vars.append(d.getChild(0).getChild(1).getText())
         if ret_types == True:
             return (r_types,r_vars)
         else:

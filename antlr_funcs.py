@@ -277,7 +277,7 @@ def print_scope_info(scope):
             print("}")
             i+=1
 
-def get_fix_loc_rewrites(scope):
+def get_fix_loc_rewrites(scope,def_vars=["i"]):
     rewrites = []
     for fn,fs in scope.items():
         i=0
@@ -289,18 +289,18 @@ def get_fix_loc_rewrites(scope):
                 try:
                     typ,var,varinfo,value=x
                     type_info=typ
-                    def_var="i"
-                    if value:
-                        if value==def_var or value.endswith(f" {def_var}") or value.startswith(f"{def_var} ") \
-                           or f" {def_var} " in value:
-                            def_var+=def_var
-                        if varinfo != "":
-                            rep_str = ("\t{ "+f"{typ} {def_var}{varinfo} = {value}; /* {var} */"+" }") 
-                        elif varinfo == "":
-                            rep_str = ("\t{ "+f"{typ} {def_var}{varinfo}; {def_var}= {value}; /* {var} */"+" }") 
-                        loc = get_end_loc(parent)
-                        #rewrites.append(("/* INSERTING */",loc))
-                        rewrites.append((rep_str,loc))
+                    for def_var in def_vars:
+                        if value:
+                            loc = get_end_loc(parent)
+                            if value==def_var or value.endswith(f" {def_var}") or value.startswith(f"{def_var} ") \
+                            or f" {def_var} " in value:
+                                #rewrites.append((f"/* SKIPPED ({typ}) {def_var}{varinfo} - used in assignment '{value}'  */",loc))
+                                continue
+                            if varinfo != "":
+                                rep_str = ("\t{ "+f"{typ} {def_var}{varinfo} = {value}; /* {var} */"+" }") 
+                            elif varinfo == "":
+                                rep_str = ("\t{ "+f"{typ} {def_var}{varinfo}; {def_var}= {value}; /* {var} */"+" }") 
+                            rewrites.append((rep_str,loc))
                 except Exception as e:
                     print(f"Exception with x={x}")
                     print(e)

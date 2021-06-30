@@ -24,8 +24,9 @@ def main():
         test_functs()
         args = get_func_args_from_inp("test_files/test.c", "simple_func",'file')
         print(args)
-    p,t =get_tree_from_file("test_files/tmp_test1.c")
-    #print_ctx_bfs(t,"help")
+    #p,t =get_tree_from_file("test_files/tmp_test1.c")
+    p,t =get_tree_from_file("test_files/test.c")
+    print_ctx_bfs(t,"help")
     get_function_info(functions=get_functions(t),global_vars=[])
 
     """
@@ -262,10 +263,13 @@ def print_scope_info(scope):
                     def_var="i"
                     if value:
                         if value==def_var or value.endswith(f" {def_var}") or value.startswith(f"{def_var} ") \
-                           or f" {def_var} " in value:
-                            def_var+=def_var
-                        print("\t{ "+f"{typ} {def_var}{varinfo}; {def_var}= {value}; /* {var} */"+" }") 
-                        print(f"loc to put in code = {get_end_loc(parent)}")
+                        or f" {def_var} " in value:
+                                def_var+=def_var
+                        if varinfo != "":
+                            print("\t{ "+f"{typ} {def_var}{varinfo} = {value}; /* {var} */"+" }") 
+                        elif varinfo == "":
+                            print("\t{ "+f"{typ} {def_var}{varinfo}; {def_var}= {value}; /* {var} */"+" }") 
+                            print(f"loc to put in code = {get_end_loc(parent)}")
                 except Exception as e:
                     print(f"Exception with x={x}")
                     print(e)
@@ -273,7 +277,7 @@ def print_scope_info(scope):
             print("}")
             i+=1
 
-def get_fix_loc_rewrites(scope):
+def get_fix_loc_rewrites(scope,def_vars=["i"]):
     rewrites = []
     for fn,fs in scope.items():
         i=0
@@ -285,14 +289,18 @@ def get_fix_loc_rewrites(scope):
                 try:
                     typ,var,varinfo,value=x
                     type_info=typ
-                    def_var="i"
-                    if value:
-                        if value==def_var or value.endswith(f" {def_var}") or value.startswith(f"{def_var} ") \
-                           or f" {def_var} " in value:
-                            def_var+=def_var
-                        rep_str = ("\t{ "+f"{typ} {def_var}{varinfo}; {def_var}= {value}; /* {var} */"+" }") 
-                        loc = get_end_loc(parent)
-                        rewrites.append((rep_str,loc))
+                    for def_var in def_vars:
+                        if value:
+                            loc = get_end_loc(parent)
+                            if value==def_var or value.endswith(f" {def_var}") or value.startswith(f"{def_var} ") \
+                            or f" {def_var} " in value:
+                                #rewrites.append((f"/* SKIPPED ({typ}) {def_var}{varinfo} - used in assignment '{value}'  */",loc))
+                                continue
+                            if varinfo != "":
+                                rep_str = ("\t{ "+f"{typ} {def_var}{varinfo} = {value}; /* {var} */"+" }") 
+                            elif varinfo == "":
+                                rep_str = ("\t{ "+f"{typ} {def_var}{varinfo}; {def_var}= {value}; /* {var} */"+" }") 
+                            rewrites.append((rep_str,loc))
                 except Exception as e:
                     print(f"Exception with x={x}")
                     print(e)
@@ -609,9 +617,8 @@ def get_decls(ctx,child_ctx,var_lut:dict,ignore_nodes:list):
                 print(f"[VERIFY] {var_lut.items()}")
                 print(f"[VERIFY] {vardict.items()}")
                 print(f"[WARNING] found: {[get_string2(f) for f in found]} ")
-                print(f"[WARNING] Setting to default (int) ")
-                typ1_t="int"
-                typ2_t=typ1_t
+                print(f"[WARNING] SKIPPING ")
+                continue
             elif typ1==None:
                 typ1=typ2
             if type(typ1)==str:

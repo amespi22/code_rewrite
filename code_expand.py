@@ -361,9 +361,9 @@ def write_new_program(p,prog_name):
 def fix_type(typ):
     if "const" in typ:
         typ = typ.replace("const", "const ")
-    if typ.startswith("signed"):
+    if "signed" in typ:
         typ = typ.replace("signed", "signed ")
-    if typ.startswith("unsigned"):
+    if "unsigned" in typ:
         typ = typ.replace("unsigned", "unsigned ")
     if "longlong" in typ:
         typ = typ.replace("longlong", "long long")

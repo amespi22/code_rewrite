@@ -290,6 +290,7 @@ def get_fix_loc_rewrites(scope,def_vars=["i"]):
                     typ,var,varinfo,value=x
                     type_info=typ
                     def_vars = get_all_vars(fn, False)
+                    strip_array_decs(def_vars)
                     print(def_vars)
                     for def_var in def_vars:
                         if value:
@@ -310,6 +311,12 @@ def get_fix_loc_rewrites(scope,def_vars=["i"]):
             #print("}")
             i+=1
     return rewrites
+
+def strip_array_decs(lst):
+    for i in range(len(lst)):
+        if '[' in lst[i]:
+            lst[i] = lst[i][:lst[i].find('[')]
+    print(lst)
 
 def get_string2(ctx,ignore_list=None):
     if ctx==None:

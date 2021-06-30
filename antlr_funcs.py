@@ -279,19 +279,26 @@ def print_scope_info(scope):
 
 def get_fix_loc_rewrites(scope,def_vars=["i"]):
     rewrites = []
+    uniques=[]
     for fn,fs in scope.items():
         i=0
+        def_vars = get_all_vars(fn, False)
+        strip_array_decs(def_vars)
         for sn, s in fs.items():
             parent=s['parent'] if s['parent'] else sn
             var_s=s['variables']
             val_s=s['values']
             for x in val_s:
                 try:
-                    typ,var,varinfo,value=x
-                    type_info=typ
-                    def_vars = get_all_vars(fn, False)
-                    strip_array_decs(def_vars)
+                    type_info,var,varinfo,value=x
+                    import re
+                    typ=re.sub(r"\bconst\b",r' ',type_info)
                     for def_var in def_vars:
+                        info=(typ,def_var,value)
+                        if info in uniques:
+                            continue
+                        else:
+                            uniques.append(info)
                         if value:
                             loc = get_end_loc(parent)
                             if value==def_var or value.endswith(f" {def_var}") or value.startswith(f"{def_var} ") \

@@ -52,8 +52,13 @@ def main():
         cur_pro = apply_changes[i](cur_pro, rewrite)
 
     #FIX-INGREDIENTS
+    write_new_program(cur_pro, f"{out_name}.prev")
     p,t = get_tree_from_string(cur_pro)
-    scope_vars = get_function_info(functions=get_functions(t),global_vars=[])
+    print_ctx_dfs(t,"help")
+    printer=ScopeListener()
+    walker = ParseTreeWalker()
+    walker.walk(printer,t)
+    scope_vars = get_function_info(functions=get_functions(t),fscope=printer.scopes )
     fix_loc_rewrites = get_fix_loc_rewrites(scope_vars)
     cur_pro = gen_fix_loc_changes(cur_pro, fix_loc_rewrites)
 

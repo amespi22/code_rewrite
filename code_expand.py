@@ -136,7 +136,7 @@ def expand_func_args(ctx):
                 f_name = p.getChild(0).getText()
                 if f_name in funcs_and_args:
                     #print(f"function {f_name} is present with args {p.getChild(2).getText()}")
-                    func_args = [c for c in p.getChild(2).getText().split(',')]
+                    func_args = parse_func_call_args(p)
                     if func_args == [')']:
                         continue
                     #replace index in function arguments
@@ -168,6 +168,7 @@ def expand_func_args(ctx):
                         #This happens in nested situations and for now
                         #I ignore it silently
                         if len(func_args) > len(fun_arg_types):
+                            #print(f"messed up here with {p.getText()}")
                             continue
 
                         new_arg_string = f"{f_name}("
@@ -185,6 +186,7 @@ def expand_func_args(ctx):
                         #print (new_arg_string[:-1]+')')
                         rewrites[start_loc,end_loc] = (new_var_dec,new_arg_string[:-1]+')')
         except:
+            print(f"messed up here with {p.getText()}")
             continue
 
     #record the changes needed to re-write the code

@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 import sys
+
 from antlr4 import *
 from CLexer import CLexer
 from CParser import CParser
@@ -626,12 +627,13 @@ def get_decls(ctx,child_ctx,var_lut:dict,ignore_nodes:list):
             typ1=var_lut.get(varlkup1,vardict.get(varlkup1,None))
             typ2=var_lut.get(varlkup2,vardict.get(varlkup2,typ1))
             if typ1==None and typ2 == None:
-                print(f"[WARNING] Looks like we've hit an unimplemented case for LHS={varlkup1},RHS={varlkup2}")
-                print(f"[WARNING] Check this line: {get_string2(d)} ")
-                print(f"[VERIFY] {var_lut.items()}")
-                print(f"[VERIFY] {vardict.items()}")
-                print(f"[WARNING] found: {[get_string2(f) for f in found]} ")
-                print(f"[WARNING] SKIPPING ")
+                if False:
+                    print(f"[WARNING] Looks like we've hit an unimplemented case for LHS={varlkup1},RHS={varlkup2}")
+                    print(f"[WARNING] Check this line: {get_string2(d)} ")
+                    print(f"[VERIFY] {var_lut.items()}")
+                    print(f"[VERIFY] {vardict.items()}")
+                    print(f"[WARNING] found: {[get_string2(f) for f in found]} ")
+                    print(f"[WARNING] SKIPPING ")
                 continue
             elif typ1==None:
                 typ1=typ2
@@ -963,6 +965,11 @@ def get_tokens_form_ctx(ctx):
     for t in tokens:
         print(t)
     return tokens
+
+def parse_func_call_args(ctx):
+    a = ctx.getChild(2)
+    aes = [a.getChild(x).getText() for x in range(a.getChildCount()) if x % 2 == 0]
+    return aes
 
 def get_line_num(ctx):
     c = ctx

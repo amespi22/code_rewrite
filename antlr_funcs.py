@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 import sys
+
 from antlr4 import *
 from CLexer import CLexer
 from CParser import CParser
@@ -27,7 +28,7 @@ def main():
         args = get_func_args_from_inp("test_files/test.c", "simple_func",'file')
         print(args)
     #p,t =get_tree_from_file("test_files/tmp_test1.c")
-    p,t =get_tree_from_file("test_files/tmp_test2.c")
+    p,t =get_tree_from_file("test_files/test.c")
     print_ctx_bfs(t,"help")
     printer=ScopeListener()
     walker = ParseTreeWalker()
@@ -356,54 +357,14 @@ def print_ctx_bfs(tree,outf):
     txt = ""
     while q.length > 0 :
         e = q.dequeue()
-        parents=[e]
-        num=5
-        for i in range(0,num):
-            xx= parents[-1].parentCtx
-            if xx:
-                parents.append(xx)
-                
-        parents.reverse()
         txt += f"Text={e.getText()}\nType={type(e)}\n"
         txt += f"Child Count = {e.getChildCount()}\n"
         if e.getChildCount()>0:
             for i,c in enumerate(list(e.getChildren())):
                 txt+=f"{i} : {type(c)} [{c.getText()}]\n"
-        for i,x in enumerate(parents):
-            txt += f"ancestor[{num-i}] : {type(x)}\n"
         txt += "-------\n"
         if e.getChildCount() != 0:
             q.push_list(list(e.getChildren()))
-    with open(outf, 'w') as outfile:
-        outfile.write(txt)
-    """
-    outfile = open(outf, 'w')
-    outfile.write(txt)
-    """
-def print_ctx_dfs(tree,outf):
-    #get first set of children
-    q = list(tree.getChildren())
-    #go through all children breadth first
-    txt = ""
-    while len(q) > 0 :
-        e = q.pop()
-        parents=[e]
-        for i in range(0,3):
-            xx= parents[-1].parentCtx
-            if xx:
-                parents.append(xx)
-                
-        parents.reverse()
-        txt += f"Text={e.getText()}\nType={type(e)}\n"
-        txt += f"Child Count = {e.getChildCount()}\n"
-        if e.getChildCount()>0:
-            for i,c in enumerate(list(e.getChildren())):
-                txt+=f"{i} : {type(c)} [{c.getText()}]\n"
-        for i,x in enumerate(parents):
-            txt += f"ancestor[{3-i}] : {type(x)}\n"
-        txt += "-------\n"
-        if e.getChildCount() != 0:
-            q=list(e.getChildren())+q
     with open(outf, 'w') as outfile:
         outfile.write(txt)
     """
@@ -573,7 +534,7 @@ def get_function_info(functions,fscope):
                     continue
                 curscope_limits=cur_info['scope_limits'][0] 
                 desc_scopes=cur_info['descendants']
-                # scope_limits:
+                #children=[x for x in scope_dict[cur]['children'] if x!=scope_stack[-1] ]
                 # [0][0] : list of valid subscopes
                 # [0][1] : list of invalid subscopes
                 # [1][0] : start node
@@ -604,6 +565,7 @@ def get_function_info(functions,fscope):
                 decls,values,variable_lut[cur]=get_decls(cur,var_lut,ignore_me)
                 pscope[cur]={'variables':decls,'values':values,'symbol2type_lut':variable_lut[cur]}
                 var_lut=copy.copy(variable_lut[cur])
+                
                 dprint(f"var_lut: {var_lut.keys()}")
                 # get local variable declarations in scope
                 variables=pscope[cur]['variables']
@@ -617,7 +579,7 @@ def get_function_info(functions,fscope):
                                   }
     return scope_vars
         
-    
+
 def print_scope_info(scope):
     for fn,fs in scope.items():
         print(get_func_name(fn))
@@ -723,7 +685,7 @@ def get_string(ctx):
     
 
 
-    
+
 def str_nodes(t:list):
     for i in range(0,len(t)):
         if t[i] and type(t[i])!=str:
@@ -778,7 +740,6 @@ def get_decls(ctx,var_lut:dict,ignore_me:list):
     ops=['==','<=','>=','<','>','!=']
     # so I needed a function that enables evaluation of the first okay_scope_changes follows screen_me
     # the point is to identify declarations, equality, etc
-    #find_multictx(tree,multctx,screen=None,ignore_nodes=None,dfs=True,screen_first=True):
     a = [p for p in find_multictx(ctx, [tree.Tree.TerminalNodeImpl]+rules_with_declarations,None,ignore_me) \
         if ( type(p)==tree.Tree.TerminalNodeImpl and any([op in p.getText() for op in ops])) or (type(p) in rules_with_declarations) ]
     assigns=[]
@@ -808,11 +769,6 @@ def get_decls(ctx,var_lut:dict,ignore_me:list):
     vardict=dict()
     vars_t=list()
     typs_t=list()
-
-    if len(check_these_nodes)>0:
-        for i,p in enumerate(check_these_nodes):
-            dprint(f"check_these_nodes[{i}]: {get_string2(p)}")
-
     for d in check_these_nodes:
         chld=list(d.getChildren())
         ignore_siblings=siblings(d)[1]
@@ -968,7 +924,6 @@ def get_decls(ctx,var_lut:dict,ignore_me:list):
     return declarations,val_t,var_lut
             
 
-    
 def get_arg_names(ctx):
     try:
         ftlc = find_ctx(ctx, "<class 'CParser.CParser.ParameterTypeListContext'>")
@@ -1112,6 +1067,11 @@ def get_tokens_form_ctx(ctx):
     for t in tokens:
         print(t)
     return tokens
+
+def parse_func_call_args(ctx):
+    a = ctx.getChild(2)
+    aes = [a.getChild(x).getText() for x in range(a.getChildCount()) if x % 2 == 0]
+    return aes
 
 def get_line_num(ctx):
     c = ctx

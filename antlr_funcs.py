@@ -9,8 +9,8 @@ import inspect
 import codecs
 import copy
 
-debug=False
-gbl_debug_msg=["",0,open("debug.log","w")]
+debug=(False,False) # [0] print debug messages ; [1] generate debug log from debug messages
+gbl_debug_msg=["",0,open("debug.log","w") if debug[1] else None,debug[1] ]
 #This program assumes that C.g4 has been used to create
 #The parser files CLexer.py Clistener.py and Cparser.py
 #see /Documents/work/sefcom/gitpatch/antlr.md for more info
@@ -314,19 +314,21 @@ class KeyPrinter(CListener):
             self.enable_dumping=True
 
 def dprint(instr,flush=False):
-    if debug:
+    if debug[0]:
         print(instr,flush=flush)
     else:
         global gbl_debug_msg
-        if gbl_debug_msg[1]%50 == 0:
-            write_log()
-            gbl_debug_msg[0]=""
-        else:
-            gbl_debug_msg[0]+=instr+"\n"
-        gbl_debug_msg[1]+=1
+        if gbl_debug_msg[3]:
+            if gbl_debug_msg[1]%50 == 0:
+                write_log()
+                gbl_debug_msg[0]=""
+            else:
+                gbl_debug_msg[0]+=instr+"\n"
+            gbl_debug_msg[1]+=1
 
 def write_log():
-    gbl_debug_msg[2].write(gbl_debug_msg[0])
+    if gbl_debug_msg[3]:
+        gbl_debug_msg[2].write(gbl_debug_msg[0])
 
 def get_tree(inp):
     lexer = CLexer(inp)
@@ -506,6 +508,7 @@ def find_multictx(tree,multctx,screen=None,ignore_nodes=None,dfs=True,screen_fir
         txt += "-------\n"
     return r
 
+# unused
 def find_scope_descendant(ancestor,descend_lineage):
     indx=descend_lineage.index(ancestor)
     return descend_lineage[indx-1]
@@ -553,11 +556,8 @@ def get_function_info(functions,fscope):
                 while scope_end.parentCtx!=scope_stack[1]:
                     scope_end=scope_end.parentCtx
             dprint(f"SCOPE STACK : {add_p_to_scope_stack} ")
-            dprint(f"START SCOPE STACK : [ {type(p)} => {get_string2(p)} ] ")
-            dprint(f"PARENT            : [ {type(parent_scope)} => {get_string2(parent_scope)} ] ")
-            x=get_end(scope_end)
-            dprint(f"SCOPE END         : [ {type(scope_end)} => {get_string2(scope_end)} ]")
-            dprint(f"CHECK ME END      : [ {type(x)} => {get_string2(x)} ]")
+            dprint(f"START SCOPE : [ {type(p)} => {get_string2(p)} ] ")
+            dprint(f"END SCOPE   : [ {type(scope_end)} => {get_string2(scope_end)} ] ")
 
             for i in range(0,len(scope_stack)):
                 dprint(f" scope [{i}] : {type(scope_stack[i])}")
@@ -723,191 +723,7 @@ def get_string(ctx):
     
 
 
-def get_siblings_to_ignore(pscope):
-    siblings=[]
-    child=None
-    if type(pscope)!=CParser.FunctionDefinitionContext:
-        parent=[pscope.parentCtx]
-        child=pscope
-        while type(parent[-1])!=CParser.ExternalDeclarationContext:
-            children=list(parent[-1].getChildren())
-            dprint(f"[get_siblings] --------------")
-            dprint(f"[get_siblings] current = {type(child)}",flush=True)
-            dprint(f"[get_siblings] parent = {type(parent[-1])}",flush=True)
-            dprint(f"[get_siblings] parents children = {[type(c) for c in children]}",flush=True)
-            if len(children)>=1:
-                get=False
-                for x in range(0,len(children)):
-                    if get:
-                        dprint(f"[get_siblings] SIBLING [ {x} ] : type = {type(children[x])}",flush=True)
-                        if not siblings:
-                            siblings=[]
-                        siblings.extend([children[x]])
-                    if children[x]==child:
-                        get=True
-            child=parent[-1]
-            parent.append(parent[-1].parentCtx)
-        dprint(f"get_siblings_to_ignore -> parents")
-        for p in parent:
-            dprint(f" -> {type(p)} [{get_string2(p)}]")
-        dprint(f"[get_siblings] SIBLINGS => ")
-        for g in siblings:
-            dprint(f" => {type(g)}   {get_string2(g)}")
-    return child,siblings
     
-def find_parent_scope(scope,parent_lut:dict,num_parents=None):
-    if not scope:
-        return None,parent_lut
-    s = parent_lut.get(scope,None)
-    if s:
-        return [s],parent_lut
-    dprint(f"[find_parent_scope] START")
-    stop=[\
-           CParser.FunctionDefinitionContext\
-          ]
-    scope_mtch= [\
-             CParser.CompoundStatementContext,\
-             CParser.IterationStatementContext,\
-             CParser.SelectionStatementContext,\
-          ]+stop
-    cmpd4=[\
-            [\
-               CParser.CompoundStatementContext,\
-               CParser.StatementContext,\
-               CParser.BlockItemContext,\
-               CParser.BlockItemListContext\
-            ]\
-          ]
-    cmpd2=[\
-            [\
-               CParser.CompoundStatementContext,\
-               CParser.FunctionDefinitionContext\
-            ]\
-          ]
-    selection=[\
-               CParser.CompoundStatementContext,\
-               CParser.StatementContext,\
-               CParser.SelectionStatementContext\
-            ]
-    cmpd3=[ \
-            [\
-               CParser.CompoundStatementContext,\
-               CParser.StatementContext,\
-               CParser.IterationStatementContext\
-            ],\
-            selection
-          ]
-    p=[scope]
-    typ_p=[type(x) for x in p]
-    dprint(f"searching : {typ_p[-1]} {get_string2(p[-1])}")
-    scopes_=list([scope])
-    l=len(scopes_)
-    while type(p[-1]) not in stop:
-        if num_parents and num_parents==l:
-            break
-        p.append(p[-1].parentCtx)
-        typ_p.append(type(p[-1]))
-        delim="\n\t"
-
-        #if CParser.SelectionStatementContext in typ_p[-4:]:
-        #    print(f"SELECTION => parents[-4:]: {typ_p[-4:]}")
-        dprint(f"parents[-4:]: {typ_p[-4:]}")
-        
-        if (len(p)>=3 and typ_p[-3:] == selection):
-            dprint(f"SELECTION FOUND!")
-            dprint(f" => last  {typ_p[-1]} : {get_string2(p[-1])}")
-            dprint(f" => parent {type(p[-1].parentCtx)} : {get_string2(p[-1].parentCtx)}")
-            c=list(p[-1].getChildren())
-            if len(c)>=3 and c[-1]==p[-2] and c[-2].getText()=="else":
-                pass
-            else:
-                add_me= [p[-1]]
-                if p[-3] != scope:
-                    add_me= [p[-3],p[-1]]
-                for x in add_me:
-                    if len(scopes_)==0 or x != scopes_[-1]:
-                        scopes_.append(x)
-            num_iter=0
-            while(typ_p[-3:] == selection) and type(p[-1].parentCtx)==selection[0]:
-                dprint(f" selection check parents[-3:]: {typ_p[-3:]}")
-                num_iter+=1
-                for i in range(0,3):
-                    p.append(p[-1].parentCtx)
-                    typ_p.append(type(p[-1]))
-            if num_iter==0:
-                if len(scopes_)==0 or p[-1] != scopes_[-1]:
-                    scopes_.append(p[-1])
-            else:
-                last_two=((p.pop(),typ_p.pop()),(p.pop(),typ_p.pop()))
-                #last_one=((p.pop(),typ_p.pop()))
-                # start checking again after p[-1]
-                if p[-1] != scopes_[-1]:
-                    scopes_.append(p[-1])
-
-        add_me=[]
-        if len(p)>=4 and typ_p[-4:] in cmpd4:
-            #add_me=[p[-4],p[-2]]
-            add_me=[p[-4]]
-        elif len(p)>=3 and typ_p[-3:] in cmpd3:
-            add_me=[p[-3],p[-1]]
-        elif len(p)>=2 and typ_p[-2:] in cmpd2:
-            add_me=[p[-1]]
-        elif type(p[-1]) in scope_mtch:
-            add_me=[p[-1]]
-        for xx in add_me:
-            if len(scopes_)==0 or xx != scopes_[-1]:
-                scopes_.append(xx)
-        if l!=len(scopes_):
-            for x in range(l,len(scopes_)-1):
-                xx=parent_lut.get(scopes_[x],"NO_MATCH")
-                if type(xx)==str and xx=="NO_MATCH":
-                    parent_lut[scopes_[x]]=scopes_[x+1]
-                elif xx == scopes_[x+1]:
-                    dprint(f" -- matched hierarchy for {type(xx)}")
-                else:
-                    dprint(f"[WARNING!!] MISMATCH : expected {scopes_[x+1]} => received {xx}")
-                    
-            if len(scopes_)>2:
-                dprint(f"[{l-1}] : {type(scopes_[-2])} ")
-            dprint(f"[{l}] : {type(scopes_[-1])} ")
-            l=len(scopes_)
-    dprint(f"SCOPES : ")
-    for i,xx in enumerate(scopes_):
-        dprint(f" {i} : {type(xx)} [{get_string2(xx)}]")
-    dprint(f"SCOPE TYPES : {[type(s) for s in scopes_]}")
-    dprint(f"[find_parent_scope] DONE")
-    return scopes_,parent_lut
-
-    
-def find_parent_scope2(scope):
-    dprint(f"[find_parent_scope2] {type(scope)}")
-    pscope=None
-    if scope and type(scope)!=CParser.FunctionDefinitionContext:
-        p=[None,None,scope,scope.parentCtx]
-        type_p=[None,None,type(scope),type(p[-1])]
-        stop_next_child = [\
-              CParser.CompoundStatementContext,\
-              CParser.IterationStatementContext,CParser.SelectionStatementContext
-              ]
-        checkme=[\
-              CParser.FunctionDefinitionContext,\
-            ]+stop_next_child
-        standalone_blk=[CParser.CompoundStatementContext,CParser.StatementContext,CParser.BlockItemContext,CParser.BlockItemListContext]
-    
-        pscope=p[-1]
-        dprint(f"\t{type(p[-1])}",flush=True)
-        while type(p[-1]) not in checkme:
-            dprint(f"\t{type(p[-1])}",flush=True)
-            if type_p==standalone_blk: 
-                pscope=p[1]
-                break
-            p=[p[-3],p[-2],p[-1],p[-1].parentCtx]
-            type_p=[type_p[-3],type_p[-2],type_p[-1],type(p[-1])]
-            pscope=p[-1]
-
-        dprint(f"\n[find_parent_scope2]\nCHILD : {type(scope)} \nPARENT : {type(pscope)}")
-    return pscope,None
-
 def str_nodes(t:list):
     for i in range(0,len(t)):
         if t[i] and type(t[i])!=str:
@@ -994,7 +810,6 @@ def get_decls(ctx,var_lut:dict,ignore_me:list):
     typs_t=list()
 
     if len(check_these_nodes)>0:
-        dprint(f"[check_these_nodes]: {type(ctx)} => {get_string2(ctx)}")
         for i,p in enumerate(check_these_nodes):
             dprint(f"check_these_nodes[{i}]: {get_string2(p)}")
 
@@ -1008,7 +823,7 @@ def get_decls(ctx,var_lut:dict,ignore_me:list):
                 l_ignore=list()
             l_ignore.extend(ignore_siblings)
         if type(d)==CParser.ForDeclarationContext:
-            dprint(f"For declaration: {get_string2(d)}")
+            dprint(f"FOR : {get_string2(d)}")
             typ=chld[0]
             node=chld[1]
             dec=list(find_multictx(chld[1],[CParser.DeclaratorContext],None,l_ignore))
@@ -1154,15 +969,6 @@ def get_decls(ctx,var_lut:dict,ignore_me:list):
             
 
     
-def get_scopes_old(ctx):
-    okay_scope_changes=[CParser.CompoundStatementContext]
-    try:
-        #ftlc = find_ctx(ctx, "<class 'CParser.CParser.CompoundStatementContext'>")
-        ftlc = find_multictx(ctx,okay_scope_changes)
-        return ftlc
-    except:
-        return None
-
 def get_arg_names(ctx):
     try:
         ftlc = find_ctx(ctx, "<class 'CParser.CParser.ParameterTypeListContext'>")
@@ -1326,12 +1132,6 @@ def get_start_loc(ctx):
     while c.getChildCount() > 0:
         c = c.getChild(0)
     return c.getSymbol().line, c.getSymbol().column+1
-
-def get_end(ctx):
-    c = ctx
-    while c.getChildCount() > 0:
-        c = c.getChild(c.getChildCount()-1)
-    return c
 
 def get_end_loc(ctx):
     c = ctx

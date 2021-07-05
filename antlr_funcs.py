@@ -25,8 +25,8 @@ def main():
         test_functs()
         args = get_func_args_from_inp("test_files/test.c", "simple_func",'file')
         print(args)
-    #p,t =get_tree_from_file("test_files/tmp_test1.c")
-    p,t =get_tree_from_file("test_files/test.c")
+    p,t =get_tree_from_file("test_files/service.c")
+    #p,t =get_tree_from_file("new_code_expand.c")
     print_ctx_bfs(t,"help")
     get_function_info(functions=get_functions(t),global_vars=[])
 
@@ -886,8 +886,9 @@ def get_function(ctx, f_name):
             return f
 
 def test_functs():
-    p,t =get_tree_from_file("test_files/test.c")
-    fns = get_functions(t)
+    p,t =get_tree_from_file("new_code_expand.c")
+    exes = find_ctx(t, "<class 'CParser.CParser.ExternalDeclarationContext'>")
+    return exes
     print("Found the following functions")
     for f in fns:
         print(f.getText())

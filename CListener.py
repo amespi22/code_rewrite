@@ -701,6 +701,15 @@ class CListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by CParser#macroSelectionStatement.
+    def enterMacroSelectionStatement(self, ctx:CParser.MacroSelectionStatementContext):
+        pass
+
+    # Exit a parse tree produced by CParser#macroSelectionStatement.
+    def exitMacroSelectionStatement(self, ctx:CParser.MacroSelectionStatementContext):
+        pass
+
+
     # Enter a parse tree produced by CParser#iterationStatement.
     def enterIterationStatement(self, ctx:CParser.IterationStatementContext):
         pass

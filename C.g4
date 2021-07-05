@@ -412,6 +412,7 @@ statement
     |   selectionStatement
     |   iterationStatement
     |   jumpStatement
+    |  	macroSelectionStatement 
     |   ('__asm' | '__asm__') ('volatile' | '__volatile__') '(' (logicalOrExpression (',' logicalOrExpression)*)? (':' (logicalOrExpression (',' logicalOrExpression)*)?)* ')' ';'
     ;
 
@@ -441,6 +442,10 @@ expressionStatement
 selectionStatement
     :   'if' '(' expression ')' statement ('else' statement)?
     |   'switch' '(' expression ')' statement
+    ;
+
+macroSelectionStatement
+    :   '#ifdef' Identifier statement ('#else' statement)? '#endif'
     ;
 
 iterationStatement
@@ -835,29 +840,31 @@ SChar
     ;
 
 ComplexDefine
-    :   '#' Whitespace? 'define'  ~[#\r\n]*
+    :   '#' Whitespace? 'define'  ~[\r\n]*
         -> skip
     ;
-
+/*
 Macroifdef
-    :   '#' Whitespace? 'ifdef'  ~[#\r\n]*
+    :   '#' Whitespace? 'ifdef'  ~[\r\n]*
         -> skip
     ;
-
+*/
 Macroifndef
-    :   '#' Whitespace? 'ifndef'  ~[#\r\n]*
+    :   '#' Whitespace? 'ifndef'  ~[\r\n]*
         -> skip
     ;
 
+/*
 Macroelse
-    :   '#' Whitespace? 'else'  ~[#\r\n]*
+    :   '#' Whitespace? 'else'  ~[\r\n]*
         -> skip
     ;
 
 Macroendif
-    :   '#' Whitespace? 'endif'  ~[#\r\n]*
+    :   '#' Whitespace? 'endif'  ~[\r\n]*
         -> skip
     ;
+*/
 
 IncludeDirective
     :   '#' Whitespace? 'include' Whitespace? (('"' ~[\r\n]* '"') | ('<' ~[\r\n]* '>' )) Whitespace? Newline

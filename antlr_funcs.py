@@ -8,8 +8,10 @@ from CListener import CListener
 import linked_list
 import inspect
 import codecs
+import copy
 
-debug=False
+debug=(False,False) # [0] print debug messages ; [1] generate debug log from debug messages
+gbl_debug_msg=["",0,open("debug.log","w") if debug[1] else None,debug[1] ]
 #This program assumes that C.g4 has been used to create
 #The parser files CLexer.py Clistener.py and Cparser.py
 #see /Documents/work/sefcom/gitpatch/antlr.md for more info
@@ -28,12 +30,278 @@ def main():
     p,t =get_tree_from_file("test_files/service.c")
     #p,t =get_tree_from_file("new_code_expand.c")
     print_ctx_bfs(t,"help")
-    get_function_info(functions=get_functions(t),global_vars=[])
+    printer=ScopeListener()
+    walker = ParseTreeWalker()
+    walker.walk(printer,t)
+
+    #for i,k in printer.scopes.items():
+    #    print(f"{type(i)} => {get_string2(i)}")
+    #    print(f"\t {k['func_ctx']}")
+    #    print(f"\t {type(k['parent'])} => {get_string2(k['parent'])}")
+        
+    x=get_function_info(functions=get_functions(t),fscope=printer.scopes)
+    print_scope_info(x)
 
     """
     for key,members in inspect.getmembers(ctx):
         print(f"key = {key}\nmember={members}")
     """
+def siblings(current):
+    parent=current.parentCtx
+    family=list(parent.getChildren())
+    older=None
+    younger=None
+    if len(family)>0:
+        for i in range(0,len(family)):
+            if current==family[i]:
+                break
+        if i!=0:
+            younger=family[0:i]
+        if i!=len(family)-1:
+            older=family[i+1:]
+    return younger,older
+    
+class ScopeListener(CListener):
+    cur_scopes=[ [], ]
+    resolved=list()
+    scopes=dict()
+    # keys: k, list of nodes that are valid_parent_scopes
+    #       k['ancestors'] : list of parent nodes
+    #       k['ignore_nodes'] : list of nodes that should not be used to evaluate for variables declaration
+    #       k['pscopes'] : list of preceding scope noes
+    #       k['parent'] : immediate parent node
+    #       k['children'] : children nodes
+    #       k['func_ctx'] : function context
+    valid_parent_scopes=[\
+        CParser.CompoundStatementContext,\
+        CParser.IterationStatementContext,\
+        CParser.SelectionStatementContext,\
+        CParser.FunctionDefinitionContext\
+        ]
+    current_fn_ctx=None
+        
+    def find_pruned_nodes(self):
+        for i in list(self.scopes.keys()):
+            self.prune(i)
+
+    def prune(self,start):
+        pruned_nodes=[]
+        for i in self.scopes[start]['ancestors']:
+            if i:
+                x=self.right_siblings(i)
+                if x:
+                    pruned_nodes.extend(x)
+        self.scopes[start]['ignore_nodes']=pruned_nodes
+
+    def siblings(self,current):
+        return siblings(current)
+    
+    def left_siblings(self,current):
+        return self.siblings(current)[0]
+    
+    def right_siblings(self,current):
+        return self.siblings(current)[1]
+    
+    def scopeleft_siblings(self,current):
+        if type(current)==CParser.FunctionDefinitionContext:
+            return None
+        else:
+            parent=current.parentCtx
+            family=list(parent.getChildren())
+            younger=None
+            if len(family)>0:
+                for i in range(0,len(family)):
+                    if current==family[i]:
+                        break
+                younger=family[0:i]
+                return younger
+            else:
+                return self.left_siblings(parent)
+
+    def scoperight_siblings(self,current):
+        if type(current)==CParser.FunctionDefinitionContext:
+            return None
+        else:
+            parent=current.parentCtx
+            family=list(parent.getChildren())
+            older=None
+            if len(family)>0:
+                for i in range(0,len(family)):
+                    if current==family[i]:
+                        break
+                older=family[i+1:]
+                return older
+            else:
+                return self.scoperight_siblings(parent)
+
+    def get_last_child(self,node):
+        n=node
+        while type(n)!=tree.Tree.TerminalNodeImpl:
+            n=list(n.getChildren())[-1]
+        return n
+
+    def get_scope_limits(self,node):
+        children=list(node.getChildren())
+        valid_scope=[node]
+        invalid_scope=[]
+        corner=False
+        if node==CParser.FunctionDefinitionContext:
+            pass
+        if node==CParser.CompoundStatementContext:
+            pass
+        if node==CParser.SelectionStatementContext:
+            valid_scope=children[:5] # StatementContext
+            if len(children)>5:
+                invalid_scope=children[5:]
+            else:
+                corner=True
+        if node==CParser.IterationStatementContext:
+            valid_scope=children[:5] # StatementContext
+            if len(children)>5:
+                invalid_scope=children[5:]
+            else:
+                corner=True
+        return ((valid_scope,invalid_scope),(node,self.get_last_child(valid_scope[-1])),corner)
+
+    def is_else(self,node):
+        return type(node)==tree.Tree.TerminalNodeImpl and node.getText()=="else"
+        
+    def getParentScopes(self,start):
+        # add the current node to the previous hierarchy's descendant list
+        self.cur_scopes[-1].append(start)
+        # create a new list to accumulate descendants
+        self.cur_scopes.append([])
+        pscopes=[]
+        p=[start]
+        siblings=self.siblings(start)
+        self.scopes[start]=dict()
+        self.scopes[start]['children']=list(start.getChildren())
+        self.scopes[start]['parent']=start.parentCtx
+        self.scopes[start]['func_ctx']=self.current_fn_ctx
+        self.scopes[start]['scope_limits']=self.get_scope_limits(start)
+        self.scopes[start]['siblings']=siblings
+        done=(type(start)==CParser.FunctionDefinitionContext)
+        CASE=0
+        while not done:
+            dprint(f"{CASE} : {type(p[-1])} [start? {p[-1]==start}]")
+            CASE+=1
+            if p[-1] == start:
+                p.append(p[-1].parentCtx)
+                continue
+            if type(p[-1]) in self.valid_parent_scopes:
+                capture=True
+                x=min(5,len(p))
+                dprint(f"Valid scope parent: {type(p[-1])}")
+                dprint(f" ===> Last {x} parents! ")
+                for i in range(0,x):
+                    dprint(f" [{i}] : {type(p[i-x])} ") 
+                    # [ {get_string2(p[x-i-1])} ]")
+                if type(p[-1])==CParser.SelectionStatementContext:
+                    lsiblings=self.left_siblings(p[-2])
+                    for i in range(0,len(lsiblings)):
+                        dprint(f" sibling [{i}] : {type(lsiblings[i])} [ {get_string2(lsiblings[i])} ]")
+                        pass
+                    if self.is_else(lsiblings[-1]):
+                        dprint(f"In an else condition, don't capture {type(p[-1])}")
+                        capture=False
+                if capture:
+                    pscopes.append(p[-1])
+                    if p[-1] in self.resolved:
+                        dprint(f"RESOLVED : {type(start)} => {type(p[-1])} ")
+                        last=p.pop()
+                        if type(last) == CParser.FunctionDefinitionContext:
+                            done=True
+                            break
+                        else:
+                            x=self.scopes.get(last,None)
+                            if x:
+                                dprint(f" converged parent => {type(last)}")
+                                pscopes.extend(x['pscopes'])
+                                p.extend(x['ancestors'])
+                                done=True
+                                break
+            p.append(p[-1].parentCtx)
+        
+        self.scopes[start]['pscopes']=pscopes
+        self.scopes[start]['ancestors']=p
+        self.resolved.append(start)
+        
+    def exitExternalDeclaration(self,ctx:CParser.ExternalDeclarationContext):
+        pass
+
+    def enterExternalDeclaration(self,ctx:CParser.ExternalDeclarationContext):
+        pass
+
+    def exitCompoundStatement(self,ctx:CParser.CompoundStatementContext):
+        x=self.cur_scopes.pop()
+        dprint(f"Descendants of {type(ctx)} : {get_string2(ctx)}")
+        for i in range(0,len(x)):
+            dprint(f" {i} : {type(x[i])}   [ {get_string2(x[i])} ]")
+        self.scopes[ctx]['descendants']=copy.copy(x)
+        pass
+
+    def enterCompoundStatement(self,ctx:CParser.CompoundStatementContext):
+        x=self.scopes.get(ctx,None)
+        if x:
+            print("[DuplicateNodeError] {get_string(ctx)}")
+        else:
+            self.getParentScopes(ctx)
+        pass
+
+    def exitSelectionStatement(self, ctx:CParser.SelectionStatementContext):
+        x=self.cur_scopes.pop()
+        dprint(f"Descendants of {type(ctx)} : {get_string2(ctx)}")
+        for i in range(0,len(x)):
+            dprint(f" {i} : {type(x[i])}   [ {get_string2(x[i])} ]")
+        self.scopes[ctx]['descendants']=copy.copy(x)
+        pass
+
+    def enterSelectionStatement(self, ctx:CParser.SelectionStatementContext):
+        x=self.scopes.get(ctx,None)
+        if x:
+            print("[DuplicateNodeError] {get_string(ctx)}")
+        else:
+            self.getParentScopes(ctx)
+        pass
+
+    def exitIterationStatement(self, ctx:CParser.IterationStatementContext):
+        x=self.cur_scopes.pop()
+        dprint(f"Descendants of {type(ctx)} : {get_string2(ctx)}")
+        for i in range(0,len(x)):
+            dprint(f" {i} : {type(x[i])}   [ {get_string2(x[i])} ]")
+        self.scopes[ctx]['descendants']=copy.copy(x)
+        pass
+
+    def enterIterationStatement(self, ctx:CParser.IterationStatementContext):
+        x=self.scopes.get(ctx,None)
+        if x:
+            print("[DuplicateNodeError] {get_string(ctx)}")
+        else:
+            self.getParentScopes(ctx)
+        pass
+
+    def enterFunctionDefinition(self,ctx:CParser.FunctionDefinitionContext):
+        self.current_fn_ctx=ctx
+        x=self.scopes.get(ctx,None)
+        if x:
+            print("[DuplicateNodeError] {get_string(ctx)}")
+        else:
+            self.getParentScopes(ctx)
+        pass
+
+    def exitFunctionDefinition(self,ctx:CParser.FunctionDefinitionContext):
+        self.find_pruned_nodes()
+        self.current_fn_ctx=None
+        x=self.cur_scopes.pop()
+        dprint(f"Descendants of {type(ctx)} : {get_string2(ctx)}")
+        for i in range(0,len(x)):
+            dprint(f" {i} : {type(x[i])}   [ {get_string2(x[i])} ]")
+        self.scopes[ctx]['descendants']=copy.copy(x)
+        pass
+
+    
+
+
 class KeyPrinter(CListener):
     def enterSelectionStatement(self, ctx):
         print(f"Enter Selection Statement\n{ctx.getText()}")
@@ -47,9 +315,21 @@ class KeyPrinter(CListener):
             self.enable_dumping=True
 
 def dprint(instr,flush=False):
-    if debug:
+    if debug[0]:
         print(instr,flush=flush)
+    else:
+        global gbl_debug_msg
+        if gbl_debug_msg[3]:
+            if gbl_debug_msg[1]%50 == 0:
+                write_log()
+                gbl_debug_msg[0]=""
+            else:
+                gbl_debug_msg[0]+=instr+"\n"
+            gbl_debug_msg[1]+=1
 
+def write_log():
+    if gbl_debug_msg[3]:
+        gbl_debug_msg[2].write(gbl_debug_msg[0])
 
 def get_tree(inp):
     lexer = CLexer(inp)
@@ -189,50 +469,100 @@ def find_multictx(tree,multctx,screen=None,ignore_nodes=None,dfs=True,screen_fir
         txt += "-------\n"
     return r
 
-def get_function_info(functions,global_vars):
-    parents=set()
-    pscope=dict()
+# unused
+def find_scope_descendant(ancestor,descend_lineage):
+    indx=descend_lineage.index(ancestor)
+    return descend_lineage[indx-1]
+    
+
+def get_function_info(functions,fscope):
     scope_vars=dict()
     variable_lut=dict()
     for ctx in functions:
         fname=ctx
         fargs=get_func_args_nodes(ctx)
-        scope_stack=list()
+        scope_dict=dict()
         scope_vars[fname]=dict()
-        dprint(f"Function: {get_func_name(ctx)} ({fargs})",flush=True)
-        scope_dict = get_scopes(ctx)
-        compound_scope= list([ i for i in list(scope_dict.keys()) if scope_dict[i]['compound']])
-        for p in list(compound_scope):
+        compound_scope=list()
+        for k,x in fscope.items():
+            if x['func_ctx']==ctx:
+                scope_dict[k]=x
+                if type(k)==CParser.IterationStatementContext or type(k)==CParser.SelectionStatementContext:
+                    c=list(k.getChildren())
+                    if type(c[4].getChild(0))!=CParser.CompoundStatementContext:
+                        dprint(f"iteration/selection scope corner case {len(compound_scope)} : {get_string2(k)}")
+                        compound_scope.append((k,True))
+                if type(k)==CParser.CompoundStatementContext:
+                    dprint(f"compound scope {len(compound_scope)} : {get_string2(k)}")
+                    compound_scope.append((k,False))
+        dprint(f"len(compound_scope) : {len(compound_scope)}")
+        for p,add_p_to_scope_stack in list(compound_scope):
+            pscope=dict()
             import copy
-            #scopes_[p] = { 'parent':parent, 'children':child_scopes,'ignore':sibs,'scope_stack':ancestors }
+            scope_stack=copy.copy(scope_dict[p]['pscopes'])
+            if add_p_to_scope_stack:
+                scope_stack=[p]+scope_stack
             parent_scope=scope_dict[p]['parent']
-            if not parent_scope:
-                continue
-            scope_stack=copy.copy(scope_dict[p]['scope_stack'])
-            scope_children=copy.copy(scope_dict[p]['children'])
-            ignore_sibs=copy.copy(scope_dict[p]['ignore'])
-            variables=copy.copy(global_vars) if global_vars else []
+            siblings=scope_dict[p]['siblings'] #[0] are younger, [1] older
+            ignore_sibs=copy.copy(scope_dict[p]['ignore_nodes'])
+            variables=[]
             if fargs and len(fargs)>0:
                 variables.extend(list(fargs))
             lut=[ (v[1],v[0]) for v in variables ]
             var_lut=dict(lut)
             values=[]
-            dprint(f"[get_function_info] SCOPE = ({type(p)}) {get_string2(p)}",flush=True)
-            dprint(f"[get_function_info] PARENT SCOPE = ({type(parent_scope)}) {get_string2(parent_scope)}",flush=True)
-            dprint(f"[get_function_info] SCOPE CHILDREN ={[get_string2(c) for c in scope_children]}",flush=True)
-            #if ignore_sibs and len(ignore_sibs)>0:
-            #    print(f"[get_function_info] SCOPE IGNORE SIBS ={[(type(c),get_string2(c)) for c in ignore_sibs]}")
+            cur=None
+            scope_end=p
+            if add_p_to_scope_stack:
+                while scope_end.parentCtx!=scope_stack[1]:
+                    scope_end=scope_end.parentCtx
+            dprint(f"SCOPE STACK : {add_p_to_scope_stack} ")
+            dprint(f"START SCOPE : [ {type(p)} => {get_string2(p)} ] ")
+            dprint(f"END SCOPE   : [ {type(scope_end)} => {get_string2(scope_end)} ] ")
+
+            for i in range(0,len(scope_stack)):
+                dprint(f" scope [{i}] : {type(scope_stack[i])}")
             i=0
             while(len(scope_stack)>0):
+                i+=1
                 cur=scope_stack.pop()
-                dprint(f"[get_func] cur => {type(cur)}")
+                cur_info=scope_dict.get(cur,None)
+                nxt=scope_stack[-1] if len(scope_stack)>0 else None
+                if not cur_info:
+                    print(f" ERROR : {type(cur)} does not exist in scope_dict!")
+                    i+=1
+                    continue
+                curscope_limits=cur_info['scope_limits'][0] 
+                desc_scopes=cur_info['descendants']
                 #children=[x for x in scope_dict[cur]['children'] if x!=scope_stack[-1] ]
-                children=scope_children
-                for x in scope_dict[cur]['children']:
-                    if len(scope_stack)==0 or x!=scope_stack[-1] :
-                        children.append(x)
-                dprint(f"current_scope={get_string2(cur)}\nchildren={[get_string2(c) for c in children]}")
-                decls,values,variable_lut[cur]=get_decls(cur,children,var_lut,ignore_sibs)
+                # [0][0] : list of valid subscopes
+                # [0][1] : list of invalid subscopes
+                # [1][0] : start node
+                # [1][1] : last node in valid subscope
+                # start evaluation at current node and stop at next scope
+                # for each scope, we need to ignore :
+                #    1) current scope's invalid subscopes
+                #           => curscope_limits[1]
+                #    2) descendant scopes
+                #           => descendant_scopes
+                ignore_me=desc_scopes
+                #if curscope_limits[1]:
+                #    ignore_me.extend(curscope_limits[1])
+                
+                    
+                #if nxt:
+                #    nxt_subchildren=scope_dict[nxt]['scope_limits'][0][1]
+                #    ignore_me.extend([nxt]+nxt_subchildren)
+                # get_decls(ctx,var_lut:dict,ignore_me:list):
+                #    ignore_me : list of nodes to stop after finding
+                #    var_lut   : look-up table for variables containing type and variable info
+                #    ctx       : node to start looking at
+                if len(ignore_me)>0:
+                    dprint(f"for scope {type(cur)}, ignoring:")
+                    for i in range(0,len(ignore_me)):
+                        dprint(f" {i} : {type(ignore_me[i])}")
+                    
+                decls,values,variable_lut[cur]=get_decls(cur,var_lut,ignore_me)
                 pscope[cur]={'variables':decls,'values':values,'symbol2type_lut':variable_lut[cur]}
                 var_lut=copy.copy(variable_lut[cur])
                 
@@ -240,12 +570,15 @@ def get_function_info(functions,global_vars):
                 # get local variable declarations in scope
                 variables=pscope[cur]['variables']
                 values=pscope[cur]['values']
-                i+=1
-            dprint(f"last scope : {get_string2(cur)}")
-            scope_vars[fname][p]={'variables':variables,'values':values,'symbol2type_lut':var_lut,'parent':parent_scope}
-
-    #print_scope_info(scope_vars)
+            dprint(f"LAST SCOPE OF {type(p)} : {type(cur)}")
+            scope_vars[fname][p]={'variables':variables,\
+                                  'values':values,\
+                                  'symbol2type_lut':var_lut,\
+                                  'parent':parent_scope,\
+                                  'scope_end':scope_end\
+                                  }
     return scope_vars
+        
 
 def print_scope_info(scope):
     for fn,fs in scope.items():
@@ -289,6 +622,7 @@ def get_fix_loc_rewrites(scope,def_vars=["i"]):
             parent=s['parent'] if s['parent'] else sn
             var_s=s['variables']
             val_s=s['values']
+            end=s['scope_end']
             for x in val_s:
                 try:
                     type_info,var,varinfo,value=x
@@ -301,7 +635,7 @@ def get_fix_loc_rewrites(scope,def_vars=["i"]):
                         else:
                             uniques.append(info)
                         if value:
-                            loc = get_end_loc(parent)
+                            loc = get_end_loc(end)
                             if value==def_var or value.endswith(f" {def_var}") or value.startswith(f"{def_var} ") \
                             or f" {def_var} " in value:
                                 #rewrites.append((f"/* SKIPPED ({typ}) {def_var}{varinfo} - used in assignment '{value}'  */",loc))
@@ -351,131 +685,6 @@ def get_string(ctx):
     
 
 
-def get_siblings_to_ignore(pscope):
-    siblings=[]
-    child=None
-    if type(pscope)!=CParser.FunctionDefinitionContext:
-        parent=[pscope.parentCtx]
-        child=pscope
-        while type(parent[-1])!=CParser.ExternalDeclarationContext:
-            children=list(parent[-1].getChildren())
-            dprint(f"[get_siblings] --------------")
-            dprint(f"[get_siblings] current = {type(child)}",flush=True)
-            dprint(f"[get_siblings] parent = {type(parent[-1])}",flush=True)
-            dprint(f"[get_siblings] parents children = {[type(c) for c in children]}",flush=True)
-            if len(children)>=1:
-                get=False
-                for x in range(0,len(children)):
-                    if get:
-                        dprint(f"[get_siblings] SIBLING [ {x} ] : type = {type(children[x])}",flush=True)
-                        if not siblings:
-                            siblings=[]
-                        siblings.extend([children[x]])
-                    if children[x]==child:
-                        get=True
-            child=parent[-1]
-            parent.append(parent[-1].parentCtx)
-        dprint(f"get_siblings_to_ignore -> parents")
-        for p in parent:
-            dprint(f" -> {type(p)} [{get_string2(p)}]")
-        dprint(f"[get_siblings] SIBLINGS => {[type(g) for g in siblings]}")
-    return child,siblings
-    
-def find_parent_scope(scope,num_parents=None):
-    dprint(f"[find_parent_scope] START")
-    stop=[\
-           CParser.FunctionDefinitionContext\
-          ]
-    scope_mtch= [\
-             CParser.IterationStatementContext,\
-             CParser.SelectionStatementContext,\
-          ]+stop
-    cmpd4=[\
-            [\
-               CParser.CompoundStatementContext,\
-               CParser.StatementContext,\
-               CParser.BlockItemContext,\
-               CParser.BlockItemListContext\
-            ]\
-          ]
-    cmpd2=[\
-            [\
-               CParser.CompoundStatementContext,\
-               CParser.FunctionDefinitionContext\
-            ]\
-          ]
-    cmpd3=[ \
-            [\
-               CParser.CompoundStatementContext,\
-               CParser.StatementContext,\
-               CParser.IterationStatementContext\
-            ],\
-            [\
-               CParser.CompoundStatementContext,\
-               CParser.StatementContext,\
-               CParser.SelectionStatementContext\
-            ],\
-          ]
-    p=[scope]
-    typ_p=[type(x) for x in p]
-    dprint(f"searching : {typ_p[-1]} {get_string2(p[-1])}")
-    scopes_=list()
-    l=len(scopes_)
-    while type(p[-1]) not in stop:
-        if num_parents and num_parents==l:
-            break
-        p.append(p[-1].parentCtx)
-        typ_p.append(type(p[-1]))
-        delim="\n\t"
-
-        dprint(f"parents[-4:]: {typ_p[-4:]}")
-        if len(p)>=4 and typ_p[-4:] in cmpd4:
-            scopes_.append(p[-2])
-        elif len(p)>=3 and typ_p[-3:] in cmpd3:
-            scopes_.append(p[-1])
-        elif len(p)>=2 and typ_p[-2:] in cmpd2:
-            scopes_.append(p[-1])
-        elif type(p[-1]) in scope_mtch:
-            scopes_.append(p[-1])
-        if l!=len(scopes_):
-            dprint(f"[{l}] : last = {type(scopes_[-1])} ")
-            if len(scopes_)>2:
-                dprint(f"[{l-1}] : next to last = {type(scopes_[-2])} ")
-            l=len(scopes_)
-    dprint(f"SCOPES : {scopes_}")
-    dprint(f"SCOPE TYPES : {[type(s) for s in scopes_]}")
-    dprint(f"[find_parent_scope] DONE")
-    return scopes_
-
-    
-def find_parent_scope2(scope):
-    dprint(f"[find_parent_scope2] {type(scope)}")
-    pscope=None
-    if scope and type(scope)!=CParser.FunctionDefinitionContext:
-        p=[None,None,scope,scope.parentCtx]
-        type_p=[None,None,type(scope),type(p[-1])]
-        stop_next_child = [\
-              CParser.CompoundStatementContext,\
-              CParser.IterationStatementContext,CParser.SelectionStatementContext
-              ]
-        checkme=[\
-              CParser.FunctionDefinitionContext,\
-            ]+stop_next_child
-        standalone_blk=[CParser.CompoundStatementContext,CParser.StatementContext,CParser.BlockItemContext,CParser.BlockItemListContext]
-    
-        pscope=p[-1]
-        dprint(f"\t{type(p[-1])}",flush=True)
-        while type(p[-1]) not in checkme:
-            dprint(f"\t{type(p[-1])}",flush=True)
-            if type_p==standalone_blk: 
-                pscope=p[1]
-                break
-            p=[p[-3],p[-2],p[-1],p[-1].parentCtx]
-            type_p=[type_p[-3],type_p[-2],type_p[-1],type(p[-1])]
-            pscope=p[-1]
-
-        dprint(f"\n[find_parent_scope2]\nCHILD : {type(scope)} \nPARENT : {type(pscope)}")
-    return pscope,None
 
 def str_nodes(t:list):
     for i in range(0,len(t)):
@@ -507,13 +716,10 @@ def get_decl_info(vt,found,lut):
             str_found.append(get_string2(decl_n))
     return val_t,found,str_found,lut
 
-def get_decls(ctx,child_ctx,var_lut:dict,ignore_nodes:list):
-    #global debug
-    #debug=True
+def get_decls(ctx,var_lut:dict,ignore_me:list):
     # we don't want to go beyond the current scope
     start=ctx
     #screen_me=[CParser.FunctionDefinitionContext,CParser.IterationStatementContext]
-    ignore_me=list(ignore_nodes)+list(child_ctx)
 
     children=list(start.getChildren())
     while(len(children)==1 and type(start)!=tree.Tree.TerminalNodeImpl):
@@ -555,11 +761,6 @@ def get_decls(ctx,child_ctx,var_lut:dict,ignore_nodes:list):
         else:
             check_these_nodes.append(i)
     
-    #global debug
-    #debug=True
-    for i,p in enumerate(check_these_nodes):
-        dprint(f"check_these_nodes[{i}]: {get_string2(p)}")
-    #debug=False
     declarations=list()
 
     val_t=list()
@@ -570,7 +771,7 @@ def get_decls(ctx,child_ctx,var_lut:dict,ignore_nodes:list):
     typs_t=list()
     for d in check_these_nodes:
         chld=list(d.getChildren())
-        d____,ignore_siblings=get_siblings_to_ignore(d)
+        ignore_siblings=siblings(d)[1]
         var_t,typ_t=(None,None)
         l_ignore=ignore_me
         if ignore_siblings:
@@ -578,7 +779,7 @@ def get_decls(ctx,child_ctx,var_lut:dict,ignore_nodes:list):
                 l_ignore=list()
             l_ignore.extend(ignore_siblings)
         if type(d)==CParser.ForDeclarationContext:
-            dprint(f"For declaration: {get_string2(d)}")
+            dprint(f"FOR : {get_string2(d)}")
             typ=chld[0]
             node=chld[1]
             dec=list(find_multictx(chld[1],[CParser.DeclaratorContext],None,l_ignore))
@@ -627,13 +828,12 @@ def get_decls(ctx,child_ctx,var_lut:dict,ignore_nodes:list):
             typ1=var_lut.get(varlkup1,vardict.get(varlkup1,None))
             typ2=var_lut.get(varlkup2,vardict.get(varlkup2,typ1))
             if typ1==None and typ2 == None:
-                if False:
-                    print(f"[WARNING] Looks like we've hit an unimplemented case for LHS={varlkup1},RHS={varlkup2}")
-                    print(f"[WARNING] Check this line: {get_string2(d)} ")
-                    print(f"[VERIFY] {var_lut.items()}")
-                    print(f"[VERIFY] {vardict.items()}")
-                    print(f"[WARNING] found: {[get_string2(f) for f in found]} ")
-                    print(f"[WARNING] SKIPPING ")
+                dprint(f"[WARNING] Looks like we've hit an unimplemented case for LHS={varlkup1},RHS={varlkup2}")
+                dprint(f"[WARNING] Check this line: {get_string2(d)} ")
+                dprint(f"[VERIFY] {var_lut.items()}")
+                dprint(f"[VERIFY] {vardict.items()}")
+                dprint(f"[WARNING] found: {[get_string2(f) for f in found]} ")
+                dprint(f"[WARNING] SKIPPING ")
                 continue
             elif typ1==None:
                 typ1=typ2
@@ -721,106 +921,8 @@ def get_decls(ctx,child_ctx,var_lut:dict,ignore_nodes:list):
     ts = [ get_string2(t) if type(t)!=str else t for t in typs_t ]
     declarations.extend(list(zip(ts, rs)))
 
-    debug=False
     return declarations,val_t,var_lut
             
-def get_scopes(node):
-    scopes_=dict()
-    child_scopes=dict()
-    okay_scope_changes=[CParser.CompoundStatementContext]
-    stop_scope = [\
-          CParser.IterationStatementContext,\
-          CParser.SelectionStatementContext\
-          ]
-    no_subscope=okay_scope_changes+stop_scope
-
-    node2ancestors=dict()
-    node2parent=dict()
-    node2children=dict()
-
-    compound_scopes = find_multictx(node,okay_scope_changes)
-    parent=None
-    ancestors=None
-    p_=find_parent_scope(node)
-    if p_ and len(p_)>0:
-        parent=p_[0]
-        ancestors=p_
-    # def find_multictx(tree,multctx,screen=None,ignore_nodes=None,dfs=True,screen_first=True):
-    child_scopes=find_multictx(node,okay_scope_changes,okay_scope_changes,None,True,False)
-    node2parent[node]=parent
-    node2ancestors[node]=ancestors
-    node2children[node]=child_scopes
-    if type(node)==CParser.FunctionDefinitionContext:
-        dprint(f"start node : children = {[(type(c),get_string2(c)) for c in node2children[node]]}")
-        pass
-
-    scopes=[node]+compound_scopes
-    scopes.reverse()
-    resolved_scopes=list()
-    compound=dict()
-
-    parents=list()
-    for i,c in enumerate(compound_scopes):
-        p_i=find_parent_scope(c)
-        node2ancestors[c]=p_i
-        node2parent[c]=p_i[0]
-        if p_i[0] not in compound_scopes:
-            parents.append(p_i[0])
-    for i,c in enumerate(parents):
-        p_i=find_parent_scope(c)
-        node2ancestors[c]=p_i
-        if p_i and len(p_i)>0:
-            node2parent[c]=p_i[0]
-        else:
-            node2parent[c]=None
-    for i,c in enumerate(scopes+parents):
-        compound=(c in scopes)
-        pc=node2parent.get(c,None)
-
-        # when the 5th parameter is False -> BFS, else DFS
-        # when the last/6th parameter is False [if true, then we check (2) then (1)]
-        # (1)we check to see if the node type is in the list of multctx [if so, add it to return list]
-        # (2)then if its type is in the screen list or the node is in ignore nodes list, don't process any of its children
-        c_i=list(find_multictx(c,okay_scope_changes,okay_scope_changes,None,True,False))
-        cp_i=[node2parent[c_ii] for c_ii in c_i if c_ii != c ]
-        node2children[c]=cp_i
-        
-
-    for i,p in enumerate(scopes+parents):
-        compound=(p in scopes)
-        child_scopes=node2children[p]
-        parent=node2parent[p]
-        ancestors=node2ancestors[p]
-        t=(type(parent),type(p))
-
-        sibs=None
-        if t[0] in [CParser.ExternalDeclarationContext]:
-            pass
-        else:
-            parents.append(parent)
-        if t[0] in [CParser.BlockItemContext,CParser.FunctionDefinitionContext]:
-            pass
-            
-        ____,sibs=list(get_siblings_to_ignore(p))
-        scopes_[p] = { 'parent':parent, 'children':child_scopes,'ignore':sibs,'scope_stack':ancestors, 'compound':compound }
-
-
-
-
-    #import sys
-    #sys.exit(-1)
-    return scopes_
-
-
-    
-def get_scopes_old(ctx):
-    okay_scope_changes=[CParser.CompoundStatementContext]
-    try:
-        #ftlc = find_ctx(ctx, "<class 'CParser.CParser.CompoundStatementContext'>")
-        ftlc = find_multictx(ctx,okay_scope_changes)
-        return ftlc
-    except:
-        return None
 
 def get_arg_names(ctx):
     try:
@@ -1040,5 +1142,11 @@ def parse_pre_process(inf):
     return ret_d,ret_d2
 
 if __name__ == "__main__":
+    import atexit
+    atexit.register(write_log)
     main()
+else:
+    import atexit
+    atexit.register(write_log)
+    
 

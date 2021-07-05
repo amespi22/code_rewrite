@@ -38,7 +38,7 @@ def main():
     #    print(f"{type(i)} => {get_string2(i)}")
     #    print(f"\t {k['func_ctx']}")
     #    print(f"\t {type(k['parent'])} => {get_string2(k['parent'])}")
-        
+
     x=get_function_info(functions=get_functions(t),fscope=printer.scopes)
     print_scope_info(x)
 
@@ -60,7 +60,7 @@ def siblings(current):
         if i!=len(family)-1:
             older=family[i+1:]
     return younger,older
-    
+
 class ScopeListener(CListener):
     cur_scopes=[ [], ]
     resolved=list()
@@ -79,7 +79,7 @@ class ScopeListener(CListener):
         CParser.FunctionDefinitionContext\
         ]
     current_fn_ctx=None
-        
+
     def find_pruned_nodes(self):
         for i in list(self.scopes.keys()):
             self.prune(i)
@@ -95,13 +95,13 @@ class ScopeListener(CListener):
 
     def siblings(self,current):
         return siblings(current)
-    
+
     def left_siblings(self,current):
         return self.siblings(current)[0]
-    
+
     def right_siblings(self,current):
         return self.siblings(current)[1]
-    
+
     def scopeleft_siblings(self,current):
         if type(current)==CParser.FunctionDefinitionContext:
             return None
@@ -165,7 +165,7 @@ class ScopeListener(CListener):
 
     def is_else(self,node):
         return type(node)==tree.Tree.TerminalNodeImpl and node.getText()=="else"
-        
+
     def getParentScopes(self,start):
         # add the current node to the previous hierarchy's descendant list
         self.cur_scopes[-1].append(start)
@@ -194,7 +194,7 @@ class ScopeListener(CListener):
                 dprint(f"Valid scope parent: {type(p[-1])}")
                 dprint(f" ===> Last {x} parents! ")
                 for i in range(0,x):
-                    dprint(f" [{i}] : {type(p[i-x])} ") 
+                    dprint(f" [{i}] : {type(p[i-x])} ")
                     # [ {get_string2(p[x-i-1])} ]")
                 if type(p[-1])==CParser.SelectionStatementContext:
                     lsiblings=self.left_siblings(p[-2])
@@ -221,11 +221,11 @@ class ScopeListener(CListener):
                                 done=True
                                 break
             p.append(p[-1].parentCtx)
-        
+
         self.scopes[start]['pscopes']=pscopes
         self.scopes[start]['ancestors']=p
         self.resolved.append(start)
-        
+
     def exitExternalDeclaration(self,ctx:CParser.ExternalDeclarationContext):
         pass
 
@@ -298,8 +298,6 @@ class ScopeListener(CListener):
             dprint(f" {i} : {type(x[i])}   [ {get_string2(x[i])} ]")
         self.scopes[ctx]['descendants']=copy.copy(x)
         pass
-
-    
 
 
 class KeyPrinter(CListener):
@@ -473,7 +471,7 @@ def find_multictx(tree,multctx,screen=None,ignore_nodes=None,dfs=True,screen_fir
 def find_scope_descendant(ancestor,descend_lineage):
     indx=descend_lineage.index(ancestor)
     return descend_lineage[indx-1]
-    
+
 
 def get_function_info(functions,fscope):
     scope_vars=dict()
@@ -532,7 +530,7 @@ def get_function_info(functions,fscope):
                     print(f" ERROR : {type(cur)} does not exist in scope_dict!")
                     i+=1
                     continue
-                curscope_limits=cur_info['scope_limits'][0] 
+                curscope_limits=cur_info['scope_limits'][0]
                 desc_scopes=cur_info['descendants']
                 #children=[x for x in scope_dict[cur]['children'] if x!=scope_stack[-1] ]
                 # [0][0] : list of valid subscopes
@@ -548,8 +546,8 @@ def get_function_info(functions,fscope):
                 ignore_me=desc_scopes
                 #if curscope_limits[1]:
                 #    ignore_me.extend(curscope_limits[1])
-                
-                    
+
+
                 #if nxt:
                 #    nxt_subchildren=scope_dict[nxt]['scope_limits'][0][1]
                 #    ignore_me.extend([nxt]+nxt_subchildren)
@@ -561,11 +559,11 @@ def get_function_info(functions,fscope):
                     dprint(f"for scope {type(cur)}, ignoring:")
                     for i in range(0,len(ignore_me)):
                         dprint(f" {i} : {type(ignore_me[i])}")
-                    
+
                 decls,values,variable_lut[cur]=get_decls(cur,var_lut,ignore_me)
                 pscope[cur]={'variables':decls,'values':values,'symbol2type_lut':variable_lut[cur]}
                 var_lut=copy.copy(variable_lut[cur])
-                
+
                 dprint(f"var_lut: {var_lut.keys()}")
                 # get local variable declarations in scope
                 variables=pscope[cur]['variables']
@@ -578,7 +576,7 @@ def get_function_info(functions,fscope):
                                   'scope_end':scope_end\
                                   }
     return scope_vars
-        
+
 
 def print_scope_info(scope):
     for fn,fs in scope.items():
@@ -679,18 +677,15 @@ def get_string2(ctx,ignore_list=None):
                 q.extend(children)
     return ' '.join(st)
 
-        
+
 def get_string(ctx):
     return ' '.join([c.parentCtx.getText() for c in find_ctx(ctx,"<class 'antlr4.tree.Tree.TerminalNodeImpl'>")])
-    
-
-
 
 def str_nodes(t:list):
     for i in range(0,len(t)):
         if t[i] and type(t[i])!=str:
             t[i]=get_string2(t[i])
-            
+
     return tuple(t)
 
 def get_decl_info(vt,found,lut):
@@ -711,7 +706,7 @@ def get_decl_info(vt,found,lut):
                 found.append(declaration[0])
                 str_found.append(d)
             lut[get_string2(decl_n)]=type_n
-            val_t.extend([str_nodes([type_n,declaration[0],decl_info,value_n])])    
+            val_t.extend([str_nodes([type_n,declaration[0],decl_info,value_n])])
             found.append(decl_n)
             str_found.append(get_string2(decl_n))
     return val_t,found,str_found,lut
@@ -760,7 +755,7 @@ def get_decls(ctx,var_lut:dict,ignore_me:list):
                 check_these_nodes.append(p)
         else:
             check_these_nodes.append(i)
-    
+
     declarations=list()
 
     val_t=list()
@@ -775,7 +770,7 @@ def get_decls(ctx,var_lut:dict,ignore_me:list):
         var_t,typ_t=(None,None)
         l_ignore=ignore_me
         if ignore_siblings:
-            if not l_ignore:   
+            if not l_ignore:
                 l_ignore=list()
             l_ignore.extend(ignore_siblings)
         if type(d)==CParser.ForDeclarationContext:
@@ -854,7 +849,7 @@ def get_decls(ctx,var_lut:dict,ignore_me:list):
             vt,found,str_found,var_lut=get_decl_info(f,found,var_lut)
             if vt:
                 val_t.extend(vt)
-            
+
         if type(d)==CParser.InitDeclaratorContext:
             # guaranteed to have 3 children
             varlkup=get_string2(chld[0])
@@ -909,7 +904,7 @@ def get_decls(ctx,var_lut:dict,ignore_me:list):
         if not var_t:
             pass
         else:
-            vars_t.extend(var_t) 
+            vars_t.extend(var_t)
             typs_t.extend(typ_t)
             for i,v in enumerate(var_t):
                 v_=v
@@ -922,7 +917,6 @@ def get_decls(ctx,var_lut:dict,ignore_me:list):
     declarations.extend(list(zip(ts, rs)))
 
     return declarations,val_t,var_lut
-            
 
 def get_arg_names(ctx):
     try:
@@ -1148,5 +1142,4 @@ if __name__ == "__main__":
 else:
     import atexit
     atexit.register(write_log)
-    
 

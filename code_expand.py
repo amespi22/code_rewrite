@@ -28,7 +28,7 @@ def main():
         #This means we have a file to parse
         #File should have a new line for each file to parse
         #Files named should be .c files
-        funcs_and_args,funcs_and_rts = parse_pre_process(pre_process)
+        funcs_and_args,funcs_and_rts,macros = get_json_data(pre_process)
     else:
         funcs_and_rts = {}
         funcs_and_args = {}
@@ -51,7 +51,7 @@ def main():
         rewrite = change_funcs[i](t)
         cur_pro = apply_changes[i](cur_pro, rewrite)
 
-    #FIX-INGREDIENTS
+    #FIX-INGREDIENTj
     write_new_program(cur_pro, f"{out_name}.prev")
     p,t = get_tree_from_string(cur_pro)
     print_ctx_bfs(t,"help")

@@ -9,6 +9,7 @@ import linked_list
 import inspect
 import codecs
 import copy
+import json
 
 debug=(False,False) # [0] print debug messages ; [1] generate debug log from debug messages
 gbl_debug_msg=["",0,open("debug.log","w") if debug[1] else None,debug[1] ]
@@ -1116,16 +1117,30 @@ def popq(q):
     q.reverse()
     return r
 
+def get_json_data(fname):
+    rd = {}
+    d1 = {}
+    d2 = {}
+    with open(fname, 'r') as j:
+        data = json.load(j)
+        if 'filenames' in data.keys():
+            #do the thing here
+            fls = data["filenames"]
+            flst = [x["name"] for x in fls]
+            d1,d2 = parse_pre_process(flst)
+        if "macros" in data.keys():
+            mcs = data["macros"]
+            for i in range(len(mcs)):
+                rd[mcs[i]['name']] = mcs[i]['value']
+
+    return (d1,d2,rd)
+
 #Input a file with a list of .c files to search functions for
 #Output a dictionary of functions and their arguments
-def parse_pre_process(inf):
+def parse_pre_process(cnts):
     #return dictionary
     ret_d = {}
     ret_d2 = {}
-    with open(inf, 'r') as infile:
-        cnts = infile.readlines()
-    #get rid of the new lines
-    cnts = [x.strip() for x in cnts]
     for c in cnts:
         #read all the files and pull out the functions from each file to return
         p,t = get_tree_from_file(c)

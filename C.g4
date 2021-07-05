@@ -445,7 +445,7 @@ selectionStatement
     ;
 
 macroSelectionStatement
-    :   '#ifdef' Identifier statement ('#else' statement)? '#endif'
+    :   '#ifdef' Identifier blockItemList ('#else' blockItemList)? '#endif'
     ;
 
 iterationStatement

@@ -505,8 +505,8 @@ def serializedATN():
         buf.write("\5.\30\2\u03ed\u03ee\7A\2\2\u03ee\u03ef\5\u008eH\2\u03ef")
         buf.write("\u03f1\3\2\2\2\u03f0\u03e1\3\2\2\2\u03f0\u03ea\3\2\2\2")
         buf.write("\u03f1\u009b\3\2\2\2\u03f2\u03f3\7\21\2\2\u03f3\u03f4")
-        buf.write("\7n\2\2\u03f4\u03f7\5\u008eH\2\u03f5\u03f6\7\22\2\2\u03f6")
-        buf.write("\u03f8\5\u008eH\2\u03f7\u03f5\3\2\2\2\u03f7\u03f8\3\2")
+        buf.write("\7n\2\2\u03f4\u03f7\5\u0094K\2\u03f5\u03f6\7\22\2\2\u03f6")
+        buf.write("\u03f8\5\u0094K\2\u03f7\u03f5\3\2\2\2\u03f7\u03f8\3\2")
         buf.write("\2\2\u03f8\u03f9\3\2\2\2\u03f9\u03fa\7\23\2\2\u03fa\u009d")
         buf.write("\3\2\2\2\u03fb\u03fc\7\65\2\2\u03fc\u03fd\7@\2\2\u03fd")
         buf.write("\u03fe\5.\30\2\u03fe\u03ff\7A\2\2\u03ff\u0400\5\u008e")
@@ -7292,11 +7292,11 @@ class CParser ( Parser ):
         def Identifier(self):
             return self.getToken(CParser.Identifier, 0)
 
-        def statement(self, i:int=None):
+        def blockItemList(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(CParser.StatementContext)
+                return self.getTypedRuleContexts(CParser.BlockItemListContext)
             else:
-                return self.getTypedRuleContext(CParser.StatementContext,i)
+                return self.getTypedRuleContext(CParser.BlockItemListContext,i)
 
 
         def getRuleIndex(self):
@@ -7325,7 +7325,7 @@ class CParser ( Parser ):
             self.state = 1009
             self.match(CParser.Identifier)
             self.state = 1010
-            self.statement()
+            self.blockItemList()
             self.state = 1013
             self._errHandler.sync(self)
             _la = self._input.LA(1)
@@ -7333,7 +7333,7 @@ class CParser ( Parser ):
                 self.state = 1011
                 self.match(CParser.T__15)
                 self.state = 1012
-                self.statement()
+                self.blockItemList()
 
 
             self.state = 1015

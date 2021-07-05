@@ -24,6 +24,7 @@ def main():
     global funcs_and_args
     #functions and their return types
     global funcs_and_rts
+    global macros
     if pre_process != "":
         #This means we have a file to parse
         #File should have a new line for each file to parse
@@ -43,15 +44,15 @@ def main():
 
     #loop to run all code transformations
     #order matters, don't re-arrange
-    change_funcs = [expand_if_else,single_declarations, expand_decs,expand_func_args,expand_decs]
-    apply_changes = [gen_if_changes,gen_dec_changes, gen_dec_changes,gen_func_changes,gen_dec_changes]
+    change_funcs = [expand_macro_block, expand_if_else,single_declarations, expand_decs,expand_func_args,expand_decs]
+    apply_changes = [gen_macro_changes, gen_if_changes,gen_dec_changes, gen_dec_changes,gen_func_changes,gen_dec_changes]
     for i in range(len(change_funcs)):
         if i != 0:
             p,t = get_tree_from_string(cur_pro)
         rewrite = change_funcs[i](t)
         cur_pro = apply_changes[i](cur_pro, rewrite)
 
-    #FIX-INGREDIENTj
+    #FIX-INGREDIENTS
     write_new_program(cur_pro, f"{out_name}.prev")
     p,t = get_tree_from_string(cur_pro)
     print_ctx_bfs(t,"help")
@@ -101,6 +102,58 @@ def expand_if_else(ctx):
                     dec = r_vars[0]
                     rewrites[start_loc, end_loc] = (f"{funcs_and_rts[f_name]} {dec} = {c.getText()};", dec)
     return rewrites
+
+def expand_macro_block(ctx):
+    #get all function contexts
+    #get all macro contexts in each function
+    #check the value in the global macro
+    #delete the rewrite is the deletion of the block we don't want
+    sel_stmt = "<class 'CParser.CParser.MacroSelectionStatementContext'>"
+    fns = get_functions(ctx)
+    rewrites = []
+    for f in fns:
+        macs = find_ctx(f, sel_stmt)
+        for m in macs:
+            if m.getChildCount() == 6:
+                #have ifdef, else, endif
+                if m.getChild(1).getText() in macros and macros[m.getChild(1).getText()]:
+                    dels = []
+                    #delete  #ifdef
+                    dels.append(get_line_num(m.getChild(0)))
+                    #delete (un|de)finedvalue
+                    dels.append(get_line_num(m.getChild(1)))
+                    #delete #else
+                    dels.append(get_line_num(m.getChild(3)))
+                    #delte #endif
+                    dels.append(get_line_num(m.getChild(5)))
+                    rewrites.append(dels)
+                if m.getChild(1).getText() in macros and not macros[m.getChild(1).getText()]:
+                    dels = []
+                    #delete  #ifdef
+                    dels.append(get_line_num(m.getChild(1)))
+                    #delete (un|de)finedvalue
+                    dels.append(get_line_num(m.getChild(5)))
+                    #delete #else
+                    dels.append(get_line_num(m.getChild(0)))
+                    #delte #endif
+                    dels.append(get_line_num(m.getChild(3)))
+                    rewrites.append(dels)
+    return rewrites
+
+def gen_macro_changes(cur_prog, rewrite):
+    lns = cur_prog.split('\n')
+    lns = [x+"\n" for x in lns]
+    lns = lns[:-1]
+    for r in rewrite:
+        i,d,e,end = r
+        if i == d:
+            lns[i-1] = ""
+        else:
+            lns[i-1] = ""
+            lns[d-1] = ""
+        for j in range(e-1,end):
+            lns[j] = ""
+    return "".join(lns)
 
 def gen_if_changes(cur_prog, rewrite):
     lns = cur_prog.split('\n')
@@ -165,7 +218,6 @@ def expand_func_args(ctx):
                         #again in the same function on another call
                         #all_vars.extend(r_vars)
                         fun_arg_types = funcs_and_args[f_name]
-
                         #added this cause we don't need functions that take
                         #const args to make the varialbes we send them const
                         de_const(fun_arg_types)
@@ -310,11 +362,12 @@ def expand_decs(ctx):
                 pass
                 #print("No initializer+declarations found")
             else:
-                if (const(d.getText())):
+                if ("const" in d.getText() or "char*" in d.getText()):
                     #Here if we have a const that can't be broken up
                     typ = d.getChild(0).getText()
                     stmt = d.getChild(1).getText()
                     typ = fix_type(typ)
+                    #print(f"{typ} {stmt};\n")
                     rewrite[(get_line_num(d)-1,get_last_line_num(d))] = f"{typ} {stmt};\n"
                 else:
                     #figure out the arguments.

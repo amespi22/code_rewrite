@@ -367,8 +367,14 @@ def expand_decs(ctx):
                     typ = d.getChild(0).getText()
                     stmt = d.getChild(1).getText()
                     typ = fix_type(typ)
-                    #print(f"{typ} {stmt};\n")
-                    rewrite[(get_line_num(d)-1,get_last_line_num(d))] = f"{typ} {stmt};\n"
+                    lhs = d.getChild(1).getChild(0).getChild(0).getText()
+                    rhs = d.getChild(1).getChild(0).getChild(2).getText()
+                    if "char*" in typ:
+                        rewrite[(get_line_num(d)-1,get_last_line_num(d))] = f"{typ.replace('char*','char')} {lhs}[] = {rhs};\n"
+                        #print(f"{typ.replace('char*','char')} {lhs}[] = {rhs};\n")
+                    else:
+                        rewrite[(get_line_num(d)-1,get_last_line_num(d))] = f"{typ} {stmt};\n"
+                        #print(f"{typ} {stmt};\n")
                 else:
                     #figure out the arguments.
                     try:

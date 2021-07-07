@@ -561,20 +561,22 @@ def get_function_info(functions,fscope):
                     for i in range(0,len(ignore_me)):
                         dprint(f" {i} : {type(ignore_me[i])}")
 
-                decls,values,variable_lut[cur]=get_decls(cur,var_lut,ignore_me)
-                pscope[cur]={'variables':decls,'values':values,'symbol2type_lut':variable_lut[cur]}
+                decls,values,variable_lut[cur],vals_wnodes=get_decls(cur,var_lut,ignore_me)
+                pscope[cur]={'variables':decls,'values':values,'symbol2type_lut':variable_lut[cur],'vals_w_nodes':vals_wnodes}
                 var_lut=copy.copy(variable_lut[cur])
 
                 dprint(f"var_lut: {var_lut.keys()}")
                 # get local variable declarations in scope
                 variables=pscope[cur]['variables']
                 values=pscope[cur]['values']
+                vals_w_nodes=pscope[cur]['vals_w_nodes']
             dprint(f"LAST SCOPE OF {type(p)} : {type(cur)}")
             scope_vars[fname][p]={'variables':variables,\
                                   'values':values,\
                                   'symbol2type_lut':var_lut,\
                                   'parent':parent_scope,\
-                                  'scope_end':scope_end\
+                                  'scope_end':scope_end,
+                                  'vals_w_nodes':vals_w_nodes\
                                   }
     return scope_vars
 
@@ -609,6 +611,113 @@ def print_scope_info(scope):
                     raise
             print("}")
             i+=1
+
+def is_literal(val):
+    # if is a digit
+    import re
+    if re.match(r"\d+",val):
+        return True
+    return False
+
+def get_fix_loc_subfns(scope):
+    uniques=[]
+    fn_body=[]
+    rewrites=[]
+    for i,f_info in enumerate(scope.items()):
+        fn,fs=f_info
+        type_lut=dict()
+        def_vars = get_all_vars(fn, False)
+        strip_array_decs(def_vars)
+        scp_fn=f"fix_ingred_{i}()"
+        fn_decl=f"void {scp_fn}"+"{\n"
+        scopefn_decls=""
+        scopefn_defs=""
+        for j, s_info in enumerate(fs.items()):
+            sn,s=s_info
+            uniq_init=[]
+            scope_uniq=[]
+            parent=s['parent'] if s['parent'] else sn
+            var_s=s['variables']
+            sym_lut=s['symbol2type_lut']
+            #val_s=s['values']
+            val_s=s['vals_w_nodes']
+            end=s['scope_end']
+            for x in val_s:
+                try:
+                    type_info,var,varinfo,value_node=x
+                    if value_node:
+                        term=list(find_multictx(value_node,[tree.Tree.TerminalNodeImpl]))
+                        value=get_string2(value_node)
+                        value_subterms=[get_string2(v) for v in term]
+                        dprint(f"Subterms : {' '.join(value_subterms)}")
+                        # if any RHS uses a variable, obtain its type from var_s (variable look-up table)
+                        # and add it to the unique scope list of required variables
+                        for v in value_subterms:
+                            if not is_literal(v):
+                                vtype = sym_lut.get(v,None)
+                                if vtype:
+                                    vtyp=vtype
+                                    if type(vtype)!=str:
+                                        vtyp=get_string2(vtype)
+                                    info=(vtyp,v,None)
+                                    if info in uniq_init:
+                                        continue
+                                    else:
+                                        uniq_init.append(info)
+                        # now we're looking at each set of variables and the RHS value
+                        import re
+                        typ=re.sub(r"\bconst\b",r' ',type_info)
+                        x=type_lut.get(typ,None)
+                        if not x:
+                            type_lut[typ]=[]
+                        for def_var in def_vars:
+                            info=(typ,def_var,value)
+                            if info in uniques:
+                                continue
+                            else:
+                                uniques.append(info)
+                                scope_uniq.append(info)
+                except Exception as e:
+                    print(f"Exception with x={x}")
+                    print(e)
+                    raise
+            # now take the uniq_init list and generate the pre-req variable types
+            # i : function id ; j : scope_id 
+            decl_vars=[]
+            if len(scope_uniq)>0:
+                scp_fn=f"fix_ingred_{i}_{j}()"
+                scp_fn_decl=f"void {scp_fn};"
+                scp_body=""
+                for u in uniq_init:
+                    utyp,uname,uval=u
+                    scp_body+=f"{utyp} {uname};\n"
+                    decl_vars.append(uname)
+                # and then take the scope_uniq list and generate the initialized values
+                for u in scope_uniq:
+                    utyp,uname,uval=u
+                    if uname not in decl_vars:
+                        scp_body+=f"{utyp} {uname}; {uname} = {uval};\n"
+                        decl_vars.append(uname)
+
+                scp_fn_def=f"void {scp_fn}"+"{\n"+f"{scp_body}"+"}"
+                call_fn=f"{scp_fn};\n"
+                fn_decl+=f"{call_fn}"
+                scopefn_decls+=f"{scp_fn_decl}\n"
+                scopefn_defs+=f"{scp_fn_def}\n"
+                loc = get_end_loc(end)
+                rewrites.append((call_fn,loc))
+        fn_decl+="}\n"
+        print("[Fix Ingredient functions]  -- START --")
+        prepend=f"{scopefn_decls}\n{scopefn_defs}"
+        print(prepend)
+        loc= get_start_loc(fn)
+        rewrites.append((prepend,loc))
+        print("[Fix Ingredient functions]  --  END  --")
+    return rewrites
+
+
+
+    
 
 def get_fix_loc_rewrites(scope,def_vars=["i"]):
     rewrites = []
@@ -682,15 +791,27 @@ def get_string2(ctx,ignore_list=None):
 def get_string(ctx):
     return ' '.join([c.parentCtx.getText() for c in find_ctx(ctx,"<class 'antlr4.tree.Tree.TerminalNodeImpl'>")])
 
+def str_nodes_cond(t:list):
+    x=[]
+    for i in range(0,len(t)):
+        if t[i][0] and t[i][1]:
+            if type(t[i][1])!=str:
+                x.append(get_string2(t[i][1]))
+            else:
+                x.append(t[i][1])
+        else:
+            x.append(t[i][1])
+    return tuple(x)
+
 def str_nodes(t:list):
     for i in range(0,len(t)):
         if t[i] and type(t[i])!=str:
             t[i]=get_string2(t[i])
-
     return tuple(t)
 
 def get_decl_info(vt,found,lut):
     val_t=list()
+    valnodes_t=list()
     str_found=[get_string2(f) for f in found]
     if vt:
         for v in vt:
@@ -699,7 +820,9 @@ def get_decl_info(vt,found,lut):
                 continue
             declaration=list(decl_n.getChild(0).getChildren())
             decl_info=""
+            decl_nodes=[]
             if len(declaration)>1:
+                decl_nodes=list(declaration[1:])
                 for i in range(1,len(declaration)):
                     decl_info+=get_string2(declaration[i])
                 d=get_string2(declaration[0])
@@ -708,9 +831,10 @@ def get_decl_info(vt,found,lut):
                 str_found.append(d)
             lut[get_string2(decl_n)]=type_n
             val_t.extend([str_nodes([type_n,declaration[0],decl_info,value_n])])
+            valnodes_t.extend([str_nodes_cond([(True,type_n),(True,declaration[0]),(True,decl_info),(False,value_n)])])
             found.append(decl_n)
             str_found.append(get_string2(decl_n))
-    return val_t,found,str_found,lut
+    return val_t,found,str_found,lut,valnodes_t
 
 def get_decls(ctx,var_lut:dict,ignore_me:list):
     # we don't want to go beyond the current scope
@@ -760,6 +884,7 @@ def get_decls(ctx,var_lut:dict,ignore_me:list):
     declarations=list()
 
     val_t=list()
+    valnodes_t=list()
     found=list()
     str_found=list()
     vardict=dict()
@@ -787,9 +912,10 @@ def get_decls(ctx,var_lut:dict,ignore_me:list):
                 f.append(v)
             var_t=[v for v in dec if v not in found ]
             typ_t=[typ for i in var_t]
-            vt,found,str_found,var_lut=get_decl_info(f,found,var_lut)
+            vt,found,str_found,var_lut,valnodes=get_decl_info(f,found,var_lut)
             if vt:
                 val_t.extend(vt)
+                valnodes_t.extend(valnodes)
         if type(d)==CParser.DeclarationContext:
             if len(chld) == 3:
                 typ=chld[0]
@@ -803,9 +929,10 @@ def get_decls(ctx,var_lut:dict,ignore_me:list):
                     f= [(typ,v,None) for v in dec if v not in found]
                 var_t=[v for v in dec if v not in found]
                 typ_t=[typ for i in var_t]
-                vt,found,str_found,var_lut=get_decl_info(f,found,var_lut)
+                vt,found,str_found,var_lut,valnodes=get_decl_info(f,found,var_lut)
                 if vt:
                     val_t.extend(vt)
+                    valnodes_t.extend(valnodes)
             if len(chld) == 2:
                 # this is a bug you see when you have 'int a;'
                 node=chld[0]
@@ -815,9 +942,10 @@ def get_decls(ctx,var_lut:dict,ignore_me:list):
                 f= [ (typ,var,None) ]
                 var_t=[var]
                 typ_t=[typ]
-                vt,found,str_found,var_lut=get_decl_info(f,found,var_lut)
+                vt,found,str_found,var_lut,valnodes=get_decl_info(f,found,var_lut)
                 if vt:
                     val_t.extend(vt)
+                    valnodes_t.extend(valnodes)
         if type(d)==CParser.RelationalExpressionContext or type(d)==CParser.EqualityExpressionContext:
             varlkup1=get_string2(chld[0])
             varlkup2=get_string2(chld[2])
@@ -847,9 +975,10 @@ def get_decls(ctx,var_lut:dict,ignore_me:list):
             f= [ (typ1,chld[0],chld[2]), (typ2,chld[2],chld[0]) ]
             var_t = [get_string2(chld[0]),get_string2(chld[2])]
             typ_t = [typ1_t,typ2_t]
-            vt,found,str_found,var_lut=get_decl_info(f,found,var_lut)
+            vt,found,str_found,var_lut,valnodes=get_decl_info(f,found,var_lut)
             if vt:
                 val_t.extend(vt)
+                valnodes_t.extend(valnodes)
 
         if type(d)==CParser.InitDeclaratorContext:
             # guaranteed to have 3 children
@@ -866,9 +995,10 @@ def get_decls(ctx,var_lut:dict,ignore_me:list):
                 dprint(f"found = {[get_string2(ii) for ii in found]}")
             var_t = [ get_string2(chld[0]) ]
             typ_t = [ typ ]
-            vt,found,str_found,var_lut=get_decl_info(f,found,var_lut)
+            vt,found,str_found,var_lut,valnodes=get_decl_info(f,found,var_lut)
             if vt:
                 val_t.extend(vt)
+                valnodes_t.extend(valnodes)
         if type(d)==CParser.AssignmentExpressionContext:
             if len(chld)==3:
                 varlkup=get_string2(chld[0])
@@ -893,9 +1023,10 @@ def get_decls(ctx,var_lut:dict,ignore_me:list):
                     dprint(f"found = {[get_string2(ii) for ii in found]}")
                 var_t = [ get_string2(chld[0]) ]
                 typ_t = [ typ ]
-                vt,found,str_found,var_lut=get_decl_info(f,found,var_lut)
+                vt,found,str_found,var_lut,valnodes=get_decl_info(f,found,var_lut)
                 if vt:
                     val_t.extend(vt)
+                    valnodes_t.extend(valnodes)
             #elif len(chld)==1:
             #    pass
 
@@ -917,7 +1048,7 @@ def get_decls(ctx,var_lut:dict,ignore_me:list):
     ts = [ get_string2(t) if type(t)!=str else t for t in typs_t ]
     declarations.extend(list(zip(ts, rs)))
 
-    return declarations,val_t,var_lut
+    return declarations,val_t,var_lut,valnodes_t
 
 def get_arg_names(ctx):
     try:

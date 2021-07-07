@@ -60,7 +60,8 @@ def main():
     walker = ParseTreeWalker()
     walker.walk(printer,t)
     scope_vars = get_function_info(functions=get_functions(t),fscope=printer.scopes )
-    fix_loc_rewrites = get_fix_loc_rewrites(scope_vars)
+    #fix_loc_rewrites = get_fix_loc_rewrites(scope_vars)
+    fix_loc_rewrites = get_fix_loc_subfns(scope_vars)
     cur_pro = gen_fix_loc_changes(cur_pro, fix_loc_rewrites)
 
     #write out the new program

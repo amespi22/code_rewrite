@@ -28,7 +28,8 @@ def main():
         test_functs()
         args = get_func_args_from_inp("test_files/test.c", "simple_func",'file')
         print(args)
-    p,t =get_tree_from_file("test_files/service.c")
+    p,t =get_tree_from_file("test_files/service.i")
+    exit()
     #p,t =get_tree_from_file("new_code_expand.c")
     print_ctx_bfs(t,"help")
     printer=ScopeListener()
@@ -1114,9 +1115,10 @@ def get_function(ctx, f_name):
             return f
 
 def test_functs():
-    p,t =get_tree_from_file("new_code_expand.c")
-    exes = find_ctx(t, "<class 'CParser.CParser.ExternalDeclarationContext'>")
-    return exes
+    p,t =get_tree_from_file("test_files/service.i")
+    g = get_typedefs_from_ctx(t)
+    print(get_typedef_from_set(g,set(['unsigned','long'])))
+    return g
     print("Found the following functions")
     for f in fns:
         print(f.getText())
@@ -1177,6 +1179,33 @@ def get_all_vars(func_ctx, ret_types):
         print(d.getText())
         print(d.getChildCount())
         return None
+
+#Input: a context should be the whole parse tree
+#Output: all the typedefine contexts that are basic data types that were just renamed
+def get_typedefs_from_ctx(ctx):
+    sel_stmt = "<class 'CParser.CParser.DeclarationSpecifiersContext'>"
+    macs = find_ctx(ctx, sel_stmt)
+    t_defs = [x for x in macs if x.getText().startswith("typedef")]
+    #might be a good idea to add pointers to all these types
+    base_types = set(['int','long','char','float','double','short','signed','unsigned'])
+    ret = []
+    for t in t_defs:
+        brkn = set([t.getChild(x).getText() for x in range(t.getChildCount())][1:-1])
+        if brkn.issubset(base_types) and brkn != set():
+            ret.append(t)
+    return ret
+
+#Input: A set of contexts' that have typedefines with basic data types
+#Output:The name of the typedef
+def get_typedef_from_set(t_defs, type_set):
+    ret = []
+    for t in t_defs:
+        brkn = [t.getChild(x).getText() for x in range(t.getChildCount())]
+        #trim off "typedf" and type-name
+        brkn_set = set(brkn[1:-1])
+        if type_set == brkn_set:
+            ret.append(brkn[-1])
+    return ret
 
 def get_tokens_form_ctx(ctx):
     #BFS to get all children, may need to DFS just try and print both

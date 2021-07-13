@@ -391,6 +391,25 @@ def find_ctx(tree,ctx,screen=None):
             pushq(q,list(e.getChildren()))
     return r
 
+#get all types of ctx
+#use to find functions or conditional statements
+def find_ctx_list(tree,ctx,screen=None):
+    q = []
+    #get first set of children
+    pushq(q, list(tree.getChildren()))
+    #go through all children breadth first
+    r = []
+    while q != []:
+        e = popq(q)
+        if screen and type(e) in screen:
+            continue
+        t = type(e)
+        if str(t) in ctx:
+            r.append(e)
+        if e.getChildCount() != 0:
+            pushq(q,list(e.getChildren()))
+    return r
+
 #Input: a functionDefinitionContext
 #Output: the argument names
 def get_func_name(fctx):

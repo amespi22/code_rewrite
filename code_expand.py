@@ -59,7 +59,7 @@ def main():
     printer=ScopeListener()
     walker = ParseTreeWalker()
     walker.walk(printer,t)
-    scope_vars = get_function_info(functions=get_functions(t),fscope=printer.scopes )
+    scope_vars = get_function_info(functions=get_functions(t),fscope=printer.scopes)
     #fix_loc_rewrites = get_fix_loc_rewrites(scope_vars)
     fix_loc_rewrites = get_fix_loc_subfns(scope_vars)
     cur_pro = gen_fix_loc_changes(cur_pro, fix_loc_rewrites)
@@ -105,30 +105,37 @@ def expand_if_else(ctx):
     return rewrites
 
 def expand_sizeof(ctx):
-    sel_stmt = "<class 'CParser.CParser.AssignmentExpressionContext'>"
+    sel_stmt = []
+    sel_stmt.append("<class 'CParser.CParser.SelectionStatementContext'>")
+    sel_stmt.append("<class 'CParser.CParser.IterationStatementContext'>")
+    sel_stmt2 = "<class 'CParser.CParser.ShiftExpressionContext'>"
     fns = get_functions(ctx)
     rewrites = {}
+    dec = "unsigned long "
     #go through all the functions
     for f in fns:
-        dec = "unsigned long "
-    #    sizes = find_ctx(f, sel_stmt)
-    #    size = [x for x in sizes if x.getText().startswith('sizeof(')]
-    #    #for all the sizeof() statements get the re-write information
-    #    for s in size:
-    #        start_loc = get_start_loc(s)
-    #        end_loc = get_end_loc(s)
-    #        rewrites[start_loc, end_loc] = (f"{dec}tlv_size = {s.getText()};", f"tlv_size")
-    #        dec = ""
+        c_vars = set()
+        loops_selections = find_ctx_list(f, sel_stmt)
+        # for all loops and conditionals
+        for l in loops_selections:
+            #this is just the stuff between parens in the statement l.getChild(2)
+            sizes = find_ctx(l.getChild(2), sel_stmt2)
+            #for all the sizeof() statements get the re-write information
+            size = [x for x in sizes if x.getText().startswith('sizeof(')]
+            #get a new variable for every sizeof in the statement
+            vs = [f"tlv_size_{x}" for x in range(len(size))]
+            i = 0
+            for s in size:
+                start_loc = get_start_loc(s)
+                end_loc = get_end_loc(s)
+                if vs[i] in c_vars:
+                    rewrites[start_loc, end_loc] = (f"{vs[i]}= {s.getText()};", f"{vs[i]}")
 
-        sel_stmt = "<class 'CParser.CParser.ShiftExpressionContext'>"
-        sizes = find_ctx(f, sel_stmt)
-        size = [x for x in sizes if x.getText().startswith('sizeof(')]
-        #for all the sizeof() statements get the re-write information
-        for s in size:
-            start_loc = get_start_loc(s)
-            end_loc = get_end_loc(s)
-            rewrites[start_loc, end_loc] = (f"{dec}tlv_size = {s.getText()};", f"tlv_size")
-            dec = ""
+                else:
+                    rewrites[start_loc, end_loc] = (f"{dec}{vs[i]}= {s.getText()};", f"{vs[i]}")
+                    c_vars.add(vs[i])
+                    i += 1
+
     return rewrites
 
 def expand_macro_block(ctx):
@@ -187,18 +194,30 @@ def gen_if_changes(cur_prog, rewrite):
     lns = cur_prog.split('\n')
     lns = [x+"\n" for x in lns]
     lns = lns[:-1]
+    diff = 0
+    prev_line = 0
     for key,val in rewrite.items():
         start_loc, end_loc = key
         func_call,var_use = val
         #if the start and end loc lines are the same
         if key[0][0] == key[1][0]:
+            if prev_line != start_loc[0]:
+                diff = 0
             ln = lns[start_loc[0]-1]
-            start = ln[:start_loc[1]-1]
-            end = ln[end_loc[1]+1:]
+            start = ln[:start_loc[1]-1-diff]
+            end = ln[end_loc[1]+1-diff:]
             middle = var_use
+
+            pre_len = len(ln)
             spaces = get_line_spaces(ln)
             line_change = f"{start}{middle}{end}"
-            lns[start_loc[0]-1] = f"{spaces}{func_call}\n{line_change}"
+
+            diff = pre_len - len(line_change)
+
+            lns[start_loc[0]-1] = f"{line_change}"
+            lns[start_loc[0]-2] += f"{spaces}{func_call}\n"
+
+            prev_line = start_loc[0]
         #if multi-line we need to compress the functioncall line to 1
         else:
             print("You should really have done this")

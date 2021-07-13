@@ -44,8 +44,8 @@ def main():
 
     #loop to run all code transformations
     #order matters, don't re-arrange
-    change_funcs = [expand_macro_block, expand_if_else,single_declarations, expand_decs,expand_func_args,expand_decs]
-    apply_changes = [gen_macro_changes, gen_if_changes,gen_dec_changes, gen_dec_changes,gen_func_changes,gen_dec_changes]
+    change_funcs = [expand_macro_block, expand_if_else, expand_sizeof, single_declarations, expand_decs,expand_func_args,expand_decs]
+    apply_changes = [gen_macro_changes, gen_if_changes, gen_if_changes, gen_dec_changes, gen_dec_changes,gen_func_changes,gen_dec_changes]
     for i in range(len(change_funcs)):
         if i != 0:
             p,t = get_tree_from_string(cur_pro)
@@ -102,6 +102,33 @@ def expand_if_else(ctx):
                     end_loc = get_end_loc(c)
                     dec = r_vars[0]
                     rewrites[start_loc, end_loc] = (f"{funcs_and_rts[f_name]} {dec} = {c.getText()};", dec)
+    return rewrites
+
+def expand_sizeof(ctx):
+    sel_stmt = "<class 'CParser.CParser.AssignmentExpressionContext'>"
+    fns = get_functions(ctx)
+    rewrites = {}
+    #go through all the functions
+    for f in fns:
+        dec = "unsigned long "
+    #    sizes = find_ctx(f, sel_stmt)
+    #    size = [x for x in sizes if x.getText().startswith('sizeof(')]
+    #    #for all the sizeof() statements get the re-write information
+    #    for s in size:
+    #        start_loc = get_start_loc(s)
+    #        end_loc = get_end_loc(s)
+    #        rewrites[start_loc, end_loc] = (f"{dec}tlv_size = {s.getText()};", f"tlv_size")
+    #        dec = ""
+
+        sel_stmt = "<class 'CParser.CParser.ShiftExpressionContext'>"
+        sizes = find_ctx(f, sel_stmt)
+        size = [x for x in sizes if x.getText().startswith('sizeof(')]
+        #for all the sizeof() statements get the re-write information
+        for s in size:
+            start_loc = get_start_loc(s)
+            end_loc = get_end_loc(s)
+            rewrites[start_loc, end_loc] = (f"{dec}tlv_size = {s.getText()};", f"tlv_size")
+            dec = ""
     return rewrites
 
 def expand_macro_block(ctx):

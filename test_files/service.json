@@ -1,10 +1,19 @@
 {
 	"filenames":[
-		{"name":"/home/tony/Documents/cb-multios-prd/challenges/Palindrome/lib/libc.c"}
+		{"name":"./libc.c"}
 	],
 	
 	"macros":[
-		{"name": "PATCHEDD",
-		"value": true}
+		{"name": "PATCHED",
+		"value": false}
+	],
+
+	"disable_eval":[
+	"cgc_check",
+	"main",
+    "fopen",
+	"cgc_receive_delim",
+	"cgc_transmit_all",
+	"cgc__terminate"
 	]
 }

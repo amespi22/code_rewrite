@@ -796,14 +796,6 @@ def get_function_info(functions,fscope,dont_eval:list=None):
                 dprint(f"{j} : type: {c[0]}, value: {get_string2(c[3])}")
             dprint(f"=======END=======")
 
-            #    pscope[cur]={'variables':decls,'values':values,'symbol2type_lut':variable_lut[cur],'vals_w_nodes':list(vals_wnodes)}
-            #    dprint(f"var_lut: {var_lut.keys()}")
-            #    # get local variable declarations in scope
-            #    variables=pscope[cur]['variables']
-            #    values=pscope[cur]['values']
-            #    vals_w_nodes=pscope[cur]['vals_w_nodes']
-            #print(f"p[vals_w_nodes] => {type(p)}\n {vals_w_nodes}")
-            #dprint(f"LAST SCOPE OF {type(p)} : {type(cur)}")
             scope_vars[fname][p]=\
                                   {'variables':copy.copy(decl_scopes),\
                                   'values':copy.copy(assign_scopes),\
@@ -811,57 +803,6 @@ def get_function_info(functions,fscope,dont_eval:list=None):
                                   'parent':copy.copy(parent_scope),\
                                   'scope_end':copy.copy(scope_end)
                                   }
-            continue
-            #    #children=[x for x in scope_dict[cur]['children'] if x!=scope_stack[-1] ]
-            #    # [0][0] : list of valid subscopes
-            #    # [0][1] : list of invalid subscopes
-            #    # [1][0] : start node
-            #    # [1][1] : last node in valid subscope
-            #    # start evaluation at current node and stop at next scope
-            #    # for each scope, we need to ignore :
-            #    #    1) current scope's invalid subscopes
-            #    #           => curscope_limits[1]
-            #    #    2) descendant scopes
-            #    #           => descendant_scopes
-            #    ignore_me=desc_scopes
-            #    #if curscope_limits[1]:
-            #    #    ignore_me.extend(curscope_limits[1])
-
-
-            #    #if any([n in i.getText() for n in dont_eval]):
-            #    decl_scopes=[n for n in cur_info['decls'] if not is_not_inscope(n[1],nxt_ignore)]
-            #    assign_scopes=[n for n in cur_info['assigns'] if not is_not_inscope(n,nxt_ignore) and not(any([x in n.getText() for x in dont_eval]))]
-            #    for j,c in enumerate(decl_scopes):
-            #        print(f"{j} : type: {c[0]}, var: {get_string2(c[1])}")
-            #    for j,c in enumerate(assign_scopes):
-            #        print(f"{j} : value: {get_string2(c)}")
-            #    # get_decls(ctx,var_lut:dict,ignore_me:list):
-            #    #    ignore_me : list of nodes to stop after finding
-            #    #    var_lut   : look-up table for variables containing type and variable info
-            #    #    ctx       : node to start looking at
-            #    if len(ignore_me)>0:
-            #        dprint(f"for scope {type(cur)}, ignoring:")
-            #        for i in range(0,len(ignore_me)):
-            #            dprint(f" {i} : {type(ignore_me[i])}")
-
-            #    #decls,values,variable_lut[cur],vals_wnodes=get_decls(cur,var_lut,ignore_me,dont_eval)
-            #    pscope[cur]={'variables':decls,'values':values,'symbol2type_lut':variable_lut[cur],'vals_w_nodes':list(vals_wnodes)}
-            #    var_lut=copy.copy(variable_lut[cur])
-
-            #    dprint(f"var_lut: {var_lut.keys()}")
-            #    # get local variable declarations in scope
-            #    variables=pscope[cur]['variables']
-            #    values=pscope[cur]['values']
-            #    vals_w_nodes=pscope[cur]['vals_w_nodes']
-            #print(f"p[vals_w_nodes] => {type(p)}\n {vals_w_nodes}")
-            #dprint(f"LAST SCOPE OF {type(p)} : {type(cur)}")
-            #scope_vars[fname][p]={'variables':variables,\
-            #                      'values':values,\
-            #                      'symbol2type_lut':var_lut,\
-            #                      'parent':parent_scope,\
-            #                      'scope_end':scope_end,
-            #                      'vals_w_nodes':vals_w_nodes\
-            #                      }
     return scope_vars
 
 
@@ -907,16 +848,17 @@ def get_fix_loc_subfns(scope):
     uniques=[]
     fn_body=[]
     rewrites=[]
+    ## function scope
     for i,f_info in enumerate(scope.items()):
         fn,fs=f_info
         type_lut=dict()
         def_vars = get_all_vars(fn, False)
         dprint(f"def_vars => {def_vars}")
         strip_array_decs(def_vars)
-        scopefn_decls=""
-        scopefn_defs=""
-        scp_fn=""
-        fn_decl=""
+        ## for each namespace scope in function scope
+        s2_fn_def=""
+        s2_body=""
+        s2_calls=""
         for j, s_info in enumerate(fs.items()):
             sn,s=s_info
             uniq_init=[]
@@ -927,6 +869,10 @@ def get_fix_loc_subfns(scope):
             #val_s=s['vals_w_nodes']
             scope_uniq=[]
             end=s['scope_end']
+
+            #s2_decls=""
+            s2_fn=f"fix_ingred_{i}"
+            ## for each value in the namespace scope
             for k,x in enumerate(val_s):
                 try:
                     type_info,var,varinfo,value_node=x
@@ -981,41 +927,64 @@ def get_fix_loc_subfns(scope):
             decl_vars=[]
             tdecl_vars=[]
 
-            # note: pdr - i know this portion is jacked up, but it's a dont care since we wont be using this anymore
+            s1_calls=""
+            s1_fn_decl=""
+            s1_fn_def=""
             if len(scope_uniq)>0:
-                scp_fn=f"fix_ingred_{i}_{j}"
-                scp_body=""
-                sfn_decl=""
-                sscp_fn_decl=""
-                sscp_fn_def=""
+                s0_calls=""
+                s0_fn_decl=""
+                s0_fn_def=""
+                s1_fn=f"fix_ingred_{i}_{j}"
                 for k in range(0,len(scope_uniq)):
-                    sscp_body=""
-                    for u in uniq_init:
-                        utyp,uname,uval=u
-                        sscp_body+=f"{utyp} {uname};\n"
-                        decl_vars.append(uname)
+                    s0_body_vals=""
+                    s0_body_vars=""
+                    valid=False
                     # and then take the scope_uniq list and generate the initialized values
                     for u in scope_uniq[k]:
                         utyp,uname,uval=u
-                        if (utyp,uname) not in tdecl_vars:
-                            sscp_body+=f"{utyp} {uname}; {uname} = {uval};\n"
+                        if (utyp,uname) not in tdecl_vars and utyp != "UNDEF":
+                            s0_body_vars+=f"{utyp} {uname}; {uname} = {uval};\n"
                             tdecl_vars.append((utyp,uname))
-                    sscp_fn=f"{scp_fn}_{k}()"
-                    sscp_fn_decl+=f"void {sscp_fn};\n"
-                    sscp_fn_def+=f"void {sscp_fn}"+"{\n"+f"{sscp_body}"+"}\n"
-                    call_fn=f"{sscp_fn};\n"
-                    sfn_decl+=f"{call_fn}"
-                scp_fn_decl=f"{scp_fn}();"
-                scp_fn_def=sscp_fn_decl+f"void {scp_fn}()"+"{\n"+f"{sfn_decl}"+"}\n"
-                scopefn_decls+=f"{scp_fn_decl}\n"
-                scopefn_defs+=f"{scp_fn_def}\n"
+                            valid=True
+                    # only need to generate if we've found a unique (type,variable) tuple
+                    if valid:
+                        for u in uniq_init:
+                            utyp,uname,uval=u
+                            s0_body_vals+=f"{utyp} {uname};\n"
+                            decl_vars.append(uname)
+                        s0_body=f"{s0_body_vals}{s0_body_vars}"
+                        # scope 0 function
+                        s0_fn=f"{s1_fn}_{k}()"
+                        ## scope 0 function declaration
+                        #s0_fn_decl+=f"void {s0_fn};\n"
+                        # scope 0 function definition (with body)
+                        s0_fn_def+=f"void {s0_fn}"+"{\n"+f"{s0_body}"+"}\n"
+                        # scope 0 function call
+                        s0_call_fn=f"{s0_fn};\n"
+                        # set of scope 0 function calls
+                        s0_calls+=f"{s0_call_fn}"
+                s1_body=""
+                # scope 1 function call (used in scope 2 function definition)
+                s1_call_fn=f"{s1_fn}();\n"
+                s1_calls+=f"{s1_call_fn}"
+                #s1_fn_decl="\n"+s0_fn_decl+"\n"+f"void {s1_call_fn}"+"\n"
+                s1_body=f"{s0_calls}"
+                # scope 0 function definition (with body)
+                s1_fn_def+=s0_fn_def+f"void {s1_fn}()"+"{\n"+f"{s1_body}"+"}\n"
+                print("==== Scope 1 ====\n"+f"{s1_fn_def}")
+                #s2_decls+=f"{s1_fn_decl}\n"
+                s2_body+=f"{s1_fn}();"+"\n"
                 loc = get_end_loc(end)
-                rewrites.append((call_fn,loc))
-        scp_fn=f"fix_ingred_{i}()"
-        fn_decl=f"void {scp_fn}"+"{\n"+fn_decl+"}\n"
-        dprint("[Fix Ingredient functions]  -- START --")
-        prepend=f"{scopefn_decls}\n{scopefn_defs}"
-        dprint(prepend)
+                rewrites.append((s1_call_fn,loc))
+                s2_fn_def+=s1_fn_def
+        s2_call_fn=f"{s2_fn}();\n"
+        s2_calls+=f"{s2_call_fn}"
+        s2_fn=f"fix_ingred_{i}()"
+        s2_fn_def+=f"void {s2_fn}"+"{\n"+f"{s2_body}"+"}\n"
+        print("==== Scope 2 ====\n"+f"{s2_fn_def}")
+        print("[Fix Ingredient functions]  -- START --")
+        prepend=f"{s2_fn_def}"
+        print(prepend)
         loc= get_start_loc(fn)
         rewrites.append((prepend,loc))
         dprint("[Fix Ingredient functions]  --  END  --")
@@ -1099,307 +1068,6 @@ def get_string2(ctx,ignore_list=None):
 def get_string(ctx):
     return ' '.join([c.parentCtx.getText() for c in find_ctx(ctx,"<class 'antlr4.tree.Tree.TerminalNodeImpl'>")])
 
-def str_nodes_cond(t:list):
-    x=[]
-    for i in range(0,len(t)):
-        if t[i][0] and t[i][1]:
-            if type(t[i][1])!=str:
-                x.append(get_string2(t[i][1]))
-            else:
-                x.append(t[i][1])
-        else:
-            x.append(t[i][1])
-    return tuple(x)
-
-def str_nodes(t:list):
-    for i in range(0,len(t)):
-        if t[i] and type(t[i])!=str:
-            t[i]=get_string2(t[i])
-    return tuple(t)
-
-def get_decl_info(vt,found,lut):
-    val_t=list()
-    valnodes_t=list()
-    str_found=[get_string2(f) for f in found]
-    if vt:
-        for v in vt:
-            type_n,decl_n,value_n=v
-            if not type_n:
-                try:
-                    d=get_string2(decl_n)
-                    type_n=lut[d]
-                except Exception as e:
-                    dprint(f"decl_n => {d}")
-                    dprint(f"lut.keys() => {lut.keys()}")
-                    continue
-                    raise(e)
-            if decl_n in found or decl_n in str_found:
-                continue
-            declaration=list(decl_n.getChild(0).getChildren())
-            decl_info=""
-            decl_nodes=[]
-            if len(declaration)>1:
-                decl_nodes=list(declaration[1:])
-                for i in range(1,len(declaration)):
-                    decl_info+=" "+get_string2(declaration[i])
-                d=get_string2(declaration[0])
-                try:
-                    lut[d]=get_string2(type_n)+" *"
-                except Exception as e:
-                    dprint(f"type_n : {type_n}")
-                    dprint(f"d : {d}")
-                    print(e)
-                    raise(e)
-                found.append(declaration[0])
-                str_found.append(d)
-            lut[get_string2(decl_n)]=type_n
-            val_t.extend([str_nodes([type_n,declaration[0],decl_info,value_n])])
-            valnodes_t.extend([str_nodes_cond([(True,type_n),(True,declaration[0]),(True,decl_info),(False,value_n)])])
-            found.append(decl_n)
-            str_found.append(get_string2(decl_n))
-    return val_t,found,str_found,lut,valnodes_t
-
-def get_decls(ctx,var_lut:dict,ignore_me:list,dont_eval:list):
-    # we don't want to go beyond the current scope
-    start=ctx
-    #screen_me=[CParser.FunctionDefinitionContext,CParser.IterationStatementContext]
-
-    children=list(start.getChildren())
-    while(len(children)==1 and type(start)!=tree.Tree.TerminalNodeImpl):
-        try:
-            start=children[0].getChild(0)
-            if type(start)==tree.Tree.TerminalNodeImpl:
-                break
-            children=list(start.getChildren())
-        except Exception as e:
-            print(f"{type(children[0])}")
-            print(e)
-            raise
-    if type(start)==tree.Tree.TerminalNodeImpl:
-        start=ctx
-    rules_with_comparators=[CParser.RelationalExpressionContext,CParser.EqualityExpressionContext]
-    rules_with_assignment=[CParser.InitDeclaratorContext,CParser.AssignmentExpressionContext]
-    rules_with_declarations=[CParser.ForDeclarationContext,CParser.DeclarationContext]
-    ops=['==','<=','>=','<','>','!=','=']
-    # so I needed a function that enables evaluation of the first okay_scope_changes follows screen_me
-    # the point is to identify declarations, equality, etc
-    a = [p for p in find_multictx(ctx, [tree.Tree.TerminalNodeImpl]+rules_with_declarations,None,ignore_me) \
-        if ( type(p)==tree.Tree.TerminalNodeImpl and any([op in p.getText() for op in ops]) \
-        \
-        ) or (type(p) in rules_with_declarations) ]
-    assigns=[]
-    comparisons=[]
-    check_these_nodes=list()
-    for i in a:
-        #s=get_string2(i)
-        #no_eval=False
-        #for n in dont_eval:
-        #    if n in s:
-        #        no_eval=True
-        #        break
-        #if no_eval:
-        # #and not any([n in p.getText() for n in dont_eval])\    pass
-        if any([n in i.getText() for n in dont_eval]):
-            dprint(f"==> not checking {get_string2(i)}")
-            pass
-        elif type(i)==tree.Tree.TerminalNodeImpl:
-            p=i.parentCtx
-            ba=(type(p) in rules_with_assignment)
-            bc=(type(p) in rules_with_comparators)
-            while not ba and not bc:
-                p=p.parentCtx
-                ba=(type(p) in rules_with_assignment)
-                bc=(type(p) in rules_with_comparators)
-            if any([n in p.getText() for n in dont_eval]):
-                dprint(f"==> not checking {get_string2(p)}")
-                pass
-            else:
-                if ba:
-                    check_these_nodes.append(p)
-                elif bc:
-                    check_these_nodes.append(p)
-        else:
-            check_these_nodes.append(i)
-
-    for i,x in enumerate(check_these_nodes):
-        dprint(f"[{i}] check_these_nodes : '{get_string2(x)}' [type = '{type(x)}']")
-    declarations=list()
-
-    val_t=list()
-    valnodes_t=list()
-    found=list()
-    str_found=list()
-    vardict=dict()
-    vars_t=list()
-    typs_t=list()
-    for d in check_these_nodes:
-        chld=list(d.getChildren())
-        ignore_siblings=siblings(d)[1]
-        var_t,typ_t=(None,None)
-        l_ignore=ignore_me
-        if ignore_siblings:
-            if not l_ignore:
-                l_ignore=list()
-            l_ignore.extend(ignore_siblings)
-        if type(d)==CParser.ForDeclarationContext:
-            dprint(f"FOR : {get_string2(d)}")
-            typ=chld[0]
-            node=chld[1]
-            dec=list(find_multictx(chld[1],[CParser.DeclaratorContext],None,l_ignore))
-            f=list()
-            for n in find_multictx(node,[CParser.InitDeclaratorContext],None,l_ignore):
-                x=list(n.getChildren())
-                val=x[2] if len(x)>1 else None
-                v=(typ,x[0],val)
-                f.append(v)
-            var_t=[v for v in dec if v not in found ]
-            typ_t=[typ for i in var_t]
-            vt,found,str_found,var_lut,valnodes=get_decl_info(f,found,var_lut)
-            if vt:
-                val_t.extend(vt)
-                valnodes_t.extend(valnodes)
-        if type(d)==CParser.DeclarationContext:
-            if len(chld) == 3:
-                typ=chld[0]
-                dec=list(find_multictx(chld[1],[CParser.DeclaratorContext],None,l_ignore))
-                f=list()
-                if type(chld[1])==CParser.InitDeclaratorListContext:
-                    node=chld[1]
-                    f=[ (typ,n.getChild(0),n.getChild(2)) for n in find_multictx(node,[CParser.InitDeclaratorContext],None,l_ignore) if n.getChild(0) not in found ]
-                else:
-                    # type,variable,initial_value
-                    f= [(typ,v,None) for v in dec if v not in found]
-                var_t=[v for v in dec if v not in found]
-                typ_t=[typ for i in var_t]
-                vt,found,str_found,var_lut,valnodes=get_decl_info(f,found,var_lut)
-                if vt:
-                    val_t.extend(vt)
-                    valnodes_t.extend(valnodes)
-            if len(chld) == 2:
-                # this is a bug you see when you have 'int a;'
-                node=chld[0]
-                chldn=list(node.getChildren());l=len(chldn)
-                typ,var=(None,None)
-                if l==2:
-                    typ=chldn[0]
-                    var=chldn[1]
-                elif l==3:
-                    typ=" ".join([get_string2(x) for x in chldn[0:2]])
-                    var=chldn[2]
-                # type,variable,initial_value
-                f= [ (typ,var,None) ]
-                var_t=[var]
-                typ_t=[typ]
-                vt,found,str_found,var_lut,valnodes=get_decl_info(f,found,var_lut)
-                if vt:
-                    val_t.extend(vt)
-                    valnodes_t.extend(valnodes)
-        if type(d)==CParser.RelationalExpressionContext or type(d)==CParser.EqualityExpressionContext:
-            varlkup1=get_string2(chld[0])
-            varlkup2=get_string2(chld[2])
-            typ1=var_lut.get(varlkup1,vardict.get(varlkup1,None))
-            typ2=var_lut.get(varlkup2,vardict.get(varlkup2,typ1))
-            if typ1==None and typ2 == None:
-                dprint(f"[WARNING] Looks like we've hit an unimplemented case for LHS={varlkup1},RHS={varlkup2}")
-                dprint(f"[WARNING] Check this line: {get_string2(d)} ")
-                dprint(f"[VERIFY] {var_lut.items()}")
-                dprint(f"[VERIFY] {vardict.items()}")
-                dprint(f"[WARNING] found: {[get_string2(f) for f in found]} ")
-                dprint(f"[WARNING] SKIPPING ")
-                continue
-            elif typ1==None:
-                typ1=typ2
-            if type(typ1)==str:
-                typ1_t=typ1
-            else:
-                typ1_t=get_string2(typ1)
-            if type(typ2)==str:
-                typ2_t=typ2
-            else:
-                typ2_t=get_string2(typ2)
-
-            val=get_string2(chld[2])
-            # type,variable,initial_value
-            f= [ (typ1,chld[0],chld[2]), (typ2,chld[2],chld[0]) ]
-            var_t = [get_string2(chld[0]),get_string2(chld[2])]
-            typ_t = [typ1_t,typ2_t]
-            vt,found,str_found,var_lut,valnodes=get_decl_info(f,found,var_lut)
-            if vt:
-                val_t.extend(vt)
-                valnodes_t.extend(valnodes)
-
-        if type(d)==CParser.InitDeclaratorContext:
-            # guaranteed to have 3 children
-            varlkup=get_string2(chld[0])
-            typ=var_lut.get(varlkup,vardict.get(varlkup,"int"))
-            typ_v=typ if type(typ)==str else get_string2(typ)
-            val=get_string2(chld[2])
-            # type,variable,initial_value
-            f= [ (typ,chld[0],chld[2]) ]
-            for x in f:
-                str_x=get_string2(x[1])
-                fnd=(str_x in str_found)
-                dprint(f"5: {get_string2(x[0])},{get_string2(x[1])},{get_string2(x[2])} [FOUND={fnd}]")
-                dprint(f"found = {[get_string2(ii) for ii in found]}")
-            var_t = [ get_string2(chld[0]) ]
-            typ_t = [ typ ]
-            vt,found,str_found,var_lut,valnodes=get_decl_info(f,found,var_lut)
-            if vt:
-                val_t.extend(vt)
-                valnodes_t.extend(valnodes)
-        if type(d)==CParser.AssignmentExpressionContext:
-            if len(chld)==3:
-                varlkup=get_string2(chld[0])
-                typ=var_lut.get(varlkup,vardict.get(varlkup,None))
-                if typ and type(typ)==str:
-                   typ_v=typ
-                elif typ:
-                   typ_v=get_string2(typ)
-                else:
-                   typ_v="int" # default!
-                val=get_string2(chld[2])
-                # type,variable,initial_value
-                f= [ (typ,chld[0],chld[2]) ]
-                for x in f:
-                    a,b,c=x
-                    if type(a)!=str:
-                      a=get_string2(a)
-                    b=get_string2(b)
-                    c=get_string2(c)
-                    fnd=(b in str_found)
-                    dprint(f"6: {a},{b},{c} [FOUND={fnd}]")
-                    dprint(f"found = {[get_string2(ii) for ii in found]}")
-                var_t = [ get_string2(chld[0]) ]
-                typ_t = [ typ ]
-                vt,found,str_found,var_lut,valnodes=get_decl_info(f,found,var_lut)
-                if vt:
-                    val_t.extend(vt)
-                    valnodes_t.extend(valnodes)
-            #elif len(chld)==1:
-            #    pass
-
-            else:
-                pass
-
-        if not var_t:
-            pass
-        else:
-            vars_t.extend(var_t)
-            typs_t.extend(typ_t)
-            for i,v in enumerate(var_t):
-                v_=v
-                if type(v) != str:
-                    v_=get_string2(v)
-                vardict[v_]=typ_t[i]
-
-    dprint(f"val_t : {val_t} ")
-    dprint(f"valnodes_t : {valnodes_t} ")
-    dprint(f"{var_lut.keys()}")
-    rs = [ get_string2(v) if type(v)!=str else v for v in vars_t ]
-    ts = [ get_string2(t) if type(t)!=str else t for t in typs_t ]
-    declarations.extend(list(zip(ts, rs)))
-
-    return declarations,val_t,var_lut,valnodes_t
 
 def get_arg_names(ctx):
     try:

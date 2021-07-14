@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 from antlr_funcs import *
 import argparse
 import sys
@@ -25,11 +25,12 @@ def main():
     #functions and their return types
     global funcs_and_rts
     global macros
+    dont_eval=[]
     if pre_process != "":
         #This means we have a file to parse
         #File should have a new line for each file to parse
         #Files named should be .c files
-        funcs_and_args,funcs_and_rts,macros = get_json_data(pre_process)
+        funcs_and_args,funcs_and_rts,macros,dont_eval = get_json_data(pre_process)
     else:
         funcs_and_rts = {}
         funcs_and_args = {}
@@ -59,7 +60,7 @@ def main():
     printer=ScopeListener()
     walker = ParseTreeWalker()
     walker.walk(printer,t)
-    scope_vars = get_function_info(functions=get_functions(t),fscope=printer.scopes)
+    scope_vars = get_function_info(functions=get_functions(t),fscope=printer.scopes,dont_eval=dont_eval)
     #fix_loc_rewrites = get_fix_loc_rewrites(scope_vars)
     fix_loc_rewrites = get_fix_loc_subfns(scope_vars)
     cur_pro = gen_fix_loc_changes(cur_pro, fix_loc_rewrites)

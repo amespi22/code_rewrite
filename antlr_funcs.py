@@ -65,6 +65,9 @@ def siblings(current):
 
 class ScopeListener(CListener):
     cur_scopes=[ [], ]
+    cur_declarations=[ [], ]
+    cur_symbol_lut=dict()
+    cur_assignments=[ [], ]
     resolved=list()
     scopes=dict()
     # keys: k, list of nodes that are valid_parent_scopes
@@ -81,6 +84,7 @@ class ScopeListener(CListener):
         CParser.FunctionDefinitionContext\
         ]
     current_fn_ctx=None
+    current_scope=None
 
     def find_pruned_nodes(self):
         for i in list(self.scopes.keys()):
@@ -170,9 +174,25 @@ class ScopeListener(CListener):
 
     def getParentScopes(self,start):
         # add the current node to the previous hierarchy's descendant list
+        if self.current_scope:
+            self.cur_symbol_lut[start]=copy.copy(self.cur_symbol_lut[self.current_scope])
+        else:
+            self.cur_symbol_lut[start]=dict()
+            #for i,c in enumerate(list(start.getChildren())):
+            #    print(f" {i} : {type(c)}")
+            #    if i==1:
+            #        print(f" {i}[0] : {get_string2(c.getChild(0).getChild(0))}")
+            #        print(f" {i}[1] : {get_string2(c.getChild(0).getChild(1))}")
+            #        print(f" {i}[2] : {get_string2(c.getChild(0).getChild(2))}")
+            #        print(f" {i}[2] : type : {type(c.getChild(0).getChild(2))}")
+
+                    
+        self.current_scope=start
         self.cur_scopes[-1].append(start)
         # create a new list to accumulate descendants
         self.cur_scopes.append([])
+        self.cur_declarations.append([])
+        self.cur_assignments.append([])
         pscopes=[]
         p=[start]
         siblings=self.siblings(start)
@@ -236,10 +256,19 @@ class ScopeListener(CListener):
 
     def exitCompoundStatement(self,ctx:CParser.CompoundStatementContext):
         x=self.cur_scopes.pop()
+        self.current_scope=self.cur_scopes[-1][-1]
         dprint(f"Descendants of {type(ctx)} : {get_string2(ctx)}")
         for i in range(0,len(x)):
             dprint(f" {i} : {type(x[i])}   [ {get_string2(x[i])} ]")
         self.scopes[ctx]['descendants']=copy.copy(x)
+        x=self.cur_symbol_lut[ctx]
+        self.scopes[ctx]['sym_lut']=copy.copy(x)
+        x=self.cur_declarations.pop()
+        self.scopes[ctx]['decls']=copy.copy(x)
+        x=self.cur_assignments.pop()
+        self.scopes[ctx]['assigns']=copy.copy(x)
+        s=[(n[0],n[1],n[2],get_string2(n[3])) for n in x]
+        dprint(f"Assigns = {s}")
         pass
 
     def enterCompoundStatement(self,ctx:CParser.CompoundStatementContext):
@@ -252,10 +281,17 @@ class ScopeListener(CListener):
 
     def exitSelectionStatement(self, ctx:CParser.SelectionStatementContext):
         x=self.cur_scopes.pop()
+        self.current_scope=self.cur_scopes[-1][-1]
         dprint(f"Descendants of {type(ctx)} : {get_string2(ctx)}")
         for i in range(0,len(x)):
             dprint(f" {i} : {type(x[i])}   [ {get_string2(x[i])} ]")
         self.scopes[ctx]['descendants']=copy.copy(x)
+        x=self.cur_symbol_lut[ctx]
+        self.scopes[ctx]['sym_lut']=copy.copy(x)
+        x=self.cur_declarations.pop()
+        self.scopes[ctx]['decls']=copy.copy(x)
+        x=self.cur_assignments.pop()
+        self.scopes[ctx]['assigns']=copy.copy(x)
         pass
 
     def enterSelectionStatement(self, ctx:CParser.SelectionStatementContext):
@@ -268,10 +304,17 @@ class ScopeListener(CListener):
 
     def exitIterationStatement(self, ctx:CParser.IterationStatementContext):
         x=self.cur_scopes.pop()
+        self.current_scope=self.cur_scopes[-1][-1]
         dprint(f"Descendants of {type(ctx)} : {get_string2(ctx)}")
         for i in range(0,len(x)):
             dprint(f" {i} : {type(x[i])}   [ {get_string2(x[i])} ]")
         self.scopes[ctx]['descendants']=copy.copy(x)
+        x=self.cur_symbol_lut[ctx]
+        self.scopes[ctx]['sym_lut']=copy.copy(x)
+        x=self.cur_declarations.pop()
+        self.scopes[ctx]['decls']=copy.copy(x)
+        x=self.cur_assignments.pop()
+        self.scopes[ctx]['assigns']=copy.copy(x)
         pass
 
     def enterIterationStatement(self, ctx:CParser.IterationStatementContext):
@@ -295,10 +338,167 @@ class ScopeListener(CListener):
         self.find_pruned_nodes()
         self.current_fn_ctx=None
         x=self.cur_scopes.pop()
+        self.current_scope=None
         dprint(f"Descendants of {type(ctx)} : {get_string2(ctx)}")
         for i in range(0,len(x)):
             dprint(f" {i} : {type(x[i])}   [ {get_string2(x[i])} ]")
         self.scopes[ctx]['descendants']=copy.copy(x)
+        x=self.cur_symbol_lut[ctx]
+        self.scopes[ctx]['sym_lut']=copy.copy(x)
+        x=self.cur_declarations.pop()
+        self.scopes[ctx]['decls']=copy.copy(x)
+        x=self.cur_assignments.pop()
+        self.scopes[ctx]['assigns']=copy.copy(x)
+        pass
+
+    def exitAssignmentExpression(self, ctx:CParser.AssignmentExpressionContext):
+        pass
+    def enterAssignmentExpression(self, ctx:CParser.AssignmentExpressionContext):
+        chld=list(ctx.getChildren())
+        if len(chld)==3 and "=" in get_string2(chld[1]):
+            #nodes=get_string2(ctx)
+            ovar=get_string2(chld[0])
+            var_ext=ovar.split('[',1) if '[' in ovar else [ovar,""]
+            var=var_ext[0]
+            ext=var_ext[1]
+            if ext!="":
+                ext="["+ext
+            nodes=chld[2]
+            dprint(f"var: {var} ({ovar}) = {get_string2(nodes)}")
+            typ=self.cur_symbol_lut[self.current_scope].get(var,"UNDEF")
+            dprint(f"var: {typ} {var} ({ovar}) = {get_string2(nodes)}")
+            if ovar!=var:
+                typ=typ.rsplit(' *',1)[0]
+            self.cur_assignments[-1].extend([(typ,var,ext,nodes)])
+        else:
+            pass
+        pass
+
+    #def exitInitializer(self, ctx:CParser.InitializerContext):
+    #    pass
+    #def enterInitializer(self, ctx:CParser.InitializerContext):
+    #    if type(ctx.getChild(0))==CParser.AssignmentExpressionContext:
+    #        nodes=get_string2(ctx)
+    #        print(f"Initializer: {nodes}")
+    #        self.cur_assignments[-1].extend([nodes])
+    #    pass
+
+    #rules_with_declarations=[CParser.ForDeclarationContext,CParser.DeclarationContext]
+    def exitDeclaration(self, ctx:CParser.DeclarationContext):
+        pass
+    def enterDeclaration(self, ctx:CParser.DeclarationContext):
+        if self.current_scope==None:
+            pass
+        else:
+            chld=list(ctx.getChildren())
+            nodes=[]
+            if len(chld)<=1:
+                return
+            elif len(chld)==3:
+                typ=get_string2(chld[0])
+                node=chld[1]
+                dec=list(find_multictx(node,[CParser.DeclaratorContext],None,None))
+                nodes=[(typ,d) for d in dec]
+            elif len(chld)==2:
+                checkme=chld[0];
+                c=list(checkme.getChildren())
+                typ,node=(None,None)
+                if len(c)==2:
+                   typ=get_string2(c[0])
+                   node=c[1]
+                elif len(c)==3:
+                   typ=" ".join([get_string2(x) for x in c[0:2]])
+                   node=c[2]
+                nodes=[(typ,node)]
+
+            sym_dict=dict()
+            up_nodes=list()
+            for t,d in nodes:
+                c=list(d.getChild(0).getChildren())
+                if len(c)>1:
+                    decl_info=""
+                    decl_nodes=list(c[1:])
+                    for i in range(1,len(c)):
+                        decl_info+=" "+get_string2(c[i])
+                    d_=get_string2(c[0])
+                    typ=t+" *"
+                    sym_dict[d_]=typ
+                    up_nodes.extend([(typ,c[0],decl_info)])
+                up_nodes.extend([(t,d,None)])
+                
+            self.cur_declarations[-1].extend(up_nodes)
+            for a,b in nodes:
+                sym_dict[get_string2(b)]=a
+            try:
+                self.cur_symbol_lut[self.current_scope].update(sym_dict)
+            except Exception as e:
+                print(e)
+                print(f"=> {type(self.current_scope)}")
+                print(f"ctx => {get_string2(ctx)}")
+                raise(e)
+        pass
+
+    def exitForDeclaration(self, ctx:CParser.ForDeclarationContext):
+        pass
+    def enterForDeclaration(self, ctx:CParser.ForDeclarationContext):
+        chld=list(ctx.getChildren())
+        typ=get_string2(chld[0])
+        node=chld[1]
+        dec=list(find_multictx(node,[CParser.DeclaratorContext],None,None))
+        nodes=[(typ,d) for d in dec]
+        up_nodes=list()
+        sym_dict=dict()
+        for t,d in nodes:
+            c=list(d.getChild(0).getChildren())
+            if len(c)>1:
+                decl_info=""
+                decl_nodes=list(c[1:])
+                for i in range(1,len(c)):
+                    decl_info+=" "+get_string2(c[i])
+                d_=get_string2(c[0])
+                typ=t+" *"
+                sym_dict[d_]=typ
+                up_nodes.extend([(typ,c[0],decl_info)])
+            up_nodes.extend([(t,d,None)])
+            
+        self.cur_declarations[-1].extend(up_nodes)
+        for a,b in nodes:
+            sym_dict[get_string2(b)]=a
+        self.cur_symbol_lut[self.current_scope].update(sym_dict)
+        pass
+
+    def exitParameterDeclaration(self, ctx:CParser.ParameterDeclarationContext):
+        pass
+    def enterParameterDeclaration(self, ctx:CParser.ParameterDeclarationContext):
+        chld=list(ctx.getChildren())
+        typ=get_string2(chld[0])
+        node=chld[1]
+        dprint(f"ParameterDeclaration : type = {typ}, var = {get_string2(node)} [type={type(node)}]")
+        dec=[node]
+        if type(node)!=CParser.DeclaratorContext:
+            dec=list(find_multictx(node,[CParser.DeclaratorContext],None,None))
+        dprint(f" dec = {[get_string2(d) for d in dec]}")
+        nodes=[(typ,d) for d in dec]
+        up_nodes=list()
+        sym_dict=dict()
+        for t,d in nodes:
+            dprint(f"{t} : {get_string2(d)}")
+            c=list(d.getChild(0).getChildren())
+            if len(c)>1:
+                decl_info=""
+                decl_nodes=list(c[1:])
+                for i in range(1,len(c)):
+                    decl_info+=" "+get_string2(c[i])
+                d_=get_string2(c[0])
+                typ=t+" *"
+                sym_dict[d_]=typ
+                up_nodes.extend([(typ,c[0],decl_info)])
+            up_nodes.extend([(t,d,None)])
+            
+        self.cur_declarations[-1].extend(up_nodes)
+        for a,b in nodes:
+            sym_dict[get_string2(b)]=a
+        self.cur_symbol_lut[self.current_scope].update(sym_dict)
         pass
 
 
@@ -493,8 +693,27 @@ def find_scope_descendant(ancestor,descend_lineage):
     indx=descend_lineage.index(ancestor)
     return descend_lineage[indx-1]
 
+def is_not_inscope(node,older):
+    found=False
+    node_=node
+    while not found:
+        if type(node_)==CParser.ExternalDeclarationContext:
+            return False
+        if node_ in older:
+            return True
+        node_=node_.parentCtx
 
-def get_function_info(functions,fscope):
+def is_descendant(node,ancestor):
+    found=False
+    node_=node
+    while not found:
+        if type(node_)==CParser.ExternalDeclarationContext:
+            return False
+        if node_==ancestor:
+            return True
+        node_=node_.parentCtx
+
+def get_function_info(functions,fscope,dont_eval:list=None):
     scope_vars=dict()
     variable_lut=dict()
     for ctx in functions:
@@ -516,20 +735,23 @@ def get_function_info(functions,fscope):
                     compound_scope.append((k,False))
         dprint(f"len(compound_scope) : {len(compound_scope)}")
         for p,add_p_to_scope_stack in list(compound_scope):
+            dprint(f"=======START=======")
             pscope=dict()
+            decl_scopes=[]
+            assign_scopes=[]
+            var_lut=dict()
             import copy
             scope_stack=copy.copy(scope_dict[p]['pscopes'])
             if add_p_to_scope_stack:
                 scope_stack=[p]+scope_stack
+            else:
+                decl_scopes.extend(scope_dict[p]['decls'])
+                assign_scopes.extend([n for n in scope_dict[p]['assigns'] if not(any([x in n[3].getText() for x in dont_eval]))])
+                var_lut.update(scope_dict[p]['sym_lut'])
             parent_scope=scope_dict[p]['parent']
             siblings=scope_dict[p]['siblings'] #[0] are younger, [1] older
             ignore_sibs=copy.copy(scope_dict[p]['ignore_nodes'])
-            variables=[]
-            if fargs and len(fargs)>0:
-                variables.extend(list(fargs))
-            lut=[ (v[1],v[0]) for v in variables ]
-            var_lut=dict(lut)
-            values=[]
+
             cur=None
             scope_end=p
             if add_p_to_scope_stack:
@@ -538,66 +760,108 @@ def get_function_info(functions,fscope):
             dprint(f"SCOPE STACK : {add_p_to_scope_stack} ")
             dprint(f"START SCOPE : [ {type(p)} => {get_string2(p)} ] ")
             dprint(f"END SCOPE   : [ {type(scope_end)} => {get_string2(scope_end)} ] ")
+            dprint(f"p_decls = {[(get_string2(n[0]),get_string2(n[1]),get_string2(n[2])) for n in scope_dict[p]['decls']]}")
 
             for i in range(0,len(scope_stack)):
                 dprint(f" scope [{i}] : {type(scope_stack[i])}")
-            i=0
             while(len(scope_stack)>0):
-                i+=1
                 cur=scope_stack.pop()
                 cur_info=scope_dict.get(cur,None)
-                nxt=scope_stack[-1] if len(scope_stack)>0 else None
                 if not cur_info:
                     print(f" ERROR : {type(cur)} does not exist in scope_dict!")
-                    i+=1
                     continue
+
+                nxt=scope_stack[-1] if len(scope_stack)>0 else None
+                nxt_ignore=ignore_sibs
+                nxt_info=None
+                if nxt:
+                    nxt_info=scope_dict.get(nxt,None)
+                    nxt_ignore=nxt_info['ignore_nodes']
                 curscope_limits=cur_info['scope_limits'][0]
                 desc_scopes=cur_info['descendants']
-                #children=[x for x in scope_dict[cur]['children'] if x!=scope_stack[-1] ]
-                # [0][0] : list of valid subscopes
-                # [0][1] : list of invalid subscopes
-                # [1][0] : start node
-                # [1][1] : last node in valid subscope
-                # start evaluation at current node and stop at next scope
-                # for each scope, we need to ignore :
-                #    1) current scope's invalid subscopes
-                #           => curscope_limits[1]
-                #    2) descendant scopes
-                #           => descendant_scopes
-                ignore_me=desc_scopes
-                #if curscope_limits[1]:
-                #    ignore_me.extend(curscope_limits[1])
+                var_lut.update(cur_info['sym_lut'])
+                local_decls=[n for n in cur_info['decls'] if not is_not_inscope(n[1],nxt_ignore)]
+                local_assigns=[n for n in cur_info['assigns'] if not is_not_inscope(n[3],nxt_ignore) and not(any([x in n[3].getText() for x in dont_eval]))]
+                decl_scopes.extend(local_decls)
+                assign_scopes.extend(local_assigns)
+                dprint(f"decls = {[(get_string2(n[0]),get_string2(n[1]),get_string2(n[2])) for n in decl_scopes]}")
+                dprint(f"assigns = {[(get_string2(n[0]),get_string2(n[1]),get_string2(n[2]),get_string2(n[3])) for n in assign_scopes]}")
+            # end of while
+            dprint(f"===> context {get_string2(p)}")
+            s=[get_string2(n) for n in ignore_sibs]
+            dprint(f"ignore sibs: {s}")
+            for j,c in enumerate(decl_scopes):
+                dprint(f"{j} : type: {c[0]}, var: {get_string2(c[1])}")
+            for j,c in enumerate(assign_scopes):
+                dprint(f"{j} : type: {c[0]}, value: {get_string2(c[3])}")
+            dprint(f"=======END=======")
 
-
-                #if nxt:
-                #    nxt_subchildren=scope_dict[nxt]['scope_limits'][0][1]
-                #    ignore_me.extend([nxt]+nxt_subchildren)
-                # get_decls(ctx,var_lut:dict,ignore_me:list):
-                #    ignore_me : list of nodes to stop after finding
-                #    var_lut   : look-up table for variables containing type and variable info
-                #    ctx       : node to start looking at
-                if len(ignore_me)>0:
-                    dprint(f"for scope {type(cur)}, ignoring:")
-                    for i in range(0,len(ignore_me)):
-                        dprint(f" {i} : {type(ignore_me[i])}")
-
-                decls,values,variable_lut[cur],vals_wnodes=get_decls(cur,var_lut,ignore_me)
-                pscope[cur]={'variables':decls,'values':values,'symbol2type_lut':variable_lut[cur],'vals_w_nodes':vals_wnodes}
-                var_lut=copy.copy(variable_lut[cur])
-
-                dprint(f"var_lut: {var_lut.keys()}")
-                # get local variable declarations in scope
-                variables=pscope[cur]['variables']
-                values=pscope[cur]['values']
-                vals_w_nodes=pscope[cur]['vals_w_nodes']
-            dprint(f"LAST SCOPE OF {type(p)} : {type(cur)}")
-            scope_vars[fname][p]={'variables':variables,\
-                                  'values':values,\
-                                  'symbol2type_lut':var_lut,\
-                                  'parent':parent_scope,\
-                                  'scope_end':scope_end,
-                                  'vals_w_nodes':vals_w_nodes\
+            #    pscope[cur]={'variables':decls,'values':values,'symbol2type_lut':variable_lut[cur],'vals_w_nodes':list(vals_wnodes)}
+            #    dprint(f"var_lut: {var_lut.keys()}")
+            #    # get local variable declarations in scope
+            #    variables=pscope[cur]['variables']
+            #    values=pscope[cur]['values']
+            #    vals_w_nodes=pscope[cur]['vals_w_nodes']
+            #print(f"p[vals_w_nodes] => {type(p)}\n {vals_w_nodes}")
+            #dprint(f"LAST SCOPE OF {type(p)} : {type(cur)}")
+            scope_vars[fname][p]=\
+                                  {'variables':copy.copy(decl_scopes),\
+                                  'values':copy.copy(assign_scopes),\
+                                  'symbol2type_lut':copy.copy(var_lut),\
+                                  'parent':copy.copy(parent_scope),\
+                                  'scope_end':copy.copy(scope_end)
                                   }
+            continue
+            #    #children=[x for x in scope_dict[cur]['children'] if x!=scope_stack[-1] ]
+            #    # [0][0] : list of valid subscopes
+            #    # [0][1] : list of invalid subscopes
+            #    # [1][0] : start node
+            #    # [1][1] : last node in valid subscope
+            #    # start evaluation at current node and stop at next scope
+            #    # for each scope, we need to ignore :
+            #    #    1) current scope's invalid subscopes
+            #    #           => curscope_limits[1]
+            #    #    2) descendant scopes
+            #    #           => descendant_scopes
+            #    ignore_me=desc_scopes
+            #    #if curscope_limits[1]:
+            #    #    ignore_me.extend(curscope_limits[1])
+
+
+            #    #if any([n in i.getText() for n in dont_eval]):
+            #    decl_scopes=[n for n in cur_info['decls'] if not is_not_inscope(n[1],nxt_ignore)]
+            #    assign_scopes=[n for n in cur_info['assigns'] if not is_not_inscope(n,nxt_ignore) and not(any([x in n.getText() for x in dont_eval]))]
+            #    for j,c in enumerate(decl_scopes):
+            #        print(f"{j} : type: {c[0]}, var: {get_string2(c[1])}")
+            #    for j,c in enumerate(assign_scopes):
+            #        print(f"{j} : value: {get_string2(c)}")
+            #    # get_decls(ctx,var_lut:dict,ignore_me:list):
+            #    #    ignore_me : list of nodes to stop after finding
+            #    #    var_lut   : look-up table for variables containing type and variable info
+            #    #    ctx       : node to start looking at
+            #    if len(ignore_me)>0:
+            #        dprint(f"for scope {type(cur)}, ignoring:")
+            #        for i in range(0,len(ignore_me)):
+            #            dprint(f" {i} : {type(ignore_me[i])}")
+
+            #    #decls,values,variable_lut[cur],vals_wnodes=get_decls(cur,var_lut,ignore_me,dont_eval)
+            #    pscope[cur]={'variables':decls,'values':values,'symbol2type_lut':variable_lut[cur],'vals_w_nodes':list(vals_wnodes)}
+            #    var_lut=copy.copy(variable_lut[cur])
+
+            #    dprint(f"var_lut: {var_lut.keys()}")
+            #    # get local variable declarations in scope
+            #    variables=pscope[cur]['variables']
+            #    values=pscope[cur]['values']
+            #    vals_w_nodes=pscope[cur]['vals_w_nodes']
+            #print(f"p[vals_w_nodes] => {type(p)}\n {vals_w_nodes}")
+            #dprint(f"LAST SCOPE OF {type(p)} : {type(cur)}")
+            #scope_vars[fname][p]={'variables':variables,\
+            #                      'values':values,\
+            #                      'symbol2type_lut':var_lut,\
+            #                      'parent':parent_scope,\
+            #                      'scope_end':scope_end,
+            #                      'vals_w_nodes':vals_w_nodes\
+            #                      }
     return scope_vars
 
 
@@ -647,24 +911,27 @@ def get_fix_loc_subfns(scope):
         fn,fs=f_info
         type_lut=dict()
         def_vars = get_all_vars(fn, False)
+        dprint(f"def_vars => {def_vars}")
         strip_array_decs(def_vars)
-        scp_fn=f"fix_ingred_{i}()"
-        fn_decl=f"void {scp_fn}"+"{\n"
         scopefn_decls=""
         scopefn_defs=""
+        scp_fn=""
+        fn_decl=""
         for j, s_info in enumerate(fs.items()):
             sn,s=s_info
             uniq_init=[]
-            scope_uniq=[]
             parent=s['parent'] if s['parent'] else sn
             var_s=s['variables']
             sym_lut=s['symbol2type_lut']
-            #val_s=s['values']
-            val_s=s['vals_w_nodes']
+            val_s=s['values']
+            #val_s=s['vals_w_nodes']
+            scope_uniq=[]
             end=s['scope_end']
-            for x in val_s:
+            for k,x in enumerate(val_s):
                 try:
                     type_info,var,varinfo,value_node=x
+                    scope_uniq.append([])
+                    dprint(f"[i={i}][j={j}][k={k}] | type: {type_info} ; var : {var} ; varinfo : {varinfo} ; value_node : {get_string2(value_node)}")
                     if value_node:
                         term=list(find_multictx(value_node,[tree.Tree.TerminalNodeImpl]))
                         value=get_string2(value_node)
@@ -674,16 +941,21 @@ def get_fix_loc_subfns(scope):
                         # and add it to the unique scope list of required variables
                         for v in value_subterms:
                             if not is_literal(v):
+                                dprint(f" => is literal (False) {v}")
                                 vtype = sym_lut.get(v,None)
                                 if vtype:
+                                    dprint(f" => literal (False) {v} => {vtype}")
                                     vtyp=vtype
                                     if type(vtype)!=str:
                                         vtyp=get_string2(vtype)
                                     info=(vtyp,v,None)
                                     if info in uniq_init:
+                                        dprint("continue!")
                                         continue
                                     else:
                                         uniq_init.append(info)
+                            else:
+                                dprint(f" => is literal (True) {v}")
                         # now we're looking at each set of variables and the RHS value
                         import re
                         typ=re.sub(r"\bconst\b",r' ',type_info)
@@ -692,11 +964,14 @@ def get_fix_loc_subfns(scope):
                             type_lut[typ]=[]
                         for def_var in def_vars:
                             info=(typ,def_var,value)
+                            dprint(f"[i={i}][j={j}][k={k}] | type : {typ}; def_var : {def_var}; value : {value}")
                             if info in uniques:
+                                dprint(f"^^ not unique")
                                 continue
                             else:
+                                dprint(f"^^ unique")
                                 uniques.append(info)
-                                scope_uniq.append(info)
+                                scope_uniq[k].append(info)
                 except Exception as e:
                     print(f"Exception with x={x}")
                     print(e)
@@ -704,35 +979,46 @@ def get_fix_loc_subfns(scope):
             # now take the uniq_init list and generate the pre-req variable types
             # i : function id ; j : scope_id 
             decl_vars=[]
-            if len(scope_uniq)>0:
-                scp_fn=f"fix_ingred_{i}_{j}()"
-                scp_fn_decl=f"void {scp_fn};"
-                scp_body=""
-                for u in uniq_init:
-                    utyp,uname,uval=u
-                    scp_body+=f"{utyp} {uname};\n"
-                    decl_vars.append(uname)
-                # and then take the scope_uniq list and generate the initialized values
-                for u in scope_uniq:
-                    utyp,uname,uval=u
-                    if uname not in decl_vars:
-                        scp_body+=f"{utyp} {uname}; {uname} = {uval};\n"
-                        decl_vars.append(uname)
+            tdecl_vars=[]
 
-                scp_fn_def=f"void {scp_fn}"+"{\n"+f"{scp_body}"+"}"
-                call_fn=f"{scp_fn};\n"
-                fn_decl+=f"{call_fn}"
+            # note: pdr - i know this portion is jacked up, but it's a dont care since we wont be using this anymore
+            if len(scope_uniq)>0:
+                scp_fn=f"fix_ingred_{i}_{j}"
+                scp_body=""
+                sfn_decl=""
+                sscp_fn_decl=""
+                sscp_fn_def=""
+                for k in range(0,len(scope_uniq)):
+                    sscp_body=""
+                    for u in uniq_init:
+                        utyp,uname,uval=u
+                        sscp_body+=f"{utyp} {uname};\n"
+                        decl_vars.append(uname)
+                    # and then take the scope_uniq list and generate the initialized values
+                    for u in scope_uniq[k]:
+                        utyp,uname,uval=u
+                        if (utyp,uname) not in tdecl_vars:
+                            sscp_body+=f"{utyp} {uname}; {uname} = {uval};\n"
+                            tdecl_vars.append((utyp,uname))
+                    sscp_fn=f"{scp_fn}_{k}()"
+                    sscp_fn_decl+=f"void {sscp_fn};\n"
+                    sscp_fn_def+=f"void {sscp_fn}"+"{\n"+f"{sscp_body}"+"}\n"
+                    call_fn=f"{sscp_fn};\n"
+                    sfn_decl+=f"{call_fn}"
+                scp_fn_decl=f"{scp_fn}();"
+                scp_fn_def=sscp_fn_decl+f"void {scp_fn}()"+"{\n"+f"{sfn_decl}"+"}\n"
                 scopefn_decls+=f"{scp_fn_decl}\n"
                 scopefn_defs+=f"{scp_fn_def}\n"
                 loc = get_end_loc(end)
                 rewrites.append((call_fn,loc))
-        fn_decl+="}\n"
-        print("[Fix Ingredient functions]  -- START --")
+        scp_fn=f"fix_ingred_{i}()"
+        fn_decl=f"void {scp_fn}"+"{\n"+fn_decl+"}\n"
+        dprint("[Fix Ingredient functions]  -- START --")
         prepend=f"{scopefn_decls}\n{scopefn_defs}"
-        print(prepend)
+        dprint(prepend)
         loc= get_start_loc(fn)
         rewrites.append((prepend,loc))
-        print("[Fix Ingredient functions]  --  END  --")
+        dprint("[Fix Ingredient functions]  --  END  --")
     return rewrites
 
 
@@ -789,6 +1075,8 @@ def strip_array_decs(lst):
 def get_string2(ctx,ignore_list=None):
     if ctx==None:
         return None
+    elif type(ctx)==str:
+        return ctx
     q=[ctx]
     st=[]
     while len(q)>0:
@@ -836,6 +1124,15 @@ def get_decl_info(vt,found,lut):
     if vt:
         for v in vt:
             type_n,decl_n,value_n=v
+            if not type_n:
+                try:
+                    d=get_string2(decl_n)
+                    type_n=lut[d]
+                except Exception as e:
+                    dprint(f"decl_n => {d}")
+                    dprint(f"lut.keys() => {lut.keys()}")
+                    continue
+                    raise(e)
             if decl_n in found or decl_n in str_found:
                 continue
             declaration=list(decl_n.getChild(0).getChildren())
@@ -844,9 +1141,15 @@ def get_decl_info(vt,found,lut):
             if len(declaration)>1:
                 decl_nodes=list(declaration[1:])
                 for i in range(1,len(declaration)):
-                    decl_info+=get_string2(declaration[i])
+                    decl_info+=" "+get_string2(declaration[i])
                 d=get_string2(declaration[0])
-                lut[d]=get_string2(type_n)+" *"
+                try:
+                    lut[d]=get_string2(type_n)+" *"
+                except Exception as e:
+                    dprint(f"type_n : {type_n}")
+                    dprint(f"d : {d}")
+                    print(e)
+                    raise(e)
                 found.append(declaration[0])
                 str_found.append(d)
             lut[get_string2(decl_n)]=type_n
@@ -856,7 +1159,7 @@ def get_decl_info(vt,found,lut):
             str_found.append(get_string2(decl_n))
     return val_t,found,str_found,lut,valnodes_t
 
-def get_decls(ctx,var_lut:dict,ignore_me:list):
+def get_decls(ctx,var_lut:dict,ignore_me:list,dont_eval:list):
     # we don't want to go beyond the current scope
     start=ctx
     #screen_me=[CParser.FunctionDefinitionContext,CParser.IterationStatementContext]
@@ -877,16 +1180,29 @@ def get_decls(ctx,var_lut:dict,ignore_me:list):
     rules_with_comparators=[CParser.RelationalExpressionContext,CParser.EqualityExpressionContext]
     rules_with_assignment=[CParser.InitDeclaratorContext,CParser.AssignmentExpressionContext]
     rules_with_declarations=[CParser.ForDeclarationContext,CParser.DeclarationContext]
-    ops=['==','<=','>=','<','>','!=']
+    ops=['==','<=','>=','<','>','!=','=']
     # so I needed a function that enables evaluation of the first okay_scope_changes follows screen_me
     # the point is to identify declarations, equality, etc
     a = [p for p in find_multictx(ctx, [tree.Tree.TerminalNodeImpl]+rules_with_declarations,None,ignore_me) \
-        if ( type(p)==tree.Tree.TerminalNodeImpl and any([op in p.getText() for op in ops])) or (type(p) in rules_with_declarations) ]
+        if ( type(p)==tree.Tree.TerminalNodeImpl and any([op in p.getText() for op in ops]) \
+        \
+        ) or (type(p) in rules_with_declarations) ]
     assigns=[]
     comparisons=[]
     check_these_nodes=list()
     for i in a:
-        if type(i)==tree.Tree.TerminalNodeImpl:
+        #s=get_string2(i)
+        #no_eval=False
+        #for n in dont_eval:
+        #    if n in s:
+        #        no_eval=True
+        #        break
+        #if no_eval:
+        # #and not any([n in p.getText() for n in dont_eval])\    pass
+        if any([n in i.getText() for n in dont_eval]):
+            dprint(f"==> not checking {get_string2(i)}")
+            pass
+        elif type(i)==tree.Tree.TerminalNodeImpl:
             p=i.parentCtx
             ba=(type(p) in rules_with_assignment)
             bc=(type(p) in rules_with_comparators)
@@ -894,13 +1210,19 @@ def get_decls(ctx,var_lut:dict,ignore_me:list):
                 p=p.parentCtx
                 ba=(type(p) in rules_with_assignment)
                 bc=(type(p) in rules_with_comparators)
-            if ba:
-                check_these_nodes.append(p)
-            if bc:
-                check_these_nodes.append(p)
+            if any([n in p.getText() for n in dont_eval]):
+                dprint(f"==> not checking {get_string2(p)}")
+                pass
+            else:
+                if ba:
+                    check_these_nodes.append(p)
+                elif bc:
+                    check_these_nodes.append(p)
         else:
             check_these_nodes.append(i)
 
+    for i,x in enumerate(check_these_nodes):
+        dprint(f"[{i}] check_these_nodes : '{get_string2(x)}' [type = '{type(x)}']")
     declarations=list()
 
     val_t=list()
@@ -956,8 +1278,14 @@ def get_decls(ctx,var_lut:dict,ignore_me:list):
             if len(chld) == 2:
                 # this is a bug you see when you have 'int a;'
                 node=chld[0]
-                typ=node.getChild(0)
-                var=node.getChild(1)
+                chldn=list(node.getChildren());l=len(chldn)
+                typ,var=(None,None)
+                if l==2:
+                    typ=chldn[0]
+                    var=chldn[1]
+                elif l==3:
+                    typ=" ".join([get_string2(x) for x in chldn[0:2]])
+                    var=chldn[2]
                 # type,variable,initial_value
                 f= [ (typ,var,None) ]
                 var_t=[var]
@@ -1064,6 +1392,9 @@ def get_decls(ctx,var_lut:dict,ignore_me:list):
                     v_=get_string2(v)
                 vardict[v_]=typ_t[i]
 
+    dprint(f"val_t : {val_t} ")
+    dprint(f"valnodes_t : {valnodes_t} ")
+    dprint(f"{var_lut.keys()}")
     rs = [ get_string2(v) if type(v)!=str else v for v in vars_t ]
     ts = [ get_string2(t) if type(t)!=str else t for t in typs_t ]
     declarations.extend(list(zip(ts, rs)))
@@ -1300,6 +1631,7 @@ def get_json_data(fname):
     rd = {}
     d1 = {}
     d2 = {}
+    disable_eval=[]
     with open(fname, 'r') as j:
         data = json.load(j)
         if 'filenames' in data.keys():
@@ -1312,7 +1644,9 @@ def get_json_data(fname):
             for i in range(len(mcs)):
                 rd[mcs[i]['name']] = mcs[i]['value']
 
-    return (d1,d2,rd)
+        if 'disable_eval' in data.keys():
+            disable_eval=list(data['disable_eval'])
+    return (d1,d2,rd,disable_eval)
 
 #Input a file with a list of .c files to search functions for
 #Output a dictionary of functions and their arguments

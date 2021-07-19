@@ -42,7 +42,7 @@ def main():
 
     #get the dictionary that maps line numbers with the re-write
     p,t = get_tree_from_file(prog_name)
-
+    d1 = get_all_decs(t)
     #loop to run all code transformations
     #order matters, don't re-arrange
     change_funcs = [expand_macro_block, expand_if_else, expand_sizeof, single_declarations, expand_decs,expand_func_args,expand_decs]
@@ -56,6 +56,11 @@ def main():
     #FIX-INGREDIENTS
     write_new_program(cur_pro, f"{out_name}.prev")
     p,t = get_tree_from_string(cur_pro)
+    d2 = get_all_decs(t)
+    #dictionary where:
+    # key = function_name //use get_func_name() on a function definition context
+    # value = [new_declaration_nodes] // only declarations introducted by the code in this program
+    new_decs = get_dec_diffs(d1,d2)
     print_ctx_bfs(t,"help")
     printer=ScopeListener()
     walker = ParseTreeWalker()

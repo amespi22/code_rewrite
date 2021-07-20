@@ -241,66 +241,83 @@ def expand_func_args(ctx):
         new_vars = []
         all_types, all_vars = get_all_vars(f,True)
         pecs = find_ctx(f, "<class 'CParser.CParser.PostfixExpressionContext'>")
-        pecs = [p for p in pecs if p.getChildCount() > 1]
+        pecs = [p for p in pecs if p.getChildCount() > 1 and p.getChild(0).getText() in funcs_and_args]
+        pecs = remove_inner_funcs(pecs)
         try:
             for p in pecs:
                 f_name = p.getChild(0).getText()
-                if f_name in funcs_and_args:
-                    #print(f"function {f_name} is present with args {p.getChild(2).getText()}")
-                    func_args = parse_func_call_args(p)
-                    if func_args == [')']:
+                #print(f"function {f_name} is present with args {p.getChild(2).getText()}")
+                #print(f"child count {p.getChildCount()}")
+                func_args = parse_func_call_args(p)
+                func_arg_names = [x.getText() for x in func_args]
+                if func_arg_names == [')']:
+                    continue
+                #replace index in function arguments
+                rep = []
+                j = 0
+                #Find indexes to replace.
+                #I do this in two passes so I can create
+                #all the new variables in one shot
+                for i in func_arg_names:
+                    if i not in all_vars and has_func(func_args[j]):
+                        rep.append(j)
+                    j += 1
+                # only here if we have 1 or more arguments to pull out
+                if len(rep) > 0:
+                    start_loc = get_start_loc(p)
+                    end_loc = get_end_loc(p)
+                    #print(f"start location {start_loc} end location = {end_loc}")
+                    #get new variables to use
+                    r_vars = gen_new_vars(new_vars + all_vars, len(rep))
+                    #add to the list of all variables so they are not used
+                    #again in the same function on another call
+                    #all_vars.extend(r_vars)
+                    fun_arg_types = funcs_and_args[f_name]
+                    #added this cause we don't need functions that take
+                    #const args to make the varialbes we send them const
+                    de_const(fun_arg_types)
+
+                    #This happens in nested situations and for now
+                    #I ignore it silently
+                    if len(func_args) > len(fun_arg_types):
+                        #print(f"messed up here with {p.getText()}")
                         continue
-                    #replace index in function arguments
-                    rep = []
-                    j = 0
-                    #Find indexes to replace.
-                    #I do this in two passes so I can create
-                    #all the new variables in one shot
-                    for i in func_args:
-                        if i not in all_vars:
-                            rep.append(j)
-                        j += 1
-                    # only here if we have 1 or more arguments to pull out
-                    if len(rep) > 0:
-                        start_loc = get_start_loc(p)
-                        end_loc = get_end_loc(p)
-                        #print(f"start location {start_loc} end location = {end_loc}")
-                        #get new variables to use
-                        r_vars = gen_new_vars(new_vars + all_vars, len(rep))
-                        #add to the list of all variables so they are not used
-                        #again in the same function on another call
-                        #all_vars.extend(r_vars)
-                        fun_arg_types = funcs_and_args[f_name]
-                        #added this cause we don't need functions that take
-                        #const args to make the varialbes we send them const
-                        de_const(fun_arg_types)
 
-                        #This happens in nested situations and for now
-                        #I ignore it silently
-                        if len(func_args) > len(fun_arg_types):
-                            #print(f"messed up here with {p.getText()}")
-                            continue
-
-                        new_arg_string = f"{f_name}("
-                        new_var_dec = ""
-                        for i in range(len(func_args)):
-                            if i in rep:
-                                #replace that variable
-                                v = r_vars.pop()
-                                new_var_dec += f"{fun_arg_types[i][0]} {v} = {func_args[i]};\n"
-                                new_arg_string += f"{v},"
-                            else:
-                                #use what was already there
-                                new_arg_string += f"{func_args[i]},"
-                        #print (new_var_dec[:-1])
-                        #print (new_arg_string[:-1]+')')
-                        rewrites[start_loc,end_loc] = (new_var_dec,new_arg_string[:-1]+')')
+                    new_arg_string = f"{f_name}("
+                    new_var_dec = ""
+                    for i in range(len(func_args)):
+                        if i in rep:
+                            #replace that variable
+                            v = r_vars.pop()
+                            new_var_dec += f"{fun_arg_types[i][0]} {v} = {func_arg_names[i]};\n"
+                            new_arg_string += f"{v},"
+                        else:
+                            #use what was already there
+                            new_arg_string += f"{func_arg_names[i]},"
+                    #print (new_var_dec[:-1])
+                    #print (new_arg_string[:-1]+')')
+                    rewrites[start_loc,end_loc] = (new_var_dec,new_arg_string[:-1]+')')
         except:
             print(f"messed up here with {p.getText()}")
             continue
 
     #record the changes needed to re-write the code
     return rewrites
+
+def has_func(ctx):
+    nums = find_ctx(ctx,"<class 'CParser.CParser.PostfixExpressionContext'>")
+    if len(nums) == 1:
+        return True
+    return False
+
+def remove_inner_funcs(ctx_list):
+    ret_list = ctx_list
+    for c in ctx_list:
+        inner = find_ctx(c, "<class 'CParser.CParser.PostfixExpressionContext'>")
+        for i in inner:
+            if i in ctx_list:
+                ret_list.remove(i)
+    return ret_list
 
 def gen_func_changes(cur_prog, rewrite):
     lns = cur_prog.split('\n')

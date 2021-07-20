@@ -1244,7 +1244,7 @@ def get_tokens_form_ctx(ctx):
 
 def parse_func_call_args(ctx):
     a = ctx.getChild(2)
-    aes = [a.getChild(x).getText() for x in range(a.getChildCount()) if x % 2 == 0]
+    aes = [a.getChild(x) for x in range(a.getChildCount()) if x % 2 == 0]
     return aes
 
 def get_line_num(ctx):

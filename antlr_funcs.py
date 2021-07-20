@@ -1245,7 +1245,7 @@ def get_tokens_form_ctx(ctx):
 
 def parse_func_call_args(ctx):
     a = ctx.getChild(2)
-    aes = [a.getChild(x).getText() for x in range(a.getChildCount()) if x % 2 == 0]
+    aes = [a.getChild(x) for x in range(a.getChildCount()) if x % 2 == 0]
     return aes
 
 def get_line_num(ctx):
@@ -1331,6 +1331,35 @@ def parse_pre_process(cnts):
             ret_d[get_func_name(f)] = get_func_args(f)
             ret_d2[get_func_name(f)] = f.getChild(0).getText()
     return ret_d,ret_d2
+
+def get_all_decs(ctx):
+    ret = {}
+    #for all functions
+    fns = get_functions(ctx)
+    for f in fns:
+        decs = find_ctx(f, "<class 'CParser.CParser.DeclarationContext'>")
+        ret[get_func_name(f)] = decs
+    return ret
+
+def get_dec_diffs(d1,d2):
+    ret = {}
+    for key,value in d1.items():
+        origs = []
+        s_in = set()
+        s_all = set()
+        #get all the text of the original
+        for v in value:
+            origs.append(v.getText())
+        # go trough all the new values and see if
+        # the new values are in the old
+        for v in d2[key]:
+            s_all.add(v)
+            for o in origs:
+                if o.startswith(v.getText()[:-1]):
+                    s_in.add(v)
+        ret[key] = list(s_all - s_in)
+
+    return ret
 
 if __name__ == "__main__":
     import atexit

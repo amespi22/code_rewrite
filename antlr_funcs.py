@@ -63,6 +63,44 @@ def siblings(current):
             older=family[i+1:]
     return younger,older
 
+def get_type_var_info(ctx):
+    chld=list(ctx.getChildren())
+    nodes=[]
+    if len(chld)<=1:
+        return None,None,None
+    elif len(chld)==3:
+        typ=get_string2(chld[0])
+        node=chld[1]
+        dec=list(find_multictx(node,[CParser.DeclaratorContext],None,None))
+        nodes=[(typ,d) for d in dec]
+    elif len(chld)==2:
+        checkme=chld[0];
+        c=list(checkme.getChildren())
+        typ,node=(None,None)
+        if len(c)==2:
+           typ=get_string2(c[0])
+           node=c[1]
+        elif len(c)==3:
+           typ=" ".join([get_string2(x) for x in c[0:2]])
+           node=c[2]
+        nodes=[(typ,node)]
+    sym_dict=dict()
+    up_nodes=list()
+    for t,d in nodes:
+        c=list(d.getChild(0).getChildren())
+        if len(c)>1:
+            decl_info=""
+            decl_nodes=list(c[1:])
+            for i in range(1,len(c)):
+                decl_info+=" "+get_string2(c[i])
+            d_=get_string2(c[0])
+            typ=t+" *"
+            sym_dict[d_]=typ
+            up_nodes.extend([(typ,c[0],decl_info)])
+        up_nodes.extend([(t,d,None)])
+        
+    return nodes, sym_dict, up_nodes
+
 class ScopeListener(CListener):
     cur_scopes=[ [], ]
     cur_declarations=[ [], ]
@@ -384,6 +422,8 @@ class ScopeListener(CListener):
     #    pass
 
     #rules_with_declarations=[CParser.ForDeclarationContext,CParser.DeclarationContext]
+
+
     def exitDeclaration(self, ctx:CParser.DeclarationContext):
         pass
     def enterDeclaration(self, ctx:CParser.DeclarationContext):
@@ -845,17 +885,39 @@ def is_literal(val):
         return True
     return False
 
-def get_fix_loc_subfns(scope):
+def can_cast(ltyp,rtyp):
+    # determines if rtyp variable can be cast as ltyp
+    equivalent_classes=[set(['int','unsigned int','uint32_t','uint_t','cgc_size_t',\
+                        'size_t','uint','void *', 'unsigned long', 'long']),\
+                        set(['char','uint8_t']),\
+                        set(['long'])
+                        ]    
+    for eq in equivalent_classes:
+        if ltyp.rstrip() in eq and rtyp.rstrip() in eq:
+            return True
+    return False
+
+def get_fix_loc_subfns(scope,dvars):
     uniques=[]
     fn_body=[]
     rewrites=[]
     ## function scope
+    #def get_type_var_info(ctx) => return nodes, sym_dict, up_nodes
     for i,f_info in enumerate(scope.items()):
         fn,fs=f_info
         type_lut=dict()
-        def_vars = get_all_vars(fn, False)
-        dprint(f"def_vars => {def_vars}")
-        strip_array_decs(def_vars)
+        #def_vars = get_all_vars(fn, False)
+        # add here pemma
+        fn_name=get_func_name(fn)
+        print(f"Processing [{fn_name}] :",flush=True)
+        try:
+            def_vars=dvars[fn_name]
+        except Exception as e:
+            print(f"Can't find {fn_name} in dvars {dvars.keys()}")
+            raise(e)
+        for d in def_vars:
+            dprint(f"[{fn_name}] : {type(d)} : {get_string2(d)}")
+        #strip_array_decs(def_vars)
         ## for each namespace scope in function scope
         s2_fn_def=""
         s2_body=""
@@ -874,44 +936,59 @@ def get_fix_loc_subfns(scope):
             #s2_decls=""
             s2_fn=f"fix_ingred_{i}"
             ## for each value in the namespace scope
-            for k,x in enumerate(val_s):
-                try:
-                    type_info,var,varinfo,value_node=x
-                    scope_uniq.append([])
-                    dprint(f"[i={i}][j={j}][k={k}] | type: {type_info} ; var : {var} ; varinfo : {varinfo} ; value_node : {get_string2(value_node)}")
-                    if value_node:
-                        term=list(find_multictx(value_node,[tree.Tree.TerminalNodeImpl]))
-                        value=get_string2(value_node)
-                        value_subterms=[get_string2(v) for v in term]
-                        dprint(f"Subterms : {' '.join(value_subterms)}")
-                        # if any RHS uses a variable, obtain its type from var_s (variable look-up table)
-                        # and add it to the unique scope list of required variables
-                        for v in value_subterms:
-                            if not is_literal(v):
-                                dprint(f" => is literal (False) {v}")
-                                vtype = sym_lut.get(v,None)
-                                if vtype:
-                                    dprint(f" => literal (False) {v} => {vtype}")
-                                    vtyp=vtype
-                                    if type(vtype)!=str:
-                                        vtyp=get_string2(vtype)
-                                    info=(vtyp,v,None)
-                                    if info in uniq_init:
-                                        dprint("continue!")
-                                        continue
-                                    else:
-                                        uniq_init.append(info)
-                            else:
-                                dprint(f" => is literal (True) {v}")
-                        # now we're looking at each set of variables and the RHS value
-                        import re
-                        typ=re.sub(r"\bconst\b",r' ',type_info)
-                        x=type_lut.get(typ,None)
-                        if not x:
-                            type_lut[typ]=[]
-                        for def_var in def_vars:
-                            info=(typ,def_var,value)
-                            dprint(f"[i={i}][j={j}][k={k}] | type : {typ}; def_var : {def_var}; value : {value}")
+            for def_var in def_vars:
+                n,lut,un=get_type_var_info(def_var)
+                #for nn in n:
+                #    print(f"{nn[0]} : {get_string2(nn[1])}")
+                #for nn in un:
+                #    print(f"{nn[0]} : {get_string2(nn[1])} {get_string2(nn[2])}")
+                # we're just going to assume a singly declared variable
+                ltyp=n[0][0]
+                lname=get_string2(n[0][1])
+                #####
+                for k,x in enumerate(val_s):
+                    try:
+                        type_info,var,varinfo,value_node=x
+                        scope_uniq.append([])
+                        dprint(f"[i={i}][j={j}][k={k}] | type: {type_info} ; var : {var} ; varinfo : {varinfo} ; value_node : {get_string2(value_node)}")
+                        if value_node:
+                            term=list(find_multictx(value_node,[tree.Tree.TerminalNodeImpl]))
+                            value=get_string2(value_node)
+                            value_subterms=[get_string2(v) for v in term]
+                            dprint(f"Subterms : {' '.join(value_subterms)}")
+                            # if any RHS uses a variable, obtain its type from var_s (variable look-up table)
+                            # and add it to the unique scope list of required variables
+                            for v in value_subterms:
+                                if not is_literal(v):
+                                    dprint(f" => is literal (False) {v}")
+                                    vtype = sym_lut.get(v,None)
+                                    if vtype:
+                                        dprint(f" => literal (False) {v} => {vtype}")
+                                        vtyp=vtype
+                                        if type(vtype)!=str:
+                                            vtyp=get_string2(vtype)
+                                        info=(vtyp,v,None)
+                                        if info in uniq_init:
+                                            dprint("continue!")
+                                            continue
+                                        else:
+                                            uniq_init.append(info)
+                                else:
+                                    dprint(f" => is literal (True) {v}")
+                            # now we're looking at each set of variables and the RHS value
+                            import re
+                            rtyp=re.sub(r"\bconst\b",r' ',type_info)
+                            x=type_lut.get(rtyp,None)
+                            if not x:
+                                type_lut[rtyp]=[]
+                                #####
+                            if not can_cast(ltyp,rtyp): 
+                                # if we can't cast the RHS to LHS type, then go to next
+                                #print(f"CASTING FAIL: ltype: {ltyp}, lvar: {lname}, rtype : {rtyp}, rvalue: {value}")
+                                continue
+                            #print(f"CASTING PASS: ltype: {ltyp}, lvar: {lname}, rtype : {rtyp}, rvalue: {value}")
+                            info=(ltyp,lname,value,rtyp)
+                            dprint(f"[i={i}][j={j}][k={k}] | type : {rtyp}; def_var : {def_var}; value : {value}")
                             if info in uniques:
                                 dprint(f"^^ not unique")
                                 continue
@@ -919,10 +996,10 @@ def get_fix_loc_subfns(scope):
                                 dprint(f"^^ unique")
                                 uniques.append(info)
                                 scope_uniq[k].append(info)
-                except Exception as e:
-                    print(f"Exception with x={x}")
-                    print(e)
-                    raise
+                    except Exception as e:
+                        print(f"Exception with x={x}")
+                        print(e)
+                        raise
             # now take the uniq_init list and generate the pre-req variable types
             # i : function id ; j : scope_id 
             decl_vars=[]
@@ -940,13 +1017,19 @@ def get_fix_loc_subfns(scope):
                     s0_body_vals=""
                     s0_body_vars=""
                     valid=False
+                    udecl_vars=[]
                     # and then take the scope_uniq list and generate the initialized values
                     for u in scope_uniq[k]:
-                        utyp,uname,uval=u
-                        if (utyp,uname) not in tdecl_vars and utyp != "UNDEF":
-                            s0_body_vars+=f"{utyp} {uname}; {uname} = {uval};\n"
-                            tdecl_vars.append((utyp,uname))
+                        utyp,uname,uval,rtyp=u
+                        if (utyp,uname) not in udecl_vars and utyp != "UNDEF":
+                            s0_body_vars+=f"{utyp} {uname}; {uname} = ({utyp})({uval});\n"
+                            udecl_vars.append((utyp,uname))
                             valid=True
+                        elif utyp != "UNDEF":
+                            s0_body_vars+=f"{uname} = ({utyp})({uval});\n"
+                            valid=True
+                        else:
+                            dprint("not valid - "+ f"{utyp} {uname}; {uname} = (({utyp}){uval});\n")
                     # only need to generate if we've found a unique (type,variable) tuple
                     if valid:
                         for u in uniq_init:
@@ -964,6 +1047,7 @@ def get_fix_loc_subfns(scope):
                         s0_call_fn=f"{s0_fn};\n"
                         # set of scope 0 function calls
                         s0_calls+=f"{s0_call_fn}"
+                    tdecl_vars.extend(udecl_vars)
                 s1_body=""
                 # scope 1 function call (used in scope 2 function definition)
                 s1_call_fn=f"{s1_fn}();\n"
@@ -972,7 +1056,7 @@ def get_fix_loc_subfns(scope):
                 s1_body=f"{s0_calls}"
                 # scope 0 function definition (with body)
                 s1_fn_def+=s0_fn_def+f"void {s1_fn}()"+"{\n"+f"{s1_body}"+"}\n"
-                print("==== Scope 1 ====\n"+f"{s1_fn_def}")
+                dprint("==== Scope 1 ====\n"+f"{s1_fn_def}")
                 #s2_decls+=f"{s1_fn_decl}\n"
                 s2_body+=f"{s1_fn}();"+"\n"
                 loc = get_end_loc(end)
@@ -982,7 +1066,7 @@ def get_fix_loc_subfns(scope):
         s2_calls+=f"{s2_call_fn}"
         s2_fn=f"fix_ingred_{i}()"
         s2_fn_def+=f"void {s2_fn}"+"{\n"+f"{s2_body}"+"}\n"
-        print("==== Scope 2 ====\n"+f"{s2_fn_def}")
+        dprint("==== Scope 2 ====\n"+f"{s2_fn_def}")
         print("[Fix Ingredient functions]  -- START --")
         prepend=f"{s2_fn_def}"
         print(prepend)

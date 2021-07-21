@@ -61,13 +61,17 @@ def main():
     # key = function_name //use get_func_name() on a function definition context
     # value = [new_declaration_nodes] // only declarations introducted by the code in this program
     new_decs = get_dec_diffs(d1,d2)
+    for i,k in enumerate(new_decs.keys()):
+        nd="\n - "+"\n - ".join([get_string2(n) for n in new_decs[k]])
+        print(f"{i} :  [{k}] {type(new_decs[k])} : {nd}")
+        
     print_ctx_bfs(t,"help")
     printer=ScopeListener()
     walker = ParseTreeWalker()
     walker.walk(printer,t)
     scope_vars = get_function_info(functions=get_functions(t),fscope=printer.scopes,dont_eval=dont_eval)
     #fix_loc_rewrites = get_fix_loc_rewrites(scope_vars)
-    fix_loc_rewrites = get_fix_loc_subfns(scope_vars)
+    fix_loc_rewrites = get_fix_loc_subfns(scope_vars,new_decs)
     cur_pro = gen_fix_loc_changes(cur_pro, fix_loc_rewrites)
 
     #write out the new program

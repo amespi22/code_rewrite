@@ -963,11 +963,19 @@ def get_fix_loc_subfns(scope,dvars):
                                     dprint(f" => is literal (False) {v}")
                                     vtype = sym_lut.get(v,None)
                                     if vtype:
-                                        dprint(f" => literal (False) {v} => {vtype}")
+                                        # check to see if there are any array versions
                                         vtyp=vtype
+                                        if '*' in vtyp:
+                                            for isym in sym_lut.keys():
+                                                if f"{v} [" in isym:
+                                                    print(f"BEFORE => literal (False) {v} => {vtyp}")
+                                                    v=isym
+                                                    vtyp=sym_lut[v]
+                                                    print(f"AFTER => literal (False) {v} => {vtyp}")
+                                                    break
+                                        info=(vtyp,v,None)
                                         if type(vtype)!=str:
                                             vtyp=get_string2(vtype)
-                                        info=(vtyp,v,None)
                                         if info in uniq_init:
                                             dprint("continue!")
                                             continue
@@ -1059,8 +1067,8 @@ def get_fix_loc_subfns(scope,dvars):
                 dprint("==== Scope 1 ====\n"+f"{s1_fn_def}")
                 #s2_decls+=f"{s1_fn_decl}\n"
                 s2_body+=f"{s1_fn}();"+"\n"
-                loc = get_end_loc(end)
-                rewrites.append((s1_call_fn,loc))
+                #loc = get_end_loc(end)
+                #rewrites.append((s1_call_fn,loc))
                 s2_fn_def+=s1_fn_def
         s2_call_fn=f"{s2_fn}();\n"
         s2_calls+=f"{s2_call_fn}"
@@ -1072,6 +1080,10 @@ def get_fix_loc_subfns(scope,dvars):
         print(prepend)
         loc= get_start_loc(fn)
         rewrites.append((prepend,loc))
+        open_bracket=list(fn.getChildren())[-1].getChild(0)
+        line,c = get_start_loc(open_bracket)
+        func=f"{s2_fn};"
+        rewrites.append((func,(line+1,c)))
         dprint("[Fix Ingredient functions]  --  END  --")
     return rewrites
 

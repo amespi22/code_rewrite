@@ -641,6 +641,7 @@ def preprocess(pragmas:dict,inf:str,outf:str):
                 captured=True
             else:
                 #print(f"[ELSE] NOT CAPTURING ELSE: {l}")
+                pass
         elif end:
             #print(f"[ENDIF] STOP CAPTURING : {l}")
             start=True

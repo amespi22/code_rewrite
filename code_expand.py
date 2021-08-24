@@ -49,7 +49,7 @@ def main():
     #loop to run all code transformations
     #order matters, don't re-arrange
     change_funcs = [expand_macro_block, expand_if_else, expand_sizeof, single_declarations, expand_decs,expand_func_args,expand_decs]
-    apply_changes = [gen_macro_changes, gen_if_changes, gen_if_changes, gen_dec_changes, gen_dec_changes,gen_func_changes,gen_dec_changes]
+    apply_changes = [gen_macro_changes, gen_if_changes, gen_expand_changes, gen_dec_changes, gen_dec_changes,gen_func_changes,gen_dec_changes]
     for i in range(len(change_funcs)):
         if i != 0:
             p,t = get_tree_from_string(cur_pro)
@@ -114,7 +114,10 @@ def expand_if_else(ctx):
                     start_loc = get_start_loc(c)
                     end_loc = get_end_loc(c)
                     dec = r_vars[0]
-                    rewrites[start_loc, end_loc] = (f"{funcs_and_rts[f_name]} {dec} = {c.getText()};", dec)
+                    pctx = get_top_dec_parent(c)
+                    func_loc = get_start_loc(pctx)
+                    rewrites[start_loc, end_loc] = (f"{funcs_and_rts[f_name]} {dec} = {c.getText()};", dec, func_loc)
+                    #rewrites[start_loc, end_loc] = (f"{funcs_and_rts[f_name]} {dec} = {c.getText()};", dec)
     return rewrites
 
 def expand_sizeof(ctx):
@@ -204,6 +207,40 @@ def gen_macro_changes(cur_prog, rewrite):
     return "".join(lns)
 
 def gen_if_changes(cur_prog, rewrite):
+    lns = cur_prog.split('\n')
+    lns = [x+"\n" for x in lns]
+    lns = lns[:-1]
+    diff = 0
+    prev_line = 0
+    for key,val in rewrite.items():
+        start_loc, end_loc = key
+        func_call,var_use,p_loc = val
+        #if the start and end loc lines are the same
+        if key[0][0] == key[1][0]:
+            if prev_line != start_loc[0]:
+                diff = 0
+            ln = lns[start_loc[0]-1]
+            start = ln[:start_loc[1]-1-diff]
+            end = ln[end_loc[1]+1-diff:]
+            middle = var_use
+
+            pre_len = len(ln)
+            spaces = get_line_spaces(ln)
+            line_change = f"{start}{middle}{end}"
+
+            diff = pre_len - len(line_change)
+
+            lns[start_loc[0]-1] = f"{line_change}"
+            lns[p_loc[0]-2] += f"{spaces}{func_call}\n"
+
+            prev_line = start_loc[0]
+        #if multi-line we need to compress the functioncall line to 1
+        else:
+            print("You should really have done this")
+    print("".join(lns))
+    return "".join(lns)
+
+def gen_expand_changes(cur_prog, rewrite):
     lns = cur_prog.split('\n')
     lns = [x+"\n" for x in lns]
     lns = lns[:-1]

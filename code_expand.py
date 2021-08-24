@@ -114,7 +114,7 @@ def expand_if_else(ctx):
                     start_loc = get_start_loc(c)
                     end_loc = get_end_loc(c)
                     dec = r_vars[0]
-                    pctx = get_top_dec_parent(c)
+                    pctx = get_top_dec_parent(i)
                     func_loc = get_start_loc(pctx)
                     rewrites[start_loc, end_loc] = (f"{funcs_and_rts[f_name]} {dec} = {c.getText()};", dec, func_loc)
                     #rewrites[start_loc, end_loc] = (f"{funcs_and_rts[f_name]} {dec} = {c.getText()};", dec)
@@ -237,7 +237,6 @@ def gen_if_changes(cur_prog, rewrite):
         #if multi-line we need to compress the functioncall line to 1
         else:
             print("You should really have done this")
-    print("".join(lns))
     return "".join(lns)
 
 def gen_expand_changes(cur_prog, rewrite):

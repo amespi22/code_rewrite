@@ -37,7 +37,6 @@ def main():
 
     _pp_prog_name=f"{prog_name}.pp"
     preprocess(macros,prog_name,_pp_prog_name)
-    import sys; sys.exit(-1);
     
     #original program
     cur_pro = ""

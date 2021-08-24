@@ -35,13 +35,17 @@ def main():
         funcs_and_rts = {}
         funcs_and_args = {}
 
+    _pp_prog_name=f"{prog_name}.pp"
+    preprocess(macros,prog_name,_pp_prog_name)
+    import sys; sys.exit(-1);
+    
     #original program
     cur_pro = ""
-    with open(prog_name, 'r') as infile:
+    with open(_pp_prog_name, 'r') as infile:
         cur_pro = infile.read()
 
     #get the dictionary that maps line numbers with the re-write
-    p,t = get_tree_from_file(prog_name)
+    p,t = get_tree_from_file(_pp_prog_name)
     d1 = get_all_decs(t)
     #loop to run all code transformations
     #order matters, don't re-arrange
@@ -539,6 +543,89 @@ def de_const(lst):
         typ = lst[i][0]
         if const(typ):
             lst[i] = typ.replace("const",""),lst[i][1]
+
+
+
+def preprocess(pragmas:dict,inf:str,outf:str):
+    import re
+    _pragmas=list(pragmas.keys())
+    _prags='|'.join(list(_pragmas))
+    pragma_re=re.compile(r'\b('+_prags+r")\b")
+    # note from pdr: there are also #if defined \((\S+)\) LOGICAL , but omitting for simplicity
+    positive_re=re.compile(r'^#(ifdef|elif)\s+(\S+)')
+    negative_re=re.compile(r'^#ifndef\s+(\S+)')
+    next_re=re.compile(r'^#else')
+    end_re=re.compile(r'^#endif')
+
+    lines=None
+    with open(inf,'r') as _in:
+        lines=_in.readlines()
+        _in.close()
+
+    ol=list()
+    capture_next,in_cascade,captured=(False,False,False)
+    for l in lines:
+        start=False
+        p=positive_re.search(l)
+        n=negative_re.search(l)
+        el=next_re.search(l)
+        end=end_re.search(l)
+        if p:
+            start=True
+            in_cascade=True
+            capture_next=False
+            if p.group(1) in _pragmas:
+                #print(f"{p.group(1)} = {pragmas[p.group(1)]} [{type(pragmas[p.group(1)])}]")
+                if pragmas[p.group(1)]:
+                    #print(f"[IFDEF] START CAPTURING POSITIVE: {l}")
+                    capture_next=True
+                    captured=True
+                else:
+                    #print(f"[IFDEF] NOT CAPTURING POSITIVE: {l}")
+                    pass
+        elif n:
+            start=True
+            in_cascade=True
+            capture_next=False
+            if n.group(1) in _pragmas:
+                #print(f"{n.group(1)} = {pragmas[n.group(1)]} [{type(pragmas[n.group(1)])}]")
+                if not pragmas[n.group(1)]:
+                    #print(f"[IFNDEF] START CAPTURING NEGATIVE: {l}")
+                    capture_next=True
+                    captured=True
+                else:
+                    #print(f"[IFNDEF] NOT CAPTURING NEGATIVE: {l}")
+                    pass
+        elif el:
+            start=True
+            capture_next=False
+            if in_cascade and not captured:
+                #print(f"[ELSE] START CAPTURING ELSE: {l}")
+                capture_next=True
+                captured=True
+            else:
+                #print(f"[ELSE] NOT CAPTURING ELSE: {l}")
+        elif end:
+            #print(f"[ENDIF] STOP CAPTURING : {l}")
+            start=True
+            capture_next=False
+            in_cascade=False
+            captured=False
+
+        if not start and (not in_cascade or capture_next):
+            ol.append(l)
+            if capture_next:
+                captured=True
+
+            
+    with open(outf,'w') as _out:
+        for i in ol:
+            _out.write(i)
+        _out.close()
+
+
+
+
 
 
 if __name__ == "__main__":

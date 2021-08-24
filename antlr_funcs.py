@@ -1230,26 +1230,9 @@ def get_function(ctx, f_name):
             return f
 
 def test_functs():
-    p,t =get_tree_from_file("test_files/service.i")
-    g = get_typedefs_from_ctx(t)
-    print(get_typedef_from_set(g,set(['unsigned','long'])))
-    return g
-    print("Found the following functions")
-    for f in fns:
-        print(f.getText())
-        print(f"all func vars {get_all_vars(f,False)}")
-    print_ctx_bfs(fns[0], "tmp2")
-    print(get_func_args(fns[0]))
-    """
-    print("First function has the following conditionals")
-    cs = get_conditionals(fns[1])
-    for c in cs:
-        print(c.getText())
-    t = get_tokens_form_ctx(cs[0])
-    """
-    decs = find_ctx(fns[0], "<class 'CParser.CParser.DeclarationContext'>")
-    cmpd = find_ctx(decs[0], "<class 'CParser.CParser.InitDeclaratorContext'>")
-    return decs,cmpd
+    p,t =get_tree_from_file("test_files/form.c")
+    ifs = find_ctx(t , "<class 'CParser.CParser.SelectionStatementContext'>")
+    return ifs
 
 def get_func_args_from_inp(inp, func_name,inp_type):
     if inp_type == "file":
@@ -1436,6 +1419,15 @@ def get_all_decs(ctx):
         decs = find_ctx(f, "<class 'CParser.CParser.DeclarationContext'>")
         ret[get_func_name(f)] = decs
     return ret
+
+def get_top_dec_parent(ctx):
+    dec1 = CParser.SelectionStatementContext
+    dec2 = CParser.StatementContext
+    pctx = ctx
+
+    while type(pctx) == dec1 or type(pctx) == dec2:
+        pctx = pctx.parentCtx
+    return pctx
 
 def get_dec_diffs(d1,d2):
     ret = {}

@@ -1231,7 +1231,7 @@ def get_function(ctx, f_name):
 
 def test_functs():
     p,t =get_tree_from_file("test_files/form.c")
-    ifs = find_ctx(t , "<class 'CParser.CParser.SelectionStatementContext'>")
+    ifs = find_ctx(t , "<class 'CParser.CParser.IterationStatementContext'>")
     return ifs
 
 def get_func_args_from_inp(inp, func_name,inp_type):
@@ -1423,8 +1423,9 @@ def get_all_decs(ctx):
 def get_top_dec_parent(ctx):
     dec1 = CParser.SelectionStatementContext
     dec2 = CParser.StatementContext
-    pctx = ctx
-
+    pctx = ctx.parentCtx
+    if type(pctx.parentCtx) != dec1 and type(pctx.parentCtx) != dec2:
+        return pctx
     while type(pctx) == dec1 or type(pctx) == dec2:
         pctx = pctx.parentCtx
     return pctx

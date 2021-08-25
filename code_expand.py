@@ -48,8 +48,8 @@ def main():
     d1 = get_all_decs(t)
     #loop to run all code transformations
     #order matters, don't re-arrange
-    change_funcs = [expand_macro_block, expand_if_else, expand_sizeof, single_declarations, expand_decs,expand_func_args,expand_decs]
-    apply_changes = [gen_macro_changes, gen_if_changes, gen_expand_changes, gen_dec_changes, gen_dec_changes,gen_func_changes,gen_dec_changes]
+    change_funcs = [expand_macro_block, inert_loop_braces, expand_if_else, expand_sizeof, single_declarations, expand_decs,expand_func_args,expand_decs]
+    apply_changes = [gen_macro_changes, gen_loop_braces, gen_if_changes, gen_expand_changes, gen_dec_changes, gen_dec_changes,gen_func_changes,gen_dec_changes]
     for i in range(len(change_funcs)):
         if i != 0:
             p,t = get_tree_from_string(cur_pro)
@@ -79,6 +79,36 @@ def main():
 
     #write out the new program
     write_new_program(cur_pro, out_name)
+
+def inert_loop_braces(ctx):
+    #get all functions
+    sel_stmt = "<class 'CParser.CParser.IterationStatementContext'>"
+    fns = get_functions(ctx)
+    rewrites = []
+    for f in fns:
+        loops = find_ctx(f, sel_stmt)
+        #get all loops in functions
+        for l in loops:
+            #check to see if there are curly braces
+            l_body = l.getChild(4)
+            if l_body.getText().startswith("{"):
+                continue
+            else:
+                #add if necessary
+                rewrites.append((get_start_loc(l_body),get_end_loc(l_body)))
+    return rewrites
+
+def gen_loop_braces(cur_prog, rewrite):
+    lns = cur_prog.split('\n')
+    lns = [x+"\n" for x in lns]
+    lns = lns[:-1]
+    for b,e in rewrite:
+        #print("1" + lns[b[0]-1])
+        spaces = get_line_spaces(lns[b[0]-2])
+        lns[b[0]-1] = f"{spaces}{{\n{lns[b[0]-1]}"
+        #print("1" + lns[e[0]-1])
+        lns[e[0]-1] = f"{lns[e[0]-1]}{spaces}}}"
+    return "".join(lns)
 
 def gen_fix_loc_changes(cur_prog, rewrite):
     lns = cur_prog.split('\n')

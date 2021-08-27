@@ -2,6 +2,7 @@
 from antlr_funcs import *
 import argparse
 import sys
+import itertools
 
 def main():
     #read in the function and file we weant to look at
@@ -48,13 +49,29 @@ def main():
     d1 = get_all_decs(t)
     #loop to run all code transformations
     #order matters, don't re-arrange
-    change_funcs = [expand_macro_block, inert_loop_braces, expand_if_else, expand_sizeof, single_declarations, expand_decs,expand_func_args,expand_decs]
-    apply_changes = [gen_macro_changes, gen_loop_braces, gen_if_changes, gen_expand_changes, gen_dec_changes, gen_dec_changes,gen_func_changes,gen_dec_changes]
+    change_funcs = [inert_loop_braces, expand_if_else, expand_sizeof, single_declarations, expand_decs,expand_func_args,expand_decs]
+    apply_changes = [gen_loop_braces, gen_if_changes, gen_expand_changes, gen_dec_changes, gen_dec_changes,gen_func_changes,gen_dec_changes]
     for i in range(len(change_funcs)):
         if i != 0:
             p,t = get_tree_from_string(cur_pro)
         rewrite = change_funcs[i](t)
         cur_pro = apply_changes[i](cur_pro, rewrite)
+        """
+        again = True
+        while again:
+            old_pro = cur_pro
+            if j != 0:
+                p,t = get_tree_from_string(cur_pro)
+            rewrite = change_funcs[i](t)
+            cur_pro = apply_changes[i](cur_pro, rewrite)
+            j += 1
+            again = not(old_pro == cur_pro)
+            print(again)
+
+        with open(f"tmp{i}.c", 'w') as out_f:
+            print(f"Writing file {i}")
+            out_f.write(cur_pro)
+        """
 
     #FIX-INGREDIENTS
     write_new_program(cur_pro, f"{out_name}.prev")
@@ -134,6 +151,11 @@ def expand_if_else(ctx):
         #for all if statements
         for i in ifs:
             fcs = get_function_calls(i.getChild(2))
+            z = itertools.permutations(fcs,2)
+            for zz in z:
+                if is_descendant(zz[0],zz[1]):
+                    if zz[0] in fcs:
+                        fcs.remove(zz[0])
             #all function calls inside the if
             for c in fcs:
                 f_name = c.getChild(0).getText()

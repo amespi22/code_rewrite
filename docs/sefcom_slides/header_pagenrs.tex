@@ -2,11 +2,17 @@
 \setbeamertemplate{footline}[page number]
 \definecolor{asured}{rgb}{0.60, 0.00, 0.2}
 \definecolor{asuyellow}{rgb}{1, .7, .062}
+%\definecolor{blockbg}{RGB}{229, 216, 183}
+\definecolor{blockbg}{RGB}{255, 230, 204}
+
 
 \setbeamercolor{structure}{fg=asured} % itemize, enumerate, etc
 \setbeamercolor{section in toc}{fg=asuyellow} % TOC sections
 \setbeamercolor{titlelike}{parent=structure,bg=asuyellow}
 \setbeamercolor{frametitle}{parent=structure,bg=asuyellow}
+\setbeamercolor{block body}{parent=structure,bg=blockbg, fg=black} %fg = block body text
+\setbeamercolor{block title}{parent=asured,bg=asuyellow, fg=black} %fg = block title text
+\setbeamercolor{block}{parent=asured,bg=asuyellow}
 
 \setbeamercolor*{palette primary}{bg=asured,fg=white}
 \setbeamercolor*{palette secondary}{bg=asured,fg=white}

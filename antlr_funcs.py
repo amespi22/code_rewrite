@@ -1402,6 +1402,8 @@ def parse_pre_process(cnts):
     #return dictionary
     ret_d = {}
     ret_d2 = {}
+    #printf has variable arguments, should skip it now
+    cnts = [c for c in cnts if not(c.endswith("printf.c"))]
     for c in cnts:
         #read all the files and pull out the functions from each file to return
         p,t = get_tree_from_file(c)

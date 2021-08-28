@@ -534,15 +534,20 @@ def expand_decs(ctx):
                     typ = fix_type(typ)
                     lhs = d.getChild(1).getChild(0).getChild(0).getText()
                     rhs = d.getChild(1).getChild(0).getChild(2).getText()
+                    #print(f"typ={typ},stmt={stmt},lhs={lhs},rhs={rhs}")
                     #This is to make sure we don't have a char array on the rhs
                     #if so we need to make sure to hit the else.
                     ts =  [x[:x.find('[')] for x in get_all_vars(f, False) if '[' in x]
-                    if "char*" in typ and rhs not in ts:
-                        rewrite[(get_line_num(d)-1,get_last_line_num(d))] = f"{typ.replace('char*','char')} {lhs}[] = {rhs};\n"
-                        #print(f"{typ.replace('char*','char')} {lhs}[] = {rhs};\n")
+                    #First if is for char*'s that are in the code and I shouldn't minipulate
+                    if "char*" in typ and "const" not in typ and not rhs.startswith('"'):
+                        rewrite[(get_line_num(d)-1,get_last_line_num(d))] = f"{typ} {lhs};\n {lhs} = {rhs};\n"
                     else:
-                        rewrite[(get_line_num(d)-1,get_last_line_num(d))] = f"{typ} {stmt};\n"
-                        #print(f"{typ} {stmt};\n")
+                        if "char*" in typ and rhs not in ts:
+                            rewrite[(get_line_num(d)-1,get_last_line_num(d))] = f"{typ.replace('char*','char')} {lhs}[] = {rhs};\n"
+                            #print(f"if:{typ.replace('char*','char')} {lhs}[] = {rhs};\n")
+                        else:
+                            rewrite[(get_line_num(d)-1,get_last_line_num(d))] = f"{typ} {stmt};\n"
+                            #print(f"else:{typ} {stmt};\n")
                 else:
                     #figure out the arguments.
                     try:

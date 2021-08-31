@@ -35,9 +35,13 @@ def main():
     else:
         funcs_and_rts = {}
         funcs_and_args = {}
+        macros = False
 
-    _pp_prog_name=f"{prog_name}.pp"
-    preprocess(macros,prog_name,_pp_prog_name)
+    if not(macros == False):
+        _pp_prog_name=f"{prog_name}.pp"
+        preprocess(macros,prog_name,_pp_prog_name)
+    else:
+        _pp_prog_name=f"{prog_name}"
     
     #original program
     cur_pro = ""
@@ -51,27 +55,38 @@ def main():
     #order matters, don't re-arrange
     change_funcs = [inert_loop_braces, expand_if_else, expand_sizeof, single_declarations, expand_decs,expand_func_args,expand_decs]
     apply_changes = [gen_loop_braces, gen_if_changes, gen_expand_changes, gen_dec_changes, gen_dec_changes,gen_func_changes,gen_dec_changes]
-    for i in range(len(change_funcs)):
+    j = 0
+    i = 0
+    f_n = 0
+    while i < len(change_funcs):
+        """
         if i != 0:
             p,t = get_tree_from_string(cur_pro)
         rewrite = change_funcs[i](t)
         cur_pro = apply_changes[i](cur_pro, rewrite)
         """
         again = True
+        if i == 6:
+            break
         while again:
             old_pro = cur_pro
             if j != 0:
                 p,t = get_tree_from_string(cur_pro)
             rewrite = change_funcs[i](t)
             cur_pro = apply_changes[i](cur_pro, rewrite)
-            j += 1
-            again = not(old_pro == cur_pro)
-            print(again)
+            #print_inter_file(f_n, cur_pro)
+            f_n += 1
+            if i == 5:
+                p,t = get_tree_from_string(cur_pro)
+                rewrite = change_funcs[i+1](t)
+                cur_pro = apply_changes[i+1](cur_pro, rewrite)
+                #print_inter_file(f_n, cur_pro)
+                f_n += 1
 
-        with open(f"tmp{i}.c", 'w') as out_f:
-            print(f"Writing file {i}")
-            out_f.write(cur_pro)
-        """
+            j += 1
+            again = not(old_pro == cur_pro) and i == 5
+            #print(again)
+        i += 1
 
     #FIX-INGREDIENTS
     write_new_program(cur_pro, f"{out_name}.prev")
@@ -96,6 +111,12 @@ def main():
 
     #write out the new program
     write_new_program(cur_pro, out_name)
+
+def print_inter_file(i, cur_pro):
+    with open(f"tmp{i}.c", 'w') as out_f:
+        print(f"Writing file {i}")
+        out_f.write(cur_pro)
+
 
 def inert_loop_braces(ctx):
     #get all functions
@@ -354,7 +375,8 @@ def expand_func_args(ctx):
                 #I do this in two passes so I can create
                 #all the new variables in one shot
                 for i in func_arg_names:
-                    if i not in all_vars and has_func(func_args[j]):
+                    #if i not in all_vars and has_func(func_args[j]):
+                    if i not in all_vars:
                         rep.append(j)
                     j += 1
                 # only here if we have 1 or more arguments to pull out
@@ -555,6 +577,8 @@ def expand_decs(ctx):
                         stmt = d.getChild(1).getText()
                         var = d.getChild(1).getChild(0).getChild(0).getText()
                         typ = fix_type(typ)
+                        if var.endswith('[]'):
+                            continue
                         #print(f"{typ} {var};")
                         #print(f"{stmt};")
                         #line_num - 1 cause I think it's not 0 indexed
@@ -610,6 +634,8 @@ def fix_type(typ):
         typ = typ.replace("longint", "long int")
     if "shortint" in typ:
         typ = typ.replace("shortint", "short int")
+    if "staticint" in typ:
+        typ = typ.replace("staticint", "static int")
     return typ
 
 def const(dec):

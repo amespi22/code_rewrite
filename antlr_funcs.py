@@ -1268,10 +1268,16 @@ def get_all_vars(func_ctx, ret_types):
                     if d.getChild(0).getChildCount() == 3:
                         r_vars.append(d.getChild(0).getChild(2).getText())
                     #r_vars.append(d.getChild(0).getChild(1).getText())
+        s_r_vars = []
+        for r in r_vars:
+            if r.endswith('[]'):
+                s_r_vars.append(r[:-2])
+            else:
+                s_r_vars.append(r)
         if ret_types == True:
-            return (r_types,r_vars)
+            return (r_types,s_r_vars)
         else:
-            return r_vars
+            return s_r_vars
     except:
         print("Error parsing get_all_vars")
         print(d.getText())

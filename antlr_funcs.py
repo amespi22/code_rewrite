@@ -654,7 +654,12 @@ def find_ctx_list(tree,ctx,screen=None):
 #Input: a functionDefinitionContext
 #Output: the argument names
 def get_func_name(fctx):
-    return fctx.declarator().getChild(0).getChild(0).getText()
+    gtx = fctx.getText()
+    if fctx.declarator().getChild(0).getChild(0).getText().strip() == '(':
+        ret = fctx.getChild(0).getText()
+    else:
+        ret = fctx.declarator().getChild(0).getChild(0).getText()
+    return ret
 
 def find_multictx_with_scope(tree,multctx,screen=None,ignore_nodes=None,okay_subscope=None):
     if not tree:

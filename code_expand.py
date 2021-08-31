@@ -98,7 +98,7 @@ def main():
     new_decs = get_dec_diffs(d1,d2)
     for i,k in enumerate(new_decs.keys()):
         nd="\n - "+"\n - ".join([get_string2(n) for n in new_decs[k]])
-        print(f"{i} :  [{k}] {type(new_decs[k])} : {nd}")
+        print(f"{i} :  [{k}] {type(new_decs[k])}  [new function decls] {nd}")
         
     print_ctx_bfs(t,"help")
     printer=ScopeListener()

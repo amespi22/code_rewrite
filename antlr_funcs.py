@@ -968,10 +968,10 @@ def get_fix_loc_subfns(scope,dvars):
                                         if '*' in vtyp:
                                             for isym in sym_lut.keys():
                                                 if f"{v} [" in isym:
-                                                    print(f"BEFORE => literal (False) {v} => {vtyp}")
+                                                    dprint(f"BEFORE => literal (False) {v} => {vtyp}")
                                                     v=isym
                                                     vtyp=sym_lut[v]
-                                                    print(f"AFTER => literal (False) {v} => {vtyp}")
+                                                    dprint(f"AFTER => literal (False) {v} => {vtyp}")
                                                     break
                                         info=(vtyp,v,None)
                                         if type(vtype)!=str:
@@ -1075,9 +1075,9 @@ def get_fix_loc_subfns(scope,dvars):
         s2_fn=f"fix_ingred_{i}()"
         s2_fn_def+=f"void {s2_fn}"+"{\n"+f"{s2_body}"+"}\n"
         dprint("==== Scope 2 ====\n"+f"{s2_fn_def}")
-        print("[Fix Ingredient functions]  -- START --")
+        dprint("[Fix Ingredient functions]  -- START --")
         prepend=f"{s2_fn_def}"
-        print(prepend)
+        dprint(prepend)
         loc= get_start_loc(fn)
         rewrites.append((prepend,loc))
         open_bracket=list(fn.getChildren())[-1].getChild(0)

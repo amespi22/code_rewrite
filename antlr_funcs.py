@@ -1612,6 +1612,7 @@ def get_json_data(fname):
     d1 = {}
     d2 = {}
     disable_eval=[]
+    enable_eval=[]
     with open(fname, 'r') as j:
         data = json.load(j)
         if 'filenames' in data.keys():

@@ -11,7 +11,7 @@ import codecs
 import copy
 import json
 
-debug=(False,True) # [0] print debug messages ; [1] generate debug log from debug messages
+debug=(False,False) # [0] print debug messages ; [1] generate debug log from debug messages
 gbl_debug_msg=["",0,open("debug.log","w") if debug[1] else None,debug[1] ]
 #This program assumes that C.g4 has been used to create
 #The parser files CLexer.py Clistener.py and Cparser.py

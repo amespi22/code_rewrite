@@ -11,7 +11,7 @@ import codecs
 import copy
 import json
 
-debug=(False,False) # [0] print debug messages ; [1] generate debug log from debug messages
+debug=(False,True) # [0] print debug messages ; [1] generate debug log from debug messages
 gbl_debug_msg=["",0,open("debug.log","w") if debug[1] else None,debug[1] ]
 #This program assumes that C.g4 has been used to create
 #The parser files CLexer.py Clistener.py and Cparser.py
@@ -106,6 +106,7 @@ class ScopeListener(CListener):
     cur_declarations=[ [], ]
     cur_symbol_lut=dict()
     cur_assignments=[ [], ]
+    cur_comparators=[ [], ]
     resolved=list()
     scopes=dict()
     # keys: k, list of nodes that are valid_parent_scopes
@@ -124,6 +125,115 @@ class ScopeListener(CListener):
     current_fn_ctx=None
     current_scope=None
 
+    valid_comparators=[\
+        CParser.RelationalExpressionContext,\
+        CParser.EqualityExpressionContext\
+    ]
+
+    def get_basic_type_or_expression(self,node):
+        n_=node
+        typ=None
+        expression=None
+        un_op=None
+        found=False
+        i="-"
+        dprint(f"[get_basic_type_or_expression]")
+        dprint(f"{type(n_)} : {get_string2(n_)}")
+        while (type(n_)!=CParser.PrimaryExpressionContext) and not found:
+            c=list(n_.getChildren())
+            dprint(f"{i}{type(n_)} {[type(x) for x in c]} {[get_string2(x) for x in c ]}")
+            i+="-"
+            if type(n_)==CParser.DigitSequence:
+                typ="int"
+                found=True
+            elif type(n_) in [\
+                           CParser.Identifier,\
+                           CParser.Constant,\
+                           CParser.PrimaryExpressionContext\
+                           ]:
+                expression=get_string2(n_)
+                found=True
+            elif type(n_)==CParser.CastExpressionContext:
+                if len(c)>1 and not typ:
+                    typ=get_string2(c[-3])
+                    expression=get_string2(c[-1])
+                    found=True
+                n_=c[-1]
+            elif type(n_)==CParser.PostfixExpressionContext:
+                if type(c[0])==CParser.PrimaryExpressionContext:
+                    n_=c[0]
+                else:
+                    if type(c[1])==CParser.TypeNameContext:
+                        n_=c[1]
+                    elif type(c[2])==CParser.TypeNameContext:
+                        n_=c[2]
+                    else:
+                        print("Error: Bad PostFix Expression")
+                        print(f"=>{get_string2(n_)}")
+                        print("Exiting.")
+                        import sys; sys.exit(-1)
+            elif type(n_)==CParser.UnaryExpressionContext:
+                if type(c[0])==CParser.UnaryOperatorContext and len(c)==2:
+                    un_op=get_string2(c[0])
+                    if un_op == '!':
+                        typ="bool"
+                        found=True
+                if type(c[-1]) in [ CParser.PostfixExpressionContext,\
+                                    CParser.CastExpressionContext,\
+                                    CParser.Identifier ]:
+                    n_=c[-1]
+                elif type(c[-2])==CParser.TypeNameContext:
+                    n_=c[-2]
+                else:
+                    print("Error: Bad Unary Expression")
+                    print(f"=>{get_string2(n_)}")
+                    print("Exiting.")
+                    import sys; sys.exit(-1)
+            elif type(n_) in [CParser.AndExpressionContext,\
+                              CParser.ExclusiveOrExpressionContext,\
+                              CParser.InclusiveOrExpressionContext,\
+                              CParser.ShiftExpressionContext,\
+                              CParser.AdditiveExpressionContext,\
+                              CParser.MultiplicativeExpressionContext\
+                             ]:
+                n_=c[0]
+            elif type(n_) in [CParser.LogicalAndExpressionContext,\
+                             CParser.RelationalExpressionContext,\
+                             CParser.EqualityExpressionContext,\
+                             CParser.LogicalOrExpressionContext\
+                             ]:
+                if len(c)>1:
+                    typ="bool"
+                    found=True
+                else:
+                    n_=c[0]
+                pass
+            else:
+                print("Error: Bad Type Expression")
+                print(f"type {type(n_)} =>{get_string2(n_)}")
+                print("Exiting.")
+                import sys; sys.exit(-1)
+        # end of while ^^
+        if not found:
+            expression=get_string2(n_);
+        return (typ,expression,un_op)
+
+    def is_comparator(self,node):
+        if type(node) not in self.valid_comparators:
+            return False,None
+        else:
+            children=list(node.getChildren())
+            if len(children)>1:
+                dprint(f"[is_comparator] {type(node)} => {get_string2(node)}")   
+                vals=list()
+                for i in range(0,len(children),2):
+                    dprint(f"[{i}] {type(children[i])} => {get_string2(children[i])}")   
+                    vals.append(children[i]) 
+                return True,vals
+            else:
+                return False,None
+
+            
     def find_pruned_nodes(self):
         for i in list(self.scopes.keys()):
             self.prune(i)
@@ -183,6 +293,7 @@ class ScopeListener(CListener):
         while type(n)!=tree.Tree.TerminalNodeImpl:
             n=list(n.getChildren())[-1]
         return n
+    
 
     def get_scope_limits(self,node):
         children=list(node.getChildren())
@@ -231,6 +342,7 @@ class ScopeListener(CListener):
         self.cur_scopes.append([])
         self.cur_declarations.append([])
         self.cur_assignments.append([])
+        self.cur_comparators.append([])
         pscopes=[]
         p=[start]
         siblings=self.siblings(start)
@@ -307,6 +419,10 @@ class ScopeListener(CListener):
         self.scopes[ctx]['assigns']=copy.copy(x)
         s=[(n[0],n[1],n[2],get_string2(n[3])) for n in x]
         dprint(f"Assigns = {s}")
+        x=self.cur_comparators.pop()
+        self.scopes[ctx]['compares']=copy.copy(x)
+        s=[(n[0],n[1],n[2],type(n[3]),get_string2(n[3])) for n in x]
+        dprint(f"Compares = {s}")
         pass
 
     def enterCompoundStatement(self,ctx:CParser.CompoundStatementContext):
@@ -330,6 +446,8 @@ class ScopeListener(CListener):
         self.scopes[ctx]['decls']=copy.copy(x)
         x=self.cur_assignments.pop()
         self.scopes[ctx]['assigns']=copy.copy(x)
+        x=self.cur_comparators.pop()
+        self.scopes[ctx]['compares']=copy.copy(x)
         pass
 
     def enterSelectionStatement(self, ctx:CParser.SelectionStatementContext):
@@ -353,6 +471,8 @@ class ScopeListener(CListener):
         self.scopes[ctx]['decls']=copy.copy(x)
         x=self.cur_assignments.pop()
         self.scopes[ctx]['assigns']=copy.copy(x)
+        x=self.cur_comparators.pop()
+        self.scopes[ctx]['compares']=copy.copy(x)
         pass
 
     def enterIterationStatement(self, ctx:CParser.IterationStatementContext):
@@ -387,6 +507,82 @@ class ScopeListener(CListener):
         self.scopes[ctx]['decls']=copy.copy(x)
         x=self.cur_assignments.pop()
         self.scopes[ctx]['assigns']=copy.copy(x)
+        x=self.cur_comparators.pop()
+        self.scopes[ctx]['compares']=copy.copy(x)
+        pass
+
+    def exitRelationalExpression(self, ctx:CParser.RelationalExpressionContext):
+        pass
+    def enterRelationalExpression(self, ctx:CParser.RelationalExpressionContext):
+        comp,values=self.is_comparator(ctx)
+        if comp:
+            typ=None
+            expr=None
+            un_op=None
+            dprint(f"[enterRelationalExpression] : {type(ctx)} => {get_string2(ctx)}")
+            dprint(f"=> {[get_string2(x) for x in values]}")
+            for x in values:
+                #str_x=get_string2(x)
+                typ,expr,un_op=self.get_basic_type_or_expression(x)
+                if typ != None:
+                    dprint(f"FOUND IT! [1.1]  {typ} : {expr}")
+                    break
+                typ=self.cur_symbol_lut[self.current_scope].get(expr,None)
+                if typ != None:
+                    dprint(f"FOUND IT! [1.2]  {typ} : {expr}")
+                    break
+            # note from pdr: i don't think this is particularly robust, but oh well. good luck to me
+            if not typ:
+                typ="UNDEF"
+                if un_op:
+                    if un_op in ['+','-','~']:
+                        typ='int'
+                    elif un_op in ['!']:
+                        typ='bool'
+            if un_op=="*" and "*" in typ:
+                typ=typ.replace(" *","",1)
+            elif un_op=="&":
+                typ=typ+" *"
+            dprint(f"Resolved type: [1.3]  {typ} : {expr}")
+            for x in values:
+                # the point here is to somewhat take advantage of existing tuple structure for reuse
+                self.cur_comparators[-1].extend([(typ,"","",x)])
+        pass
+
+    def exitEqualityExpression(self, ctx:CParser.EqualityExpressionContext):
+        pass
+    def enterEqualityExpression(self, ctx:CParser.EqualityExpressionContext):
+        comp,values=self.is_comparator(ctx)
+        if comp:
+            typ=None
+            expr=None
+            un_op=None
+            dprint(f"[enterEqualityExpression] : {type(ctx)} => {get_string2(ctx)}")
+            dprint(f"=> {[get_string2(x) for x in values]}")
+            for x in values:
+                #str_x=get_string2(x)
+                typ,expr,un_op=self.get_basic_type_or_expression(x)
+                if typ != None:
+                    dprint(f"FOUND IT! [2.1]  {typ} : {expr}")
+                    break
+                typ=self.cur_symbol_lut[self.current_scope].get(expr,None)
+                if typ != None:
+                    dprint(f"FOUND IT! [2.2]  {typ} : {expr}")
+                    break
+            if not typ:
+                typ="UNDEF"
+                if un_op:
+                    if un_op in ['+','-','~']:
+                        typ='int'
+                    elif un_op in ['!']:
+                        typ='bool'
+            if un_op=="*" and "*" in typ:
+                typ=typ.replace(" *","",1)
+            elif un_op=="&":
+                typ=typ+" *"
+            dprint(f"Resolved type: [2.3]  {typ} : {expr}")
+            for x in values:
+                self.cur_comparators[-1].extend([(typ,"","",x)])
         pass
 
     def exitAssignmentExpression(self, ctx:CParser.AssignmentExpressionContext):
@@ -759,7 +955,7 @@ def is_descendant(node,ancestor):
             return True
         node_=node_.parentCtx
 
-def get_function_info(functions,fscope,dont_eval:list=None):
+def get_function_info(functions,fscope,dont_eval:list=None,okay_eval:list=None):
     scope_vars=dict()
     variable_lut=dict()
     for ctx in functions:
@@ -785,6 +981,7 @@ def get_function_info(functions,fscope,dont_eval:list=None):
             pscope=dict()
             decl_scopes=[]
             assign_scopes=[]
+            compare_scopes=[]
             var_lut=dict()
             import copy
             scope_stack=copy.copy(scope_dict[p]['pscopes'])
@@ -793,6 +990,7 @@ def get_function_info(functions,fscope,dont_eval:list=None):
             else:
                 decl_scopes.extend(scope_dict[p]['decls'])
                 assign_scopes.extend([n for n in scope_dict[p]['assigns'] if not(any([x in n[3].getText() for x in dont_eval]))])
+                compare_scopes.extend([n for n in scope_dict[p]['compares'] if not(any([x in n[3].getText() for x in dont_eval]))])
                 var_lut.update(scope_dict[p]['sym_lut'])
             parent_scope=scope_dict[p]['parent']
             siblings=scope_dict[p]['siblings'] #[0] are younger, [1] older
@@ -828,10 +1026,13 @@ def get_function_info(functions,fscope,dont_eval:list=None):
                 var_lut.update(cur_info['sym_lut'])
                 local_decls=[n for n in cur_info['decls'] if not is_not_inscope(n[1],nxt_ignore)]
                 local_assigns=[n for n in cur_info['assigns'] if not is_not_inscope(n[3],nxt_ignore) and not(any([x in n[3].getText() for x in dont_eval]))]
+                local_compares=[n for n in cur_info['compares'] if not is_not_inscope(n[3],nxt_ignore) and not(any([x in n[3].getText() for x in dont_eval]))]
                 decl_scopes.extend(local_decls)
                 assign_scopes.extend(local_assigns)
+                compare_scopes.extend(local_compares)
                 dprint(f"decls = {[(get_string2(n[0]),get_string2(n[1]),get_string2(n[2])) for n in decl_scopes]}")
                 dprint(f"assigns = {[(get_string2(n[0]),get_string2(n[1]),get_string2(n[2]),get_string2(n[3])) for n in assign_scopes]}")
+                dprint(f"compares = {[get_string2(n[1]) for n in compare_scopes]}")
             # end of while
             dprint(f"===> context {get_string2(p)}")
             s=[get_string2(n) for n in ignore_sibs]
@@ -840,11 +1041,14 @@ def get_function_info(functions,fscope,dont_eval:list=None):
                 dprint(f"{j} : type: {c[0]}, var: {get_string2(c[1])}")
             for j,c in enumerate(assign_scopes):
                 dprint(f"{j} : type: {c[0]}, value: {get_string2(c[3])}")
+            for j,c in enumerate(compare_scopes):
+                dprint(f"{j} : type: {c[0]}, value: {get_string2(c[3])}")
             dprint(f"=======END=======")
 
             scope_vars[fname][p]=\
                                   {'variables':copy.copy(decl_scopes),\
                                   'values':copy.copy(assign_scopes),\
+                                  'compvalues':copy.copy(compare_scopes),\
                                   'symbol2type_lut':copy.copy(var_lut),\
                                   'parent':copy.copy(parent_scope),\
                                   'scope_end':copy.copy(scope_end)
@@ -861,8 +1065,9 @@ def print_scope_info(scope):
             parent=s['parent'] if s['parent'] else sn
             var_s=s['variables']
             val_s=s['values']
+            cval_s=s['compvalues']
             print(f"/* scope = {get_string2(parent)}*/")
-            for x in val_s:
+            for x in val_s+cval_s:
                 try:
                     typ,var,varinfo,value=x
                     type_info=typ
@@ -893,7 +1098,7 @@ def is_literal(val):
 def can_cast(ltyp,rtyp):
     # determines if rtyp variable can be cast as ltyp
     equivalent_classes=[set(['int','unsigned int','uint32_t','uint_t','cgc_size_t',\
-                        'size_t','uint','void *', 'unsigned long', 'long']),\
+                        'size_t','uint','void *', 'char *', 'int *', 'unsigned long', 'long']),\
                         set(['char','uint8_t']),\
                         set(['long'])
                         ]    
@@ -902,7 +1107,17 @@ def can_cast(ltyp,rtyp):
             return True
     return False
 
-def get_fix_loc_subfns(scope,dvars):
+def is_okay_func_call(rhs_value,eval_me):
+    import re
+    is_func=re.search(r"(\S+)\s*\((((\S+),\s*)*\S+)?\)",rhs_value)
+    if is_func and is_func.group(1) not in eval_me:
+        return True
+    else:
+        return False
+        
+    
+
+def get_fix_loc_subfns(scope,dvars,eval_me):
     uniques=[]
     fn_body=[]
     rewrites=[]
@@ -934,6 +1149,7 @@ def get_fix_loc_subfns(scope,dvars):
             var_s=s['variables']
             sym_lut=s['symbol2type_lut']
             val_s=s['values']
+            cval_s=s['compvalues']
             #val_s=s['vals_w_nodes']
             scope_uniq=[]
             end=s['scope_end']
@@ -951,12 +1167,13 @@ def get_fix_loc_subfns(scope,dvars):
                 ltyp=n[0][0]
                 lname=get_string2(n[0][1])
                 #####
-                for k,x in enumerate(val_s):
+                for k,x in enumerate(val_s+cval_s):
                     try:
                         type_info,var,varinfo,value_node=x
                         scope_uniq.append([])
                         dprint(f"[i={i}][j={j}][k={k}] | type: {type_info} ; var : {var} ; varinfo : {varinfo} ; value_node : {get_string2(value_node)}")
-                        if value_node:
+                        fn_ptr=is_okay_func_call(get_string(value_node),eval_me)
+                        if value_node and not fn_ptr:
                             term=list(find_multictx(value_node,[tree.Tree.TerminalNodeImpl]))
                             value=get_string2(value_node)
                             value_subterms=[get_string2(v) for v in term]
@@ -972,7 +1189,7 @@ def get_fix_loc_subfns(scope,dvars):
                                         vtyp=vtype
                                         if '*' in vtyp:
                                             for isym in sym_lut.keys():
-                                                if f"{v} [" in isym:
+                                                if f"{v} [" in isym and isym.startswith(v):
                                                     dprint(f"BEFORE => literal (False) {v} => {vtyp}")
                                                     v=isym
                                                     vtyp=sym_lut[v]
@@ -987,7 +1204,7 @@ def get_fix_loc_subfns(scope,dvars):
                                         else:
                                             uniq_init.append(info)
                                 else:
-                                    dprint(f" => is literal (True) {v}")
+                                    dprint(f" => is literal (True) {v} [type_info : {type_info}]")
                             # now we're looking at each set of variables and the RHS value
                             import re
                             rtyp=re.sub(r"\bconst\b",r' ',type_info)
@@ -1034,7 +1251,11 @@ def get_fix_loc_subfns(scope,dvars):
                     # and then take the scope_uniq list and generate the initialized values
                     for u in scope_uniq[k]:
                         utyp,uname,uval,rtyp=u
-                        if (utyp,uname) not in udecl_vars and utyp != "UNDEF":
+                        import re
+                        has_uname=re.search(r"\b("+uname+r")\b",uval)
+                        if has_uname :
+                            dprint("not valid - "+ f"{utyp} {uname}; {uname} = (({utyp}){uval});\n")
+                        elif (utyp,uname) not in udecl_vars and utyp != "UNDEF":
                             s0_body_vars+=f"{utyp} {uname}; {uname} = ({utyp})({uval});\n"
                             udecl_vars.append((utyp,uname))
                             valid=True
@@ -1403,9 +1624,12 @@ def get_json_data(fname):
             for i in range(len(mcs)):
                 rd[mcs[i]['name']] = mcs[i]['value']
 
+        if 'enable_eval' in data.keys():
+            enable_eval=list(data['enable_eval'])
+
         if 'disable_eval' in data.keys():
             disable_eval=list(data['disable_eval'])
-    return (d1,d2,rd,disable_eval)
+    return (d1,d2,rd,disable_eval,enable_eval)
 
 #Input a file with a list of .c files to search functions for
 #Output a dictionary of functions and their arguments

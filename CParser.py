@@ -493,8 +493,8 @@ def serializedATN():
         buf.write("\u03d1\3\2\2\2\u03d1\u03d2\7E\2\2\u03d2\u0093\3\2\2\2")
         buf.write("\u03d3\u03d5\5\u0096L\2\u03d4\u03d3\3\2\2\2\u03d5\u03d6")
         buf.write("\3\2\2\2\u03d6\u03d4\3\2\2\2\u03d6\u03d7\3\2\2\2\u03d7")
-        buf.write("\u0095\3\2\2\2\u03d8\u03db\5\u008eH\2\u03d9\u03db\5\62")
-        buf.write("\32\2\u03da\u03d8\3\2\2\2\u03da\u03d9\3\2\2\2\u03db\u0097")
+        buf.write("\u0095\3\2\2\2\u03d8\u03db\5\62\32\2\u03d9\u03db\5\u008e")
+        buf.write("H\2\u03da\u03d8\3\2\2\2\u03da\u03d9\3\2\2\2\u03db\u0097")
         buf.write("\3\2\2\2\u03dc\u03de\5.\30\2\u03dd\u03dc\3\2\2\2\u03dd")
         buf.write("\u03de\3\2\2\2\u03de\u03df\3\2\2\2\u03df\u03e0\7\\\2\2")
         buf.write("\u03e0\u0099\3\2\2\2\u03e1\u03e2\7#\2\2\u03e2\u03e3\7")
@@ -7073,12 +7073,12 @@ class CParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def statement(self):
-            return self.getTypedRuleContext(CParser.StatementContext,0)
-
-
         def declaration(self):
             return self.getTypedRuleContext(CParser.DeclarationContext,0)
+
+
+        def statement(self):
+            return self.getTypedRuleContext(CParser.StatementContext,0)
 
 
         def getRuleIndex(self):
@@ -7106,13 +7106,13 @@ class CParser ( Parser ):
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 982
-                self.statement()
+                self.declaration()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 983
-                self.declaration()
+                self.statement()
                 pass
 
 

@@ -1256,11 +1256,11 @@ def get_fix_loc_subfns(scope,dvars,eval_me):
                         if has_uname :
                             dprint("not valid - "+ f"{utyp} {uname}; {uname} = (({utyp}){uval});\n")
                         elif (utyp,uname) not in udecl_vars and utyp != "UNDEF":
-                            s0_body_vars+=f"{utyp} {uname}; {uname} = ({utyp})({uval});\n"
+                            s0_body_vars+="    {"+f"{utyp} {uname}; {uname} = ({utyp})({uval}); "+"}\n"
                             udecl_vars.append((utyp,uname))
                             valid=True
                         elif utyp != "UNDEF":
-                            s0_body_vars+=f"{uname} = ({utyp})({uval});\n"
+                            s0_body_vars+="    "+f"{uname} = ({utyp})({uval});"+"\n"
                             valid=True
                         else:
                             dprint("not valid - "+ f"{utyp} {uname}; {uname} = (({utyp}){uval});\n")

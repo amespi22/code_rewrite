@@ -1408,6 +1408,30 @@ def get_arg_names(ctx):
 def get_func_args(ctx):
     try:
         ftlc = find_ctx(ctx, "<class 'CParser.CParser.ParameterTypeListContext'>")
+        
+        #for the c89 standard of not declaring types in parameter list of functions
+        if ctx.getChildCount() == 4:
+            args = ctx.getChild(2)
+            #for every argument
+            ts = []
+            rs = []
+            for e in args.getChildren():
+                #all text from args but the ';' char
+                c = e.getChild(0)
+                #print(f"chiild 0 child count {c.getChildCount()}")
+                #the last child is alwasy the variable
+                #everything prior is the type e.g. 
+                #1 = const 2 = char* 3 = inp_str
+                cs = list(e.getChild(0).getChildren())
+                #r = arg name
+                r = cs[len(cs)-1]
+                rs.append(r.getText())
+                z = [a.getText() for a in cs[:-1]]
+                #t = arg type
+                t = "".join(z)
+                ts.append(t)
+            return list(zip(ts,rs))
+
         if len(ftlc) > 0:
             c = ftlc[0].getChild(0)
             cl = c.children
@@ -1416,8 +1440,11 @@ def get_func_args(ctx):
             ts = [c.getChild(0).getText() for c in cs]
             return list(zip(ts, rs))
         else:
-            return None
+                #print("error")
+                #print(ctx.getText())
+                return None
     except:
+        print("Threw exception")
         return None
 
 #Output: list of tuples [(type'node,var_name)]
@@ -1471,6 +1498,8 @@ def get_func_args_from_inp(inp, func_name,inp_type):
 #Input: A function context
 #Output: List of variables used in the function including function parameters
 def get_all_vars(func_ctx, ret_types):
+    #print("new call to get_all_vars")
+    #print(func_ctx.getText())
     try:
         r_vars = []
         r_types = []
@@ -1482,18 +1511,19 @@ def get_all_vars(func_ctx, ret_types):
         #Get all declarations
         decs = find_ctx(func_ctx, "<class 'CParser.CParser.DeclarationContext'>")
         for d in decs:
-                # This works for ints, longs, floats etc
-                if d.getChildCount() == 3:
-                    r_vars.append(d.getChild(1).getChild(0).getChild(0).getText())
-                    #print(d.getChild(1).getChild(0).getChild(0).getText())
-                    r_types.append(d.getChild(0).getChild(0).getText())
-                #This works for structs
-                if d.getChildCount() == 2:
-                    if d.getChild(0).getChildCount() == 2:
-                        r_vars.append(d.getChild(0).getChild(1).getText())
-                    if d.getChild(0).getChildCount() == 3:
-                        r_vars.append(d.getChild(0).getChild(2).getText())
-                    #r_vars.append(d.getChild(0).getChild(1).getText())
+            #print(f"d.getText() = {d.getText()}")
+            # This works for ints, longs, floats etc
+            if d.getChildCount() == 3:
+                r_vars.append(d.getChild(1).getChild(0).getChild(0).getText())
+                #print(d.getChild(1).getChild(0).getChild(0).getText())
+                r_types.append(d.getChild(0).getChild(0).getText())
+            #This works for structs
+            if d.getChildCount() == 2:
+                if d.getChild(0).getChildCount() == 2:
+                    r_vars.append(d.getChild(0).getChild(1).getText())
+                if d.getChild(0).getChildCount() == 3:
+                    r_vars.append(d.getChild(0).getChild(2).getText())
+                #r_vars.append(d.getChild(0).getChild(1).getText())
         s_r_vars = []
         for r in r_vars:
             if r.endswith('[]'):

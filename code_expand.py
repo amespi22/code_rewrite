@@ -37,7 +37,6 @@ def main():
         funcs_and_rts = {}
         funcs_and_args = {}
         macros = False
-
     if not(macros == False):
         _pp_prog_name=f"{prog_name}.pp"
         preprocess(macros,prog_name,_pp_prog_name)
@@ -76,6 +75,7 @@ def main():
             rewrite = change_funcs[i](t)
             cur_pro = apply_changes[i](cur_pro, rewrite)
             #print_inter_file(f_n, cur_pro)
+            #print_ctx_bfs(t,f"help_pre_{f_n}")
             f_n += 1
             if i == 5:
                 p,t = get_tree_from_string(cur_pro)
@@ -128,6 +128,8 @@ def inert_loop_braces(ctx):
         loops = find_ctx(f, sel_stmt)
         #get all loops in functions
         for l in loops:
+            if l.getText().startswith("do"):
+                continue
             #check to see if there are curly braces
             l_body = l.getChild(4)
             if l_body.getText().startswith("{"):
@@ -140,7 +142,6 @@ def inert_loop_braces(ctx):
 def gen_loop_braces(cur_prog, rewrite):
     lns = cur_prog.split('\n')
     lns = [x+"\n" for x in lns]
-    lns = lns[:-1]
     for b,e in rewrite:
         #print("1" + lns[b[0]-1])
         spaces = get_line_spaces(lns[b[0]-2])
@@ -208,6 +209,8 @@ def expand_sizeof(ctx):
         loops_selections = find_ctx_list(f, sel_stmt)
         # for all loops and conditionals
         for l in loops_selections:
+            if l.getText().startswith("do"):
+                continue
             #this is just the stuff between parens in the statement l.getChild(2)
             sizes = find_ctx(l.getChild(2), sel_stmt2)
             #for all the sizeof() statements get the re-write information
@@ -375,6 +378,9 @@ def expand_func_args(ctx):
                 #Find indexes to replace.
                 #I do this in two passes so I can create
                 #all the new variables in one shot
+                #print(all_vars)
+                #should do this better but without going global this works
+                all_vars = [a for a in all_vars if a.startswith("tlv")]
                 for i in func_arg_names:
                     #if i not in all_vars and has_func(func_args[j]):
                     if i not in all_vars:
@@ -391,6 +397,7 @@ def expand_func_args(ctx):
                     #again in the same function on another call
                     #all_vars.extend(r_vars)
                     fun_arg_types = funcs_and_args[f_name]
+                    #print(f"{f_name} has types {fun_arg_types}")
                     #added this cause we don't need functions that take
                     #const args to make the varialbes we send them const
                     de_const(fun_arg_types)
@@ -415,8 +422,9 @@ def expand_func_args(ctx):
                     #print (new_var_dec[:-1])
                     #print (new_arg_string[:-1]+')')
                     rewrites[start_loc,end_loc] = (new_var_dec,new_arg_string[:-1]+')')
-        except:
+        except Exception as e:
             print(f"messed up here with {p.getText()}")
+            print(e)
             continue
 
     #record the changes needed to re-write the code
@@ -577,11 +585,13 @@ def expand_decs(ctx):
                         typ = d.getChild(0).getText()
                         stmt = d.getChild(1).getText()
                         var = d.getChild(1).getChild(0).getChild(0).getText()
+                        rhs = d.getChild(1).getChild(0).getChild(2).getText()
                         typ = fix_type(typ)
-                        if var.endswith('[]'):
+                        if var.endswith('[]') or rhs.startswith('{'):
                             continue
                         #print(f"{typ} {var};")
                         #print(f"{stmt};")
+                        #print(f"{rhs};")
                         #line_num - 1 cause I think it's not 0 indexed
                         rewrite[(get_line_num(d)-1,get_last_line_num(d))] = f"{typ} {var};\n{stmt};\n"
                     except:
@@ -742,11 +752,6 @@ def preprocess(pragmas:dict,inf:str,outf:str):
         for i in ol:
             _out.write(i)
         _out.close()
-
-
-
-
-
 
 if __name__ == "__main__":
     main()

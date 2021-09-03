@@ -431,8 +431,8 @@ blockItemList
     ;
 
 blockItem
-    :   statement
-    |   declaration
+    :   declaration
+    |   statement
     ;
 
 expressionStatement

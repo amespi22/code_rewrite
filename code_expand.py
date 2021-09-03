@@ -363,6 +363,7 @@ def expand_func_args(ctx):
         pecs = find_ctx(f, "<class 'CParser.CParser.PostfixExpressionContext'>")
         pecs = [p for p in pecs if p.getChildCount() > 1 and p.getChild(0).getText() in funcs_and_args]
         pecs = remove_inner_funcs(pecs)
+        #print([p.getChild(0).getText() for p in pecs])
         try:
             for p in pecs:
                 f_name = p.getChild(0).getText()

@@ -1672,7 +1672,13 @@ def parse_pre_process(cnts):
     cnts = [c for c in cnts if not(c.endswith("printf.c"))]
     for c in cnts:
         #read all the files and pull out the functions from each file to return
-        p,t = get_tree_from_file(c)
+        #open the file
+        inf = open(c, 'r')
+        src = remove_defines(inf.readlines()) 
+        inf.close()
+        #kill preprocessing stuff
+        #make the new call on the string
+        p,t = get_tree_from_string(src)
         fns = get_functions(t)
         for f in fns:
             ret_d[get_func_name(f)] = get_func_args(f)
@@ -1717,6 +1723,19 @@ def get_dec_diffs(d1,d2):
         ret[key] = list(s_all - s_in)
 
     return ret
+
+def remove_defines(src):
+    rm_next = False
+    new_src = ""
+    for line in src:
+        if line.startswith("#define") or rm_next:
+            if line.strip().endswith('\\'):
+                rm_next = True
+            else:
+                rm_next = False
+        else:
+            new_src += line
+    return new_src
 
 if __name__ == "__main__":
     import atexit

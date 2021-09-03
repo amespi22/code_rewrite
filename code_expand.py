@@ -681,10 +681,10 @@ def preprocess(pragmas:dict,inf:str,outf:str):
     _prags='|'.join(list(_pragmas))
     pragma_re=re.compile(r'\b('+_prags+r")\b")
     # note from pdr: there are also #if defined \((\S+)\) LOGICAL , but omitting for simplicity
-    positive_re=re.compile(r'^#(if|ifdef|elif)\s+(\S+)')
-    negative_re=re.compile(r'^#ifndef\s+(\S+)')
-    next_re=re.compile(r'^#else')
-    end_re=re.compile(r'^#endif')
+    positive_re=re.compile(r'^\s*#(if|ifdef|elif)\s+(\S+)')
+    negative_re=re.compile(r'^\s*#ifndef\s+(\S+)')
+    next_re=re.compile(r'^\s*#else')
+    end_re=re.compile(r'^\s*#endif')
 
     lines=None
     with open(inf,'r') as _in:

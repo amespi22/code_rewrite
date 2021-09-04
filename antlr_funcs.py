@@ -1259,7 +1259,11 @@ def get_fix_loc_subfns(scope,dvars,eval_me):
                         if has_uname :
                             dprint("not valid - "+ f"{utyp} {uname}; {uname} = (({utyp}){uval});\n")
                         elif (utyp,uname) not in udecl_vars and utyp != "UNDEF":
-                            s0_body_vars+="    {"+f"{utyp} {uname}; {uname} = ({utyp})({uval}); "+"}\n"
+                            if "[ ]" in uname:
+                                xname=uname.replace("[ ]","")
+                                s0_body_vars+="    {"+f"{utyp}* {xname}; {xname} = ({utyp}*)({uval}); "+"}\n"
+                            else:
+                                s0_body_vars+="    {"+f"{utyp} {uname}; {uname} = ({utyp})({uval}); "+"}\n"
                             udecl_vars.append((utyp,uname))
                             valid=True
                         elif utyp != "UNDEF":
@@ -1271,7 +1275,11 @@ def get_fix_loc_subfns(scope,dvars,eval_me):
                     if valid:
                         for u in uniq_init:
                             utyp,uname,uval=u
-                            s0_body_vals+=f"{utyp} {uname};\n"
+                            if "[ ]" in uname:
+                                xname=uname.replace("[ ]","[0]")
+                                s0_body_vals+=f"{utyp} {xname};\n"
+                            else:
+                                s0_body_vals+=f"{utyp} {uname};\n"
                             decl_vars.append(uname)
                         s0_body=f"{s0_body_vals}{s0_body_vars}"
                         # scope 0 function

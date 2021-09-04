@@ -160,8 +160,19 @@ declarationSpecifiers
     :   declarationSpecifier+
     ;
 
+funcDeclarationSpecifiers
+    :   funcDeclarationSpecifier* declarationSpecifier funcDeclarationSpecifier*
+    ;
+
 declarationSpecifiers2
     :   declarationSpecifier+
+    ;
+
+funcDeclarationSpecifier
+    :   storageClassSpecifier
+    |   typeQualifier
+    |   functionSpecifier
+    |   alignmentSpecifier
     ;
 
 declarationSpecifier
@@ -292,7 +303,6 @@ declarator
 
 directDeclarator
     :   Identifier
-    |   '(' declarator ')'
     |   directDeclarator '[' typeQualifierList? assignmentExpression? ']'
     |   directDeclarator '[' 'static' typeQualifierList? assignmentExpression ']'
     |   directDeclarator '[' typeQualifierList 'static' assignmentExpression ']'
@@ -301,6 +311,7 @@ directDeclarator
     |   directDeclarator '(' identifierList? ')'
     |   Identifier ':' DigitSequence  // bit field
     |   '(' typeSpecifier? pointer directDeclarator ')' // function pointer like: (__cdecl *f)
+    |   '(' declarator ')'
     ;
 
 gccDeclaratorExtension
@@ -492,8 +503,12 @@ externalDeclaration
     |   ';' // stray ;
     ;
 
+//functionDefinition
+//    :   declarationSpecifiers? declarator declarationList? compoundStatement
+//    ;
+
 functionDefinition
-    :   declarationSpecifiers? declarator declarationList? compoundStatement
+    :   funcDeclarationSpecifiers? declarator declarationList? compoundStatement
     ;
 
 declarationList

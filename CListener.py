@@ -242,12 +242,30 @@ class CListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by CParser#funcDeclarationSpecifiers.
+    def enterFuncDeclarationSpecifiers(self, ctx:CParser.FuncDeclarationSpecifiersContext):
+        pass
+
+    # Exit a parse tree produced by CParser#funcDeclarationSpecifiers.
+    def exitFuncDeclarationSpecifiers(self, ctx:CParser.FuncDeclarationSpecifiersContext):
+        pass
+
+
     # Enter a parse tree produced by CParser#declarationSpecifiers2.
     def enterDeclarationSpecifiers2(self, ctx:CParser.DeclarationSpecifiers2Context):
         pass
 
     # Exit a parse tree produced by CParser#declarationSpecifiers2.
     def exitDeclarationSpecifiers2(self, ctx:CParser.DeclarationSpecifiers2Context):
+        pass
+
+
+    # Enter a parse tree produced by CParser#funcDeclarationSpecifier.
+    def enterFuncDeclarationSpecifier(self, ctx:CParser.FuncDeclarationSpecifierContext):
+        pass
+
+    # Exit a parse tree produced by CParser#funcDeclarationSpecifier.
+    def exitFuncDeclarationSpecifier(self, ctx:CParser.FuncDeclarationSpecifierContext):
         pass
 
 

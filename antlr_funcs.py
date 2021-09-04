@@ -736,6 +736,9 @@ class ScopeListener(CListener):
             for a,b in nodes:
                 sym_dict[get_string2(b)]=a
             self.cur_symbol_lut[self.current_scope].update(sym_dict)
+        else:
+            dprint(f"[CORNER CASE] ParameterDeclaration : children = {[(type(v),get_string2(v)) for v in chld]}")
+            pass
         pass
 
 
@@ -760,8 +763,7 @@ def dprint(instr,flush=False):
             if gbl_debug_msg[1]%50 == 0:
                 write_log()
                 gbl_debug_msg[0]=""
-            else:
-                gbl_debug_msg[0]+=instr+"\n"
+            gbl_debug_msg[0]+=instr+"\n"
             gbl_debug_msg[1]+=1
 
 def write_log():
@@ -1182,8 +1184,8 @@ def get_fix_loc_subfns(scope,dvars,eval_me):
                             # and add it to the unique scope list of required variables
                             for v in value_subterms:
                                 if not is_literal(v):
-                                    dprint(f" => is literal (False) {v}")
                                     vtype = sym_lut.get(v,None)
+                                    dprint(f" => is literal (False) {v} [vtype={vtype}]")
                                     if vtype:
                                         # check to see if there are any array versions
                                         vtyp=vtype
@@ -1199,9 +1201,10 @@ def get_fix_loc_subfns(scope,dvars,eval_me):
                                         if type(vtype)!=str:
                                             vtyp=get_string2(vtype)
                                         if info in uniq_init:
-                                            dprint("continue!")
+                                            dprint(f"not unique: {info} ... continue!")
                                             continue
                                         else:
+                                            dprint(f"unique : {info}")
                                             uniq_init.append(info)
                                 else:
                                     dprint(f" => is literal (True) {v} [type_info : {type_info}]")

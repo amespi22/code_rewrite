@@ -32,7 +32,9 @@ def main():
         #This means we have a file to parse
         #File should have a new line for each file to parse
         #Files named should be .c files
+        print("Starting pre-processing")
         funcs_and_args,funcs_and_rts,macros,dont_eval,okay_to_eval = get_json_data(pre_process)
+        print("Pre-processing done")
     else:
         funcs_and_rts = {}
         funcs_and_args = {}
@@ -58,6 +60,7 @@ def main():
     j = 0
     i = 0
     f_n = 0
+    print("Starting Transformations")
     while i < len(change_funcs):
         """
         if i != 0:
@@ -74,6 +77,7 @@ def main():
                 p,t = get_tree_from_string(cur_pro)
             rewrite = change_funcs[i](t)
             cur_pro = apply_changes[i](cur_pro, rewrite)
+            print("Pass successfull?")
             #print_inter_file(f_n, cur_pro)
             #print_ctx_bfs(t,f"help_pre_{f_n}")
             f_n += 1
@@ -529,6 +533,7 @@ def single_declarations(ctx):
                 if  cc > 1:
                     #we are with more than one declaration and one is initialized
                     typ = d.getChild(0).getText()
+                    typ = fix_type(typ)
                     all_vars = [d.getChild(1).getChild(x).getText() for x in range(cc) if d.getChild(1).getChild(x).getText() != ',']
                 else:
                     #if here we don't have more than one variable in the
@@ -574,9 +579,10 @@ def expand_decs(ctx):
                     if "char*" in typ and "const" not in typ and not rhs.startswith('"'):
                         rewrite[(get_line_num(d)-1,get_last_line_num(d))] = f"{typ} {lhs};\n {lhs} = {rhs};\n"
                     else:
-                        if "char*" in typ and rhs not in ts:
+                        if "char*" in typ and rhs not in ts and rhs.startswith('"'):
                             rewrite[(get_line_num(d)-1,get_last_line_num(d))] = f"{typ.replace('char*','char')} {lhs}[] = {rhs};\n"
                             #print(f"if:{typ.replace('char*','char')} {lhs}[] = {rhs};\n")
+                            #print(f"{d.getText()}")
                         else:
                             rewrite[(get_line_num(d)-1,get_last_line_num(d))] = f"{typ} {stmt};\n"
                             #print(f"else:{typ} {stmt};\n")
@@ -648,6 +654,9 @@ def fix_type(typ):
         typ = typ.replace("shortint", "short int")
     if "staticint" in typ:
         typ = typ.replace("staticint", "static int")
+    if "unsignedint" in typ:
+        typ = typ.replace("unsignedint", "unsigned int")
+    typ = typ.replace("  ", " ")
     return typ
 
 def const(dec):

@@ -1685,6 +1685,7 @@ def parse_pre_process(cnts):
         #read all the files and pull out the functions from each file to return
         #open the file
         inf = open(c, 'r')
+        print(f"Processing file {c}")
         src = remove_defines(inf.readlines()) 
         inf.close()
         #kill preprocessing stuff

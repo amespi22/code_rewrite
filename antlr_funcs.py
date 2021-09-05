@@ -1278,7 +1278,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me):
                             if "*" in utyp:
                                 xtyp=utyp.replace("*","")
                                 xname=uname+"_ref"
-                                uname=f"{uname} = {xname}"
+                                uname=f"{uname} = &{xname}"
                                 s0_body_vals+=f"{xtyp} {xname};\n"
                             if "[ ]" in uname:
                                 xname=uname.replace("[ ]","[0]",1)

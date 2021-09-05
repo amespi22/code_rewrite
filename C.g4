@@ -303,6 +303,7 @@ declarator
 
 directDeclarator
     :   Identifier
+    |   '(' declarator ')'
     |   directDeclarator '[' typeQualifierList? assignmentExpression? ']'
     |   directDeclarator '[' 'static' typeQualifierList? assignmentExpression ']'
     |   directDeclarator '[' typeQualifierList 'static' assignmentExpression ']'
@@ -311,7 +312,6 @@ directDeclarator
     |   directDeclarator '(' identifierList? ')'
     |   Identifier ':' DigitSequence  // bit field
     |   '(' typeSpecifier? pointer directDeclarator ')' // function pointer like: (__cdecl *f)
-    |   '(' declarator ')'
     ;
 
 gccDeclaratorExtension

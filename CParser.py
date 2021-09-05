@@ -69,7 +69,7 @@ def serializedATN():
         buf.write("\u0259\n\61\3\62\3\62\3\62\3\62\5\62\u025f\n\62\3\62\3")
         buf.write("\62\3\63\5\63\u0264\n\63\3\63\3\63\7\63\u0268\n\63\f\63")
         buf.write("\16\63\u026b\13\63\3\64\3\64\3\64\3\64\3\64\3\64\3\64")
-        buf.write("\5\64\u0274\n\64\3\64\3\64\3\64\3\64\3\64\3\64\3\64\3")
+        buf.write("\3\64\3\64\3\64\3\64\5\64\u0278\n\64\3\64\3\64\3\64\3")
         buf.write("\64\5\64\u027e\n\64\3\64\3\64\3\64\5\64\u0283\n\64\3\64")
         buf.write("\5\64\u0286\n\64\3\64\3\64\3\64\3\64\3\64\5\64\u028d\n")
         buf.write("\64\3\64\3\64\3\64\3\64\3\64\3\64\3\64\3\64\3\64\3\64")
@@ -337,28 +337,28 @@ def serializedATN():
         buf.write("\u0266\3\2\2\2\u0268\u026b\3\2\2\2\u0269\u0267\3\2\2\2")
         buf.write("\u0269\u026a\3\2\2\2\u026ae\3\2\2\2\u026b\u0269\3\2\2")
         buf.write("\2\u026c\u026d\b\64\1\2\u026d\u027e\7n\2\2\u026e\u026f")
-        buf.write("\7n\2\2\u026f\u0270\7[\2\2\u0270\u027e\7p\2\2\u0271\u0273")
-        buf.write("\7@\2\2\u0272\u0274\5D#\2\u0273\u0272\3\2\2\2\u0273\u0274")
-        buf.write("\3\2\2\2\u0274\u0275\3\2\2\2\u0275\u0276\5r:\2\u0276\u0277")
-        buf.write("\5f\64\2\u0277\u0278\7A\2\2\u0278\u027e\3\2\2\2\u0279")
-        buf.write("\u027a\7@\2\2\u027a\u027b\5d\63\2\u027b\u027c\7A\2\2\u027c")
+        buf.write("\7@\2\2\u026f\u0270\5d\63\2\u0270\u0271\7A\2\2\u0271\u027e")
+        buf.write("\3\2\2\2\u0272\u0273\7n\2\2\u0273\u0274\7[\2\2\u0274\u027e")
+        buf.write("\7p\2\2\u0275\u0277\7@\2\2\u0276\u0278\5D#\2\u0277\u0276")
+        buf.write("\3\2\2\2\u0277\u0278\3\2\2\2\u0278\u0279\3\2\2\2\u0279")
+        buf.write("\u027a\5r:\2\u027a\u027b\5f\64\2\u027b\u027c\7A\2\2\u027c")
         buf.write("\u027e\3\2\2\2\u027d\u026c\3\2\2\2\u027d\u026e\3\2\2\2")
-        buf.write("\u027d\u0271\3\2\2\2\u027d\u0279\3\2\2\2\u027e\u02ac\3")
-        buf.write("\2\2\2\u027f\u0280\f\13\2\2\u0280\u0282\7B\2\2\u0281\u0283")
+        buf.write("\u027d\u0272\3\2\2\2\u027d\u0275\3\2\2\2\u027e\u02ac\3")
+        buf.write("\2\2\2\u027f\u0280\f\n\2\2\u0280\u0282\7B\2\2\u0281\u0283")
         buf.write("\5t;\2\u0282\u0281\3\2\2\2\u0282\u0283\3\2\2\2\u0283\u0285")
         buf.write("\3\2\2\2\u0284\u0286\5*\26\2\u0285\u0284\3\2\2\2\u0285")
         buf.write("\u0286\3\2\2\2\u0286\u0287\3\2\2\2\u0287\u02ab\7C\2\2")
-        buf.write("\u0288\u0289\f\n\2\2\u0289\u028a\7B\2\2\u028a\u028c\7")
+        buf.write("\u0288\u0289\f\t\2\2\u0289\u028a\7B\2\2\u028a\u028c\7")
         buf.write("-\2\2\u028b\u028d\5t;\2\u028c\u028b\3\2\2\2\u028c\u028d")
         buf.write("\3\2\2\2\u028d\u028e\3\2\2\2\u028e\u028f\5*\26\2\u028f")
-        buf.write("\u0290\7C\2\2\u0290\u02ab\3\2\2\2\u0291\u0292\f\t\2\2")
+        buf.write("\u0290\7C\2\2\u0290\u02ab\3\2\2\2\u0291\u0292\f\b\2\2")
         buf.write("\u0292\u0293\7B\2\2\u0293\u0294\5t;\2\u0294\u0295\7-\2")
         buf.write("\2\u0295\u0296\5*\26\2\u0296\u0297\7C\2\2\u0297\u02ab")
-        buf.write("\3\2\2\2\u0298\u0299\f\b\2\2\u0299\u029b\7B\2\2\u029a")
+        buf.write("\3\2\2\2\u0298\u0299\f\7\2\2\u0299\u029b\7B\2\2\u029a")
         buf.write("\u029c\5t;\2\u029b\u029a\3\2\2\2\u029b\u029c\3\2\2\2\u029c")
         buf.write("\u029d\3\2\2\2\u029d\u029e\7P\2\2\u029e\u02ab\7C\2\2\u029f")
-        buf.write("\u02a0\f\7\2\2\u02a0\u02a1\7@\2\2\u02a1\u02a2\5v<\2\u02a2")
-        buf.write("\u02a3\7A\2\2\u02a3\u02ab\3\2\2\2\u02a4\u02a5\f\6\2\2")
+        buf.write("\u02a0\f\6\2\2\u02a0\u02a1\7@\2\2\u02a1\u02a2\5v<\2\u02a2")
+        buf.write("\u02a3\7A\2\2\u02a3\u02ab\3\2\2\2\u02a4\u02a5\f\5\2\2")
         buf.write("\u02a5\u02a7\7@\2\2\u02a6\u02a8\5|?\2\u02a7\u02a6\3\2")
         buf.write("\2\2\u02a7\u02a8\3\2\2\2\u02a8\u02a9\3\2\2\2\u02a9\u02ab")
         buf.write("\7A\2\2\u02aa\u027f\3\2\2\2\u02aa\u0288\3\2\2\2\u02aa")
@@ -566,7 +566,7 @@ def serializedATN():
         buf.write("\u01a0\u01a7\u01ac\u01b1\u01b6\u01bd\u01c3\u01c9\u01d0")
         buf.write("\u01d7\u01dd\u01f0\u01f6\u01fb\u0204\u020b\u020f\u0214")
         buf.write("\u0218\u021b\u0222\u0227\u022b\u022f\u0234\u023a\u0241")
-        buf.write("\u0247\u0258\u025e\u0263\u0269\u0273\u027d\u0282\u0285")
+        buf.write("\u0247\u0258\u025e\u0263\u0269\u0277\u027d\u0282\u0285")
         buf.write("\u028c\u029b\u02a7\u02aa\u02ac\u02b4\u02b8\u02c2\u02c6")
         buf.write("\u02ca\u02d0\u02d3\u02da\u02dc\u02e1\u02e5\u02ea\u02ef")
         buf.write("\u02f6\u02fe\u0300\u0307\u030c\u0310\u0316\u0319\u0322")
@@ -4782,14 +4782,21 @@ class CParser ( Parser ):
         def Identifier(self):
             return self.getToken(CParser.Identifier, 0)
 
+        def LeftParen(self):
+            return self.getToken(CParser.LeftParen, 0)
+
+        def declarator(self):
+            return self.getTypedRuleContext(CParser.DeclaratorContext,0)
+
+
+        def RightParen(self):
+            return self.getToken(CParser.RightParen, 0)
+
         def Colon(self):
             return self.getToken(CParser.Colon, 0)
 
         def DigitSequence(self):
             return self.getToken(CParser.DigitSequence, 0)
-
-        def LeftParen(self):
-            return self.getToken(CParser.LeftParen, 0)
 
         def pointer(self):
             return self.getTypedRuleContext(CParser.PointerContext,0)
@@ -4799,15 +4806,8 @@ class CParser ( Parser ):
             return self.getTypedRuleContext(CParser.DirectDeclaratorContext,0)
 
 
-        def RightParen(self):
-            return self.getToken(CParser.RightParen, 0)
-
         def typeSpecifier(self):
             return self.getTypedRuleContext(CParser.TypeSpecifierContext,0)
-
-
-        def declarator(self):
-            return self.getTypedRuleContext(CParser.DeclaratorContext,0)
 
 
         def LeftBracket(self):
@@ -4871,37 +4871,37 @@ class CParser ( Parser ):
 
             elif la_ == 2:
                 self.state = 620
-                self.match(CParser.Identifier)
-                self.state = 621
-                self.match(CParser.Colon)
-                self.state = 622
-                self.match(CParser.DigitSequence)
-                pass
-
-            elif la_ == 3:
-                self.state = 623
                 self.match(CParser.LeftParen)
-                self.state = 625
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CParser.T__0) | (1 << CParser.T__3) | (1 << CParser.T__4) | (1 << CParser.T__5) | (1 << CParser.T__6) | (1 << CParser.Char) | (1 << CParser.Double) | (1 << CParser.Enum) | (1 << CParser.Float) | (1 << CParser.Int) | (1 << CParser.Long) | (1 << CParser.Short) | (1 << CParser.Signed) | (1 << CParser.Struct) | (1 << CParser.Union) | (1 << CParser.Unsigned) | (1 << CParser.Void) | (1 << CParser.Atomic) | (1 << CParser.Bool) | (1 << CParser.Complex))) != 0) or _la==CParser.Identifier:
-                    self.state = 624
-                    self.typeSpecifier(0)
-
-
-                self.state = 627
-                self.pointer()
-                self.state = 628
-                self.directDeclarator(0)
-                self.state = 629
+                self.state = 621
+                self.declarator()
+                self.state = 622
                 self.match(CParser.RightParen)
                 pass
 
+            elif la_ == 3:
+                self.state = 624
+                self.match(CParser.Identifier)
+                self.state = 625
+                self.match(CParser.Colon)
+                self.state = 626
+                self.match(CParser.DigitSequence)
+                pass
+
             elif la_ == 4:
-                self.state = 631
+                self.state = 627
                 self.match(CParser.LeftParen)
+                self.state = 629
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CParser.T__0) | (1 << CParser.T__3) | (1 << CParser.T__4) | (1 << CParser.T__5) | (1 << CParser.T__6) | (1 << CParser.Char) | (1 << CParser.Double) | (1 << CParser.Enum) | (1 << CParser.Float) | (1 << CParser.Int) | (1 << CParser.Long) | (1 << CParser.Short) | (1 << CParser.Signed) | (1 << CParser.Struct) | (1 << CParser.Union) | (1 << CParser.Unsigned) | (1 << CParser.Void) | (1 << CParser.Atomic) | (1 << CParser.Bool) | (1 << CParser.Complex))) != 0) or _la==CParser.Identifier:
+                    self.state = 628
+                    self.typeSpecifier(0)
+
+
+                self.state = 631
+                self.pointer()
                 self.state = 632
-                self.declarator()
+                self.directDeclarator(0)
                 self.state = 633
                 self.match(CParser.RightParen)
                 pass
@@ -4923,9 +4923,9 @@ class CParser ( Parser ):
                         localctx = CParser.DirectDeclaratorContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_directDeclarator)
                         self.state = 637
-                        if not self.precpred(self._ctx, 9):
+                        if not self.precpred(self._ctx, 8):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 9)")
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 8)")
                         self.state = 638
                         self.match(CParser.LeftBracket)
                         self.state = 640
@@ -4952,9 +4952,9 @@ class CParser ( Parser ):
                         localctx = CParser.DirectDeclaratorContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_directDeclarator)
                         self.state = 646
-                        if not self.precpred(self._ctx, 8):
+                        if not self.precpred(self._ctx, 7):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 8)")
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 7)")
                         self.state = 647
                         self.match(CParser.LeftBracket)
                         self.state = 648
@@ -4977,9 +4977,9 @@ class CParser ( Parser ):
                         localctx = CParser.DirectDeclaratorContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_directDeclarator)
                         self.state = 655
-                        if not self.precpred(self._ctx, 7):
+                        if not self.precpred(self._ctx, 6):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 7)")
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 6)")
                         self.state = 656
                         self.match(CParser.LeftBracket)
                         self.state = 657
@@ -4996,9 +4996,9 @@ class CParser ( Parser ):
                         localctx = CParser.DirectDeclaratorContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_directDeclarator)
                         self.state = 662
-                        if not self.precpred(self._ctx, 6):
+                        if not self.precpred(self._ctx, 5):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 6)")
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 5)")
                         self.state = 663
                         self.match(CParser.LeftBracket)
                         self.state = 665
@@ -5019,9 +5019,9 @@ class CParser ( Parser ):
                         localctx = CParser.DirectDeclaratorContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_directDeclarator)
                         self.state = 669
-                        if not self.precpred(self._ctx, 5):
+                        if not self.precpred(self._ctx, 4):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 5)")
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 4)")
                         self.state = 670
                         self.match(CParser.LeftParen)
                         self.state = 671
@@ -5034,9 +5034,9 @@ class CParser ( Parser ):
                         localctx = CParser.DirectDeclaratorContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_directDeclarator)
                         self.state = 674
-                        if not self.precpred(self._ctx, 4):
+                        if not self.precpred(self._ctx, 3):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 4)")
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 3)")
                         self.state = 675
                         self.match(CParser.LeftParen)
                         self.state = 677
@@ -8273,27 +8273,27 @@ class CParser ( Parser ):
 
     def directDeclarator_sempred(self, localctx:DirectDeclaratorContext, predIndex:int):
             if predIndex == 1:
-                return self.precpred(self._ctx, 9)
-         
-
-            if predIndex == 2:
                 return self.precpred(self._ctx, 8)
          
 
-            if predIndex == 3:
+            if predIndex == 2:
                 return self.precpred(self._ctx, 7)
          
 
-            if predIndex == 4:
+            if predIndex == 3:
                 return self.precpred(self._ctx, 6)
          
 
-            if predIndex == 5:
+            if predIndex == 4:
                 return self.precpred(self._ctx, 5)
          
 
-            if predIndex == 6:
+            if predIndex == 5:
                 return self.precpred(self._ctx, 4)
+         
+
+            if predIndex == 6:
+                return self.precpred(self._ctx, 3)
          
 
     def directAbstractDeclarator_sempred(self, localctx:DirectAbstractDeclaratorContext, predIndex:int):

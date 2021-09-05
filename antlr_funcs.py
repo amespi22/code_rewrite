@@ -11,7 +11,7 @@ import codecs
 import copy
 import json
 
-debug=(False,False) # [0] print debug messages ; [1] generate debug log from debug messages
+debug=(False,True) # [0] print debug messages ; [1] generate debug log from debug messages
 gbl_debug_msg=["",0,open("debug.log","w") if debug[1] else None,debug[1] ]
 #This program assumes that C.g4 has been used to create
 #The parser files CLexer.py Clistener.py and Cparser.py
@@ -129,7 +129,13 @@ class ScopeListener(CListener):
         CParser.RelationalExpressionContext,\
         CParser.EqualityExpressionContext\
     ]
+    
+    func_names=[]
 
+    def set_functions(self,funcs):
+        if funcs and type(funcs)==list and len(funcs)>0:
+            self.func_names=copy.copy(funcs)
+        
     def get_basic_type_or_expression(self,node):
         n_=node
         typ=None
@@ -628,6 +634,7 @@ class ScopeListener(CListener):
         else:
             chld=list(ctx.getChildren())
             nodes=[]
+            dprint(f"[enterDeclaration] {[(type(c),get_string2(c)) for c in chld]}")
             if len(chld)<=1:
                 return
             elif len(chld)==3:
@@ -650,6 +657,8 @@ class ScopeListener(CListener):
             sym_dict=dict()
             up_nodes=list()
             for t,d in nodes:
+                if t in self.func_names:
+                    continue
                 c=list(d.getChild(0).getChildren())
                 if len(c)>1:
                     decl_info=""
@@ -659,12 +668,16 @@ class ScopeListener(CListener):
                     d_=get_string2(c[0])
                     typ=t+" *"
                     sym_dict[d_]=typ
+                    dprint(f"sym_dict [{get_string2(d_)}] = {typ} ")
                     up_nodes.extend([(typ,c[0],decl_info)])
                 up_nodes.extend([(t,d,None)])
                 
             self.cur_declarations[-1].extend(up_nodes)
             for a,b in nodes:
+                if a in self.func_names:
+                    continue
                 sym_dict[get_string2(b)]=a
+                dprint(f"sym_dict [{get_string2(b)}] = {a} ")
             try:
                 self.cur_symbol_lut[self.current_scope].update(sym_dict)
             except Exception as e:
@@ -681,10 +694,13 @@ class ScopeListener(CListener):
         typ=get_string2(chld[0])
         node=chld[1]
         dec=list(find_multictx(node,[CParser.DeclaratorContext],None,None))
+        dprint(f"[enterForDeclaration]")
         nodes=[(typ,d) for d in dec]
         up_nodes=list()
         sym_dict=dict()
         for t,d in nodes:
+            if t in self.func_names:
+                continue
             c=list(d.getChild(0).getChildren())
             if len(c)>1:
                 decl_info=""
@@ -694,11 +710,15 @@ class ScopeListener(CListener):
                 d_=get_string2(c[0])
                 typ=t+" *"
                 sym_dict[d_]=typ
+                dprint(f"sym_dict [{get_string2(d_)}] = {typ} ")
                 up_nodes.extend([(typ,c[0],decl_info)])
             up_nodes.extend([(t,d,None)])
             
         self.cur_declarations[-1].extend(up_nodes)
         for a,b in nodes:
+            if a in self.func_names:
+                continue
+            dprint(f"sym_dict [{get_string2(b)}] = {a} ")
             sym_dict[get_string2(b)]=a
         self.cur_symbol_lut[self.current_scope].update(sym_dict)
         pass
@@ -719,7 +739,9 @@ class ScopeListener(CListener):
             up_nodes=list()
             sym_dict=dict()
             for t,d in nodes:
-                dprint(f"{t} : {get_string2(d)}")
+                if t in self.func_names:
+                    continue
+                dprint(f"[enterParameterDeclaration] {t} : {get_string2(d)}")
                 c=list(d.getChild(0).getChildren())
                 if len(c)>1:
                     decl_info=""
@@ -729,11 +751,15 @@ class ScopeListener(CListener):
                     d_=get_string2(c[0])
                     typ=t+" *"
                     sym_dict[d_]=typ
+                    dprint(f"sym_dict [{get_string2(d_)}] = {typ} ")
                     up_nodes.extend([(typ,c[0],decl_info)])
                 up_nodes.extend([(t,d,None)])
             
             self.cur_declarations[-1].extend(up_nodes)
             for a,b in nodes:
+                if a in self.func_names:
+                    continue
+                dprint(f"sym_dict [{get_string2(b)}] = {a} ")
                 sym_dict[get_string2(b)]=a
             self.cur_symbol_lut[self.current_scope].update(sym_dict)
         else:

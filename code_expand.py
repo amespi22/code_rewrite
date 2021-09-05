@@ -107,7 +107,7 @@ def main():
         
     print_ctx_bfs(t,"help")
     printer=ScopeListener()
-    printer.set_functions(dont_eval)
+    printer.set_functions(dont_eval+okay_to_eval)
     walker = ParseTreeWalker()
     walker.walk(printer,t)
     scope_vars = get_function_info(functions=get_functions(t),fscope=printer.scopes,dont_eval=dont_eval)

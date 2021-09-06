@@ -1700,11 +1700,18 @@ def get_json_data(fname):
             for i in range(len(mcs)):
                 rd[mcs[i]['name']] = mcs[i]['value']
 
+        if 'disable_eval' in data.keys():
+            disable_eval=list(data['disable_eval'])
+
         if 'enable_eval' in data.keys():
             enable_eval=list(data['enable_eval'])
 
-        if 'disable_eval' in data.keys():
-            disable_eval=list(data['disable_eval'])
+        for i in enable_eval:
+            if i in disable_eval:
+                # let's make sure that if it's allowed to be evaluated as a RHS assignment (non-destructive)
+                # then we don't disable it
+                disable_eval.remove(i)
+            
     return (d1,d2,rd,disable_eval,enable_eval)
 
 #Input a file with a list of .c files to search functions for

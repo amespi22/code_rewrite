@@ -28,7 +28,8 @@ def main():
         test_functs()
         args = get_func_args_from_inp("test_files/test.c", "simple_func",'file')
         print(args)
-    p,t =get_tree_from_file("test_files/service.i")
+    #p,t =get_tree_from_file("test_files/service.i")
+    p,t =get_tree_from_file("test.service.c.prev")
     exit()
     #p,t =get_tree_from_file("new_code_expand.c")
     print_ctx_bfs(t,"help")
@@ -41,7 +42,7 @@ def main():
     #    print(f"\t {k['func_ctx']}")
     #    print(f"\t {type(k['parent'])} => {get_string2(k['parent'])}")
 
-    x=get_function_info(functions=get_functions(t),fscope=printer.scopes)
+    x=get_function_info(functions=get_functions(t),fscope=printer.scopes,dont_eval=[])
     print_scope_info(x)
 
     """
@@ -296,8 +297,15 @@ class ScopeListener(CListener):
 
     def get_last_child(self,node):
         n=node
-        while type(n)!=tree.Tree.TerminalNodeImpl:
+        if type(n)==tree.Tree.ErrorNodeImpl:
+            print(f"ERROR: We have a parsetree error with {get_string2(n)} [type={type(n)}]")
+            print(f"Parent node: {get_string2(n.parentCtx)} [type={type(n.parentCtx)}]")
+            return n
+        while type(n) not in [ tree.Tree.TerminalNodeImpl, tree.Tree.ErrorNodeImpl ]:
             n=list(n.getChildren())[-1]
+            if type(n)==tree.Tree.ErrorNodeImpl:
+                print(f"ERROR: We have a parsetree error with {get_string2(n)} [type={type(n)}]")
+                print(f"Parent node: {get_string2(n.parentCtx)} [type={type(n.parentCtx)}]")
         return n
     
 
@@ -306,17 +314,17 @@ class ScopeListener(CListener):
         valid_scope=[node]
         invalid_scope=[]
         corner=False
-        if node==CParser.FunctionDefinitionContext:
+        if type(node)==CParser.FunctionDefinitionContext:
             pass
-        if node==CParser.CompoundStatementContext:
+        if type(node)==CParser.CompoundStatementContext:
             pass
-        if node==CParser.SelectionStatementContext:
+        if type(node)==CParser.SelectionStatementContext:
             valid_scope=children[:5] # StatementContext
             if len(children)>5:
                 invalid_scope=children[5:]
             else:
                 corner=True
-        if node==CParser.IterationStatementContext:
+        if type(node)==CParser.IterationStatementContext:
             valid_scope=children[:5] # StatementContext
             if len(children)>5:
                 invalid_scope=children[5:]
@@ -1148,10 +1156,11 @@ def is_okay_func_call(rhs_value,eval_me):
         
     
 
-def get_fix_loc_subfns(scope,dvars,eval_me):
+def get_fix_loc_subfns(scope,dvars,eval_me,id_=""):
     uniques=[]
     fn_body=[]
     rewrites=[]
+    fname=f"fix_ingred_{id_}"
     ## function scope
     #def get_type_var_info(ctx) => return nodes, sym_dict, up_nodes
     for i,f_info in enumerate(scope.items()):
@@ -1186,7 +1195,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me):
             end=s['scope_end']
 
             #s2_decls=""
-            s2_fn=f"fix_ingred_{i}"
+            s2_fn=f"{fname}_{i}"
             ## for each value in the namespace scope
             for def_var in def_vars:
                 n,lut,un=get_type_var_info(def_var)
@@ -1274,7 +1283,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me):
                 s0_calls=""
                 s0_fn_decl=""
                 s0_fn_def=""
-                s1_fn=f"fix_ingred_{i}_{j}"
+                s1_fn=f"{fname}_{i}_{j}"
                 for k in range(0,len(scope_uniq)):
                     s0_body_vals=""
                     s0_body_vars=""
@@ -1353,7 +1362,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me):
                 s2_fn_def+=s1_fn_def
         s2_call_fn=f"{s2_fn}();\n"
         s2_calls+=f"{s2_call_fn}"
-        s2_fn=f"fix_ingred_{i}()"
+        s2_fn=f"{fname}_{i}()"
         s2_fn_def+=f"void {s2_fn}"+"{\n"+f"{s2_body}"+"}\n"
         dprint("==== Scope 2 ====\n"+f"{s2_fn_def}")
         dprint("[Fix Ingredient functions]  -- START --")

@@ -45,6 +45,10 @@ def main():
     else:
         _pp_prog_name=f"{prog_name}"
     
+    
+    from os import path as path
+    fix_ingred_id=path.splitext(path.basename(f"{prog_name}"))[0]
+    
     #original program
     cur_pro = ""
     with open(_pp_prog_name, 'r') as infile:
@@ -79,7 +83,7 @@ def main():
             rewrite = change_funcs[i](t)
             cur_pro = apply_changes[i](cur_pro, rewrite)
             print("End pass")
-            print_inter_file(f_n, cur_pro)
+            #print_inter_file(f_n, cur_pro)
             print_ctx_bfs(t,f"help_pre_{f_n}")
             f_n += 1
             if i == 5:
@@ -115,7 +119,7 @@ def main():
     walker.walk(printer,t)
     scope_vars = get_function_info(functions=get_functions(t),fscope=printer.scopes,dont_eval=dont_eval)
     #fix_loc_rewrites = get_fix_loc_rewrites(scope_vars)
-    fix_loc_rewrites = get_fix_loc_subfns(scope_vars,new_decs,okay_to_eval)
+    fix_loc_rewrites = get_fix_loc_subfns(scope_vars,new_decs,okay_to_eval,id_=fix_ingred_id)
     cur_pro = gen_fix_loc_changes(cur_pro, fix_loc_rewrites)
 
     #write out the new program

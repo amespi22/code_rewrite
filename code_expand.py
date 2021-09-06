@@ -55,7 +55,7 @@ def main():
     d1 = get_all_decs(t)
     #loop to run all code transformations
     #order matters, don't re-arrange
-    change_funcs = [inert_loop_braces, expand_if_else, expand_sizeof, single_declarations, expand_decs,expand_func_args,expand_decs]
+    change_funcs = [insert_loop_braces, expand_if_else, expand_sizeof, single_declarations, expand_decs,expand_func_args,expand_decs]
     apply_changes = [gen_loop_braces, gen_if_changes, gen_expand_changes, gen_dec_changes, gen_dec_changes,gen_func_changes,gen_dec_changes]
     j = 0
     i = 0
@@ -72,19 +72,22 @@ def main():
         if i == 6:
             break
         while again:
+            print("Start pass")
             old_pro = cur_pro
             if j != 0:
                 p,t = get_tree_from_string(cur_pro)
             rewrite = change_funcs[i](t)
             cur_pro = apply_changes[i](cur_pro, rewrite)
-            print("Pass successfull?")
-            #print_inter_file(f_n, cur_pro)
-            #print_ctx_bfs(t,f"help_pre_{f_n}")
+            print("End pass")
+            print_inter_file(f_n, cur_pro)
+            print_ctx_bfs(t,f"help_pre_{f_n}")
             f_n += 1
             if i == 5:
+                print("Start pass")
                 p,t = get_tree_from_string(cur_pro)
                 rewrite = change_funcs[i+1](t)
                 cur_pro = apply_changes[i+1](cur_pro, rewrite)
+                print("End pass")
                 #print_inter_file(f_n, cur_pro)
                 f_n += 1
 
@@ -92,7 +95,7 @@ def main():
             again = not(old_pro == cur_pro) and i == 5
             #print(again)
         i += 1
-
+    print("all done wiht passes")
     #FIX-INGREDIENTS
     write_new_program(cur_pro, f"{out_name}.prev")
     p,t = get_tree_from_string(cur_pro)
@@ -124,13 +127,18 @@ def print_inter_file(i, cur_pro):
         out_f.write(cur_pro)
 
 
-def inert_loop_braces(ctx):
+def insert_loop_braces(ctx):
     #get all functions
-    sel_stmt = "<class 'CParser.CParser.IterationStatementContext'>"
+    loop_stmt = "<class 'CParser.CParser.IterationStatementContext'>"
+    if_stmt = "<class 'CParser.CParser.SelectionStatementContext'>"
     fns = get_functions(ctx)
     rewrites = []
+    #for else conditions we will want to check the 5th child of SelectionStatementContext
+    #and do the same thing
     for f in fns:
-        loops = find_ctx(f, sel_stmt)
+        loops = find_ctx(f, loop_stmt)
+        ifs = find_ctx(f, if_stmt)
+        loops.extend(ifs)
         #get all loops in functions
         for l in loops:
             if l.getText().startswith("do"):
@@ -152,7 +160,7 @@ def gen_loop_braces(cur_prog, rewrite):
         spaces = get_line_spaces(lns[b[0]-2])
         lns[b[0]-1] = f"{spaces}{{\n{lns[b[0]-1]}"
         #print("1" + lns[e[0]-1])
-        lns[e[0]-1] = f"{lns[e[0]-1]}{spaces}}}"
+        lns[e[0]-1] = f"{lns[e[0]-1]}{spaces}}}\n"
     return "".join(lns)
 
 def gen_fix_loc_changes(cur_prog, rewrite):
@@ -179,11 +187,15 @@ def expand_if_else(ctx):
         #for all if statements
         for i in ifs:
             fcs = get_function_calls(i.getChild(2))
+            #print([f.getText() for f in fcs])
             z = itertools.permutations(fcs,2)
             for zz in z:
                 if is_descendant(zz[0],zz[1]):
                     if zz[0] in fcs:
                         fcs.remove(zz[0])
+            #print([f.getText() for f in fcs])
+            #print("get_functions")
+            #print([f for f in funcs_and_rts.keys()])
             #all function calls inside the if
             for c in fcs:
                 f_name = c.getChild(0).getText()
@@ -361,6 +373,7 @@ def expand_func_args(ctx):
     #This gives us all functions in the file and it's args
     for f in fns:
         funcs_and_args[get_func_name(f)] = get_func_args(f)
+    #print(funcs_and_args)
     #for each function find all <class 'CParser.CParser.PostfixExpressionContext'>
     for f in fns:
         new_vars = []
@@ -542,6 +555,12 @@ def single_declarations(ctx):
                     continue
                 #line_num - 1 cause I think it's not 0 indexed
                 rs = ""
+                if len(all_vars) > 1:
+                    #we need to see if the type ends with a *
+                    #if so, remove the * and place it on the first var
+                    if typ.endswith("*"):
+                        all_vars[0] = f"*{all_vars[0]}" 
+                        typ = typ[:-1]
                 for a in all_vars:
                     rs+= f"{typ} {a};\n"
                 rewrite[(get_line_num(d)-1,get_last_line_num(d))] = rs
@@ -572,6 +591,9 @@ def expand_decs(ctx):
                     typ = fix_type(typ)
                     lhs = d.getChild(1).getChild(0).getChild(0).getText()
                     rhs = d.getChild(1).getChild(0).getChild(2).getText()
+                    if rhs.startswith("("):
+                        #fix this later to get everything between () then remake rhs
+                        rhs = fix_type(rhs)
                     #print(f"typ={typ},stmt={stmt},lhs={lhs},rhs={rhs}")
                     #This is to make sure we don't have a char array on the rhs
                     #if so we need to make sure to hit the else.
@@ -585,7 +607,7 @@ def expand_decs(ctx):
                             #print(f"if:{typ.replace('char*','char')} {lhs}[] = {rhs};\n")
                             #print(f"{d.getText()}")
                         else:
-                            rewrite[(get_line_num(d)-1,get_last_line_num(d))] = f"{typ} {stmt};\n"
+                            rewrite[(get_line_num(d)-1,get_last_line_num(d))] = f"{typ} {lhs} = {rhs};\n"
                             #print(f"else:{typ} {stmt};\n")
                 else:
                     #figure out the arguments.

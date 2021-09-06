@@ -1483,13 +1483,18 @@ def get_func_args(ctx):
             cs = [c for c in cl if str(type(c)) != "<class 'antlr4.tree.Tree.TerminalNodeImpl'>"]
             rs = [c.getChild(1).getText() for c in cs]
             ts = [c.getChild(0).getText() for c in cs]
+            #for some reason antlr does not deal with void pointers well
+            for i in range(len(rs)):
+                if rs[i].startswith("(*"):
+                    ts[i] = f"{ts[i]}*"
+            #print(list(zip(ts, rs)))
             return list(zip(ts, rs))
         else:
                 #print("error")
                 #print(ctx.getText())
                 return None
     except:
-        print("Threw exception")
+        print("Threw exception in get_func_args of antlr_funcs.py")
         return None
 
 #Output: list of tuples [(type'node,var_name)]

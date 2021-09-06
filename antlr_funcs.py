@@ -492,6 +492,9 @@ class ScopeListener(CListener):
     def enterFunctionDefinition(self,ctx:CParser.FunctionDefinitionContext):
         self.current_fn_ctx=ctx
         x=self.scopes.get(ctx,None)
+        c=list(ctx.getChildren())
+        dprint(f"[enterFunctionDefinition]")
+        dprint(f"{[(type(c[x]),get_string2(c[x])) for x in range(0,len(c)-1)]}")
         if x:
             print("[DuplicateNodeError] {get_string(ctx)}")
         else:

@@ -161,7 +161,7 @@ declarationSpecifiers
     ;
 
 funcDeclarationSpecifiers
-    :   funcDeclarationSpecifier* declarationSpecifier funcDeclarationSpecifier*
+    :   funcDeclarationSpecifier* declarationSpecifier funcDeclarationSpecifier* 
     ;
 
 declarationSpecifiers2
@@ -214,14 +214,14 @@ typeSpecifier
     |   '_Complex'
     |   '__m128'
     |   '__m128d'
-    |   '__m128i')
+    |   '__m128i')+
     |   '__extension__' '(' ('__m128' | '__m128d' | '__m128i') ')'
     |   atomicTypeSpecifier
     |   structOrUnionSpecifier
     |   enumSpecifier
-    |   typedefName
     |   '__typeof__' '(' constantExpression ')' // GCC extension
     |   typeSpecifier pointer
+    |   typedefName
     ;
 
 structOrUnionSpecifier

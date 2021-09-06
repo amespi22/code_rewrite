@@ -1305,10 +1305,20 @@ def get_fix_loc_subfns(scope,dvars,eval_me):
                         for u in uniq_init:
                             utyp,uname,uval=u
                             if "*" in utyp:
-                                xtyp=utyp.replace("*","")
-                                xname=uname+"_ref"
-                                uname=f"{uname} = &{xname}"
-                                s0_body_vals+=f"{xtyp} {xname};\n"
+                                xtyp=utyp.replace("*","").rstrip()
+                                xname=uname.rstrip()+"_ref"
+                                if "[" in xname:
+                                    while("]_ref" in xname):
+                                        x_re=re.search(r"(\[(\s*\d*\s*)\])",xname)
+                                        v=x_re.group(1)
+                                        xname=re.sub(r""+v+r"","",xname,1).rstrip()+v
+                                if xtyp != "void":
+                                    uname=f"{uname} = &{xname}"
+                                    s0_body_vals+=f"{xtyp} {xname};\n"
+                                else:
+                                    # choosing int as the default type to cast a void* to
+                                    uname=f"{uname} = (void*)&{xname}"
+                                    s0_body_vals+=f"int {xname};\n"
                             if "[ ]" in uname:
                                 xname=uname.replace("[ ]","[0]",1)
                                 s0_body_vals+=f"{utyp} {xname};\n"

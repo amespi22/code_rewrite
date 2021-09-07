@@ -59,8 +59,8 @@ def main():
     d1 = get_all_decs(t)
     #loop to run all code transformations
     #order matters, don't re-arrange
-    change_funcs = [insert_loop_braces, expand_if_else, expand_sizeof, single_declarations, expand_decs,expand_func_args,expand_decs]
-    apply_changes = [gen_loop_braces, gen_if_changes, gen_expand_changes, gen_dec_changes, gen_dec_changes,gen_func_changes,gen_dec_changes]
+    change_funcs = [if_else_break, insert_loop_braces, expand_if_else, expand_sizeof, single_declarations, expand_decs,expand_func_args,expand_decs]
+    apply_changes = [gen_if_else_break, gen_loop_braces, gen_if_changes, gen_expand_changes, gen_dec_changes, gen_dec_changes,gen_func_changes,gen_dec_changes]
     j = 0
     i = 0
     f_n = 0
@@ -84,7 +84,7 @@ def main():
             cur_pro = apply_changes[i](cur_pro, rewrite)
             print("End pass")
             #print_inter_file(f_n, cur_pro)
-            print_ctx_bfs(t,f"help_pre_{f_n}")
+            #print_ctx_bfs(t,f"help_pre_{f_n}")
             f_n += 1
             if i == 5:
                 print("Start pass")
@@ -150,11 +150,52 @@ def insert_loop_braces(ctx):
             #check to see if there are curly braces
             l_body = l.getChild(4)
             if l_body.getText().startswith("{"):
-                continue
+                pass 
             else:
                 #add if necessary
                 rewrites.append((get_start_loc(l_body),get_end_loc(l_body)))
+            if l.getChildCount() == 7:
+                #we have if...else
+                l_body = l.getChild(6)
+                if l_body.getText().startswith("{"):
+                    continue
+                else:
+                    rewrites.append((get_start_loc(l_body),get_end_loc(l_body)))
     return rewrites
+
+def if_else_break(ctx):
+    if_stmt = "<class 'CParser.CParser.SelectionStatementContext'>"
+    fns = get_functions(ctx)
+    rewrites = []
+    for f in fns:
+        ifs = find_ctx(f, if_stmt)
+        for l in ifs:
+            if l.getChildCount() == 7:
+                #we have if...else
+                l_body = l.getChild(6)
+                if l_body.getText().startswith("{"):
+                    continue
+                else:
+                    #check to see if the if and the else are on the same line
+                    else_start = get_start_loc(l.getChild(5))
+                    else_stmt_start = get_start_loc(l_body)
+                    else_stmt_end = get_end_loc(l_body)
+                    if else_stmt_start[0] == else_start[0]:
+                        #both are on the same line and we need a newline between them
+                        rewrites.append((else_stmt_start,else_stmt_end))
+    return rewrites
+
+def gen_if_else_break(cur_prog, rewrites):
+    lns = cur_prog.split('\n')
+    lns = [x+"\n" for x in lns]
+    for b,e in rewrites:
+        l = lns[b[0]-1]
+        es = b[1]
+        lns[b[0]-1] = f"{l[:es-1]}\n{{\n{l[es-1:]}"
+        l = lns[e[0]-1]
+        ee = e[1]
+        lns[e[0]-1] = f"{l[:ee+1]}\n}}{l[ee+1:]}"
+    return "".join(lns)
 
 def gen_loop_braces(cur_prog, rewrite):
     lns = cur_prog.split('\n')
@@ -163,7 +204,7 @@ def gen_loop_braces(cur_prog, rewrite):
         #print("1" + lns[b[0]-1])
         spaces = get_line_spaces(lns[b[0]-2])
         lns[b[0]-1] = f"{spaces}{{\n{lns[b[0]-1]}"
-        #print("1" + lns[e[0]-1])
+        #print("2" + lns[e[0]-1])
         lns[e[0]-1] = f"{lns[e[0]-1]}{spaces}}}\n"
     return "".join(lns)
 

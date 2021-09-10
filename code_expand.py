@@ -48,6 +48,7 @@ def main():
     
     from os import path as path
     fix_ingred_id=path.splitext(path.basename(f"{prog_name}"))[0]
+    bl_filename=f"fn_blacklist.{fix_ingred_id}.txt"
     
     #original program
     cur_pro = ""
@@ -119,11 +120,15 @@ def main():
     walker.walk(printer,t)
     scope_vars = get_function_info(functions=get_functions(t),fscope=printer.scopes,dont_eval=dont_eval)
     #fix_loc_rewrites = get_fix_loc_rewrites(scope_vars)
-    fix_loc_rewrites = get_fix_loc_subfns(scope_vars,new_decs,okay_to_eval,id_=fix_ingred_id)
+    fix_loc_rewrites,new_funcs = get_fix_loc_subfns(scope_vars,new_decs,okay_to_eval,id_=fix_ingred_id)
     cur_pro = gen_fix_loc_changes(cur_pro, fix_loc_rewrites)
 
     #write out the new program
     write_new_program(cur_pro, out_name)
+    with open(bl_filename,"w") as o:
+        for i in new_funcs:
+            o.write(f"{i}\n")
+        o.close()
 
 def print_inter_file(i, cur_pro):
     with open(f"tmp{i}.c", 'w') as out_f:

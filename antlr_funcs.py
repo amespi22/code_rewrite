@@ -1161,6 +1161,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_=""):
     fn_body=[]
     rewrites=[]
     fname=f"fix_ingred_{id_}"
+    bl_funcs=[]
     ## function scope
     #def get_type_var_info(ctx) => return nodes, sym_dict, up_nodes
     for i,f_info in enumerate(scope.items()):
@@ -1347,6 +1348,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_=""):
                         s0_body=f"{s0_body_vals}{s0_body_vars}"
                         # scope 0 function
                         s0_fn=f"{s1_fn}_{k}()"
+                        bl_funcs.append(f"{s1_fn}_{k}")
                         ## scope 0 function declaration
                         #s0_fn_decl+=f"void {s0_fn};\n"
                         # scope 0 function definition (with body)
@@ -1359,6 +1361,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_=""):
                 s1_body=""
                 # scope 1 function call (used in scope 2 function definition)
                 s1_call_fn=f"{s1_fn}();\n"
+                bl_funcs.append(f"{s1_fn}")
                 s1_calls+=f"{s1_call_fn}"
                 #s1_fn_decl="\n"+s0_fn_decl+"\n"+f"void {s1_call_fn}"+"\n"
                 s1_body=f"{s0_calls}"
@@ -1373,6 +1376,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_=""):
         s2_call_fn=f"{s2_fn}();\n"
         s2_calls+=f"{s2_call_fn}"
         s2_fn=f"{fname}_{i}()"
+        bl_funcs.append(f"{fname}_{i}")
         s2_fn_def+=f"void {s2_fn}"+"{\n"+f"{s2_body}"+"}\n"
         dprint("==== Scope 2 ====\n"+f"{s2_fn_def}")
         dprint("[Fix Ingredient functions]  -- START --")
@@ -1385,7 +1389,10 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_=""):
         func=f"{s2_fn};"
         rewrites.append((func,(line+1,c)))
         dprint("[Fix Ingredient functions]  --  END  --")
-    return rewrites
+    dprint("Fix Ingredient functions")
+    for b in bl_funcs:
+        dprint(f"- {b}")
+    return rewrites,bl_funcs
 
 
 

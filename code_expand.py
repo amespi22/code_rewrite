@@ -752,8 +752,7 @@ def de_const(lst):
             lst[i] = typ.replace("const",""),lst[i][1]
 
 
-
-def preprocess(pragmas:dict,inf:str,outf:str):
+def preprocess_string(pragmas:dict,prog:str):
     import re
     _pragmas=list(pragmas.keys())
     _prags='|'.join(list(_pragmas))
@@ -764,11 +763,7 @@ def preprocess(pragmas:dict,inf:str,outf:str):
     next_re=re.compile(r'^\s*#else')
     end_re=re.compile(r'^\s*#endif')
 
-    lines=None
-    with open(inf,'r') as _in:
-        lines=_in.readlines()
-        _in.close()
-
+    lines = prog.split("\n")
     ol=list()
     capture_next,in_cascade,captured=(False,False,False)
     for l in lines:
@@ -824,12 +819,21 @@ def preprocess(pragmas:dict,inf:str,outf:str):
             ol.append(l)
             if capture_next:
                 captured=True
-
+    return ol
             
+
+
+def preprocess(pragmas:dict,inf:str,outf:str):
+
+    pgrm=None
+    with open(inf,'r') as _in:
+        pgrm=_in.read()
+
+    ol = preprocess_string(pragmas, pgrm)
+
     with open(outf,'w') as _out:
         for i in ol:
-            _out.write(i)
-        _out.close()
+            _out.write(f"{i}\n")
 
 if __name__ == "__main__":
     main()

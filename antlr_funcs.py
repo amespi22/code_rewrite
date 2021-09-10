@@ -5,6 +5,7 @@ from antlr4 import *
 from CLexer import CLexer
 from CParser import CParser
 from CListener import CListener
+from code_expand import preprocess_string
 import linked_list
 import inspect
 import codecs
@@ -1724,16 +1725,16 @@ def get_json_data(fname):
     enable_eval=[]
     with open(fname, 'r') as j:
         data = json.load(j)
-        if 'filenames' in data.keys():
-            #do the thing here
-            fls = data["filenames"]
-            flst = [x["name"] for x in fls]
-            d1,d2 = parse_pre_process(flst)
         if "macros" in data.keys():
             mcs = data["macros"]
             for i in range(len(mcs)):
                 rd[mcs[i]['name']] = mcs[i]['value']
-
+        if 'filenames' in data.keys():
+            #do the thing here
+            fls = data["filenames"]
+            flst = [x["name"] for x in fls]
+            #add macro stuff and use pemma's preprocess() function 
+            d1,d2 = parse_pre_process(flst,rd)
         if 'disable_eval' in data.keys():
             disable_eval=list(data['disable_eval'])
 
@@ -1750,7 +1751,7 @@ def get_json_data(fname):
 
 #Input a file with a list of .c files to search functions for
 #Output a dictionary of functions and their arguments
-def parse_pre_process(cnts):
+def parse_pre_process(cnts, pragmas):
     #return dictionary
     ret_d = {}
     ret_d2 = {}
@@ -1763,6 +1764,8 @@ def parse_pre_process(cnts):
         print(f"Processing file {c}")
         src = remove_defines(inf.readlines()) 
         inf.close()
+        src = preprocess_string(pragmas,src)
+        src = "".join([f"{s}\n" for s in src])
         #kill preprocessing stuff
         #make the new call on the string
         p,t = get_tree_from_string(src)
@@ -1815,7 +1818,7 @@ def remove_defines(src):
     rm_next = False
     new_src = ""
     for line in src:
-        if line.startswith("#define") or rm_next:
+        if line.startswith("#define") or rm_next or line.startswith("#undef"):
             if line.strip().endswith('\\'):
                 rm_next = True
             else:

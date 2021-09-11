@@ -1164,7 +1164,7 @@ def generate_preface(var):
     prog+="#define FIX_INGREDIENT_CONTENT_VAR\n"
     prog+=f"static int {var}=0;\n"
     prog+="static void __attribute((constructor)) "+f"{var}"+"_init(){\n"
-    prog+="    char* tmp=getenv(\"IS_NEG\");\n"
+    prog+="    char* tmp=getenv(\"ENABLE_FIXES\");\n"
     prog+="    if (tmp) { "+f"{var}=1;"+" }\n" 
     prog+="}\n"
     prog+="#else\n"

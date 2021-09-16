@@ -1135,6 +1135,10 @@ def is_literal(val):
         return True
     return False
 
+def number_types():
+    return ['int','unsigned int','uint32_t','uint_t','cgc_size_t','size_t','uint','char','long',\
+    'uint8_t','uint16_t','short']
+
 def can_cast(ltyp,rtyp):
     # determines if rtyp variable can be cast as ltyp
     equivalent_classes=[set(['int','unsigned int','uint32_t','uint_t','cgc_size_t',\
@@ -1319,19 +1323,28 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_=""):
                             dprint("not valid - "+ f"{utyp} {uname}; {uname} = (({utyp}){uval});\n")
                         elif (utyp,uname) not in udecl_vars and utyp != "UNDEF":
                             prefix=""
+                            suffix=""
                             if "[" in uval:
                                 x_re=re.search(r"\[\s*(\S+)\s*\]",uval)
                                 if x_re:
                                     v=x_re.group(1)
                                     if v in [x[1] for x in uniq_init]:
                                         prefix=f"    {v} = 0;\n         "
+                                else:
+                                    x_list=re.findall(r"\[\s*((([^]]+)\s*)+)\]",uval)
+                                    y=[x in x_[0] for x_ in x_list for x in ["+","-","*","/"]]
+                                    print(f" =====> {x_list} '{uval}' => {y} ")
+                                    if any(y):
+                                        prefix=" /* [not yet implemented] array based initialization \n"
+                                        suffix="\n */ "
+                                        print(f" === FOUND IT ===> {x_list} [{uval}] ")
                                         
                                 
                             if "[ ]" in uname:
                                 xname=uname.replace("[ ]","")
-                                s0_body_vars+="    {"+prefix+f"{utyp}* {xname}; {xname} = ({utyp}*)({uval}); "+"}\n"
+                                s0_body_vars+="    {"+prefix+f"{utyp}* {xname}; {xname} = ({utyp}*)({uval}); "+suffix+"}\n"
                             else:
-                                s0_body_vars+="    {"+prefix+f"{utyp} {uname}; {uname} = ({utyp})({uval}); "+"}\n"
+                                s0_body_vars+="    {"+prefix+f"{utyp} {uname}; {uname} = ({utyp})({uval}); "+suffix+"}\n"
                             udecl_vars.append((utyp,uname))
                             valid=True
                         elif utyp != "UNDEF":
@@ -1344,7 +1357,9 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_=""):
                     if valid:
                         for u in uniq_init:
                             utyp,uname,uval=u
+                            ptr_=False
                             if "*" in utyp:
+                                ptr_=True
                                 xtyp=utyp.replace("*","").rstrip()
                                 xname=uname.rstrip()+"_ref"
                                 if "[" in xname:
@@ -1355,15 +1370,21 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_=""):
                                 if xtyp != "void":
                                     uname=f"{uname} = &{xname}"
                                     s0_body_vals+=f"{xtyp} {xname};\n"
+                                    s0_body_vals+=f"    bzero(&{xname},sizeof({xtyp}));\n"
                                 else:
                                     # choosing int as the default type to cast a void* to
                                     uname=f"{uname} = (void*)&{xname}"
                                     s0_body_vals+=f"int {xname};\n"
+                                    s0_body_vals+=f"    bzero(&{xname},sizeof({int}));\n"
                             if "[ ]" in uname:
                                 xname=uname.replace("[ ]","[0]",1)
                                 s0_body_vals+=f"{utyp} {xname};\n"
+                                if not ptr_:
+                                    s0_body_vals+=f"    bzero(&{xname},sizeof({utyp}));\n"
                             else:
                                 s0_body_vals+=f"{utyp} {uname};\n"
+                                if not ptr_:
+                                    s0_body_vals+=f"    bzero(&{uname},sizeof({utyp}));\n"
                             decl_vars.append(uname)
                         s0_body=f"{s0_body_vals}{s0_body_vars}"
                         # scope 0 function

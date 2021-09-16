@@ -1530,8 +1530,9 @@ def get_func_args(ctx):
                 #print("error")
                 #print(ctx.getText())
                 return None
-    except:
+    except Exception as e:
         print("Threw exception in get_func_args of antlr_funcs.py")
+        print(e)
         return None
 
 #Output: list of tuples [(type'node,var_name)]

@@ -1333,11 +1333,11 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_=""):
                                 else:
                                     x_list=re.findall(r"\[\s*((([^]]+)\s*)+)\]",uval)
                                     y=[x in x_[0] for x_ in x_list for x in ["+","-","*","/"]]
-                                    print(f" =====> {x_list} '{uval}' => {y} ")
+                                    dprint(f" =====> {x_list} '{uval}' => {y} ")
                                     if any(y):
                                         prefix=" /* [not yet implemented] array based initialization \n"
                                         suffix="\n */ "
-                                        print(f" === FOUND IT ===> {x_list} [{uval}] ")
+                                        dprint(f" === FOUND IT ===> {x_list} [{uval}] ")
                                         
                                 
                             if "[ ]" in uname:

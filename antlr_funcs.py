@@ -1156,6 +1156,24 @@ def is_okay_func_call(rhs_value,eval_me):
         return False
         
     
+# the point of this is to be able to disable fix_repair* functions from being executed
+def generate_preface(var):
+    var=var.rstrip();
+    prog="#ifndef FIX_INGREDIENT_CONTENT\n"
+    prog+="#define FIX_INGREDIENT_CONTENT\n"
+    prog+="#define FIX_INGREDIENT_CONTENT_VAR\n"
+    prog+=f"static int {var}=0;\n"
+    prog+="static void __attribute((constructor)) "+f"{var}"+"_init(){\n"
+    prog+="    char* tmp=getenv(\"ENABLE_FIXES\");\n"
+    prog+="    if (tmp) { "+f"{var}=1;"+" }\n" 
+    prog+="}\n"
+    prog+="#else\n"
+    prog+="#ifndef FIX_INGREDIENT_CONTENT_VAR\n"
+    prog+="#define FIX_INGREDIENT_CONTENT_VAR\n"
+    prog+=f"static int {var}=0;\n"
+    prog+="#endif\n"
+    prog+="#endif\n"
+    return prog
 
 def get_fix_loc_subfns(scope,dvars,eval_me,id_=""):
     uniques=[]
@@ -1163,6 +1181,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_=""):
     rewrites=[]
     fname=f"fix_ingred_{id_}"
     bl_funcs=[]
+    preface_included=False
     ## function scope
     #def get_type_var_info(ctx) => return nodes, sym_dict, up_nodes
     for i,f_info in enumerate(scope.items()):
@@ -1381,13 +1400,18 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_=""):
         s2_fn_def+=f"void {s2_fn}"+"{\n"+f"{s2_body}"+"}\n"
         dprint("==== Scope 2 ====\n"+f"{s2_fn_def}")
         dprint("[Fix Ingredient functions]  -- START --")
-        prepend=f"{s2_fn_def}"
+        en_var="fix_ingred_enable"
+        if not preface_included:
+            prepend=generate_preface(en_var)+f"\n{s2_fn_def}"
+            preface_included=True
+        else:
+            prepend=f"{s2_fn_def}"
         dprint(prepend)
         loc= get_start_loc(fn)
         rewrites.append((prepend,loc))
         open_bracket=list(fn.getChildren())[-1].getChild(0)
         line,c = get_start_loc(open_bracket)
-        func=f"{s2_fn};"
+        func=f"if ({en_var})"+"{ "+f"{s2_fn};"+" };"
         rewrites.append((func,(line+1,c)))
         dprint("[Fix Ingredient functions]  --  END  --")
     dprint("Fix Ingredient functions")

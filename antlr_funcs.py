@@ -1375,7 +1375,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_=""):
                                     # choosing int as the default type to cast a void* to
                                     uname=f"{uname} = (void*)&{xname}"
                                     s0_body_vals+=f"int {xname};\n"
-                                    s0_body_vals+=f"    bzero(&{xname},sizeof({int}));\n"
+                                    s0_body_vals+=f"    bzero(&{xname},sizeof(int));\n"
                             if "[ ]" in uname:
                                 xname=uname.replace("[ ]","[0]",1)
                                 s0_body_vals+=f"{utyp} {xname};\n"

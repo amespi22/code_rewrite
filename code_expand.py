@@ -77,7 +77,7 @@ def main():
         if i == 6:
             break
         while again:
-            print("Start pass")
+            print(f"Start {change_funcs[i].__name__} pass")
             old_pro = cur_pro
             if j != 0:
                 p,t = get_tree_from_string(cur_pro)
@@ -88,7 +88,7 @@ def main():
             #print_ctx_bfs(t,f"help_pre_{f_n}")
             f_n += 1
             if i == 5:
-                print("Start pass")
+                print(f"Start {change_funcs[i+1].__name__} pass")
                 p,t = get_tree_from_string(cur_pro)
                 rewrite = change_funcs[i+1](t)
                 cur_pro = apply_changes[i+1](cur_pro, rewrite)
@@ -420,6 +420,7 @@ def expand_func_args(ctx):
     #find all functions, record their names and paramaters
     fns = get_functions(ctx)
     rewrites = {}
+    start_locs = {}
     #This gives us all functions in the file and it's args
     for f in fns:
         funcs_and_args[get_func_name(f)] = get_func_args(f)
@@ -457,11 +458,18 @@ def expand_func_args(ctx):
                     j += 1
                 # only here if we have 1 or more arguments to pull out
                 if len(rep) > 0:
+                    #get new variables to use
                     start_loc = get_start_loc(p)
+                    #sometimes we are in a situation like func(a) + func(b)
+                    #and a needs to be tlv1 and b tlv2
+                    if start_loc[0] in start_locs:
+                        start_locs[start_loc[0]] = start_locs[start_loc[0]] + 1
+                    else:
+                        start_locs[start_loc[0]] = 0
+                    r_vars = gen_new_vars(new_vars + all_vars, len(rep)+start_locs[start_loc[0]])
+                    r_vars.reverse()
                     end_loc = get_end_loc(p)
                     #print(f"start location {start_loc} end location = {end_loc}")
-                    #get new variables to use
-                    r_vars = gen_new_vars(new_vars + all_vars, len(rep))
                     #add to the list of all variables so they are not used
                     #again in the same function on another call
                     #all_vars.extend(r_vars)
@@ -488,8 +496,6 @@ def expand_func_args(ctx):
                         else:
                             #use what was already there
                             new_arg_string += f"{func_arg_names[i]},"
-                    #print (new_var_dec[:-1])
-                    #print (new_arg_string[:-1]+')')
                     rewrites[start_loc,end_loc] = (new_var_dec,new_arg_string[:-1]+')')
         except Exception as e:
             print(f"messed up here with {p.getText()}")
@@ -519,19 +525,44 @@ def gen_func_changes(cur_prog, rewrite):
     lns = [x+"\n" for x in lns]
     lns = lns[:-1]
     tab = chr(32) * 4
+    line_deltas = {}
     for key,val in rewrite.items():
         start_loc, end_loc = key
         var_decs,func_call = val
         #if the start and end loc lines are the same
         if key[0][0] == key[1][0]:
-            ln = lns[start_loc[0]-1]
-            start = ln[:start_loc[1]-1]
-            end = ln[end_loc[1]+1:]
-            middle = val[1]
-            spaces = get_line_spaces(ln)
-            var_decs = indent_by_newline(var_decs, spaces, tab)
-            line_change = f"{tab}{start}{middle}{end}"
-            lns[start_loc[0]-1] = f"{spaces}{{\n{var_decs}{line_change}{spaces}}}\n"
+            if key[0][0] not in line_deltas:
+                ln = lns[start_loc[0]-1]
+                start = ln[:start_loc[1]-1]
+                end = ln[end_loc[1]+1:]
+                middle = val[1]
+                spaces = get_line_spaces(ln)
+                var_decs = indent_by_newline(var_decs, spaces, tab)
+                line_change = f"{tab}{start}{middle}{end}"
+                line_deltas[key[0][0]] = len(line_change) - len(lns[start_loc[0]-1])
+                lns[start_loc[0]-1] = f"{spaces}{{\n{var_decs}{line_change}{spaces}}}\n"
+            else:
+                orig_len = len(lns[start_loc[0]-1]) + line_deltas[key[0][0]]
+                s_lns = lns[start_loc[0]-1].split('\n')
+                ln = s_lns[2]
+                spaces = get_line_spaces(s_lns[1])
+                var_decs = indent_by_newline(var_decs, spaces,' ')
+                delta = line_deltas[key[0][0]]
+
+                start = ln[:start_loc[1]-1 + delta]
+                end = ln[end_loc[1]+1+delta:]
+                middle = val[1]
+                spaces = get_line_spaces(ln)
+                line_change = f"{start}{middle}{end}"
+
+                # add var decs to s_lns
+                s_lns[2] = line_change
+                s_lns[1] = f"{var_decs}{s_lns[1]}"
+
+                # add line change to s_lns
+                line_deltas[key[0][0]] = len(line_change) - orig_len
+                lns[start_loc[0]-1] = "\n".join(s_lns)
+
         #if multi-line we need to compress the functioncall line to 1
         else:
             s = start_loc[0]-1
@@ -666,17 +697,25 @@ def expand_decs(ctx):
                         stmt = d.getChild(1).getText()
                         var = d.getChild(1).getChild(0).getChild(0).getText()
                         rhs = d.getChild(1).getChild(0).getChild(2).getText()
+                        #trying to fix the way getText handles structs
+                        rhs = fix_rhs(rhs)
                         typ = fix_type(typ)
                         if var.endswith('[]') or rhs.startswith('{'):
                             continue
-                        #print(f"{typ} {var};")
-                        #print(f"{stmt};")
-                        #print(f"{rhs};")
+                        #print(f"type = {typ} var = {var};")
+                        #print(f"stmt = {stmt};")
+                        #print(f"rhs = {rhs};")
+                        #print(f"rewrite number {get_line_num(d)-1}")
                         #line_num - 1 cause I think it's not 0 indexed
-                        rewrite[(get_line_num(d)-1,get_last_line_num(d))] = f"{typ} {var};\n{stmt};\n"
+                        rewrite[(get_line_num(d)-1,get_last_line_num(d))] = f"{typ} {var};\n{var} = {rhs};\n"
                     except:
                         continue
     return rewrite
+
+def fix_rhs(stmt):
+    if '"' not in stmt and "struct" in stmt:
+        return fix_type(stmt)
+    return stmt
 
 def gen_dec_changes(cur_prog, rewrite):
     #print(cur_prog)
@@ -729,6 +768,8 @@ def fix_type(typ):
         typ = typ.replace("staticint", "static int")
     if "unsignedint" in typ:
         typ = typ.replace("unsignedint", "unsigned int")
+    if "struct" in typ:
+        typ = typ.replace("struct", "struct ")
     typ = typ.replace("  ", " ")
     return typ
 

@@ -3,6 +3,7 @@ from antlr_funcs import *
 import argparse
 import sys
 import itertools
+import subprocess
 
 def main():
     #read in the function and file we weant to look at
@@ -44,12 +45,12 @@ def main():
         preprocess(macros,prog_name,_pp_prog_name)
     else:
         _pp_prog_name=f"{prog_name}"
-    
-    
+
+
     from os import path as path
     fix_ingred_id=path.splitext(path.basename(f"{prog_name}"))[0]
     bl_filename=f"fn_blacklist.{fix_ingred_id}.txt"
-    
+
     #original program
     cur_pro = ""
     with open(_pp_prog_name, 'r') as infile:
@@ -60,8 +61,8 @@ def main():
     d1 = get_all_decs(t)
     #loop to run all code transformations
     #order matters, don't re-arrange
-    change_funcs = [if_else_break, insert_loop_braces, expand_if_else, expand_sizeof, single_declarations, expand_decs,expand_func_args,expand_decs]
-    apply_changes = [gen_if_else_break, gen_loop_braces, gen_if_changes, gen_expand_changes, gen_dec_changes, gen_dec_changes,gen_func_changes,gen_dec_changes]
+    change_funcs = [expand_conditionals, if_else_break, insert_loop_braces, expand_if_else, expand_sizeof, single_declarations, expand_decs,expand_func_args,expand_decs]
+    apply_changes = [gen_conditionals, gen_if_else_break, gen_loop_braces, gen_if_changes, gen_expand_changes, gen_dec_changes, gen_dec_changes,gen_func_changes,gen_dec_changes]
     j = 0
     i = 0
     f_n = 0
@@ -100,7 +101,7 @@ def main():
             again = not(old_pro == cur_pro) and i == 5
             #print(again)
         i += 1
-    print("all done wiht passes")
+    print("all done with passes")
     #FIX-INGREDIENTS
     write_new_program(cur_pro, f"{out_name}.prev")
     p,t = get_tree_from_string(cur_pro)
@@ -112,7 +113,7 @@ def main():
     for i,k in enumerate(new_decs.keys()):
         nd="\n - "+"\n - ".join([get_string2(n) for n in new_decs[k]])
         print(f"{i} :  [{k}] {type(new_decs[k])}  [new function decls] {nd}")
-        
+
     print_ctx_bfs(t,"help")
     printer=ScopeListener()
     printer.set_functions(dont_eval+okay_to_eval)
@@ -155,7 +156,7 @@ def insert_loop_braces(ctx):
             #check to see if there are curly braces
             l_body = l.getChild(4)
             if l_body.getText().startswith("{"):
-                pass 
+                pass
             else:
                 #add if necessary
                 rewrites.append((get_start_loc(l_body),get_end_loc(l_body)))
@@ -167,6 +168,51 @@ def insert_loop_braces(ctx):
                 else:
                     rewrites.append((get_start_loc(l_body),get_end_loc(l_body)))
     return rewrites
+
+def expand_conditionals(ctx):
+    #get the conditional statement
+    if_stmt = "<class 'CParser.CParser.SelectionStatementContext'>"
+    fns = get_functions(ctx)
+    rewrites = []
+    for f in fns:
+        ifs = find_ctx(f, if_stmt)
+        for l in ifs:
+            if not l.getChild(4).getText().startswith('{'):
+                #add in the curly brace to start and end of IF
+                rewrites.append((get_start_loc(l.getChild(4)),get_end_loc(l.getChild(4))))
+            if l.getChildCount() != 7:
+                continue
+            if not l.getChild(6).getText().startswith('{'):
+                rewrites.append((get_start_loc(l.getChild(6)),get_end_loc(l.getChild(6))))
+                #add in the curly brace to start and end of ELSE
+        #find the body
+        #wewrite it the whole thing to not suck
+        #profit
+    return rewrites
+
+def gen_conditionals(cur_prog, rewrite):
+    lns = cur_prog.split('\n')
+    for r in rewrite:
+        s,e = r
+        #may want to do this with a line delta but I'll test this first
+        if s[0] == e[0]:
+            #start and end are on the same line and need to add 1 to the index for the end
+            ln = lns[s[0]-1]
+            lns[s[0]-1] = f"{ln[:s[1]-1]}{{{ln[s[1]-1:]}"
+            ln = lns[e[0]-1]
+            lns[s[0]-1] = f"{ln[:e[1]+2]}}}{ln[e[1]+2:]}"
+        else:
+            ln = lns[s[0]-1]
+            lns[s[0]-1] = f"{ln[:s[1]-1]}{{{ln[s[1]-1:]}"
+            ln = lns[e[0]-1]
+            lns[e[0]-1] = f"{ln[:e[1]+1]}}}{ln[e[1]+1:]}"
+            #start and end are on different lines and don't need to add 1 to the index
+    ret = "\n".join(lns)
+    of = open('tmp_fmt', 'w')
+    of.write(ret)
+    of.close()
+    s,o = subprocess.getstatusoutput(f"indent -kr -st tmp_fmt")
+    return o
 
 def if_else_break(ctx):
     if_stmt = "<class 'CParser.CParser.SelectionStatementContext'>"
@@ -182,9 +228,12 @@ def if_else_break(ctx):
                     continue
                 else:
                     #check to see if the if and the else are on the same line
+                    if_start = get_start_loc(l.getChild(0))
                     else_start = get_start_loc(l.getChild(5))
                     else_stmt_start = get_start_loc(l_body)
                     else_stmt_end = get_end_loc(l_body)
+                    if if_start[0] != else_start[0]:
+                        continue
                     if else_stmt_start[0] == else_start[0]:
                         #both are on the same line and we need a newline between them
                         rewrites.append((else_stmt_start,else_stmt_end))
@@ -297,58 +346,6 @@ def expand_sizeof(ctx):
                     i += 1
 
     return rewrites
-
-def expand_macro_block(ctx):
-    #get all function contexts
-    #get all macro contexts in each function
-    #check the value in the global macro
-    #delete the rewrite is the deletion of the block we don't want
-    sel_stmt = "<class 'CParser.CParser.MacroSelectionStatementContext'>"
-    fns = get_functions(ctx)
-    rewrites = []
-    for f in fns:
-        macs = find_ctx(f, sel_stmt)
-        for m in macs:
-            if m.getChildCount() == 6:
-                #have ifdef, else, endif
-                if m.getChild(1).getText() in macros and macros[m.getChild(1).getText()]:
-                    dels = []
-                    #delete  #ifdef
-                    dels.append(get_line_num(m.getChild(0)))
-                    #delete (un|de)finedvalue
-                    dels.append(get_line_num(m.getChild(1)))
-                    #delete #else
-                    dels.append(get_line_num(m.getChild(3)))
-                    #delte #endif
-                    dels.append(get_line_num(m.getChild(5)))
-                    rewrites.append(dels)
-                if m.getChild(1).getText() in macros and not macros[m.getChild(1).getText()]:
-                    dels = []
-                    #delete  #ifdef
-                    dels.append(get_line_num(m.getChild(1)))
-                    #delete (un|de)finedvalue
-                    dels.append(get_line_num(m.getChild(5)))
-                    #delete #else
-                    dels.append(get_line_num(m.getChild(0)))
-                    #delte #endif
-                    dels.append(get_line_num(m.getChild(3)))
-                    rewrites.append(dels)
-    return rewrites
-
-def gen_macro_changes(cur_prog, rewrite):
-    lns = cur_prog.split('\n')
-    lns = [x+"\n" for x in lns]
-    lns = lns[:-1]
-    for r in rewrite:
-        i,d,e,end = r
-        if i == d:
-            lns[i-1] = ""
-        else:
-            lns[i-1] = ""
-            lns[d-1] = ""
-        for j in range(e-1,end):
-            lns[j] = ""
-    return "".join(lns)
 
 def gen_if_changes(cur_prog, rewrite):
     lns = cur_prog.split('\n')

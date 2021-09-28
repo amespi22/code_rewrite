@@ -61,8 +61,8 @@ def main():
     d1 = get_all_decs(t)
     #loop to run all code transformations
     #order matters, don't re-arrange
-    change_funcs = [expand_conditionals, if_else_break, insert_loop_braces, expand_if_else, expand_sizeof, single_declarations, expand_decs,expand_func_args,expand_decs]
-    apply_changes = [gen_conditionals, gen_if_else_break, gen_loop_braces, gen_if_changes, gen_expand_changes, gen_dec_changes, gen_dec_changes,gen_func_changes,gen_dec_changes]
+    change_funcs = [expand_conditionals, if_else_break, insert_loop_braces, expand_if_else, expand_sizeof, single_declarations, expand_decs,expand_func_args]
+    apply_changes = [gen_conditionals, gen_if_else_break, gen_loop_braces, gen_if_changes, gen_expand_changes, gen_dec_changes, gen_dec_changes,gen_func_changes]
     j = 0
     i = 0
     f_n = 0
@@ -75,7 +75,7 @@ def main():
         cur_pro = apply_changes[i](cur_pro, rewrite)
         """
         again = True
-        if i == 7:
+        if i == len(change_funcs)-1:
             break
         while again:
             print(f"Start {change_funcs[i].__name__} pass")
@@ -88,7 +88,7 @@ def main():
             #print_inter_file(f_n, cur_pro)
             #print_ctx_bfs(t,f"help_pre_{f_n}")
             f_n += 1
-            if i == 6:
+            if i == len(change_funcs)-2:
                 print(f"Start {change_funcs[i+1].__name__} pass")
                 p,t = get_tree_from_string(cur_pro)
                 rewrite = change_funcs[i+1](t)
@@ -98,7 +98,7 @@ def main():
                 f_n += 1
 
             j += 1
-            again = not(old_pro == cur_pro) and i == 6
+            again = not(old_pro == cur_pro) and i == len(change_funcs)-2
             #print(again)
         i += 1
     print("all done with passes")

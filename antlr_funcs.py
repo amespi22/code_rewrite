@@ -1361,12 +1361,15 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_=""):
                             if "*" in utyp:
                                 ptr_=True
                                 xtyp=utyp.replace("*","").rstrip()
-                                xname=uname.rstrip()+"_ref"
+                                xname=uname.strip()+"_ref"
                                 if "[" in xname:
+                                    xname=re.sub(r"\s+",r"",xname)
                                     while("]_ref" in xname):
                                         x_re=re.search(r"(\[(\s*\d*\s*)\])",xname)
                                         v=x_re.group(1)
-                                        xname=re.sub(r""+v+r"","",xname,1).rstrip()+v
+                                        val=x_re.group(2)
+                                        print(f"=> ]_ref check : {v}   [xname={xname}]")
+                                        xname=re.sub(r"\["+val+r"\]",r"",xname,1).rstrip()+v
                                 if xtyp != "void":
                                     uname=f"{uname} = &{xname}"
                                     s0_body_vals+=f"{xtyp} {xname};\n"

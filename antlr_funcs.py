@@ -1360,34 +1360,73 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_=""):
                             ptr_=False
                             if "*" in utyp:
                                 ptr_=True
+                                ptr_cnt=utyp.count('*')
                                 xtyp=utyp.replace("*","").rstrip()
-                                xname=uname.strip()+"_ref"
-                                if "[" in xname:
-                                    xname=re.sub(r"\s+",r"",xname)
-                                    while("]_ref" in xname):
-                                        x_re=re.search(r"(\[(\s*\d*\s*)\])",xname)
-                                        v=x_re.group(1)
-                                        val=x_re.group(2)
-                                        print(f"=> ]_ref check : {v}   [xname={xname}]")
-                                        xname=re.sub(r"\["+val+r"\]",r"",xname,1).rstrip()+v
-                                if xtyp != "void":
-                                    uname=f"{uname} = &{xname}"
-                                    s0_body_vals+=f"{xtyp} {xname};\n"
-                                    s0_body_vals+=f"    bzero(&{xname},sizeof({xtyp}));\n"
+                                xname=uname.replace(" ","")+"_ref"
+                                x1name=xname
+                                x2name=x1name
+                                size=""
+                                if "[" not in xname:
+                                    # this is the code that handles pointers
+                                    if xtyp != "void":
+                                        uname=f"{uname} = &{x1name}"
+                                        s0_body_vals+=f"{xtyp} {x1name};\n"
+                                        s0_body_vals+=f"    bzero(&{xname},{size}sizeof({xtyp}));\n"
+                                    else:
+                                        # choosing int as the default type to cast a void* to
+                                        uname=f"{uname} = (void*)&{x1name}"
+                                        s0_body_vals+=f"int {x1name};\n"
+                                        s0_body_vals+=f"    bzero(&{xname},{size}sizeof(int));\n"
+                                    s0_body_vals+=f"{utyp} {uname};\n"
+                                    pass
                                 else:
-                                    # choosing int as the default type to cast a void* to
-                                    uname=f"{uname} = (void*)&{xname}"
-                                    s0_body_vals+=f"int {xname};\n"
-                                    s0_body_vals+=f"    bzero(&{xname},sizeof(int));\n"
-                            if "[ ]" in uname:
-                                xname=uname.replace("[ ]","[0]",1)
-                                s0_body_vals+=f"{utyp} {xname};\n"
-                                if not ptr_:
-                                    s0_body_vals+=f"    bzero(&{xname},sizeof({utyp}));\n"
+                                    x1name=re.sub(r"\s+",r"",xname)
+                                    first_index_found=False
+                                    vals=[]
+                                    while("]_ref" in x1name):
+                                        x_re=re.search(r"(\[(\s*\d*\s*)\])",x1name)
+                                        v1=x_re.group(1)
+                                        val=x_re.group(2)
+                                        vals.append(val)
+                                        x1name=re.sub(r"\["+val+r"\]",r"",x1name,1).rstrip()
+                                    xname=x1name # <var>_ref
+                                    orig=re.sub(r"_ref$",r"",xname) # <var>
+                                    size="1"
+                                    array_size=""
+                                    for x in vals:
+                                        if x!="":
+                                            size=f"{size}*({x})"
+                                            array_size=f"{array_size}[{size}]"
+                                        else:
+                                            array_size=f"{array_size}[1]"
+
+                                    s0_body_vals+=f"{xtyp} {xname}{array_size};\n"
+                                    s0_body_vals+=f"    bzero(&{xname},{size}*sizeof({xtyp}));\n"
+                                    s0_body_vals+=f"{utyp} {orig}{array_size};\n"
+                                    s0_body_vals+="{"+\
+                                            f"  {xtyp} **dst_ref={orig}; {xtyp} *src_ref={xname};\n"\
+                                            f"  for( int ref_i=0;ref_i<{size};ref_i++)"+\
+                                            "{*dst_ref=src_ref;dst_ref++;src_ref++;}\n"+\
+                                            "}\n"
+                                    # this is the code that handles arrays of pointers
+                                    #    int * myarray[100][100];
+                                    #    (utyp,uname) = ("int *","myarray[100][100]")
+                                    # needs to be
+                                    #    int myarray_ref[100][100];
+                                    #    (xtyp,x1name+vals) = ("int","myarray_ref"+"[100][100]")
+                                    #    bzero(&myarray_ref,100*100*sizeof(int));
+                                    #    (x1name,vals+"*"+"sizeof("+xtyp+")")=("myarray_ref","100*100*sizeof(int)")
+                                    #    int * myarray[100][100];
+                                    #    (utyp,uname) = ("int *","myarray[100][100]")
+                                    #    { int **x=myarray; int * src_x=myarray_ref;
+                                    #    for (int myref_i=0;myref_i<100*100; myref_i++) { *x=src_x; x++; src_x++;}
+                            elif "[ ]" in uname:
+                                x1name=uname.replace("[ ]","[0]",1)
+                                s0_body_vals+=f"{utyp} {x1name};\n"
+                                s0_body_vals+=f"    bzero(&{x1name},sizeof({utyp}));\n"
                             else:
                                 s0_body_vals+=f"{utyp} {uname};\n"
-                                if not ptr_:
-                                    s0_body_vals+=f"    bzero(&{uname},sizeof({utyp}));\n"
+                                s0_body_vals+=f"    bzero(&{uname},sizeof({utyp}));\n"
                             decl_vars.append(uname)
                         s0_body=f"{s0_body_vals}{s0_body_vars}"
                         # scope 0 function

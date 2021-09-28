@@ -212,7 +212,7 @@ def gen_conditionals(cur_prog, rewrite):
     of.write(ret)
     of.close()
     s,o = subprocess.getstatusoutput(f"indent -kr -st -l300 tmp_fmt")
-    return ret
+    return o
 
 def if_else_break(ctx):
     if_stmt = "<class 'CParser.CParser.SelectionStatementContext'>"
@@ -753,6 +753,8 @@ def fix_type(typ):
         typ = typ.replace("const", "const ")
     if "signed" in typ:
         typ = typ.replace("signed", "signed ")
+    if "static" in typ:
+        typ = typ.replace("static", "static ")
     if "unsigned" in typ:
         typ = typ.replace("unsigned", "unsigned ")
     if "longlong" in typ:

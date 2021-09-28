@@ -98,7 +98,7 @@ def main():
                 f_n += 1
 
             j += 1
-            again = not(old_pro == cur_pro) and i == 5
+            again = not(old_pro == cur_pro) and i == 6
             #print(again)
         i += 1
     print("all done with passes")
@@ -211,8 +211,8 @@ def gen_conditionals(cur_prog, rewrite):
     of = open('tmp_fmt', 'w')
     of.write(ret)
     of.close()
-    s,o = subprocess.getstatusoutput(f"indent -kr -st tmp_fmt")
-    return o
+    s,o = subprocess.getstatusoutput(f"indent -kr -st -l300 tmp_fmt")
+    return ret
 
 def if_else_break(ctx):
     if_stmt = "<class 'CParser.CParser.SelectionStatementContext'>"

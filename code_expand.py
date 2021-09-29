@@ -685,8 +685,11 @@ def expand_decs(ctx):
                             #print(f"if:{typ.replace('char*','char')} {lhs}[] = {rhs};\n")
                             #print(f"{d.getText()}")
                         else:
+                            #this is an attempt to pass lines that I should not need to chage
+                            #example instantiating function pointers
+                            continue
                             rewrite[(get_line_num(d)-1,get_last_line_num(d))] = f"{typ} {lhs} = {rhs};\n"
-                            #print(f"else:{typ} {stmt};\n")
+                            print(f"{typ} {lhs} = {rhs};\n")
                 else:
                     #figure out the arguments.
                     try:
@@ -751,6 +754,8 @@ def write_new_program(p,prog_name):
 def fix_type(typ):
     if "const" in typ:
         typ = typ.replace("const", "const ")
+    if "register" in typ:
+        typ = typ.replace("register", "register ")
     if "signed" in typ:
         typ = typ.replace("signed", "signed ")
     if "static" in typ:

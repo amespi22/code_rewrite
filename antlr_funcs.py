@@ -1361,11 +1361,13 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_=""):
                     if valid:
                         for u in uniq_init:
                             utyp,uname,uval=u
+                            utyp_=re.sub(r"\b(static|const|register)\b",r"",utyp).strip()
                             ptr_=False
                             if "*" in utyp:
                                 ptr_=True
                                 ptr_cnt=utyp.count('*')
                                 xtyp=utyp.replace("*","").rstrip()
+                                xtyp_=re.sub(r"\b(static|const|register)\b",r"",xtyp).strip()
                                 xname=uname.replace(" ","")+"_ref"
                                 x1name=xname
                                 x2name=x1name
@@ -1375,7 +1377,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_=""):
                                     if xtyp != "void":
                                         uname=f"{uname} = &{x1name}"
                                         s0_body_vals+=f"{xtyp} {x1name};\n"
-                                        s0_body_vals+=f"    bzero(&{xname},{size}sizeof({xtyp}));\n"
+                                        s0_body_vals+=f"    bzero(&{xname},{size}sizeof({xtyp_}));\n"
                                     else:
                                         # choosing int as the default type to cast a void* to
                                         uname=f"{uname} = (void*)&{x1name}"
@@ -1405,7 +1407,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_=""):
                                             array_size=f"{array_size}[1]"
 
                                     s0_body_vals+=f"{xtyp} {xname}{array_size};\n"
-                                    s0_body_vals+=f"    bzero(&{xname},{size}*sizeof({xtyp}));\n"
+                                    s0_body_vals+=f"    bzero(&{xname},{size}*sizeof({xtyp_}));\n"
                                     s0_body_vals+=f"{utyp} {orig}{array_size};\n"
                                     s0_body_vals+="{"+\
                                             f"  {xtyp} **dst_ref={orig}; {xtyp} *src_ref={xname};\n"\
@@ -1427,10 +1429,10 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_=""):
                             elif "[ ]" in uname:
                                 x1name=uname.replace("[ ]","[0]",1)
                                 s0_body_vals+=f"{utyp} {x1name};\n"
-                                s0_body_vals+=f"    bzero(&{x1name},sizeof({utyp}));\n"
+                                s0_body_vals+=f"    bzero(&{x1name},sizeof({utyp_}));\n"
                             else:
                                 s0_body_vals+=f"{utyp} {uname};\n"
-                                s0_body_vals+=f"    bzero(&{uname},sizeof({utyp}));\n"
+                                s0_body_vals+=f"    bzero(&{uname},sizeof({utyp_}));\n"
                             decl_vars.append(uname)
                         s0_body=f"{s0_body_vals}{s0_body_vars}"
                         # scope 0 function

@@ -414,6 +414,10 @@ def gen_expand_changes(cur_prog, rewrite):
     return "".join(lns)
 
 def expand_func_args(ctx):
+    loop_stmt = "<class 'CParser.CParser.IterationStatementContext'>"
+    loops = find_ctx(ctx, loop_stmt)
+    whiles = [x for x in loops if ('for' in x.getChild(0).getText() or 'while' in x.getChild(0).getText())]
+    lps = [x.getChild(2) for x in whiles]
     #find all functions, record their names and paramaters
     fns = get_functions(ctx)
     rewrites = {}
@@ -424,6 +428,7 @@ def expand_func_args(ctx):
     #print(funcs_and_args)
     #for each function find all <class 'CParser.CParser.PostfixExpressionContext'>
     for f in fns:
+        skip = False
         new_vars = []
         all_types, all_vars = get_all_vars(f,True)
         pecs = find_ctx(f, "<class 'CParser.CParser.PostfixExpressionContext'>")
@@ -432,6 +437,14 @@ def expand_func_args(ctx):
         #print([p.getChild(0).getText() for p in pecs])
         try:
             for p in pecs:
+                #make sure we don't do anything with things inside the conditional check
+                #of the while or for loop
+                for l in lps:
+                    if is_descendant(p, l):
+                        skip = True
+                if skip:
+                    skip = False
+                    continue
                 f_name = p.getChild(0).getText()
                 #print(f"function {f_name} is present with args {p.getChild(2).getText()}")
                 #print(f"child count {p.getChildCount()}")

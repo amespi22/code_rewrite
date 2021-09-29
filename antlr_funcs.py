@@ -1183,7 +1183,7 @@ def generate_preface(var):
     prog+="#endif\n"
     return prog
 
-def get_fix_loc_subfns(scope,dvars,eval_me,id_=""):
+def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
     uniques=[]
     fn_body=[]
     rewrites=[]
@@ -1192,6 +1192,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_=""):
     preface_included=False
     ## function scope
     #def get_type_var_info(ctx) => return nodes, sym_dict, up_nodes
+    all_fn_def=""
     for i,f_info in enumerate(scope.items()):
         fn,fs=f_info
         type_lut=dict()
@@ -1209,6 +1210,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_=""):
         #strip_array_decs(def_vars)
         ## for each namespace scope in function scope
         s2_fn_def=""
+        s2_fn_decls=""
         s2_body=""
         s2_calls=""
         for j, s_info in enumerate(fs.items()):
@@ -1442,6 +1444,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_=""):
                         #s0_fn_decl+=f"void {s0_fn};\n"
                         # scope 0 function definition (with body)
                         s0_fn_def+=f"void {s0_fn}"+"{\n"+f"{s0_body}"+"}\n"
+                        s2_fn_decls+=f"void {s0_fn};\n"
                         # scope 0 function call
                         s0_call_fn=f"{s0_fn};\n"
                         # set of scope 0 function calls
@@ -1450,6 +1453,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_=""):
                 s1_body=""
                 # scope 1 function call (used in scope 2 function definition)
                 s1_call_fn=f"{s1_fn}();\n"
+                s2_fn_decls+=f"void {s1_call_fn}"
                 bl_funcs.append(f"{s1_fn}")
                 s1_calls+=f"{s1_call_fn}"
                 #s1_fn_decl="\n"+s0_fn_decl+"\n"+f"void {s1_call_fn}"+"\n"
@@ -1463,29 +1467,39 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_=""):
                 #rewrites.append((s1_call_fn,loc))
                 s2_fn_def+=s1_fn_def
         s2_call_fn=f"{s2_fn}();\n"
+        s2_fn_decls+=f"void {s2_fn}();\n"
         s2_calls+=f"{s2_call_fn}"
         s2_fn=f"{fname}_{i}()"
         bl_funcs.append(f"{fname}_{i}")
         s2_fn_def+=f"void {s2_fn}"+"{\n"+f"{s2_body}"+"}\n"
+        all_fn_def+=s2_fn_def
         dprint("==== Scope 2 ====\n"+f"{s2_fn_def}")
         dprint("[Fix Ingredient functions]  -- START --")
         en_var="fix_ingred_enable"
         if not preface_included:
-            prepend=generate_preface(en_var)+f"\n{s2_fn_def}"
+            prepend=generate_preface(en_var)+f"\n{s2_fn_decls}\n\n"
             preface_included=True
         else:
-            prepend=f"{s2_fn_def}"
+            #prepend=f"{s2_fn_def}"
+            prepend=f"{s2_fn_decls}\n\n"
         dprint(prepend)
         loc= get_start_loc(fn)
         rewrites.append((prepend,loc))
         open_bracket=list(fn.getChildren())[-1].getChild(0)
         line,c = get_start_loc(open_bracket)
-        func=f"if ({en_var})"+"{ "+f"{s2_fn};"+" };"
+        func=f"    if ({en_var})"+"{ "+f"{s2_fn};"+" };"
         rewrites.append((func,(line+1,c)))
         dprint("[Fix Ingredient functions]  --  END  --")
     dprint("Fix Ingredient functions")
     for b in bl_funcs:
         dprint(f"- {b}")
+    
+    # putting repair ingredient function definitions at the end
+    last_line=list(root.getChildren())[-1]
+    if type(last_line)!=tree.Tree.TerminalNodeImpl:
+        last_line=list(last_line.getChildren())[-1]
+    line,c = get_start_loc(last_line)
+    rewrites.append((all_fn_def,(line,c)))
     return rewrites,bl_funcs
 
 

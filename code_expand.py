@@ -121,7 +121,7 @@ def main():
     walker.walk(printer,t)
     scope_vars = get_function_info(functions=get_functions(t),fscope=printer.scopes,dont_eval=dont_eval)
     #fix_loc_rewrites = get_fix_loc_rewrites(scope_vars)
-    fix_loc_rewrites,new_funcs = get_fix_loc_subfns(scope_vars,new_decs,okay_to_eval,id_=fix_ingred_id)
+    fix_loc_rewrites,new_funcs = get_fix_loc_subfns(scope_vars,new_decs,okay_to_eval,id_=fix_ingred_id,root=t)
     cur_pro = gen_fix_loc_changes(cur_pro, fix_loc_rewrites)
 
     #write out the new program

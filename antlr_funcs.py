@@ -1583,7 +1583,7 @@ def get_arg_names(ctx):
 def get_func_args(ctx):
     try:
         ftlc = find_ctx(ctx, "<class 'CParser.CParser.ParameterTypeListContext'>")
-        
+
         #for the c89 standard of not declaring types in parameter list of functions
         if ctx.getChildCount() == 4:
             args = ctx.getChild(2)
@@ -1610,7 +1610,8 @@ def get_func_args(ctx):
         if len(ftlc) > 0:
             c = ftlc[0].getChild(0)
             cl = c.children
-            cs = [c for c in cl if str(type(c)) != "<class 'antlr4.tree.Tree.TerminalNodeImpl'>"]
+            #looks like c.getChildCount() len of 1 is void and we don't care about funcs with no args
+            cs = [c for c in cl if str(type(c)) != "<class 'antlr4.tree.Tree.TerminalNodeImpl'>" and c.getChildCount() > 1]
             rs = [c.getChild(1).getText() for c in cs]
             ts = [c.getChild(0).getText() for c in cs]
             #for some reason antlr does not deal with void pointers well
@@ -1626,6 +1627,8 @@ def get_func_args(ctx):
     except Exception as e:
         print("Threw exception in get_func_args of antlr_funcs.py")
         print(e)
+        print(ctx.getText())
+        print(ctx.getChildCount())
         return None
 
 #Output: list of tuples [(type'node,var_name)]

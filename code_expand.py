@@ -680,8 +680,8 @@ def expand_decs(ctx):
                     typ = d.getChild(0).getText()
                     stmt = d.getChild(1).getText()
                     typ = fix_type(typ)
-                    lhs = d.getChild(1).getChild(0).getChild(0).getText()
-                    rhs = d.getChild(1).getChild(0).getChild(2).getText()
+                    lhs = get_string2(d.getChild(1).getChild(0).getChild(0))
+                    rhs = get_string2(d.getChild(1).getChild(0).getChild(2))
                     if rhs.startswith("("):
                         #fix this later to get everything between () then remake rhs
                         rhs = fix_type(rhs)
@@ -700,9 +700,8 @@ def expand_decs(ctx):
                         else:
                             #this is an attempt to pass lines that I should not need to chage
                             #example instantiating function pointers
-                            continue
                             rewrite[(get_line_num(d)-1,get_last_line_num(d))] = f"{typ} {lhs} = {rhs};\n"
-                            print(f"{typ} {lhs} = {rhs};\n")
+                            #print(f"{typ} {lhs} = {rhs};\n")
                 else:
                     #figure out the arguments.
                     try:

@@ -498,14 +498,16 @@ translationUnit
     ;
 
 externalDeclaration
-    :   functionDefinition
+    :   functionDeclaration
+    |   functionDefinition
     |   declaration
     |   ';' // stray ;
     ;
 
-//functionDefinition
-//    :   declarationSpecifiers? declarator declarationList? compoundStatement
-//    ;
+
+functionDeclaration
+    :   funcDeclarationSpecifiers? declarator declarationList? ';'
+    ;
 
 functionDefinition
     :   funcDeclarationSpecifiers? declarator declarationList? compoundStatement

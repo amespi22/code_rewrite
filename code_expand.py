@@ -29,6 +29,8 @@ def main():
     global macros
     dont_eval=[]
     okay_to_eval=[]
+    macros=preprocess(dict(),prog_name,f"{prog_name}.pp")
+    import sys;sys.exit(-1)
     if pre_process != "":
         #This means we have a file to parse
         #File should have a new line for each file to parse
@@ -819,10 +821,13 @@ def preprocess_string(pragmas:dict,prog:str):
     import re
     _pragmas=list(pragmas.keys())
     _prags='|'.join(list(_pragmas))
-    pragma_re=re.compile(r'\b('+_prags+r")\b")
+    print(f"[PRAGMAS] {_prags}")
+    pragma_re = None
+    if len(_prags)>0:
+        pragma_re=re.compile(r'\b('+_prags+r")\b")
     # note from pdr: there are also #if defined \((\S+)\) LOGICAL , but omitting for simplicity
-    positive_re=re.compile(r'^\s*#(if|ifdef|elif)\s+(\S+)')
-    negative_re=re.compile(r'^\s*#ifndef\s+(\S+)')
+    positive_re=re.compile(r'^\s*#(if|ifdef|elif)\s+(\w+)')
+    negative_re=re.compile(r'^\s*#ifndef\s+(\w+)')
     next_re=re.compile(r'^\s*#else')
     end_re=re.compile(r'^\s*#endif')
     define_re=re.compile(r'^\s*#define\s+(.*)')
@@ -833,6 +838,7 @@ def preprocess_string(pragmas:dict,prog:str):
     cur_define=None
     new_pragma=dict()
     for l in lines:
+        #print(f"[LINE] '{l}'")
         start=False
         p=positive_re.search(l)
         n=negative_re.search(l)
@@ -843,9 +849,11 @@ def preprocess_string(pragmas:dict,prog:str):
             start=True
             in_cascade=True
             capture_next=False
-            if p.group(1) in _pragmas:
-                #print(f"{p.group(1)} = {pragmas[p.group(1)]} [{type(pragmas[p.group(1)])}]")
-                if pragmas[p.group(1)]:
+            #print(f"[positive] {p.group(1)} {p.group(2)} ")
+            value=p.group(2)
+            if value in _pragmas:
+                #print(f"{value} = {pragmas[value]} [{type(pragmas[value])}]")
+                if pragmas[p.group(2)]:
                     #print(f"[IFDEF] START CAPTURING POSITIVE: {l}")
                     capture_next=True
                     captured=True
@@ -853,18 +861,18 @@ def preprocess_string(pragmas:dict,prog:str):
                     #print(f"[IFDEF] NOT CAPTURING POSITIVE: {l}")
                     pass
         elif n:
+            #print(f"[HERE] NEGATIVE {n.group(1)}")
             start=True
             in_cascade=True
             capture_next=False
-            if n.group(1) in _pragmas:
-                #print(f"{n.group(1)} = {pragmas[n.group(1)]} [{type(pragmas[n.group(1)])}]")
-                if not pragmas[n.group(1)]:
-                    #print(f"[IFNDEF] START CAPTURING NEGATIVE: {l}")
-                    capture_next=True
-                    captured=True
-                else:
-                    #print(f"[IFNDEF] NOT CAPTURING NEGATIVE: {l}")
-                    pass
+            if (n.group(1) in _pragmas and not pragmas[n.group(1)]) or (n.group(1) not in _pragmas):
+                #print(f"{n.group(1)} = {pragmas.get(n.group(1),None)} [{type(pragmas.get(n.group(1),None))}]")
+                #print(f"[IFNDEF] START CAPTURING NEGATIVE: {l}")
+                capture_next=True
+                captured=True
+            else:
+                #print(f"[IFNDEF] NOT CAPTURING NEGATIVE: {l}")
+                pass
         elif el:
             start=True
             capture_next=False
@@ -900,9 +908,13 @@ def preprocess_string(pragmas:dict,prog:str):
                         new_pragma[cur_define]="" 
                     else:
                         new_pragma[cur_define]=True
-                        _pragmas.append(cur_define)
-                        _prags='|'+cur_define
-                        pragma_re=re.compile(r'\b('+_prags+r")\b")
+
+                _pragmas.append(cur_define)
+                _prags='|'+cur_define
+                pragma_re=re.compile(r'\b('+_prags+r")\b")
+                pragmas[cur_define]=new_pragma[cur_define]
+                    
+                #print(f"[PRAGMA] New pragma {cur_define} => {new_pragma[cur_define]}")
             elif append_to_define:
                 val=l
                 if val[-1]!='\\':
@@ -910,6 +922,7 @@ def preprocess_string(pragmas:dict,prog:str):
                 else:
                     val=val[:-1]
                 new_pragma[cur_define]+=" ".join(vals[1:])
+                pragmas[cur_define]=new_pragma[cur_define]
 
             if capture_next:
                 captured=True

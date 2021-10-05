@@ -1874,23 +1874,40 @@ def parse_pre_process(cnts, pragmas):
     ret_d = {}
     ret_d2 = {}
     #printf has variable arguments, should skip it now
-    cnts = [c for c in cnts if not(c.endswith("printf.c"))]
+    cnts = [c for c in cnts if "printf" not in c]
     for c in cnts:
         #read all the files and pull out the functions from each file to return
         #open the file
-        inf = open(c, 'r')
-        print(f"Processing file {c}")
-        src = remove_defines(inf.readlines()) 
-        inf.close()
-        src = preprocess_string(pragmas,src)
-        src = "".join([f"{s}\n" for s in src])
-        #kill preprocessing stuff
-        #make the new call on the string
-        p,t = get_tree_from_string(src)
-        fns = get_functions(t)
-        for f in fns:
-            ret_d[get_func_name(f)] = get_func_args(f)
-            ret_d2[get_func_name(f)] = f.getChild(0).getText()
+        if c.endswith(".c"):
+            inf = open(c, 'r')
+            print(f"Processing file {c}")
+            src = remove_defines(inf.readlines())
+            inf.close()
+            src = preprocess_string(pragmas,src)
+            src = "".join([f"{s}\n" for s in src])
+            #kill preprocessing stuff
+            #make the new call on the string
+            p,t = get_tree_from_string(src)
+            fns = get_functions(t)
+            for f in fns:
+                ret_d[get_func_name(f)] = get_func_args(f)
+                ret_d2[get_func_name(f)] = f.getChild(0).getText()
+        if c.endswith(".h"):
+            inf = open(c, 'r')
+            print(f"Processing file {c}")
+            #add in preprocessing when it's done
+            src = remove_defines(inf.readlines())
+            inf.close()
+            src=src.split('\n')
+            src = "".join([f"{s}\n" for s in src])
+            #kill preprocessing stuff
+            #make the new call on the string
+            p,t = get_tree_from_string(src)
+            print_ctx_bfs(t,"help")
+            fns = find_ctx(t,"<class 'CParser.CParser.FunctionDeclarationContext'>")
+            for f in fns:
+                ret_d[get_func_name(f)] = get_func_args(f)
+                ret_d2[get_func_name(f)] = f.getChild(0).getText()
     return ret_d,ret_d2
 
 def get_all_decs(ctx):

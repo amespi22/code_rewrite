@@ -1890,43 +1890,28 @@ def parse_pre_process(cnts, pragmas,infile):
     for c in cnts:
         #read all the files and pull out the functions from each file to return
         #open the file
-        if c.endswith(".c"):
-            inf = open(c, 'r')
-            print(f"Processing file {c}")
-            src = remove_defines(inf.readlines())
-            inf.close()
-            src,_ = preprocess_string(pragmas,src)
-            src = "".join([f"{s}\n" for s in src])
-            #kill preprocessing stuff
-            #make the new call on the string
-            p,t = get_tree_from_string(src)
-            fns = get_functions(t)
-            for f in fns:
-                ret_d[get_func_name(f)] = get_func_args(f)
-                ret_d2[get_func_name(f)] = f.getChild(0).getText()
+        inf = open(c, 'r')
+        print(f"Processing file {c}")
+        src = remove_defines(inf.readlines())
+        src,_ = preprocess_string(pragmas,src)
+        inf.close()
+        src = "\n".join(src)
+        #kill preprocessing stuff
+        #make the new call on the string
+        p,t = get_tree_from_string(src)
         if c.endswith(".h"):
-            inf = open(c, 'r')
-            print(f"Processing file {c}")
-            #add in preprocessing when it's done
-            #src = remove_defines(inf.readlines())
-            src,_ = preprocess_string(pragmas,inf.read())
-            print(type(src))
-            print("\n".join(src))
-            src = "\n".join(src)
-            inf.close()
-            #src = src.split('\n')
-            #src = "".join([f"{s}\n" for s in src])
-            #kill preprocessing stuff
-            #make the new call on the string
-            p,t = get_tree_from_string(src)
-            print_ctx_bfs(t,"help")
+            #here if header file
             fns = find_ctx(t,"<class 'CParser.CParser.FunctionDeclarationContext'>")
-            for f in fns:
-                ret_d[get_func_name(f)] = get_func_args(f)
-                ret_d2[get_func_name(f)] = f.getChild(0).getText()
-            print(ret_d)
-            print(ret_d2)
+        elif c.endswith(".c"):
+            #here if c file
+            fns = get_functions(t)
+        else:
+            #here if we have error
+            print("ERROR parsing header and library files ")
             exit()
+        for f in fns:
+            ret_d[get_func_name(f)] = get_func_args(f)
+            ret_d2[get_func_name(f)] = f.getChild(0).getText()
     return ret_d,ret_d2
 
 def get_all_decs(ctx):

@@ -29,8 +29,6 @@ def main():
     global macros
     dont_eval=[]
     okay_to_eval=[]
-    macros=preprocess(dict(),prog_name,f"{prog_name}.pp")
-    import sys;sys.exit(-1)
     if pre_process != "":
         #This means we have a file to parse
         #File should have a new line for each file to parse

@@ -1895,7 +1895,7 @@ def parse_pre_process(cnts, pragmas,infile):
             print(f"Processing file {c}")
             src = remove_defines(inf.readlines())
             inf.close()
-            src = preprocess_string(pragmas,src)
+            src,_ = preprocess_string(pragmas,src)
             src = "".join([f"{s}\n" for s in src])
             #kill preprocessing stuff
             #make the new call on the string
@@ -1908,10 +1908,14 @@ def parse_pre_process(cnts, pragmas,infile):
             inf = open(c, 'r')
             print(f"Processing file {c}")
             #add in preprocessing when it's done
-            src = remove_defines(inf.readlines())
+            #src = remove_defines(inf.readlines())
+            src,_ = preprocess_string(pragmas,inf.read())
+            print(type(src))
+            print("\n".join(src))
+            src = "\n".join(src)
             inf.close()
-            src=src.split('\n')
-            src = "".join([f"{s}\n" for s in src])
+            #src = src.split('\n')
+            #src = "".join([f"{s}\n" for s in src])
             #kill preprocessing stuff
             #make the new call on the string
             p,t = get_tree_from_string(src)
@@ -1920,6 +1924,9 @@ def parse_pre_process(cnts, pragmas,infile):
             for f in fns:
                 ret_d[get_func_name(f)] = get_func_args(f)
                 ret_d2[get_func_name(f)] = f.getChild(0).getText()
+            print(ret_d)
+            print(ret_d2)
+            exit()
     return ret_d,ret_d2
 
 def get_all_decs(ctx):

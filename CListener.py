@@ -53,6 +53,15 @@ class CListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by CParser#passignmentExpression.
+    def enterPassignmentExpression(self, ctx:CParser.PassignmentExpressionContext):
+        pass
+
+    # Exit a parse tree produced by CParser#passignmentExpression.
+    def exitPassignmentExpression(self, ctx:CParser.PassignmentExpressionContext):
+        pass
+
+
     # Enter a parse tree produced by CParser#argumentExpressionList.
     def enterArgumentExpressionList(self, ctx:CParser.ArgumentExpressionListContext):
         pass

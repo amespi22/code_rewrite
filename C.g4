@@ -41,6 +41,7 @@ primaryExpression
     |   '__builtin_offsetof' '(' typeName ',' unaryExpression ')'
     ;
 
+
 genericSelection
     :   '_Generic' '(' assignmentExpression ',' genericAssocList ')'
     ;
@@ -65,8 +66,12 @@ postfixExpression
     )*
     ;
 
+passignmentExpression
+    : ( specifierQualifierList | assignmentExpression )
+    ;
+
 argumentExpressionList
-    :   assignmentExpression (',' assignmentExpression)*
+    :   passignmentExpression (',' passignmentExpression)*
     ;
 
 unaryExpression
@@ -393,6 +398,7 @@ typedefName
 initializer
     :   assignmentExpression
     |   '{' initializerList ','? '}'
+    |   '{' '}'
     ;
 
 initializerList
@@ -884,7 +890,7 @@ Macroendif
 */
 
 IncludeDirective
-    :   '#' Whitespace? 'include' Whitespace? (('"' ~[\r\n]* '"') | ('<' ~[\r\n]* '>' )) Whitespace? Newline
+    :   '#' Whitespace? 'include' Whitespace? (('"' ~[\r\n]* '"') | ('<' ~[\r\n]* '>' )) Whitespace? LineComment? Newline
         -> skip
     ;
 
@@ -913,7 +919,7 @@ LineDirective
     ;
 
 PragmaDirective
-    :   '#' Whitespace? 'pragma' Whitespace ~[\r\n]*
+    :   '#' Whitespace? ('pragma'|'error') Whitespace ~[\r\n]*
         -> skip
     ;
 

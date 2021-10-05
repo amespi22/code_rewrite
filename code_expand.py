@@ -34,7 +34,7 @@ def main():
         #File should have a new line for each file to parse
         #Files named should be .c files
         print("Starting pre-processing")
-        funcs_and_args,funcs_and_rts,macros,dont_eval,okay_to_eval = get_json_data(pre_process)
+        funcs_and_args,funcs_and_rts,macros,dont_eval,okay_to_eval = get_json_data(pre_process,infile=prog_name)
         print("Pre-processing done")
     else:
         funcs_and_rts = {}
@@ -42,7 +42,7 @@ def main():
         macros = False
     if not(macros == False):
         _pp_prog_name=f"{prog_name}.pp"
-        preprocess(macros,prog_name,_pp_prog_name)
+        macros=preprocess(macros,prog_name,_pp_prog_name)
     else:
         _pp_prog_name=f"{prog_name}"
 
@@ -58,6 +58,7 @@ def main():
 
     #get the dictionary that maps line numbers with the re-write
     p,t = get_tree_from_file(_pp_prog_name)
+    print_ctx_bfs(t,"original_tree")
     d1 = get_all_decs(t)
     #loop to run all code transformations
     #order matters, don't re-arrange
@@ -824,16 +825,20 @@ def preprocess_string(pragmas:dict,prog:str):
     negative_re=re.compile(r'^\s*#ifndef\s+(\S+)')
     next_re=re.compile(r'^\s*#else')
     end_re=re.compile(r'^\s*#endif')
+    define_re=re.compile(r'^\s*#define\s+(.*)')
 
     lines = prog.split("\n")
     ol=list()
-    capture_next,in_cascade,captured=(False,False,False)
+    capture_next,in_cascade,captured,append_to_define=(False,False,False,False)
+    cur_define=None
+    new_pragma=dict()
     for l in lines:
         start=False
         p=positive_re.search(l)
         n=negative_re.search(l)
         el=next_re.search(l)
         end=end_re.search(l)
+        define=define_re.search(l)
         if p:
             start=True
             in_cascade=True
@@ -879,9 +884,37 @@ def preprocess_string(pragmas:dict,prog:str):
 
         if not start and (not in_cascade or capture_next):
             ol.append(l)
+            if define:
+                val=define.group(1)
+                vals=val.split()
+                if vals[-1][-1]=='\\':
+                    append_to_define=True
+                    vals[-1]=vals[-1][:-1]
+                else:
+                    append_to_define=False
+                cur_define=vals[0].strip()
+                if len(vals)>1:
+                    new_pragma[cur_define]=" ".join(vals[1:])
+                else:
+                    if append_to_define:
+                        new_pragma[cur_define]="" 
+                    else:
+                        new_pragma[cur_define]=True
+                        _pragmas.append(cur_define)
+                        _prags='|'+cur_define
+                        pragma_re=re.compile(r'\b('+_prags+r")\b")
+            elif append_to_define:
+                val=l
+                if val[-1]!='\\':
+                    append_to_define=False
+                else:
+                    val=val[:-1]
+                new_pragma[cur_define]+=" ".join(vals[1:])
+
             if capture_next:
                 captured=True
-    return ol
+    pragmas.update(new_pragma)
+    return ol,pragmas
             
 
 
@@ -891,11 +924,12 @@ def preprocess(pragmas:dict,inf:str,outf:str):
     with open(inf,'r') as _in:
         pgrm=_in.read()
 
-    ol = preprocess_string(pragmas, pgrm)
+    ol,updated_pragmas = preprocess_string(pragmas, pgrm)
 
     with open(outf,'w') as _out:
         for i in ol:
             _out.write(f"{i}\n")
+    return updated_pragmas
 
 if __name__ == "__main__":
     main()

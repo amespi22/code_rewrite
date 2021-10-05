@@ -1835,7 +1835,7 @@ def popq(q):
     q.reverse()
     return r
 
-def get_json_data(fname):
+def get_json_data(fname,infile):
     rd = {}
     d1 = {}
     d2 = {}
@@ -1852,7 +1852,7 @@ def get_json_data(fname):
             fls = data["filenames"]
             flst = [x["name"] for x in fls]
             #add macro stuff and use pemma's preprocess() function 
-            d1,d2 = parse_pre_process(flst,rd)
+            d1,d2 = parse_pre_process(flst,rd,infile)
         if 'disable_eval' in data.keys():
             disable_eval=list(data['disable_eval'])
 
@@ -1867,9 +1867,21 @@ def get_json_data(fname):
             
     return (d1,d2,rd,disable_eval,enable_eval)
 
+def resolve_included(includes, infile, pragmas):
+    # this function walks through, identifies the #includes and then resolves processing order
+    includes=list()
+    prag_def={'name':None,'value':None}
+    with open(infile,'r') as inf:
+        l=inf.readlines()
+        for i,line in enumerate(lines):
+            pass
+
+        
+    
+
 #Input a file with a list of .c files to search functions for
 #Output a dictionary of functions and their arguments
-def parse_pre_process(cnts, pragmas):
+def parse_pre_process(cnts, pragmas,infile):
     #return dictionary
     ret_d = {}
     ret_d2 = {}
@@ -1882,7 +1894,7 @@ def parse_pre_process(cnts, pragmas):
         print(f"Processing file {c}")
         src = remove_defines(inf.readlines()) 
         inf.close()
-        src = preprocess_string(pragmas,src)
+        src,pragmas = preprocess_string(pragmas,src)
         src = "".join([f"{s}\n" for s in src])
         #kill preprocessing stuff
         #make the new call on the string

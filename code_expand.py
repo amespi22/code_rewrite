@@ -4,6 +4,7 @@ import argparse
 import sys
 import itertools
 import subprocess
+import re
 
 def main():
     #read in the function and file we weant to look at
@@ -39,12 +40,17 @@ def main():
     else:
         funcs_and_rts = {}
         funcs_and_args = {}
-        macros = False
-    if not(macros == False):
-        _pp_prog_name=f"{prog_name}.pp"
-        macros=preprocess(macros,prog_name,_pp_prog_name)
-    else:
-        _pp_prog_name=f"{prog_name}"
+        macros = None
+
+    _pp_prog_name=f"{prog_name}.pp"
+    macros=preprocess(macros,prog_name,_pp_prog_name)
+
+    #if not(macros == False):
+    #    _pp_prog_name=f"{prog_name}.pp"
+    #    macros=preprocess(macros,prog_name,_pp_prog_name)
+    #else:
+    #    macros=preprocess(None,prog_name,f"{prog_name}.pp")
+    #    _pp_prog_name=f"{prog_name}"
 
 
     from os import path as path
@@ -814,26 +820,67 @@ def de_const(lst):
         if const(typ):
             lst[i] = typ.replace("const",""),lst[i][1]
 
+def remove_multiline_comments(prog:str):
+    mlcmnt_start_re=re.compile(r'(.*)/\*(.*)$')
+    mlcmnt_end_re=re.compile(r'\*/(.*)$')
+    lines = prog.split("\n")
+    comment=[False]
+    ol=[]
+    for l in lines:
+        cmt=mlcmnt_start_re.search(l)
+        if cmt:
+            l1=cmt.group(1)
+            comment=[True]
+            l2=cmt.group(2)
+            ecmt= mlcmnt_end_re.search(l2)
+            if ecmt:
+                l1+=ecmt.group(1)
+                comment.append(False)
+            l=l1
+        elif comment[-1]:
+            ecmt= mlcmnt_end_re.search(l)
+            if ecmt:
+                l=ecmt.group(1)
+                comment.append(False)
+            else:
+                l=None
+        if l:
+            ol.append(l)
+    return ol
 
 def preprocess_string(pragmas:dict,prog:str):
-    import re
-    _pragmas=list(pragmas.keys())
+    _pragmas=[ x.strip() if '(' not in x else x.split('(',1)[0] for x in pragmas.keys()] if pragmas else []
+    _macros=[]
+    if pragmas:
+        for x in pragmas.keys():
+            if '(' in x:
+                _macros.append(x.split('(',1)[0])
+    if not pragmas:
+        pragmas=dict()
+    _macs='|'.join(list(_macros))
     _prags='|'.join(list(_pragmas))
-    print(f"[PRAGMAS] {_prags}")
+    #print(f"[PRAGMAS] {_macs}")
     pragma_re = None
-    if len(_prags)>0:
+    macro_re = None
+    if len(_macros)>0:
+        macro_re=re.compile(r'\b('+_macs+r")\b")
+    if len(_pragmas)>0:
         pragma_re=re.compile(r'\b('+_prags+r")\b")
     # note from pdr: there are also #if defined \((\S+)\) LOGICAL , but omitting for simplicity
-    positive_re=re.compile(r'^\s*#(if|ifdef|elif)\s+(\w+)')
-    negative_re=re.compile(r'^\s*#ifndef\s+(\w+)')
-    next_re=re.compile(r'^\s*#else')
-    end_re=re.compile(r'^\s*#endif')
-    define_re=re.compile(r'^\s*#define\s+(.*)')
+    positive_re=re.compile(r'^\s*#\s*(if|ifdef|elif)\s+(\w+)')
+    negative_re=re.compile(r'^\s*#\s*ifndef\s+(\w+)')
+    undef_re=re.compile(r'^\s*#\s*undef\s+(\w+)')
+    next_re=re.compile(r'^\s*#\s*else')
+    end_re=re.compile(r'^\s*#\s*endif')
+    define_re=re.compile(r'^\s*#\s*define\s+(.*)')
+    macrofn_re=re.compile(r'^(\w+)(\(.*\))(.*)')
+    macrofndef_re=re.compile(r'^(\w+)(\([^\(]*\))(.*)')
 
-    lines = prog.split("\n")
+    lines = remove_multiline_comments(prog)
     ol=list()
     capture_next,in_cascade,captured,append_to_define=(False,False,False,False)
     cur_define=None
+    cur_value=None
     new_pragma=dict()
     for l in lines:
         #print(f"[LINE] '{l}'")
@@ -841,8 +888,11 @@ def preprocess_string(pragmas:dict,prog:str):
         p=positive_re.search(l)
         n=negative_re.search(l)
         el=next_re.search(l)
+        und=undef_re.search(l)
         end=end_re.search(l)
         define=define_re.search(l)
+        mac=macro_re.search(l) if macro_re else None
+        
         if p:
             start=True
             in_cascade=True
@@ -887,30 +937,62 @@ def preprocess_string(pragmas:dict,prog:str):
             capture_next=False
             in_cascade=False
             captured=False
-
-        if not start and (not in_cascade or capture_next):
-            ol.append(l)
+        elif und:
+            val=und.group(1)
+            pragmas[val]=False
+        elif not start and (not in_cascade or capture_next):
             if define:
-                val=define.group(1)
-                vals=val.split()
-                if vals[-1][-1]=='\\':
+                val=define.group(1).strip()
+                macro=macrofndef_re.search(val)
+                # #define xyz(a,b,c) \
+                #   #1 : xyz 
+                #   #2 : (a,b,c)
+                #   #3 :  \
+    
+                macnm,params,rest=(None,None,None)
+                if macro:
+                    macnm=macro.group(1)
+                    params=macro.group(2)
+                    rest=macro.group(3)
+                    _macros.append(macnm)
+                    if len(_macs)<=1:
+                        _macs=macnm
+                    else:
+                        _macs+=f"|{macnm}"
+                    macro_re=re.compile(r'\b('+_macs+r")\b")
+                else:
+                    vals=val.split('\s')
+                    macnm=vals[0].strip()
+                    if len(vals)>1:
+                        rest=" ".join(vals[1:])
+    
+                if rest and rest[-1]=='\\':
                     append_to_define=True
-                    vals[-1]=vals[-1][:-1]
+                    rest=rest[:-1]
                 else:
                     append_to_define=False
-                cur_define=vals[0].strip()
-                if len(vals)>1:
-                    new_pragma[cur_define]=" ".join(vals[1:])
+    
+                cur_define=[macnm,params,rest]
+                if rest:
+                    cur_value=rest
                 else:
                     if append_to_define:
-                        new_pragma[cur_define]="" 
+                        cur_value="" 
                     else:
-                        new_pragma[cur_define]=True
-
-                _pragmas.append(cur_define)
-                _prags='|'+cur_define
-                pragma_re=re.compile(r'\b('+_prags+r")\b")
-                pragmas[cur_define]=new_pragma[cur_define]
+                        cur_value=True
+    
+                if cur_define[0] not in _pragmas:
+                    _pragmas.append(cur_define[0])
+                    _prags='|'+cur_define[0]
+                    try:
+                        pragma_re=re.compile(r'\b('+_prags+r")\b")
+                    except Exception as e:
+                        print(f"[preprocess_string] cur_define => {cur_define}")
+                        raise(e)
+                
+                if not append_to_define:
+                    d=f"{cur_define[0]}{cur_define[1]}" if cur_define[1] else cur_define[0]
+                    pragmas[d.strip()]=cur_value
                     
                 #print(f"[PRAGMA] New pragma {cur_define} => {new_pragma[cur_define]}")
             elif append_to_define:
@@ -919,11 +1001,85 @@ def preprocess_string(pragmas:dict,prog:str):
                     append_to_define=False
                 else:
                     val=val[:-1]
-                new_pragma[cur_define]+=" ".join(vals[1:])
-                pragmas[cur_define]=new_pragma[cur_define]
+                cur_value +=val
+                if not append_to_define:
+                    d=f"{cur_define[0]}{cur_define[1]}" if cur_define[1] else cur_define[0]
+                    pragmas[d.strip()]=cur_value
+            elif mac:
+                #print(f"[Found macro] {mac.group(1)} {mac.span(1)}")
+                macro_dict={key:val for key,val in pragmas.items() if key.startswith(mac.group(1)) }
+                k_pragmas=list(macro_dict.keys())
+                if len(k_pragmas)<1 and mac.group(1):
+                    print("[WARNING!] we have an unmatched pragma!")
+                else:
+                    #print(f"[Found pragma] {macro_dict} {k_pragmas}\n^^<= {mac.group(1)}\n LINE ==> ['{l}']")
+                    span=mac.span(1)
+                    e=span[1]
+                    #print(f"[params] {l[span[0]:e]} => {l[0:span[0]]} | {l[span[0]:span[1]]}  | {l[span[1]:]}")
+                    char=l[e];e+=1
+                    params=char
+                    p_list=[]
+                    index=None
+                    open_b=0
+                    close_b=0
+                    if char=='(':
+                        open_b=1
+                        index=e-1
+                    while(open_b!=close_b) and (open_b!=0):
+                        #print(f"[params] {params}")
+                        char=l[e];e+=1
+                        if char == ',' :
+                            if open_b==close_b+1:
+                                #print(f"[maybe found it] {l[index+1:e-1]}")
+                                p_list.append(l[index+1:e-1])
+                                index=e
+                        elif char == '(':
+                            open_b+=1
+                        elif char == ')':
+                            close_b+=1
+                            if open_b==close_b:
+                                #print(f"[maybe found it] {l[index+1:e-1]}")
+                                p_list.append(l[index+1:e-1])
+                                index=e
+                        params+=char
+                    # found full parameters
+                    substring=(span[0],e)
+                    mname,mparams,mpars=(None,None,None)
+                    index=None
+                    for i in k_pragmas:
+                        mfn=macrofndef_re.search(i)
+                        if mfn:
+                            mname=mfn.group(1)
+                            mparams=re.sub('[\(\)]','',mfn.group(2))
+                            mpars=mparams.split(',')
+                            #print(f"mfn: {i}\nmname: {mname}\nmparams: {mparams}")
+                            if len(mpars)==len(p_list):
+                                index=i
+                                break
+                    new_string=macro_dict[i]
+                    #print(f"------")
+                    #print(f"mfn: {i}\nmname: {mname}\nmparams: {mparams}\nnew_string: {new_string}")
+                    for i,m in enumerate(mpars):
+                        #print(f"m:{m} p_list:{p_list} ==> l:{l} \nmacroname:{mname}\nmacroparams:{mparams}\nnew_string:{new_string}")
+                        nstring=re.sub(r'\b'+m.strip()+r'\b',p_list[i],new_string)
+                        #print(f"'{m}' => '{p_list[i]}' \n{new_string} => {nstring}")
+                        new_string=nstring
+    
+                    #macrofn_re=re.compile(r'^(\w+)(\(.*\))(.*)')
+                    oldstring=l
+                    l=l[0:substring[0]]+new_string+l[substring[1]:]
+                    #print(f"[Old string] {oldstring}")
+                    #print(f"[new string] {l}")
+            
+
+        if not start and (not in_cascade or capture_next):
+            # continue for every line
+            ol.append(l)
+
 
             if capture_next:
                 captured=True
+    
     pragmas.update(new_pragma)
     return ol,pragmas
             

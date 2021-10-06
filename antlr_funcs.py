@@ -11,6 +11,7 @@ import inspect
 import codecs
 import copy
 import json
+import re
 
 debug=(False,True) # [0] print debug messages ; [1] generate debug log from debug messages
 gbl_debug_msg=["",0,open("debug.log","w") if debug[1] else None,debug[1] ]
@@ -1134,7 +1135,6 @@ def print_scope_info(scope):
 
 def is_literal(val):
     # if is a digit
-    import re
     if re.match(r"\d+",val):
         return True
     return False
@@ -1156,7 +1156,6 @@ def can_cast(ltyp,rtyp):
     return False
 
 def is_okay_func_call(rhs_value,eval_me):
-    import re
     is_func=re.search(r"(\S+)\s*\((((\S+),\s*)*\S+)?\)",rhs_value)
     if is_func and is_func.group(1) not in eval_me:
         return True
@@ -1278,7 +1277,6 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
                                 else:
                                     dprint(f" => is literal (True) {v} [type_info : {type_info}]")
                             # now we're looking at each set of variables and the RHS value
-                            import re
                             rtyp=re.sub(r"\bconst\b",r' ',type_info)
                             x=type_lut.get(rtyp,None)
                             if not x:
@@ -1323,7 +1321,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
                     # and then take the scope_uniq list and generate the initialized values
                     for u in scope_uniq[k]:
                         utyp,uname,uval,rtyp=u
-                        import re
+                        utyp=re.sub(r"\bregister\b",r"",utyp)
                         has_uname=re.search(r"\b("+uname+r")\b",uval)
                         if has_uname :
                             dprint("not valid - "+ f"{utyp} {uname}; {uname} = (({utyp}){uval});\n")
@@ -1363,6 +1361,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
                     if valid:
                         for u in uniq_init:
                             utyp,uname,uval=u
+                            utyp=re.sub(r"\b(register)\b",r"",utyp).strip()
                             utyp_=re.sub(r"\b(static|const|register)\b",r"",utyp).strip()
                             ptr_=False
                             if "*" in utyp:
@@ -1521,7 +1520,6 @@ def get_fix_loc_rewrites(scope,def_vars=["i"]):
             for x in val_s:
                 try:
                     type_info,var,varinfo,value=x
-                    import re
                     typ=re.sub(r"\bconst\b",r' ',type_info)
                     for def_var in def_vars:
                         info=(typ,def_var,value)
@@ -1841,8 +1839,11 @@ def get_json_data(fname,infile):
     d2 = {}
     disable_eval=[]
     enable_eval=[]
+    version=None
     with open(fname, 'r') as j:
         data = json.load(j)
+        if 'DEPEND_VERSION' in data.keys():
+            version=data['DEPEND_VERSION']
         if "macros" in data.keys():
             mcs = data["macros"]
             for i in range(len(mcs)):
@@ -1851,6 +1852,10 @@ def get_json_data(fname,infile):
             #do the thing here
             fls = data["filenames"]
             flst = [x["name"] for x in fls]
+        if 'ignore' in data.keys():
+            fignore=data['ignore']
+            for x in fignore:
+                flst.remove(x)
             #add macro stuff and use pemma's preprocess() function 
             d1,d2 = parse_pre_process(flst,rd,infile)
         if 'disable_eval' in data.keys():
@@ -1911,7 +1916,7 @@ def parse_pre_process(cnts, pragmas,infile):
             exit()
         for f in fns:
             ret_d[get_func_name(f)] = get_func_args(f)
-            ret_d2[get_func_name(f)] = f.getChild(0).getText()
+            ret_d2[get_func_name(f)] = re.sub(r"^extern",r"",f.getChild(0).getText())
     return ret_d,ret_d2
 
 def get_all_decs(ctx):

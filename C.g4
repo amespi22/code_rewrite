@@ -850,6 +850,12 @@ EncodingPrefix
     ;
 
 fragment
+SCont
+    :   '\\\n'   // Added line
+    |   '\\\r\n' // Added line
+    ;
+
+fragment
 SCharSequence
     :   SChar+
     ;
@@ -858,26 +864,25 @@ fragment
 SChar
     :   ~["\\\r\n]
     |   EscapeSequence
-    |   '\\\n'   // Added line
-    |   '\\\r\n' // Added line
+    |   SCont
     ;
 
+
 ComplexDefine
-    :   '#' Whitespace? 'define'  ~[\r\n]*
+    :  '#' Whitespace? 'define' ( ~[\\\r\n]* SCont )* ~[\r\n]* 
         -> skip
     ;
-/*
+
 Macroifdef
     :   '#' Whitespace? 'ifdef'  ~[\r\n]*
         -> skip
     ;
-*/
+
 Macroifndef
     :   '#' Whitespace? 'ifndef'  ~[\r\n]*
         -> skip
     ;
 
-/*
 Macroelse
     :   '#' Whitespace? 'else'  ~[\r\n]*
         -> skip
@@ -887,7 +892,6 @@ Macroendif
     :   '#' Whitespace? 'endif'  ~[\r\n]*
         -> skip
     ;
-*/
 
 IncludeDirective
     :   '#' Whitespace? 'include' Whitespace? (('"' ~[\r\n]* '"') | ('<' ~[\r\n]* '>' )) Whitespace? LineComment? Newline

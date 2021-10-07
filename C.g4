@@ -434,9 +434,9 @@ statement
     ;
 
 labeledStatement
-    :   Identifier ':' statement
-    |   'case' constantExpression ':' statement
-    |   'default' ':' statement
+    :   Identifier ':' blockItemList
+    |   'case' constantExpression ':' blockItemList
+    |   'default' ':' blockItemList
     ;
 
 compoundStatement

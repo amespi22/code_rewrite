@@ -502,11 +502,11 @@ def serializedATN():
         buf.write("\2\2\2\u03e3\u03be\3\2\2\2\u03e3\u03bf\3\2\2\2\u03e3\u03c0")
         buf.write("\3\2\2\2\u03e3\u03c1\3\2\2\2\u03e3\u03c2\3\2\2\2\u03e3")
         buf.write("\u03c3\3\2\2\2\u03e3\u03c4\3\2\2\2\u03e4\u0095\3\2\2\2")
-        buf.write("\u03e5\u03e6\7n\2\2\u03e6\u03e7\7[\2\2\u03e7\u03f1\5\u0094")
-        buf.write("K\2\u03e8\u03e9\7\26\2\2\u03e9\u03ea\5\62\32\2\u03ea\u03eb")
-        buf.write("\7[\2\2\u03eb\u03ec\5\u0094K\2\u03ec\u03f1\3\2\2\2\u03ed")
-        buf.write("\u03ee\7\32\2\2\u03ee\u03ef\7[\2\2\u03ef\u03f1\5\u0094")
-        buf.write("K\2\u03f0\u03e5\3\2\2\2\u03f0\u03e8\3\2\2\2\u03f0\u03ed")
+        buf.write("\u03e5\u03e6\7n\2\2\u03e6\u03e7\7[\2\2\u03e7\u03f1\5\u009a")
+        buf.write("N\2\u03e8\u03e9\7\26\2\2\u03e9\u03ea\5\62\32\2\u03ea\u03eb")
+        buf.write("\7[\2\2\u03eb\u03ec\5\u009aN\2\u03ec\u03f1\3\2\2\2\u03ed")
+        buf.write("\u03ee\7\32\2\2\u03ee\u03ef\7[\2\2\u03ef\u03f1\5\u009a")
+        buf.write("N\2\u03f0\u03e5\3\2\2\2\u03f0\u03e8\3\2\2\2\u03f0\u03ed")
         buf.write("\3\2\2\2\u03f1\u0097\3\2\2\2\u03f2\u03f4\7D\2\2\u03f3")
         buf.write("\u03f5\5\u009aN\2\u03f4\u03f3\3\2\2\2\u03f4\u03f5\3\2")
         buf.write("\2\2\u03f5\u03f6\3\2\2\2\u03f6\u03f7\7E\2\2\u03f7\u0099")
@@ -7167,8 +7167,8 @@ class CParser ( Parser ):
         def Colon(self):
             return self.getToken(CParser.Colon, 0)
 
-        def statement(self):
-            return self.getTypedRuleContext(CParser.StatementContext,0)
+        def blockItemList(self):
+            return self.getTypedRuleContext(CParser.BlockItemListContext,0)
 
 
         def Case(self):
@@ -7210,7 +7210,7 @@ class CParser ( Parser ):
                 self.state = 996
                 self.match(CParser.Colon)
                 self.state = 997
-                self.statement()
+                self.blockItemList()
                 pass
             elif token in [CParser.Case]:
                 self.enterOuterAlt(localctx, 2)
@@ -7221,7 +7221,7 @@ class CParser ( Parser ):
                 self.state = 1000
                 self.match(CParser.Colon)
                 self.state = 1001
-                self.statement()
+                self.blockItemList()
                 pass
             elif token in [CParser.Default]:
                 self.enterOuterAlt(localctx, 3)
@@ -7230,7 +7230,7 @@ class CParser ( Parser ):
                 self.state = 1004
                 self.match(CParser.Colon)
                 self.state = 1005
-                self.statement()
+                self.blockItemList()
                 pass
             else:
                 raise NoViableAltException(self)
@@ -7335,20 +7335,21 @@ class CParser ( Parser ):
 
         localctx = CParser.BlockItemListContext(self, self._ctx, self.state)
         self.enterRule(localctx, 152, self.RULE_blockItemList)
-        self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 1015 
             self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            while True:
-                self.state = 1014
-                self.blockItem()
+            _alt = 1
+            while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
+                if _alt == 1:
+                    self.state = 1014
+                    self.blockItem()
+
+                else:
+                    raise NoViableAltException(self)
                 self.state = 1017 
                 self._errHandler.sync(self)
-                _la = self._input.LA(1)
-                if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CParser.T__0) | (1 << CParser.T__1) | (1 << CParser.T__2) | (1 << CParser.T__3) | (1 << CParser.T__4) | (1 << CParser.T__5) | (1 << CParser.T__6) | (1 << CParser.T__7) | (1 << CParser.T__8) | (1 << CParser.T__9) | (1 << CParser.T__10) | (1 << CParser.T__11) | (1 << CParser.T__12) | (1 << CParser.T__14) | (1 << CParser.Auto) | (1 << CParser.Break) | (1 << CParser.Case) | (1 << CParser.Char) | (1 << CParser.Const) | (1 << CParser.Continue) | (1 << CParser.Default) | (1 << CParser.Do) | (1 << CParser.Double) | (1 << CParser.Enum) | (1 << CParser.Extern) | (1 << CParser.Float) | (1 << CParser.For) | (1 << CParser.Goto) | (1 << CParser.If) | (1 << CParser.Inline) | (1 << CParser.Int) | (1 << CParser.Long) | (1 << CParser.Register) | (1 << CParser.Restrict) | (1 << CParser.Return) | (1 << CParser.Short) | (1 << CParser.Signed) | (1 << CParser.Sizeof) | (1 << CParser.Static) | (1 << CParser.Struct) | (1 << CParser.Switch) | (1 << CParser.Typedef) | (1 << CParser.Union) | (1 << CParser.Unsigned) | (1 << CParser.Void) | (1 << CParser.Volatile) | (1 << CParser.While) | (1 << CParser.Alignas) | (1 << CParser.Alignof) | (1 << CParser.Atomic) | (1 << CParser.Bool) | (1 << CParser.Complex) | (1 << CParser.Generic) | (1 << CParser.Noreturn) | (1 << CParser.StaticAssert) | (1 << CParser.ThreadLocal) | (1 << CParser.LeftParen))) != 0) or ((((_la - 66)) & ~0x3f) == 0 and ((1 << (_la - 66)) & ((1 << (CParser.LeftBrace - 66)) | (1 << (CParser.Plus - 66)) | (1 << (CParser.PlusPlus - 66)) | (1 << (CParser.Minus - 66)) | (1 << (CParser.MinusMinus - 66)) | (1 << (CParser.Star - 66)) | (1 << (CParser.And - 66)) | (1 << (CParser.AndAnd - 66)) | (1 << (CParser.Not - 66)) | (1 << (CParser.Tilde - 66)) | (1 << (CParser.Semi - 66)) | (1 << (CParser.Identifier - 66)) | (1 << (CParser.Constant - 66)) | (1 << (CParser.DigitSequence - 66)) | (1 << (CParser.StringLiteral - 66)))) != 0)):
-                    break
+                _alt = self._interp.adaptivePredict(self._input,122,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re

@@ -306,6 +306,15 @@ declarator
     :   pointer? directDeclarator gccDeclaratorExtension*
     ;
 
+funcDeclarator
+    :   pointer? directFunctionDeclarator gccDeclaratorExtension*
+    ;
+
+directFunctionDeclarator
+    :   directDeclarator '(' parameterTypeList? ')'
+    |   directDeclarator '(' identifierList? ')'
+    ;
+
 directDeclarator
     :   Identifier
     |   '(' declarator ')'
@@ -512,7 +521,7 @@ externalDeclaration
 
 
 functionDeclaration
-    :   funcDeclarationSpecifiers? declarator declarationList? ';'
+    :   ~'typedef' funcDeclarationSpecifiers? funcDeclarator declarationList? ';'
     ;
 
 functionDefinition

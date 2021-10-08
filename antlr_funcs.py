@@ -896,10 +896,16 @@ def find_ctx_list(tree,ctx,screen=None):
 #Output: the argument names
 def get_func_name(fctx):
     gtx = fctx.getText()
-    if fctx.declarator().getChild(0).getChild(0).getText().strip() == '(':
+    node=None
+    if type(fctx)==CParser.FunctionDefinitionContext:
+        node=fctx.declarator()
+    else:
+        node=fctx.funcDeclarator()
+
+    if node.getChild(0).getChild(0).getText().strip() == '(':
         ret = fctx.getChild(0).getText()
     else:
-        ret = fctx.declarator().getChild(0).getChild(0).getText()
+        ret = node.getChild(0).getChild(0).getText()
     return ret
 
 def find_multictx_with_scope(tree,multctx,screen=None,ignore_nodes=None,okay_subscope=None):

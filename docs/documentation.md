@@ -35,7 +35,7 @@ This is an ***optional*** json file that contains:
 ## filenames
 Filenames of any library function required to transform the target C file. Used
 when extracting function arguments during program transformation. Currently supports
-the C file of the libraries, header files are future work. The file names are given
+the C file of the libraries, as well as the header files. The file names are given
 as a json list, e.g.,
 
 ~~~

@@ -41,6 +41,9 @@ def main():
         funcs_and_rts = {}
         funcs_and_args = {}
         macros = None
+    for k,v in funcs_and_rts.items():
+        print(f"{k}, {v}")
+    exit()
 
     _pp_prog_name=f"{prog_name}.pp"
     macros=preprocess(macros,prog_name,_pp_prog_name)
@@ -92,7 +95,7 @@ def main():
             rewrite = change_funcs[i](t)
             cur_pro = apply_changes[i](cur_pro, rewrite)
             print("End pass")
-            #print_inter_file(f_n, cur_pro)
+            print_inter_file(f_n, cur_pro)
             #print_ctx_bfs(t,f"help_pre_{f_n}")
             f_n += 1
             if i == len(change_funcs)-2:
@@ -101,7 +104,7 @@ def main():
                 rewrite = change_funcs[i+1](t)
                 cur_pro = apply_changes[i+1](cur_pro, rewrite)
                 print("End pass")
-                #print_inter_file(f_n, cur_pro)
+                print_inter_file(f_n, cur_pro)
                 f_n += 1
 
             j += 1
@@ -456,7 +459,7 @@ def expand_func_args(ctx):
                 #print(f"function {f_name} is present with args {p.getChild(2).getText()}")
                 #print(f"child count {p.getChildCount()}")
                 func_args = parse_func_call_args(p)
-                func_arg_names = [x.getText() for x in func_args]
+                func_arg_names = [get_string2(x) for x in func_args]
                 if func_arg_names == [')']:
                     continue
                 #replace index in function arguments
@@ -510,6 +513,7 @@ def expand_func_args(ctx):
                             v = r_vars.pop()
                             new_var_dec += f"{fun_arg_types[i][0]} {v} = {func_arg_names[i]};\n"
                             new_arg_string += f"{v},"
+                            #print(f"{fun_arg_types[i][0]} {v} = {func_arg_names[i]};\n")
                         else:
                             #use what was already there
                             new_arg_string += f"{func_arg_names[i]},"
@@ -645,7 +649,7 @@ def single_declarations(ctx):
                 if  cc > 1:
                     #we are with more than one declaration and one is initialized
                     typ = d.getChild(0).getText()
-                    typ = fix_type(typ)
+                    typ = get_string2(typ)
                     all_vars = [d.getChild(1).getChild(x).getText() for x in range(cc) if d.getChild(1).getChild(x).getText() != ',']
                 else:
                     #if here we don't have more than one variable in the
@@ -702,7 +706,7 @@ def expand_decs(ctx):
                     else:
                         if "char*" in typ and rhs not in ts and rhs.startswith('"'):
                             rewrite[(get_line_num(d)-1,get_last_line_num(d))] = f"{typ.replace('char*','char')} {lhs}[] = {rhs};\n"
-                            #print(f"if:{typ.replace('char*','char')} {lhs}[] = {rhs};\n")
+                            print(f"if:{typ.replace('char*','char')} {lhs}[] = {rhs};\n")
                             #print(f"{d.getText()}")
                         else:
                             #this is an attempt to pass lines that I should not need to chage
@@ -714,10 +718,10 @@ def expand_decs(ctx):
                     try:
                         typ = d.getChild(0).getText()
                         stmt = d.getChild(1).getText()
-                        var = d.getChild(1).getChild(0).getChild(0).getText()
-                        rhs = d.getChild(1).getChild(0).getChild(2).getText()
+                        var = get_string2(d.getChild(1).getChild(0).getChild(0))
+                        rhs = get_string2(d.getChild(1).getChild(0).getChild(2))
                         #trying to fix the way getText handles structs
-                        rhs = fix_rhs(rhs)
+                        #rhs = fix_rhs(rhs)
                         typ = fix_type(typ)
                         if var.endswith('[]') or rhs.startswith('{'):
                             continue
@@ -791,8 +795,8 @@ def fix_type(typ):
         typ = typ.replace("staticint", "static int")
     if "unsignedint" in typ:
         typ = typ.replace("unsignedint", "unsigned int")
-    if "struct" in typ:
-        typ = typ.replace("struct", "struct ")
+    if "struct" in typ and typ.startswith("struct"):
+        typ = typ.replace("struct", "struct ", 1)
     typ = typ.replace("  ", " ")
     return typ
 

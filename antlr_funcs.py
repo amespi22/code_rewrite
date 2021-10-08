@@ -1885,7 +1885,8 @@ def resolve_included(includes, infile, pragmas):
     
 
 #Input a file with a list of .c files to search functions for
-#Output a dictionary of functions and their arguments
+#ret_d = dictionary with functions(keys) and args(values)
+#ret_d2 = dictionary with functions(keys) and return values(values)
 def parse_pre_process(cnts, pragmas,infile):
     #return dictionary
     ret_d = {}
@@ -1907,6 +1908,10 @@ def parse_pre_process(cnts, pragmas,infile):
         if c.endswith(".h"):
             #here if header file
             fns = find_ctx(t,"<class 'CParser.CParser.FunctionDeclarationContext'>")
+            print(len(fns))
+            for f in fns:
+                print(f.getText())
+                print(type(f))
         elif c.endswith(".c"):
             #here if c file
             fns = get_functions(t)

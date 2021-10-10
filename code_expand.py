@@ -41,9 +41,6 @@ def main():
         funcs_and_rts = {}
         funcs_and_args = {}
         macros = None
-    for k,v in funcs_and_rts.items():
-        print(f"{k}, {v}")
-    exit()
 
     _pp_prog_name=f"{prog_name}.pp"
     macros=preprocess(macros,prog_name,_pp_prog_name)
@@ -71,8 +68,8 @@ def main():
     d1 = get_all_decs(t)
     #loop to run all code transformations
     #order matters, don't re-arrange
-    change_funcs = [expand_conditionals, if_else_break, insert_loop_braces, expand_if_else, expand_sizeof, single_declarations, expand_decs,expand_func_args]
-    apply_changes = [gen_conditionals, gen_if_else_break, gen_loop_braces, gen_if_changes, gen_expand_changes, gen_dec_changes, gen_dec_changes,gen_func_changes]
+    change_funcs = [expand_case, expand_conditionals, if_else_break, insert_loop_braces, expand_if_else, expand_sizeof, single_declarations, expand_decs,expand_func_args]
+    apply_changes = [gen_case, gen_conditionals, gen_if_else_break, gen_loop_braces, gen_if_changes, gen_expand_changes, gen_dec_changes, gen_dec_changes,gen_func_changes]
     j = 0
     i = 0
     f_n = 0
@@ -146,6 +143,49 @@ def print_inter_file(i, cur_pro):
         print(f"Writing file {i}")
         out_f.write(cur_pro)
 
+
+def expand_case(ctx):
+    #insert '{' after each "case():"
+    #insert '}' at end of switch
+    sw = "<class 'CParser.CParser.SelectionStatementContext'>"
+    lsc = "<class 'CParser.CParser.LabeledStatementContext'>"
+    fns = get_functions(ctx)
+    rewrites = []
+    for f in fns:
+        switches = find_ctx(f, sw)
+        #get rid of the if statements
+        s = [x for x in switches if x.getChild(0).getText() == 'switch']
+        for w in s:
+            #get all the Labled StatementContexts
+            cs = find_ctx(w, lsc)
+            for c in cs:
+                #append the start and end location of the
+                #case so we can and curles at the re-write
+                #the place right after the colon
+                if c.getChild(0).getText() == 'case':
+                    sl = get_start_loc(c.getChild(3))
+                    #the place at the end
+                    el = get_end_loc(c.getChild(3))
+                if c.getChild(0).getText() == 'default':
+                    sl = get_start_loc(c.getChild(2))
+                    #the place at the end
+                    el = get_end_loc(c.getChild(2))
+                rewrites.append((sl,el))
+    return rewrites
+
+def gen_case(cur_prog, rewrite):
+    lns = cur_prog.split('\n')
+    bc = '{'
+    ec = '}'
+    for r in rewrite:
+        (sr,sc),(er,ec) = r
+        ln = lns[sr-1]
+        #add open curly to case
+        lns[sr-1] = f"{ln[:sc-1]}{{{ln[sc-1:]}"
+        #add end curly to end
+        ln = lns[er-1]
+        lns[er-1] = f"{ln[:ec+1]}}}{ln[ec+1:]}"
+    return "\n".join(lns)
 
 def insert_loop_braces(ctx):
     #get all functions
@@ -723,7 +763,7 @@ def expand_decs(ctx):
                         #trying to fix the way getText handles structs
                         #rhs = fix_rhs(rhs)
                         typ = fix_type(typ)
-                        if var.endswith('[]') or rhs.startswith('{'):
+                        if var.endswith('[ ]') or rhs.startswith('{'):
                             continue
                         #print(f"type = {typ} var = {var};")
                         #print(f"stmt = {stmt};")

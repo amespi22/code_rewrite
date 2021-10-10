@@ -906,6 +906,8 @@ def get_func_name(fctx):
         ret = fctx.getChild(0).getText()
     else:
         ret = node.getChild(0).getChild(0).getText()
+        if ret == '*':
+            ret = node.getChild(1).getChild(0).getText()
     return ret
 
 def find_multictx_with_scope(tree,multctx,screen=None,ignore_nodes=None,okay_subscope=None):
@@ -1914,10 +1916,6 @@ def parse_pre_process(cnts, pragmas,infile):
         if c.endswith(".h"):
             #here if header file
             fns = find_ctx(t,"<class 'CParser.CParser.FunctionDeclarationContext'>")
-            print(len(fns))
-            for f in fns:
-                print(f.getText())
-                print(type(f))
         elif c.endswith(".c"):
             #here if c file
             fns = get_functions(t)

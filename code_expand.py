@@ -101,7 +101,7 @@ def main():
                 rewrite = change_funcs[i+1](t)
                 cur_pro = apply_changes[i+1](cur_pro, rewrite)
                 print("End pass")
-                print_inter_file(f_n, cur_pro)
+                #print_inter_file(f_n, cur_pro)
                 f_n += 1
 
             j += 1
@@ -177,14 +177,27 @@ def gen_case(cur_prog, rewrite):
     lns = cur_prog.split('\n')
     bc = '{'
     ec = '}'
+    deltas = {}
     for r in rewrite:
         (sr,sc),(er,ec) = r
         ln = lns[sr-1]
         #add open curly to case
         lns[sr-1] = f"{ln[:sc-1]}{{{ln[sc-1:]}"
+        if sr-1 not in deltas:
+            deltas[sr-1] = 1
+        else:
+            deltas[sr-1] += 1
+
         #add end curly to end
+        #first see if we have anything changed by the addition of
+        #the curly brace from above
+        if er-1 in deltas:
+            d = deltas[er-1]
+        else:
+            d = 0
         ln = lns[er-1]
-        lns[er-1] = f"{ln[:ec+1]}}}{ln[ec+1:]}"
+        lns[er-1] = f"{ln[:ec+1+d]}}}{ln[ec+1+d:]}"
+
     return "\n".join(lns)
 
 def insert_loop_braces(ctx):
@@ -746,7 +759,7 @@ def expand_decs(ctx):
                     else:
                         if "char*" in typ and rhs not in ts and rhs.startswith('"'):
                             rewrite[(get_line_num(d)-1,get_last_line_num(d))] = f"{typ.replace('char*','char')} {lhs}[] = {rhs};\n"
-                            print(f"if:{typ.replace('char*','char')} {lhs}[] = {rhs};\n")
+                            #print(f"if:{typ.replace('char*','char')} {lhs}[] = {rhs};\n")
                             #print(f"{d.getText()}")
                         else:
                             #this is an attempt to pass lines that I should not need to chage

@@ -92,7 +92,7 @@ def main():
             rewrite = change_funcs[i](t)
             cur_pro = apply_changes[i](cur_pro, rewrite)
             print("End pass")
-            print_inter_file(f_n, cur_pro)
+            #print_inter_file(f_n, cur_pro)
             #print_ctx_bfs(t,f"help_pre_{f_n}")
             f_n += 1
             if i == len(change_funcs)-2:

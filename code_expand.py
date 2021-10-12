@@ -257,18 +257,38 @@ def expand_conditionals(ctx):
 
 def gen_conditionals(cur_prog, rewrite):
     lns = cur_prog.split('\n')
+    deltas = {}
     for r in rewrite:
         s,e = r
         #may want to do this with a line delta but I'll test this first
         if s[0] == e[0]:
             #start and end are on the same line and need to add 1 to the index for the end
+
+            #start curly
+            if s[0]-1 in deltas:
+                d = deltas[s[0]-1]
+                deltas[s[0]-1] += 1
+            else:
+                deltas[s[0]-1] = 1
+                d = 0
+
             ln = lns[s[0]-1]
-            lns[s[0]-1] = f"{ln[:s[1]-1]}{{{ln[s[1]-1:]}"
+            lns[s[0]-1] = f"{ln[:s[1]-1+d]}{{{ln[s[1]-1+d:]}"
+
+            #end curly
+            if e[0]-1 in deltas:
+                d = deltas[e[0]-1]
+                deltas[e[0]-1] += 1
+
             ln = lns[e[0]-1]
-            lns[s[0]-1] = f"{ln[:e[1]+2]}}}{ln[e[1]+2:]}"
+            lns[s[0]-1] = f"{ln[:e[1]+1+d]}}}{ln[e[1]+1+d:]}"
         else:
             ln = lns[s[0]-1]
             lns[s[0]-1] = f"{ln[:s[1]-1]}{{{ln[s[1]-1:]}"
+            if s[0]-1 in deltas:
+                deltas[s[0]-1] += 1
+            else:
+                deltas[s[0]-1] = 1
             ln = lns[e[0]-1]
             lns[e[0]-1] = f"{ln[:e[1]+1]}}}{ln[e[1]+1:]}"
             #start and end are on different lines and don't need to add 1 to the index
@@ -276,8 +296,9 @@ def gen_conditionals(cur_prog, rewrite):
     of = open('tmp_fmt', 'w')
     of.write(ret)
     of.close()
-    s,o = subprocess.getstatusoutput(f"indent -kr -st -l300 tmp_fmt")
-    return o
+    #s,o = subprocess.getstatusoutput(f"indent -kr -st -l300 tmp_fmt")
+    #return o
+    return ret
 
 def if_else_break(ctx):
     if_stmt = "<class 'CParser.CParser.SelectionStatementContext'>"

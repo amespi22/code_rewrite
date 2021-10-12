@@ -296,9 +296,9 @@ def gen_conditionals(cur_prog, rewrite):
     of = open('tmp_fmt', 'w')
     of.write(ret)
     of.close()
-    #s,o = subprocess.getstatusoutput(f"indent -kr -st -l300 tmp_fmt")
-    #return o
-    return ret
+    s,o = subprocess.getstatusoutput(f"indent -kr -st -l300 tmp_fmt")
+    return o
+    #return ret
 
 def if_else_break(ctx):
     if_stmt = "<class 'CParser.CParser.SelectionStatementContext'>"

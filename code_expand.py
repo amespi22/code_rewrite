@@ -180,13 +180,15 @@ def gen_case(cur_prog, rewrite):
     deltas = {}
     for r in rewrite:
         (sr,sc),(er,ec) = r
-        ln = lns[sr-1]
         #add open curly to case
-        lns[sr-1] = f"{ln[:sc-1]}{{{ln[sc-1:]}"
         if sr-1 not in deltas:
             deltas[sr-1] = 1
+            d = 0
         else:
             deltas[sr-1] += 1
+            d = deltas[sr-1] - 1
+        ln = lns[sr-1]
+        lns[sr-1] = f"{ln[:sc-1+d]}{{{ln[sc-1+d:]}"
 
         #add end curly to end
         #first see if we have anything changed by the addition of

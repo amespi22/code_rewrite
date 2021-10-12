@@ -1605,7 +1605,7 @@ def get_func_args(ctx):
         ftlc = find_ctx(ctx, "<class 'CParser.CParser.ParameterTypeListContext'>")
 
         #for the c89 standard of not declaring types in parameter list of functions
-        if ctx.getChildCount() == 4:
+        if ctx.getChildCount() == 4 and not ctx.getChild(0).getText().startswith("extern"):
             args = ctx.getChild(2)
             #for every argument
             ts = []
@@ -1629,6 +1629,9 @@ def get_func_args(ctx):
 
         if len(ftlc) > 0:
             c = ftlc[0].getChild(0)
+            #print(f"ftlc len = {len(ftlc)} text = {ftlc[0].getText()}")
+            #print(ctx.getChild(0).getText())
+            #print(ctx.getText())
             cl = c.children
             #looks like c.getChildCount() len of 1 is void and we don't care about funcs with no args
             cs = [c for c in cl if str(type(c)) != "<class 'antlr4.tree.Tree.TerminalNodeImpl'>" and c.getChildCount() > 1]
@@ -1889,8 +1892,6 @@ def resolve_included(includes, infile, pragmas):
         for i,line in enumerate(lines):
             pass
 
-        
-    
 
 #Input a file with a list of .c files to search functions for
 #ret_d = dictionary with functions(keys) and args(values)
@@ -1925,7 +1926,10 @@ def parse_pre_process(cnts, pragmas,infile):
             exit()
         for f in fns:
             ret_d[get_func_name(f)] = get_func_args(f)
-            ret_d2[get_func_name(f)] = re.sub(r"^extern",r"",f.getChild(0).getText())
+            if f.getChild(0).getText() == 'extern':
+                ret_d2[get_func_name(f)] = f.getChild(1).getText()
+            else:
+                ret_d2[get_func_name(f)] = f.getChild(0).getText()
     return ret_d,ret_d2
 
 def get_all_decs(ctx):

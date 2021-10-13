@@ -1905,31 +1905,33 @@ def parse_pre_process(cnts, pragmas,infile):
     for c in cnts:
         #read all the files and pull out the functions from each file to return
         #open the file
-        inf = open(c, 'r')
-        print(f"Processing file {c}")
-        src = remove_defines(inf.readlines())
-        src,_ = preprocess_string(pragmas,src)
-        inf.close()
-        src = "\n".join(src)
-        #kill preprocessing stuff
-        #make the new call on the string
-        p,t = get_tree_from_string(src)
-        if c.endswith(".h"):
-            #here if header file
-            fns = find_ctx(t,"<class 'CParser.CParser.FunctionDeclarationContext'>")
-        elif c.endswith(".c"):
-            #here if c file
-            fns = get_functions(t)
-        else:
-            #here if we have error
-            print("ERROR parsing header and library files ")
-            exit()
-        for f in fns:
-            ret_d[get_func_name(f)] = get_func_args(f)
-            if f.getChild(0).getText() == 'extern':
-                ret_d2[get_func_name(f)] = f.getChild(1).getText()
+        from os import path
+        if path.exists(c):
+            inf = open(c, 'r')
+            print(f"Processing file {c}")
+            src = remove_defines(inf.readlines())
+            src,_ = preprocess_string(pragmas,src)
+            inf.close()
+            src = "\n".join(src)
+            #kill preprocessing stuff
+            #make the new call on the string
+            p,t = get_tree_from_string(src)
+            if c.endswith(".h"):
+                #here if header file
+                fns = find_ctx(t,"<class 'CParser.CParser.FunctionDeclarationContext'>")
+            elif c.endswith(".c"):
+                #here if c file
+                fns = get_functions(t)
             else:
-                ret_d2[get_func_name(f)] = f.getChild(0).getText()
+                #here if we have error
+                print("ERROR parsing header and library files ")
+                exit()
+            for f in fns:
+                ret_d[get_func_name(f)] = get_func_args(f)
+                if f.getChild(0).getText() == 'extern':
+                    ret_d2[get_func_name(f)] = f.getChild(1).getText()
+                else:
+                    ret_d2[get_func_name(f)] = f.getChild(0).getText()
     return ret_d,ret_d2
 
 def get_all_decs(ctx):

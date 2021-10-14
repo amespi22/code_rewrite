@@ -845,6 +845,33 @@ class CListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by CParser#stringIdentifier.
+    def enterStringIdentifier(self, ctx:CParser.StringIdentifierContext):
+        pass
+
+    # Exit a parse tree produced by CParser#stringIdentifier.
+    def exitStringIdentifier(self, ctx:CParser.StringIdentifierContext):
+        pass
+
+
+    # Enter a parse tree produced by CParser#stringIdentifierList.
+    def enterStringIdentifierList(self, ctx:CParser.StringIdentifierListContext):
+        pass
+
+    # Exit a parse tree produced by CParser#stringIdentifierList.
+    def exitStringIdentifierList(self, ctx:CParser.StringIdentifierListContext):
+        pass
+
+
+    # Enter a parse tree produced by CParser#macroDefinition.
+    def enterMacroDefinition(self, ctx:CParser.MacroDefinitionContext):
+        pass
+
+    # Exit a parse tree produced by CParser#macroDefinition.
+    def exitMacroDefinition(self, ctx:CParser.MacroDefinitionContext):
+        pass
+
+
     # Enter a parse tree produced by CParser#declarationList.
     def enterDeclarationList(self, ctx:CParser.DeclarationListContext):
         pass

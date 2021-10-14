@@ -15,6 +15,7 @@ import re
 
 debug=(False,True) # [0] print debug messages ; [1] generate debug log from debug messages
 gbl_debug_msg=["",0,open("debug.log","w") if debug[1] else None,debug[1] ]
+
 #This program assumes that C.g4 has been used to create
 #The parser files CLexer.py Clistener.py and Cparser.py
 #see /Documents/work/sefcom/gitpatch/antlr.md for more info
@@ -1147,25 +1148,56 @@ def is_literal(val):
         return True
     return False
 
-def number_types():
-    return ['int','unsigned int','uint32_t','uint_t','cgc_size_t','size_t','uint','char','long',\
-    'uint8_t','uint16_t','short']
+
+
+
+number_equivalent_classes=[ 
+                        set(['long long','unsigned long long','signed long long',\
+                        'long long int','unsigned long long int','signed long long int']), \
+                        set(['long int','unsigned long int','signed long int',\
+                        'long','unsigned long','signed long' ]), \
+                        set(['uint32_t','cgc_size_t',\
+                        'size_t','void *','char *','int *']),\
+                        set(['int','unsigned','signed','signed int','unsigned int',\
+                        'uint','uint_t' ]),\
+                        set(['short','uint16_t','signed short','unsigned short',\
+                        'short int','signed short int','unsigned short int']),
+                        set(['char','uint8_t','signed char','unsigned char'])
+                        ]    
+floatp_equivalent_classes=[
+        set(['long double','double double']),
+        set(['double']),
+        set(['float'])
+        ]
+number_set=set()
+fpnumber_set=set()
+for i in range(0,len(number_equivalent_classes)):
+    number_set=number_set|number_equivalent_classes[i] 
+for i in range(0,len(floatp_equivalent_classes)):
+    fpnumber_set=fpnumber_set|floatp_equivalent_classes[i] 
 
 def can_cast(ltyp,rtyp):
     # determines if rtyp variable can be cast as ltyp
-    equivalent_classes=[set(['int','unsigned int','uint32_t','uint_t','cgc_size_t',\
-                        'size_t','uint','void *', 'char *', 'int *', 'unsigned long', 'long']),\
-                        set(['char','uint8_t']),\
-                        set(['long'])
-                        ]    
-    for eq in equivalent_classes:
-        if ltyp.rstrip() in eq and rtyp.rstrip() in eq:
-            return True
-    return False
+    equivalent_classes=None
+    if ltyp in number_set and rtyp in number_set:
+        equivalent_classes=number_equivalent_classes 
+    elif ltyp in fpnumber_set and rtyp in fpnumber_set:
+        equivalent_classes=floatp_equivalent_classes 
+    if not equivalent_classes:
+        # they're not in the same number classes
+        return False
+    index=[None,None]
+    for i,eq in enumerate(equivalent_classes):
+        if ltyp.rstrip() in eq:
+            index[0]=i
+        if rtyp.rstrip() in eq:
+            index[1]=i
+    return index[0]<=index[1]
 
 def is_okay_func_call(rhs_value,eval_me):
-    is_func=re.search(r"(\S+)\s*\((((\S+),\s*)*\S+)?\)",rhs_value)
+    is_func=re.search(r"(\w+)\s*\((((\S+),\s*)*\S+)?\)",rhs_value[0],flags=re.ASCII)
     if is_func and is_func.group(1) not in eval_me:
+        dprint(f"[is_okay_func_call] found {is_func.group(1)} in {eval_me} [{rhs_value[0]}]")
         return True
     else:
         return False
@@ -1249,8 +1281,8 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
                     try:
                         type_info,var,varinfo,value_node=x
                         scope_uniq.append([])
-                        dprint(f"[i={i}][j={j}][k={k}] | type: {type_info} ; var : {var} ; varinfo : {varinfo} ; value_node : {get_string2(value_node)}")
                         fn_ptr=is_okay_func_call(get_string(value_node),eval_me)
+                        dprint(f"[i={i}][j={j}][k={k}] | type: {type_info} ; var : {var} ; varinfo : {varinfo} ; value_node : {get_string2(value_node)}; fn_ptr : {fn_ptr}")
                         if value_node and not fn_ptr:
                             term=list(find_multictx(value_node,[tree.Tree.TerminalNodeImpl]))
                             value=get_string2(value_node)

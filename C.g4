@@ -516,6 +516,7 @@ externalDeclaration
     :   functionDeclaration
     |   functionDefinition
     |   declaration
+    |   macroDefinition
     |   ';' // stray ;
     ;
 
@@ -526,6 +527,18 @@ functionDeclaration
 
 functionDefinition
     :   funcDeclarationSpecifiers? declarator declarationList? compoundStatement
+    ;
+
+stringIdentifier
+    :   ( Identifier+ | StringLiteral | Constant)
+    ;
+
+stringIdentifierList
+    :   stringIdentifier (',' stringIdentifier )*
+    ;
+
+macroDefinition
+    :   (directDeclarator|Identifier) '('  stringIdentifierList? ')' ';'?
     ;
 
 declarationList

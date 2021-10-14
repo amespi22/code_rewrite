@@ -299,9 +299,9 @@ def gen_conditionals(cur_prog, rewrite):
     of = open('tmp_fmt', 'w')
     of.write(ret)
     of.close()
-    #s,o = subprocess.getstatusoutput(f"indent -kr -st -l300 tmp_fmt")
-    #return o
-    return ret
+    s,o = subprocess.getstatusoutput(f"indent -kr -st -l300 tmp_fmt")
+    return o
+    #return ret
 
 def if_else_break(ctx):
     if_stmt = "<class 'CParser.CParser.SelectionStatementContext'>"
@@ -438,7 +438,7 @@ def expand_sizeof(ctx):
 
 def gen_if_changes(cur_prog, rewrite):
     lns = cur_prog.split('\n')
-    lns = [x+"\n" for x in lns]
+    lns = [f"{x}\n" for x in lns]
     lns = lns[:-1]
     diff = 0
     prev_line = 0
@@ -458,8 +458,7 @@ def gen_if_changes(cur_prog, rewrite):
             spaces = get_line_spaces(ln)
             line_change = f"{start}{middle}{end}"
 
-            diff = pre_len - len(line_change)
-
+            diff = pre_len - len(line_change) + diff
             lns[start_loc[0]-1] = f"{line_change}"
             lns[p_loc[0]-2] += f"{spaces}{func_call}\n"
 
@@ -728,7 +727,7 @@ def single_declarations(ctx):
                 if  cc > 1:
                     #we are with more than one declaration and one is initialized
                     typ = d.getChild(0).getText()
-                    typ = get_string2(typ)
+                    typ = fix_type(typ)
                     all_vars = [d.getChild(1).getChild(x).getText() for x in range(cc) if d.getChild(1).getChild(x).getText() != ',']
                 else:
                     #if here we don't have more than one variable in the

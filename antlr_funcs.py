@@ -1415,9 +1415,9 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
                                 size=""
                                 if "[" not in xname:
                                     # this is the code that handles pointers
-                                    if xtyp != "void":
+                                    if xtyp_ != "void":
                                         uname=f"{uname} = &{x1name}"
-                                        s0_body_vals+=f"{xtyp} {x1name};\n"
+                                        s0_body_vals+=f"{xtyp_} {x1name};\n"
                                         s0_body_vals+=f"    bzero(&{xname},{size}sizeof({xtyp_}));\n"
                                     else:
                                         # choosing int as the default type to cast a void* to

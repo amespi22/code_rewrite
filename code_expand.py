@@ -71,8 +71,8 @@ def main():
     d1 = get_all_decs(t) if args.only_new_vars else []
     #loop to run all code transformations
     #order matters, don't re-arrange
-    change_funcs = [expand_case, expand_conditionals, if_else_break, insert_loop_braces, expand_if_else, expand_sizeof, single_declarations, expand_decs,expand_func_args]
-    apply_changes = [gen_case, gen_conditionals, gen_if_else_break, gen_loop_braces, gen_if_changes, gen_expand_changes, gen_dec_changes, gen_dec_changes,gen_func_changes]
+    change_funcs = [expand_case, expand_conditionals,expand_blockItems,  if_else_break, insert_loop_braces, expand_if_else, expand_sizeof, single_declarations, expand_decs,expand_func_args]
+    apply_changes = [gen_case, gen_conditionals, gen_blockItems, gen_if_else_break, gen_loop_braces, gen_if_changes, gen_expand_changes, gen_dec_changes, gen_dec_changes,gen_func_changes]
     j = 0
     i = 0
     f_n = 0
@@ -146,6 +146,38 @@ def print_inter_file(i, cur_pro):
         print(f"Writing file {i}")
         out_f.write(cur_pro)
 
+
+def expand_blockItems(ctx):
+    #get all block items that end in ;
+    bic = "<class 'CParser.CParser.BlockItemContext'>"
+    fns = get_functions(ctx)
+    rewrites = []
+    for f in fns:
+        bics = find_ctx(f, bic)
+        r_bics = [x for x in bics if x.getText().endswith(";")]
+        for r in r_bics:
+            #rewrites will be end locations
+            rewrites.append(get_end_loc(r))
+    return rewrites
+
+def gen_blockItems(cur_prog, rewrite):
+    lns = cur_prog.split('\n')
+    line_deltas = {}
+    for r in rewrite:
+        er, ec = r
+        #print(f"len = {len(lns[er-1])} row = {ec},{lns[er-1][ec]} line = {lns[er-1]}")
+        if len(lns[er-1])-1 != ec:
+            ln = lns[er-1]
+            #print(f"{ln[:ec+1]}\n{ln[ec:]}")
+            if er - 1 in line_deltas:
+                d = line_deltas[er-1]
+                lns[er-1] =f"{ln[:ec+1+d]}\n{ln[ec+d:]}"
+                line_deltas[er-1] += 1
+            else:
+                lns[er-1] =f"{ln[:ec+1]}\n{ln[ec:]}"
+                line_deltas[er-1] = 1
+
+    return "\n".join(lns)
 
 def expand_case(ctx):
     #insert '{' after each "case():"
@@ -371,6 +403,7 @@ def expand_if_else(ctx):
     #for all functions
     for f in fns:
         ifs = find_ctx(f, sel_stmt)
+        ifs = [x for x in ifs if not ("&&" in x.getText() and "==" in x.getText())]
         all_types, all_vars = get_all_vars(f,True)
         #for all if statements
         for i in ifs:
@@ -504,7 +537,11 @@ def gen_expand_changes(cur_prog, rewrite):
 def expand_func_args(ctx):
     loop_stmt = "<class 'CParser.CParser.IterationStatementContext'>"
     loops = find_ctx(ctx, loop_stmt)
+    if_stmt = "<class 'CParser.CParser.SelectionStatementContext'>"
+    ifcons = find_ctx(ctx, if_stmt)
     whiles = [x for x in loops if ('for' in x.getChild(0).getText() or 'while' in x.getChild(0).getText())]
+    ifcons = [x.getChild(2) for x in ifcons if 'if' in x.getChild(0).getText() ]
+
     lps = [x.getChild(2) for x in whiles]
     #find all functions, record their names and paramaters
     fns = get_functions(ctx)
@@ -529,6 +566,9 @@ def expand_func_args(ctx):
                 #of the while or for loop
                 for l in lps:
                     if is_descendant(p, l):
+                        skip = True
+                for f in ifcons:
+                    if is_descendant(p, f):
                         skip = True
                 if skip:
                     skip = False
@@ -625,6 +665,7 @@ def gen_func_changes(cur_prog, rewrite):
     lns = lns[:-1]
     tab = chr(32) * 4
     line_deltas = {}
+    #of = open("tmp_ln_prints", 'a')
     for key,val in rewrite.items():
         start_loc, end_loc = key
         var_decs,func_call = val
@@ -639,7 +680,9 @@ def gen_func_changes(cur_prog, rewrite):
                 var_decs = indent_by_newline(var_decs, spaces, tab)
                 line_change = f"{tab}{start}{middle}{end}"
                 line_deltas[key[0][0]] = len(line_change) - len(lns[start_loc[0]-1])
+                #of.write(lns[start_loc[0]-1])
                 lns[start_loc[0]-1] = f"{spaces}{{\n{var_decs}{line_change}{spaces}}}\n"
+                #of.write(f"{spaces}{{\n{var_decs}{line_change}{spaces}}}\n")
             else:
                 orig_len = len(lns[start_loc[0]-1]) + line_deltas[key[0][0]]
                 s_lns = lns[start_loc[0]-1].split('\n')
@@ -653,6 +696,7 @@ def gen_func_changes(cur_prog, rewrite):
                 middle = val[1]
                 spaces = get_line_spaces(ln)
                 line_change = f"{start}{middle}{end}"
+                #of.write(line_change)
 
                 # add var decs to s_lns
                 s_lns[2] = line_change
@@ -678,7 +722,11 @@ def gen_func_changes(cur_prog, rewrite):
                 lns[i] = ""
             #kill the last line since it's now part of variable "end"
             lns[e] = ""
+            #of.write(lns[s])
+            #of.write(f"{spaces}{{\n{var_decs}{tab}{start}{middle}{end}{spaces}}}\n")
             lns[s] = f"{spaces}{{\n{var_decs}{tab}{start}{middle}{end}{spaces}}}\n"
+    #of.close()
+    #exit()
     return "".join(lns)
 
 #Used for getting the edited/new lines in aligned with surrounding text

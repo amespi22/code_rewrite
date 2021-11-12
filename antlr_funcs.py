@@ -1194,6 +1194,13 @@ def can_cast(ltyp,rtyp):
             index[1]=i
     return index[0]<=index[1]
 
+
+def is_function(name):
+    is_func=re.match(r"\s*(\S+)\s*\((((\S+),\s*)*\S+)?\)",name,flags=re.ASCII)
+    is_func_ptr=re.match(r"\s*(\(\s*\*\s*\S+\s*\))\s*(\(.*\))",name,flags=re.ASCII)
+    print(f"Checking {name} - is_func={is_func}, is_func_ptr={is_func_ptr}")
+    return is_func or is_func_ptr
+
 def is_okay_func_call(rhs_value,eval_me):
     is_func=re.search(r"(\w+)\s*\((((\S+),\s*)*\S+)?\)",rhs_value[0],flags=re.ASCII)
     if is_func and is_func.group(1) not in eval_me:
@@ -1276,6 +1283,10 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
                 # we're just going to assume a singly declared variable
                 ltyp=n[0][0]
                 lname=get_string2(n[0][1])
+                if '(' in lname and is_function(lname):
+                    print(f"{lname} is a function.\nSkipping.")
+                    continue
+                
                 #####
                 for k,x in enumerate(val_s+cval_s):
                     try:

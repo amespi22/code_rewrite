@@ -34,7 +34,7 @@ primaryExpression
     :   Identifier
     |   Constant
     |   StringLiteral+
-    |   '(' expression ')'
+    |   '__extension__'? '(' expression ')'
     |   genericSelection
     |   '__extension__'? '(' compoundStatement ')' // Blocks (GCC extension)
     |   '__builtin_va_arg' '(' unaryExpression ',' typeName ')'
@@ -186,6 +186,7 @@ declarationSpecifier
     |   typeQualifier
     |   functionSpecifier
     |   alignmentSpecifier
+    |   pointer
     ;
 
 initDeclaratorList
@@ -220,9 +221,10 @@ typeSpecifier
     |   '__m128'
     |   '__m128d'
     |   '__m128i')+
+    |   '__extension__' 'typedef'? typeSpecifier+
     |   '__extension__' '(' ('__m128' | '__m128d' | '__m128i') ')'
     |   atomicTypeSpecifier
-    |   structOrUnionSpecifier
+    |   '__extension__'? structOrUnionSpecifier
     |   enumSpecifier
     |   '__typeof__' '(' constantExpression ')' // GCC extension
     |   typeSpecifier pointer
@@ -285,13 +287,18 @@ atomicTypeSpecifier
 typeQualifier
     :   'const'
     |   'restrict'
+    |   '__restrict'
+    |   '__restrict__'
     |   'volatile'
+    |   'register'
     |   '_Atomic'
     ;
 
 functionSpecifier
     :   ('inline'
+    |   '__extension__'
     |   '_Noreturn'
+    |   '__inline' // GCC extension
     |   '__inline__' // GCC extension
     |   '__stdcall')
     |   gccAttributeSpecifier
@@ -330,6 +337,7 @@ directDeclarator
 
 gccDeclaratorExtension
     :   '__asm' '(' StringLiteral+ ')'
+    |   '__asm__' '(' StringLiteral+ ')'
     |   gccAttributeSpecifier
     ;
 
@@ -442,10 +450,18 @@ statement
     |   ('__asm' | '__asm__') ('volatile' | '__volatile__') '(' (logicalOrExpression (',' logicalOrExpression)*)? (':' (logicalOrExpression (',' logicalOrExpression)*)?)* ')' ';'
     ;
 
+/*
 labeledStatement
     :   Identifier ':' blockItemList
     |   'case' constantExpression ':' blockItemList
     |   'default' ':' blockItemList
+    ;
+*/
+
+labeledStatement
+    :   Identifier ':' statement
+    |   'case' constantExpression ':' statement
+    |   'default' ':' statement
     ;
 
 compoundStatement

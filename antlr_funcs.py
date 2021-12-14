@@ -1298,7 +1298,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
                             term=list(find_multictx(value_node,[tree.Tree.TerminalNodeImpl]))
                             value=get_string2(value_node)
                             value_subterms=[get_string2(v) for v in term]
-                            dprint(f"Subterms : {' '.join(value_subterms)}")
+                            dprint(f"Subterms : {','.join(value_subterms)}")
                             # if any RHS uses a variable, obtain its type from var_s (variable look-up table)
                             # and add it to the unique scope list of required variables
                             for v in value_subterms:

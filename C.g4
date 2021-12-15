@@ -460,8 +460,8 @@ labeledStatement
 
 labeledStatement
     :   Identifier ':' statement
-    |   'case' constantExpression ':' statement
-    |   'default' ':' statement
+    |   'case' constantExpression ':' ( declaration | statement )
+    |   'default' ':' ( declaration | statement )
     ;
 
 compoundStatement

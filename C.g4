@@ -186,8 +186,8 @@ declarationSpecifier
     |   typeQualifier
     |   functionSpecifier
     |   alignmentSpecifier
-    |   pointer
     ;
+//    |   pointer
 
 initDeclaratorList
     :   initDeclarator (',' initDeclarator)*

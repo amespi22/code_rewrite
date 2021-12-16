@@ -1196,18 +1196,23 @@ def can_cast(ltyp,rtyp):
 
 
 def is_function(name):
-    is_func=re.match(r"\s*(\S+)\s*\((((\S+),\s*)*\S+)?\)",name,flags=re.ASCII)
+    is_func=re.match(r"\s*(\S+)\s*\(((\s*(\S+),)*\s*\S+\s*)?\s*\)",name,flags=re.ASCII)
     is_func_ptr=re.match(r"\s*(\(\s*\*\s*\S+\s*\))\s*(\(.*\))",name,flags=re.ASCII)
-    print(f"Checking {name} - is_func={is_func}, is_func_ptr={is_func_ptr}")
+    print(f"Checking '{name}' - is_func={is_func}, is_func_ptr={is_func_ptr}")
     return is_func or is_func_ptr
 
 def is_okay_func_call(rhs_value,eval_me):
-    is_func=re.search(r"(\w+)\s*\((((\S+),\s*)*\S+)?\)",rhs_value[0],flags=re.ASCII)
-    if is_func and is_func.group(1) not in eval_me:
-        dprint(f"[is_okay_func_call] found {is_func.group(1)} in {eval_me} [{rhs_value[0]}]")
-        return True
-    else:
-        return False
+    is_func=re.search(r"(\w+)\s*\(((\s*(\S+)\s*,)*\s*\S+\s*)?\)",rhs_value[0],flags=re.ASCII)
+    is_func_ptr=re.match(r"\s*(\(\s*\*\s*\S+\s*\))\s*(\(.*\))",rhs_value[0],flags=re.ASCII)
+    is_func_call=re.match(r"\s*(\S+((\s*\[.*\]|\s*->\s*\S+)*))\s*(\(.*\))",rhs_value[0],flags=re.ASCII)
+    is_func_=[True if is_func else False,\
+             True if is_func_ptr else False,\
+             True if is_func_call else False]
+    is_valid_=[ True if is_func and is_func.group(1) in eval_me else False,\
+                True if is_func_call and is_func_call.group(1) in eval_me else False\
+              ]
+    dprint(f"is_func_ [{rhs_value[0]}] => '{is_func_}'")
+    return any(is_func_),any(is_valid_)
         
     
 # the point of this is to be able to disable fix_repair* functions from being executed
@@ -1251,8 +1256,8 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
         except Exception as e:
             print(f"Can't find {fn_name} in dvars {dvars.keys()}")
             raise(e)
-        for d in def_vars:
-            dprint(f"[{fn_name}] : {type(d)} : {get_string2(d)}")
+        for dd,d in enumerate(def_vars):
+            dprint(f"def_vars[{dd}]: [{fn_name}] : {type(d)} : {get_string2(d)}")
         #strip_array_decs(def_vars)
         ## for each namespace scope in function scope
         s2_fn_def=""
@@ -1270,6 +1275,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
             #val_s=s['vals_w_nodes']
             scope_uniq=[]
             end=s['scope_end']
+            dprint(f"sym_lut=>'{sym_lut}'\nval_s=>'{val_s}'\ncval_s=>'{cval_s}'")
 
             #s2_decls=""
             s2_fn=f"{fname}_{i}"
@@ -1283,6 +1289,10 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
                 # we're just going to assume a singly declared variable
                 ltyp=n[0][0]
                 lname=get_string2(n[0][1])
+                if lname.startswith('(') and is_function(f"{ltyp}{lname}"):
+                    print(f"{ltyp}{lname} is a function.\nSkipping.")
+                    continue
+            
                 if '(' in lname and is_function(lname):
                     print(f"{lname} is a function.\nSkipping.")
                     continue
@@ -1292,9 +1302,10 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
                     try:
                         type_info,var,varinfo,value_node=x
                         scope_uniq.append([])
-                        fn_ptr=is_okay_func_call(get_string(value_node),eval_me)
-                        dprint(f"[i={i}][j={j}][k={k}] | type: {type_info} ; var : {var} ; varinfo : {varinfo} ; value_node : {get_string2(value_node)}; fn_ptr : {fn_ptr}")
-                        if value_node and not fn_ptr:
+                        is_fn,okay_fn=is_okay_func_call([get_string(value_node).split(' ')[0]],eval_me)
+                        proceed=True if not is_fn else okay_fn
+                        dprint(f"[i={i}][j={j}][k={k}] | type: {type_info} ; var : {var} ; varinfo : {varinfo} ; value_node : {get_string2(value_node)}; proceed : {proceed} [not ({is_fn}) || {okay_fn}]")
+                        if value_node and proceed:
                             term=list(find_multictx(value_node,[tree.Tree.TerminalNodeImpl]))
                             value=get_string2(value_node)
                             value_subterms=[get_string2(v) for v in term]
@@ -1304,7 +1315,10 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
                             for v in value_subterms:
                                 if not is_literal(v):
                                     vtype = sym_lut.get(v,None)
-                                    dprint(f" => is literal (False) {v} [vtype={vtype}]")
+                                    if v.startswith('i'): 
+                                        dprint(f" => is literal (False) {v} [vtype={vtype}] => sym_lut:'{sym_lut}'")
+                                    else:
+                                        dprint(f" => is literal (False) {v} [vtype={vtype}]")
                                     if vtype:
                                         # check to see if there are any array versions
                                         vtyp=vtype
@@ -1340,12 +1354,13 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
                             #print(f"CASTING PASS: ltype: {ltyp}, lvar: {lname}, rtype : {rtyp}, rvalue: {value}")
                             info=(ltyp,lname,value,rtyp)
                             dprint(f"[i={i}][j={j}][k={k}] | type : {rtyp}; def_var : {def_var}; value : {value}")
-                            if info in uniques:
-                                dprint(f"^^ not unique")
+                            if info in uniques and info in scope_uniq[k]:
+                                dprint(f"^^ not unique  {info}")
                                 continue
                             else:
-                                dprint(f"^^ unique")
-                                uniques.append(info)
+                                dprint(f"^^ unique  {info}")
+                                if info not in uniques:
+                                    uniques.append(info)
                                 scope_uniq[k].append(info)
                     except Exception as e:
                         print(f"Exception with x={x}")
@@ -1412,6 +1427,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
                     if valid:
                         for u in uniq_init:
                             utyp,uname,uval=u
+                            dprint(f"UNIQ_INIT: ('{utyp}','{uname}','{uval});\n")
                             utyp=re.sub(r"\b(register)\b",r"",utyp).strip()
                             utyp_=re.sub(r"\b(static|const|register)\b",r"",utyp).strip()
                             ptr_=False
@@ -1482,6 +1498,12 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
                                 x1name=uname.replace("[ ]","[0]",1)
                                 s0_body_vals+=f"{utyp} {x1name};\n"
                                 s0_body_vals+=f"    bzero(&{x1name},sizeof({utyp_}));\n"
+                            elif "[" in uname:
+                                uname_re=re.search("(\S+)\s*\[\s*(.*)\s*\]$",uname)
+                                name=uname_re.group(1);
+                                size=uname_re.group(2);
+                                s0_body_vals+=f"{utyp} {uname};\n"
+                                s0_body_vals+=f"    bzero(&{name},( {size}));\n"
                             else:
                                 s0_body_vals+=f"{utyp} {uname};\n"
                                 s0_body_vals+=f"    bzero(&{uname},sizeof({utyp_}));\n"

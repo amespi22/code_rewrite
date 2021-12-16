@@ -33,6 +33,7 @@ def main():
     global macros
     dont_eval=[]
     okay_to_eval=[]
+    okay_ = ["sizeof"]
     if pre_process != "":
         #This means we have a file to parse
         #File should have a new line for each file to parse
@@ -45,6 +46,10 @@ def main():
         funcs_and_args = {}
         macros = None
 
+    for x in okay_:
+        if x not in okay_to_eval:
+            okay_to_eval.append(x)
+    
     _pp_prog_name=f"{prog_name}.pp"
     macros=preprocess(macros,prog_name,_pp_prog_name)
 

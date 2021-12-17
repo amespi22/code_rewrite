@@ -1195,8 +1195,10 @@ def can_cast(ltyp,rtyp):
     return index[0]<=index[1]
 
 def has_multiptr_refs(rhs_value):
-    has_multiptr=re.search(r"((\w+|\(\w+\))(->|\[\w+\])){2,}",rhs_value[0],flags=re.ASCII)
-    has_multidim_array=re.search(r"(\[\w+\]\s*){2,}",rhs_value[0],flags=re.ASCII)
+    x=re.sub(" ","",rhs_value)
+    has_multiptr=re.search(r"((\w+|\(\w+\))(\.|->|\[[^\]]+\])){2,}",x,flags=re.ASCII)
+    has_multidim_array=re.search(r"(\[[^\]]*]){2,}",x,flags=re.ASCII)
+    dprint(f"has_multiptr_refs '{x}' - {has_multiptr is not None} OR  {has_multidim_array is not None}")
     return (has_multiptr is not None) or (has_multidim_array is not None)
 
 def is_function(name):
@@ -1206,9 +1208,9 @@ def is_function(name):
     return is_func or is_func_ptr
 
 def is_okay_func_call(rhs_value,eval_me):
-    is_func=re.search(r"(\w+)\s*\(((\s*(\w+)\s*,)*\s*\w+\s*)?\)",rhs_value[0],flags=re.ASCII)
-    is_func_ptr=re.match(r"\s*(\(\s*\*\s*\S+\s*\))\s*(\(.*\))",rhs_value[0],flags=re.ASCII)
-    is_func_call=re.match(r"\s*(\w+((\s*\[.*\]|\s*->\s*\w+)*))\s*(\(.*\))",rhs_value[0],flags=re.ASCII)
+    is_func=re.search(r"(\w+)\s*\(((\s*(\w+)\s*,)*\s*\w+\s*)?\)",rhs_value,flags=re.ASCII)
+    is_func_ptr=re.match(r"\s*(\(\s*\*\s*\S+\s*\))\s*(\(.*\))",rhs_value,flags=re.ASCII)
+    is_func_call=re.match(r"\s*(\w+((\s*\.\s*\w+|\s*\[.*\]|\s*->\s*\w+)*))\s*(\(.*\))",rhs_value,flags=re.ASCII)
     is_func_=[True if is_func else False,\
              True if is_func_ptr else False,\
              True if is_func_call else False]
@@ -1306,14 +1308,21 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                     try:
                         type_info,var,varinfo,value_node=x
                         scope_uniq.append([])
-                        is_fn,okay_fn=is_okay_func_call([get_string(value_node).split(' ')[0]],eval_me)
-                        has_multiptrs=has_multiptr_refs([get_string(value_node).split(' ')[0]])
+                        if not value_node:
+                            dprint(f"empty value_node: continuing {x}")
+                            continue
+
+                        term=list(find_multictx(value_node,[tree.Tree.TerminalNodeImpl]))
+                        value_subterms= [get_string2(v) for v in term]
+                        val=" ".join(value_subterms)
+                        #if isinstance(value_node,list):
+                        #    value=get_string(value_node[0])
+                        is_fn,okay_fn=is_okay_func_call(val,eval_me)
+                        has_multiptrs=has_multiptr_refs(val)
                         proceed=False if has_multiptrs else True if not is_fn else okay_fn
-                        dprint(f"[i={i}][j={j}][k={k}] | type: {type_info} ; var : {var} ; varinfo : {varinfo} ; value_node : {get_string2(value_node)};\n proceed : {proceed} [not({has_multiptrs}) && ( not ({is_fn}) || {okay_fn} )]")
-                        if value_node and proceed:
-                            term=list(find_multictx(value_node,[tree.Tree.TerminalNodeImpl]))
+                        dprint(f"[i={i}][j={j}][k={k}] | type: {type_info} ; var : {var} ; varinfo : {varinfo} ; value_node : {get_string2(value_node)} ({type(value_node)});\n proceed : {proceed} [not({has_multiptrs}) && ( not ({is_fn}) || {okay_fn} )]")
+                        if proceed:
                             value=get_string2(value_node)
-                            value_subterms=[get_string2(v) for v in term]
                             dprint(f"Subterms : {','.join(value_subterms)}")
                             # if any RHS uses a variable, obtain its type from var_s (variable look-up table)
                             # and add it to the unique scope list of required variables
@@ -1390,6 +1399,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                     valid=False
                     udecl_vars=[]
                     # and then take the scope_uniq list and generate the initialized values
+                    comment=False
                     for u in scope_uniq[k]:
                         utyp,uname,uval,rtyp=u
                         utyp=re.sub(r"\bregister\b",r"",utyp)
@@ -1397,39 +1407,47 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                         if has_uname :
                             dprint("not valid - "+ f"{utyp} {uname}; {uname} = (({utyp}){uval});\n")
                         elif (utyp,uname) not in udecl_vars and utyp != "UNDEF":
-                            prefix=""
-                            suffix=""
+                            prefix_=list()
+                            suffix_=list()
                             if "/" in uval or "%" in uval:
                                 x_re=re.search(r"[/%]\s*(\w+)",uval)
                                 found=False
                                 if x_re:
                                     v=x_re.group(1)
                                     if v in [x[1] for x in uniq_init]:
-                                        prefix=f"    {v} = 1;\n         "
+                                        prefix_.append(f"    {v} = 1;\n         ")
                                         found=True
                                 if not found:
-                                    prefix=" /* [not yet implemented] modulo/divisor initialization \n"
-                                    suffix="\n */ "
+                                    prefix_.append(" /* [not yet implemented] modulo/divisor initialization \n")
+                                    suffix_.insert(0,"\n */ ")
+                                    comment=True
                             if "[" in uval:
                                 x_re=re.search(r"(\w+)\s*\[\s*(\S+)\s*\]",uval)
                                 if x_re:
                                     av=x_re.group(1)
                                     v=x_re.group(2)
-                                    if v in [x[1] for x in uniq_init]:
-                                        prefix=f"    {v} = 0;\n         "
                                     if av not in [x[1] for x in uniq_init]:
-                                        prefix=f"if ({av})"+'{'+f" {prefix}"
-                                        suffix="}"
+                                        prefix_.append(f"if ({av})"+'{')
+                                        suffix_.insert(0,"}")
+                                    if v in [x[1] for x in uniq_init]:
+                                        prefix_.append(f"    {v} = 0;\n         ")
                                 else:
                                     x_list=re.findall(r"\[\s*((([^]]+)\s*)+)\]",uval)
                                     y=[x in x_[0] for x_ in x_list for x in ["+","-","*","/"]]
                                     dprint(f" =====> {x_list} '{uval}' => {y} ")
                                     if any(y):
-                                        prefix=" /* [not yet implemented] array based initialization \n"
-                                        suffix="\n */ "
+                                        if not comment:
+                                            prefix_.append(" /* [not yet implemented] array based initialization \n")
+                                            suffix_.insert(0,"\n */ ")
+                                            comment=True
+                                        else:
+                                            prefix_.append(" // [not yet implemented] array based initialization \n")
+                                            suffix_.insert(0,"\n")
                                         dprint(f" === FOUND IT ===> {x_list} [{uval}] ")
                                         
                                 
+                            prefix="".join(prefix_)
+                            suffix="".join(suffix_)
                             if "[ ]" in uname:
                                 xname=uname.replace("[ ]","")
                                 s0_body_vars+="    {"+prefix+f"{utyp}* {xname}; {xname} = ({utyp}*)({uval}); "+suffix+"}\n"

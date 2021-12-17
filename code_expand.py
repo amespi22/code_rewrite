@@ -34,6 +34,7 @@ def main():
     dont_eval=[]
     okay_to_eval=[]
     okay_ = ["sizeof"]
+    struct_ptrs = []
     if pre_process != "":
         #This means we have a file to parse
         #File should have a new line for each file to parse

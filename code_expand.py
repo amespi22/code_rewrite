@@ -39,7 +39,7 @@ def main():
         #File should have a new line for each file to parse
         #Files named should be .c files
         print("Starting pre-processing")
-        funcs_and_args,funcs_and_rts,macros,dont_eval,okay_to_eval = get_json_data(pre_process,infile=prog_name)
+        funcs_and_args,funcs_and_rts,macros,dont_eval,okay_to_eval,struct_ptrs = get_json_data(pre_process,infile=prog_name)
         print("Pre-processing done")
     else:
         funcs_and_rts = {}
@@ -136,7 +136,7 @@ def main():
     walker.walk(printer,t)
     scope_vars = get_function_info(functions=get_functions(t),fscope=printer.scopes,dont_eval=dont_eval)
     #fix_loc_rewrites = get_fix_loc_rewrites(scope_vars)
-    fix_loc_rewrites,new_funcs = get_fix_loc_subfns(scope_vars,new_decs,okay_to_eval,id_=fix_ingred_id,root=t)
+    fix_loc_rewrites,new_funcs = get_fix_loc_subfns(scope_vars,new_decs,okay_to_eval,id_=fix_ingred_id,root=t,ptr_t=struct_ptrs)
     cur_pro = gen_fix_loc_changes(cur_pro, fix_loc_rewrites)
 
     #write out the new program

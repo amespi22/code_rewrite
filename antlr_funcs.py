@@ -1194,17 +1194,21 @@ def can_cast(ltyp,rtyp):
             index[1]=i
     return index[0]<=index[1]
 
+def has_multiptr_refs(rhs_value):
+    has_multiptr=re.search(r"((\w+|\(\w+\))(->|\[\w+\])){2,}",rhs_value[0],flags=re.ASCII)
+    has_multidim_array=re.search(r"(\[\w+\]\s*){2,}",rhs_value[0],flags=re.ASCII)
+    return (has_multiptr is not None) or (has_multidim_array is not None)
 
 def is_function(name):
-    is_func=re.match(r"\s*(\S+)\s*\(((\s*(\S+),)*\s*\S+\s*)?\s*\)",name,flags=re.ASCII)
+    is_func=re.match(r"\s*(\w+)\s*\(((\s*(\S+),)*\s*\S+\s*)?\s*\)",name,flags=re.ASCII)
     is_func_ptr=re.match(r"\s*(\(\s*\*\s*\S+\s*\))\s*(\(.*\))",name,flags=re.ASCII)
-    print(f"Checking '{name}' - is_func={is_func}, is_func_ptr={is_func_ptr}")
+    dprint(f"Checking '{name}' - is_func={is_func}, is_func_ptr={is_func_ptr}")
     return is_func or is_func_ptr
 
 def is_okay_func_call(rhs_value,eval_me):
-    is_func=re.search(r"(\w+)\s*\(((\s*(\S+)\s*,)*\s*\S+\s*)?\)",rhs_value[0],flags=re.ASCII)
+    is_func=re.search(r"(\w+)\s*\(((\s*(\w+)\s*,)*\s*\w+\s*)?\)",rhs_value[0],flags=re.ASCII)
     is_func_ptr=re.match(r"\s*(\(\s*\*\s*\S+\s*\))\s*(\(.*\))",rhs_value[0],flags=re.ASCII)
-    is_func_call=re.match(r"\s*(\S+((\s*\[.*\]|\s*->\s*\S+)*))\s*(\(.*\))",rhs_value[0],flags=re.ASCII)
+    is_func_call=re.match(r"\s*(\w+((\s*\[.*\]|\s*->\s*\w+)*))\s*(\(.*\))",rhs_value[0],flags=re.ASCII)
     is_func_=[True if is_func else False,\
              True if is_func_ptr else False,\
              True if is_func_call else False]
@@ -1234,7 +1238,7 @@ def generate_preface(var):
     prog+="#endif\n"
     return prog
 
-def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
+def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
     uniques=[]
     fn_body=[]
     rewrites=[]
@@ -1290,11 +1294,11 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
                 ltyp=n[0][0]
                 lname=get_string2(n[0][1])
                 if lname.startswith('(') and is_function(f"{ltyp}{lname}"):
-                    print(f"{ltyp}{lname} is a function.\nSkipping.")
+                    dprint(f"{ltyp}{lname} is a function.\nSkipping.")
                     continue
             
                 if '(' in lname and is_function(lname):
-                    print(f"{lname} is a function.\nSkipping.")
+                    dprint(f"{lname} is a function.\nSkipping.")
                     continue
                 
                 #####
@@ -1303,8 +1307,9 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
                         type_info,var,varinfo,value_node=x
                         scope_uniq.append([])
                         is_fn,okay_fn=is_okay_func_call([get_string(value_node).split(' ')[0]],eval_me)
-                        proceed=True if not is_fn else okay_fn
-                        dprint(f"[i={i}][j={j}][k={k}] | type: {type_info} ; var : {var} ; varinfo : {varinfo} ; value_node : {get_string2(value_node)}; proceed : {proceed} [not ({is_fn}) || {okay_fn}]")
+                        has_multiptrs=has_multiptr_refs([get_string(value_node).split(' ')[0]])
+                        proceed=False if has_multiptrs else True if not is_fn else okay_fn
+                        dprint(f"[i={i}][j={j}][k={k}] | type: {type_info} ; var : {var} ; varinfo : {varinfo} ; value_node : {get_string2(value_node)};\n proceed : {proceed} [not({has_multiptrs}) && ( not ({is_fn}) || {okay_fn} )]")
                         if value_node and proceed:
                             term=list(find_multictx(value_node,[tree.Tree.TerminalNodeImpl]))
                             value=get_string2(value_node)
@@ -1394,12 +1399,27 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
                         elif (utyp,uname) not in udecl_vars and utyp != "UNDEF":
                             prefix=""
                             suffix=""
-                            if "[" in uval:
-                                x_re=re.search(r"\[\s*(\S+)\s*\]",uval)
+                            if "/" in uval or "%" in uval:
+                                x_re=re.search(r"[/%]\s*(\w+)",uval)
+                                found=False
                                 if x_re:
                                     v=x_re.group(1)
                                     if v in [x[1] for x in uniq_init]:
+                                        prefix=f"    {v} = 1;\n         "
+                                        found=True
+                                if not found:
+                                    prefix=" /* [not yet implemented] modulo/divisor initialization \n"
+                                    suffix="\n */ "
+                            if "[" in uval:
+                                x_re=re.search(r"(\w+)\s*\[\s*(\S+)\s*\]",uval)
+                                if x_re:
+                                    av=x_re.group(1)
+                                    v=x_re.group(2)
+                                    if v in [x[1] for x in uniq_init]:
                                         prefix=f"    {v} = 0;\n         "
+                                    if av not in [x[1] for x in uniq_init]:
+                                        prefix=f"if ({av})"+'{'+f" {prefix}"
+                                        suffix="}"
                                 else:
                                     x_list=re.findall(r"\[\s*((([^]]+)\s*)+)\]",uval)
                                     y=[x in x_[0] for x_ in x_list for x in ["+","-","*","/"]]
@@ -1431,10 +1451,18 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
                             utyp=re.sub(r"\b(register)\b",r"",utyp).strip()
                             utyp_=re.sub(r"\b(static|const|register)\b",r"",utyp).strip()
                             ptr_=False
-                            if "*" in utyp:
+                            struct_ptr_base=None
+                            if ptr_t and utyp in list(ptr_t.keys()):
+                                struct_ptr_base=ptr_t.get(utyp)
+                                dprint(f"ptr_t: {utyp}, base(ptr_t): {struct_ptr_base}")
+                            if "*" in utyp or struct_ptr_base:
                                 ptr_=True
                                 ptr_cnt=utyp.count('*')
-                                xtyp=utyp.replace("*","").rstrip()
+                                xtyp=None
+                                if not struct_ptr_base:
+                                    xtyp=utyp.replace("*","").rstrip()
+                                else:
+                                    xtyp=struct_ptr_base
                                 xtyp_=re.sub(r"\b(static|const|register)\b",r"",xtyp).strip()
                                 xname=uname.replace(" ","")+"_ref"
                                 x1name=xname
@@ -1916,6 +1944,7 @@ def get_json_data(fname,infile):
     disable_eval=[]
     enable_eval=[]
     version=None
+    struct_ptrs=[]
     with open(fname, 'r') as j:
         data = json.load(j)
         if 'DEPEND_VERSION' in data.keys():
@@ -1940,13 +1969,16 @@ def get_json_data(fname,infile):
         if 'enable_eval' in data.keys():
             enable_eval=list(data['enable_eval'])
 
+        if 'struct_ptrs' in data.keys():
+            struct_ptrs=dict(data['struct_ptrs'])
+
         for i in enable_eval:
             if i in disable_eval:
                 # let's make sure that if it's allowed to be evaluated as a RHS assignment (non-destructive)
                 # then we don't disable it
                 disable_eval.remove(i)
             
-    return (d1,d2,rd,disable_eval,enable_eval)
+    return (d1,d2,rd,disable_eval,enable_eval,struct_ptrs)
 
 def resolve_included(includes, infile, pragmas):
     # this function walks through, identifies the #includes and then resolves processing order

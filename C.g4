@@ -911,6 +911,11 @@ ComplexDefine
         -> skip
     ;
 
+Macroundef
+    :   '#' Whitespace? 'undef'  ~[\r\n]*
+        -> skip
+    ;
+
 Macroifdef
     :   '#' Whitespace? 'ifdef'  ~[\r\n]*
         -> skip

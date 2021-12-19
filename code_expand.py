@@ -985,6 +985,7 @@ def remove_multiline_comments(prog:str):
     return ol
 
 def preprocess_string(pragmas:dict,prog:str):
+    MACRO_EXPANSION_ENABLED=False
     _pragmas=[ x.strip() if '(' not in x else x.split('(',1)[0] for x in pragmas.keys()] if pragmas else []
     _macros=[]
     if pragmas:
@@ -1018,7 +1019,7 @@ def preprocess_string(pragmas:dict,prog:str):
     cur_define=None
     cur_value=None
     new_pragma=dict()
-    for l in lines:
+    for iil, l in enumerate(lines):
         #print(f"[LINE] '{l}'")
         start=False
         p=positive_re.search(l)
@@ -1141,10 +1142,18 @@ def preprocess_string(pragmas:dict,prog:str):
                 if not append_to_define:
                     d=f"{cur_define[0]}{cur_define[1]}" if cur_define[1] else cur_define[0]
                     pragmas[d.strip()]=cur_value
-            elif mac:
+            elif MACRO_EXPANSION_ENABLED and mac:
                 #print(f"[Found macro] {mac.group(1)} {mac.span(1)}")
                 macro_dict={key:val for key,val in pragmas.items() if key.startswith(mac.group(1)) }
                 k_pragmas=list(macro_dict.keys())
+                #inst_mac=l[mac.span(1)[0]:-1]
+                #l_cont=0
+                #while inst_mac.count('(') != inst_mac.count(')'): # and (inst_mac.count('"')%2==0 ):
+                #    l_cont+=1
+                #    next_l=lines[iil+l_cont].strip()
+                #    inst_mac+=next_l
+                #if l_cont>0:
+                #    l[e:-1]=inst_mac
                 if len(k_pragmas)<1 and mac.group(1):
                     print("[WARNING!] we have an unmatched pragma!")
                 else:
@@ -1163,6 +1172,8 @@ def preprocess_string(pragmas:dict,prog:str):
                         index=e-1
                     while(open_b!=close_b) and (open_b!=0):
                         #print(f"[params] {params}")
+                        if e>len(l):    
+                            print(f"[ERROR] looks like we're spanning more than one line")
                         char=l[e];e+=1
                         if char == ',' :
                             if open_b==close_b+1:

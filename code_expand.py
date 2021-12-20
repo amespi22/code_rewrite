@@ -435,7 +435,7 @@ def expand_if_else(ctx):
                     dec = r_vars[0]
                     pctx = get_top_dec_parent(i)
                     func_loc = get_start_loc(pctx)
-                    rewrites[start_loc, end_loc] = (f"{funcs_and_rts[f_name]} {dec} = {c.getText()};", dec, func_loc)
+                    rewrites[start_loc, end_loc] = (f"{fix_type(funcs_and_rts[f_name])} {dec} = {c.getText()};", dec, func_loc)
                     #rewrites[start_loc, end_loc] = (f"{funcs_and_rts[f_name]} {dec} = {c.getText()};", dec)
     return rewrites
 
@@ -818,7 +818,7 @@ def expand_decs(ctx):
                 pass
                 #print("No initializer+declarations found")
             else:
-                if ("const" in d.getText() or "char*" in d.getText()):
+                if ("const" in d.getChild(0).getText() or "char*" in d.getChild(0).getText()):
                     #Here if we have a const that can't be broken up
                     typ = d.getChild(0).getText()
                     stmt = d.getChild(1).getText()
@@ -863,7 +863,8 @@ def expand_decs(ctx):
                         #print(f"rewrite number {get_line_num(d)-1}")
                         #line_num - 1 cause I think it's not 0 indexed
                         rewrite[(get_line_num(d)-1,get_last_line_num(d))] = f"{typ} {var};\n{var} = {rhs};\n"
-                    except:
+                    except Exception as e:
+                        print(f"got exception {e}")
                         continue
     return rewrite
 

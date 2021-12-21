@@ -1752,6 +1752,8 @@ def get_func_args(ctx):
             for i in range(len(rs)):
                 if rs[i].startswith("(*"):
                     ts[i] = f"{ts[i]}*"
+                if rs[i].endswith("[]"):
+                    ts[i] = f"{ts[i]}*"
             #print(list(zip(ts, rs)))
             return list(zip(ts, rs))
         else:

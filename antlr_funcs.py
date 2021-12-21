@@ -1202,8 +1202,9 @@ def has_multiptr_refs(rhs_value):
     return (has_multiptr is not None) or (has_multidim_array is not None)
 
 def is_function(name):
-    is_func=re.match(r"\s*(\w+)\s*\(((\s*(\S+),)*\s*\S+\s*)?\s*\)",name,flags=re.ASCII)
-    is_func_ptr=re.match(r"\s*(\(\s*\*\s*\S+\s*\))\s*(\(.*\))",name,flags=re.ASCII)
+    is_func=re.match(r"\s*(\w+)\s*\(((\s*(\S+),)*\s*\S+\s*)?\s*\)",name,flags=re.ASCII) is not None
+    is_func_ptr= (re.match(r"\s*(\(\s*\*\s*\S+\s*\))\s*(\(.*\))",name,flags=re.ASCII) is not None) or \
+                (re.match(r"\s*(\w+\s*)*\s*(\(\s*\*\s*\S+\s*\))\s*(\(.*\))",name,flags=re.ASCII) is not None)
     dprint(f"Checking '{name}' - is_func={is_func}, is_func_ptr={is_func_ptr}")
     return is_func or is_func_ptr
 

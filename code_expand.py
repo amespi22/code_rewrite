@@ -852,6 +852,9 @@ def expand_decs(ctx):
                         stmt = d.getChild(1).getText()
                         var = get_string2(d.getChild(1).getChild(0).getChild(0))
                         rhs = get_string2(d.getChild(1).getChild(0).getChild(2))
+                        #don't break up thigns that are setting function pointers
+                        if rhs in funcs_and_args:
+                            continue
                         #trying to fix the way getText handles structs
                         #rhs = fix_rhs(rhs)
                         typ = fix_type(typ)

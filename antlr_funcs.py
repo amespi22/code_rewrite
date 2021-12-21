@@ -1400,11 +1400,11 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                     valid=False
                     udecl_vars=[]
                     # and then take the scope_uniq list and generate the initialized values
-                    comment=False
                     for u in scope_uniq[k]:
                         utyp,uname,uval,rtyp=u
                         utyp=re.sub(r"\bregister\b",r"",utyp)
                         has_uname=re.search(r"\b("+uname+r")\b",uval)
+                        comment=False
                         if has_uname :
                             dprint("not valid - "+ f"{utyp} {uname}; {uname} = (({utyp}){uval});\n")
                         elif (utyp,uname) not in udecl_vars and utyp != "UNDEF":

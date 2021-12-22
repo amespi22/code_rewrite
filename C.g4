@@ -157,7 +157,8 @@ constantExpression
     ;
 
 declaration
-    :   declarationSpecifiers initDeclaratorList? ';'
+    :   fptypeSpecifier
+    |   declarationSpecifiers initDeclaratorList? ';'
     |   staticAssertDeclaration
     ;
 
@@ -206,6 +207,10 @@ storageClassSpecifier
     |   'register'
     ;
 
+fptypeSpecifier
+    :   'typedef' functionPtrDeclaration
+    ;
+
 typeSpecifier
     :   ('void'
     |   'char'
@@ -229,6 +234,7 @@ typeSpecifier
     |   '__typeof__' '(' constantExpression ')' // GCC extension
     |   typeSpecifier pointer
     |   typedefName
+    |   gccAttributeSpecifier
     ;
 
 structOrUnionSpecifier
@@ -251,7 +257,7 @@ structDeclaration
     ;
 
 specifierQualifierList
-    :   (typeSpecifier| typeQualifier) specifierQualifierList?
+    :   (functionPtrDeclaration | typeSpecifier| typeQualifier) specifierQualifierList?
     ;
 
 structDeclaratorList
@@ -529,11 +535,18 @@ translationUnit
     ;
 
 externalDeclaration
-    :   functionDeclaration
+    :   fptypeSpecifier
+    |   functionDeclaration
     |   functionDefinition
     |   declaration
     |   macroDefinition
     |   ';' // stray ;
+    ;
+
+
+functionPtrDeclaration
+    :   typeSpecifier+  gccAttributeSpecifier? '(' pointer Identifier ')' '(' parameterTypeList? ')'
+    |   typeSpecifier+  '(' gccAttributeSpecifier? '(' pointer Identifier ')' ')'  '(' parameterTypeList? ')'
     ;
 
 

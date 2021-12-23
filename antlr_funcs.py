@@ -608,7 +608,10 @@ class ScopeListener(CListener):
     def exitAssignmentExpression(self, ctx:CParser.AssignmentExpressionContext):
         pass
     def enterAssignmentExpression(self, ctx:CParser.AssignmentExpressionContext):
-        if self.cur_symbol_lut[self.current_scope] is None:
+        if self.current_scope is None or self.cur_symbol_lut[self.current_scope] is None:
+            dprint(f"[WARNING] : self.current_scope = '{self.current_scope}'")
+            dprint(f"[WARNING] : self.cur_symbol_lut[self.current_scope] = '{self.cur_symbol_lut.get(self.current_scope,None)}'")
+            dprint(f"[WARNING] ctx : {get_string2(ctx)}")
             pass
             
         chld=list(ctx.getChildren())
@@ -1398,16 +1401,19 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
             s1_calls=""
             s1_fn_decl=""
             s1_fn_def=""
+            has_ibody=False
             if len(scope_uniq)>0:
                 s0_calls=""
                 s0_fn_decl=""
                 s0_fn_def=""
                 s1_fn=f"{fname}_{i}_{j}"
+                has_jbody=False
                 for k in range(0,len(scope_uniq)):
                     s0_body_vals=""
                     s0_body_vars=""
                     valid=False
                     udecl_vars=[]
+                    has_kbody=False
                     # and then take the scope_uniq list and generate the initialized values
                     for u in scope_uniq[k]:
                         utyp,uname,uval,rtyp=u
@@ -1461,18 +1467,24 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                             if "[ ]" in uname:
                                 xname=uname.replace("[ ]","")
                                 s0_body_vars+="    {"+prefix+f"{utyp}* {xname}; {xname} = ({utyp}*)({uval}); "+suffix+"}\n"
+                                if not comment:
+                                    has_kbody=True
                             else:
                                 s0_body_vars+="    {"+prefix+f"{utyp} {uname}; {uname} = ({utyp})({uval}); "+suffix+"}\n"
+                                if not comment:
+                                    has_kbody=True
                             udecl_vars.append((utyp,uname))
                             valid=True
                         elif utyp != "UNDEF":
                             # we shouldn't really be hitting this line, but it's a fail-case
                             s0_body_vars+="    "+f"{uname} = ({utyp})({uval});"+"\n"
                             valid=True
+                            has_kbody=True
                         else:
                             dprint("not valid - "+ f"{utyp} {uname}; {uname} = (({utyp}){uval});\n")
                     # only need to generate if we've found a unique (type,variable) tuple
-                    if valid:
+                    if valid and has_kbody:
+                        has_jbody=True
                         for u in uniq_init:
                             utyp,uname,uval=u
                             dprint(f"UNIQ_INIT: ('{utyp}','{uname}','{uval});\n")
@@ -1495,18 +1507,18 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                                 xname=uname.replace(" ","")+"_ref"
                                 x1name=xname
                                 x2name=x1name
-                                size=""
+                                size="1"
                                 if "[" not in xname:
                                     # this is the code that handles pointers
                                     if xtyp_ != "void":
                                         uname=f"{uname} = &{x1name}"
                                         s0_body_vals+=f"{xtyp_} {x1name};\n"
-                                        s0_body_vals+=f"    bzero(&{xname},{size}sizeof({xtyp_}));\n"
+                                        s0_body_vals+=f"    bzero(&{xname},{size}*sizeof({xtyp_}));\n"
                                     else:
                                         # choosing int as the default type to cast a void* to
                                         uname=f"{uname} = (void*)&{x1name}"
                                         s0_body_vals+=f"int {x1name};\n"
-                                        s0_body_vals+=f"    bzero(&{xname},{size}sizeof(int));\n"
+                                        s0_body_vals+=f"    bzero(&{xname},{size}*sizeof(int));\n"
                                     s0_body_vals+=f"{utyp} {uname};\n"
                                     pass
                                 else:
@@ -1559,7 +1571,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                                 name=uname_re.group(1);
                                 size=uname_re.group(2);
                                 s0_body_vals+=f"{utyp} {uname};\n"
-                                s0_body_vals+=f"    bzero(&{name},( {size}));\n"
+                                s0_body_vals+=f"    bzero(&{name},( {size}*sizeof({utyp_}) ) );\n"
                             else:
                                 s0_body_vals+=f"{utyp} {uname};\n"
                                 s0_body_vals+=f"    bzero(&{uname},sizeof({utyp_}));\n"
@@ -1578,22 +1590,24 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                         # set of scope 0 function calls
                         s0_calls+=f"{s0_call_fn}"
                     tdecl_vars.extend(udecl_vars)
-                s1_body=""
-                # scope 1 function call (used in scope 2 function definition)
-                s1_call_fn=f"{s1_fn}();\n"
-                s2_fn_decls+=f"void {s1_call_fn}"
-                bl_funcs.append(f"{s1_fn}")
-                s1_calls+=f"{s1_call_fn}"
-                #s1_fn_decl="\n"+s0_fn_decl+"\n"+f"void {s1_call_fn}"+"\n"
-                s1_body=f"{s0_calls}"
-                # scope 0 function definition (with body)
-                s1_fn_def+=s0_fn_def+f"void {s1_fn}()"+"{\n"+f"{s1_body}"+"}\n"
-                dprint("==== Scope 1 ====\n"+f"{s1_fn_def}")
-                #s2_decls+=f"{s1_fn_decl}\n"
-                s2_body+=f"{s1_fn}();"+"\n"
-                #loc = get_end_loc(end)
-                #rewrites.append((s1_call_fn,loc))
-                s2_fn_def+=s1_fn_def
+                if has_jbody:
+                    has_ibody=True
+                    s1_body=""
+                    # scope 1 function call (used in scope 2 function definition)
+                    s1_call_fn=f"{s1_fn}();\n"
+                    s2_fn_decls+=f"void {s1_call_fn}"
+                    bl_funcs.append(f"{s1_fn}")
+                    s1_calls+=f"{s1_call_fn}"
+                    #s1_fn_decl="\n"+s0_fn_decl+"\n"+f"void {s1_call_fn}"+"\n"
+                    s1_body=f"{s0_calls}"
+                    # scope 0 function definition (with body)
+                    s1_fn_def+=s0_fn_def+f"void {s1_fn}()"+"{\n"+f"{s1_body}"+"}\n"
+                    dprint("==== Scope 1 ====\n"+f"{s1_fn_def}")
+                    #s2_decls+=f"{s1_fn_decl}\n"
+                    s2_body+=f"{s1_fn}();"+"\n"
+                    #loc = get_end_loc(end)
+                    #rewrites.append((s1_call_fn,loc))
+                    s2_fn_def+=s1_fn_def
         s2_call_fn=f"{s2_fn}();\n"
         s2_fn_decls+=f"void {s2_fn}();\n"
         s2_calls+=f"{s2_call_fn}"

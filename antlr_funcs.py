@@ -608,6 +608,9 @@ class ScopeListener(CListener):
     def exitAssignmentExpression(self, ctx:CParser.AssignmentExpressionContext):
         pass
     def enterAssignmentExpression(self, ctx:CParser.AssignmentExpressionContext):
+        if self.cur_symbol_lut[self.current_scope] is None:
+            pass
+            
         chld=list(ctx.getChildren())
         if len(chld)==3 and "=" in get_string2(chld[1]):
             #nodes=get_string2(ctx)
@@ -619,7 +622,7 @@ class ScopeListener(CListener):
                 ext="["+ext
             nodes=chld[2]
             dprint(f"var: {var} ({ovar}) = {get_string2(nodes)}")
-            typ=self.cur_symbol_lut[self.current_scope].get(var,"UNDEF")
+            typ=self.cur_symbol_lut[self.current_scope].get(var,"UNDEF") 
             dprint(f"var: {typ} {var} ({ovar}) = {get_string2(nodes)}")
             if ovar!=var:
                 typ=typ.rsplit(' *',1)[0]
@@ -1176,11 +1179,13 @@ for i in range(0,len(number_equivalent_classes)):
 for i in range(0,len(floatp_equivalent_classes)):
     fpnumber_set=fpnumber_set|floatp_equivalent_classes[i] 
 
-def can_cast(ltyp,rtyp):
+def can_cast(ltyp,rtyp,ignore_int_hier=True):
     # determines if rtyp variable can be cast as ltyp
     equivalent_classes=None
+    hier=True
     if ltyp in number_set and rtyp in number_set:
         equivalent_classes=number_equivalent_classes 
+        hier=not ignore_int_hier
     elif ltyp in fpnumber_set and rtyp in fpnumber_set:
         equivalent_classes=floatp_equivalent_classes 
     if not equivalent_classes:
@@ -1192,7 +1197,9 @@ def can_cast(ltyp,rtyp):
             index[0]=i
         if rtyp.rstrip() in eq:
             index[1]=i
-    return index[0]<=index[1]
+    if index[0] is not None and index[1] is not None:
+        return index[0]<=index[1] if hier else True
+    return False
 
 def has_multiptr_refs(rhs_value):
     x=re.sub(" ","",rhs_value)
@@ -1330,10 +1337,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                             for v in value_subterms:
                                 if not is_literal(v):
                                     vtype = sym_lut.get(v,None)
-                                    if v.startswith('i'): 
-                                        dprint(f" => is literal (False) {v} [vtype={vtype}] => sym_lut:'{sym_lut}'")
-                                    else:
-                                        dprint(f" => is literal (False) {v} [vtype={vtype}]")
+                                    dprint(f" => is literal (False) {v} [vtype={vtype}]")
                                     if vtype:
                                         # check to see if there are any array versions
                                         vtyp=vtype
@@ -1369,13 +1373,18 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                             #print(f"CASTING PASS: ltype: {ltyp}, lvar: {lname}, rtype : {rtyp}, rvalue: {value}")
                             info=(ltyp,lname,value,rtyp)
                             dprint(f"[i={i}][j={j}][k={k}] | type : {rtyp}; def_var : {def_var}; value : {value}")
-                            if info in uniques and info in scope_uniq[k]:
+                            dont_add_me=any([\
+                                info[0]==x[0] and \
+                                info[1]==x[1] and \
+                                info[2]==x[2] and \
+                                info[3]==x[3] \
+                                for x in uniques])
+                            if dont_add_me:
                                 dprint(f"^^ not unique  {info}")
                                 continue
                             else:
                                 dprint(f"^^ unique  {info}")
-                                if info not in uniques:
-                                    uniques.append(info)
+                                uniques.append(info)
                                 scope_uniq[k].append(info)
                     except Exception as e:
                         print(f"Exception with x={x}")

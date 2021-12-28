@@ -261,7 +261,9 @@ def insert_loop_braces(ctx):
                 continue
             #check to see if there are curly braces
             l_body = l.getChild(4)
-            if l_body.getText().startswith("{"):
+            if not l_body:
+                pass
+            elif l_body.getText().startswith("{"):
                 pass
             else:
                 #add if necessary

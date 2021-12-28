@@ -545,8 +545,13 @@ def expand_func_args(ctx):
     loops = find_ctx(ctx, loop_stmt)
     if_stmt = "<class 'CParser.CParser.SelectionStatementContext'>"
     ifcons = find_ctx(ctx, if_stmt)
+    jump_stmt = "<class 'CParser.CParser.JumpStatementContext'>"
+    jumps = find_ctx(ctx, jump_stmt)
+
     whiles = [x for x in loops if ('for' in x.getChild(0).getText() or 'while' in x.getChild(0).getText())]
     ifcons = [x.getChild(2) for x in ifcons if 'if' in x.getChild(0).getText() ]
+    #make sure we are not messing with the contents of a return statement
+    rets =  [x for x in jumps if 'return' in x.getChild(0).getText()]
 
     lps = [x.getChild(2) for x in whiles]
     #find all functions, record their names and paramaters
@@ -570,11 +575,8 @@ def expand_func_args(ctx):
             for p in pecs:
                 #make sure we don't do anything with things inside the conditional check
                 #of the while or for loop
-                for l in lps:
+                for l in lps + ifcons + rets:
                     if is_descendant(p, l):
-                        skip = True
-                for f in ifcons:
-                    if is_descendant(p, f):
                         skip = True
                 if skip:
                     skip = False

@@ -141,6 +141,7 @@ def main():
     cur_pro = gen_fix_loc_changes(cur_pro, fix_loc_rewrites)
 
     #write out the new program
+    print(f"Writing output file {out_name}")
     write_new_program(cur_pro, out_name)
     with open(bl_filename,"w") as o:
         for i in new_funcs:

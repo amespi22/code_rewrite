@@ -1251,6 +1251,18 @@ def generate_preface(var):
     prog+="#endif\n"
     return prog
 
+def uniquify(varlist):
+    svals=list()
+    uniq_varlist=list()
+    for x in varlist:
+        xs=get_string2(x)
+        if xs not in svals:
+           svals.append(xs)
+           uniq_varlist.append(x)
+    return uniq_varlist
+
+    
+
 def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
     uniques=[]
     fn_body=[]
@@ -1261,6 +1273,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
     ## function scope
     #def get_type_var_info(ctx) => return nodes, sym_dict, up_nodes
     all_fn_def=""
+    num_i=len(scope.items())
     for i,f_info in enumerate(scope.items()):
         fn,fs=f_info
         type_lut=dict()
@@ -1269,7 +1282,8 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
         fn_name=get_func_name(fn)
         print(f"Processing [{fn_name}] :",flush=True)
         try:
-            def_vars=dvars[fn_name]
+            ddef_vars=dvars[fn_name]
+            def_vars=uniquify(ddef_vars)
         except Exception as e:
             print(f"Can't find {fn_name} in dvars {dvars.keys()}")
             raise(e)
@@ -1281,6 +1295,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
         s2_fn_decls=""
         s2_body=""
         s2_calls=""
+        num_j=len(fs.items())
         for j, s_info in enumerate(fs.items()):
             sn,s=s_info
             uniq_init=[]
@@ -1297,7 +1312,8 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
             #s2_decls=""
             s2_fn=f"{fname}_{i}"
             ## for each value in the namespace scope
-            for def_var in def_vars:
+            num_d=len(def_vars)
+            for dd,def_var in enumerate(def_vars):
                 n,lut,un=get_type_var_info(def_var)
                 #for nn in n:
                 #    print(f"{nn[0]} : {get_string2(nn[1])}")
@@ -1315,6 +1331,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                     continue
                 
                 #####
+                num_k=len(val_s+cval_s)
                 for k,x in enumerate(val_s+cval_s):
                     try:
                         type_info,var,varinfo,value_node=x
@@ -1326,14 +1343,25 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                         term=list(find_multictx(value_node,[tree.Tree.TerminalNodeImpl]))
                         value_subterms= [get_string2(v) for v in term]
                         val=" ".join(value_subterms)
+                        value=get_string2(value_node)
+                        rtyp=re.sub(r"\bconst\b",r' ',type_info)
+                        info=(ltyp,lname,value,rtyp)
+                        dont_check_me=any([\
+                                info[0]==x[0] and \
+                                info[1]==x[1] and \
+                                info[2]==x[2] and \
+                                info[3]==x[3] \
+                                for x in uniques])
+                        if dont_check_me:
+                            continue
+                        uniques.append(info)
                         #if isinstance(value_node,list):
                         #    value=get_string(value_node[0])
                         is_fn,okay_fn=is_okay_func_call(val,eval_me)
                         has_multiptrs=has_multiptr_refs(val)
                         proceed=False if has_multiptrs else True if not is_fn else okay_fn
-                        dprint(f"[i={i}][j={j}][k={k}] | type: {type_info} ; var : {var} ; varinfo : {varinfo} ; value_node : {get_string2(value_node)} ({type(value_node)});\n proceed : {proceed} [not({has_multiptrs}) && ( not ({is_fn}) || {okay_fn} )]")
+                        dprint(f"[i={i}/{num_i}][j={j}/{num_j}][dd={dd}/{num_d}][k={k}/{num_k}] | type: {type_info} ; var : {var} ; varinfo : {varinfo} ; value_node : {get_string2(value_node)} ({type(value_node)});\n proceed : {proceed} [not({has_multiptrs}) && ( not ({is_fn}) || {okay_fn} )]")
                         if proceed:
-                            value=get_string2(value_node)
                             dprint(f"Subterms : {','.join(value_subterms)}")
                             # if any RHS uses a variable, obtain its type from var_s (variable look-up table)
                             # and add it to the unique scope list of required variables
@@ -1375,20 +1403,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                                 continue
                             #print(f"CASTING PASS: ltype: {ltyp}, lvar: {lname}, rtype : {rtyp}, rvalue: {value}")
                             info=(ltyp,lname,value,rtyp)
-                            dprint(f"[i={i}][j={j}][k={k}] | type : {rtyp}; def_var : {def_var}; value : {value}")
-                            dont_add_me=any([\
-                                info[0]==x[0] and \
-                                info[1]==x[1] and \
-                                info[2]==x[2] and \
-                                info[3]==x[3] \
-                                for x in uniques])
-                            if dont_add_me:
-                                dprint(f"^^ not unique  {info}")
-                                continue
-                            else:
-                                dprint(f"^^ unique  {info}")
-                                uniques.append(info)
-                                scope_uniq[k].append(info)
+                            scope_uniq[k].append(info)
                     except Exception as e:
                         print(f"Exception with x={x}")
                         print(e)

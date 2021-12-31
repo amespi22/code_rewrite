@@ -516,9 +516,11 @@ def gen_expand_changes(cur_prog, rewrite):
     lns = lns[:-1]
     diff = 0
     prev_line = 0
-    for key,val in rewrite.items():
+    keys = list(rewrite.keys())
+    keys.sort()
+    for key in keys:
         start_loc, end_loc = key
-        func_call,var_use = val
+        func_call,var_use = rewrite[key]
         #if the start and end loc lines are the same
         if key[0][0] == key[1][0]:
             if prev_line != start_loc[0]:
@@ -798,7 +800,7 @@ def single_declarations(ctx):
                     #we need to see if the type ends with a *
                     #if so, remove the * and place it on the first var
                     if typ.endswith("*"):
-                        all_vars[0] = f"*{all_vars[0]}" 
+                        all_vars[0] = f"*{all_vars[0]}"
                         typ = typ[:-1]
                 for a in all_vars:
                     rs+= f"{typ} {a};\n"
@@ -916,6 +918,8 @@ def write_new_program(p,prog_name):
 #antlr seems to squish things together so if this happesn to you
 #just follow the example of the const fix
 def fix_type(typ):
+    if "extern" in typ:
+        typ = typ.replace("extern", "extern ")
     if "const" in typ:
         typ = typ.replace("const", "const ")
     if "register" in typ:

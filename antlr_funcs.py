@@ -88,6 +88,8 @@ def get_type_var_info(ctx):
            typ=" ".join([get_string2(x) for x in c[0:2]])
            node=c[2]
         nodes=[(typ,node)]
+    else:
+        return None,None,None
     sym_dict=dict()
     up_nodes=list()
     for t,d in nodes:
@@ -673,6 +675,8 @@ class ScopeListener(CListener):
                    typ=" ".join([get_string2(x) for x in c[0:2]])
                    node=c[2]
                 nodes=[(typ,node)]
+            else:
+                return
 
             sym_dict=dict()
             up_nodes=list()
@@ -718,6 +722,8 @@ class ScopeListener(CListener):
         nodes=[(typ,d) for d in dec]
         up_nodes=list()
         sym_dict=dict()
+        if len(nodes)==0:
+            return
         for t,d in nodes:
             if t in self.func_names:
                 continue
@@ -811,10 +817,12 @@ def dprint(instr,flush=False):
         global gbl_debug_msg
         if gbl_debug_msg[3]:
             if gbl_debug_msg[1]%50 == 0:
-                write_log()
-                gbl_debug_msg[0]=""
+                flush=True
             gbl_debug_msg[0]+=instr+"\n"
             gbl_debug_msg[1]+=1
+            if flush:
+                write_log()
+                gbl_debug_msg[0]=""
 
 def write_log():
     if gbl_debug_msg[3]:
@@ -1148,9 +1156,16 @@ def print_scope_info(scope):
             print("}")
             i+=1
 
+def is_operator(val):
+    if re.match(r"([()*-/%+]|->)",val):
+        return True
+    return False
+
 def is_literal(val):
     # if is a digit
     if re.match(r"\d+",val):
+        return True
+    elif re.match(r"('\w*'|\"\w*\")",val):
         return True
     return False
 
@@ -1355,20 +1370,24 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                         if dont_check_me:
                             continue
                         uniques.append(info)
-                        #if isinstance(value_node,list):
-                        #    value=get_string(value_node[0])
+                        # if we can't cast the RHS to LHS type, then go to next
+                        if not can_cast(ltyp,rtyp): 
+                            continue
                         is_fn,okay_fn=is_okay_func_call(val,eval_me)
                         has_multiptrs=has_multiptr_refs(val)
                         proceed=False if has_multiptrs else True if not is_fn else okay_fn
                         dprint(f"[i={i}/{num_i}][j={j}/{num_j}][dd={dd}/{num_d}][k={k}/{num_k}] | type: {type_info} ; var : {var} ; varinfo : {varinfo} ; value_node : {get_string2(value_node)} ({type(value_node)});\n proceed : {proceed} [not({has_multiptrs}) && ( not ({is_fn}) || {okay_fn} )]")
                         if proceed:
+                            scope_uniq[k].append(info)
                             dprint(f"Subterms : {','.join(value_subterms)}")
                             # if any RHS uses a variable, obtain its type from var_s (variable look-up table)
                             # and add it to the unique scope list of required variables
                             for v in value_subterms:
-                                if not is_literal(v):
+                                is_op = is_operator(v) 
+                                is_lit= is_literal(v)
+                                if not is_op and not is_lit:
                                     vtype = sym_lut.get(v,None)
-                                    dprint(f" => is literal (False) {v} [vtype={vtype}]")
+                                    dprint(f" => is literal ({is_lit}) | is operator ({is_op}) {v} [vtype={vtype}]")
                                     if vtype:
                                         # check to see if there are any array versions
                                         vtyp=vtype
@@ -1380,30 +1399,17 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                                                     vtyp=sym_lut[v]
                                                     dprint(f"AFTER => literal (False) {v} => {vtyp}")
                                                     break
-                                        info=(vtyp,v,None)
+                                        subinfo=(vtyp,v,None)
                                         if type(vtype)!=str:
                                             vtyp=get_string2(vtype)
-                                        if info in uniq_init:
-                                            dprint(f"not unique: {info} ... continue!")
+                                        if subinfo in uniq_init:
+                                            dprint(f"not unique: {subinfo} ... continue!")
                                             continue
                                         else:
-                                            dprint(f"unique : {info}")
-                                            uniq_init.append(info)
+                                            dprint(f"unique : {subinfo}")
+                                            uniq_init.append(subinfo)
                                 else:
-                                    dprint(f" => is literal (True) {v} [type_info : {type_info}]")
-                            # now we're looking at each set of variables and the RHS value
-                            rtyp=re.sub(r"\bconst\b",r' ',type_info)
-                            x=type_lut.get(rtyp,None)
-                            if not x:
-                                type_lut[rtyp]=[]
-                                #####
-                            if not can_cast(ltyp,rtyp): 
-                                # if we can't cast the RHS to LHS type, then go to next
-                                #print(f"CASTING FAIL: ltype: {ltyp}, lvar: {lname}, rtype : {rtyp}, rvalue: {value}")
-                                continue
-                            #print(f"CASTING PASS: ltype: {ltyp}, lvar: {lname}, rtype : {rtyp}, rvalue: {value}")
-                            info=(ltyp,lname,value,rtyp)
-                            scope_uniq[k].append(info)
+                                    dprint(f" => is literal ({is_lit}) | is operator ({is_op}) {v} [vtype={vtype}]")
                     except Exception as e:
                         print(f"Exception with x={x}")
                         print(e)

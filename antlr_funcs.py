@@ -1423,7 +1423,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                                             dprint(f"unique : {subinfo}")
                                             uniq_init.append(subinfo)
                                 else:
-                                    dprint(f" => is literal ({is_lit}) | is operator ({is_op}) {v} [vtype={vtype}]")
+                                    dprint(f" => is literal ({is_lit}) | is operator ({is_op}) {v}")
                     except Exception as e:
                         print(f"Exception with x={x}")
                         print(e)

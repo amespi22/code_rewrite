@@ -93,6 +93,8 @@ def get_type_var_info(ctx):
     sym_dict=dict()
     up_nodes=list()
     for t,d in nodes:
+        if d is None or len(list(d.getChildren()))<1 :
+            continue
         c=list(d.getChild(0).getChildren())
         if len(c)>1:
             decl_info=""
@@ -681,6 +683,8 @@ class ScopeListener(CListener):
             sym_dict=dict()
             up_nodes=list()
             for t,d in nodes:
+                if d is None or len(list(d.getChildren()))<1 :
+                    continue
                 if t in self.func_names:
                     continue
                 c=list(d.getChild(0).getChildren())
@@ -698,6 +702,8 @@ class ScopeListener(CListener):
                 
             self.cur_declarations[-1].extend(up_nodes)
             for a,b in nodes:
+                if b is None or len(list(b.getChildren()))<1 :
+                    continue
                 if a in self.func_names:
                     continue
                 sym_dict[get_string2(b)]=a
@@ -725,6 +731,8 @@ class ScopeListener(CListener):
         if len(nodes)==0:
             return
         for t,d in nodes:
+            if d is None or len(list(d.getChildren()))<1 :
+                continue
             if t in self.func_names:
                 continue
             c=list(d.getChild(0).getChildren())
@@ -742,6 +750,8 @@ class ScopeListener(CListener):
             
         self.cur_declarations[-1].extend(up_nodes)
         for a,b in nodes:
+            if b is None or len(list(b.getChildren()))<1 :
+                continue
             if a in self.func_names:
                 continue
             dprint(f"sym_dict [{get_string2(b)}] = {a} ")
@@ -769,6 +779,8 @@ class ScopeListener(CListener):
                 up_nodes=list()
                 sym_dict=dict()
                 for t,d in nodes:
+                    if d is None or len(list(d.getChildren()))<1 :
+                        continue
                     if t in self.func_names:
                         continue
                     dprint(f"[enterParameterDeclaration] {t} : {get_string2(d)}")
@@ -787,6 +799,8 @@ class ScopeListener(CListener):
                 
                 self.cur_declarations[-1].extend(up_nodes)
                 for a,b in nodes:
+                    if b is None or len(list(b.getChildren()))<1 :
+                        continue
                     if a in self.func_names:
                         continue
                     dprint(f"sym_dict [{get_string2(b)}] = {a} ")

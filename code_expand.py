@@ -410,6 +410,9 @@ def expand_if_else(ctx):
     #This gives us all functions in the file and it's args
     for f in fns:
         funcs_and_rts[get_func_name(f)] = f.getChild(0).getText()
+    for key,value in funcs_and_rts.items():
+        if value.startswith(f"{key}("):
+            funcs_and_rts[key] = 'int'
     #for all functions
     for f in fns:
         ifs = find_ctx(f, sel_stmt)

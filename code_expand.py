@@ -63,8 +63,9 @@ def main():
 
 
     from os import path as path
-    fix_ingred_id=path.splitext(path.basename(f"{prog_name}"))[0]
-    bl_filename=f"fn_blacklist.{fix_ingred_id}.txt"
+    fix_ingred_fileid=path.splitext(path.basename(f"{prog_name}"))[0]
+    bl_filename=f"fn_blacklist.{fix_ingred_fileid}.txt"
+    fix_ingred_id=re.sub(r'-',r'_',fix_ingred_fileid)
 
     #original program
     cur_pro = ""

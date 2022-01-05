@@ -302,7 +302,7 @@ def expand_conditionals(ctx):
 
 def gen_conditionals(cur_prog, rewrite):
     lns = cur_prog.split('\n')
-    deltas = {}
+    i = 0
     for r in rewrite:
         s,e = r
         #may want to do this with a line delta but I'll test this first
@@ -310,33 +310,23 @@ def gen_conditionals(cur_prog, rewrite):
             #start and end are on the same line and need to add 1 to the index for the end
 
             #start curly
-            if s[0]-1 in deltas:
-                d = deltas[s[0]-1]
-                deltas[s[0]-1] += 1
-            else:
-                deltas[s[0]-1] = 1
-                d = 0
-
+            d = calc_delta_conditionals(rewrite[:i],s) 
             ln = lns[s[0]-1]
             lns[s[0]-1] = f"{ln[:s[1]-1+d]}{{{ln[s[1]-1+d:]}"
 
-            #end curly
-            if e[0]-1 in deltas:
-                d = deltas[e[0]-1]
-                deltas[e[0]-1] += 1
+            d = calc_delta_conditionals(rewrite[:i],e) 
+            ln = lns[e[0]-1]
+            lns[s[0]-1] = f"{ln[:e[1]+2+d]}}}{ln[e[1]+2+d:]}"
+        else:
+            d = calc_delta_conditionals(rewrite[:i],s) 
+            ln = lns[s[0]-1]
+            lns[s[0]-1] = f"{ln[:s[1]-1+d]}{{{ln[s[1]-1+d:]}"
 
             ln = lns[e[0]-1]
-            lns[s[0]-1] = f"{ln[:e[1]+1+d]}}}{ln[e[1]+1+d:]}"
-        else:
-            ln = lns[s[0]-1]
-            lns[s[0]-1] = f"{ln[:s[1]-1]}{{{ln[s[1]-1:]}"
-            if s[0]-1 in deltas:
-                deltas[s[0]-1] += 1
-            else:
-                deltas[s[0]-1] = 1
-            ln = lns[e[0]-1]
-            lns[e[0]-1] = f"{ln[:e[1]+1]}}}{ln[e[1]+1:]}"
+            d = calc_delta_conditionals(rewrite[:i],e) 
+            lns[e[0]-1] = f"{ln[:e[1]+1+d]}}}{ln[e[1]+1+d:]}"
             #start and end are on different lines and don't need to add 1 to the index
+        i += 1
     ret = "\n".join(lns)
     of = open('tmp_fmt', 'w')
     of.write(ret)
@@ -344,6 +334,21 @@ def gen_conditionals(cur_prog, rewrite):
     s,o = subprocess.getstatusoutput(f"indent -kr -st -l300 tmp_fmt")
     return o
     #return ret
+
+def calc_delta_conditionals(before, cur):
+    ret = 0
+    for b in before:
+        s,e = b
+        #cur[0] = line
+        #cur[0] = column in line
+        if cur[0] == s[0]:
+            #this means they are the same line
+            if cur[1] > s[1]:
+                ret += 1
+        if cur[0] == e[0]:
+            if cur[1] > e[1]:
+                ret += 1
+    return ret
 
 def if_else_break(ctx):
     if_stmt = "<class 'CParser.CParser.SelectionStatementContext'>"

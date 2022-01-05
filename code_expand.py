@@ -330,7 +330,7 @@ def gen_conditionals(cur_prog, rewrite):
     of = open('tmp_fmt', 'w')
     of.write(ret)
     of.close()
-    s,o = subprocess.getstatusoutput(f"indent -kr -st -l300 tmp_fmt")
+    s,o = subprocess.getstatusoutput(f"indent -kr -st -l300 tmp_fmt 2>/dev/null")
     return o
     #return ret
 

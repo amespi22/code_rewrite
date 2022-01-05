@@ -71,7 +71,6 @@ def main():
     cur_pro = ""
     with open(_pp_prog_name, 'r') as infile:
         cur_pro = infile.read()
-
     #get the dictionary that maps line numbers with the re-write
     p,t = get_tree_from_file(_pp_prog_name)
     print_ctx_bfs(t,"original_tree")
@@ -1259,6 +1258,7 @@ def preprocess(pragmas:dict,inf:str,outf:str):
     pgrm=None
     with open(inf,'r') as _in:
         pgrm=_in.read()
+    pgrm = pgrm.replace('©',"")
 
     ol,updated_pragmas = preprocess_string(pragmas, pgrm)
 

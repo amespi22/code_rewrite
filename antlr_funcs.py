@@ -1358,7 +1358,20 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                 if '(' in lname and is_function(lname):
                     dprint(f"{lname} is a function.\nSkipping.")
                     continue
-                
+                ares=re.search(r"\[\s*(\w*)\s*\]",lname)
+                if ares:
+                    asize=ares.group(1)
+                    dprint(f"def_var[{dd}] | {lname} | [size={asize}]")
+                    if len(asize)>0 and not is_literal(asize):
+                        dprint(f"Array size is variable => '{asize}'")
+                        asizetyp=sym_lut.get(asize,None)
+                        if asizetyp:
+                            ainfo=(asizetyp,asize,None)
+                            if (ainfo,None) in uniq_init:
+                                uniq_init.pop(uniq_init.index((ainfo,None)))
+                                uniq_init.append((ainfo,"1"))
+                            elif (ainfo,"1") not in uniq_init:
+                                uniq_init.append((ainfo,"1"))
                 #####
                 num_k=len(val_s+cval_s)
                 for k,x in enumerate(val_s+cval_s):
@@ -1411,17 +1424,29 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                                                     dprint(f"BEFORE => literal (False) {v} => {vtyp}")
                                                     v=isym
                                                     vtyp=sym_lut[v]
-                                                    dprint(f"AFTER => literal (False) {v} => {vtyp}")
+                                                    ares=re.search(r"\[\s*(\w*)\s*\]",isym)
+                                                    if not ares:
+                                                        dprint(f"AFTER => literal (False) {v} => {vtyp}")
+                                                        break
+                                                    asize=ares.group(1)
+                                                    dprint(f"AFTER => literal (False) {v} => {vtyp} [size={asize}]")
+                                                    if len(asize)>0 and not is_literal(asize):
+                                                        dprint(f"Array size is variable => '{asize}'")
+                                                        asizetyp=sym_lut.get(asize,None)
+                                                        if asizetyp:
+                                                            ainfo=(asizetyp,asize,None)
+                                                            if ainfo not in [x[0] for x in uniq_init]:
+                                                                uniq_init.append((ainfo,"1"))
                                                     break
                                         subinfo=(vtyp,v,None)
                                         if type(vtype)!=str:
                                             vtyp=get_string2(vtype)
-                                        if subinfo in uniq_init:
+                                        if subinfo in [x[0] for x in uniq_init]:
                                             dprint(f"not unique: {subinfo} ... continue!")
                                             continue
                                         else:
                                             dprint(f"unique : {subinfo}")
-                                            uniq_init.append(subinfo)
+                                            uniq_init.append((subinfo,None))
                                 else:
                                     dprint(f" => is literal ({is_lit}) | is operator ({is_op}) {v}")
                     except Exception as e:
@@ -1465,7 +1490,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                                 found=False
                                 if x_re:
                                     v=x_re.group(1)
-                                    if v in [x[1] for x in uniq_init]:
+                                    if v in [x[0][1] for x in uniq_init]:
                                         prefix_.append(f"    {v} = 1;\n         ")
                                         found=True
                                 if not found:
@@ -1477,10 +1502,10 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                                 if x_re:
                                     av=x_re.group(1)
                                     v=x_re.group(2)
-                                    if av not in [x[1] for x in uniq_init]:
+                                    if av not in [x[0][1] for x in uniq_init]:
                                         prefix_.append(f"if ({av})"+'{')
                                         suffix_.insert(0,"}")
-                                    if v in [x[1] for x in uniq_init]:
+                                    if v in [x[0][1] for x in uniq_init]:
                                         prefix_.append(f"    {v} = 0;\n         ")
                                 else:
                                     x_list=re.findall(r"\[\s*((([^]]+)\s*)+)\]",uval)
@@ -1521,8 +1546,8 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                     if valid and has_kbody:
                         has_jbody=True
                         for u in uniq_init:
-                            utyp,uname,uval=u
-                            dprint(f"UNIQ_INIT: ('{utyp}','{uname}','{uval});\n")
+                            utyp,uname,uval=u[0]; uinit=u[1]
+                            dprint(f"UNIQ_INIT: ('{utyp}','{uname}','{uval}','{uinit}');\n")
                             utyp=re.sub(r"\b(register)\b",r"",utyp).strip()
                             utyp_=re.sub(r"\b(static|const|register)\b",r"",utyp).strip()
                             ptr_=False
@@ -1609,7 +1634,10 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                                 s0_body_vals+=f"    bzero(&{name},( {size}*sizeof({utyp_}) ) );\n"
                             else:
                                 s0_body_vals+=f"{utyp} {uname};\n"
-                                s0_body_vals+=f"    bzero(&{uname},sizeof({utyp_}));\n"
+                                if not uinit:
+                                   s0_body_vals+=f"    bzero(&{uname},sizeof({utyp_}));\n"
+                                else:
+                                   s0_body_vals+=f"    {uname}={uinit};\n"
                             decl_vars.append(uname)
                         s0_body=f"{s0_body_vals}{s0_body_vars}"
                         # scope 0 function

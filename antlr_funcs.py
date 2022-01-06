@@ -2060,7 +2060,7 @@ def get_json_data(fname,infile):
     disable_eval=[]
     enable_eval=[]
     version=None
-    struct_ptrs=[]
+    struct_ptrs={}
     with open(fname, 'r') as j:
         data = json.load(j)
         if 'DEPEND_VERSION' in data.keys():

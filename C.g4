@@ -950,7 +950,7 @@ Macroendif
     ;
 
 IncludeDirective
-    :   '#' Whitespace? 'include' Whitespace? (('"' ~[\r\n]* '"') | ('<' ~[\r\n]* '>' )) Whitespace? LineComment? Newline
+    :   '#' Whitespace? ('include'|'import') Whitespace? (('"' ~[\r\n]* '"') | ('<' ~[\r\n]* '>' )) Whitespace? LineComment? Newline
         -> skip
     ;
 

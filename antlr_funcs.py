@@ -721,42 +721,47 @@ class ScopeListener(CListener):
         pass
     def enterForDeclaration(self, ctx:CParser.ForDeclarationContext):
         chld=list(ctx.getChildren())
-        typ=get_string2(chld[0])
-        node=chld[1]
-        dec=list(find_multictx(node,[CParser.DeclaratorContext],None,None))
-        dprint(f"[enterForDeclaration]")
-        nodes=[(typ,d) for d in dec]
-        up_nodes=list()
-        sym_dict=dict()
-        if len(nodes)==0:
-            return
-        for t,d in nodes:
-            if d is None or len(list(d.getChildren()))<1 :
-                continue
-            if t in self.func_names:
-                continue
-            c=list(d.getChild(0).getChildren())
-            if len(c)>1:
-                decl_info=""
-                decl_nodes=list(c[1:])
-                for i in range(1,len(c)):
-                    decl_info+=" "+get_string2(c[i])
-                d_=get_string2(c[0])
-                typ=t+" *"
-                sym_dict[d_]=typ
-                dprint(f"sym_dict [{get_string2(d_)}] = {typ} ")
-                up_nodes.extend([(typ,c[0],decl_info)])
-            up_nodes.extend([(t,d,None)])
-            
-        self.cur_declarations[-1].extend(up_nodes)
-        for a,b in nodes:
-            if b is None or len(list(b.getChildren()))<1 :
-                continue
-            if a in self.func_names:
-                continue
-            dprint(f"sym_dict [{get_string2(b)}] = {a} ")
-            sym_dict[get_string2(b)]=a
-        self.cur_symbol_lut[self.current_scope].update(sym_dict)
+        if len(chld)>=2:
+            typ=get_string2(chld[0])
+            try:
+               node=chld[1]
+            except:
+               print(f"[enterForDeclaration] len(chld)={len(chld)}")
+               raise
+            dec=list(find_multictx(node,[CParser.DeclaratorContext],None,None))
+            dprint(f"[enterForDeclaration]")
+            nodes=[(typ,d) for d in dec]
+            up_nodes=list()
+            sym_dict=dict()
+            if len(nodes)==0:
+                return
+            for t,d in nodes:
+                if d is None or len(list(d.getChildren()))<1 :
+                    continue
+                if t in self.func_names:
+                    continue
+                c=list(d.getChild(0).getChildren())
+                if len(c)>1:
+                    decl_info=""
+                    decl_nodes=list(c[1:])
+                    for i in range(1,len(c)):
+                        decl_info+=" "+get_string2(c[i])
+                    d_=get_string2(c[0])
+                    typ=t+" *"
+                    sym_dict[d_]=typ
+                    dprint(f"sym_dict [{get_string2(d_)}] = {typ} ")
+                    up_nodes.extend([(typ,c[0],decl_info)])
+                up_nodes.extend([(t,d,None)])
+                
+            self.cur_declarations[-1].extend(up_nodes)
+            for a,b in nodes:
+                if b is None or len(list(b.getChildren()))<1 :
+                    continue
+                if a in self.func_names:
+                    continue
+                dprint(f"sym_dict [{get_string2(b)}] = {a} ")
+                sym_dict[get_string2(b)]=a
+            self.cur_symbol_lut[self.current_scope].update(sym_dict)
         pass
 
     def exitParameterDeclaration(self, ctx:CParser.ParameterDeclarationContext):

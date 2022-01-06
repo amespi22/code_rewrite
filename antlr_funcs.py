@@ -1593,7 +1593,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                                     first_index_found=False
                                     vals=[]
                                     while("]_ref" in x1name):
-                                        x_re=re.search(r"(\[(\s*\d*\s*)\])",x1name)
+                                        x_re=re.search(r"(\[(\s*[\d\w]*\s*)\])",x1name)
                                         v1=x_re.group(1)
                                         val=x_re.group(2)
                                         vals.append(val)

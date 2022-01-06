@@ -449,7 +449,7 @@ class ScopeListener(CListener):
     def enterCompoundStatement(self,ctx:CParser.CompoundStatementContext):
         x=self.scopes.get(ctx,None)
         if x:
-            print("[DuplicateNodeError] {get_string(ctx)}")
+            print("[DuplicateNodeError] {get_string2(ctx)}")
         else:
             self.getParentScopes(ctx)
         pass
@@ -474,7 +474,7 @@ class ScopeListener(CListener):
     def enterSelectionStatement(self, ctx:CParser.SelectionStatementContext):
         x=self.scopes.get(ctx,None)
         if x:
-            print("[DuplicateNodeError] {get_string(ctx)}")
+            print("[DuplicateNodeError] {get_string2(ctx)}")
         else:
             self.getParentScopes(ctx)
         pass
@@ -499,7 +499,7 @@ class ScopeListener(CListener):
     def enterIterationStatement(self, ctx:CParser.IterationStatementContext):
         x=self.scopes.get(ctx,None)
         if x:
-            print("[DuplicateNodeError] {get_string(ctx)}")
+            print("[DuplicateNodeError] {get_string2(ctx)}")
         else:
             self.getParentScopes(ctx)
         pass
@@ -511,7 +511,7 @@ class ScopeListener(CListener):
         dprint(f"[enterFunctionDefinition]")
         dprint(f"{[(type(c[x]),get_string2(c[x])) for x in range(0,len(c)-1)]}")
         if x:
-            print("[DuplicateNodeError] {get_string(ctx)}")
+            print("[DuplicateNodeError] {get_string2(ctx)}")
         else:
             self.getParentScopes(ctx)
         pass
@@ -812,7 +812,10 @@ class ScopeListener(CListener):
                     sym_dict[get_string2(b)]=a
                 self.cur_symbol_lut[self.current_scope].update(sym_dict)
             else:
-                dprint(f"[CORNER CASE] ParameterDeclaration : children = {[(type(v),get_string2(v)) for v in chld]}")
+                dprint(f"[CORNER CASE] ParameterDeclaration : children = {[(type(v),get_string2(v)) for v in chld]} => setting default type to 'int'")
+                sym_dict=dict()
+                sym_dict[get_string2(chld[0])]="int";
+                self.cur_symbol_lut[self.current_scope].update(sym_dict)
                 pass
         pass
 
@@ -1347,13 +1350,10 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
             s2_fn=f"{fname}_{i}"
             ## for each value in the namespace scope
             num_d=len(def_vars)
+            
+            valid_def_vars=list()
             for dd,def_var in enumerate(def_vars):
                 n,lut,un=get_type_var_info(def_var)
-                #for nn in n:
-                #    print(f"{nn[0]} : {get_string2(nn[1])}")
-                #for nn in un:
-                #    print(f"{nn[0]} : {get_string2(nn[1])} {get_string2(nn[2])}")
-                # we're just going to assume a singly declared variable
                 ltyp=n[0][0]
                 lname=get_string2(n[0][1])
                 if lname is None:
@@ -1365,6 +1365,22 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                 if '(' in lname and is_function(lname):
                     dprint(f"{lname} is a function.\nSkipping.")
                     continue
+                llut=sym_lut.get(lname,None)
+                if not llut:
+                    if not ltyp:
+                        ltyp="int"
+                    sym_lut[lname]=ltyp
+                valid_def_vars.append(def_var)
+
+            for dd,def_var in enumerate(valid_def_vars):
+                n,lut,un=get_type_var_info(def_var)
+                #for nn in n:
+                #    print(f"{nn[0]} : {get_string2(nn[1])}")
+                #for nn in un:
+                #    print(f"{nn[0]} : {get_string2(nn[1])} {get_string2(nn[2])}")
+                # we're just going to assume a singly declared variable
+                ltyp=n[0][0]
+                lname=get_string2(n[0][1])
                 if '[' in lname:
                     term=list(find_multictx(n[0][1],[tree.Tree.TerminalNodeImpl]))
                     value_subterms= [get_string2(v) for v in term[1:]]
@@ -1691,11 +1707,11 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
         dprint("[Fix Ingredient functions]  -- START --")
         en_var="fix_ingred_enable"
         if not preface_included:
-            prepend=generate_preface(en_var)+f"\n{s2_fn_decls}\n\n"
+            prepend=generate_preface(en_var)+f"\n{s2_fn_decls}\n"
             preface_included=True
         else:
             #prepend=f"{s2_fn_def}"
-            prepend=f"{s2_fn_decls}\n\n"
+            prepend=f"{s2_fn_decls}\n"
         dprint(prepend)
         loc= get_start_loc(fn)
         rewrites.append((prepend,loc))

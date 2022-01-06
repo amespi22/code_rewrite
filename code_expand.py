@@ -1278,13 +1278,13 @@ def preprocess_string(pragmas:dict,prog:str):
 def preprocess(pragmas:dict,inf:str,outf:str):
 
     pgrm=None
-    with open(inf,'r') as _in:
+    with open(inf,'r',encoding="ascii",errors="replace") as _in:
         pgrm=_in.read()
     pgrm = pgrm.replace('©',"")
 
     ol,updated_pragmas = preprocess_string(pragmas, pgrm)
 
-    with open(outf,'w') as _out:
+    with open(outf,'w',encoding='ascii',errors="replace") as _out:
         for i in ol:
             _out.write(f"{i}\n")
     return updated_pragmas

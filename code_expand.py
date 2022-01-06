@@ -659,6 +659,7 @@ def expand_func_args(ctx):
                             #replace that variable
                             v = r_vars.pop()
                             new_var_dec += f"{fun_arg_types[i][0]} {v} = {func_arg_names[i]};\n"
+                            new_vars.append(v)
                             new_arg_string += f"{v},"
                             #print(f"{fun_arg_types[i][0]} {v} = {func_arg_names[i]};\n")
                         else:
@@ -718,7 +719,7 @@ def gen_func_changes(cur_prog, rewrite):
             else:
                 orig_len = len(lns[start_loc[0]-1]) + line_deltas[key[0][0]]
                 s_lns = lns[start_loc[0]-1].split('\n')
-                ln = s_lns[2]
+                ln = s_lns[len(s_lns)-3]
                 spaces = get_line_spaces(s_lns[1])
                 var_decs = indent_by_newline(var_decs, spaces,' ')
                 delta = line_deltas[key[0][0]]
@@ -731,7 +732,7 @@ def gen_func_changes(cur_prog, rewrite):
                 #of.write(line_change)
 
                 # add var decs to s_lns
-                s_lns[2] = line_change
+                s_lns[len(s_lns)-3] = line_change
                 s_lns[1] = f"{var_decs}{s_lns[1]}"
 
                 # add line change to s_lns
@@ -813,16 +814,21 @@ def single_declarations(ctx):
                     #if here we don't have more than one variable in the
                     #declaration and expand_decs will get it
                     continue
-                #line_num - 1 cause I think it's not 0 indexed
+                if '*' in typ:
+                    all_vars[0] = f"{typ[typ.find('*'):]}{all_vars[0]}"
+                    typ = typ[:typ.find('*')]
                 rs = ""
+                """
                 if len(all_vars) > 1:
                     #we need to see if the type ends with a *
                     #if so, remove the * and place it on the first var
                     if typ.endswith("*"):
                         all_vars[0] = f"*{all_vars[0]}"
                         typ = typ[:-1]
+                """
                 for a in all_vars:
                     rs+= f"{typ} {a};\n"
+                #line_num - 1 cause I think it's not 0 indexed
                 rewrite[(get_line_num(d)-1,get_last_line_num(d))] = rs
             except:
                 continue

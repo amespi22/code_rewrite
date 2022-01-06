@@ -1373,6 +1373,8 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                         is_lit= is_literal(v)
                         if not is_op and not is_lit:
                             vtype = sym_lut.get(v,None)
+                            if not vtype:
+                                vtype="int"
                             ainfo=(vtype,v,None)
                             if (ainfo,None) in uniq_init:
                                 uniq_init.pop(uniq_init.index((ainfo,None)))

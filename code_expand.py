@@ -975,6 +975,9 @@ def fix_type(typ):
         typ = typ.replace("unsignedint", "unsigned int")
     if "struct" in typ and typ.startswith("struct"):
         typ = typ.replace("struct", "struct ", 1)
+    z = re.search(r"struct[A-Za-z0-9_]", typ)
+    if z:
+        typ = typ.replace("struct", "struct ")
     typ = typ.replace("  ", " ")
     return typ
 

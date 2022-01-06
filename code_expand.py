@@ -34,7 +34,7 @@ def main():
     dont_eval=[]
     okay_to_eval=[]
     okay_ = ["sizeof"]
-    struct_ptrs = []
+    global struct_ptrs
     if pre_process != "":
         #This means we have a file to parse
         #File should have a new line for each file to parse
@@ -570,10 +570,19 @@ def expand_func_args(ctx):
     fns = get_functions(ctx)
     rewrites = {}
     start_locs = {}
-    #This gives us all functions in the file and it's args
+    tmp = {}
+    for k,v in struct_ptrs.items():
+        tmp[v] = k
+    #This gives us all functions in the file and its args
     for f in fns:
-        funcs_and_args[get_func_name(f)] = get_func_args(f)
-    #print(funcs_and_args)
+        args = []
+        fn_args = get_func_args(f)
+        for i,j in fn_args:
+            if i in tmp:
+                args.append((f"{tmp[i]}*",j))
+            else:
+                args.append((i,j))
+        funcs_and_args[get_func_name(f)] = args
     #for each function find all <class 'CParser.CParser.PostfixExpressionContext'>
     for f in fns:
         skip = False

@@ -46,7 +46,6 @@ def main():
         funcs_and_rts = {}
         funcs_and_args = {}
         macros = None
-
     for x in okay_:
         if x not in okay_to_eval:
             okay_to_eval.append(x)
@@ -687,8 +686,11 @@ def gen_func_changes(cur_prog, rewrite):
     tab = chr(32) * 4
     line_deltas = {}
     #of = open("tmp_ln_prints", 'a')
-    for key,val in rewrite.items():
+    keys = list(rewrite.keys())
+    keys.sort()
+    for key in keys:
         start_loc, end_loc = key
+        val = rewrite[key]
         var_decs,func_call = val
         #if the start and end loc lines are the same
         if key[0][0] == key[1][0]:

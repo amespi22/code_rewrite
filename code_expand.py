@@ -1017,6 +1017,7 @@ def preprocess_string(pragmas:dict,prog:str):
         pragmas=dict()
     _macs='|'.join(list(_macros))
     _prags='|'.join(list(_pragmas))
+    #print(f"[PRAGMAS] {_prags} [from '{pragmas}'")
     #print(f"[PRAGMAS] {_macs}")
     pragma_re = None
     macro_re = None
@@ -1041,6 +1042,24 @@ def preprocess_string(pragmas:dict,prog:str):
     cur_value=None
     new_pragma=dict()
     for iil, l in enumerate(lines):
+        prag=pragma_re.search(l) if pragma_re else None
+        define=define_re.search(l)
+        if prag:
+            #print(f"[NOTE!] PRAGMA {prag.group(0)} {l} {pragma_re}")
+            key=prag.group(1)
+            skip=False
+            if define:
+               val=define.group(1)
+               if val.startswith(key):
+                  skip=True
+            if not skip:
+                val=pragmas.get(key,None)
+                #print(f"[NOTE!] basic PRAGMA expansion for '{key}':'{val}' => '{l}'")
+                if val:
+                    post_l = re.sub(key,val,l)
+                    #print(f"[NOTE!]  PRAGMA RESULT =>  '{post_l}'")
+                    l=post_l
+        
         #print(f"[LINE] '{l}'")
         start=False
         p=positive_re.search(l)
@@ -1050,7 +1069,6 @@ def preprocess_string(pragmas:dict,prog:str):
         end=end_re.search(l)
         define=define_re.search(l)
         mac=macro_re.search(l) if macro_re else None
-        
         if p:
             start=True
             in_cascade=True
@@ -1139,9 +1157,11 @@ def preprocess_string(pragmas:dict,prog:str):
                     else:
                         cur_value=True
     
-                if cur_define[0] not in _pragmas:
+                # note to future debugger : MACRO_EXPANSION_ENABLED is broken
+                #if (cur_define[0] not in _pragmas):
+                if MACRO_EXPANSION_ENABLED and (cur_define[0] not in _pragmas):
                     _pragmas.append(cur_define[0])
-                    _prags='|'+cur_define[0]
+                    _prags+='|'+cur_define[0]
                     try:
                         pragma_re=re.compile(r'\b('+_prags+r")\b")
                     except Exception as e:

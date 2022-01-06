@@ -1351,6 +1351,8 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                 # we're just going to assume a singly declared variable
                 ltyp=n[0][0]
                 lname=get_string2(n[0][1])
+                if lname is None:
+                    continue
                 if lname.startswith('(') and is_function(f"{ltyp}{lname}"):
                     dprint(f"{ltyp}{lname} is a function.\nSkipping.")
                     continue

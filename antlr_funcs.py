@@ -1347,13 +1347,10 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
             s2_fn=f"{fname}_{i}"
             ## for each value in the namespace scope
             num_d=len(def_vars)
+            
+            valid_def_vars=list()
             for dd,def_var in enumerate(def_vars):
                 n,lut,un=get_type_var_info(def_var)
-                #for nn in n:
-                #    print(f"{nn[0]} : {get_string2(nn[1])}")
-                #for nn in un:
-                #    print(f"{nn[0]} : {get_string2(nn[1])} {get_string2(nn[2])}")
-                # we're just going to assume a singly declared variable
                 ltyp=n[0][0]
                 lname=get_string2(n[0][1])
                 if lname is None:
@@ -1365,6 +1362,20 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                 if '(' in lname and is_function(lname):
                     dprint(f"{lname} is a function.\nSkipping.")
                     continue
+                llut=sym_lut.get(lname,None)
+                if not llut:
+                    sym_lut[lname]=ltyp
+                valid_def_vars.append(def_var)
+
+            for dd,def_var in enumerate(valid_def_vars):
+                n,lut,un=get_type_var_info(def_var)
+                #for nn in n:
+                #    print(f"{nn[0]} : {get_string2(nn[1])}")
+                #for nn in un:
+                #    print(f"{nn[0]} : {get_string2(nn[1])} {get_string2(nn[2])}")
+                # we're just going to assume a singly declared variable
+                ltyp=n[0][0]
+                lname=get_string2(n[0][1])
                 if '[' in lname:
                     term=list(find_multictx(n[0][1],[tree.Tree.TerminalNodeImpl]))
                     value_subterms= [get_string2(v) for v in term[1:]]

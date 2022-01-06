@@ -812,7 +812,10 @@ class ScopeListener(CListener):
                     sym_dict[get_string2(b)]=a
                 self.cur_symbol_lut[self.current_scope].update(sym_dict)
             else:
-                dprint(f"[CORNER CASE] ParameterDeclaration : children = {[(type(v),get_string2(v)) for v in chld]}")
+                dprint(f"[CORNER CASE] ParameterDeclaration : children = {[(type(v),get_string2(v)) for v in chld]} => setting default type to 'int'")
+                sym_dict=dict()
+                sym_dict[get_string2(chld[0])]="int";
+                self.cur_symbol_lut[self.current_scope].update(sym_dict)
                 pass
         pass
 
@@ -1364,6 +1367,8 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                     continue
                 llut=sym_lut.get(lname,None)
                 if not llut:
+                    if not ltyp:
+                        ltyp="int"
                     sym_lut[lname]=ltyp
                 valid_def_vars.append(def_var)
 

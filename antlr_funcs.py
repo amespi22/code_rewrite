@@ -1383,8 +1383,14 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                 lname=get_string2(n[0][1])
                 if '[' in lname:
                     term=list(find_multictx(n[0][1],[tree.Tree.TerminalNodeImpl]))
-                    value_subterms= [get_string2(v) for v in term[1:]]
+                    value_subterms= [get_string2(v) for v in term]
+                    while value_subterms[0]!='[':
+                        value_subterms=value_subterms[1:]
+                    while value_subterms[-1]!=']':
+                        value_subterms=value_subterms[0:-1]
                     for v in value_subterms:
+                        if v==']':
+                            break
                         is_op = is_operator(v) 
                         is_lit= is_literal(v)
                         if not is_op and not is_lit:
@@ -1570,6 +1576,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                     # only need to generate if we've found a unique (type,variable) tuple
                     if valid and has_kbody:
                         has_jbody=True
+                        dprint(f"----")
                         for u in uniq_init:
                             utyp,uname,uval=u[0]; uinit=u[1]
                             dprint(f"UNIQ_INIT: ('{utyp}','{uname}','{uval}','{uinit}');\n")

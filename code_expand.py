@@ -809,7 +809,15 @@ def single_declarations(ctx):
                     #we are with more than one declaration and one is initialized
                     typ = d.getChild(0).getText()
                     typ = fix_type(typ)
-                    all_vars = [d.getChild(1).getChild(x).getText() for x in range(cc) if d.getChild(1).getChild(x).getText() != ',']
+                    all_vars_o = [d.getChild(1).getChild(x).getText() for x in range(cc) if d.getChild(1).getChild(x).getText() != ',']
+                    all_vars = []
+                    for a in all_vars_o:
+                        if '(' in a:
+                            nv = fix_type(a[:a.rfind(')')]) + a[a.rfind(')'):]
+                            all_vars.append(nv)
+                        else:
+                            all_vars.append(a)
+
                 else:
                     #if here we don't have more than one variable in the
                     #declaration and expand_decs will get it

@@ -1176,7 +1176,7 @@ def print_scope_info(scope):
             i+=1
 
 def is_operator(val):
-    if re.match(r"([()*-/%+]|->)",val):
+    if re.match(r"([()*-/%+\[\]]|->)",val):
         return True
     return False
 
@@ -1365,20 +1365,20 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                 if '(' in lname and is_function(lname):
                     dprint(f"{lname} is a function.\nSkipping.")
                     continue
-                ares=re.search(r"\[\s*(\w*)\s*\]",lname)
-                if ares:
-                    asize=ares.group(1)
-                    dprint(f"def_var[{dd}] | {lname} | [size={asize}]")
-                    if len(asize)>0 and not is_literal(asize):
-                        dprint(f"Array size is variable => '{asize}'")
-                        asizetyp=sym_lut.get(asize,None)
-                        if asizetyp:
-                            ainfo=(asizetyp,asize,None)
+                if '[' in lname:
+                    term=list(find_multictx(n[0][1],[tree.Tree.TerminalNodeImpl]))
+                    value_subterms= [get_string2(v) for v in term[1:]]
+                    for v in value_subterms:
+                        is_op = is_operator(v) 
+                        is_lit= is_literal(v)
+                        if not is_op and not is_lit:
+                            vtype = sym_lut.get(v,None)
+                            ainfo=(vtype,v,None)
                             if (ainfo,None) in uniq_init:
                                 uniq_init.pop(uniq_init.index((ainfo,None)))
-                                uniq_init.append((ainfo,"1"))
+                                uniq_init.insert(0,(ainfo,"1"))
                             elif (ainfo,"1") not in uniq_init:
-                                uniq_init.append((ainfo,"1"))
+                                uniq_init.insert(0,(ainfo,"1"))
                 #####
                 num_k=len(val_s+cval_s)
                 for k,x in enumerate(val_s+cval_s):
@@ -1443,7 +1443,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                                                         if asizetyp:
                                                             ainfo=(asizetyp,asize,None)
                                                             if ainfo not in [x[0] for x in uniq_init]:
-                                                                uniq_init.append((ainfo,"1"))
+                                                                uniq_init.insert(0,(ainfo,"1"))
                                                     break
                                         subinfo=(vtyp,v,None)
                                         if type(vtype)!=str:

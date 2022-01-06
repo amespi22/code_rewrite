@@ -449,7 +449,7 @@ class ScopeListener(CListener):
     def enterCompoundStatement(self,ctx:CParser.CompoundStatementContext):
         x=self.scopes.get(ctx,None)
         if x:
-            print("[DuplicateNodeError] {get_string(ctx)}")
+            print("[DuplicateNodeError] {get_string2(ctx)}")
         else:
             self.getParentScopes(ctx)
         pass
@@ -474,7 +474,7 @@ class ScopeListener(CListener):
     def enterSelectionStatement(self, ctx:CParser.SelectionStatementContext):
         x=self.scopes.get(ctx,None)
         if x:
-            print("[DuplicateNodeError] {get_string(ctx)}")
+            print("[DuplicateNodeError] {get_string2(ctx)}")
         else:
             self.getParentScopes(ctx)
         pass
@@ -499,7 +499,7 @@ class ScopeListener(CListener):
     def enterIterationStatement(self, ctx:CParser.IterationStatementContext):
         x=self.scopes.get(ctx,None)
         if x:
-            print("[DuplicateNodeError] {get_string(ctx)}")
+            print("[DuplicateNodeError] {get_string2(ctx)}")
         else:
             self.getParentScopes(ctx)
         pass
@@ -511,7 +511,7 @@ class ScopeListener(CListener):
         dprint(f"[enterFunctionDefinition]")
         dprint(f"{[(type(c[x]),get_string2(c[x])) for x in range(0,len(c)-1)]}")
         if x:
-            print("[DuplicateNodeError] {get_string(ctx)}")
+            print("[DuplicateNodeError] {get_string2(ctx)}")
         else:
             self.getParentScopes(ctx)
         pass
@@ -1707,11 +1707,11 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
         dprint("[Fix Ingredient functions]  -- START --")
         en_var="fix_ingred_enable"
         if not preface_included:
-            prepend=generate_preface(en_var)+f"\n{s2_fn_decls}\n\n"
+            prepend=generate_preface(en_var)+f"\n{s2_fn_decls}\n"
             preface_included=True
         else:
             #prepend=f"{s2_fn_def}"
-            prepend=f"{s2_fn_decls}\n\n"
+            prepend=f"{s2_fn_decls}\n"
         dprint(prepend)
         loc= get_start_loc(fn)
         rewrites.append((prepend,loc))

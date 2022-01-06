@@ -1294,8 +1294,10 @@ def preprocess(pragmas:dict,inf:str,outf:str):
     ol,updated_pragmas = preprocess_string(pragmas, pgrm)
 
     with open(outf,'w',encoding='ascii',errors="replace") as _out:
+        _out.write(f"\n\n")
         for i in ol:
             _out.write(f"{i}\n")
+        _out.write(f"\n\n")
     return updated_pragmas
 
 if __name__ == "__main__":

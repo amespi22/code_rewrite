@@ -1871,7 +1871,7 @@ def get_func_args(ctx):
         else:
                 #print("error")
                 #print(ctx.getText())
-                return None
+                return []
     except Exception as e:
         print("Threw exception in get_func_args of antlr_funcs.py")
         print(e)

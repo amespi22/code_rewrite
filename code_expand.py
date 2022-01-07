@@ -580,6 +580,8 @@ def expand_func_args(ctx):
         for i,j in fn_args:
             if i in tmp:
                 args.append((f"{tmp[i]}*",j))
+            if '[' in j:
+                args.append((f"{i}*",j))
             else:
                 args.append((i,j))
         funcs_and_args[get_func_name(f)] = args

@@ -46,7 +46,6 @@ def main():
     #    print(f"\t {type(k['parent'])} => {get_string2(k['parent'])}")
 
     x=get_function_info(functions=get_functions(t),fscope=printer.scopes,dont_eval=[])
-    print_scope_info(x)
 
     """
     for key,members in inspect.getmembers(ctx):
@@ -682,7 +681,9 @@ class ScopeListener(CListener):
 
             sym_dict=dict()
             up_nodes=list()
+            i=-1
             for t,d in nodes:
+                i+=1
                 if d is None or len(list(d.getChildren()))<1 :
                     continue
                 if t in self.func_names:
@@ -696,18 +697,28 @@ class ScopeListener(CListener):
                     d_=get_string2(c[0])
                     typ=t+" *"
                     sym_dict[d_]=typ
-                    dprint(f"sym_dict [{get_string2(d_)}] = {typ} ")
+                    dprint(f"[A-t-{i}] sym_dict [{get_string2(d_)}] = {typ} ")
                     up_nodes.extend([(typ,c[0],decl_info)])
+                    if type(c[0])!=tree.Tree.TerminalNodeImpl:
+                        c0=list(c[0].getChildren())
+                        if len(c0)>1:
+                            dl_info=""
+                            dl_nodes=list(c0[1:])
+                            for i in range(1,len(c)):
+                                dl_info+=" "+get_string2(c[i])
+                            dl_info+=decl_info
+                            typ+="*"
+                            d_=get_string2(c0[0])
+                            sym_dict[d_]=typ
+                            dprint(f"[B-t-{i}] sym_dict [{get_string2(d_)}] = {typ} ")
+                            up_nodes.extend([(typ,c0[0],dl_info)])
+                        
                 up_nodes.extend([(t,d,None)])
                 
+                dprint(f"[C-t-{i}] sym_dict [{get_string2(d)}] = {t} ")
+                sym_dict[get_string2(d)]=t
+                
             self.cur_declarations[-1].extend(up_nodes)
-            for a,b in nodes:
-                if b is None or len(list(b.getChildren()))<1 :
-                    continue
-                if a in self.func_names:
-                    continue
-                sym_dict[get_string2(b)]=a
-                dprint(f"sym_dict [{get_string2(b)}] = {a} ")
             try:
                 self.cur_symbol_lut[self.current_scope].update(sym_dict)
             except Exception as e:
@@ -735,7 +746,9 @@ class ScopeListener(CListener):
             sym_dict=dict()
             if len(nodes)==0:
                 return
+            i=-1
             for t,d in nodes:
+                i+=1
                 if d is None or len(list(d.getChildren()))<1 :
                     continue
                 if t in self.func_names:
@@ -749,18 +762,27 @@ class ScopeListener(CListener):
                     d_=get_string2(c[0])
                     typ=t+" *"
                     sym_dict[d_]=typ
-                    dprint(f"sym_dict [{get_string2(d_)}] = {typ} ")
+                    dprint(f"[A-t-{i}] sym_dict [{get_string2(d_)}] = {typ}  [# children={len(c)}]")
                     up_nodes.extend([(typ,c[0],decl_info)])
+                    if type(c[0])!=tree.Tree.TerminalNodeImpl:
+                        c0=list(c[0].getChildren())
+                        if len(c0)>1:
+                            dl_info=""
+                            dl_nodes=list(c0[1:])
+                            for i in range(1,len(c)):
+                                dl_info+=" "+get_string2(c[i])
+                            dl_info+=decl_info
+                            typ+="*"
+                            d_=get_string2(c0[0])
+                            sym_dict[d_]=typ
+                            dprint(f"[B-t-{i}] sym_dict [{get_string2(d_)}] = {typ} ")
+                            up_nodes.extend([(typ,c0[0],dl_info)])
                 up_nodes.extend([(t,d,None)])
                 
+                dprint(f"[C-t-{i}] sym_dict [{get_string2(d)}] = {t} ")
+                sym_dict[get_string2(d)]=t
+                
             self.cur_declarations[-1].extend(up_nodes)
-            for a,b in nodes:
-                if b is None or len(list(b.getChildren()))<1 :
-                    continue
-                if a in self.func_names:
-                    continue
-                dprint(f"sym_dict [{get_string2(b)}] = {a} ")
-                sym_dict[get_string2(b)]=a
             self.cur_symbol_lut[self.current_scope].update(sym_dict)
         pass
 
@@ -1128,11 +1150,11 @@ def get_function_info(functions,fscope,dont_eval:list=None,okay_eval:list=None):
             s=[get_string2(n) for n in ignore_sibs]
             dprint(f"ignore sibs: {s}")
             for j,c in enumerate(decl_scopes):
-                dprint(f"{j} : type: {c[0]}, var: {get_string2(c[1])}")
+                dprint(f"{j} : |  decl_scope  | type: {c[0]}, var: {get_string2(c[1])}")
             for j,c in enumerate(assign_scopes):
-                dprint(f"{j} : type: {c[0]}, value: {get_string2(c[3])}")
+                dprint(f"{j} : | assign_scope | type: {c[0]}, value: {get_string2(c[3])}")
             for j,c in enumerate(compare_scopes):
-                dprint(f"{j} : type: {c[0]}, value: {get_string2(c[3])}")
+                dprint(f"{j} : |compare_scopes| type: {c[0]}, value: {get_string2(c[3])}")
             dprint(f"=======END=======")
 
             scope_vars[fname][p]=\
@@ -1145,38 +1167,6 @@ def get_function_info(functions,fscope,dont_eval:list=None,okay_eval:list=None):
                                   }
     return scope_vars
 
-
-def print_scope_info(scope):
-    for fn,fs in scope.items():
-        print(get_func_name(fn))
-        i=0
-        for sn, s in fs.items():
-            print("{")
-            parent=s['parent'] if s['parent'] else sn
-            var_s=s['variables']
-            val_s=s['values']
-            cval_s=s['compvalues']
-            print(f"/* scope = {get_string2(parent)}*/")
-            for x in val_s+cval_s:
-                try:
-                    typ,var,varinfo,value=x
-                    type_info=typ
-                    def_var="i"
-                    if value:
-                        if value==def_var or value.endswith(f" {def_var}") or value.startswith(f"{def_var} ") \
-                        or f" {def_var} " in value:
-                                def_var+=def_var
-                        if varinfo != "":
-                            print("\t{ "+f"{typ} {def_var}{varinfo} = {value}; /* {var} */"+" }") 
-                        elif varinfo == "":
-                            print("\t{ "+f"{typ} {def_var}{varinfo}; {def_var}= {value}; /* {var} */"+" }") 
-                            print(f"loc to put in code = {get_end_loc(parent)}")
-                except Exception as e:
-                    print(f"Exception with x={x}")
-                    print(e)
-                    raise
-            print("}")
-            i+=1
 
 def is_operator(val):
     if re.match(r"([()*-/%+\[\]]|->)",val):
@@ -1742,47 +1732,6 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
 
 
     
-
-def get_fix_loc_rewrites(scope,def_vars=["i"]):
-    rewrites = []
-    uniques=[]
-    for fn,fs in scope.items():
-        i=0
-        def_vars = get_all_vars(fn, False)
-        strip_array_decs(def_vars)
-        for sn, s in fs.items():
-            parent=s['parent'] if s['parent'] else sn
-            var_s=s['variables']
-            val_s=s['values']
-            end=s['scope_end']
-            for x in val_s:
-                try:
-                    type_info,var,varinfo,value=x
-                    typ=re.sub(r"\bconst\b",r' ',type_info)
-                    for def_var in def_vars:
-                        info=(typ,def_var,value)
-                        if info in uniques:
-                            continue
-                        else:
-                            uniques.append(info)
-                        if value:
-                            loc = get_end_loc(end)
-                            if value==def_var or value.endswith(f" {def_var}") or value.startswith(f"{def_var} ") \
-                            or f" {def_var} " in value:
-                                #rewrites.append((f"/* SKIPPED ({typ}) {def_var}{varinfo} - used in assignment '{value}'  */",loc))
-                                continue
-                            if varinfo != "":
-                                rep_str = ("\t{ "+f"{typ} {def_var}{varinfo} = {value}; /* {var} */"+" }") 
-                            elif varinfo == "":
-                                rep_str = ("\t{ "+f"{typ} {def_var}{varinfo}; {def_var}= {value}; /* {var} */"+" }") 
-                            rewrites.append((rep_str,loc))
-                except Exception as e:
-                    print(f"Exception with x={x}")
-                    print(e)
-                    raise
-            #print("}")
-            i+=1
-    return rewrites
 
 def strip_array_decs(lst):
     for i in range(len(lst)):

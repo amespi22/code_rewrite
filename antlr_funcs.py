@@ -1550,6 +1550,16 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                                 s0_body_vars+="    {"+prefix+f"{utyp}* {xname}; {xname} = ({utyp}*)({uval}); "+suffix+"}\n"
                                 if not comment:
                                     has_kbody=True
+                            elif "[" in uname:
+                                xnames=uname.split('[')
+                                xname=xnames[0]
+                                for x in xnames[1:]:
+                                    x_=re.sub(']','',x)
+                                    val="[ ("+x_+")-1 ]"
+                                    xname+=val
+                                s0_body_vars+="    {"+prefix+f"{utyp} {uname}; {xname} = ({utyp})({uval}); "+suffix+"}\n"
+                                if not comment:
+                                    has_kbody=True
                             else:
                                 s0_body_vars+="    {"+prefix+f"{utyp} {uname}; {uname} = ({utyp})({uval}); "+suffix+"}\n"
                                 if not comment:

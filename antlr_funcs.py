@@ -1463,27 +1463,18 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None,defines=N
                                                         asizetyp=sym_lut.get(asize,None)
                                                         if asizetyp:
                                                             ainfo=(asizetyp,asize,None)
-                                                            #is_macrodef=False
-                                                            #if defines:
-                                                            #    srchk='|'.join(defines)
-                                                            #    if re.search(r"\b("+srchk+r")\b",asize):
-                                                            #        is_macrodef=True
-                                                            #if is_macrodef:
-                                                            #    dprint(f"Skipping {asize} => #define")
                                                             if ainfo not in [x[0] for x in uniq_init]:
                                                                 uniq_init.insert(0,(ainfo,"1"))
                                                     break
                                         subinfo=(vtyp,v,None)
                                         if type(vtype)!=str:
                                             vtyp=get_string2(vtype)
-                                        #is_macrodef=False
-                                        #if defines:
-                                        #    srchk='|'.join(defines)
-                                        #    if re.search(r"\b("+srchk+r")\b",v):
-                                        #        is_macrodef=True
-                                        #if is_macrodef:
-                                        #    dprint(f"Skipping {v} => #define")
-                                        if subinfo in [x[0] for x in uniq_init]:
+                                        is_macrodef=False
+                                        if re.search(r"\b(void)\b",v):
+                                            is_macrodef=True
+                                        if is_macrodef:
+                                            dprint(f"Skipping {v} => #define")
+                                        elif subinfo in [x[0] for x in uniq_init]:
                                             dprint(f"not unique: {subinfo} ... continue!")
                                             continue
                                         else:

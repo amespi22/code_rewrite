@@ -1290,7 +1290,7 @@ def uniquify(varlist):
 
     
 
-def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
+def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None,defines=None):
     uniques=[]
     fn_body=[]
     rewrites=[]
@@ -1388,7 +1388,14 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                             if not vtype:
                                 vtype="int"
                             ainfo=(vtype,v,None)
-                            if (ainfo,None) in uniq_init:
+                            is_macrodef=False
+                            if defines:
+                                srchk='|'.join(defines)
+                                if re.search(r"\b("+srchk+r")\b",v):
+                                    is_macrodef=True
+                            if is_macrodef:
+                                dprint(f"Skipping {v} => #define")
+                            elif (ainfo,None) in uniq_init:
                                 uniq_init.pop(uniq_init.index((ainfo,None)))
                                 uniq_init.insert(0,(ainfo,"1"))
                             elif (ainfo,"1") not in uniq_init:
@@ -1456,12 +1463,26 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                                                         asizetyp=sym_lut.get(asize,None)
                                                         if asizetyp:
                                                             ainfo=(asizetyp,asize,None)
+                                                            #is_macrodef=False
+                                                            #if defines:
+                                                            #    srchk='|'.join(defines)
+                                                            #    if re.search(r"\b("+srchk+r")\b",asize):
+                                                            #        is_macrodef=True
+                                                            #if is_macrodef:
+                                                            #    dprint(f"Skipping {asize} => #define")
                                                             if ainfo not in [x[0] for x in uniq_init]:
                                                                 uniq_init.insert(0,(ainfo,"1"))
                                                     break
                                         subinfo=(vtyp,v,None)
                                         if type(vtype)!=str:
                                             vtyp=get_string2(vtype)
+                                        #is_macrodef=False
+                                        #if defines:
+                                        #    srchk='|'.join(defines)
+                                        #    if re.search(r"\b("+srchk+r")\b",v):
+                                        #        is_macrodef=True
+                                        #if is_macrodef:
+                                        #    dprint(f"Skipping {v} => #define")
                                         if subinfo in [x[0] for x in uniq_init]:
                                             dprint(f"not unique: {subinfo} ... continue!")
                                             continue
@@ -1501,7 +1522,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None):
                         utyp=re.sub(r"\bregister\b",r"",utyp)
                         has_uname=re.search(r"\b("+uname+r")\b",uval)
                         comment=False
-                        if has_uname :
+                        if has_uname:
                             dprint("not valid - "+ f"{utyp} {uname}; {uname} = (({utyp}){uval});\n")
                         elif (utyp,uname) not in udecl_vars and utyp != "UNDEF":
                             prefix_=list()
@@ -1867,6 +1888,9 @@ def get_conditionals(ctx):
     ftlc = find_ctx(ctx, "<class 'CParser.CParser.SelectionStatementContext'>")
     return ftlc
 
+def get_defines(ctx):
+    return find_ctx(ctx,"<class 'CParser.ComplexDefine'>")
+
 def get_functions(ctx):
     return find_ctx(ctx,"<class 'CParser.CParser.FunctionDefinitionContext'>")
 
@@ -2042,7 +2066,9 @@ def get_json_data(fname,infile):
     disable_eval=[]
     enable_eval=[]
     version=None
-    struct_ptrs={}
+    struct_ptrs={} 
+    keywords=[]
+    defines=[]
     with open(fname, 'r') as j:
         data = json.load(j)
         if 'DEPEND_VERSION' in data.keys():
@@ -2070,13 +2096,19 @@ def get_json_data(fname,infile):
         if 'struct_ptrs' in data.keys():
             struct_ptrs=dict(data['struct_ptrs'])
 
+        if 'defines' in data.keys():
+            defines=list(data['defines'])
+
+        if 'keyword_types' in data.keys():
+            keywords=list(data['keyword_types'])
+
         for i in enable_eval:
             if i in disable_eval:
                 # let's make sure that if it's allowed to be evaluated as a RHS assignment (non-destructive)
                 # then we don't disable it
                 disable_eval.remove(i)
             
-    return (d1,d2,rd,disable_eval,enable_eval,struct_ptrs)
+    return (d1,d2,rd,disable_eval,enable_eval,struct_ptrs,keywords,defines)
 
 def resolve_included(includes, infile, pragmas):
     # this function walks through, identifies the #includes and then resolves processing order

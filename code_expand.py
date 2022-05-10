@@ -49,6 +49,7 @@ def main():
     else:
         funcs_and_rts = {}
         funcs_and_args = {}
+        struct_ptrs = {}
         macros = None
     for x in okay_:
         if x not in okay_to_eval:

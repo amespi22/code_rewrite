@@ -418,6 +418,7 @@ def expand_if_else(ctx):
     #This gives us all functions in the file and it's args
     for f in fns:
         funcs_and_rts[get_func_name(f)] = f.getChild(0).getText()
+    #fix case where there is no return type of a functino
     for key,value in funcs_and_rts.items():
         if value.startswith(f"{key}("):
             funcs_and_rts[key] = 'int'

@@ -1,0 +1,1 @@
+../../../cgc_test/WordCompletion/test-pov_1.sh

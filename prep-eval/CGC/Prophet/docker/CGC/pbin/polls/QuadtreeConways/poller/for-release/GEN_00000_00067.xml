@@ -1,0 +1,25 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>9362beb678f3e70723a1085de1dda90682acf335bbcd29fdabf73487184a7e5d98ffba10906875b130ce2364709facca</seed>
+<replay>
+    <read><length>85</length><match><data>Before we begin. Enter a number \x5b1 \x2d 4294967295\x5d\x0aOr any number. We\x27ll figure it out: </data></match></read>
+    <write><data>3245610860\x0a</data></write>
+    <read><length>28</length><match><data>New Game \x2d\x2d Ready\x2c set\x2c go!\x0a</data></match></read>
+    <read><length>94</length><match><data>                              \x2d\x2dBoard: HIDDEN\x2d\x2d\x0a1. Shoot!\x0a2. Reveal Board\x0a3. New Game\x0a4. Quit\x0a</data></match></read>
+    <read><length>66</length><match><data>Current Score \x3d 0 \x7c Total Time Remaining: 10000 \x7c High Score \x3d 0 \x0a</data></match></read>
+    <read><length>43</length><match><data>Shots Remaining: 125 \x7c Bombs Remaining: 5\x0a\x0a</data></match></read>
+    <read><length>12</length><match><data>Selection\x2d: </data></match></read>
+    <write><data>1\x0a</data></write>
+    <read><delim>Enter Shot Coordinates Ex: 100\x2c 100:: </delim></read>
+    <write><data>7595\x2c 5604\x0a</data></write>
+    <read><length>35</length><match><data>You missed. Better luck next time.\x0a</data></match></read>
+    <read><length>94</length><match><data>                              \x2d\x2dBoard: HIDDEN\x2d\x2d\x0a1. Shoot!\x0a2. Reveal Board\x0a3. New Game\x0a4. Quit\x0a</data></match></read>
+    <read><length>66</length><match><data>Current Score \x3d 0 \x7c Total Time Remaining: 10000 \x7c High Score \x3d 0 \x0a</data></match></read>
+    <read><length>43</length><match><data>Shots Remaining: 124 \x7c Bombs Remaining: 5\x0a\x0a</data></match></read>
+    <read><length>12</length><match><data>Selection\x2d: </data></match></read>
+    <write><data>4\x0a</data></write>
+    <read><length>30</length><match><data>Thanks for Playing\x0aEXITING...\x0a</data></match></read>
+</replay>
+</pov>

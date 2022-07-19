@@ -1,0 +1,1 @@
+../../../cgc_test/stack_vm/test.sh

@@ -1,0 +1,44 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>91376e0140a79af515f9d4a84706da5a46b9e18600c4def0e740bf0f60eadb4e873cd6be9dba0c60683439cce0904163</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>Welcome to the diary logger!</data></match></read>
+    <write><data>\x7b\x01</data></write>
+    <write><data>BB\xf1G\x08\x00\x00\x00\x00\x09\x0e\x00\x87\x00\x00\x03\x04\x15\x00\x19\x00bcbc\x02\x03\x06 \x00\x26\x00ccbcba\x03\x00\x00\x99\x00\x2d\x00\x06\x03\x0e4\x00B\x00bbccbbacabaaac\x07\x03\x18I\x00a\x00ccaccacbbabcbabbbbbcabca\x01\x03\x06h\x00n\x00cacacc\x04\x01\x00.\xbfu\x00\x08\x04\x00\x00\x00\x7c\x00\x05\x03\x04\x83\x00\x00\x00aacc\x01\x04\x8d\x00\xe5\x00\x00\x03\x11\x94\x00\xa5\x00cbcbabbaabbacabca\x05\x03\x10\xac\x00\xbc\x00cbbcaaccbaacacbc\x03\x03\x13\xc3\x00\xd6\x00bcacbbcbaccaacbccab\x02\x03\x08\xdd\x00\x00\x00cbacbbca\x04\x05\xeb\x00G\x01\x00\x03\x14\xf2\x00\x06\x01bbabcaabacbbbbbcaaca\x04\x04\x00\x01\x00\x0d\x01\x00\x03\x03\x14\x01\x17\x01abb\x02\x03\x18\x1e\x016\x01bbaacccbbbaacabaaabcabac\x00\x03\x0a\x3d\x01\x00\x00bcacbbbacb\x01\x02M\x01\x00\x00\x00\x03\x0aT\x01\x5e\x01cbbbbcbcaa\x05\x03\x16e\x01\x00\x00bbabcbabbcbabbacbcacaa</data></write>
+    <read><delim>\x0a</delim><match><data>Length: 379</data></match></read>
+    <read><delim>\x0a</delim><match><data>Magic number: 0x4242</data></match></read>
+    <read><delim>\x0a</delim><match><data>Future: 0x47f1</data></match></read>
+    <read><delim>\x0a</delim><match><data>Offset: 0x8</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: identity</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x9</data></match></read>
+    <read><delim>\x0a</delim><match><data>first name: bcbc</data></match></read>
+    <read><delim>\x0a</delim><match><data>last name: ccbcba</data></match></read>
+    <read><delim>\x0a</delim><match><data>age: 0x99</data></match></read>
+    <read><delim>\x0a</delim><match><data>birth state: bbccbbacabaaac</data></match></read>
+    <read><delim>\x0a</delim><match><data>birth city: ccaccacbbabcbabbbbbcabca</data></match></read>
+    <read><delim>\x0a</delim><match><data>middle name: cacacc</data></match></read>
+    <read><delim>\x0a</delim><match><data>weight: 0xbf2e</data></match></read>
+    <read><delim>\x0a</delim><match><data>married: false</data></match></read>
+    <read><delim>\x0a</delim><match><data>birth country: aacc</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: movies</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x4</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: cbcbabbaabbacabca</data></match></read>
+    <read><delim>\x0a</delim><match><data>plot summary: cbbcaaccbaacacbc</data></match></read>
+    <read><delim>\x0a</delim><match><data>producer: bcacbbcbaccaacbccab</data></match></read>
+    <read><delim>\x0a</delim><match><data>director: cbacbbca</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: songs</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x5</data></match></read>
+    <read><delim>\x0a</delim><match><data>writer: bbabcaabacbbbbbcaaca</data></match></read>
+    <read><delim>\x0a</delim><match><data>free online: true</data></match></read>
+    <read><delim>\x0a</delim><match><data>writer: abb</data></match></read>
+    <read><delim>\x0a</delim><match><data>genre: bbaacccbbbaacabaaabcabac</data></match></read>
+    <read><delim>\x0a</delim><match><data>writer: bcacbbbacb</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: movies</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x2</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: cbbbbcbcaa</data></match></read>
+    <read><delim>\x0a</delim><match><data>plot summary: bbabcbabbcbabbacbcacaa</data></match></read>
+    <read><delim>\x0a</delim><match><data>good book.</data></match></read>
+</replay>
+</pov>

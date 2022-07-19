@@ -1,0 +1,52 @@
+{
+"DEPEND_VERSION":"1.0.1",
+"filenames":[{"name":"On_Sale/src/include/libcgc.h","included_by":["On_Sale/src/On_Sale/lib/list.c", "On_Sale/src/On_Sale/lib/malloc.c", "On_Sale/src/On_Sale/lib/recv_bytes.c", "On_Sale/src/On_Sale/lib/recv_until_delim_n.c", "On_Sale/src/On_Sale/lib/send_bytes.c", "On_Sale/src/On_Sale/lib/string.c", "On_Sale/src/On_Sale/src/inventory.c", "On_Sale/src/On_Sale/src/products.c", "On_Sale/src/On_Sale/src/sale.c", "On_Sale/src/On_Sale/src/service.c"]},
+{"name":"On_Sale/src/On_Sale/include/cgc_stdint.h","included_by":["On_Sale/src/On_Sale/lib/list.c", "On_Sale/src/On_Sale/lib/malloc.c", "On_Sale/src/On_Sale/lib/cgc_libc.h", "On_Sale/src/On_Sale/src/inventory.c", "On_Sale/src/On_Sale/src/products.c"]},
+{"name":"On_Sale/src/On_Sale/lib/cgc_list.h","included_by":["On_Sale/src/On_Sale/lib/list.c", "On_Sale/src/On_Sale/lib/malloc.c", "On_Sale/src/On_Sale/src/inventory.c", "On_Sale/src/On_Sale/src/products.c"]},
+{"name":"On_Sale/src/On_Sale/lib/cgc_malloc.h","included_by":["On_Sale/src/On_Sale/lib/list.c", "On_Sale/src/On_Sale/lib/malloc.c", "On_Sale/src/On_Sale/src/inventory.c", "On_Sale/src/On_Sale/src/products.c"]},
+{"name":"On_Sale/src/On_Sale/lib/cgc_memset.h","included_by":["On_Sale/src/On_Sale/lib/list.c", "On_Sale/src/On_Sale/lib/memset.c", "On_Sale/src/On_Sale/src/inventory.c"]},
+{"name":"On_Sale/src/On_Sale/lib/list.c"},
+{"name":"On_Sale/src/On_Sale/lib/malloc.c"},
+{"name":"On_Sale/src/On_Sale/lib/cgc_memcmp.h","included_by":["On_Sale/src/On_Sale/lib/memcmp.c", "On_Sale/src/On_Sale/src/products.c"]},
+{"name":"On_Sale/src/On_Sale/lib/memcmp.c"},
+{"name":"On_Sale/src/On_Sale/lib/cgc_memcpy.h","included_by":["On_Sale/src/On_Sale/lib/memcpy.c", "On_Sale/src/On_Sale/src/inventory.c", "On_Sale/src/On_Sale/src/products.c"]},
+{"name":"On_Sale/src/On_Sale/lib/memcpy.c"},
+{"name":"On_Sale/src/On_Sale/lib/memset.c"},
+{"name":"On_Sale/src/On_Sale/include/cgc_errno.h","included_by":["On_Sale/src/On_Sale/lib/recv_bytes.c", "On_Sale/src/On_Sale/lib/recv_until_delim_n.c", "On_Sale/src/On_Sale/lib/send_bytes.c", "On_Sale/src/On_Sale/lib/cgc_libc.h"]},
+{"name":"On_Sale/src/On_Sale/lib/cgc_recv_bytes.h","included_by":["On_Sale/src/On_Sale/lib/recv_bytes.c", "On_Sale/src/On_Sale/lib/cgc_libc.h"]},
+{"name":"On_Sale/src/On_Sale/lib/recv_bytes.c"},
+{"name":"On_Sale/src/On_Sale/lib/cgc_send_bytes.h","included_by":["On_Sale/src/On_Sale/lib/cgc_libc.h", "On_Sale/src/On_Sale/lib/send_bytes.c"]},
+{"name":"On_Sale/src/On_Sale/lib/cgc_libc.h","included_by":["On_Sale/src/On_Sale/lib/recv_until_delim_n.c", "On_Sale/src/On_Sale/lib/string.c", "On_Sale/src/On_Sale/src/inventory.c", "On_Sale/src/On_Sale/src/products.c", "On_Sale/src/On_Sale/src/service.c"]},
+{"name":"On_Sale/src/On_Sale/lib/cgc_recv_until_delim_n.h","included_by":["On_Sale/src/On_Sale/lib/recv_until_delim_n.c", "On_Sale/src/On_Sale/src/products.c"]},
+{"name":"On_Sale/src/On_Sale/lib/recv_until_delim_n.c"},
+{"name":"On_Sale/src/On_Sale/lib/send_bytes.c"},
+{"name":"On_Sale/src/On_Sale/lib/cgc_string.h","included_by":["On_Sale/src/On_Sale/lib/string.c", "On_Sale/src/On_Sale/src/inventory.c", "On_Sale/src/On_Sale/src/products.c"]},
+{"name":"On_Sale/src/On_Sale/lib/string.c"},
+{"name":"On_Sale/src/On_Sale/src/cgc_products.h","included_by":["On_Sale/src/On_Sale/src/inventory.c", "On_Sale/src/On_Sale/src/products.c", "On_Sale/src/On_Sale/src/service.c"]},
+{"name":"On_Sale/src/On_Sale/src/cgc_inventory.h","included_by":["On_Sale/src/On_Sale/src/inventory.c", "On_Sale/src/On_Sale/src/products.c"]},
+{"name":"On_Sale/src/On_Sale/src/cgc_sale.h","included_by":["On_Sale/src/On_Sale/src/inventory.c", "On_Sale/src/On_Sale/src/products.c", "On_Sale/src/On_Sale/src/sale.c"]},
+{"name":"On_Sale/src/On_Sale/src/inventory.c"},
+{"name":"On_Sale/src/On_Sale/src/products.c"},
+{"name":"On_Sale/src/On_Sale/src/sale.c"},
+{"name":"On_Sale/src/On_Sale/src/service.c"}
+],
+"ignore":[
+"On_Sale/src/On_Sale/src/products.c"
+],
+"macros":[
+   {"name": "PATCHED", "value": false },
+   {"name": "PATCHED_1", "value": false },
+   {"name": "PATCHED_2", "value": false }
+],
+"disable_eval":[
+   "MALLOC_OK","cgc_allocate","cgc_do_add","cgc_do_buy","cgc_do_check","cgc_do_list","cgc_do_nosale","cgc_do_onsale","cgc_do_rm","cgc_do_update","cgc_free","cgc_gen_status_codes","cgc_get_next_update_serial","cgc_get_product_by_barcode","cgc_init_heap","cgc_is_enough_room","cgc_list_create_node","cgc_list_destroy","cgc_list_destroy_node","cgc_list_end_marker","cgc_list_find_node_with_data","cgc_list_head_node","cgc_list_init","cgc_list_insert_after_node","cgc_list_insert_at_end","cgc_list_insert_at_start","cgc_list_insert_before_node","cgc_list_insert_node_at_end","cgc_list_insert_node_at_start","cgc_list_insert_node_sorted","cgc_list_insert_sorted","cgc_list_length","cgc_list_next_node","cgc_list_pop","cgc_list_remove_node","cgc_list_start_marker","cgc_list_tail_node","cgc_load_inventory","cgc_malloc","cgc_memcmp","cgc_memcpy","cgc_memset","cgc_process_cmd","cgc_prod_has_bc","cgc_receive","cgc_recv_bytes","cgc_recv_char","cgc_recv_until_delim_n","cgc_sale_0","cgc_sale_1","cgc_sale_10","cgc_sale_11","cgc_sale_12","cgc_sale_13","cgc_sale_14","cgc_sale_15","cgc_sale_16","cgc_sale_17","cgc_sale_18","cgc_sale_19","cgc_sale_2","cgc_sale_20","cgc_sale_21","cgc_sale_22","cgc_sale_23","cgc_sale_24","cgc_sale_25","cgc_sale_26","cgc_sale_27","cgc_sale_28","cgc_sale_29","cgc_sale_3","cgc_sale_30","cgc_sale_31","cgc_sale_32","cgc_sale_33","cgc_sale_34","cgc_sale_35","cgc_sale_36","cgc_sale_37","cgc_sale_38","cgc_sale_39","cgc_sale_4","cgc_sale_40","cgc_sale_41","cgc_sale_42","cgc_sale_43","cgc_sale_44","cgc_sale_45","cgc_sale_46","cgc_sale_47","cgc_sale_48","cgc_sale_49","cgc_sale_5","cgc_sale_50","cgc_sale_51","cgc_sale_52","cgc_sale_53","cgc_sale_54","cgc_sale_55","cgc_sale_56","cgc_sale_57","cgc_sale_58","cgc_sale_59","cgc_sale_6","cgc_sale_60","cgc_sale_61","cgc_sale_62","cgc_sale_63","cgc_sale_64","cgc_sale_65","cgc_sale_66","cgc_sale_67","cgc_sale_68","cgc_sale_69","cgc_sale_7","cgc_sale_70","cgc_sale_71","cgc_sale_72","cgc_sale_73","cgc_sale_74","cgc_sale_75","cgc_sale_76","cgc_sale_77","cgc_sale_78","cgc_sale_79","cgc_sale_8","cgc_sale_80","cgc_sale_81","cgc_sale_82","cgc_sale_83","cgc_sale_84","cgc_sale_85","cgc_sale_86","cgc_sale_87","cgc_sale_88","cgc_sale_89","cgc_sale_9","cgc_sale_90","cgc_sale_91","cgc_sale_92","cgc_sale_93","cgc_sale_94","cgc_sale_95","cgc_sale_96","cgc_sale_97","cgc_sale_98","cgc_sale_99","cgc_send_bytes","cgc_send_status","cgc_set_block_size","cgc_setup","cgc_strcmp","cgc_streq","cgc_strlen","cgc__terminate","cgc_transmit","__cxa_finalize@@GLIBC_2.1.3","data_start","deregister_tm_clones","__do_global_dtors_aux","__do_global_dtors_aux_fini_array_entry","_fini","frame_dummy","__frame_dummy_init_array_entry","__gmon_start__","_init","__init_array_end","__init_array_start","_ITM_deregisterTMCloneTable","_ITM_registerTMCloneTable","__libc_csu_fini","__libc_csu_init","__libc_start_main@@GLIBC_2.0","main","register_tm_clones","_start","__x86.get_pc_thunk.ax","__x86.get_pc_thunk.bx","__x86.get_pc_thunk.dx"
+],
+"enable_eval":[
+   "cgc_strlen"
+],
+"struct_ptrs":{
+},
+"defines":[
+"void","END_MARKER","SEND_BYTES_H","LIST_H","MY_ID","#define","READ_FD","#define","#define","#define","FLAG_PAGE","SEND","#define","RECV","FAIL_BAIL_RET","NEG_BAIL_RET","MALLOC_OK","#define","//","#define","//","MEMCMP_H","MEMSET_H","MALLOC_H","PAGE_SZ","EOF","FILE_BUF_SZ","RECV_FILE_COUNT","RECV_FILE_FROM_FD","STRING_H","MEMCPY_H","SALE_H","END_MARKER","PRODUCT_BODY_SIZE","PRODUCTS_H","MAX_DESC_LEN","BARCODE_SZ","INVENTORY_H","ERRNO_H","ERRNO_ALLOC","ERRNO_SEND","ERRNO_RECV","ERRNO_RAND","ERRNO_HASH","ERRNO_CONV","ERRNO_COPY","STDINT_H","INT_MAX","INT_MIN","UINT_MAX","UINT_MIN","SUCCESS"
+]
+}

@@ -1,0 +1,95 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>16056b3c7dd5b6e9de39efc49e90fba6dfc6c10ea96614a0c924b2279740b631116badcc22837daf0dba7f9c9ebea36d</seed>
+<replay>
+    <write><data>newTokens\x2cUserPass\x2c2442\x2cuser\x2fpass\x2cUse\x3denroll:newTokens:refreshToken:revokeToken!</data></write>
+    <read><delim>?</delim><match><pcre>Token=60000000;Expiration=(.*);Use=enroll:newTokens:refreshToken:revokeToken?</pcre></match></read>
+    <write><data>enroll\x2cToken\x2c2443\x2cToken\x3d60000000\x3bExpiration\x3d100\x3bUse\x3denroll:newTokens:refreshToken:revokeToken</data></write>
+    <write><data>\x2cSubject\x3dzjDnnbPoXBZmeBATMJDz\x3bKey\x3dEcdhY7q3B\x3bUse\x3denroll:reenroll:crls!</data></write>
+    <read><delim>\x3b</delim><assign> <var>issuer</var> <pcre group="1">Issuer=(.*);</pcre> </assign></read>
+    <read><delim>\x3b</delim><match><data>Subject\x3dzjDnnbPoXBZmeBATMJDz\x3b</data></match></read>
+    <read><delim>\x3b</delim><match><data>Key\x3dEcdhY7q3B\x3b</data></match></read>
+    <read><delim>\x3b</delim><assign> <var>signature</var> <pcre group="1">Signature=(.*);</pcre> </assign></read>
+    <read><delim>\x3b</delim><assign> <var>expiration</var> <pcre group="1">Expiration=(.*);</pcre> </assign></read>
+    <read><delim>?</delim><match><data>Use\x3denroll:reenroll:crls?</data></match></read>
+    <write><data>refreshToken\x2cToken\x2c2444\x2cToken\x3d60000000\x3bExpiration\x3d100\x3bUse\x3denroll:newTokens:refreshToken:revokeToken</data></write>
+    <write><data>\x2c</data></write>
+    <write><data>Token\x3d60000000\x3bExpiration\x3d100\x3bUse\x3denroll:newTokens:refreshToken:revokeToken</data></write>
+    <write><data>!</data></write>
+    <read><delim>?</delim><match><pcre>Token=60000000;Expiration=(.*);Use=enroll:newTokens:refreshToken:revokeToken?</pcre></match></read>
+    <write><data>refreshToken\x2cToken\x2c2445\x2cToken\x3d60000000\x3bExpiration\x3d100\x3bUse\x3denroll:newTokens:refreshToken:revokeToken</data></write>
+    <write><data>\x2c</data></write>
+    <write><data>Token\x3d60000000\x3bExpiration\x3d100\x3bUse\x3denroll:newTokens:refreshToken:revokeToken</data></write>
+    <write><data>!</data></write>
+    <read><delim>?</delim><match><pcre>Token=60000000;Expiration=(.*);Use=enroll:newTokens:refreshToken:revokeToken?</pcre></match></read>
+    <write><data>refreshToken\x2cToken\x2c2446\x2cToken\x3d60000000\x3bExpiration\x3d100\x3bUse\x3denroll:newTokens:refreshToken:revokeToken</data></write>
+    <write><data>\x2c</data></write>
+    <write><data>Token\x3d60000000\x3bExpiration\x3d100\x3bUse\x3denroll:newTokens:refreshToken:revokeToken</data></write>
+    <write><data>!</data></write>
+    <read><delim>?</delim><match><pcre>Token=60000000;Expiration=(.*);Use=enroll:newTokens:refreshToken:revokeToken?</pcre></match></read>
+    <write><data>newTokens\x2cUserPass\x2c2447\x2cuser\x2fpass\x2cUse\x3denroll:newTokens:refreshToken:revokeToken!</data></write>
+    <read><delim>?</delim><match><pcre>Token=50000000;Expiration=(.*);Use=enroll:newTokens:refreshToken:revokeToken?</pcre></match></read>
+    <write><data>newTokens\x2cToken\x2c2448\x2cToken\x3d50000000\x3bExpiration\x3d100\x3bUse\x3denroll:newTokens:refreshToken:revokeToken</data></write>
+    <write><data>\x2cUse\x3denroll:newTokens:refreshToken:revokeToken!</data></write>
+    <read><delim>?</delim><match><pcre>Token=20000000;Expiration=(.*);Use=enroll:newTokens:refreshToken:revokeToken?</pcre></match></read>
+    <write><data>revokeT\x2cToken\x2c2449\x2cToken\x3d20000000\x3bExpiration\x3d100\x3bUse\x3denroll:newTokens:refreshToken:revokeToken</data></write>
+    <write><data>\x2c</data></write>
+    <write><data>Token\x3d20000000\x3bExpiration\x3d100\x3bUse\x3denroll:newTokens:refreshToken:revokeToken</data></write>
+    <write><data>!</data></write>
+    <read><delim>?</delim><match><data>Response\x3dToken Revoked?</data></match></read>
+    <write><data>newTokens\x2cToken\x2c2450\x2cToken\x3d50000000\x3bExpiration\x3d100\x3bUse\x3denroll:newTokens:refreshToken:revokeToken</data></write>
+    <write><data>\x2cUse\x3denroll:newTokens:refreshToken:revokeToken!</data></write>
+    <read><delim>?</delim><match><pcre>Token=30000000;Expiration=(.*);Use=enroll:newTokens:refreshToken:revokeToken?</pcre></match></read>
+    <write><data>newTokens\x2cToken\x2c2451\x2cToken\x3d30000000\x3bExpiration\x3d100\x3bUse\x3denroll:newTokens:refreshToken:revokeToken</data></write>
+    <write><data>\x2cUse\x3denroll:newTokens:refreshToken:revokeToken!</data></write>
+    <read><delim>?</delim><match><pcre>Token=60000000;Expiration=(.*);Use=enroll:newTokens:refreshToken:revokeToken?</pcre></match></read>
+    <write><data>revokeT\x2cToken\x2c2452\x2cToken\x3d60000000\x3bExpiration\x3d100\x3bUse\x3denroll:newTokens:refreshToken:revokeToken</data></write>
+    <write><data>\x2c</data></write>
+    <write><data>Token\x3d60000000\x3bExpiration\x3d100\x3bUse\x3denroll:newTokens:refreshToken:revokeToken</data></write>
+    <write><data>!</data></write>
+    <read><delim>?</delim><match><data>Response\x3dToken Revoked?</data></match></read>
+    <write><data>newTokens\x2cUserPass\x2c2453\x2cuser\x2fpass\x2cUse\x3denroll:newTokens:refreshToken:revokeToken!</data></write>
+    <read><delim>?</delim><match><pcre>Token=19500000;Expiration=(.*);Use=enroll:newTokens:refreshToken:revokeToken?</pcre></match></read>
+    <write><data>newTokens\x2cToken\x2c2454\x2cToken\x3d19500000\x3bExpiration\x3d100\x3bUse\x3denroll:newTokens:refreshToken:revokeToken</data></write>
+    <write><data>\x2cUse\x3denroll:newTokens:refreshToken:revokeToken!</data></write>
+    <read><delim>?</delim><match><pcre>Token=60000000;Expiration=(.*);Use=enroll:newTokens:refreshToken:revokeToken?</pcre></match></read>
+    <write><data>newTokens\x2cToken\x2c2455\x2cToken\x3d60000000\x3bExpiration\x3d100\x3bUse\x3denroll:newTokens:refreshToken:revokeToken</data></write>
+    <write><data>\x2cUse\x3denroll:newTokens:refreshToken:revokeToken!</data></write>
+    <read><delim>?</delim><match><pcre>Token=95000000;Expiration=(.*);Use=enroll:newTokens:refreshToken:revokeToken?</pcre></match></read>
+    <write><data>enroll\x2cToken\x2c2456\x2cToken\x3d95000000\x3bExpiration\x3d100\x3bUse\x3denroll:newTokens:refreshToken:revokeToken</data></write>
+    <write><data>\x2cSubject\x3dmBZOVFThdDeHXrYLptJK\x3bKey\x3dkns0mY4ef\x3bUse\x3denroll:reenroll:crls!</data></write>
+    <read><delim>\x3b</delim><assign> <var>issuer</var> <pcre group="1">Issuer=(.*);</pcre> </assign></read>
+    <read><delim>\x3b</delim><match><data>Subject\x3dmBZOVFThdDeHXrYLptJK\x3b</data></match></read>
+    <read><delim>\x3b</delim><match><data>Key\x3dkns0mY4ef\x3b</data></match></read>
+    <read><delim>\x3b</delim><assign> <var>signature</var> <pcre group="1">Signature=(.*);</pcre> </assign></read>
+    <read><delim>\x3b</delim><assign> <var>expiration</var> <pcre group="1">Expiration=(.*);</pcre> </assign></read>
+    <read><delim>?</delim><match><data>Use\x3denroll:reenroll:crls?</data></match></read>
+    <write><data>refreshToken\x2cToken\x2c2457\x2cToken\x3d95000000\x3bExpiration\x3d100\x3bUse\x3denroll:newTokens:refreshToken:revokeToken</data></write>
+    <write><data>\x2c</data></write>
+    <write><data>Token\x3d95000000\x3bExpiration\x3d100\x3bUse\x3denroll:newTokens:refreshToken:revokeToken</data></write>
+    <write><data>!</data></write>
+    <read><delim>?</delim><match><pcre>Token=95000000;Expiration=(.*);Use=enroll:newTokens:refreshToken:revokeToken?</pcre></match></read>
+    <write><data>newTokens\x2cToken\x2c2458\x2cToken\x3d95000000\x3bExpiration\x3d100\x3bUse\x3denroll:newTokens:refreshToken:revokeToken</data></write>
+    <write><data>\x2cUse\x3denroll:newTokens:refreshToken:revokeToken!</data></write>
+    <read><delim>?</delim><match><pcre>Token=10150000;Expiration=(.*);Use=enroll:newTokens:refreshToken:revokeToken?</pcre></match></read>
+    <write><data>revokeT\x2cToken\x2c2459\x2cToken\x3d10150000\x3bExpiration\x3d100\x3bUse\x3denroll:newTokens:refreshToken:revokeToken</data></write>
+    <write><data>\x2c</data></write>
+    <write><data>Token\x3d10150000\x3bExpiration\x3d100\x3bUse\x3denroll:newTokens:refreshToken:revokeToken</data></write>
+    <write><data>!</data></write>
+    <read><delim>?</delim><match><data>Response\x3dToken Revoked?</data></match></read>
+    <write><data>newTokens\x2cToken\x2c2460\x2cToken\x3d95000000\x3bExpiration\x3d100\x3bUse\x3denroll:newTokens:refreshToken:revokeToken</data></write>
+    <write><data>\x2cUse\x3denroll:newTokens:refreshToken:revokeToken!</data></write>
+    <read><delim>?</delim><match><pcre>Token=10000000;Expiration=(.*);Use=enroll:newTokens:refreshToken:revokeToken?</pcre></match></read>
+    <write><data>enroll\x2cToken\x2c2461\x2cToken\x3d10000000\x3bExpiration\x3d100\x3bUse\x3denroll:newTokens:refreshToken:revokeToken</data></write>
+    <write><data>\x2cSubject\x3dPXfBHaKKHIcQlCeEztqX\x3bKey\x3dLNVJEXlGn\x3bUse\x3denroll:reenroll:crls!</data></write>
+    <read><delim>\x3b</delim><assign> <var>issuer</var> <pcre group="1">Issuer=(.*);</pcre> </assign></read>
+    <read><delim>\x3b</delim><match><data>Subject\x3dPXfBHaKKHIcQlCeEztqX\x3b</data></match></read>
+    <read><delim>\x3b</delim><match><data>Key\x3dLNVJEXlGn\x3b</data></match></read>
+    <read><delim>\x3b</delim><assign> <var>signature</var> <pcre group="1">Signature=(.*);</pcre> </assign></read>
+    <read><delim>\x3b</delim><assign> <var>expiration</var> <pcre group="1">Expiration=(.*);</pcre> </assign></read>
+    <read><delim>?</delim><match><data>Use\x3denroll:reenroll:crls?</data></match></read>
+    <write><data>quit\x2c \x2c \x2c !</data></write>
+</replay>
+</pov>

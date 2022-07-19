@@ -1,0 +1,20 @@
+--seed 0
+--disable-aslr
+--program decompiled_source.i
+--search ga
+--popsize 40
+--generations 10
+--compiler gcc
+--func-repair
+--func-repair-binary CGC_Symbol_Viewer_CSV
+--func-repair-fn-name CHANGEME
+--do-not-instrument CHANGEME
+--func-repair-insert decompiled_source.c
+--trampoline-compiler-opts 
+--minimization
+--edit-script
+--func-repair-script ./funcinsert.py --genprog
+--blacklist-src-functions main
+--pos-tests 100
+--neg-tests 1
+--test-script ./test-pov_1.sh

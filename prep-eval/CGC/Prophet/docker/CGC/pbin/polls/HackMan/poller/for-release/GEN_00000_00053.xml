@@ -1,0 +1,418 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>da58254764008cdf8343259c2947388711b3581730cb7df953108ba5fb89eacd2ad94c20cdfc4c4c69f9c30248f1a48b</seed>
+<replay>
+    <read><length>28</length><match><data>\x0aWelcome to HackMan v13.37\x0a\x0a</data></match></read>
+    <read><length>164</length><match><data>\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x0a\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x0a     Sh41l w3 p14y a g4m3?\x0a\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x0a\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x2d\x5f\x0a\x0a</data></match></read>
+    <read><length>43</length><match><data>\x0a\x40 \x40 \x40 \x40 \x40  New Challenge  \x40 \x40 \x40 \x40 \x40\x0aSeed? </data></match></read>
+    <write><data>1975825550\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>d\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>c\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: c\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>n\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: c\x5fn\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>j\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: c\x5fn\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>o\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: con\x5f\x5fo\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>r\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: con\x5f\x5for \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>u\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: conu\x5for \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>z\x0a</data></write>
+    <read><length>41</length><match><data>\x3e\x3e\x3e You got it!! \x22conuzor\x22 \x288 tries\x29 \x3c\x3c\x3c\x0a</data></match></read>
+    <read><length>84</length><match><data>\x23\x23\x23\x23\x23\x23 Good Work! \x23\x23\x23\x23\x23\x23\x0a\x23 Leave your comment!! \x23\x0a\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x0aComment: </data></match></read>
+    <write><data>aNEeQjzKdyOPeTDSZDVToSXUZcOSDiEtGdVHmrdQOMqhaowhAmSrfAkZsQSzMasHskJRehWvrebAcaNjtlZMGGHymXEwcNqlCzwPvXCGAGUNztXscIwdBPYcwztinAHEktPZKkHOkXzjvBIceIDRudTxaFLLEwRAaBoAhiCIRgoyEUxykdFGcTEvZZqNwkGWqtjEDofMRqBpHgYdwcAEMYrHoeYyiTtNGubfZtlkQfupIvU\x0a</data></write>
+    <read><length>251</length><match><data>You wrote: aNEeQjzKdyOPeTDSZDVToSXUZcOSDiEtGdVHmrdQOMqhaowhAmSrfAkZsQSzMasHskJRehWvrebAcaNjtlZMGGHymXEwcNqlCzwPvXCGAGUNztXscIwdBPYcwztinAHEktPZKkHOkXzjvBIceIDRudTxaFLLEwRAaBoAhiCIRgoyEUxykdFGcTEvZZqNwkGWqtjEDofMRqBpHgYdwcAEMYrHoeYyiTtNGubfZtlkQfupIvU\x0a</data></match></read>
+    <read><length>43</length><match><data>\x0a\x40 \x40 \x40 \x40 \x40  New Challenge  \x40 \x40 \x40 \x40 \x40\x0aSeed? </data></match></read>
+    <write><data>1079537279\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>a\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5fa\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>m\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5fa\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>b\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5fab\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>c\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: c\x5f\x5f\x5f\x5fab\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>e\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: c\x5f\x5f\x5f\x5fab\x5fe\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>l\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: c\x5f\x5f\x5f\x5fable\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>n\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: c\x5fn\x5f\x5fable\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>g\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: c\x5fn\x5f\x5fable\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>o\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: con\x5f\x5fable\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>r\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: con\x5f\x5fabler\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>s\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: cons\x5fabler\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>f\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: cons\x5fabler\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>t\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: constabler\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>h\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: constabler\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>y\x0a</data></write>
+    <read><length>46</length><match><data>\x3e\x3e\x3e You got it!! \x22constablery\x22 \x2815 tries\x29 \x3c\x3c\x3c\x0a</data></match></read>
+    <read><length>84</length><match><data>\x23\x23\x23\x23\x23\x23 Good Work! \x23\x23\x23\x23\x23\x23\x0a\x23 Leave your comment!! \x23\x0a\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x0aComment: </data></match></read>
+    <write><data>MogIvflfdDBi\x0a</data></write>
+    <read><length>24</length><match><data>You wrote: MogIvflfdDBi\x0a</data></match></read>
+    <read><length>43</length><match><data>\x0a\x40 \x40 \x40 \x40 \x40  New Challenge  \x40 \x40 \x40 \x40 \x40\x0aSeed? </data></match></read>
+    <write><data>1216766942\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>a\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5fa\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>c\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5fca\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>d\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5fca\x5f\x5f\x5f\x5f\x5f\x5f\x5fd \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>e\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5fca\x5f\x5f\x5f\x5f\x5f\x5fed \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>\x2b\x0a</data></write>
+    <read><length>43</length><match><data>\x0a\x40 \x40 \x40 \x40 \x40  New Challenge  \x40 \x40 \x40 \x40 \x40\x0aSeed? </data></match></read>
+    <write><data>693738524\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>m\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>\x2b\x0a</data></write>
+    <read><length>43</length><match><data>\x0a\x40 \x40 \x40 \x40 \x40  New Challenge  \x40 \x40 \x40 \x40 \x40\x0aSeed? </data></match></read>
+    <write><data>1107430423\x0a</data></write>
+    <read><length>49</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>c\x0a</data></write>
+    <read><length>49</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5fc\x5f\x5fc\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>e\x0a</data></write>
+    <read><length>49</length><match><data>\x5b\x5b\x5b Your challenge: e\x5fc\x5f\x5fc\x5fe \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>i\x0a</data></write>
+    <read><length>49</length><match><data>\x5b\x5b\x5b Your challenge: e\x5fci\x5fc\x5fe \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>l\x0a</data></write>
+    <read><length>49</length><match><data>\x5b\x5b\x5b Your challenge: e\x5fci\x5fcle \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>r\x0a</data></write>
+    <read><length>49</length><match><data>\x5b\x5b\x5b Your challenge: e\x5fcircle \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>j\x0a</data></write>
+    <read><length>49</length><match><data>\x5b\x5b\x5b Your challenge: e\x5fcircle \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>\x2b\x0a</data></write>
+    <read><length>43</length><match><data>\x0a\x40 \x40 \x40 \x40 \x40  New Challenge  \x40 \x40 \x40 \x40 \x40\x0aSeed? </data></match></read>
+    <write><data>98009439\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>a\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: a\x5f\x5f\x5f\x5f\x5fa \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>z\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: a\x5f\x5f\x5f\x5f\x5fa \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>e\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: a\x5fe\x5f\x5f\x5fa \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>i\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: a\x5fe\x5f\x5fia \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>\x2b\x0a</data></write>
+    <read><length>43</length><match><data>\x0a\x40 \x40 \x40 \x40 \x40  New Challenge  \x40 \x40 \x40 \x40 \x40\x0aSeed? </data></match></read>
+    <write><data>1484851671\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>d\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5fd \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>e\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5fe\x5f\x5f\x5fe\x5f\x5f\x5fd \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>h\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5fe\x5f\x5fhe\x5f\x5f\x5fd \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>i\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5fe\x5f\x5fhe\x5f\x5fid \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>n\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5fe\x5f\x5fhen\x5fid \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>?\x0a</data></write>
+    <read><length>20</length><match><data>\x0a\x5e\x5e\x5e\x5e\x5e RESET \x5e\x5e\x5e\x5e\x5e\x0a\x0a</data></match></read>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>?\x0a</data></write>
+    <read><length>20</length><match><data>\x0a\x5e\x5e\x5e\x5e\x5e RESET \x5e\x5e\x5e\x5e\x5e\x0a\x0a</data></match></read>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>d\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5fd \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>e\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5fe\x5f\x5f\x5fe\x5f\x5f\x5fd \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>c\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5fe\x5f\x5f\x5fe\x5f\x5f\x5fd \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>h\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5fe\x5f\x5fhe\x5f\x5f\x5fd \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>i\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5fe\x5f\x5fhe\x5f\x5fid \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>n\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5fe\x5f\x5fhen\x5fid \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>o\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5fe\x5f\x5fhenoid \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>p\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: p\x5fe\x5fphenoid \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>r\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: pre\x5fphenoid \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>f\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: pre\x5fphenoid \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>s\x0a</data></write>
+    <read><length>46</length><match><data>\x3e\x3e\x3e You got it!! \x22presphenoid\x22 \x2811 tries\x29 \x3c\x3c\x3c\x0a</data></match></read>
+    <read><length>84</length><match><data>\x23\x23\x23\x23\x23\x23 Good Work! \x23\x23\x23\x23\x23\x23\x0a\x23 Leave your comment!! \x23\x0a\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x0aComment: </data></match></read>
+    <write><data>yVJdYaWipIiTEoAcmGpsrIovpgLxSMlH\x0a</data></write>
+    <read><length>44</length><match><data>You wrote: yVJdYaWipIiTEoAcmGpsrIovpgLxSMlH\x0a</data></match></read>
+    <read><length>43</length><match><data>\x0a\x40 \x40 \x40 \x40 \x40  New Challenge  \x40 \x40 \x40 \x40 \x40\x0aSeed? </data></match></read>
+    <write><data>77144938\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>a\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: \x5fa\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>d\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: \x5fa\x5f\x5f\x5f\x5fd \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>e\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: \x5fa\x5f\x5f\x5fed \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>?\x0a</data></write>
+    <read><length>20</length><match><data>\x0a\x5e\x5e\x5e\x5e\x5e RESET \x5e\x5e\x5e\x5e\x5e\x0a\x0a</data></match></read>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>a\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: \x5fa\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>d\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: \x5fa\x5f\x5f\x5f\x5fd \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>e\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: \x5fa\x5f\x5f\x5fed \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>i\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: \x5fa\x5f\x5fied \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>m\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: ma\x5f\x5fied \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>r\x0a</data></write>
+    <read><length>41</length><match><data>\x3e\x3e\x3e You got it!! \x22married\x22 \x286 tries\x29 \x3c\x3c\x3c\x0a</data></match></read>
+    <read><length>84</length><match><data>\x23\x23\x23\x23\x23\x23 Good Work! \x23\x23\x23\x23\x23\x23\x0a\x23 Leave your comment!! \x23\x0a\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x0aComment: </data></match></read>
+    <write><data>tYpqviZFckLqyaVjlmrHcZaVOFTsBcghnvBKSWosHtJUiZisCoAVASb\x0a</data></write>
+    <read><length>67</length><match><data>You wrote: tYpqviZFckLqyaVjlmrHcZaVOFTsBcghnvBKSWosHtJUiZisCoAVASb\x0a</data></match></read>
+    <read><length>43</length><match><data>\x0a\x40 \x40 \x40 \x40 \x40  New Challenge  \x40 \x40 \x40 \x40 \x40\x0aSeed? </data></match></read>
+    <write><data>741918873\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>d\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5fd \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>e\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5fe\x5f\x5f\x5fe\x5f\x5f\x5fd \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>h\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5fe\x5f\x5fhe\x5f\x5f\x5fd \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>i\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5fe\x5f\x5fhe\x5f\x5fid \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>n\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5fe\x5f\x5fhen\x5fid \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>o\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5fe\x5f\x5fhenoid \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>f\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5fe\x5f\x5fhenoid \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>g\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5fe\x5f\x5fhenoid \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>p\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: p\x5fe\x5fphenoid \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>r\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: pre\x5fphenoid \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>\x2b\x0a</data></write>
+    <read><length>43</length><match><data>\x0a\x40 \x40 \x40 \x40 \x40  New Challenge  \x40 \x40 \x40 \x40 \x40\x0aSeed? </data></match></read>
+    <write><data>1127124171\x0a</data></write>
+    <read><length>50</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>a\x0a</data></write>
+    <read><length>50</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5fa\x5f\x5f\x5fa \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>c\x0a</data></write>
+    <read><length>50</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5fac\x5f\x5fa \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>?\x0a</data></write>
+    <read><length>20</length><match><data>\x0a\x5e\x5e\x5e\x5e\x5e RESET \x5e\x5e\x5e\x5e\x5e\x0a\x0a</data></match></read>
+    <read><length>50</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>a\x0a</data></write>
+    <read><length>50</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5fa\x5f\x5f\x5fa \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>?\x0a</data></write>
+    <read><length>20</length><match><data>\x0a\x5e\x5e\x5e\x5e\x5e RESET \x5e\x5e\x5e\x5e\x5e\x0a\x0a</data></match></read>
+    <read><length>50</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>a\x0a</data></write>
+    <read><length>50</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5fa\x5f\x5f\x5fa \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>c\x0a</data></write>
+    <read><length>50</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5fac\x5f\x5fa \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>u\x0a</data></write>
+    <read><length>50</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5fac\x5f\x5fa \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>?\x0a</data></write>
+    <read><length>20</length><match><data>\x0a\x5e\x5e\x5e\x5e\x5e RESET \x5e\x5e\x5e\x5e\x5e\x0a\x0a</data></match></read>
+    <read><length>50</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>b\x0a</data></write>
+    <read><length>50</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>a\x0a</data></write>
+    <read><length>50</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5fa\x5f\x5f\x5fa \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>c\x0a</data></write>
+    <read><length>50</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5fac\x5f\x5fa \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>d\x0a</data></write>
+    <read><length>50</length><match><data>\x5b\x5b\x5b Your challenge: d\x5fd\x5fac\x5f\x5fa \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>\x2b\x0a</data></write>
+    <read><length>43</length><match><data>\x0a\x40 \x40 \x40 \x40 \x40  New Challenge  \x40 \x40 \x40 \x40 \x40\x0aSeed? </data></match></read>
+    <write><data>184870048\x0a</data></write>
+    <read><length>51</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>t\x0a</data></write>
+    <read><length>51</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>d\x0a</data></write>
+    <read><length>51</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5fd\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>c\x0a</data></write>
+    <read><length>51</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5fd\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>r\x0a</data></write>
+    <read><length>51</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5fd\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>e\x0a</data></write>
+    <read><length>51</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5feed\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>g\x0a</data></write>
+    <read><length>51</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5feed\x5f\x5fg\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>\x2b\x0a</data></write>
+    <read><length>43</length><match><data>\x0a\x40 \x40 \x40 \x40 \x40  New Challenge  \x40 \x40 \x40 \x40 \x40\x0aSeed? </data></match></read>
+    <write><data>534611605\x0a</data></write>
+    <read><length>51</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>d\x0a</data></write>
+    <read><length>51</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5fd\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>e\x0a</data></write>
+    <read><length>51</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5feed\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>k\x0a</data></write>
+    <read><length>51</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5feed\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>g\x0a</data></write>
+    <read><length>51</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5feed\x5f\x5fg\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>q\x0a</data></write>
+    <read><length>51</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5feed\x5f\x5fg\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>z\x0a</data></write>
+    <read><length>51</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5feed\x5f\x5fg\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>x\x0a</data></write>
+    <read><length>51</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5feed\x5f\x5fg\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>i\x0a</data></write>
+    <read><length>51</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5feedi\x5fg\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>l\x0a</data></write>
+    <read><length>51</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5feedi\x5fgl\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>?\x0a</data></write>
+    <read><length>20</length><match><data>\x0a\x5e\x5e\x5e\x5e\x5e RESET \x5e\x5e\x5e\x5e\x5e\x0a\x0a</data></match></read>
+    <read><length>51</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>d\x0a</data></write>
+    <read><length>51</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5fd\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>e\x0a</data></write>
+    <read><length>51</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5feed\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>\x2b\x0a</data></write>
+    <read><length>43</length><match><data>\x0a\x40 \x40 \x40 \x40 \x40  New Challenge  \x40 \x40 \x40 \x40 \x40\x0aSeed? </data></match></read>
+    <write><data>783953648\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>d\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: d\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5fd \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>\x2b\x0a</data></write>
+    <read><length>43</length><match><data>\x0a\x40 \x40 \x40 \x40 \x40  New Challenge  \x40 \x40 \x40 \x40 \x40\x0aSeed? </data></match></read>
+    <write><data>1126271859\x0a</data></write>
+    <read><length>43</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>m\x0a</data></write>
+    <read><length>43</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>a\x0a</data></write>
+    <read><length>43</length><match><data>\x5b\x5b\x5b Your challenge: \x5fa \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>u\x0a</data></write>
+    <read><length>43</length><match><data>\x5b\x5b\x5b Your challenge: \x5fa \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>d\x0a</data></write>
+    <read><length>43</length><match><data>\x5b\x5b\x5b Your challenge: \x5fa \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>f\x0a</data></write>
+    <read><length>36</length><match><data>\x3e\x3e\x3e You got it!! \x22fa\x22 \x285 tries\x29 \x3c\x3c\x3c\x0a</data></match></read>
+    <read><length>84</length><match><data>\x23\x23\x23\x23\x23\x23 Good Work! \x23\x23\x23\x23\x23\x23\x0a\x23 Leave your comment!! \x23\x0a\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x0aComment: </data></match></read>
+    <write><data>evCHbgGR\x0a</data></write>
+    <read><length>20</length><match><data>You wrote: evCHbgGR\x0a</data></match></read>
+    <read><length>43</length><match><data>\x0a\x40 \x40 \x40 \x40 \x40  New Challenge  \x40 \x40 \x40 \x40 \x40\x0aSeed? </data></match></read>
+    <write><data>50887646\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>a\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5fa\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>?\x0a</data></write>
+    <read><length>20</length><match><data>\x0a\x5e\x5e\x5e\x5e\x5e RESET \x5e\x5e\x5e\x5e\x5e\x0a\x0a</data></match></read>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>a\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5fa\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>b\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5fab\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>c\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: c\x5f\x5f\x5f\x5fab\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>e\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: c\x5f\x5f\x5f\x5fab\x5fe\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>\x2b\x0a</data></write>
+    <read><length>43</length><match><data>\x0a\x40 \x40 \x40 \x40 \x40  New Challenge  \x40 \x40 \x40 \x40 \x40\x0aSeed? </data></match></read>
+    <write><data>113366221\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>\x2b\x0a</data></write>
+    <read><length>43</length><match><data>\x0a\x40 \x40 \x40 \x40 \x40  New Challenge  \x40 \x40 \x40 \x40 \x40\x0aSeed? </data></match></read>
+    <write><data>1953142188\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>\x2b\x0a</data></write>
+    <read><length>43</length><match><data>\x0a\x40 \x40 \x40 \x40 \x40  New Challenge  \x40 \x40 \x40 \x40 \x40\x0aSeed? </data></match></read>
+    <write><data>1714997290\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>a\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: \x5fa\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>d\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: \x5fa\x5f\x5f\x5f\x5fd \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>?\x0a</data></write>
+    <read><length>20</length><match><data>\x0a\x5e\x5e\x5e\x5e\x5e RESET \x5e\x5e\x5e\x5e\x5e\x0a\x0a</data></match></read>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>p\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>a\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: \x5fa\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>d\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: \x5fa\x5f\x5f\x5f\x5fd \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>e\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: \x5fa\x5f\x5f\x5fed \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>b\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: \x5fa\x5f\x5f\x5fed \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>\x2b\x0a</data></write>
+    <read><length>43</length><match><data>\x0a\x40 \x40 \x40 \x40 \x40  New Challenge  \x40 \x40 \x40 \x40 \x40\x0aSeed? </data></match></read>
+    <write><data>1995530293\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>\x2b\x0a</data></write>
+    <read><length>43</length><match><data>\x0a\x40 \x40 \x40 \x40 \x40  New Challenge  \x40 \x40 \x40 \x40 \x40\x0aSeed? </data></match></read>
+    <write><data>2009170061\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>d\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5fd \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>e\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5fe\x5f\x5f\x5fe\x5f\x5f\x5fd \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>h\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5fe\x5f\x5fhe\x5f\x5f\x5fd \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>?\x0a</data></write>
+    <read><length>20</length><match><data>\x0a\x5e\x5e\x5e\x5e\x5e RESET \x5e\x5e\x5e\x5e\x5e\x0a\x0a</data></match></read>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>d\x0a</data></write>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5fd \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>?\x0a</data></write>
+    <read><length>20</length><match><data>\x0a\x5e\x5e\x5e\x5e\x5e RESET \x5e\x5e\x5e\x5e\x5e\x0a\x0a</data></match></read>
+    <read><length>52</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>\x2b\x0a</data></write>
+    <read><length>43</length><match><data>\x0a\x40 \x40 \x40 \x40 \x40  New Challenge  \x40 \x40 \x40 \x40 \x40\x0aSeed? </data></match></read>
+    <write><data>320336374\x0a</data></write>
+    <read><length>49</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>p\x0a</data></write>
+    <read><length>49</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>\x2b\x0a</data></write>
+    <read><length>43</length><match><data>\x0a\x40 \x40 \x40 \x40 \x40  New Challenge  \x40 \x40 \x40 \x40 \x40\x0aSeed? </data></match></read>
+    <write><data>320693878\x0a</data></write>
+    <read><length>50</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>d\x0a</data></write>
+    <read><length>50</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5fd\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>w\x0a</data></write>
+    <read><length>50</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5fd\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>j\x0a</data></write>
+    <read><length>50</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5fd\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>e\x0a</data></write>
+    <read><length>50</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5fd\x5fe\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>i\x0a</data></write>
+    <read><length>50</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5fid\x5fe\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>l\x0a</data></write>
+    <read><length>50</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5flid\x5fe\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>n\x0a</data></write>
+    <read><length>50</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5flidne\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>w\x0a</data></write>
+    <read><length>50</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5flidne\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>f\x0a</data></write>
+    <read><length>50</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5flidne\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>o\x0a</data></write>
+    <read><length>50</length><match><data>\x5b\x5b\x5b Your challenge: \x5folidne\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>s\x0a</data></write>
+    <read><length>44</length><match><data>\x3e\x3e\x3e You got it!! \x22solidness\x22 \x2811 tries\x29 \x3c\x3c\x3c\x0a</data></match></read>
+    <read><length>84</length><match><data>\x23\x23\x23\x23\x23\x23 Good Work! \x23\x23\x23\x23\x23\x23\x0a\x23 Leave your comment!! \x23\x0a\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x0aComment: </data></match></read>
+    <write><data>TTkbTkiYYeXsvXqWaNfgAUpkiRqEgDVOOVGEwKhorlKxwUlSWnwNWRoafpgVIvYSFYMokSZgafCvxYNyhbkYdNmFdUBbpqwmvUFqrjOtZFcKaCTYsayUgliuSerlYXImYOZdtXVyENCGRiVPluQVfFkemepDKyOJOYXakARlydqxkjJqcweAHOkdTkyiinMkSj\x0a</data></write>
+    <read><length>206</length><match><data>You wrote: TTkbTkiYYeXsvXqWaNfgAUpkiRqEgDVOOVGEwKhorlKxwUlSWnwNWRoafpgVIvYSFYMokSZgafCvxYNyhbkYdNmFdUBbpqwmvUFqrjOtZFcKaCTYsayUgliuSerlYXImYOZdtXVyENCGRiVPluQVfFkemepDKyOJOYXakARlydqxkjJqcweAHOkdTkyiinMkSj\x0a</data></match></read>
+    <read><length>43</length><match><data>\x0a\x40 \x40 \x40 \x40 \x40  New Challenge  \x40 \x40 \x40 \x40 \x40\x0aSeed? </data></match></read>
+    <write><data>256757485\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: \x5f\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>c\x0a</data></write>
+    <read><length>48</length><match><data>\x5b\x5b\x5b Your challenge: c\x5f\x5f\x5f\x5f\x5f\x5f \x5d\x5d\x5d\x0aGuess a letter: </data></match></read>
+    <write><data>\x2f\x0a</data></write>
+    <read><length>61</length><match><data>\x0a \x2a \x2a \x2a \x2a Thank you for playing! You\x27ve won 6 times! \x2a \x2a \x2a \x2a\x0a</data></match></read>
+</replay>
+</pov>

@@ -1,0 +1,26 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>3b3c844bf971d9aa869e453da71b007fcdabfeb2c576e7aae3f7c2f9adfab16c8b6d8cd5311338ede1e544cd64c2296f</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Welcome to Palindrome Finder\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><length>37</length><match><data>\x09Please enter a possible palindrome: </data></match></read>
+    <write><data>fkvzD0x\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x09\x09Nope\x2c that\x27s not a palindrome\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><length>37</length><match><data>\x09Please enter a possible palindrome: </data></match></read>
+    <write><data>5xTWWE6vUiA8ql3HhMpuwvxnu3hP43Di\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x09\x09Nope\x2c that\x27s not a palindrome\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><length>37</length><match><data>\x09Please enter a possible palindrome: </data></match></read>
+    <write><data>qKdZT3eEP5Z0vZr8lGybShbKvM\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x09\x09Nope\x2c that\x27s not a palindrome\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><length>37</length><match><data>\x09Please enter a possible palindrome: </data></match></read>
+    <write><data>jDbcnJDnZZXxaaxXZZnDJncbDj\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x09\x09Yes\x2c that\x27s a palindrome!\x0a</data></match></read>
+</replay>
+</pov>

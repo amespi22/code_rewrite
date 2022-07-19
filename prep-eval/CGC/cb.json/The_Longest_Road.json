@@ -1,0 +1,36 @@
+{
+"DEPEND_VERSION":"1.0.1",
+"filenames":[{"name":"The_Longest_Road/src/include/libcgc.h","included_by":["The_Longest_Road/src/The_Longest_Road/lib/mymath.c", "The_Longest_Road/src/The_Longest_Road/lib/printf.c", "The_Longest_Road/src/The_Longest_Road/lib/stdlib.c", "The_Longest_Road/src/The_Longest_Road/include/cgc_math_lib.h", "The_Longest_Road/src/The_Longest_Road/src/service.c"]},
+{"name":"The_Longest_Road/src/The_Longest_Road/lib/cgc_mymath.h","included_by":["The_Longest_Road/src/The_Longest_Road/lib/mymath.c", "The_Longest_Road/src/The_Longest_Road/lib/printf.c"]},
+{"name":"The_Longest_Road/src/The_Longest_Road/lib/cgc_stdint.h","included_by":["The_Longest_Road/src/The_Longest_Road/lib/mymath.c", "The_Longest_Road/src/The_Longest_Road/lib/printf.c", "The_Longest_Road/src/The_Longest_Road/lib/prng.c", "The_Longest_Road/src/The_Longest_Road/lib/stdlib.c", "The_Longest_Road/src/The_Longest_Road/lib/cgc_prng.h"]},
+{"name":"The_Longest_Road/src/The_Longest_Road/lib/mymath.c"},
+{"name":"The_Longest_Road/src/The_Longest_Road/lib/cgc_stdarg.h","included_by":["The_Longest_Road/src/The_Longest_Road/lib/printf.c"]},
+{"name":"The_Longest_Road/src/The_Longest_Road/lib/cgc_stdlib.h","included_by":["The_Longest_Road/src/The_Longest_Road/lib/printf.c", "The_Longest_Road/src/The_Longest_Road/lib/stdlib.c", "The_Longest_Road/src/The_Longest_Road/include/cgc_math_lib.h"]},
+{"name":"The_Longest_Road/src/The_Longest_Road/lib/printf.c"},
+{"name":"The_Longest_Road/src/The_Longest_Road/lib/cgc_prng.h","included_by":["The_Longest_Road/src/The_Longest_Road/lib/prng.c", "The_Longest_Road/src/The_Longest_Road/include/cgc_math_lib.h"]},
+{"name":"The_Longest_Road/src/The_Longest_Road/lib/prng.c"},
+{"name":"The_Longest_Road/src/The_Longest_Road/lib/stdlib.c"},
+{"name":"The_Longest_Road/src/The_Longest_Road/include/cgc_game.h","included_by":["The_Longest_Road/src/The_Longest_Road/src/game.c", "The_Longest_Road/src/The_Longest_Road/src/packet.c", "The_Longest_Road/src/The_Longest_Road/src/service.c"]},
+{"name":"The_Longest_Road/src/The_Longest_Road/include/cgc_math_lib.h","included_by":["The_Longest_Road/src/The_Longest_Road/src/game.c", "The_Longest_Road/src/The_Longest_Road/src/math_lib.c", "The_Longest_Road/src/The_Longest_Road/src/packet.c", "The_Longest_Road/src/The_Longest_Road/src/service.c"]},
+{"name":"The_Longest_Road/src/The_Longest_Road/src/game.c"},
+{"name":"The_Longest_Road/src/The_Longest_Road/src/math_lib.c"},
+{"name":"The_Longest_Road/src/The_Longest_Road/include/cgc_packet.h","included_by":["The_Longest_Road/src/The_Longest_Road/src/packet.c", "The_Longest_Road/src/The_Longest_Road/src/service.c"]},
+{"name":"The_Longest_Road/src/The_Longest_Road/src/packet.c"},
+{"name":"The_Longest_Road/src/The_Longest_Road/include/cgc_service.h","included_by":["The_Longest_Road/src/The_Longest_Road/src/service.c"]},
+{"name":"The_Longest_Road/src/The_Longest_Road/src/service.c"}
+],
+"ignore":[
+"The_Longest_Road/src/The_Longest_Road/src/packet.c"
+],
+"macros":[
+   {"name": "PATCHED", "value": false }
+],
+"disable_eval":[
+   "cgc_allocate","cgc_atof","cgc_atoi","cgc_bzero","cgc_calculateCS","cgc_calloc","cgc_check_win","cgc_connect_pieces","cgc_create_random_piece","cgc_deallocate","cgc_decrypt_packet","cgc_discard_piece","cgc_encrypt_data","cgc_float_to_str","cgc_floor","cgc_free","cgc_get_checksum","cgc_get_max_road_len","cgc_getNextPieceNum","cgc_get_piece","cgc_handle_auth_challenge_resp","cgc_handle_deauth_req","cgc_handle_disass_req","cgc_int_to_hex","cgc_int_to_str","cgc_isalnum","cgc_isalpha","cgc_isdigit","cgc_isinf","cgc_islower","cgc_isnan","cgc_isspace","cgc_isTopPiecePlaced","cgc_isupper","cgc_itoa","cgc_locate_char","cgc_log10","cgc_malloc","cgc_memcpy","cgc_memset","cgc_packet_handler","cgc_piece_to_pkt","cgc_populate_packet","cgc_pow","cgc_printf","cgc_prng","cgc_push_piece","cgc_putc","cgc_puts","cgc_random_in_range","cgc_receive","cgc_receive_until","cgc_rint","cgc_round","cgc_round_away_from_zero","cgc_seed_prng","cgc_send_ack","cgc_send_assoc_response","cgc_send_auth_challenge","cgc_send_auth_response","cgc_send_nack","cgc_send_packet","cgc_send_packet_new","cgc_set_checksum","cgc_sprng","cgc_strcat","cgc_strchr","cgc_strcmp","cgc_strcpy","cgc_strdup","cgc_strlen","cgc_strncat","cgc_strncpy","cgc_strtok","cgc__terminate","cgc_transmit","cgc_validate_packet","cgc_vprintf","cgc_write","__cxa_finalize@@GLIBC_2.1.3","data_start","deregister_tm_clones","__do_global_dtors_aux","__do_global_dtors_aux_fini_array_entry","_fini","frame_dummy","__frame_dummy_init_array_entry","__gmon_start__","_init","__init_array_end","__init_array_start","_ITM_deregisterTMCloneTable","_ITM_registerTMCloneTable","__libc_csu_fini","__libc_csu_init","__libc_start_main@@GLIBC_2.0","main","register_tm_clones","_start","__x86.get_pc_thunk.ax","__x86.get_pc_thunk.bx","__x86.get_pc_thunk.cx","__x86.get_pc_thunk.dx"
+],
+"enable_eval":[
+   "cgc_strlen"
+],
+"struct_ptrs":{
+}
+}

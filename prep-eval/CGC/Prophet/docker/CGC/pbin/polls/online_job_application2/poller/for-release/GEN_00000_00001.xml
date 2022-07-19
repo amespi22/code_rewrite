@@ -1,0 +1,19 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>1f1a9ec998ccc9ff6ce095ddd627a06ebd286c7359239a7e1495c44f7e82ed794a0452961d822078f26a34dfa4a9a49d</seed>
+<replay>
+    <read><length>342</length><match><data>\x0a\x0aThanks for your interest in the Sea Eye Association.\x0aIn order to be considered for the job complete the preliminary online background check\x0aDue to the secure nature of the position you are applying for you may be asked to\x0asubmit additional paperwork after your preliminary background check has been approved.\x0aThank you for your cooperation\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>11</length><match><data>Last Name: </data></match></read>
+    <write><data>ig\x0a</data></write>
+    <read><length>12</length><match><data>First Name: </data></match></read>
+    <write><data>\x2a\x2ahelp\x0a</data></write>
+    <read><length>237</length><match><data>All commands begin with \x27\x2a\x2a\x27 and may be entered at any time\x0a\x2a\x2aprev \x3cReturn to the previous page\x3e\x0a\x2a\x2anext \x3cMove to the next page\x3e\x0a\x2a\x2aupdate \x5bid\x5d \x3cUpdate field\x2c ex: \x22Update First Name\x22\x3e\x0a\x2a\x2ahelp \x3cPrint this dialogue\x3e\x0a\x2a\x2aexit \x3cExit application\x3e\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>12</length><match><data>First Name: </data></match></read>
+    <write><data>\x2a\x2aexit\x0a</data></write>
+    <read><length>11</length><match><data>Thank you!\x0a</data></match></read>
+</replay>
+</pov>

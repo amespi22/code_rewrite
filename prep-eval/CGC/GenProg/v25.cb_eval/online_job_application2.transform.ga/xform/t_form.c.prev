@@ -1,0 +1,550 @@
+
+
+#include "cgc_stdlib.h"
+#include "cgc_string.h"
+#include "cgc_form.h"
+#include "cgc_input.h"
+extern page_t education;
+static const char *cmd_lbls[NUM_CMDS] = {
+    "NEXT",
+    "PREV",
+    "UPDATE",
+    "HELP",
+    "EXIT"
+};
+
+static int cgc_handler_index(form_t * form, char *buf)
+{
+    int i;
+    char* p;
+     p = buf;
+    char cmd_buf[MAX_CMD_SIZE];
+    while (*p == '*' && p - buf < 2)
+    {
+	p++;
+    }
+    for (i = 0; i < NUM_CMDS; i++) {
+ {
+     void* tlv4;
+     tlv4 = cmd_buf;
+     void* tlv3;
+     tlv3 = p;
+     cgc_size_t tlv2;
+     {
+         const char* tlv9 = cmd_lbls [ i ];
+         tlv2 = cgc_strlen(tlv9);
+     }
+    	cgc_memcpy(tlv4,tlv3,tlv2);
+ }
+ {
+     const char* tlv8 = cmd_lbls [ i ];
+    	cmd_buf[cgc_strlen(tlv8)] = '\0';
+ }
+ int tlv1;
+ {
+     const char* tlv7 = cmd_buf;
+     const char* tlv6 = cmd_lbls [ i ];
+     cgc_size_t tlv5;
+     {
+         const char* tlv10 = cmd_lbls [ i ];
+         tlv5 = cgc_strlen(tlv10);
+     }
+     tlv1 = cgc_strncasecmp(tlv7,tlv6,tlv5);
+ }
+	if (tlv1 == 0) {
+	    return i;
+	}
+    }
+    return -1;
+}
+
+static int cgc_is_cmd(form_t * form, char *buf)
+{
+    int tlv1;
+    {
+        const char tlv4 [ ] = "**";
+        const char* tlv3 = buf;
+        cgc_size_t tlv2;
+        tlv2 = 2;
+        tlv1 = cgc_strncmp(tlv4,tlv3,tlv2);
+    }
+    if (tlv1) {
+	return 0;
+    }
+    return cgc_handler_index(form, buf) >= 0;
+}
+
+static int page_complete(form_t * form)
+{
+    question_t* cur;
+    cur = form -> cur_page -> questions;
+    int completed;
+    completed = 1;
+    while (cur != NULL)
+    {
+	if (!cur->optional && cur->answer == NULL) {
+	    completed = 0;
+	    break;
+	} else {
+	    cur = cur->next;
+	}
+    }
+    return completed && form->cur_question == NULL;
+}
+
+static void cgc_print_title(form_t * form)
+{
+    int tlv1;
+    {
+        const char* tlv4 = form -> cur_page -> title;
+        const char tlv3 [ ] = "Fin";
+        cgc_size_t tlv2;
+        tlv2 = 3;
+        tlv1 = cgc_strncmp(tlv4,tlv3,tlv2);
+    }
+    if (tlv1 == 0) {
+	cgc_printf("\nFinal Questions\n");
+    } else {
+	cgc_printf("\n%s Form\n", form->cur_page->title);
+    }
+}
+
+static int cgc_handle_cmd(form_t * form, char *buf)
+{
+    char* arg;
+     {
+         cgc_size_t tlv3;
+         {
+             const char* tlv9 = buf;
+             tlv3 = cgc_strlen(tlv9) + 1;
+         }
+         arg = cgc_malloc(tlv3);
+     }
+    int ret;
+    if (arg == NULL) {
+	return -1;
+    }
+    {
+        char* tlv2;
+         tlv2 = arg;
+        const char* tlv1 = buf;
+        cgc_strcpy(tlv2,tlv1);
+    }
+    {
+        const char* tlv8 = buf;
+        arg[cgc_strlen(tlv8)] = '\0';
+    }
+    char* cmd;
+     {
+         char** tlv5;
+          tlv5 = & arg;
+         const char tlv4 [ ] = " ";
+         cmd = cgc_strsep(tlv5,tlv4);
+     }
+    int i;
+    {
+        form_t* tlv7;
+        tlv7 = form;
+        char* tlv6;
+         tlv6 = cmd;
+        i = cgc_handler_index(tlv7,tlv6);
+    }
+    if (i < 0) {
+	ret = i;
+	goto out;
+    }
+    ret = form->handlers[i] (form, arg);
+  out:
+    if (cmd != NULL) {
+	cgc_free(cmd);
+    }
+    return ret;
+}
+
+static int cgc_handle_answer(form_t * form, char *input)
+{
+    if (!form->cur_question->validator(input)) {
+	return 1;
+    }
+    if (form->cur_question->answer != NULL) {
+ {
+     void* tlv4;
+     tlv4 = form -> cur_question -> answer;
+    	cgc_free(tlv4);
+ }
+    }
+    {
+        cgc_size_t tlv3;
+        {
+            const char* tlv5 = input;
+            tlv3 = cgc_strlen(tlv5) + 1;
+        }
+        form->cur_question->answer = cgc_malloc(tlv3);
+    }
+    if (form->cur_question->answer == NULL) {
+	return -1;
+    }
+    {
+        char* tlv2;
+         tlv2 = form -> cur_question -> answer;
+        const char* tlv1 = input;
+        cgc_strcpy(tlv2,tlv1);
+    }
+    return 0;
+}
+
+static int cgc_next_question(form_t * form)
+{
+    if (form->cur_question == NULL) {
+	return -1;
+    }
+    if (form->cur_question->next == NULL) {
+	form->cur_page->completed = 1;
+    } else {
+	form->cur_question = form->cur_question->next;
+    }
+    return 0;
+}
+
+static void cgc_print_page(form_t * form)
+{
+    question_t* cur;
+    cur = form -> cur_page -> questions;
+    int tlv1;
+    {
+        const char* tlv6 = form -> cur_page -> title;
+        const char tlv5 [ ] = "Edu";
+        cgc_size_t tlv4;
+        tlv4 = 3;
+        tlv1 = cgc_strncmp(tlv6,tlv5,tlv4);
+    }
+    if (tlv1 == 0) {
+	cgc_printf("\n*********Highest %s:*********\n", form->cur_page->title);
+    } else {
+ int tlv2;
+ {
+     const char* tlv9 = form -> cur_page -> title;
+     const char tlv8 [ ] = "Emp";
+     cgc_size_t tlv7;
+     tlv7 = 3;
+     tlv2 = cgc_strncmp(tlv9,tlv8,tlv7);
+ }
+	if (tlv2 == 0) {
+	    cgc_printf("\n*********Most Recent Employer:*********\n", form->cur_page->title);
+	} else {
+     int tlv3;
+     {
+         const char* tlv12 = form -> cur_page -> title;
+         const char tlv11 [ ] = "Fin";
+         cgc_size_t tlv10;
+         tlv10 = 3;
+         tlv3 = cgc_strncmp(tlv12,tlv11,tlv10);
+     }
+	    if (tlv3 == 0) {
+		cgc_printf("\n*********Final Screening:*********\n", form->cur_page->title);
+	    } else {
+		cgc_printf("\n*********%s:*********\n", form->cur_page->title);
+	    }
+	}
+    }
+    for (; cur != NULL; cur = cur->next)
+    {
+	if (cur->answer != NULL) {
+	    cgc_printf("%s=%s\n", cur->title, cur->answer);
+	} else {
+	    cgc_printf("%s=\n", cur->title);
+	}
+    }
+}
+
+static void cgc_prompt_next(void)
+{
+    cgc_printf("\nType **next to continue\n");
+}
+
+static int cgc_next_page(form_t * form)
+{
+    if (form->cur_page == NULL) {
+	return -1;
+    }
+    if (form->cur_page->next == NULL) {
+	return 1;
+    }
+    form->cur_page = form->cur_page->next;
+    form->cur_question = form->cur_page->questions;
+    return 0;
+}
+
+static void cgc_print_next_title(form_t * form)
+{
+    if (form->cur_page->next->title == NULL) {
+	cgc_printf("%s", form->ending);
+    } else {
+ int tlv1;
+ {
+     const char* tlv4 = form -> cur_page -> next -> title;
+     const char tlv3 [ ] = "Fin";
+     cgc_size_t tlv2;
+     tlv2 = 3;
+     tlv1 = cgc_strncmp(tlv4,tlv3,tlv2);
+ }
+	if (tlv1 == 0) {
+	    cgc_printf("\nFinal Questions\n");
+	} else {
+	    cgc_printf("\n%s Form\n", form->cur_page->next->title);
+	}
+    }
+}
+
+static void cgc_prompt_q(question_t * q)
+{
+    if (q->hint != NULL) {
+	cgc_printf("%s%s: ", q->title, q->hint);
+    } else {
+	cgc_printf("%s: ", q->title);
+    }
+}
+
+int cgc_handle_next(form_t * form, char *arg)
+{
+    int ret;
+    if (form->cur_page->title == NULL) {
+	return 1;
+    }
+    if (!form->cur_page->completed) {
+	cgc_print_next_title(form);
+	cgc_printf("You must complete the previous page before proceeding to this page\n");
+	return 1;
+    }
+    {
+        form_t* tlv1;
+        tlv1 = form;
+        ret = cgc_next_page(tlv1);
+    }
+    if (ret < 0) {
+	return -1;
+    }
+    if (ret != 0) {
+	return 2;
+    }
+    while (form->cur_question != NULL && form->cur_question->next != NULL && form->cur_question->answer != NULL)
+    {
+	form->cur_question = form->cur_question->next;
+    }
+    return 1;
+}
+
+int cgc_handle_exit(form_t * form, char *arg)
+{
+    cgc_printf("Thank you!\n");
+    cgc_exit(0);
+    return 0;
+}
+
+int cgc_handle_help(form_t * form, char *arg)
+{
+    cgc_printf("%s", form->help);
+    return 1;
+}
+
+int cgc_handle_prev(form_t * form, char *arg)
+{
+    if (form->cur_page == NULL) {
+	return -1;
+    }
+    if (form->cur_page->prev == NULL) {
+	cgc_print_title(form);
+	return 0;
+    }
+    form->cur_page = form->cur_page->prev;
+    form->cur_question = form->cur_page->questions;
+    return 1;
+}
+
+int cgc_handle_update(form_t * form, char *arg)
+{
+    question_t *cur;
+    char *input_buf;
+    if (!form->cur_page->completed) {
+	cgc_printf("Cannot update field until all fields are inputted\n");
+	return 1;
+    }
+    if (arg == NULL) {
+	return 1;
+    }
+    cur = form->cur_page->questions;
+    for (; cur != NULL; cur = cur->next)
+    {
+ int tlv2;
+ {
+     const char* tlv8 = cur -> title;
+     const char* tlv7 = arg;
+     cgc_size_t tlv6;
+     {
+         const char* tlv16 = cur -> title;
+         tlv6 = cgc_strlen(tlv16);
+     }
+     tlv2 = cgc_strncmp(tlv8,tlv7,tlv6);
+ }
+	if (tlv2 == 0) {
+	    break;
+	}
+    }
+    if (cur == NULL) {
+	cgc_printf("Could not find specified field\n");
+	cgc_printf("Update Unsuccessful\n");
+	return 1;
+    }
+    {
+        cgc_size_t tlv4;
+        tlv4 = LINE_SIZE;
+        input_buf = cgc_malloc(tlv4);
+    }
+    if (input_buf == NULL) {
+	return -1;
+    }
+    cgc_prompt_q(cur);
+    int tlv1;
+    {
+        char* tlv5;
+         tlv5 = input_buf;
+        tlv1 = cgc_read_line(tlv5);
+    }
+    if (tlv1 < 0) {
+	return -1;
+    }
+    if ((cgc_strlen(input_buf) == 0) && cur->optional) {
+	if (input_buf != NULL) {
+	    cgc_free(input_buf);
+	}
+	if (cur->answer != NULL) {
+     {
+         void* tlv12;
+         tlv12 = cur -> answer;
+    	    cgc_free(tlv12);
+     }
+	}
+	cur->answer = NULL;
+	return 1;
+    }
+    if (!cur->validator(input_buf)) {
+	if (input_buf != NULL) {
+	    cgc_free(input_buf);
+	}
+	cgc_printf("Bad input.\n");
+	cgc_printf("Update Unsuccessful\n");
+	return 1;
+    }
+    if (cur->answer == NULL) {
+	cur->answer = input_buf;
+    } else {
+ int tlv3;
+ {
+     const char* tlv11 = cur -> answer;
+     const char* tlv10 = input_buf;
+     cgc_size_t tlv9;
+     {
+         const char* tlv17 = cur -> answer;
+         tlv9 = cgc_strlen(tlv17);
+     }
+     tlv3 = cgc_strncmp(tlv11,tlv10,tlv9);
+ }
+	if (tlv3 == 0) {
+     {
+         char* tlv14;
+          tlv14 = cur -> answer;
+         const char* tlv13 = input_buf;
+    	    cgc_strcpy(tlv14,tlv13);
+     }
+	    cgc_free(input_buf);
+	} else {
+     {
+         void* tlv15;
+         tlv15 = cur -> answer;
+    	    cgc_free(tlv15);
+     }
+	    cur->answer = input_buf;
+	}
+    }
+    return 1;
+}
+
+void cgc_print_prompt(form_t * form, int with_title, int done)
+{
+    if (form->cur_page->title == NULL) {
+	cgc_printf("%s", form->ending);
+	return;
+    }
+    if (with_title) {
+	cgc_print_title(form);
+    }
+    if (form->cur_page->completed) {
+	cgc_print_page(form);
+	cgc_prompt_next();
+	return;
+    }
+    {
+        question_t* tlv1;
+        tlv1 = form -> cur_question;
+        cgc_prompt_q(tlv1);
+    }
+}
+
+int cgc_handle_line(form_t * form, char *buf)
+{
+    int ret;
+    static int tlv1;
+    {
+        form_t* tlv4;
+        tlv4 = form;
+        char* tlv3;
+         tlv3 = buf;
+        tlv1 = cgc_is_cmd(tlv4,tlv3);
+    }
+    if (tlv1) {
+	return cgc_handle_cmd(form, buf);
+    }
+    if (form->cur_page->completed || form->cur_question == NULL) {
+	return 1;
+    }
+    cgc_size_t tlv2;
+    {
+        const char* tlv5 = buf;
+        tlv2 = cgc_strlen(tlv5);
+    }
+    if (tlv2 == 0) {
+	if (!form->cur_question->optional) {
+	    return 0;
+	}
+    } else {
+ {
+     form_t* tlv8;
+     tlv8 = form;
+     char* tlv7;
+      tlv7 = buf;
+    	ret = cgc_handle_answer(tlv8,tlv7);
+ }
+	if (ret < 0) {
+	    return -1;
+	}
+	if (ret != 0) {
+	    return 0;
+	}
+    }
+    {
+        form_t* tlv6;
+        tlv6 = form;
+        ret = cgc_next_question(tlv6);
+    }
+    if (ret < 0) {
+	return -1;
+    } else {
+	return 0;
+    }
+}
+
+void cgc_print_greeting(form_t * form)
+{
+    cgc_printf("%s", form->greeting);
+}
+

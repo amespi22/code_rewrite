@@ -1,0 +1,37 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>7c05d37985d0e50ab25e0c1b01acd0d87296f4c639c6e57c91960312287ce7a71174f96127819e2e6bc3530b8c2f854d</seed>
+<replay>
+    <read><length>85</length><match><data>Before we begin. Enter a number \x5b1 \x2d 4294967295\x5d\x0aOr any number. We\x27ll figure it out: </data></match></read>
+    <write><data>128167490\x0a</data></write>
+    <read><length>28</length><match><data>New Game \x2d\x2d Ready\x2c set\x2c go!\x0a</data></match></read>
+    <read><length>94</length><match><data>                              \x2d\x2dBoard: HIDDEN\x2d\x2d\x0a1. Shoot!\x0a2. Reveal Board\x0a3. New Game\x0a4. Quit\x0a</data></match></read>
+    <read><length>66</length><match><data>Current Score \x3d 0 \x7c Total Time Remaining: 10000 \x7c High Score \x3d 0 \x0a</data></match></read>
+    <read><length>43</length><match><data>Shots Remaining: 125 \x7c Bombs Remaining: 5\x0a\x0a</data></match></read>
+    <read><length>12</length><match><data>Selection\x2d: </data></match></read>
+    <write><data>3\x0a</data></write>
+    <read><length>28</length><match><data>New Game \x2d\x2d Ready\x2c set\x2c go!\x0a</data></match></read>
+    <read><length>94</length><match><data>                              \x2d\x2dBoard: HIDDEN\x2d\x2d\x0a1. Shoot!\x0a2. Reveal Board\x0a3. New Game\x0a4. Quit\x0a</data></match></read>
+    <read><length>66</length><match><data>Current Score \x3d 0 \x7c Total Time Remaining: 10000 \x7c High Score \x3d 0 \x0a</data></match></read>
+    <read><length>43</length><match><data>Shots Remaining: 125 \x7c Bombs Remaining: 5\x0a\x0a</data></match></read>
+    <read><length>12</length><match><data>Selection\x2d: </data></match></read>
+    <write><data>1\x0a</data></write>
+    <read><delim>Enter Shot Coordinates Ex: 100\x2c 100:: </delim></read>
+    <write><data>3826\x2c 6390\x0a</data></write>
+    <read><length>35</length><match><data>You missed. Better luck next time.\x0a</data></match></read>
+    <read><length>94</length><match><data>                              \x2d\x2dBoard: HIDDEN\x2d\x2d\x0a1. Shoot!\x0a2. Reveal Board\x0a3. New Game\x0a4. Quit\x0a</data></match></read>
+    <read><length>66</length><match><data>Current Score \x3d 0 \x7c Total Time Remaining: 10000 \x7c High Score \x3d 0 \x0a</data></match></read>
+    <read><length>43</length><match><data>Shots Remaining: 124 \x7c Bombs Remaining: 5\x0a\x0a</data></match></read>
+    <read><length>12</length><match><data>Selection\x2d: </data></match></read>
+    <write><data>3\x0a</data></write>
+    <read><length>28</length><match><data>New Game \x2d\x2d Ready\x2c set\x2c go!\x0a</data></match></read>
+    <read><length>94</length><match><data>                              \x2d\x2dBoard: HIDDEN\x2d\x2d\x0a1. Shoot!\x0a2. Reveal Board\x0a3. New Game\x0a4. Quit\x0a</data></match></read>
+    <read><length>66</length><match><data>Current Score \x3d 0 \x7c Total Time Remaining: 10000 \x7c High Score \x3d 0 \x0a</data></match></read>
+    <read><length>43</length><match><data>Shots Remaining: 125 \x7c Bombs Remaining: 5\x0a\x0a</data></match></read>
+    <read><length>12</length><match><data>Selection\x2d: </data></match></read>
+    <write><data>4\x0a</data></write>
+    <read><length>30</length><match><data>Thanks for Playing\x0aEXITING...\x0a</data></match></read>
+</replay>
+</pov>

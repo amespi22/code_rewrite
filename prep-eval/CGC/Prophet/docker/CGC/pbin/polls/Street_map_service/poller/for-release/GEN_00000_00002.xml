@@ -1,0 +1,15 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>d761c6e56520a095a33b77b73334dbf3ac196f52a785ddb525759094b405c06c7d530f440c907a51473f7ab8f97e9ec5</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>This is Mapper.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>I\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>from address \x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>0\x0a</data></write>
+    <write><data>0\x0a</data></write>
+</replay>
+</pov>

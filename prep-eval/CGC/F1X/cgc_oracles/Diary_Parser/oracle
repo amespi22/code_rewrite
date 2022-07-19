@@ -1,0 +1,184 @@
+#!/bin/bash
+i=Diary_Parser
+bin=$(realpath -- ./build/$i/$i)
+TIMEOUT=5
+if [[ ! -z $ANGELIX_RUN ]]; then TIMEOUT=50; fi; 
+TMP=/tmp/angelix/${i}_$RANDOM
+mkdir -p $(dirname -- $TMP)
+assert-equal () {
+	timeout --preserve-status -k $TIMEOUT $TIMEOUT $ANGELIX_RUN $1 < $2  > $TMP
+	x=$?
+	if (( $x >= 64 )); then rm $TMP ; exit $x; fi; 
+	bc=$(wc -c $3)
+	cat $TMP | head -c $bc > $TMP.bc
+	diff -q $TMP.bc $3 > /dev/null
+	xx=$?
+	rm $TMP $TMP.bc
+	exit $xx
+}
+case "$1" in 
+1)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.n1 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/n1.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/n1.out"
+	;;
+2)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.n2 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/n2.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/n2.out"
+	;;
+3)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.n3 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/n3.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/n3.out"
+	;;
+4)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p1 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p1.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p1.out"
+	;;
+5)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p2 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p2.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p2.out"
+	;;
+6)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p3 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p3.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p3.out"
+	;;
+7)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p4 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p4.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p4.out"
+	;;
+8)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p5 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p5.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p5.out"
+	;;
+9)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p6 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p6.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p6.out"
+	;;
+10)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p7 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p7.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p7.out"
+	;;
+11)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p8 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p8.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p8.out"
+	;;
+12)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p9 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p9.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p9.out"
+	;;
+13)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p10 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p10.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p10.out"
+	;;
+14)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p11 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p11.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p11.out"
+	;;
+15)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p12 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p12.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p12.out"
+	;;
+16)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p13 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p13.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p13.out"
+	;;
+17)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p14 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p14.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p14.out"
+	;;
+18)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p15 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p15.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p15.out"
+	;;
+19)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p16 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p16.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p16.out"
+	;;
+20)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p17 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p17.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p17.out"
+	;;
+21)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p18 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p18.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p18.out"
+	;;
+22)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p19 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p19.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p19.out"
+	;;
+23)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p20 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p20.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p20.out"
+	;;
+24)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p21 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p21.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p21.out"
+	;;
+25)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p22 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p22.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p22.out"
+	;;
+26)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p23 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p23.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p23.out"
+	;;
+27)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p24 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p24.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p24.out"
+	;;
+28)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p25 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p25.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p25.out"
+	;;
+29)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p26 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p26.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p26.out"
+	;;
+30)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p27 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p27.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p27.out"
+	;;
+31)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p28 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p28.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p28.out"
+	;;
+32)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p29 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p29.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p29.out"
+	;;
+33)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p30 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p30.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p30.out"
+	;;
+34)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p31 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p31.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p31.out"
+	;;
+35)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p32 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p32.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p32.out"
+	;;
+36)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p33 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p33.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p33.out"
+	;;
+37)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p34 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p34.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p34.out"
+	;;
+38)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p35 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p35.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p35.out"
+	;;
+39)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p36 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p36.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p36.out"
+	;;
+40)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p37 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p37.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p37.out"
+	;;
+41)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/Diary_Parser/seed.p38 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p38.in" "/mnt/Data/APR_eval/cgc_oracles/Diary_Parser/p38.out"
+	;;
+esac

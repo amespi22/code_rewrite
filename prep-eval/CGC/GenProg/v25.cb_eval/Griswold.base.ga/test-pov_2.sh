@@ -1,0 +1,1 @@
+../../../cgc_test/Griswold/test-pov_2.sh

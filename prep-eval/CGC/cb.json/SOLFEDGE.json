@@ -1,0 +1,25 @@
+{
+"DEPEND_VERSION":"1.0.1",
+"filenames":[{"name":"SOLFEDGE/src/include/libcgc.h","included_by":["SOLFEDGE/src/SOLFEDGE/lib/cgc_libc.h", "SOLFEDGE/src/SOLFEDGE/src/operation.c", "SOLFEDGE/src/SOLFEDGE/src/service.c"]},
+{"name":"SOLFEDGE/src/SOLFEDGE/lib/cgc_libc.h","included_by":["SOLFEDGE/src/SOLFEDGE/lib/libc.c", "SOLFEDGE/src/SOLFEDGE/src/operation.c", "SOLFEDGE/src/SOLFEDGE/src/service.c"]},
+{"name":"SOLFEDGE/src/SOLFEDGE/lib/libc.c"},
+{"name":"SOLFEDGE/src/SOLFEDGE/src/cgc_operation.h","included_by":["SOLFEDGE/src/SOLFEDGE/src/operation.c", "SOLFEDGE/src/SOLFEDGE/src/service.c"]},
+{"name":"SOLFEDGE/src/SOLFEDGE/src/operation.c"},
+{"name":"SOLFEDGE/src/SOLFEDGE/src/cgc_service.h","included_by":["SOLFEDGE/src/SOLFEDGE/src/service.c"]},
+{"name":"SOLFEDGE/src/SOLFEDGE/src/service.c"}
+],
+"ignore":[
+"SOLFEDGE/src/SOLFEDGE/src/operation.c"
+],
+"macros":[
+   {"name": "PATCHED", "value": false }
+],
+"disable_eval":[
+   "cgc_allocate","cgc_get_next_note_id","cgc_get_next_syllable_id","cgc_get_note_for_syllable_id","cgc_get_syllable_for_note_id","cgc_memset","cgc_process_notes","cgc_process_syllables","cgc_read_all","cgc_receive","cgc_recv_all","cgc_recv_bytes_count","cgc_send","cgc_send_notes","cgc_send_syllables","cgc__terminate","cgc_to_notes","cgc_to_syllables","cgc_transmit","cgc_transmit_all","cgc_write_note_to_buf","cgc_write_syllable_to_buf","__cxa_finalize@@GLIBC_2.1.3","data_start","deregister_tm_clones","__do_global_dtors_aux","__do_global_dtors_aux_fini_array_entry","_fini","frame_dummy","__frame_dummy_init_array_entry","__gmon_start__","_init","__init_array_end","__init_array_start","_ITM_deregisterTMCloneTable","_ITM_registerTMCloneTable",".L10",".L13",".L14",".L16",".L17",".L18",".L19",".L2",".L20",".L21",".L25",".L27",".L28",".L29",".L3",".L30",".L31",".L32",".L5",".L6",".L7",".L8",".L9","__libc_csu_fini","__libc_csu_init","__libc_start_main@@GLIBC_2.0","main","register_tm_clones","_start","__x86.get_pc_thunk.ax","__x86.get_pc_thunk.bx","__x86.get_pc_thunk.dx"
+],
+"enable_eval":[
+   "cgc_strlen"
+],
+"struct_ptrs":{
+}
+}

@@ -1,0 +1,1 @@
+../../../cgc_test/QuadtreeConways/test.sh

@@ -1,0 +1,45 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>ea484eda249e45a8f3739a0cf7c9ffbf321f91e77416450e3eaca36f721247d5fcc5e7d94bf0d515389ef7c59ab61b18</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>Welcome to the diary logger!</data></match></read>
+    <write><data>X\x01</data></write>
+    <write><data>BB\xee\x2c\x08\x00\x00\x00\x05\x06\x0e\x00V\x00\x00\x03\x09\x15\x00\x1e\x00bcbbbbbcc\x03\x03\x05\x25\x00\x2a\x00cbcbb\x05\x02\x041\x005\x00\x5c\xda\xe4L\x02\x03\x02\x3c\x00\x3e\x00ac\x00\x03\x0aE\x00O\x00ccbccabcac\x01\x00\x00\xbd\x00\x00\x00\x05\x05\x5c\x00\xb9\x00\x00\x03\x08c\x00k\x00baaacbcb\x03\x03\x18r\x00\x8a\x00abcaaaabcacbcbaacccaacaa\x05\x02\x04\x91\x00\x95\x00\x81\x99\x97W\x00\x03\x16\x9c\x00\xb2\x00bbbabacbaaaccacbaccaac\x04\x04\x00\x01\x00\x00\x00\x00\x03\xbf\x00\xf2\x00\x00\x03\x11\xc6\x00\xd7\x00bbccaaabcabcacbab\x02\x03\x0d\xde\x00\xeb\x00cbbccbbbbccba\x03\x00\x00\x25\x00\x00\x00\x01\x02\xf8\x00\x1f\x01\x00\x03\x0c\xff\x00\x0b\x01cbbcbbcbaacc\x05\x03\x0d\x12\x01\x00\x00baacacbbccabb\x03\x03\x25\x01\x00\x00\x00\x03\x0e\x2c\x01:\x01bacbcbabacaccb\x05\x04\x00\x00\x00A\x01\x03\x03\x10H\x01\x00\x00bccacbacbcabcbaa</data></write>
+    <read><delim>\x0a</delim><match><data>Length: 344</data></match></read>
+    <read><delim>\x0a</delim><match><data>Magic number: 0x4242</data></match></read>
+    <read><delim>\x0a</delim><match><data>Future: 0x2cee</data></match></read>
+    <read><delim>\x0a</delim><match><data>Offset: 0x8</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: jobs</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x6</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: bcbbbbbcc</data></match></read>
+    <read><delim>\x0a</delim><match><data>company: cbcbb</data></match></read>
+    <read><delim>\x0a</delim><match><data>salary: 0x4ce4da5c</data></match></read>
+    <read><delim>\x0a</delim><match><data>job category: ac</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: ccbccabcac</data></match></read>
+    <read><delim>\x0a</delim><match><data>years: 0xbd</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: jobs</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x5</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: baaacbcb</data></match></read>
+    <read><delim>\x0a</delim><match><data>company: abcaaaabcacbcbaacccaacaa</data></match></read>
+    <read><delim>\x0a</delim><match><data>salary: 0x57979981</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: bbbabacbaaaccacbaccaac</data></match></read>
+    <read><delim>\x0a</delim><match><data>have a best friend: true</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: identity</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x3</data></match></read>
+    <read><delim>\x0a</delim><match><data>first name: bbccaaabcabcacbab</data></match></read>
+    <read><delim>\x0a</delim><match><data>last name: cbbccbbbbccba</data></match></read>
+    <read><delim>\x0a</delim><match><data>age: 0x25</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: movies</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x2</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: cbbcbbcbaacc</data></match></read>
+    <read><delim>\x0a</delim><match><data>plot summary: baacacbbccabb</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: books</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x3</data></match></read>
+    <read><delim>\x0a</delim><match><data>author: bacbcbabacaccb</data></match></read>
+    <read><delim>\x0a</delim><match><data>made into a movie: false</data></match></read>
+    <read><delim>\x0a</delim><match><data>publisher: bccacbacbcabcbaa</data></match></read>
+    <read><delim>\x0a</delim><match><data>good book.</data></match></read>
+</replay>
+</pov>

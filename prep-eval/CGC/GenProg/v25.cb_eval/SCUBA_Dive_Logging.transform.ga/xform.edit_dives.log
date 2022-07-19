@@ -1,0 +1,176 @@
+Starting pre-processing
+Processing file SCUBA_Dive_Logging/src/include/libcgc.h
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/cgc_stdlib.h
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/include/cgc_malloc.h
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/malloc.c
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/cgc_mymath.h
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/cgc_stdint.h
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/mymath.c
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/cgc_stdarg.h
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/stdlib.c
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/include/cgc_dates.h
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/dates.c
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/include/cgc_service.h
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/dive_statistics.c
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/edit_diver.c
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/include/cgc_menu.h
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/log_dive.c
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/menu.c
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/print_dives.c
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/remove_dives.c
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/service.c
+Pre-processing done
+Starting Transformations
+Start expand_case pass
+End pass
+Start expand_conditionals pass
+End pass
+Start expand_blockItems pass
+End pass
+Start if_else_break pass
+End pass
+Start insert_loop_braces pass
+End pass
+Start expand_if_else pass
+End pass
+Start expand_sizeof pass
+End pass
+Start single_declarations pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+all done with passes
+0 :  [cgc_edit_dives] <class 'list'>  [all function decls] 
+ - char buf [ 1024 ] ;
+ - int rcv_cnt ;
+ - dive_log_type * next_dive ;
+ - int dive_count ;
+ - int dive_number_to_edit ;
+ - cgc_list_dives ( Info ) ;
+ - const char tlv1 [ ] = "\n" ;
+ - cgc_printf ( tlv1 ) ;
+ - const char tlv2 [ ] = "Enter Dive # to edit: " ;
+ - cgc_printf ( tlv2 ) ;
+ - char * tlv4 ;
+ - cgc_size_t tlv3 ;
+ - const char * tlv5 = buf ;
+ - cgc_update_dive ( next_dive ) ;
+ - const char tlv6 [ ] = "\n" ;
+ - cgc_printf ( tlv6 ) ;
+ - const char tlv7 [ ] = "Dive Log is empty\n" ;
+ - cgc_printf ( tlv7 ) ;
+ - const char tlv8 [ ] = "Invalid dive number entered\n" ;
+ - cgc_printf ( tlv8 ) ;
+1 :  [cgc_update_dive] <class 'list'>  [all function decls] 
+ - char buffer [ 1024 ] ;
+ - char buf2 [ 1024 ] ;
+ - cgc_size_t count ;
+ - datetime_struct_type tm ;
+ - const char tlv1 [ ] = "Dive Site" ;
+ - cgc_printf ( tlv1 ) ;
+ - const char tlv2 [ ] = ": " ;
+ - cgc_printf ( tlv2 ) ;
+ - char * tlv28 ;
+ - cgc_size_t tlv27 ;
+ - const char tlv3 [ ] = "Date" ;
+ - cgc_printf ( tlv3 ) ;
+ - const char tlv4 [ ] = ": " ;
+ - cgc_printf ( tlv4 ) ;
+ - char * tlv30 ;
+ - cgc_size_t tlv29 ;
+ - const char tlv5 [ ] = "Time" ;
+ - cgc_printf ( tlv5 ) ;
+ - const char tlv6 [ ] = ": " ;
+ - cgc_printf ( tlv6 ) ;
+ - char * tlv32 ;
+ - cgc_size_t tlv31 ;
+ - char * tlv9 ;
+ - const char tlv8 [ ] = " " ;
+ - cgc_size_t tlv7 ;
+ - char * tlv12 ;
+ - const char * tlv11 = buf2 ;
+ - cgc_size_t tlv10 ;
+ - char * tlv34 ;
+ - datetime_struct_type * tlv33 ;
+ - const char tlv13 [ ] = "Location (area/city)" ;
+ - cgc_printf ( tlv13 ) ;
+ - const char tlv14 [ ] = ": " ;
+ - cgc_printf ( tlv14 ) ;
+ - char * tlv36 ;
+ - cgc_size_t tlv35 ;
+ - const char tlv15 [ ] = "Max Depth in ft" ;
+ - cgc_printf ( tlv15 ) ;
+ - const char tlv16 [ ] = ": " ;
+ - cgc_printf ( tlv16 ) ;
+ - char * tlv38 ;
+ - cgc_size_t tlv37 ;
+ - const char tlv17 [ ] = "Avg Depth in ft" ;
+ - cgc_printf ( tlv17 ) ;
+ - const char tlv18 [ ] = ": " ;
+ - cgc_printf ( tlv18 ) ;
+ - char * tlv40 ;
+ - cgc_size_t tlv39 ;
+ - const char tlv19 [ ] = "Dive Duration (mins)" ;
+ - cgc_printf ( tlv19 ) ;
+ - const char tlv20 [ ] = ": " ;
+ - cgc_printf ( tlv20 ) ;
+ - char * tlv42 ;
+ - cgc_size_t tlv41 ;
+ - const char tlv21 [ ] = "O2 Percentage" ;
+ - cgc_printf ( tlv21 ) ;
+ - const char tlv22 [ ] = ": " ;
+ - cgc_printf ( tlv22 ) ;
+ - char * tlv44 ;
+ - cgc_size_t tlv43 ;
+ - const char tlv23 [ ] = "Pressure In (psi)" ;
+ - cgc_printf ( tlv23 ) ;
+ - const char tlv24 [ ] = ": " ;
+ - cgc_printf ( tlv24 ) ;
+ - char * tlv46 ;
+ - cgc_size_t tlv45 ;
+ - const char tlv25 [ ] = "Pressure Out (psi)" ;
+ - cgc_printf ( tlv25 ) ;
+ - const char tlv26 [ ] = ": " ;
+ - cgc_printf ( tlv26 ) ;
+ - char * tlv48 ;
+ - cgc_size_t tlv47 ;
+ - char * tlv67 ;
+ - char * tlv51 ;
+ - const char * tlv50 = buffer ;
+ - cgc_size_t tlv49 ;
+ - char * tlv54 ;
+ - const char * tlv53 = buffer ;
+ - cgc_size_t tlv52 ;
+ - char * tlv57 ;
+ - const char * tlv56 = buf2 ;
+ - cgc_size_t tlv55 ;
+ - char * tlv60 ;
+ - const char * tlv59 = buffer ;
+ - cgc_size_t tlv58 ;
+ - const char * tlv61 = buffer ;
+ - const char * tlv62 = buffer ;
+ - const char * tlv63 = buffer ;
+ - const char * tlv64 = buffer ;
+ - const char * tlv65 = buffer ;
+ - const char * tlv66 = buffer ;
+Processing [cgc_edit_dives] :
+Processing [cgc_update_dive] :
+Writing output file xform/t_edit_dives.c
+
+real	0m29.794s
+user	0m29.733s
+sys	0m0.057s

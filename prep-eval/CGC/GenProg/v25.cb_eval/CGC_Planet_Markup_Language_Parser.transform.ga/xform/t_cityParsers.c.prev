@@ -1,0 +1,1220 @@
+
+
+#include "cgc_cityParsers.h"
+int cgc_cityMenu(pCity ci)
+{
+    int choice;
+    choice = 0;
+    char selection[30];
+    pBorder pb;
+    pb = NULL;
+
+    if (ci == NULL) {
+	return 0;
+    }
+    while (1) {
+	cgc_printf("\nCity: @s\n", ci->name);
+ {
+     const char tlv2 [ ] = "1) Display City Info\n";
+    	cgc_printf(tlv2);
+ }
+ {
+     const char tlv3 [ ] = "2) Set Mayor\n";
+    	cgc_printf(tlv3);
+ }
+ {
+     const char tlv4 [ ] = "3) Set Url\n";
+    	cgc_printf(tlv4);
+ }
+ {
+     const char tlv5 [ ] = "4) Set Population\n";
+    	cgc_printf(tlv5);
+ }
+ {
+     const char tlv6 [ ] = "5) Add Border\n";
+    	cgc_printf(tlv6);
+ }
+ {
+     const char tlv7 [ ] = "6) Delete City and Exit Menu\n";
+    	cgc_printf(tlv7);
+ }
+ {
+     const char tlv8 [ ] = "7) Exit Menu\n";
+    	cgc_printf(tlv8);
+ }
+ {
+     const char tlv9 [ ] = "Selection: ";
+    	cgc_printf(tlv9);
+ }
+ {
+     void* tlv11;
+     tlv11 = selection;
+     cgc_size_t tlv10;
+     tlv10 = 30;
+    	cgc_bzero(tlv11,tlv10);
+ }
+ {
+     char* tlv14;
+      tlv14 = selection;
+     char tlv13;
+     tlv13 = '\n';
+     cgc_size_t tlv12;
+     tlv12 = 4;
+    	cgc_receive_until(tlv14,tlv13,tlv12);
+ }
+ {
+     const char* tlv15 = selection;
+    	choice = cgc_atoi(tlv15);
+ }
+	switch (choice) {
+	case 1:
+	    {
+		cgc_printCityInfo(ci);
+	    }
+	    break;
+	case 2:
+	    {
+  {
+      const char tlv63 [ ] = "\n-> ";
+    		cgc_printf(tlv63);
+  }
+	    }
+     {
+         void* tlv17;
+         tlv17 = selection;
+         cgc_size_t tlv16;
+         tlv16 = 30;
+    	    cgc_bzero(tlv17,tlv16);
+     }
+     {
+         char* tlv20;
+          tlv20 = selection;
+         char tlv19;
+         tlv19 = '\n';
+         cgc_size_t tlv18;
+         tlv18 = 29;
+    	    cgc_receive_until(tlv20,tlv19,tlv18);
+     }
+	    choice = 0;
+	    while (cgc_isalnum(selection[choice]) || selection[choice] == ' ') {
+		ci->mayor[choice] = selection[choice];
+		choice++;
+	    }
+	    ci->mayor[choice] = '\x00';
+	    break;
+	case 3:
+	    {
+  {
+      const char tlv64 [ ] = "\n-> ";
+    		cgc_printf(tlv64);
+  }
+	    }
+     {
+         void* tlv22;
+         tlv22 = selection;
+         cgc_size_t tlv21;
+         tlv21 = 30;
+    	    cgc_bzero(tlv22,tlv21);
+     }
+     {
+         char* tlv25;
+          tlv25 = selection;
+         char tlv24;
+         tlv24 = '\n';
+         cgc_size_t tlv23;
+         tlv23 = 29;
+    	    cgc_receive_until(tlv25,tlv24,tlv23);
+     }
+	    /// While it is valid url data copy loop and copy it
+	    /// Since the buffer is zeroed and the max received is 29 this loop
+	    ///     should be safe
+	    choice = 0;
+	    while (cgc_isalnum(selection[choice]) || selection[choice] == ':' || selection[choice] == '.' || selection[choice] == '/') {
+		ci->url[choice] = selection[choice];
+		choice++;
+	    }
+	    ci->url[choice] = '\x00';
+	    break;
+	case 4:
+	    {
+  {
+      const char tlv65 [ ] = "\n-> ";
+    		cgc_printf(tlv65);
+  }
+	    }
+     {
+         void* tlv27;
+         tlv27 = selection;
+         cgc_size_t tlv26;
+         tlv26 = 30;
+    	    cgc_bzero(tlv27,tlv26);
+     }
+     {
+         char* tlv30;
+          tlv30 = selection;
+         char tlv29;
+         tlv29 = '\n';
+         cgc_size_t tlv28;
+         tlv28 = 29;
+    	    cgc_receive_until(tlv30,tlv29,tlv28);
+     }
+     {
+         const char* tlv55 = selection;
+    	    ci->population = cgc_atoi(tlv55);
+     }
+	    break;
+	case 5:
+	    {
+		if (ci->border_count > CITYBORDERMAX) {
+      {
+          const char tlv67 [ ] = "Max Borders\n";
+    		    cgc_printf(tlv67);
+      }
+		    break;
+		}
+	    }
+     int tlv1;
+     {
+         cgc_size_t tlv58;
+         tlv58 = sizeof ( Border );
+         int tlv57;
+         tlv57 = 0;
+         void** tlv56;
+         tlv56 = ( void * * ) & pb;
+         tlv1 = cgc_allocate(tlv58,tlv57,tlv56);
+     }
+	    if (tlv1 != 0) {
+		pb = NULL;
+		continue;
+	    }
+     {
+         const char tlv31 [ ] = "Lat Start: ";
+    	    cgc_printf(tlv31);
+     }
+     {
+         void* tlv33;
+         tlv33 = selection;
+         cgc_size_t tlv32;
+         tlv32 = 30;
+    	    cgc_bzero(tlv33,tlv32);
+     }
+     {
+         char* tlv36;
+          tlv36 = selection;
+         char tlv35;
+         tlv35 = '\n';
+         cgc_size_t tlv34;
+         tlv34 = 19;
+    	    cgc_receive_until(tlv36,tlv35,tlv34);
+     }
+     {
+         const char* tlv59 = selection;
+    	    pb->latStart = cgc_atof(tlv59);
+     }
+     {
+         const char tlv37 [ ] = "Long Start: ";
+    	    cgc_printf(tlv37);
+     }
+     {
+         void* tlv39;
+         tlv39 = selection;
+         cgc_size_t tlv38;
+         tlv38 = 30;
+    	    cgc_bzero(tlv39,tlv38);
+     }
+     {
+         char* tlv42;
+          tlv42 = selection;
+         char tlv41;
+         tlv41 = '\n';
+         cgc_size_t tlv40;
+         tlv40 = 19;
+    	    cgc_receive_until(tlv42,tlv41,tlv40);
+     }
+     {
+         const char* tlv60 = selection;
+    	    pb->lngStart = cgc_atof(tlv60);
+     }
+     {
+         const char tlv43 [ ] = "Lat End: ";
+    	    cgc_printf(tlv43);
+     }
+     {
+         void* tlv45;
+         tlv45 = selection;
+         cgc_size_t tlv44;
+         tlv44 = 30;
+    	    cgc_bzero(tlv45,tlv44);
+     }
+     {
+         char* tlv48;
+          tlv48 = selection;
+         char tlv47;
+         tlv47 = '\n';
+         cgc_size_t tlv46;
+         tlv46 = 19;
+    	    cgc_receive_until(tlv48,tlv47,tlv46);
+     }
+     {
+         const char* tlv61 = selection;
+    	    pb->latEnd = cgc_atof(tlv61);
+     }
+     {
+         const char tlv49 [ ] = "Long End: ";
+    	    cgc_printf(tlv49);
+     }
+     {
+         void* tlv51;
+         tlv51 = selection;
+         cgc_size_t tlv50;
+         tlv50 = 30;
+    	    cgc_bzero(tlv51,tlv50);
+     }
+     {
+         char* tlv54;
+          tlv54 = selection;
+         char tlv53;
+         tlv53 = '\n';
+         cgc_size_t tlv52;
+         tlv52 = 19;
+    	    cgc_receive_until(tlv54,tlv53,tlv52);
+     }
+     {
+         const char* tlv62 = selection;
+    	    pb->lngEnd = cgc_atof(tlv62);
+     }
+	    ci->borders[ci->border_count] = pb;
+	    ci->border_count++;
+	    break;
+	case 6:
+	    {
+		cgc_freeCity(ci);
+	    }
+	    return 0;
+	    break;
+	case 7:
+	    {
+		return 1;
+	    }
+	    break;
+	default:
+	    {
+  {
+      const char tlv66 [ ] = "Invalid\n";
+    		cgc_printf(tlv66);
+  }
+	    }
+	    break;
+	};
+    }
+    return 1;
+}
+
+void cgc_freeCharPtr(char **buffer)
+{
+    if (buffer == NULL) {
+	return;
+    }
+    if (*buffer == NULL) {
+	return;
+    }
+    {
+        void* tlv2;
+        tlv2 = * buffer;
+        cgc_size_t tlv1;
+        {
+            char* tlv3;
+             tlv3 = * buffer;
+            tlv1 = cgc_strlen(tlv3) + 1;
+        }
+        cgc_deallocate(tlv2,tlv1);
+    }
+    *buffer = NULL;
+    return;
+}
+
+void cgc_freeCity(pCity ci)
+{
+    int index;
+    index = 0;
+    if (ci == NULL) {
+	return;
+    }
+    for (index = 0; index < ci->border_count; index++) {
+ {
+     void* tlv4;
+     tlv4 = ci -> borders;
+     cgc_size_t tlv3;
+     tlv3 = sizeof ( Border );
+    	cgc_deallocate(tlv4,tlv3);
+ }
+    }
+    {
+        void* tlv2;
+        tlv2 = ci;
+        cgc_size_t tlv1;
+        tlv1 = sizeof ( City );
+        cgc_deallocate(tlv2,tlv1);
+    }
+    return;
+}
+
+void cgc_initCity(pCity ci)
+{
+    int index;
+    index = 0;
+    if (ci == NULL) {
+	return;
+    }
+    for (index = 0; index < CITYBORDERMAX; index++) {
+	ci->name[index] = 0x00;
+	ci->borders[index] = NULL;
+    }
+    for (index = 0; index < 30; index++) {
+	ci->mayor[index] = 0;
+	ci->url[index] = 0;
+    }
+    ci->population = -1;
+    ci->border_count = 0;
+    return;
+}
+
+void cgc_printCityInfo(pCity ci)
+{
+    int index;
+    index = 0;
+    pBorder b;
+    b = NULL;
+    if (ci == NULL) {
+	return;
+    }
+    {
+        const char tlv1 [ ] = "\t\t\t\tCity: ";
+        cgc_printf(tlv1);
+    }
+    if (ci->name[0] != '\x00') {
+	cgc_printf("@s\n", ci->name);
+    } else {
+ {
+     const char tlv2 [ ] = "Unknown\n";
+    	cgc_printf(tlv2);
+ }
+    }
+    if (ci->population >= 0) {
+	cgc_printf("\t\t\t\t\tPopulation: @d\n", ci->population);
+    }
+    if (ci->mayor[0] != '\x00') {
+	cgc_printf("\t\t\t\t\tMayor: @s\n", ci->mayor);
+    }
+    if (ci->url[0] != '\x00') {
+	cgc_printf("\t\t\t\t\tUrl: @s\n", ci->url);
+    }
+    for (index = 0; index < ci->border_count; index++) {
+	b = ci->borders[index];
+	if (b != NULL) {
+	    cgc_printf("\t\t\t\t\tBorder: @f @f @f @f\n", b->latStart, b->lngStart, b->latEnd, b->lngEnd);
+	}
+    }
+    return;
+}
+
+int cgc_skipOpen(pstring str, int ending)
+{
+    if (str == NULL) {
+	return 0;
+    }
+    cgc_skipWhiteSpace(str);
+    int tlv1;
+    {
+        pstring tlv6;
+        tlv6 = str;
+        char tlv5;
+        tlv5 = '{';
+        tlv1 = cgc_atChar(tlv6,tlv5);
+    }
+    if (!tlv1) {
+	return 0;
+    }
+    /// Skip the opening brace
+    int tlv2;
+    {
+        pstring tlv7;
+        tlv7 = str;
+        tlv2 = cgc_incChar(tlv7);
+    }
+    if (tlv2 == -1) {
+	return 0;
+    }
+    /// Skip to the element id value or '#' if it is an end
+    cgc_skipWhiteSpace(str);
+    if (ending) {
+ int tlv3;
+ {
+     pstring tlv9;
+     tlv9 = str;
+     char tlv8;
+     tlv8 = '#';
+     tlv3 = cgc_atChar(tlv9,tlv8);
+ }
+	if (!tlv3) {
+	    return 0;
+	}
+ int tlv4;
+ {
+     pstring tlv10;
+     tlv10 = str;
+     tlv4 = cgc_incChar(tlv10);
+ }
+	if (tlv4 == -1) {
+	    return 0;
+	}
+    }
+    return 1;
+}
+
+pCity cgc_cityTopLevel(pstring str)
+{
+    int lastGood;
+    lastGood = 0;
+    pCity newCity;
+    newCity = NULL;
+    int startIndex;
+    startIndex = 0;
+    int endIndex;
+    endIndex = 0;
+    char* temp;
+     temp = NULL;
+    int tempInt;
+    tempInt = 0;
+    element el;
+    if (str == NULL) {
+	goto end;
+    }
+    /// Skip the opening "{"
+    int tlv1;
+    {
+        pstring tlv17;
+        tlv17 = str;
+        int tlv16;
+        tlv16 = 0;
+        tlv1 = cgc_skipOpen(tlv17,tlv16);
+    }
+    if (tlv1 == 0) {
+	goto end;
+    }
+    /// Get the start and end index of the element id
+    {
+        pstring tlv9;
+        tlv9 = str;
+        int* tlv8;
+        tlv8 = & startIndex;
+        cgc_getIndex(tlv9,tlv8);
+    }
+    {
+        pstring tlv18;
+        tlv18 = str;
+        endIndex = cgc_skipAlpha(tlv18);
+    }
+    if (endIndex == -1) {
+	goto end;
+    }
+    if (startIndex == endIndex) {
+	goto end;
+    }
+    {
+        pstring tlv21;
+        tlv21 = str;
+        int tlv20;
+        tlv20 = startIndex;
+        int tlv19;
+        tlv19 = endIndex;
+        temp = cgc_copyData(tlv21,tlv20,tlv19);
+    }
+    if (temp == NULL) {
+	goto end;
+    }
+    int tlv2;
+    {
+        const char* tlv23 = temp;
+        const char tlv22 [ ] = "City";
+        tlv2 = cgc_strcmp(tlv23,tlv22);
+    }
+    if (tlv2 != 0) {
+ {
+     void* tlv41;
+     tlv41 = temp;
+     cgc_size_t tlv40;
+     {
+         char* tlv74;
+          tlv74 = temp;
+         tlv40 = cgc_strlen(tlv74) + 1;
+     }
+    	cgc_deallocate(tlv41,tlv40);
+ }
+	goto end;
+    }
+    {
+        void* tlv11;
+        tlv11 = temp;
+        cgc_size_t tlv10;
+        {
+            char* tlv72;
+             tlv72 = temp;
+            tlv10 = cgc_strlen(tlv72) + 1;
+        }
+        cgc_deallocate(tlv11,tlv10);
+    }
+    cgc_skipWhiteSpace(str);
+    int tlv3;
+    {
+        pstring tlv25;
+        tlv25 = str;
+        char tlv24;
+        tlv24 = '}';
+        tlv3 = cgc_atChar(tlv25,tlv24);
+    }
+    if (!tlv3) {
+	goto end;
+    }
+    cgc_incChar(str);
+    cgc_skipWhiteSpace(str);
+    lastGood = str->index;
+    int tlv4;
+    {
+        cgc_size_t tlv28;
+        tlv28 = sizeof ( City );
+        int tlv27;
+        tlv27 = 0;
+        void** tlv26;
+        tlv26 = ( void * * ) & newCity;
+        tlv4 = cgc_allocate(tlv28,tlv27,tlv26);
+    }
+    if (tlv4 != 0) {
+	newCity = NULL;
+	goto error;
+    }
+    cgc_initCity(newCity);
+    {
+        pstring tlv29;
+        tlv29 = str;
+        temp = cgc_pullNextElementName(tlv29);
+    }
+    while (temp != NULL) {
+ {
+     char* tlv46;
+      tlv46 = temp;
+    	el = cgc_elementNameToEnum(tlv46);
+ }
+ {
+     void* tlv43;
+     tlv43 = temp;
+     cgc_size_t tlv42;
+     {
+         char* tlv75;
+          tlv75 = temp;
+         tlv42 = cgc_strlen(tlv75) + 1;
+     }
+    	cgc_deallocate(tlv43,tlv42);
+ }
+	switch (el) {
+	case name:
+	    {
+  {
+      pstring tlv68;
+      tlv68 = str;
+    		temp = cgc_extractName(tlv68);
+  }
+	    }
+	    if (temp == NULL) {
+		goto error;
+	    }
+	    /// Clear it out
+     {
+         void* tlv49;
+         tlv49 = newCity -> name;
+         cgc_size_t tlv48;
+         tlv48 = 20;
+    	    cgc_bzero(tlv49,tlv48);
+     }
+	    /// Copy the name data. It has already been filtered 
+	    ///     for invalid characters.
+     {
+         char* tlv52;
+          tlv52 = newCity -> name;
+         char* tlv51;
+          tlv51 = temp;
+         cgc_size_t tlv50;
+         tlv50 = 19;
+    	    cgc_strncpy(tlv52,tlv51,tlv50);
+     }
+	    /// Free the buffer
+     {
+         void* tlv54;
+         tlv54 = temp;
+         cgc_size_t tlv53;
+         {
+             char* tlv77;
+              tlv77 = temp;
+             tlv53 = cgc_strlen(tlv77) + 1;
+         }
+    	    cgc_deallocate(tlv54,tlv53);
+     }
+	    temp = NULL;
+	    break;
+	case mayor:
+	    {
+  {
+      pstring tlv69;
+      tlv69 = str;
+    		temp = cgc_extractMayor(tlv69);
+  }
+	    }
+	    if (temp == NULL) {
+		goto error;
+	    }
+
+     {
+         void* tlv56;
+         tlv56 = newCity -> mayor;
+         cgc_size_t tlv55;
+         tlv55 = 30;
+    	    cgc_bzero(tlv56,tlv55);
+     }
+     {
+         char* tlv58;
+          tlv58 = newCity -> mayor;
+         char* tlv57;
+          tlv57 = temp;
+    	    cgc_strcpy(tlv58,tlv57);
+     }
+     {
+         char** tlv59;
+          tlv59 = & temp;
+    	    cgc_freeCharPtr(tlv59);
+     }
+	    break;
+	case url:
+	    {
+  {
+      pstring tlv70;
+      tlv70 = str;
+    		temp = cgc_extractUrl(tlv70);
+  }
+	    }
+	    if (temp == NULL) {
+		goto error;
+	    }
+     {
+         void* tlv61;
+         tlv61 = newCity -> url;
+         cgc_size_t tlv60;
+         tlv60 = 30;
+    	    cgc_bzero(tlv61,tlv60);
+     }
+     {
+         char* tlv64;
+          tlv64 = newCity -> url;
+         char* tlv63;
+          tlv63 = temp;
+         cgc_size_t tlv62;
+         tlv62 = 29;
+    	    cgc_strncpy(tlv64,tlv63,tlv62);
+     }
+     {
+         char** tlv65;
+          tlv65 = & temp;
+    	    cgc_freeCharPtr(tlv65);
+     }
+	    break;
+	case border:
+	    {
+		if (newCity->border_count >= CITYBORDERMAX) {
+		    goto error;
+		}
+	    }
+	    tempInt = newCity->border_count;
+     {
+         pstring tlv66;
+         tlv66 = str;
+    	    newCity->borders[tempInt] = cgc_extractBorder(tlv66);
+     }
+	    if (newCity->borders[tempInt] == NULL) {
+		goto error;
+	    }
+	    newCity->border_count++;
+	    break;
+	case population:
+	    {
+  {
+      pstring tlv71;
+      tlv71 = str;
+    		newCity->population = cgc_extractPopulation(tlv71);
+  }
+	    }
+	    if (newCity->population < 0) {
+		goto error;
+	    }
+	    break;
+	default:
+	    {
+  {
+      const char tlv67 [ ] = "!!Invalid element ID for City\n";
+    		cgc_printf(tlv67);
+  }
+	    }
+	    goto error;
+	    break;
+	};
+	lastGood = str->index;
+ {
+     pstring tlv47;
+     tlv47 = str;
+    	temp = cgc_pullNextElementName(tlv47);
+ }
+    }
+    int tlv5;
+    {
+        pstring tlv31;
+        tlv31 = str;
+        int tlv30;
+        tlv30 = 1;
+        tlv5 = cgc_skipOpen(tlv31,tlv30);
+    }
+    if (tlv5 == 0) {
+	goto error;
+    }
+    {
+        pstring tlv13;
+        tlv13 = str;
+        int* tlv12;
+        tlv12 = & startIndex;
+        cgc_getIndex(tlv13,tlv12);
+    }
+    {
+        pstring tlv32;
+        tlv32 = str;
+        endIndex = cgc_skipAlpha(tlv32);
+    }
+    if (endIndex == -1) {
+	goto error;
+    } else {
+	if (startIndex == endIndex) {
+	    goto error;
+	}
+    }
+    {
+        pstring tlv35;
+        tlv35 = str;
+        int tlv34;
+        tlv34 = startIndex;
+        int tlv33;
+        tlv33 = endIndex;
+        temp = cgc_copyData(tlv35,tlv34,tlv33);
+    }
+    if (temp == NULL) {
+	goto error;
+    }
+    int tlv6;
+    {
+        const char* tlv37 = temp;
+        const char tlv36 [ ] = "City";
+        tlv6 = cgc_strcmp(tlv37,tlv36);
+    }
+    if (tlv6 != 0) {
+ {
+     void* tlv45;
+     tlv45 = temp;
+     cgc_size_t tlv44;
+     {
+         char* tlv76;
+          tlv76 = temp;
+         tlv44 = cgc_strlen(tlv76) + 1;
+     }
+    	cgc_deallocate(tlv45,tlv44);
+ }
+	goto error;
+    }
+    {
+        void* tlv15;
+        tlv15 = temp;
+        cgc_size_t tlv14;
+        {
+            char* tlv73;
+             tlv73 = temp;
+            tlv14 = cgc_strlen(tlv73) + 1;
+        }
+        cgc_deallocate(tlv15,tlv14);
+    }
+    cgc_skipWhiteSpace(str);
+    int tlv7;
+    {
+        pstring tlv39;
+        tlv39 = str;
+        char tlv38;
+        tlv38 = '}';
+        tlv7 = cgc_atChar(tlv39,tlv38);
+    }
+    if (!tlv7) {
+	goto error;
+    }
+    cgc_incChar(str);
+    goto end;
+  error:
+    if (newCity) {
+	cgc_freeCity(newCity);
+	newCity = NULL;
+    }
+    cgc_printf("!!Error at: @s\n", str->buffer + lastGood);
+    str->index = lastGood;
+  end:
+    return newCity;
+}
+
+char *cgc_extractMayor(pstring str)
+{
+    char* mayor;
+     mayor = NULL;
+    register int startIndex;
+    startIndex = 0;
+    register int endIndex;
+    endIndex = 0;
+    char* temp;
+     temp = NULL;
+    if (!str) {
+	return NULL;
+    }
+    /// This skips any whitespace and opening '{ '
+    int tlv1;
+    {
+        pstring tlv9;
+        tlv9 = str;
+        int tlv8;
+        tlv8 = 0;
+        tlv1 = cgc_skipOpen(tlv9,tlv8);
+    }
+    if (tlv1 == 0) {
+	return NULL;
+    }
+    startIndex = str->index;
+    {
+        pstring tlv10;
+        tlv10 = str;
+        endIndex = cgc_skipAlpha(tlv10);
+    }
+    if (endIndex == -1 || startIndex == endIndex) {
+	return NULL;
+    }
+    {
+        pstring tlv13;
+        tlv13 = str;
+        int tlv12;
+        tlv12 = startIndex;
+        int tlv11;
+        tlv11 = endIndex;
+        mayor = cgc_copyData(tlv13,tlv12,tlv11);
+    }
+    if (mayor == NULL) {
+	return NULL;
+    }
+    int tlv2;
+    {
+        const char* tlv15 = mayor;
+        const char tlv14 [ ] = "Mayor";
+        tlv2 = cgc_strcmp(tlv15,tlv14);
+    }
+    if (tlv2 != 0) {
+ {
+     char** tlv34;
+      tlv34 = & mayor;
+    	cgc_freeCharPtr(tlv34);
+ }
+	return NULL;
+    }
+    {
+        char** tlv7;
+         tlv7 = & mayor;
+        cgc_freeCharPtr(tlv7);
+    }
+    cgc_skipWhiteSpace(str);
+    int tlv3;
+    {
+        pstring tlv17;
+        tlv17 = str;
+        char tlv16;
+        tlv16 = '}';
+        tlv3 = cgc_atChar(tlv17,tlv16);
+    }
+    if (!tlv3) {
+	return NULL;
+    }
+    /// Skip the Closing brace
+    cgc_incChar(str);
+    {
+        pstring tlv18;
+        tlv18 = str;
+        startIndex = cgc_skipWhiteSpace(tlv18);
+    }
+    /// Using this function allows things like Sir Winston Churchill 3rd
+    {
+        pstring tlv19;
+        tlv19 = str;
+        endIndex = cgc_skipToNonAlphaNumSpace(tlv19);
+    }
+    if (endIndex < 0 || startIndex == endIndex) {
+	return NULL;
+    }
+    while (cgc_isspace(str->buffer[endIndex - 1])) {
+	endIndex--;
+    }
+    {
+        pstring tlv22;
+        tlv22 = str;
+        int tlv21;
+        tlv21 = startIndex;
+        int tlv20;
+        tlv20 = endIndex;
+        mayor = cgc_copyData(tlv22,tlv21,tlv20);
+    }
+    if (mayor == NULL) {
+	return NULL;
+    }
+    cgc_skipWhiteSpace(str);
+    /// Skip the opening brace and '#'
+    int tlv4;
+    {
+        pstring tlv24;
+        tlv24 = str;
+        int tlv23;
+        tlv23 = 1;
+        tlv4 = cgc_skipOpen(tlv24,tlv23);
+    }
+    if (tlv4 == 0) {
+	goto error;
+    }
+    startIndex = str->index;
+    {
+        pstring tlv25;
+        tlv25 = str;
+        endIndex = cgc_skipAlpha(tlv25);
+    }
+    if (endIndex == -1 || startIndex == endIndex) {
+	goto error;
+    }
+    {
+        pstring tlv28;
+        tlv28 = str;
+        int tlv27;
+        tlv27 = startIndex;
+        int tlv26;
+        tlv26 = endIndex;
+        temp = cgc_copyData(tlv28,tlv27,tlv26);
+    }
+    if (temp == NULL) {
+	goto error;
+    }
+    int tlv5;
+    {
+        const char* tlv30 = temp;
+        const char tlv29 [ ] = "Mayor";
+        tlv5 = cgc_strcmp(tlv30,tlv29);
+    }
+    if (tlv5 != 0) {
+ {
+     char** tlv35;
+      tlv35 = & temp;
+    	cgc_freeCharPtr(tlv35);
+ }
+	goto error;
+    }
+    cgc_skipWhiteSpace(str);
+    int tlv6;
+    {
+        pstring tlv32;
+        tlv32 = str;
+        char tlv31;
+        tlv31 = '}';
+        tlv6 = cgc_atChar(tlv32,tlv31);
+    }
+    if (!tlv6) {
+	goto error;
+    }
+    cgc_incChar(str);
+
+    goto end;
+  error:
+    {
+        char** tlv33;
+         tlv33 = & mayor;
+        cgc_freeCharPtr(tlv33);
+    }
+  end:
+    return mayor;
+}
+
+char *cgc_extractUrl(pstring str)
+{
+    char* url;
+     url = NULL;
+    int startIndex;
+    startIndex = 0;
+    char* temp;
+     temp = NULL;
+    if (str == NULL) {
+	goto end;
+    }
+    int tlv1;
+    {
+        pstring tlv15;
+        tlv15 = str;
+        int tlv14;
+        tlv14 = 0;
+        tlv1 = cgc_skipOpen(tlv15,tlv14);
+    }
+    if (tlv1 == 0) {
+	goto end;
+    }
+    {
+        pstring tlv8;
+        tlv8 = str;
+        int* tlv7;
+        tlv7 = & startIndex;
+        cgc_getIndex(tlv8,tlv7);
+    }
+    cgc_skipAlpha(str);
+    {
+        pstring tlv18;
+        tlv18 = str;
+        int tlv17;
+        tlv17 = startIndex;
+        int tlv16;
+        tlv16 = str -> index;
+        url = cgc_copyData(tlv18,tlv17,tlv16);
+    }
+    if (url == NULL) {
+	goto end;
+    }
+    int tlv2;
+    {
+        const char* tlv20 = url;
+        const char tlv19 [ ] = "Url";
+        tlv2 = cgc_strcmp(tlv20,tlv19);
+    }
+    if (tlv2) {
+ {
+     char** tlv35;
+      tlv35 = & url;
+    	cgc_freeCharPtr(tlv35);
+ }
+	goto end;
+    }
+    cgc_skipWhiteSpace(str);
+    int tlv3;
+    {
+        pstring tlv22;
+        tlv22 = str;
+        char tlv21;
+        tlv21 = '}';
+        tlv3 = cgc_atChar(tlv22,tlv21);
+    }
+    if (!tlv3) {
+	goto end;
+    }
+    cgc_incChar(str);
+    cgc_skipWhiteSpace(str);
+    {
+        pstring tlv10;
+        tlv10 = str;
+        int* tlv9;
+        tlv9 = & startIndex;
+        cgc_getIndex(tlv10,tlv9);
+    }
+    cgc_skipUrl(str);
+    {
+        pstring tlv25;
+        tlv25 = str;
+        int tlv24;
+        tlv24 = startIndex;
+        int tlv23;
+        tlv23 = str -> index;
+        url = cgc_copyData(tlv25,tlv24,tlv23);
+    }
+    if (url == NULL) {
+	goto end;
+    }
+    cgc_skipWhiteSpace(str);
+    int tlv4;
+    {
+        pstring tlv27;
+        tlv27 = str;
+        int tlv26;
+        tlv26 = 1;
+        tlv4 = cgc_skipOpen(tlv27,tlv26);
+    }
+    if (tlv4 == 0) {
+	goto error;
+    }
+    {
+        pstring tlv12;
+        tlv12 = str;
+        int* tlv11;
+        tlv11 = & startIndex;
+        cgc_getIndex(tlv12,tlv11);
+    }
+    cgc_skipAlpha(str);
+    {
+        pstring tlv30;
+        tlv30 = str;
+        int tlv29;
+        tlv29 = startIndex;
+        int tlv28;
+        tlv28 = str -> index;
+        temp = cgc_copyData(tlv30,tlv29,tlv28);
+    }
+    if (temp == NULL) {
+	goto error;
+    }
+    int tlv5;
+    {
+        const char* tlv32 = temp;
+        const char tlv31 [ ] = "Url";
+        tlv5 = cgc_strcmp(tlv32,tlv31);
+    }
+    if (tlv5 != 0) {
+ {
+     char** tlv36;
+      tlv36 = & temp;
+    	cgc_freeCharPtr(tlv36);
+ }
+	goto error;
+    }
+    {
+        char** tlv13;
+         tlv13 = & temp;
+        cgc_freeCharPtr(tlv13);
+    }
+    cgc_skipWhiteSpace(str);
+    int tlv6;
+    {
+        pstring tlv34;
+        tlv34 = str;
+        char tlv33;
+        tlv33 = '}';
+        tlv6 = cgc_atChar(tlv34,tlv33);
+    }
+    if (!tlv6) {
+	goto error;
+    }
+    cgc_incChar(str);
+    goto end;
+  error:
+    if (url) {
+ {
+     char** tlv37;
+      tlv37 = & url;
+    	cgc_freeCharPtr(tlv37);
+ }
+    }
+  end:
+    return url;
+}
+

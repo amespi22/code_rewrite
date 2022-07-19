@@ -1,0 +1,816 @@
+#!/bin/bash
+i=SCUBA_Dive_Logging
+bin=$(realpath -- ./build/$i/$i)
+TIMEOUT=5
+if [[ ! -z $ANGELIX_RUN ]]; then TIMEOUT=50; fi; 
+TMP=/tmp/angelix/${i}_$RANDOM
+mkdir -p $(dirname -- $TMP)
+assert-equal () {
+	timeout --preserve-status -k $TIMEOUT $TIMEOUT $ANGELIX_RUN $1 < $2  > $TMP
+	x=$?
+	if (( $x >= 64 )); then rm $TMP ; exit $x; fi; 
+	bc=$(wc -c $3)
+	cat $TMP | head -c $bc > $TMP.bc
+	diff -q $TMP.bc $3 > /dev/null
+	xx=$?
+	rm $TMP $TMP.bc
+	exit $xx
+}
+case "$1" in 
+1)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.n1 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/n1.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/n1.out"
+	;;
+2)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p1 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p1.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p1.out"
+	;;
+3)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p2 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p2.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p2.out"
+	;;
+4)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p3 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p3.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p3.out"
+	;;
+5)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p4 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p4.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p4.out"
+	;;
+6)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p5 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p5.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p5.out"
+	;;
+7)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p6 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p6.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p6.out"
+	;;
+8)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p7 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p7.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p7.out"
+	;;
+9)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p8 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p8.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p8.out"
+	;;
+10)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p9 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p9.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p9.out"
+	;;
+11)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p10 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p10.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p10.out"
+	;;
+12)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p11 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p11.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p11.out"
+	;;
+13)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p12 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p12.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p12.out"
+	;;
+14)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p13 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p13.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p13.out"
+	;;
+15)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p14 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p14.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p14.out"
+	;;
+16)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p15 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p15.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p15.out"
+	;;
+17)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p16 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p16.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p16.out"
+	;;
+18)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p17 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p17.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p17.out"
+	;;
+19)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p18 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p18.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p18.out"
+	;;
+20)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p19 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p19.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p19.out"
+	;;
+21)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p20 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p20.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p20.out"
+	;;
+22)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p21 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p21.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p21.out"
+	;;
+23)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p22 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p22.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p22.out"
+	;;
+24)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p23 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p23.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p23.out"
+	;;
+25)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p24 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p24.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p24.out"
+	;;
+26)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p25 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p25.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p25.out"
+	;;
+27)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p26 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p26.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p26.out"
+	;;
+28)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p27 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p27.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p27.out"
+	;;
+29)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p28 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p28.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p28.out"
+	;;
+30)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p29 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p29.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p29.out"
+	;;
+31)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p30 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p30.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p30.out"
+	;;
+32)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p31 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p31.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p31.out"
+	;;
+33)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p32 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p32.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p32.out"
+	;;
+34)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p33 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p33.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p33.out"
+	;;
+35)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p34 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p34.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p34.out"
+	;;
+36)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p35 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p35.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p35.out"
+	;;
+37)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p36 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p36.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p36.out"
+	;;
+38)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p37 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p37.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p37.out"
+	;;
+39)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p38 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p38.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p38.out"
+	;;
+40)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p39 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p39.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p39.out"
+	;;
+41)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p40 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p40.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p40.out"
+	;;
+42)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p41 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p41.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p41.out"
+	;;
+43)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p42 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p42.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p42.out"
+	;;
+44)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p43 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p43.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p43.out"
+	;;
+45)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p44 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p44.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p44.out"
+	;;
+46)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p45 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p45.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p45.out"
+	;;
+47)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p46 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p46.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p46.out"
+	;;
+48)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p47 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p47.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p47.out"
+	;;
+49)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p48 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p48.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p48.out"
+	;;
+50)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p49 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p49.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p49.out"
+	;;
+51)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p50 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p50.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p50.out"
+	;;
+52)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p51 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p51.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p51.out"
+	;;
+53)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p52 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p52.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p52.out"
+	;;
+54)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p53 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p53.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p53.out"
+	;;
+55)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p54 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p54.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p54.out"
+	;;
+56)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p55 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p55.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p55.out"
+	;;
+57)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p56 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p56.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p56.out"
+	;;
+58)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p57 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p57.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p57.out"
+	;;
+59)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p58 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p58.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p58.out"
+	;;
+60)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p59 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p59.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p59.out"
+	;;
+61)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p60 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p60.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p60.out"
+	;;
+62)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p61 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p61.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p61.out"
+	;;
+63)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p62 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p62.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p62.out"
+	;;
+64)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p63 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p63.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p63.out"
+	;;
+65)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p64 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p64.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p64.out"
+	;;
+66)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p65 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p65.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p65.out"
+	;;
+67)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p66 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p66.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p66.out"
+	;;
+68)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p67 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p67.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p67.out"
+	;;
+69)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p68 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p68.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p68.out"
+	;;
+70)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p69 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p69.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p69.out"
+	;;
+71)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p70 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p70.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p70.out"
+	;;
+72)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p71 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p71.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p71.out"
+	;;
+73)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p72 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p72.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p72.out"
+	;;
+74)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p73 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p73.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p73.out"
+	;;
+75)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p74 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p74.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p74.out"
+	;;
+76)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p75 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p75.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p75.out"
+	;;
+77)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p76 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p76.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p76.out"
+	;;
+78)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p77 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p77.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p77.out"
+	;;
+79)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p78 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p78.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p78.out"
+	;;
+80)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p79 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p79.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p79.out"
+	;;
+81)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p80 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p80.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p80.out"
+	;;
+82)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p81 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p81.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p81.out"
+	;;
+83)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p82 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p82.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p82.out"
+	;;
+84)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p83 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p83.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p83.out"
+	;;
+85)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p84 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p84.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p84.out"
+	;;
+86)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p85 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p85.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p85.out"
+	;;
+87)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p86 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p86.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p86.out"
+	;;
+88)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p87 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p87.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p87.out"
+	;;
+89)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p88 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p88.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p88.out"
+	;;
+90)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p89 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p89.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p89.out"
+	;;
+91)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p90 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p90.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p90.out"
+	;;
+92)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p91 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p91.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p91.out"
+	;;
+93)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p92 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p92.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p92.out"
+	;;
+94)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p93 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p93.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p93.out"
+	;;
+95)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p94 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p94.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p94.out"
+	;;
+96)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p95 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p95.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p95.out"
+	;;
+97)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p96 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p96.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p96.out"
+	;;
+98)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p97 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p97.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p97.out"
+	;;
+99)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p98 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p98.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p98.out"
+	;;
+100)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p99 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p99.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p99.out"
+	;;
+101)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p100 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p100.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p100.out"
+	;;
+102)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p101 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p101.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p101.out"
+	;;
+103)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p102 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p102.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p102.out"
+	;;
+104)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p103 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p103.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p103.out"
+	;;
+105)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p104 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p104.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p104.out"
+	;;
+106)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p105 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p105.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p105.out"
+	;;
+107)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p106 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p106.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p106.out"
+	;;
+108)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p107 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p107.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p107.out"
+	;;
+109)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p108 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p108.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p108.out"
+	;;
+110)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p109 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p109.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p109.out"
+	;;
+111)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p110 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p110.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p110.out"
+	;;
+112)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p111 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p111.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p111.out"
+	;;
+113)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p112 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p112.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p112.out"
+	;;
+114)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p113 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p113.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p113.out"
+	;;
+115)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p114 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p114.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p114.out"
+	;;
+116)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p115 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p115.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p115.out"
+	;;
+117)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p116 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p116.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p116.out"
+	;;
+118)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p117 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p117.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p117.out"
+	;;
+119)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p118 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p118.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p118.out"
+	;;
+120)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p119 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p119.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p119.out"
+	;;
+121)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p120 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p120.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p120.out"
+	;;
+122)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p121 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p121.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p121.out"
+	;;
+123)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p122 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p122.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p122.out"
+	;;
+124)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p123 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p123.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p123.out"
+	;;
+125)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p124 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p124.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p124.out"
+	;;
+126)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p125 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p125.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p125.out"
+	;;
+127)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p126 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p126.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p126.out"
+	;;
+128)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p127 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p127.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p127.out"
+	;;
+129)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p128 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p128.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p128.out"
+	;;
+130)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p129 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p129.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p129.out"
+	;;
+131)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p130 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p130.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p130.out"
+	;;
+132)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p131 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p131.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p131.out"
+	;;
+133)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p132 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p132.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p132.out"
+	;;
+134)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p133 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p133.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p133.out"
+	;;
+135)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p134 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p134.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p134.out"
+	;;
+136)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p135 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p135.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p135.out"
+	;;
+137)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p136 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p136.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p136.out"
+	;;
+138)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p137 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p137.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p137.out"
+	;;
+139)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p138 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p138.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p138.out"
+	;;
+140)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p139 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p139.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p139.out"
+	;;
+141)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p140 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p140.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p140.out"
+	;;
+142)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p141 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p141.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p141.out"
+	;;
+143)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p142 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p142.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p142.out"
+	;;
+144)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p143 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p143.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p143.out"
+	;;
+145)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p144 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p144.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p144.out"
+	;;
+146)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p145 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p145.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p145.out"
+	;;
+147)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p146 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p146.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p146.out"
+	;;
+148)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p147 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p147.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p147.out"
+	;;
+149)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p148 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p148.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p148.out"
+	;;
+150)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p149 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p149.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p149.out"
+	;;
+151)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p150 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p150.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p150.out"
+	;;
+152)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p151 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p151.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p151.out"
+	;;
+153)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p152 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p152.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p152.out"
+	;;
+154)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p153 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p153.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p153.out"
+	;;
+155)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p154 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p154.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p154.out"
+	;;
+156)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p155 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p155.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p155.out"
+	;;
+157)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p156 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p156.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p156.out"
+	;;
+158)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p157 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p157.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p157.out"
+	;;
+159)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p158 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p158.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p158.out"
+	;;
+160)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p159 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p159.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p159.out"
+	;;
+161)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p160 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p160.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p160.out"
+	;;
+162)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p161 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p161.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p161.out"
+	;;
+163)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p162 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p162.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p162.out"
+	;;
+164)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p163 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p163.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p163.out"
+	;;
+165)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p164 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p164.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p164.out"
+	;;
+166)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p165 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p165.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p165.out"
+	;;
+167)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p166 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p166.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p166.out"
+	;;
+168)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p167 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p167.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p167.out"
+	;;
+169)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p168 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p168.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p168.out"
+	;;
+170)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p169 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p169.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p169.out"
+	;;
+171)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p170 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p170.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p170.out"
+	;;
+172)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p171 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p171.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p171.out"
+	;;
+173)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p172 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p172.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p172.out"
+	;;
+174)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p173 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p173.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p173.out"
+	;;
+175)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p174 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p174.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p174.out"
+	;;
+176)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p175 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p175.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p175.out"
+	;;
+177)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p176 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p176.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p176.out"
+	;;
+178)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p177 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p177.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p177.out"
+	;;
+179)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p178 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p178.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p178.out"
+	;;
+180)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p179 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p179.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p179.out"
+	;;
+181)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p180 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p180.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p180.out"
+	;;
+182)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p181 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p181.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p181.out"
+	;;
+183)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p182 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p182.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p182.out"
+	;;
+184)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p183 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p183.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p183.out"
+	;;
+185)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p184 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p184.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p184.out"
+	;;
+186)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p185 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p185.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p185.out"
+	;;
+187)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p186 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p186.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p186.out"
+	;;
+188)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p187 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p187.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p187.out"
+	;;
+189)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p188 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p188.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p188.out"
+	;;
+190)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p189 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p189.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p189.out"
+	;;
+191)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p190 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p190.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p190.out"
+	;;
+192)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p191 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p191.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p191.out"
+	;;
+193)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p192 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p192.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p192.out"
+	;;
+194)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p193 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p193.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p193.out"
+	;;
+195)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p194 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p194.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p194.out"
+	;;
+196)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p195 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p195.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p195.out"
+	;;
+197)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p196 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p196.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p196.out"
+	;;
+198)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p197 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p197.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p197.out"
+	;;
+199)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/seed.p198 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p198.in" "/mnt/Data/APR_eval/cgc_oracles/SCUBA_Dive_Logging/p198.out"
+	;;
+esac

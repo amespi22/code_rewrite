@@ -1,0 +1,32 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>01f26126e372972c07f5b205ff9646848c207fa08c239ed341f7c50b18ef5654f8529719c8daf191ba0c15041446dbc2</seed>
+<replay>
+    <write><data>\xd4\x05\x00\x00</data></write>
+    <write><data>\x2a\x01</data></write>
+    <write><data>UsckNme8lXTIqIJTW3trS7myOSYnuXOC0fBWHkNPsMeyt5zkNSYdA8webeXSzo31dCsk4QOWXx2RRucNBMfPgh364uvsvCFJUcnZaWrlSXFv11y04FZUnPcZznK5NAbuDG0Ij6G4skBlR7eP2ciWQobKF5iNIt6xTIfIAh3fvBbVbrFnLtciyM\x07RzA091cW5OP6XbzNQfQ34DV46fbVZ2HiRuCazUaQhBHgNM3NpDMf6LAHpN8\x07KyMK1s9cixrOnWeD4xiMSnuW6Lk5vSwMa7TEN2A7E1B5v3Co1JPavW\x07</data></write>
+    <read><length>4</length><match><data>2y\x06\x00</data></match></read>
+    <write><data>j\x0d\x03\x00</data></write>
+    <read><length>4</length><match><pcre>(.+)</pcre></match></read>
+    <read><length>2</length><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <write><data>\xcf\x07\x00\x00</data></write>
+    <write><data>2y\x06\x00</data></write>
+    <read><length>4</length><match><data>2y\x06\x00</data></match></read>
+    <read><length>2</length><match><data>\x2a\x01</data></match></read>
+    <read><length>298</length><match><data>UsckNme8lXTIqIJTW3trS7myOSYnuXOC0fBWHkNPsMeyt5zkNSYdA8webeXSzo31dCsk4QOWXx2RRucNBMfPgh364uvsvCFJUcnZaWrlSXFv11y04FZUnPcZznK5NAbuDG0Ij6G4skBlR7eP2ciWQobKF5iNIt6xTIfIAh3fvBbVbrFnLtciyM\x07RzA091cW5OP6XbzNQfQ34DV46fbVZ2HiRuCazUaQhBHgNM3NpDMf6LAHpN8\x07KyMK1s9cixrOnWeD4xiMSnuW6Lk5vSwMa7TEN2A7E1B5v3Co1JPavW\x07</data></match></read>
+    <write><data>\xd4\x05\x00\x00</data></write>
+    <write><data>\x1f\x01</data></write>
+    <write><data>3TeQI3ZQFiu6SVBd4vU087bWIi937T8nc5mTicEJuTH4FOCpoVon4UiIwjfDpAUM1fL2n2OJ3MxCkbnVioUERs84ucvfoScfwZYbidnePcbdQ4kwcjrAcwfb23e\x07GEF8aKGrfjZPrmGZ26DEfI2oVX8tNZSAuNreK5xg9dFUlv9gepqZTdYlk7jjLTUIPxmQCF6ZFsra0O03n1SJ3r0RJFmccvfEEAfFee3m4WO3w4DJsSxFmjOpKIT\x07MuRmdgsRnFsYpWhQdisBnEWZPa8q6IgwleZP4u\x07</data></write>
+    <read><length>4</length><match><data>3y\x06\x00</data></match></read>
+    <write><data>\xed\x5f\x84\x00</data></write>
+    <read><length>4</length><match><data>\x02\x00\x00\x00</data></match></read>
+    <read><length>8</length><match><data>2y\x06\x003y\x06\x00</data></match></read>
+    <write><data>\x90v\x12\x00</data></write>
+    <read><length>4</length><match><data>\x02\x00\x00\x00</data></match></read>
+</replay>
+</pov>

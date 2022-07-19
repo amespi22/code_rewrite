@@ -1,0 +1,15 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>b809562c0f34d42fcb819d97e79c64fc94f0f94e92d941b1f38b3c5a0d80c33eebf31705267b245272dfc5af0956b031</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>This is Mapper.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>D\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Invalid intersection.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>0\x0a</data></write>
+    <write><data>0\x0a</data></write>
+</replay>
+</pov>

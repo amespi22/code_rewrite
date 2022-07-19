@@ -1,0 +1,29 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>561f9e33486e0d4423ee4758d6e1210a6ded97bfc44a7d3bc9c99ff1898237ca9942932b59ef4ead75ec0fb5e4ac6ed8</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>This is Mapper.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>E\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Map Info\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Map Name: Newville Number of Roads: 0\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Road List:\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>End of road list\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>I\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>from address \x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>I\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>from address \x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>A\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Name:\x0a</data></match></read>
+    <write><data>8WpvbDSAeRl27OHWHB8X32dILK76l\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Map Newville is now named 8WpvbDSAeRl27OHWHB8X32dILK76l.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>0\x0a</data></write>
+    <write><data>0\x0a</data></write>
+</replay>
+</pov>

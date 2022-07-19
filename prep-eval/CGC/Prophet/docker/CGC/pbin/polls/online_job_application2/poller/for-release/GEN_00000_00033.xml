@@ -1,0 +1,34 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>4dda06d16d071550660ae9745fd385d824cd50b67b73288e6b92238ed9cb79062acbab1fea8a3ce7e5a391c4a3901e56</seed>
+<replay>
+    <read><length>342</length><match><data>\x0a\x0aThanks for your interest in the Sea Eye Association.\x0aIn order to be considered for the job complete the preliminary online background check\x0aDue to the secure nature of the position you are applying for you may be asked to\x0asubmit additional paperwork after your preliminary background check has been approved.\x0aThank you for your cooperation\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>11</length><match><data>Last Name: </data></match></read>
+    <write><data>mTUEDiOGOtdHyZ\x0a</data></write>
+    <read><length>12</length><match><data>First Name: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>19</length><match><data>\x0aContact Info Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>12</length><match><data>First Name: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>19</length><match><data>\x0aContact Info Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>12</length><match><data>First Name: </data></match></read>
+    <write><data>aHbFNRbWKE\x0a</data></write>
+    <read><length>33</length><match><data>Middle Name \x5bMI or Middle Name\x5d: </data></match></read>
+    <write><data>PFoLYMWToCn\x0a</data></write>
+    <read><length>26</length><match><data>Suffix \x5bJr\x2c Sr\x2c II\x2c etc\x5d: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>19</length><match><data>\x0aContact Info Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>26</length><match><data>Suffix \x5bJr\x2c Sr\x2c II\x2c etc\x5d: </data></match></read>
+    <write><data>\x2a\x2aexit\x0a</data></write>
+    <read><length>11</length><match><data>Thank you!\x0a</data></match></read>
+</replay>
+</pov>

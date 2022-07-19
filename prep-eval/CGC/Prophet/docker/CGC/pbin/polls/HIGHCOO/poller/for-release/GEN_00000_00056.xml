@@ -1,0 +1,32 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>b2fd1b611c6da1a087fb5f455a86180dcde2ac1999780fef805c0f28eaa6f5a78999f502782a27452dcae06ffb1a1fe8</seed>
+<replay>
+    <write><data>\xd4\x05\x00\x00</data></write>
+    <write><data>B\x01</data></write>
+    <write><data>qVN7fu3IhrneZYZdUJlvAJPksoOEPYsAyMLXGRJMoq21Mo2DeBs3JEagdud4N3zHii1Uoof3pESsjLVSSotKCSh0fZL5aQPWJmZjexmIuqozM7ks8UituzGQ75qUfVJARwAZmgGgKZkUxgdDwOxoaB3bLMRTExHKAHaZ5YLz2J4m9vCLzyQtkS8IGGc8kUN3\x07SpO7b4PQf2hiU8gzHq28vOtA3L7RLQlCfSvJrBDeoyjwmWT74V9SWQRcpTjv6O7zyMCqiVSynaQT\x0771p0wqg6lNGxbEXoqK4rs1FmAqFs99NjBSRdkZO0putdW07vkCv\x07</data></write>
+    <read><length>4</length><match><data>2y\x06\x00</data></match></read>
+    <write><data>j\x0d\x03\x00</data></write>
+    <read><length>4</length><match><pcre>(.+)</pcre></match></read>
+    <read><length>2</length><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <write><data>\xed\x5f\x84\x00</data></write>
+    <read><length>4</length><match><data>\x01\x00\x00\x00</data></match></read>
+    <read><length>4</length><match><data>2y\x06\x00</data></match></read>
+    <write><data>\xcf\x07\x00\x00</data></write>
+    <write><data>2y\x06\x00</data></write>
+    <read><length>4</length><match><data>2y\x06\x00</data></match></read>
+    <read><length>2</length><match><data>B\x01</data></match></read>
+    <read><length>322</length><match><data>qVN7fu3IhrneZYZdUJlvAJPksoOEPYsAyMLXGRJMoq21Mo2DeBs3JEagdud4N3zHii1Uoof3pESsjLVSSotKCSh0fZL5aQPWJmZjexmIuqozM7ks8UituzGQ75qUfVJARwAZmgGgKZkUxgdDwOxoaB3bLMRTExHKAHaZ5YLz2J4m9vCLzyQtkS8IGGc8kUN3\x07SpO7b4PQf2hiU8gzHq28vOtA3L7RLQlCfSvJrBDeoyjwmWT74V9SWQRcpTjv6O7zyMCqiVSynaQT\x0771p0wqg6lNGxbEXoqK4rs1FmAqFs99NjBSRdkZO0putdW07vkCv\x07</data></match></read>
+    <write><data>\xd4\x05\x00\x00</data></write>
+    <write><data>\xd2\x00</data></write>
+    <write><data>oaUyBmQzfHQ4jvGiopIIX309pB5AN7Tr1mASfcBaJVMnZkmQzciK8tf3ZT7L4P5jsmetuwjM2dj2j8sJY2nd\x07DORTREpjbzc5mlJRyWyTaPq9MHmTaiQMDWsvfazmICJmg4qmv5aQv5mFNI1YLQuPCTbzJnhXNz4nvqLbRnB8\x077z0Y9Vyf9sxjkV5SRDtQaVmgejwhvYze6Ee3JbF\x07</data></write>
+    <read><length>4</length><match><data>3y\x06\x00</data></match></read>
+    <write><data>\x90v\x12\x00</data></write>
+    <read><length>4</length><match><data>\x02\x00\x00\x00</data></match></read>
+</replay>
+</pov>

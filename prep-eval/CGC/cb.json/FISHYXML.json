@@ -1,0 +1,58 @@
+{
+"DEPEND_VERSION":"1.0.1",
+"filenames":[{"name":"FISHYXML/src/include/libcgc.h","included_by":["FISHYXML/src/FISHYXML/lib/malloc.c", "FISHYXML/src/FISHYXML/lib/cgc_memcpy.h", "FISHYXML/src/FISHYXML/lib/cgc_recv_until_delim.h", "FISHYXML/src/FISHYXML/lib/cgc_send.h", "FISHYXML/src/FISHYXML/lib/cgc_sendall.h", "FISHYXML/src/FISHYXML/lib/cgc_strncpy.h", "FISHYXML/src/FISHYXML/src/card.c", "FISHYXML/src/FISHYXML/src/deck.c", "FISHYXML/src/FISHYXML/src/fishyxml.c", "FISHYXML/src/FISHYXML/src/gofish.c", "FISHYXML/src/FISHYXML/src/hand.c", "FISHYXML/src/FISHYXML/src/operation.c", "FISHYXML/src/FISHYXML/src/player.c", "FISHYXML/src/FISHYXML/src/rxtx.c", "FISHYXML/src/FISHYXML/src/service.c"]},
+{"name":"FISHYXML/src/FISHYXML/include/cgc_stdint.h","included_by":["FISHYXML/src/FISHYXML/lib/cgc_libc.h", "FISHYXML/src/FISHYXML/lib/memcpy.c", "FISHYXML/src/FISHYXML/lib/cgc_send.h", "FISHYXML/src/FISHYXML/lib/sendall.c"]},
+{"name":"FISHYXML/src/FISHYXML/include/cgc_errno.h","included_by":["FISHYXML/src/FISHYXML/lib/cgc_libc.h", "FISHYXML/src/FISHYXML/lib/recv_until_delim.c", "FISHYXML/src/FISHYXML/lib/cgc_send.h", "FISHYXML/src/FISHYXML/lib/cgc_sendall.h"]},
+{"name":"FISHYXML/src/FISHYXML/lib/cgc_memset.h","included_by":["FISHYXML/src/FISHYXML/lib/cgc_libc.h", "FISHYXML/src/FISHYXML/lib/memset.c"]},
+{"name":"FISHYXML/src/FISHYXML/lib/cgc_memcpy.h","included_by":["FISHYXML/src/FISHYXML/lib/cgc_libc.h", "FISHYXML/src/FISHYXML/lib/memcpy.c"]},
+{"name":"FISHYXML/src/FISHYXML/lib/cgc_send.h","included_by":["FISHYXML/src/FISHYXML/lib/cgc_libc.h", "FISHYXML/src/FISHYXML/lib/send.c"]},
+{"name":"FISHYXML/src/FISHYXML/lib/cgc_recv_until_delim.h","included_by":["FISHYXML/src/FISHYXML/lib/cgc_libc.h", "FISHYXML/src/FISHYXML/lib/recv_until_delim.c"]},
+{"name":"FISHYXML/src/FISHYXML/lib/cgc_pi_prng.h","included_by":["FISHYXML/src/FISHYXML/lib/cgc_libc.h", "FISHYXML/src/FISHYXML/lib/pi_prng.c"]},
+{"name":"FISHYXML/src/FISHYXML/lib/cgc_strncpy.h","included_by":["FISHYXML/src/FISHYXML/lib/cgc_libc.h", "FISHYXML/src/FISHYXML/lib/strncpy.c"]},
+{"name":"FISHYXML/src/FISHYXML/lib/cgc_libc.h","included_by":["FISHYXML/src/FISHYXML/lib/malloc.c", "FISHYXML/src/FISHYXML/lib/cgc_list.h", "FISHYXML/src/FISHYXML/src/card.c", "FISHYXML/src/FISHYXML/src/deck.c", "FISHYXML/src/FISHYXML/src/fishyxml.c", "FISHYXML/src/FISHYXML/src/gofish.c", "FISHYXML/src/FISHYXML/src/hand.c", "FISHYXML/src/FISHYXML/src/operation.c", "FISHYXML/src/FISHYXML/src/player.c", "FISHYXML/src/FISHYXML/src/rxtx.c", "FISHYXML/src/FISHYXML/src/service.c"]},
+{"name":"FISHYXML/src/FISHYXML/lib/cgc_list.h","included_by":["FISHYXML/src/FISHYXML/lib/cgc_libc.h"]},
+{"name":"FISHYXML/src/FISHYXML/lib/malloc.c"},
+{"name":"FISHYXML/src/FISHYXML/lib/memcpy.c"},
+{"name":"FISHYXML/src/FISHYXML/lib/memset.c"},
+{"name":"FISHYXML/src/FISHYXML/lib/pi_prng.c"},
+{"name":"FISHYXML/src/FISHYXML/lib/recv_until_delim.c"},
+{"name":"FISHYXML/src/FISHYXML/lib/cgc_sendall.h","included_by":["FISHYXML/src/FISHYXML/lib/send.c", "FISHYXML/src/FISHYXML/lib/sendall.c"]},
+{"name":"FISHYXML/src/FISHYXML/lib/send.c"},
+{"name":"FISHYXML/src/FISHYXML/lib/sendall.c"},
+{"name":"FISHYXML/src/FISHYXML/lib/strncpy.c"},
+{"name":"FISHYXML/src/FISHYXML/src/cgc_common.h","included_by":["FISHYXML/src/FISHYXML/src/card.c", "FISHYXML/src/FISHYXML/src/deck.c", "FISHYXML/src/FISHYXML/src/fishyxml.c", "FISHYXML/src/FISHYXML/src/gofish.c", "FISHYXML/src/FISHYXML/src/hand.c", "FISHYXML/src/FISHYXML/src/operation.c", "FISHYXML/src/FISHYXML/src/player.c", "FISHYXML/src/FISHYXML/src/rxtx.c"]},
+{"name":"FISHYXML/src/FISHYXML/src/cgc_card.h","included_by":["FISHYXML/src/FISHYXML/src/card.c", "FISHYXML/src/FISHYXML/src/cgc_deck.h", "FISHYXML/src/FISHYXML/src/fishyxml.c", "FISHYXML/src/FISHYXML/src/hand.c", "FISHYXML/src/FISHYXML/src/rxtx.c", "FISHYXML/src/FISHYXML/src/cgc_rxtx.h"]},
+{"name":"FISHYXML/src/FISHYXML/src/card.c"},
+{"name":"FISHYXML/src/FISHYXML/src/cgc_deck.h","included_by":["FISHYXML/src/FISHYXML/src/deck.c", "FISHYXML/src/FISHYXML/src/cgc_gofish.h", "FISHYXML/src/FISHYXML/src/player.c"]},
+{"name":"FISHYXML/src/FISHYXML/src/deck.c"},
+{"name":"FISHYXML/src/FISHYXML/src/cgc_hand.h","included_by":["FISHYXML/src/FISHYXML/src/fishyxml.c", "FISHYXML/src/FISHYXML/src/hand.c", "FISHYXML/src/FISHYXML/src/cgc_rxtx.h", "FISHYXML/src/FISHYXML/src/player.c", "FISHYXML/src/FISHYXML/src/rxtx.c"]},
+{"name":"FISHYXML/src/FISHYXML/src/cgc_fishyxml.h","included_by":["FISHYXML/src/FISHYXML/src/fishyxml.c", "FISHYXML/src/FISHYXML/src/rxtx.c"]},
+{"name":"FISHYXML/src/FISHYXML/src/fishyxml.c"},
+{"name":"FISHYXML/src/FISHYXML/src/cgc_player.h","included_by":["FISHYXML/src/FISHYXML/src/cgc_gofish.h", "FISHYXML/src/FISHYXML/src/player.c"]},
+{"name":"FISHYXML/src/FISHYXML/src/cgc_gofish.h","included_by":["FISHYXML/src/FISHYXML/src/gofish.c", "FISHYXML/src/FISHYXML/src/operation.c", "FISHYXML/src/FISHYXML/src/rxtx.c", "FISHYXML/src/FISHYXML/src/cgc_rxtx.h"]},
+{"name":"FISHYXML/src/FISHYXML/src/gofish.c"},
+{"name":"FISHYXML/src/FISHYXML/src/hand.c"},
+{"name":"FISHYXML/src/FISHYXML/src/cgc_operation.h","included_by":["FISHYXML/src/FISHYXML/src/operation.c", "FISHYXML/src/FISHYXML/src/service.c"]},
+{"name":"FISHYXML/src/FISHYXML/src/cgc_rxtx.h","included_by":["FISHYXML/src/FISHYXML/src/operation.c", "FISHYXML/src/FISHYXML/src/rxtx.c", "FISHYXML/src/FISHYXML/src/service.c"]},
+{"name":"FISHYXML/src/FISHYXML/src/operation.c"},
+{"name":"FISHYXML/src/FISHYXML/src/player.c"},
+{"name":"FISHYXML/src/FISHYXML/src/rxtx.c"},
+{"name":"FISHYXML/src/FISHYXML/src/cgc_service.h","included_by":["FISHYXML/src/FISHYXML/src/service.c"]},
+{"name":"FISHYXML/src/FISHYXML/src/service.c"}
+],
+"ignore":[
+"FISHYXML/src/FISHYXML/src/fishyxml.c",
+"FISHYXML/src/FISHYXML/src/rxtx.c"
+],
+"macros":[
+   {"name": "PATCHED", "value": false }
+],
+"disable_eval":[
+   "cgc_accept_cards","cgc_add_cards_to_hand","cgc_add_card_to_hand","cgc_allocate","cgc_allocate_large_chunk","cgc_calloc","cgc_chunk_to_ptr","cgc_coalesce","cgc_consolidate_hand","cgc_create_card","cgc_create_deck","cgc_create_game","cgc_create_hand","cgc_create_player","cgc_deal","cgc_destroy_card","cgc_do_bot_turn","cgc_do_player_turn","cgc_do_turn","cgc_draw_new_hand","cgc_find_fit","cgc_free","cgc_gen_xml_ask","cgc_gen_xml_books","cgc_gen_xml_card","cgc_gen_xml_cards","cgc_gen_xml_error","cgc_gen_xml_final_results","cgc_gen_xml_go_fish","cgc_gen_xml_turn","cgc_get_all_of_rank_from_hand","cgc_get_count_cards_in_hand","cgc_get_hand_size","cgc_get_latest_card","cgc_get_players_newest_card","cgc_get_rank_of_random_card_in_hand","cgc_get_shuffled_deck","cgc_grow_heap","cgc_have_cards_of_rank","cgc_is_deck_empty","cgc_is_equal","cgc_is_game_over","cgc_is_hand_empty","cgc_is_player_hand_empty","cgc_is_player_turn","cgc_is_rank","cgc_is_set_equal","cgc_is_valid_rank","cgc_is_valid_suit","cgc_list_find","cgc_list_insert_after","cgc_list_insert_before","cgc_list_insert_in_order","cgc_list_push_back","cgc_list_remove","cgc_log_base_two","cgc_malloc","cgc_mark_allocated","cgc_mark_free","cgc_memcpy","cgc_memset","cgc_parse_xml_ask","cgc_parse_xml_books","cgc_parse_xml_card","cgc_parse_xml_cards","cgc_parse_xml_draw","cgc_parse_xml_fishing","cgc_parse_xml_go_fish","cgc_parse_xml_player_name","cgc_play_books","cgc_play_game","cgc_pop","cgc_prng_get_next","cgc__prng_load_four","cgc__prng_setup","cgc_process_bot_player_accept_cards","cgc_process_bot_player_ask","cgc_process_bot_player_books","cgc_process_bot_player_empty_hand","cgc_process_bot_player_fishing","cgc_process_remote_player_accept_cards","cgc_process_remote_player_ask","cgc_process_remote_player_books","cgc_process_remote_player_empty_hand","cgc_process_remote_player_fishing","cgc_ptr_to_chunk","cgc_qty_of_rank_in_hand","cgc_realloc","cgc_receive","cgc_recv_and_match_cards","cgc_recv_and_match_count_books_played","cgc_recv_ask_and_get_rank","cgc_recv_cards","cgc_recv_draw_request","cgc_recv_fish_request","cgc_recv_go_fish_notice","cgc_recv_player_name","cgc_recv_until_delim","cgc_rm_card_from_hand","cgc_select_random_card","cgc_send","cgc_sendall","cgc_send_ask","cgc_send_cards","cgc_send_count_books_played","cgc_send_error","cgc_send_final_results","cgc_send_go_fish_notice","cgc_send_hand","cgc_send_initial_hand_to_player","cgc_send_turn_notice","cgc_shuffle_deck","cgc_size_cmp","cgc_split_chunk","cgc_strncpy","cgc_take_top_card","cgc__terminate","cgc_transmit","cgc_turn_complete","__cxa_finalize@@GLIBC_2.1.3","data_start","deregister_tm_clones","__do_global_dtors_aux","__do_global_dtors_aux_fini_array_entry","_fini","frame_dummy","__frame_dummy_init_array_entry","__gmon_start__","_init","__init_array_end","__init_array_start","_ITM_deregisterTMCloneTable","_ITM_registerTMCloneTable","__libc_csu_fini","__libc_csu_init","__libc_start_main@@GLIBC_2.0","main","register_tm_clones","_start","__x86.get_pc_thunk.ax","__x86.get_pc_thunk.bx","__x86.get_pc_thunk.cx","__x86.get_pc_thunk.dx"
+],
+"enable_eval":[
+   "cgc_strlen"
+],
+"struct_ptrs":{
+}
+}

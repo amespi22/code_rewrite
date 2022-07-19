@@ -1,0 +1,1 @@
+../../../cgc_test/simplenote/test-pov_1.sh

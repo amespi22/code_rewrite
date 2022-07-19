@@ -1,0 +1,24 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>274eb816b80984e683bb53ebad529187cde30423c8aaf6a59b4200e9248199e9f41f9731614d7cf1a9be718e5be3ed14</seed>
+<replay>
+    <read><length>22</length><match><data>\x3d\x3d\x3d\x3d\x3d\x3d 3M v0.2 \x3d\x3d\x3d\x3d\x3d\x3d\x0a</data></match></read>
+    <read><length>137</length><match><data>\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x0a 1. New memo\x0a 2. View memo\x0a 3. Update memo\x0a 4. Delete memo\x0a 5. Add custom AC word\x0a 6. Quit\x0a\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x0a</data></match></read>
+    <write><data>4\x0a</data></write>
+    <read><length>4</length><match><data>id? </data></match></read>
+    <write><data>314\x0a</data></write>
+    <write><data>2\x0a</data></write>
+    <read><length>4</length><match><data>id? </data></match></read>
+    <write><data>485\x0a</data></write>
+    <write><data>4\x0a</data></write>
+    <read><length>4</length><match><data>id? </data></match></read>
+    <write><data>43\x0a</data></write>
+    <write><data>4\x0a</data></write>
+    <read><length>4</length><match><data>id? </data></match></read>
+    <write><data>288\x0a</data></write>
+    <write><data>6\x0a</data></write>
+    <read><length>5</length><match><data>bye!\x0a</data></match></read>
+</replay>
+</pov>

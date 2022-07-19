@@ -1,0 +1,19 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>fbfb7033cb973db6858e6416276e4804acef965bc73a984e367e9c6ab7a376f67f1f4af249c2315230df7d8ae91edcae</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>This is Mapper.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>C\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Street Number: \x0a</data></match></read>
+    <write><data>8666904\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Resident: \x0a</data></match></read>
+    <write><data>48jYMa8u6Lh3zvnDq\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Invalid road.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>0\x0a</data></write>
+    <write><data>0\x0a</data></write>
+</replay>
+</pov>

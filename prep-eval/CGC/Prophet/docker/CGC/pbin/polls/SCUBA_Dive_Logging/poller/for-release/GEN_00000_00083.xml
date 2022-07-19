@@ -1,0 +1,283 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>415e7628bf7bd1e5e1b2315796db04924886a0a79c62a066d3685b12ebc4b6ed1303797381f58a6f3a053d26f980da3a</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>C \x2d Change Diver Info</data></match></read>
+    <read><delim>\x0a</delim><match><data>L \x2d Log a New Dive</data></match></read>
+    <read><delim>\x0a</delim><match><data>D \x2d Download Dive Data</data></match></read>
+    <read><delim>\x0a</delim><match><data>E \x2d Edit Dives</data></match></read>
+    <read><delim>\x0a</delim><match><data>P \x2d Print Dive Logs</data></match></read>
+    <read><delim>\x0a</delim><match><data>R \x2d Remove Dives</data></match></read>
+    <read><delim>\x0a</delim><match><data>S \x2d Diver Statistics</data></match></read>
+    <read><delim>\x0a</delim><match><data>X \x2d Exit Application</data></match></read>
+    <read><length>1</length><match><data>:</data></match></read>
+    <write><data>L\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><length>11</length><match><data>Dive Site: </data></match></read>
+    <write><data>bomnlggegp\x0a</data></write>
+    <read><length>6</length><match><data>Date: </data></match></read>
+    <write><data>5\x2f18\x2f2014\x0a</data></write>
+    <read><length>6</length><match><data>Time: </data></match></read>
+    <write><data>20:11:31\x0a</data></write>
+    <read><length>22</length><match><data>Location \x28area\x2fcity\x29: </data></match></read>
+    <write><data>gchoedaodf\x0a</data></write>
+    <read><length>17</length><match><data>Max Depth in ft: </data></match></read>
+    <write><data>119\x0a</data></write>
+    <read><length>17</length><match><data>Avg Depth in ft: </data></match></read>
+    <write><data>59\x0a</data></write>
+    <read><length>22</length><match><data>Dive Duration \x28mins\x29: </data></match></read>
+    <write><data>24\x0a</data></write>
+    <read><length>15</length><match><data>O2 Percentage: </data></match></read>
+    <write><data>48\x0a</data></write>
+    <read><length>19</length><match><data>Pressure In \x28psi\x29: </data></match></read>
+    <write><data>3192\x0a</data></write>
+    <read><length>20</length><match><data>Pressure Out \x28psi\x29: </data></match></read>
+    <write><data>765\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>C \x2d Change Diver Info</data></match></read>
+    <read><delim>\x0a</delim><match><data>L \x2d Log a New Dive</data></match></read>
+    <read><delim>\x0a</delim><match><data>D \x2d Download Dive Data</data></match></read>
+    <read><delim>\x0a</delim><match><data>E \x2d Edit Dives</data></match></read>
+    <read><delim>\x0a</delim><match><data>P \x2d Print Dive Logs</data></match></read>
+    <read><delim>\x0a</delim><match><data>R \x2d Remove Dives</data></match></read>
+    <read><delim>\x0a</delim><match><data>S \x2d Diver Statistics</data></match></read>
+    <read><delim>\x0a</delim><match><data>X \x2d Exit Application</data></match></read>
+    <read><length>1</length><match><data>:</data></match></read>
+    <write><data>D\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <write><data>T\x5c\x26S</data></write>
+    <write><data>\x2b\x00\x00\x00</data></write>
+    <write><data>\x90\x5c\x26S</data></write>
+    <write><data>a\x00\x00\x00</data></write>
+    <write><data>\xcc\x5c\x26S</data></write>
+    <write><data>\x13\x00\x00\x00</data></write>
+    <write><data>\x08\x5d\x26S</data></write>
+    <write><data>B\x00\x00\x00</data></write>
+    <write><data>D\x5d\x26S</data></write>
+    <write><data>\x18\x00\x00\x00</data></write>
+    <write><data>\x80\x5d\x26S</data></write>
+    <write><data>z\x00\x00\x00</data></write>
+    <write><data>\xbc\x5d\x26S</data></write>
+    <write><data>\x29\x00\x00\x00</data></write>
+    <write><data>\xf8\x5d\x26S</data></write>
+    <write><data>E\x00\x00\x00</data></write>
+    <write><data>4\x5e\x26S</data></write>
+    <write><data>\x27\x00\x00\x00</data></write>
+    <write><data>\x00\x00\x00\x00</data></write>
+    <read><length>11</length><match><data>Dive Site: </data></match></read>
+    <write><data>begingnboh\x0a</data></write>
+    <read><length>18</length><match><data>Date \x283\x2f17\x2f2014\x29: </data></match></read>
+    <write><data>3\x2f17\x2f2014\x0a</data></write>
+    <read><length>17</length><match><data>Time \x2802:22:12\x29: </data></match></read>
+    <write><data>02:22:12\x0a</data></write>
+    <read><length>22</length><match><data>Location \x28area\x2fcity\x29: </data></match></read>
+    <write><data>odhmkallec\x0a</data></write>
+    <read><length>23</length><match><data>Max Depth in ft \x28122\x29: </data></match></read>
+    <write><data>\x0a</data></write>
+    <read><length>22</length><match><data>Avg Depth in ft \x2857\x29: </data></match></read>
+    <write><data>\x0a</data></write>
+    <read><length>26</length><match><data>Dive Duration \x28mins\x29 \x288\x29: </data></match></read>
+    <write><data>\x0a</data></write>
+    <read><length>15</length><match><data>O2 Percentage: </data></match></read>
+    <write><data>33\x0a</data></write>
+    <read><length>19</length><match><data>Pressure In \x28psi\x29: </data></match></read>
+    <write><data>3072\x0a</data></write>
+    <read><length>20</length><match><data>Pressure Out \x28psi\x29: </data></match></read>
+    <write><data>505\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>C \x2d Change Diver Info</data></match></read>
+    <read><delim>\x0a</delim><match><data>L \x2d Log a New Dive</data></match></read>
+    <read><delim>\x0a</delim><match><data>D \x2d Download Dive Data</data></match></read>
+    <read><delim>\x0a</delim><match><data>E \x2d Edit Dives</data></match></read>
+    <read><delim>\x0a</delim><match><data>P \x2d Print Dive Logs</data></match></read>
+    <read><delim>\x0a</delim><match><data>R \x2d Remove Dives</data></match></read>
+    <read><delim>\x0a</delim><match><data>S \x2d Diver Statistics</data></match></read>
+    <read><delim>\x0a</delim><match><data>X \x2d Exit Application</data></match></read>
+    <read><length>1</length><match><data>:</data></match></read>
+    <write><data>C\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><length>12</length><match><data>First Name: </data></match></read>
+    <write><data>nfadafkianblkbc\x0a</data></write>
+    <read><length>11</length><match><data>Last Name: </data></match></read>
+    <write><data>bpoljmknepmihfk\x0a</data></write>
+    <read><length>8</length><match><data>Street: </data></match></read>
+    <write><data>nmibhjlaiemlegjbhidjehfcl\x0a</data></write>
+    <read><length>6</length><match><data>City: </data></match></read>
+    <write><data>mljghobcai\x0a</data></write>
+    <read><length>7</length><match><data>State: </data></match></read>
+    <write><data>gl\x0a</data></write>
+    <read><length>10</length><match><data>Zip Code: </data></match></read>
+    <write><data>51652\x0a</data></write>
+    <read><length>14</length><match><data>Phone Number: </data></match></read>
+    <write><data>8455151146\x0a</data></write>
+    <read><length>19</length><match><data>PADI Diver Number: </data></match></read>
+    <write><data>7309896162\x0a</data></write>
+    <read><length>16</length><match><data>PADI Cert Date: </data></match></read>
+    <write><data>9836636015\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>     Name: nfadafkianblkbc bpoljmknepmihfk\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>  Address: nmibhjlaiemlegjbhidjehfcl\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>     City: mljghobcai\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>    State: gl\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data> Zip Code: 51652\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>    Phone: 8455151146\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data> PADI Num: 7309896162\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Cert Date: 9836636015\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>C \x2d Change Diver Info</data></match></read>
+    <read><delim>\x0a</delim><match><data>L \x2d Log a New Dive</data></match></read>
+    <read><delim>\x0a</delim><match><data>D \x2d Download Dive Data</data></match></read>
+    <read><delim>\x0a</delim><match><data>E \x2d Edit Dives</data></match></read>
+    <read><delim>\x0a</delim><match><data>P \x2d Print Dive Logs</data></match></read>
+    <read><delim>\x0a</delim><match><data>R \x2d Remove Dives</data></match></read>
+    <read><delim>\x0a</delim><match><data>S \x2d Diver Statistics</data></match></read>
+    <read><delim>\x0a</delim><match><data>X \x2d Exit Application</data></match></read>
+    <read><length>1</length><match><data>:</data></match></read>
+    <write><data>r\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Dive\x23 Date       Time     Dive Site                 Location                 \x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>   1: 5\x2f18\x2f2014  20:11:31 bomnlggegp                gchoedaodf               \x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>   2: 3\x2f17\x2f2014  02:22:12 begingnboh                odhmkallec               \x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><length>42</length><match><data>Enter Dive \x23 to delete or blank to abort: </data></match></read>
+    <write><data>2\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>C \x2d Change Diver Info</data></match></read>
+    <read><delim>\x0a</delim><match><data>L \x2d Log a New Dive</data></match></read>
+    <read><delim>\x0a</delim><match><data>D \x2d Download Dive Data</data></match></read>
+    <read><delim>\x0a</delim><match><data>E \x2d Edit Dives</data></match></read>
+    <read><delim>\x0a</delim><match><data>P \x2d Print Dive Logs</data></match></read>
+    <read><delim>\x0a</delim><match><data>R \x2d Remove Dives</data></match></read>
+    <read><delim>\x0a</delim><match><data>S \x2d Diver Statistics</data></match></read>
+    <read><delim>\x0a</delim><match><data>X \x2d Exit Application</data></match></read>
+    <read><length>1</length><match><data>:</data></match></read>
+    <write><data>s\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Dives logged: 1</data></match></read>
+    <read><delim>\x0a</delim><match><data>Average Max Depth: 119</data></match></read>
+    <read><delim>\x0a</delim><match><data>Average Dive Length: 24</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>C \x2d Change Diver Info</data></match></read>
+    <read><delim>\x0a</delim><match><data>L \x2d Log a New Dive</data></match></read>
+    <read><delim>\x0a</delim><match><data>D \x2d Download Dive Data</data></match></read>
+    <read><delim>\x0a</delim><match><data>E \x2d Edit Dives</data></match></read>
+    <read><delim>\x0a</delim><match><data>P \x2d Print Dive Logs</data></match></read>
+    <read><delim>\x0a</delim><match><data>R \x2d Remove Dives</data></match></read>
+    <read><delim>\x0a</delim><match><data>S \x2d Diver Statistics</data></match></read>
+    <read><delim>\x0a</delim><match><data>X \x2d Exit Application</data></match></read>
+    <read><length>1</length><match><data>:</data></match></read>
+    <write><data>E\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Dive\x23 Date       Time     Dive Site                 Location                 \x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>   1: 5\x2f18\x2f2014  20:11:31 bomnlggegp                gchoedaodf               \x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><length>22</length><match><data>Enter Dive \x23 to edit: </data></match></read>
+    <write><data>1\x0a</data></write>
+    <read><delim>\x0a</delim></read>
+    <read><length>24</length><match><data>Dive Site \x28bomnlggegp\x29: </data></match></read>
+    <write><data>pjcebefkpg\x0a</data></write>
+    <read><length>18</length><match><data>Date \x285\x2f18\x2f2014\x29: </data></match></read>
+    <write><data>5\x2f7\x2f2014\x0a</data></write>
+    <read><length>17</length><match><data>Time \x2820:11:31\x29: </data></match></read>
+    <write><data>14:26:18\x0a</data></write>
+    <read><length>35</length><match><data>Location \x28area\x2fcity\x29 \x28gchoedaodf\x29: </data></match></read>
+    <write><data>agnhekfhdp\x0a</data></write>
+    <read><length>23</length><match><data>Max Depth in ft \x28119\x29: </data></match></read>
+    <write><data>73\x0a</data></write>
+    <read><length>22</length><match><data>Avg Depth in ft \x2859\x29: </data></match></read>
+    <write><data>36\x0a</data></write>
+    <read><length>27</length><match><data>Dive Duration \x28mins\x29 \x2824\x29: </data></match></read>
+    <write><data>41\x0a</data></write>
+    <read><length>20</length><match><data>O2 Percentage \x2848\x29: </data></match></read>
+    <write><data>37\x0a</data></write>
+    <read><length>26</length><match><data>Pressure In \x28psi\x29 \x283192\x29: </data></match></read>
+    <write><data>3026\x0a</data></write>
+    <read><length>26</length><match><data>Pressure Out \x28psi\x29 \x28765\x29: </data></match></read>
+    <write><data>834\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>C \x2d Change Diver Info</data></match></read>
+    <read><delim>\x0a</delim><match><data>L \x2d Log a New Dive</data></match></read>
+    <read><delim>\x0a</delim><match><data>D \x2d Download Dive Data</data></match></read>
+    <read><delim>\x0a</delim><match><data>E \x2d Edit Dives</data></match></read>
+    <read><delim>\x0a</delim><match><data>P \x2d Print Dive Logs</data></match></read>
+    <read><delim>\x0a</delim><match><data>R \x2d Remove Dives</data></match></read>
+    <read><delim>\x0a</delim><match><data>S \x2d Diver Statistics</data></match></read>
+    <read><delim>\x0a</delim><match><data>X \x2d Exit Application</data></match></read>
+    <read><length>1</length><match><data>:</data></match></read>
+    <write><data>s\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Dives logged: 1</data></match></read>
+    <read><delim>\x0a</delim><match><data>Average Max Depth: 73</data></match></read>
+    <read><delim>\x0a</delim><match><data>Average Dive Length: 41</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>C \x2d Change Diver Info</data></match></read>
+    <read><delim>\x0a</delim><match><data>L \x2d Log a New Dive</data></match></read>
+    <read><delim>\x0a</delim><match><data>D \x2d Download Dive Data</data></match></read>
+    <read><delim>\x0a</delim><match><data>E \x2d Edit Dives</data></match></read>
+    <read><delim>\x0a</delim><match><data>P \x2d Print Dive Logs</data></match></read>
+    <read><delim>\x0a</delim><match><data>R \x2d Remove Dives</data></match></read>
+    <read><delim>\x0a</delim><match><data>S \x2d Diver Statistics</data></match></read>
+    <read><delim>\x0a</delim><match><data>X \x2d Exit Application</data></match></read>
+    <read><length>1</length><match><data>:</data></match></read>
+    <write><data>e\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Dive\x23 Date       Time     Dive Site                 Location                 \x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>   1: 5\x2f7\x2f2014   14:26:18 pjcebefkpg                agnhekfhdp               \x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><length>22</length><match><data>Enter Dive \x23 to edit: </data></match></read>
+    <write><data>2\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Invalid dive number entered\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>C \x2d Change Diver Info</data></match></read>
+    <read><delim>\x0a</delim><match><data>L \x2d Log a New Dive</data></match></read>
+    <read><delim>\x0a</delim><match><data>D \x2d Download Dive Data</data></match></read>
+    <read><delim>\x0a</delim><match><data>E \x2d Edit Dives</data></match></read>
+    <read><delim>\x0a</delim><match><data>P \x2d Print Dive Logs</data></match></read>
+    <read><delim>\x0a</delim><match><data>R \x2d Remove Dives</data></match></read>
+    <read><delim>\x0a</delim><match><data>S \x2d Diver Statistics</data></match></read>
+    <read><delim>\x0a</delim><match><data>X \x2d Exit Application</data></match></read>
+    <read><length>1</length><match><data>:</data></match></read>
+    <write><data>r\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Dive\x23 Date       Time     Dive Site                 Location                 \x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>   1: 5\x2f7\x2f2014   14:26:18 pjcebefkpg                agnhekfhdp               \x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><length>42</length><match><data>Enter Dive \x23 to delete or blank to abort: </data></match></read>
+    <write><data>1\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>C \x2d Change Diver Info</data></match></read>
+    <read><delim>\x0a</delim><match><data>L \x2d Log a New Dive</data></match></read>
+    <read><delim>\x0a</delim><match><data>D \x2d Download Dive Data</data></match></read>
+    <read><delim>\x0a</delim><match><data>E \x2d Edit Dives</data></match></read>
+    <read><delim>\x0a</delim><match><data>P \x2d Print Dive Logs</data></match></read>
+    <read><delim>\x0a</delim><match><data>R \x2d Remove Dives</data></match></read>
+    <read><delim>\x0a</delim><match><data>S \x2d Diver Statistics</data></match></read>
+    <read><delim>\x0a</delim><match><data>X \x2d Exit Application</data></match></read>
+    <read><length>1</length><match><data>:</data></match></read>
+    <write><data>P\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Dive Log is empty\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>C \x2d Change Diver Info</data></match></read>
+    <read><delim>\x0a</delim><match><data>L \x2d Log a New Dive</data></match></read>
+    <read><delim>\x0a</delim><match><data>D \x2d Download Dive Data</data></match></read>
+    <read><delim>\x0a</delim><match><data>E \x2d Edit Dives</data></match></read>
+    <read><delim>\x0a</delim><match><data>P \x2d Print Dive Logs</data></match></read>
+    <read><delim>\x0a</delim><match><data>R \x2d Remove Dives</data></match></read>
+    <read><delim>\x0a</delim><match><data>S \x2d Diver Statistics</data></match></read>
+    <read><delim>\x0a</delim><match><data>X \x2d Exit Application</data></match></read>
+    <read><delim>:</delim><match><data>:</data></match></read>
+    <write><data>X\x0a</data></write>
+</replay>
+</pov>

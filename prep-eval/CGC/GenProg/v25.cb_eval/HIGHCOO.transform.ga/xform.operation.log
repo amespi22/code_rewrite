@@ -1,0 +1,182 @@
+Starting pre-processing
+Processing file HIGHCOO/src/include/libcgc.h
+Processing file HIGHCOO/src/HIGHCOO/lib/cgc_libc.h
+Processing file HIGHCOO/src/HIGHCOO/lib/libc.c
+Processing file HIGHCOO/src/HIGHCOO/src/cgc_operation.h
+Processing file HIGHCOO/src/HIGHCOO/src/cgc_service.h
+Processing file HIGHCOO/src/HIGHCOO/src/service.c
+Pre-processing done
+Starting Transformations
+Start expand_case pass
+End pass
+Start expand_conditionals pass
+End pass
+Start expand_blockItems pass
+End pass
+Start if_else_break pass
+End pass
+Start insert_loop_braces pass
+End pass
+Start expand_if_else pass
+End pass
+Start expand_sizeof pass
+End pass
+Start single_declarations pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+all done with passes
+0 :  [cgc_recv_uint32] <class 'list'>  [all function decls] 
+ - uint32_t num [ 1 ] = { 0 } ;
+1 :  [cgc_recv_uint16] <class 'list'>  [all function decls] 
+ - uint16_t num [ 1 ] = { 0 } ;
+2 :  [cgc_haiku_list_exists] <class 'list'>  [all function decls] 
+ - 
+3 :  [cgc_is_haiku_list_empty] <class 'list'>  [all function decls] 
+ - 
+4 :  [cgc_init_haiku_list] <class 'list'>  [all function decls] 
+ - uint8_t tlv1 ;
+5 :  [cgc_get_count] <class 'list'>  [all function decls] 
+ - uint8_t tlv1 ;
+6 :  [cgc_get_id_from_haiku] <class 'list'>  [all function decls] 
+ - struct haiku * h ;
+7 :  [cgc_get_next_haiku_id] <class 'list'>  [all function decls] 
+ - 
+8 :  [cgc_get_random_idx] <class 'list'>  [all function decls] 
+ - uint32_t random_idx ;
+ - int ret ;
+ - int32_t count ;
+ - char * tlv2 ;
+ - cgc_size_t tlv1 ;
+9 :  [cgc_populate_array_with_haiku_ids] <class 'list'>  [all function decls] 
+ - node_t * haiku_ptr ;
+ - struct haiku * h ;
+ - uint32_t id ;
+ - uint8_t tlv1 ;
+10 :  [cgc_find_haiku_with_id] <class 'list'>  [all function decls] 
+ - node_t * haiku_ptr ;
+ - struct haiku * tmp ;
+ - int count ;
+ - bool_t found ;
+11 :  [cgc_send_haiku] <class 'list'>  [all function decls] 
+ - uint32_t id ;
+ - char * content ;
+ - uint16_t length ;
+ - const char * tlv2 = ( char * ) & id ;
+ - cgc_size_t tlv1 ;
+ - const char * tlv4 = ( char * ) & length ;
+ - cgc_size_t tlv3 ;
+ - const char * tlv6 = content ;
+ - cgc_size_t tlv5 ;
+12 :  [cgc_send_easter_egg_haiku] <class 'list'>  [all function decls] 
+ - uint32_t id ;
+ - char * content ;
+ - uint16_t length ;
+ - const char * tlv7 = content ;
+ - const char * tlv2 = ( char * ) & id ;
+ - cgc_size_t tlv1 ;
+ - const char * tlv4 = ( char * ) & length ;
+ - cgc_size_t tlv3 ;
+ - const char * tlv6 = content ;
+ - cgc_size_t tlv5 ;
+13 :  [cgc_send_haiku_id] <class 'list'>  [all function decls] 
+ - SENDUI ( id ) ;
+14 :  [cgc_add_haiku_to_list] <class 'list'>  [all function decls] 
+ - node_t * nd ;
+ - void * tlv1 ;
+15 :  [cgc_recv_haiku_line] <class 'list'>  [all function decls] 
+ - char temp_line_buf [ MAX_HAIKU_LINE_LEN ] = { 0 } ;
+ - int16_t bytes_received ;
+ - int16_t bytes_written ;
+ - int tlv3 ;
+ - char * tlv2 ;
+ - cgc_size_t tlv1 ;
+16 :  [cgc_recv_haiku] <class 'list'>  [all function decls] 
+ - struct haiku * h ;
+ - char * haiku_content_ptr ;
+ - int16_t bytes_remaining ;
+ - int16_t bytes_written ;
+ - char * tlv2 ;
+ - int16_t tlv1 ;
+17 :  [cgc_recv_haiku_size] <class 'list'>  [all function decls] 
+ - 
+18 :  [cgc_add_haiku] <class 'list'>  [all function decls] 
+ - int ret ;
+ - uint16_t total_bytes ;
+ - struct haiku * h ;
+ - uint8_t tlv1 ;
+ - uint16_t tlv2 ;
+ - struct haiku * tlv4 ;
+ - uint32_t tlv3 ;
+ - cgc_send_haiku_id ( tlv3 ) ;
+19 :  [cgc_get_haiku_by_id] <class 'list'>  [all function decls] 
+ - struct haiku * h ;
+ - uint32_t id ;
+ - int res ;
+ - uint8_t tlv1 ;
+ - struct haiku * * tlv3 ;
+ - uint32_t tlv2 ;
+ - cgc_send_haiku ( h ) ;
+20 :  [cgc_get_haiku_cgc_random] <class 'list'>  [all function decls] 
+ - uint32_t random_idx ;
+ - uint32_t count ;
+ - uint32_t * id_arr ;
+ - struct haiku * rand_haiku ;
+ - int res ;
+ - uint8_t tlv1 ;
+ - uint32_t * * tlv3 ;
+ - uint32_t tlv2 ;
+ - uint32_t * tlv4 ;
+ - cgc_send_haiku ( rand_haiku ) ;
+ - struct haiku * * tlv6 ;
+ - uint32_t tlv5 ;
+21 :  [cgc_get_haiku_count] <class 'list'>  [all function decls] 
+ - uint32_t count ;
+ - uint8_t tlv1 ;
+ - SENDUI ( count ) ;
+22 :  [cgc_get_haiku_ids] <class 'list'>  [all function decls] 
+ - uint8_t tlv1 ;
+ - uint32_t count ;
+ - SENDUI ( count ) ;
+ - node_t * hl_ptr ;
+ - uint32_t id ;
+ - SENDUI ( id ) ;
+ - node_t * tlv2 ;
+Processing [cgc_recv_uint32] :
+Processing [cgc_recv_uint16] :
+Processing [cgc_haiku_list_exists] :
+Processing [cgc_is_haiku_list_empty] :
+Processing [cgc_init_haiku_list] :
+Processing [cgc_get_count] :
+Processing [cgc_get_id_from_haiku] :
+Processing [cgc_get_next_haiku_id] :
+Processing [cgc_get_random_idx] :
+Processing [cgc_populate_array_with_haiku_ids] :
+Processing [cgc_find_haiku_with_id] :
+Processing [cgc_send_haiku] :
+Processing [cgc_send_easter_egg_haiku] :
+Processing [cgc_send_haiku_id] :
+Processing [cgc_add_haiku_to_list] :
+Processing [cgc_recv_haiku_line] :
+Processing [cgc_recv_haiku] :
+Processing [cgc_recv_haiku_size] :
+Processing [cgc_add_haiku] :
+Processing [cgc_get_haiku_by_id] :
+Processing [cgc_get_haiku_cgc_random] :
+Processing [cgc_get_haiku_count] :
+Processing [cgc_get_haiku_ids] :
+Writing output file xform/t_operation.c
+
+real	0m22.197s
+user	0m22.140s
+sys	0m0.052s

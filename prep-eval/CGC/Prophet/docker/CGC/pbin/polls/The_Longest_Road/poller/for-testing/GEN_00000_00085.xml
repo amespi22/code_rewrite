@@ -1,0 +1,293 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>8d1b919f45876cac024856998d1a3a32d0d888672305016590a0c7f9fd070be18072b5dad53df8be784ed3f28c95056e</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>go time</data></match></read>
+    <read><delim>\x0a</delim><match><data>Enter crypto seed</data></match></read>
+    <write><data>\x2fXBM\x2c\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>bd00101234567896\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>be00110000000007</data></match></read>
+    <read><delim>\x0a</delim><match><pcre>SUCCESSFUL association</pcre></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>bf003abc0099000g\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>bg005jcgap00000\x7f</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>bh005gfddm00000c\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>bi0011000000000\x3b</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cx0091122334455\x22\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0010000000000 </data></match></read>
+    <read><delim>\x0a</delim><match><data>cx009w3k4k5v6k0\x7c</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cx1091122334455\x23\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0011000000000!</data></match></read>
+    <read><delim>\x0a</delim><match><data>cx109x3k4v5v6k0o</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cv2091122334455.\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0012000000000\x22</data></match></read>
+    <read><delim>\x0a</delim><match><data>cv201y000000000o</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cx3091122334455!\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0013000000000\x23</data></match></read>
+    <read><delim>\x0a</delim><match><data>cx309x3v4v5k6k0m</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cz405x373y00034\x29\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0014000000000\x24</data></match></read>
+    <read><delim>\x0a</delim><match><data>cz401y000000000e</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cx5091122334455\x27\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0015000000000\x25</data></match></read>
+    <read><delim>\x0a</delim><match><data>cx509y3v4k5v6k0j</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cv6091122334455\x2a\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0016000000000\x26</data></match></read>
+    <read><delim>\x0a</delim><match><data>cv601y000000000k</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cx7091122334455\x25\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0017000000000\x27</data></match></read>
+    <read><delim>\x0a</delim><match><data>cx709y3v4v5k6k0h</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cv8091122334455\x24\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0018000000000\x28</data></match></read>
+    <read><delim>\x0a</delim><match><data>cv801y000000000e</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>bl00971223344551\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>bm0011000000000?</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>bj00931223344553\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>bk00110000000009</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>bd00111234567897\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>be01110000000006</data></match></read>
+    <read><delim>\x0a</delim><match><pcre>SUCCESSFUL association</pcre></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>bf013abc0099000f\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>bg015mniab00000h</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>bh015jqfd\x5f00000H\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>bi0111000000000:</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cx0191122334455\x23\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0110000000000!</data></match></read>
+    <read><delim>\x0a</delim><match><data>cx019y3v4k5v6k0n</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cv1191122334455\x2c\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0111000000000 </data></match></read>
+    <read><delim>\x0a</delim><match><data>cv111y000000000m</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cx2191122334455!\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0112000000000\x23</data></match></read>
+    <read><delim>\x0a</delim><match><data>cx219y3k4v5v6k0l</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cv3191122334455.\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0113000000000\x22</data></match></read>
+    <read><delim>\x0a</delim><match><data>cv311y000000000o</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cx4191122334455\x27\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0114000000000\x25</data></match></read>
+    <read><delim>\x0a</delim><match><data>cx419y3v4k5k6v0j</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cz515y674x00034\x2b\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0115000000000\x24</data></match></read>
+    <read><delim>\x0a</delim><match><data>cz5110000000000\x2c</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cx6191122334455\x25\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0116000000000\x27</data></match></read>
+    <read><delim>\x0a</delim><match><data>cx61903k4v5k6v0!</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cv7191122334455\x2a\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0117000000000\x26</data></match></read>
+    <read><delim>\x0a</delim><match><data>cv711y000000000k</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cx8191122334455\x2b\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0118000000000\x29</data></match></read>
+    <read><delim>\x0a</delim><match><data>cx81903k4v5v6k0\x2f</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>bl01971223344550\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>bm0111000000000\x3e</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>bj01931223344552\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>bk01110000000008</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>bd00121234567894\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>be02110000000005</data></match></read>
+    <read><delim>\x0a</delim><match><pcre>SUCCESSFUL association</pcre></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>bf023abc0099000e\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>bg025iohpl00000p</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>bh025fresi00000f\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>bi02110000000009</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cz0250575w00034i\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0210000000000\x22</data></match></read>
+    <read><delim>\x0a</delim><match><data>cz0211000000000\x2b</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cx1291122334455!\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0211000000000\x23</data></match></read>
+    <read><delim>\x0a</delim><match><data>cx12913v4k5k6v0\x24</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cz2251676x00034e\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0212000000000 </data></match></read>
+    <read><delim>\x0a</delim><match><data>cz2212000000000\x2a</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cx3291122334455\x23\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0213000000000!</data></match></read>
+    <read><delim>\x0a</delim><match><data>cx32923k4v5k6v0\x25</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cv4291122334455\x2a\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0214000000000\x26</data></match></read>
+    <read><delim>\x0a</delim><match><data>cv421y000000000k</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cx5291122334455\x25\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0215000000000\x27</data></match></read>
+    <read><delim>\x0a</delim><match><data>cx52923v4k5v6k0\x23</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cz6252577w00034o\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0216000000000\x24</data></match></read>
+    <read><delim>\x0a</delim><match><data>cz6213000000000\x2f</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cx7291122334455\x27\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0217000000000\x25</data></match></read>
+    <read><delim>\x0a</delim><match><data>cx72933v4v5k6k0 </data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cv8291122334455\x26\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0218000000000\x2a</data></match></read>
+    <read><delim>\x0a</delim><match><data>cv821y000000000g</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>bl02971223344553\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>bm0211000000000\x3d</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>bj02931223344551\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>bk0211000000000\x3b</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>bd00131234567895\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>be03110000000004</data></match></read>
+    <read><delim>\x0a</delim><match><pcre>SUCCESSFUL association</pcre></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>bf033xyz0099000\x7f\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>bg035gicdi00000c</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>bh035jffal00000k\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>bi03110000000008</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cx0391122334455!\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0310000000000\x23</data></match></read>
+    <read><delim>\x0a</delim><match><data>cx0399wqx2yq020n</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cv1391122334455.\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0311000000000\x22</data></match></read>
+    <read><delim>\x0a</delim><match><data>cv131y000000000o</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cx2391122334455\x23\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0312000000000!</data></match></read>
+    <read><delim>\x0a</delim><match><data>cx2399wqx2yq020l</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cv3391122334455\x2c\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0313000000000 </data></match></read>
+    <read><delim>\x0a</delim><match><data>cv331y000000000m</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cx4391122334455\x25\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0314000000000\x27</data></match></read>
+    <read><delim>\x0a</delim><match><data>cx4399wqx2y20q0j</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cz5359y\x3d2300034a\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0315000000000\x26</data></match></read>
+    <read><delim>\x0a</delim><match><data>cz531:000000000\x24</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cx6391122334455\x27\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0316000000000\x25</data></match></read>
+    <read><delim>\x0a</delim><match><data>cx639:wqx2y20q0k</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cv7391122334455\x28\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0317000000000\x24</data></match></read>
+    <read><delim>\x0a</delim><match><data>cv731y000000000i</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cx8391122334455\x29\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0318000000000\x2b</data></match></read>
+    <read><delim>\x0a</delim><match><data>cx839:wqx2yq020e</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>bl03971223344552\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>bm0311000000000\x3c</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>bj03931223344550\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>bk0311000000000:</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>bd00141234567892\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>be04110000000003</data></match></read>
+    <read><delim>\x0a</delim><match><pcre>SUCCESSFUL association</pcre></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>bf043xyz0099000x\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>bg045ppcoe00000m</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>bh045smflh00000w\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>bi0411000000000?</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cz045:0\x3d3400034\x2f\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0410000000000\x24</data></match></read>
+    <read><delim>\x0a</delim><match><data>cz041\x3b000000000\x27</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cx1491122334455\x27\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0411000000000\x25</data></match></read>
+    <read><delim>\x0a</delim><match><data>cx149\x3bwqx2y20q0j</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cv2491122334455\x2a\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0412000000000\x26</data></match></read>
+    <read><delim>\x0a</delim><match><data>cv241y000000000k</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cx3491122334455\x25\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0413000000000\x27</data></match></read>
+    <read><delim>\x0a</delim><match><data>cx349\x3bwqx2y20q0h</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cv4491122334455\x2c\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0414000000000 </data></match></read>
+    <read><delim>\x0a</delim><match><data>cv441y000000000m</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cx5491122334455\x23\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0415000000000!</data></match></read>
+    <read><delim>\x0a</delim><match><data>cx549\x3bwqx2y20q0n</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cv6491122334455.\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0416000000000\x22</data></match></read>
+    <read><delim>\x0a</delim><match><data>cv641y000000000o</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cx7491122334455!\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0417000000000\x23</data></match></read>
+    <read><delim>\x0a</delim><match><data>cx749\x3bwqx2y20q0l</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cv8491122334455 \x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0418000000000\x2c</data></match></read>
+    <read><delim>\x0a</delim><match><data>cv841y000000000a</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>bl04971223344555\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>bm0411000000000\x3b</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>bj04931223344557\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>bk0411000000000\x3d</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>bd00151234567893\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>be05110000000002</data></match></read>
+    <read><delim>\x0a</delim><match><pcre>SUCCESSFUL association</pcre></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>bf053abc0099000b\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>bg055icimm00000f</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>bh055fffpj00000v\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>bi0511000000000\x3e</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cx0591122334455\x27\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0510000000000\x25</data></match></read>
+    <read><delim>\x0a</delim><match><data>cx05953k4k5v6v0\x26</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <write><data>cz155567:x00034i\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>ap0511000000000\x24</data></match></read>
+    <read><delim>\x0a</delim><match><data>cz1516000000000\x2a</data></match></read>
+    <read><delim>\x0a</delim><match><data>ready for next packet</data></match></read>
+    <read><delim>\x0a</delim><match><data>YOU WIN\x2c what is your name?</data></match></read>
+    <write><data>kqaYrPMMApWW\x0a</data></write>
+    <read><delim>\x0a</delim><match><pcre>Well done,</pcre></match></read>
+</replay>
+</pov>

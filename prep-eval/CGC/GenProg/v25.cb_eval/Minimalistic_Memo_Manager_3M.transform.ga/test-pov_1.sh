@@ -1,0 +1,1 @@
+../../../cgc_test/Minimalistic_Memo_Manager_3M/test-pov_1.sh

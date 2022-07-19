@@ -1,0 +1,29 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>d60a1062884563db939efd681a41591adbbfe9a5fe5054087fe1e64dbc1baed9f940abe31bcf11ea5064045040fe6c29</seed>
+<replay>
+    <write><data>\xd4\x05\x00\x00</data></write>
+    <write><data>\xb4\x01</data></write>
+    <write><data>zCgbrCcR1nxRcXocHeytIysjcS3476EYGXWbSBxwdOGJmNZgCC69Sx0cA9tgtydsgMbcvqALhX8r8oAryusxyX5RgtYA6MTBtjow6JEJ6\x07DGFZqG8z3JqvjX7yV9MbU64Uh9yyAhBCX1JZCWP1ADivWxqgjPyxUvJ2EqAHBiY0t6AIe97a5maDYEGjcsxqK1PTNj3eM9uyNHwIVj8PDevCechqikcMg49WDsnS3lkueVQXlBXnL7I6luXgtVl8EqMAapVndsinh\x077Q6aqm0xp7p3uz9xV2BCgAMpGVnVVAJ1xWX9SdNnLOyXUzPBa36OesQt9CHJsBFaBy6AETzhUyLKldWSzIay5omMSS8nmweB2mTXMOeN2bRsp4cw5Z7FUOCzfv9suGhWhl6own8ZZ6dXpCjcS7sj6flmlUZk5ZiR2WJ9Iqt\x07</data></write>
+    <read><length>4</length><match><data>2y\x06\x00</data></match></read>
+    <write><data>\xed\x5f\x84\x00</data></write>
+    <read><length>4</length><match><data>\x01\x00\x00\x00</data></match></read>
+    <read><length>4</length><match><data>2y\x06\x00</data></match></read>
+    <write><data>\xed\x5f\x84\x00</data></write>
+    <read><length>4</length><match><data>\x01\x00\x00\x00</data></match></read>
+    <read><length>4</length><match><data>2y\x06\x00</data></match></read>
+    <write><data>j\x0d\x03\x00</data></write>
+    <read><length>4</length><match><pcre>(.+)</pcre></match></read>
+    <read><length>2</length><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <write><data>\xed\x5f\x84\x00</data></write>
+    <read><length>4</length><match><data>\x01\x00\x00\x00</data></match></read>
+    <read><length>4</length><match><data>2y\x06\x00</data></match></read>
+    <write><data>\x90v\x12\x00</data></write>
+    <read><length>4</length><match><data>\x01\x00\x00\x00</data></match></read>
+</replay>
+</pov>

@@ -1,0 +1,11 @@
+digraph G {
+    start [label="start", shape=box];
+    begin [label="begin"];
+    auth [label="auth"];
+    assoc [label="assoc"];
+    data [label="data", shape=triangle];
+    start -> begin;
+    begin -> assoc;
+    auth -> data;
+    assoc -> auth;
+}

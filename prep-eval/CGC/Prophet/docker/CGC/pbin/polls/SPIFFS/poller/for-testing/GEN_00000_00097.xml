@@ -1,0 +1,199 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>2e20888623b7286cc5847b2688ac4be7ff4b0f79542be1283b43a3d909b8f3066344c07150bcd7e342abc6c84142c2b2</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>Welcome to SPIFFS \x28Somewhat Poorly Implemented Fast File System\x29</data></match></read>
+    <read><delim>\x0a</delim><match><data>Please enter the date as prompted</data></match></read>
+    <read><delim>:</delim><match><data>Enter year between 1970 and 2105 </data></match></read>
+    <write><data>2014\x0a</data></write>
+    <read><delim>:</delim><match><data>Enter month </data></match></read>
+    <write><data>12\x0a</data></write>
+    <read><delim>:</delim><match><data>Enter day :</data></match></read>
+    <write><data>17\x0a</data></write>
+    <read><delim>:</delim><match><data>Enter hour \x2800\x2d23\x29 </data></match></read>
+    <write><data>21\x0a</data></write>
+    <read><delim>:</delim><match><data>Enter Minute \x2800\x2d59\x29 </data></match></read>
+    <write><data>4\x0a</data></write>
+    <read><delim>:</delim><match><data>Enter second \x2800\x2d59\x29 </data></match></read>
+    <write><data>3\x0a</data></write>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>add user </data></write>
+    <write><data>qRmu5NuX\x0a</data></write>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>add group </data></write>
+    <write><data>ZMFXV0\x0a</data></write>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>add user </data></write>
+    <write><data>TT6KS\x0a</data></write>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>add group </data></write>
+    <write><data>0On1rvG\x0a</data></write>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>set group 0On1rvG\x0a</data></write>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>add usertogroup TT6KS\x0a</data></write>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>get usersingroup </data></write>
+    <write><data>0On1rvG\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Count Name</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f</data></match></read>
+    <read><delim>\x0a</delim><match><data>0 TT6KS</data></match></read>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>delete usertogroup TT6KS 0On1rvG\x0a</data></write>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>add file </data></write>
+    <write><data>Ckfdh6 31\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x2d\x2d\x2d\x2d\x2dBegin File\x2d\x2d\x2d\x2d\x2d</data></match></read>
+    <write><data>PB1IU7HeLPWChRF8x55GfP03Ch1L28u</data></write>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>cat Ckfdh6\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x2d\x2d\x2d\x2d\x2dBegin File\x2d\x2d\x2d\x2d\x2d</data></match></read>
+    <read><length>31</length><match><pcre>([[:print:]])*</pcre></match></read>
+    <read><delim>\x0a</delim><match><data>\x2d\x2d\x2d\x2d\x2dEND File\x2d\x2d\x2d\x2d\x2d</data></match></read>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>get grouplist\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>GUID     NAME</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f</data></match></read>
+    <read><delim>\x0a</delim><match><data>0 root</data></match></read>
+    <read><delim>\x0a</delim><match><data>1 ZMFXV0</data></match></read>
+    <read><delim>\x0a</delim><match><data>2 0On1rvG</data></match></read>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>help\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x3c set\x2c get\x2c add\x2c delete\x2c exit\x2c help\x2c ls\x2c cat\x2c cd \x3e</data></match></read>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>add user </data></write>
+    <write><data>rSwKqmavA\x0a</data></write>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>add group </data></write>
+    <write><data>9LjGm\x0a</data></write>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>add file </data></write>
+    <write><data>DO6vNJ 27\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x2d\x2d\x2d\x2d\x2dBegin File\x2d\x2d\x2d\x2d\x2d</data></match></read>
+    <write><data>WTDU4TxLR89yExOnpnTDVYhGXhR</data></write>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>add perm DO6vNJ user rSwKqmavA\x0a</data></write>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>add perm DO6vNJ group 9LjGm\x0a</data></write>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>set group ZMFXV0\x0a</data></write>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>add file </data></write>
+    <write><data>l12QGVKm8 75\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x2d\x2d\x2d\x2d\x2dBegin File\x2d\x2d\x2d\x2d\x2d</data></match></read>
+    <write><data>C41YRbdYMdG1txTd2aCji834g4aDf836ObJNoIn1EEKryXvtLVJORs042fPq37olcGDY86asfSr</data></write>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>add user </data></write>
+    <write><data>zhc2rY\x0a</data></write>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>get help\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x3c date\x2c user\x2c group\x2c workingDir\x2c help\x2c userlist\x2c grouplist\x2c usersingroup \x3e</data></match></read>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>add help\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x3c user\x2c group\x2c file\x2c directory\x2c usertogroup\x2c perm\x2c appendfile\x2c help \x3e</data></match></read>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>add group </data></write>
+    <write><data>KvviLpPp\x0a</data></write>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>add group </data></write>
+    <write><data>OPDD4\x0a</data></write>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>add user </data></write>
+    <write><data>AMi0wm\x0a</data></write>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>get grouplist\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>GUID     NAME</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f</data></match></read>
+    <read><delim>\x0a</delim><match><data>0 root</data></match></read>
+    <read><delim>\x0a</delim><match><data>1 ZMFXV0</data></match></read>
+    <read><delim>\x0a</delim><match><data>2 0On1rvG</data></match></read>
+    <read><delim>\x0a</delim><match><data>3 9LjGm</data></match></read>
+    <read><delim>\x0a</delim><match><data>4 KvviLpPp</data></match></read>
+    <read><delim>\x0a</delim><match><data>5 OPDD4</data></match></read>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>add help\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x3c user\x2c group\x2c file\x2c directory\x2c usertogroup\x2c perm\x2c appendfile\x2c help \x3e</data></match></read>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>add group </data></write>
+    <write><data>2Ycs8z\x0a</data></write>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>set date\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Please enter the date as prompted</data></match></read>
+    <read><delim>:</delim><match><data>Enter year between 1970 and 2105 </data></match></read>
+    <write><data>2014\x0a</data></write>
+    <read><delim>:</delim><match><data>Enter month </data></match></read>
+    <write><data>7\x0a</data></write>
+    <read><delim>:</delim><match><data>Enter day :</data></match></read>
+    <write><data>14\x0a</data></write>
+    <read><delim>:</delim><match><data>Enter hour \x2800\x2d23\x29 </data></match></read>
+    <write><data>14\x0a</data></write>
+    <read><delim>:</delim><match><data>Enter Minute \x2800\x2d59\x29 </data></match></read>
+    <write><data>23\x0a</data></write>
+    <read><delim>:</delim><match><data>Enter second \x2800\x2d59\x29 </data></match></read>
+    <write><data>39\x0a</data></write>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>exit\x0a</data></write>
+</replay>
+</pov>

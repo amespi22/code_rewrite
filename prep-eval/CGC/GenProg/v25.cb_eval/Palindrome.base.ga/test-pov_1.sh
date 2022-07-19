@@ -1,0 +1,1 @@
+../../../cgc_test/Palindrome/test-pov_1.sh

@@ -1,0 +1,27 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>fd101096fdb524c54341836d2bf606a3ac9fc098c0da7cbb88ff05791195128c9a79e5c05a3b4587f875d14a461770a3</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>Welcome to the diary logger!</data></match></read>
+    <write><data>\x87\x00</data></write>
+    <write><data>BB\x07\x0a\x08\x00\x00\x00\x03\x04\x0e\x00S\x00\x00\x03\x18\x15\x00\x2d\x00bbbbabaaabcaabcabbabccac\x05\x04\x00\x00\x004\x00\x00\x03\x11\x3b\x00L\x00cccbcbabbcaccbacb\x01\x00\x00\x8a\x00\x00\x00\x01\x03Y\x00\x00\x00\x00\x03\x13\x60\x00s\x00ccbcaacbbabacabcbcb\x05\x03\x06z\x00\x80\x00acbabc\x04\x01\x00\x9b\xfd\x00\x00</data></write>
+    <read><delim>\x0a</delim><match><data>Length: 135</data></match></read>
+    <read><delim>\x0a</delim><match><data>Magic number: 0x4242</data></match></read>
+    <read><delim>\x0a</delim><match><data>Future: 0xa07</data></match></read>
+    <read><delim>\x0a</delim><match><data>Offset: 0x8</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: books</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x4</data></match></read>
+    <read><delim>\x0a</delim><match><data>author: bbbbabaaabcaabcabbabccac</data></match></read>
+    <read><delim>\x0a</delim><match><data>made into a movie: false</data></match></read>
+    <read><delim>\x0a</delim><match><data>author: cccbcbabbcaccbacb</data></match></read>
+    <read><delim>\x0a</delim><match><data>year: 0x8a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: movies</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x3</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: ccbcaacbbabacabcbcb</data></match></read>
+    <read><delim>\x0a</delim><match><data>plot summary: acbabc</data></match></read>
+    <read><delim>\x0a</delim><match><data>year released: 0xfd9b</data></match></read>
+    <read><delim>\x0a</delim><match><data>good book.</data></match></read>
+</replay>
+</pov>

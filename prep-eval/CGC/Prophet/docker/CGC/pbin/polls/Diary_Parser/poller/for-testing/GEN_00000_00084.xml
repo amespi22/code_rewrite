@@ -1,0 +1,64 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>44bcb9eba1835e44ccb603d33586dc71997b408ab8b387d1f2dbab7a03e620b8cf0d3e3c46343e7526fc492a07b38c75</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>Welcome to the diary logger!</data></match></read>
+    <write><data>\xbe\x01</data></write>
+    <write><data>BBPO\x08\x00\x00\x00\x04\x05\x0e\x00L\x00\x00\x03\x07\x15\x00\x1c\x00cbbcbba\x04\x04\x00\x01\x00\x23\x00\x01\x00\x00\xff\x00\x2a\x00\x00\x03\x0e1\x00?\x00cbbbbcbbbccccc\x03\x03\x06F\x00\x00\x00cbbcca\x06\x05R\x00\x5d\x01\x04\x04X\x00\x87\x00\x00\x03\x0f\x5f\x00n\x00babccbbbaabacac\x02\x02\x04u\x00y\x00\xaf!\x13B\x03\x04\x00\x00\x00\x80\x00\x04\x00\x00\xee\x00\x00\x00\x02\x04\x8d\x00\xb4\x00\x00\x03\x0b\x94\x00\x9f\x00bbcabbacbbc\x01\x01\x00X\xf6\xa6\x00\x03\x04\x00\x01\x00\xad\x00\x04\x00\x00n\x00\x00\x00\x06\x03\xba\x00\xde\x00\x00\x03\x04\xc1\x00\xc5\x00bbcc\x01\x03\x0b\xcc\x00\xd7\x00abacccabbac\x02\x00\x00\xd5\x00\x00\x00\x00\x04\xe4\x00\x2a\x01\x00\x03\x0c\xeb\x00\xf7\x00acaaabbabbac\x01\x03\x10\xfe\x00\x0e\x01abaaccabbbaccbaa\x05\x00\x00Q\x00\x15\x01\x04\x03\x0e\x1c\x01\x00\x00bccccabcccaaab\x01\x040\x01\x00\x00\x01\x03\x0e7\x01E\x01acabcaaabcccba\x04\x00\x00\x7d\x00L\x01\x05\x03\x03S\x01V\x01cbb\x07\x04\x00\x00\x00\x00\x00\x01\x03c\x01\x9f\x01\x00\x03\x0ej\x01x\x01baccbaaaababaa\x05\x03\x04\x7f\x01\x83\x01ccaa\x03\x03\x15\x8a\x01\x00\x00bacbbccaccbabbaabaabb\x03\x03\xa5\x01\x00\x00\x00\x03\x04\xac\x01\xb0\x01bcca\x05\x04\x00\x00\x00\xb7\x01\x01\x00\x00\xe1\x00\x00\x00</data></write>
+    <read><delim>\x0a</delim><match><data>Length: 446</data></match></read>
+    <read><delim>\x0a</delim><match><data>Magic number: 0x4242</data></match></read>
+    <read><delim>\x0a</delim><match><data>Future: 0x4f50</data></match></read>
+    <read><delim>\x0a</delim><match><data>Offset: 0x8</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: songs</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x5</data></match></read>
+    <read><delim>\x0a</delim><match><data>writer: cbbcbba</data></match></read>
+    <read><delim>\x0a</delim><match><data>free online: true</data></match></read>
+    <read><delim>\x0a</delim><match><data>year: 0xff</data></match></read>
+    <read><delim>\x0a</delim><match><data>writer: cbbbbcbbbccccc</data></match></read>
+    <read><delim>\x0a</delim><match><data>publisher: cbbcca</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: hobbies</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x5</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: coins</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x4</data></match></read>
+    <read><delim>\x0a</delim><match><data>name: babccbbbaabacac</data></match></read>
+    <read><delim>\x0a</delim><match><data>value: 0x421321af</data></match></read>
+    <read><delim>\x0a</delim><match><data>mint: false</data></match></read>
+    <read><delim>\x0a</delim><match><data>count: 0xee</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: stamps</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x4</data></match></read>
+    <read><delim>\x0a</delim><match><data>name: bbcabbacbbc</data></match></read>
+    <read><delim>\x0a</delim><match><data>value: 0xf658</data></match></read>
+    <read><delim>\x0a</delim><match><data>mint: true</data></match></read>
+    <read><delim>\x0a</delim><match><data>count: 0x6e</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: sports</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x3</data></match></read>
+    <read><delim>\x0a</delim><match><data>name: bbcc</data></match></read>
+    <read><delim>\x0a</delim><match><data>position: abacccabbac</data></match></read>
+    <read><delim>\x0a</delim><match><data>years experience: 0xd5</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: shooting</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x4</data></match></read>
+    <read><delim>\x0a</delim><match><data>make: acaaabbabbac</data></match></read>
+    <read><delim>\x0a</delim><match><data>model: abaaccabbbaccbaa</data></match></read>
+    <read><delim>\x0a</delim><match><data>years experience: 0x51</data></match></read>
+    <read><delim>\x0a</delim><match><data>length units: bccccabcccaaab</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: knives</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x4</data></match></read>
+    <read><delim>\x0a</delim><match><data>model: acabcaaabcccba</data></match></read>
+    <read><delim>\x0a</delim><match><data>blade length: 0x7d</data></match></read>
+    <read><delim>\x0a</delim><match><data>length units: cbb</data></match></read>
+    <read><delim>\x0a</delim><match><data>injury: false</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: movies</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x3</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: baccbaaaababaa</data></match></read>
+    <read><delim>\x0a</delim><match><data>plot summary: ccaa</data></match></read>
+    <read><delim>\x0a</delim><match><data>producer: bacbbccaccbabbaabaabb</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: books</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x3</data></match></read>
+    <read><delim>\x0a</delim><match><data>author: bcca</data></match></read>
+    <read><delim>\x0a</delim><match><data>made into a movie: false</data></match></read>
+    <read><delim>\x0a</delim><match><data>year: 0xe1</data></match></read>
+    <read><delim>\x0a</delim><match><data>good book.</data></match></read>
+</replay>
+</pov>

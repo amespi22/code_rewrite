@@ -1,0 +1,46 @@
+{
+"DEPEND_VERSION":"1.0.1",
+"filenames":[{"name":"SCUBA_Dive_Logging/src/include/libcgc.h","included_by":["SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/cgc_stdlib.h", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/mymath.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/new_printf.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/stdlib.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/download_dive.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/edit_diver.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/log_dive.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/menu.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/service.c"]},
+{"name":"SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/cgc_stdlib.h","included_by":["SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/malloc.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/new_printf.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/stdlib.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/dates.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/dive_statistics.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/download_dive.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/edit_diver.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/edit_dives.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/log_dive.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/menu.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/print_dives.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/remove_dives.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/service.c"]},
+{"name":"SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/include/cgc_malloc.h","included_by":["SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/malloc.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/download_dive.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/log_dive.c"]},
+{"name":"SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/malloc.c"},
+{"name":"SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/cgc_mymath.h","included_by":["SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/mymath.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/new_printf.c"]},
+{"name":"SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/cgc_stdint.h","included_by":["SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/mymath.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/new_printf.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/stdlib.c"]},
+{"name":"SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/mymath.c"},
+{"name":"SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/cgc_stdarg.h","included_by":["SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/new_printf.c"]},
+{"name":"SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/new_printf.c"},
+{"name":"SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/stdlib.c"},
+{"name":"SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/include/cgc_dates.h","included_by":["SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/dates.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/include/cgc_service.h", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/download_dive.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/log_dive.c"]},
+{"name":"SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/dates.c"},
+{"name":"SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/include/cgc_service.h","included_by":["SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/dive_statistics.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/download_dive.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/edit_diver.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/edit_dives.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/log_dive.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/menu.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/print_dives.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/remove_dives.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/service.c"]},
+{"name":"SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/dive_statistics.c"},
+{"name":"SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/download_dive.c"},
+{"name":"SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/edit_diver.c"},
+{"name":"SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/include/cgc_menu.h","included_by":["SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/edit_dives.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/menu.c", "SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/service.c"]},
+{"name":"SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/edit_dives.c"},
+{"name":"SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/log_dive.c"},
+{"name":"SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/menu.c"},
+{"name":"SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/print_dives.c"},
+{"name":"SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/remove_dives.c"},
+{"name":"SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/service.c"}
+],
+"ignore":[
+"SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/download_dive.c",
+"SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/edit_dives.c"
+],
+"macros":[
+   {"name": "PATCHED", "value": false }
+],
+"disable_eval":[
+   "cgc_add_free_list","cgc_allocate","cgc_atof","cgc_atoi","cgc_bzero","cgc_calloc","cgc_datetime2time_t","cgc_deallocate","cgc_diff_between_dates","cgc_dive_statistics","cgc_download_dive","cgc_doy","cgc_edit_diver","cgc_edit_dives","cgc_exit_app","cgc_fdwait","cgc_find_char","cgc_float_to_str","cgc_floor","cgc_flush_input","cgc_free","cgc_getline","cgc_int_to_hex","cgc_int_to_str","cgc_isalnum","cgc_isalpha","cgc_isdigit","cgc_isinf","cgc_islower","cgc_isnan","cgc_isspace","cgc_isupper","cgc_itoa","cgc_leap_year","cgc_list_dives","cgc_log10","cgc_log_dives","cgc_malloc","cgc_memcpy","cgc_memset","cgc_pow","cgc_print_datetime","cgc_print_diver_info","cgc_print_dives","cgc_printf","cgc_print_time_t","cgc_process_menu","cgc_putc","cgc_puts","cgc_receive","cgc_receive_bytes","cgc_receive_until","cgc_remove_dives","cgc_rint","cgc_round","cgc_round_away_from_zero","cgc_sprintf","cgc_str2datetime","cgc_strcat","cgc_strchr","cgc_strcmp","cgc_strcpy","cgc_strdup","cgc_strlen","cgc_strncat","cgc_strncpy","cgc_strtok","cgc__terminate","cgc_time_t2datetime","cgc_to_date_str","cgc_to_time_str","cgc_transmit","cgc_update_dive","cgc_vprintf","cgc_vsprintf","cgc_write","__cxa_finalize@@GLIBC_2.1.3","data_start","deregister_tm_clones","__do_global_dtors_aux","__do_global_dtors_aux_fini_array_entry","_fini","frame_dummy","__frame_dummy_init_array_entry","__gmon_start__","_init","__init_array_end","__init_array_start","_ITM_deregisterTMCloneTable","_ITM_registerTMCloneTable","__libc_csu_fini","__libc_csu_init","__libc_start_main@@GLIBC_2.0","main","register_tm_clones","_start","__x86.get_pc_thunk.ax","__x86.get_pc_thunk.bx","__x86.get_pc_thunk.dx"
+],
+"enable_eval":[
+   "cgc_strlen"
+],
+"struct_ptrs":{
+},
+"keyword_types":[ "datetime_struct_type" ],
+"defines":[
+"__MYMATH_H__","__STDINT_H__","__STDARG_H__","va_start","va_end","va_arg","ALLOC_PAGE_SIZE","FREE_BLOCK_NEXT","FREE_BLOCK_PREV","SET_BIT","CLEAR_BIT","IS_BIT_SET","F32_PRECISION","__STDLIB_H__","INUSE_FLAG","FREE_FLAG","SERVICE_H","DATES_H","FP_ERANGE","FP_ENVAL","MENU_H","__MALLOC_H__","MALLOC_INUSE_FLAG_BIT","MALLOC_NEXT_FLAG_BIT","MALLOC_BUCKET_COUNT"
+]
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>9e796ea7ab53f25045444e73e6fc0786dc4498572163d491b3dc9f12f6cd51fd97bb9b0ba90f4842a2d372c3aabfcc1e</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>Welcome to the diary logger!</data></match></read>
+    <write><data>p\x00</data></write>
+    <write><data>BB4w\x08\x00\x00\x00\x02\x05\x0e\x00K\x00\x00\x03\x06\x15\x00\x1b\x00cbaaac\x01\x03\x14\x22\x006\x00acabcaacabccccaacbca\x05\x00\x00\x7e\x00\x3d\x00\x04\x00\x00\xa3\x00D\x00\x03\x01\x00\xe7\x0d\x00\x00\x04\x02Q\x00\x00\x00\x00\x03\x11X\x00i\x00bcaccbbacbbbbbbca\x04\x04\x00\x00\x00\x00\x00</data></write>
+    <read><delim>\x0a</delim><match><data>Length: 112</data></match></read>
+    <read><delim>\x0a</delim><match><data>Magic number: 0x4242</data></match></read>
+    <read><delim>\x0a</delim><match><data>Future: 0x7734</data></match></read>
+    <read><delim>\x0a</delim><match><data>Offset: 0x8</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: vehicles</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x5</data></match></read>
+    <read><delim>\x0a</delim><match><data>make: cbaaac</data></match></read>
+    <read><delim>\x0a</delim><match><data>model: acabcaacabccccaacbca</data></match></read>
+    <read><delim>\x0a</delim><match><data>doors: 0x7e</data></match></read>
+    <read><delim>\x0a</delim><match><data>displacement units: 0xa3</data></match></read>
+    <read><delim>\x0a</delim><match><data>displacement: 0xde7</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: songs</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x2</data></match></read>
+    <read><delim>\x0a</delim><match><data>writer: bcaccbbacbbbbbbca</data></match></read>
+    <read><delim>\x0a</delim><match><data>free online: false</data></match></read>
+    <read><delim>\x0a</delim><match><data>good book.</data></match></read>
+</replay>
+</pov>

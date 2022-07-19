@@ -1,0 +1,5 @@
+digraph G {
+    doit [label="doit", shape=triangle];
+    start [label="start", shape=box];
+    start -> doit;
+}

@@ -1,0 +1,1 @@
+../../../cgc_test/FSK_BBS/test.sh

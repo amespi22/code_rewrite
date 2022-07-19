@@ -1,0 +1,704 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>933dd4c2821e8c9301bd0162f5c8ac12d474b45d59de6f07bd7fa0b9280fc4e5ca9fa419daafc826edb16bcfb654df92</seed>
+<replay>
+    <read><length>85</length><match><data>Before we begin. Enter a number \x5b1 \x2d 4294967295\x5d\x0aOr any number. We\x27ll figure it out: </data></match></read>
+    <write><data>507685833\x0a</data></write>
+    <read><length>28</length><match><data>New Game \x2d\x2d Ready\x2c set\x2c go!\x0a</data></match></read>
+    <read><length>94</length><match><data>                              \x2d\x2dBoard: HIDDEN\x2d\x2d\x0a1. Shoot!\x0a2. Reveal Board\x0a3. New Game\x0a4. Quit\x0a</data></match></read>
+    <read><length>66</length><match><data>Current Score \x3d 0 \x7c Total Time Remaining: 10000 \x7c High Score \x3d 0 \x0a</data></match></read>
+    <read><length>43</length><match><data>Shots Remaining: 125 \x7c Bombs Remaining: 5\x0a\x0a</data></match></read>
+    <read><length>12</length><match><data>Selection\x2d: </data></match></read>
+    <write><data>3\x0a</data></write>
+    <read><length>28</length><match><data>New Game \x2d\x2d Ready\x2c set\x2c go!\x0a</data></match></read>
+    <read><length>94</length><match><data>                              \x2d\x2dBoard: HIDDEN\x2d\x2d\x0a1. Shoot!\x0a2. Reveal Board\x0a3. New Game\x0a4. Quit\x0a</data></match></read>
+    <read><length>66</length><match><data>Current Score \x3d 0 \x7c Total Time Remaining: 10000 \x7c High Score \x3d 0 \x0a</data></match></read>
+    <read><length>43</length><match><data>Shots Remaining: 125 \x7c Bombs Remaining: 5\x0a\x0a</data></match></read>
+    <read><length>12</length><match><data>Selection\x2d: </data></match></read>
+    <write><data>1\x0a</data></write>
+    <read><delim>Enter Shot Coordinates Ex: 100\x2c 100:: </delim></read>
+    <write><data>526\x2c 4569\x0a</data></write>
+    <read><length>35</length><match><data>You missed. Better luck next time.\x0a</data></match></read>
+    <read><length>94</length><match><data>                              \x2d\x2dBoard: HIDDEN\x2d\x2d\x0a1. Shoot!\x0a2. Reveal Board\x0a3. New Game\x0a4. Quit\x0a</data></match></read>
+    <read><length>66</length><match><data>Current Score \x3d 0 \x7c Total Time Remaining: 10000 \x7c High Score \x3d 0 \x0a</data></match></read>
+    <read><length>43</length><match><data>Shots Remaining: 124 \x7c Bombs Remaining: 5\x0a\x0a</data></match></read>
+    <read><length>12</length><match><data>Selection\x2d: </data></match></read>
+    <write><data>2\x0a</data></write>
+    <read><length>11</length><match><data>GAME BOARD\x0a</data></match></read>
+    <read><length>43</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28490\x2c256\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>43</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28491\x2c257\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>43</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28492\x2c255\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>43</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28492\x2c256\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>43</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28492\x2c257\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28591\x2c1043\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28592\x2c1044\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28593\x2c1042\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28593\x2c1043\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28593\x2c1044\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281001\x2c6965\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281002\x2c6964\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281003\x2c6964\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281003\x2c6965\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281003\x2c6966\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281274\x2c897\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281275\x2c898\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281276\x2c896\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281276\x2c897\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281276\x2c898\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281547\x2c6960\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281548\x2c6959\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281549\x2c6959\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281549\x2c6960\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281549\x2c6961\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281839\x2c4870\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281840\x2c4869\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281841\x2c4869\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281841\x2c4870\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281841\x2c4871\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282522\x2c1169\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282523\x2c1170\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282524\x2c1168\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282524\x2c1169\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282524\x2c1170\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282601\x2c739\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282602\x2c740\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282603\x2c738\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282603\x2c739\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282603\x2c740\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283066\x2c2261\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283067\x2c2262\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283068\x2c2260\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283068\x2c2261\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283068\x2c2262\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283173\x2c8042\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283174\x2c8041\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283175\x2c8041\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283175\x2c8042\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283175\x2c8043\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283382\x2c928\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283383\x2c929\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283384\x2c927\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283384\x2c928\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283384\x2c929\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283645\x2c1457\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283646\x2c1458\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283647\x2c1456\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283647\x2c1457\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283647\x2c1458\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283658\x2c3808\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283659\x2c3809\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283660\x2c3807\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283660\x2c3808\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283660\x2c3809\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283932\x2c5474\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283933\x2c5473\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283934\x2c5473\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283934\x2c5474\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283934\x2c5475\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284237\x2c8108\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284237\x2c8109\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284237\x2c8110\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284238\x2c8108\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284239\x2c8109\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284660\x2c2133\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284660\x2c2134\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284660\x2c2135\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284661\x2c2135\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284662\x2c2134\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284910\x2c1216\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284910\x2c1217\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284910\x2c1218\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284911\x2c1218\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284912\x2c1217\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286067\x2c4773\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286067\x2c4774\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286067\x2c4775\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286068\x2c4773\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286069\x2c4774\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286087\x2c7018\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286087\x2c7019\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286087\x2c7020\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286088\x2c7018\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286089\x2c7019\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286217\x2c4298\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286217\x2c4299\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286217\x2c4300\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286218\x2c4298\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286219\x2c4299\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286461\x2c3811\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286461\x2c3812\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286461\x2c3813\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286462\x2c3813\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286463\x2c3812\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286620\x2c7761\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286620\x2c7762\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286620\x2c7763\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286621\x2c7761\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286622\x2c7762\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286712\x2c4204\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286712\x2c4205\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286712\x2c4206\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286713\x2c4204\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286714\x2c4205\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286784\x2c6941\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286784\x2c6942\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286784\x2c6943\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286785\x2c6941\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286786\x2c6942\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287491\x2c566\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287491\x2c567\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287491\x2c568\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287492\x2c568\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287493\x2c567\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>1</length><match><data>\x0a</data></match></read>
+    <read><length>117</length><match><data>                              \x2d\x2dBoard: REVEALED\x2d\x2d\x0a1. Place Bomb\x0a2. Reveal Board\x0a3. Let them Run!\x0a4. New Game\x0a5. Quit\x0a</data></match></read>
+    <read><length>66</length><match><data>Current Score \x3d 0 \x7c Total Time Remaining: 10000 \x7c High Score \x3d 0 \x0a</data></match></read>
+    <read><length>43</length><match><data>Shots Remaining: 124 \x7c Bombs Remaining: 5\x0a\x0a</data></match></read>
+    <read><length>12</length><match><data>Selection\x2d: </data></match></read>
+    <write><data>2\x0a</data></write>
+    <read><length>11</length><match><data>GAME BOARD\x0a</data></match></read>
+    <read><length>43</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28490\x2c256\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>43</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28491\x2c257\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>43</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28492\x2c255\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>43</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28492\x2c256\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>43</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28492\x2c257\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28591\x2c1043\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28592\x2c1044\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28593\x2c1042\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28593\x2c1043\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28593\x2c1044\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281001\x2c6965\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281002\x2c6964\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281003\x2c6964\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281003\x2c6965\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281003\x2c6966\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281274\x2c897\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281275\x2c898\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281276\x2c896\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281276\x2c897\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281276\x2c898\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281547\x2c6960\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281548\x2c6959\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281549\x2c6959\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281549\x2c6960\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281549\x2c6961\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281839\x2c4870\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281840\x2c4869\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281841\x2c4869\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281841\x2c4870\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281841\x2c4871\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282522\x2c1169\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282523\x2c1170\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282524\x2c1168\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282524\x2c1169\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282524\x2c1170\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282601\x2c739\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282602\x2c740\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282603\x2c738\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282603\x2c739\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282603\x2c740\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283066\x2c2261\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283067\x2c2262\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283068\x2c2260\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283068\x2c2261\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283068\x2c2262\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283173\x2c8042\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283174\x2c8041\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283175\x2c8041\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283175\x2c8042\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283175\x2c8043\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283382\x2c928\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283383\x2c929\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283384\x2c927\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283384\x2c928\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283384\x2c929\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283645\x2c1457\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283646\x2c1458\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283647\x2c1456\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283647\x2c1457\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283647\x2c1458\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283658\x2c3808\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283659\x2c3809\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283660\x2c3807\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283660\x2c3808\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283660\x2c3809\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283932\x2c5474\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283933\x2c5473\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283934\x2c5473\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283934\x2c5474\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283934\x2c5475\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284237\x2c8108\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284237\x2c8109\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284237\x2c8110\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284238\x2c8108\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284239\x2c8109\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284660\x2c2133\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284660\x2c2134\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284660\x2c2135\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284661\x2c2135\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284662\x2c2134\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284910\x2c1216\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284910\x2c1217\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284910\x2c1218\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284911\x2c1218\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284912\x2c1217\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286067\x2c4773\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286067\x2c4774\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286067\x2c4775\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286068\x2c4773\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286069\x2c4774\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286087\x2c7018\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286087\x2c7019\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286087\x2c7020\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286088\x2c7018\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286089\x2c7019\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286217\x2c4298\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286217\x2c4299\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286217\x2c4300\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286218\x2c4298\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286219\x2c4299\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286461\x2c3811\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286461\x2c3812\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286461\x2c3813\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286462\x2c3813\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286463\x2c3812\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286620\x2c7761\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286620\x2c7762\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286620\x2c7763\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286621\x2c7761\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286622\x2c7762\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286712\x2c4204\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286712\x2c4205\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286712\x2c4206\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286713\x2c4204\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286714\x2c4205\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286784\x2c6941\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286784\x2c6942\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286784\x2c6943\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286785\x2c6941\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286786\x2c6942\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287491\x2c566\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287491\x2c567\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287491\x2c568\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287492\x2c568\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287493\x2c567\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>1</length><match><data>\x0a</data></match></read>
+    <read><length>117</length><match><data>                              \x2d\x2dBoard: REVEALED\x2d\x2d\x0a1. Place Bomb\x0a2. Reveal Board\x0a3. Let them Run!\x0a4. New Game\x0a5. Quit\x0a</data></match></read>
+    <read><length>66</length><match><data>Current Score \x3d 0 \x7c Total Time Remaining: 10000 \x7c High Score \x3d 0 \x0a</data></match></read>
+    <read><length>43</length><match><data>Shots Remaining: 124 \x7c Bombs Remaining: 5\x0a\x0a</data></match></read>
+    <read><length>12</length><match><data>Selection\x2d: </data></match></read>
+    <write><data>2\x0a</data></write>
+    <read><length>11</length><match><data>GAME BOARD\x0a</data></match></read>
+    <read><length>43</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28490\x2c256\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>43</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28491\x2c257\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>43</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28492\x2c255\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>43</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28492\x2c256\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>43</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28492\x2c257\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28591\x2c1043\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28592\x2c1044\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28593\x2c1042\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28593\x2c1043\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28593\x2c1044\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281001\x2c6965\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281002\x2c6964\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281003\x2c6964\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281003\x2c6965\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281003\x2c6966\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281274\x2c897\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281275\x2c898\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281276\x2c896\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281276\x2c897\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281276\x2c898\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281547\x2c6960\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281548\x2c6959\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281549\x2c6959\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281549\x2c6960\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281549\x2c6961\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281839\x2c4870\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281840\x2c4869\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281841\x2c4869\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281841\x2c4870\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281841\x2c4871\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282522\x2c1169\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282523\x2c1170\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282524\x2c1168\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282524\x2c1169\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282524\x2c1170\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282601\x2c739\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282602\x2c740\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282603\x2c738\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282603\x2c739\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282603\x2c740\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283066\x2c2261\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283067\x2c2262\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283068\x2c2260\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283068\x2c2261\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283068\x2c2262\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283173\x2c8042\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283174\x2c8041\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283175\x2c8041\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283175\x2c8042\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283175\x2c8043\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283382\x2c928\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283383\x2c929\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283384\x2c927\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283384\x2c928\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283384\x2c929\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283645\x2c1457\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283646\x2c1458\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283647\x2c1456\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283647\x2c1457\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283647\x2c1458\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283658\x2c3808\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283659\x2c3809\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283660\x2c3807\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283660\x2c3808\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283660\x2c3809\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283932\x2c5474\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283933\x2c5473\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283934\x2c5473\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283934\x2c5474\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283934\x2c5475\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284237\x2c8108\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284237\x2c8109\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284237\x2c8110\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284238\x2c8108\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284239\x2c8109\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284660\x2c2133\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284660\x2c2134\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284660\x2c2135\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284661\x2c2135\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284662\x2c2134\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284910\x2c1216\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284910\x2c1217\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284910\x2c1218\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284911\x2c1218\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284912\x2c1217\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286067\x2c4773\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286067\x2c4774\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286067\x2c4775\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286068\x2c4773\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286069\x2c4774\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286087\x2c7018\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286087\x2c7019\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286087\x2c7020\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286088\x2c7018\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286089\x2c7019\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286217\x2c4298\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286217\x2c4299\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286217\x2c4300\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286218\x2c4298\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286219\x2c4299\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286461\x2c3811\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286461\x2c3812\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286461\x2c3813\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286462\x2c3813\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286463\x2c3812\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286620\x2c7761\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286620\x2c7762\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286620\x2c7763\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286621\x2c7761\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286622\x2c7762\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286712\x2c4204\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286712\x2c4205\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286712\x2c4206\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286713\x2c4204\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286714\x2c4205\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286784\x2c6941\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286784\x2c6942\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286784\x2c6943\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286785\x2c6941\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286786\x2c6942\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287491\x2c566\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287491\x2c567\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287491\x2c568\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287492\x2c568\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287493\x2c567\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>1</length><match><data>\x0a</data></match></read>
+    <read><length>117</length><match><data>                              \x2d\x2dBoard: REVEALED\x2d\x2d\x0a1. Place Bomb\x0a2. Reveal Board\x0a3. Let them Run!\x0a4. New Game\x0a5. Quit\x0a</data></match></read>
+    <read><length>66</length><match><data>Current Score \x3d 0 \x7c Total Time Remaining: 10000 \x7c High Score \x3d 0 \x0a</data></match></read>
+    <read><length>43</length><match><data>Shots Remaining: 124 \x7c Bombs Remaining: 5\x0a\x0a</data></match></read>
+    <read><length>12</length><match><data>Selection\x2d: </data></match></read>
+    <write><data>2\x0a</data></write>
+    <read><length>11</length><match><data>GAME BOARD\x0a</data></match></read>
+    <read><length>43</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28490\x2c256\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>43</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28491\x2c257\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>43</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28492\x2c255\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>43</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28492\x2c256\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>43</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28492\x2c257\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28591\x2c1043\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28592\x2c1044\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28593\x2c1042\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28593\x2c1043\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28593\x2c1044\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281001\x2c6965\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281002\x2c6964\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281003\x2c6964\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281003\x2c6965\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281003\x2c6966\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281274\x2c897\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281275\x2c898\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281276\x2c896\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281276\x2c897\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281276\x2c898\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281547\x2c6960\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281548\x2c6959\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281549\x2c6959\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281549\x2c6960\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281549\x2c6961\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281839\x2c4870\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281840\x2c4869\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281841\x2c4869\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281841\x2c4870\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281841\x2c4871\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282522\x2c1169\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282523\x2c1170\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282524\x2c1168\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282524\x2c1169\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282524\x2c1170\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282601\x2c739\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282602\x2c740\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282603\x2c738\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282603\x2c739\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282603\x2c740\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283066\x2c2261\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283067\x2c2262\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283068\x2c2260\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283068\x2c2261\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283068\x2c2262\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283173\x2c8042\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283174\x2c8041\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283175\x2c8041\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283175\x2c8042\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283175\x2c8043\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283382\x2c928\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283383\x2c929\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283384\x2c927\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283384\x2c928\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283384\x2c929\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283645\x2c1457\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283646\x2c1458\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283647\x2c1456\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283647\x2c1457\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283647\x2c1458\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283658\x2c3808\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283659\x2c3809\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283660\x2c3807\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283660\x2c3808\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283660\x2c3809\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283932\x2c5474\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283933\x2c5473\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283934\x2c5473\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283934\x2c5474\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283934\x2c5475\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284237\x2c8108\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284237\x2c8109\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284237\x2c8110\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284238\x2c8108\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284239\x2c8109\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284660\x2c2133\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284660\x2c2134\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284660\x2c2135\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284661\x2c2135\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284662\x2c2134\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284910\x2c1216\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284910\x2c1217\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284910\x2c1218\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284911\x2c1218\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284912\x2c1217\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286067\x2c4773\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286067\x2c4774\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286067\x2c4775\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286068\x2c4773\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286069\x2c4774\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286087\x2c7018\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286087\x2c7019\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286087\x2c7020\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286088\x2c7018\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286089\x2c7019\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286217\x2c4298\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286217\x2c4299\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286217\x2c4300\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286218\x2c4298\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286219\x2c4299\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286461\x2c3811\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286461\x2c3812\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286461\x2c3813\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286462\x2c3813\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286463\x2c3812\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286620\x2c7761\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286620\x2c7762\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286620\x2c7763\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286621\x2c7761\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286622\x2c7762\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286712\x2c4204\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286712\x2c4205\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286712\x2c4206\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286713\x2c4204\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286714\x2c4205\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286784\x2c6941\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286784\x2c6942\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286784\x2c6943\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286785\x2c6941\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286786\x2c6942\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287491\x2c566\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287491\x2c567\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287491\x2c568\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287492\x2c568\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287493\x2c567\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>1</length><match><data>\x0a</data></match></read>
+    <read><length>117</length><match><data>                              \x2d\x2dBoard: REVEALED\x2d\x2d\x0a1. Place Bomb\x0a2. Reveal Board\x0a3. Let them Run!\x0a4. New Game\x0a5. Quit\x0a</data></match></read>
+    <read><length>66</length><match><data>Current Score \x3d 0 \x7c Total Time Remaining: 10000 \x7c High Score \x3d 0 \x0a</data></match></read>
+    <read><length>43</length><match><data>Shots Remaining: 124 \x7c Bombs Remaining: 5\x0a\x0a</data></match></read>
+    <read><length>12</length><match><data>Selection\x2d: </data></match></read>
+    <write><data>3\x0a</data></write>
+    <read><length>42</length><match><data>Enter amount of time to run: \x5b100\x2d1000\x5d:: </data></match></read>
+    <write><data>750\x0a</data></write>
+    <read><length>94</length><match><data>                              \x2d\x2dBoard: HIDDEN\x2d\x2d\x0a1. Shoot!\x0a2. Reveal Board\x0a3. New Game\x0a4. Quit\x0a</data></match></read>
+    <read><length>65</length><match><data>Current Score \x3d 0 \x7c Total Time Remaining: 9250 \x7c High Score \x3d 0 \x0a</data></match></read>
+    <read><length>43</length><match><data>Shots Remaining: 124 \x7c Bombs Remaining: 5\x0a\x0a</data></match></read>
+    <read><length>12</length><match><data>Selection\x2d: </data></match></read>
+    <write><data>3\x0a</data></write>
+    <read><length>28</length><match><data>New Game \x2d\x2d Ready\x2c set\x2c go!\x0a</data></match></read>
+    <read><length>94</length><match><data>                              \x2d\x2dBoard: HIDDEN\x2d\x2d\x0a1. Shoot!\x0a2. Reveal Board\x0a3. New Game\x0a4. Quit\x0a</data></match></read>
+    <read><length>66</length><match><data>Current Score \x3d 0 \x7c Total Time Remaining: 10000 \x7c High Score \x3d 0 \x0a</data></match></read>
+    <read><length>43</length><match><data>Shots Remaining: 125 \x7c Bombs Remaining: 5\x0a\x0a</data></match></read>
+    <read><length>12</length><match><data>Selection\x2d: </data></match></read>
+    <write><data>2\x0a</data></write>
+    <read><length>11</length><match><data>GAME BOARD\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28224\x2c3545\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28225\x2c3546\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28226\x2c3544\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28226\x2c3545\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28226\x2c3546\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28360\x2c4325\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28361\x2c4324\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28362\x2c4324\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28362\x2c4325\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28362\x2c4326\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28652\x2c1127\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28653\x2c1128\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28654\x2c1126\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28654\x2c1127\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x28654\x2c1128\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281431\x2c2859\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281432\x2c2860\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281433\x2c2858\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281433\x2c2859\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281433\x2c2860\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281622\x2c5322\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281623\x2c5321\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281624\x2c5321\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281624\x2c5322\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x281624\x2c5323\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282416\x2c7174\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282417\x2c7173\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282418\x2c7173\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282418\x2c7174\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282418\x2c7175\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282951\x2c3269\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282952\x2c3270\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282953\x2c3268\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282953\x2c3269\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x282953\x2c3270\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283184\x2c1536\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283185\x2c1537\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283186\x2c1535\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283186\x2c1536\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283186\x2c1537\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283190\x2c4047\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283191\x2c4048\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283192\x2c4046\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283192\x2c4047\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283192\x2c4048\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283299\x2c7180\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283300\x2c7179\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283301\x2c7179\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283301\x2c7180\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283301\x2c7181\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283483\x2c726\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283484\x2c727\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283485\x2c725\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283485\x2c726\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>44</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283485\x2c727\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283507\x2c6596\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283508\x2c6595\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283509\x2c6595\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283509\x2c6596\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283509\x2c6597\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283781\x2c3239\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283782\x2c3240\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283783\x2c3238\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283783\x2c3239\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283783\x2c3240\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283861\x2c4306\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283862\x2c4305\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283863\x2c4305\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283863\x2c4306\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x283863\x2c4307\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284142\x2c6425\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284142\x2c6426\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284142\x2c6427\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284143\x2c6425\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284144\x2c6426\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284928\x2c7182\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284928\x2c7183\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284928\x2c7184\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284929\x2c7182\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x284930\x2c7183\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x285474\x2c4904\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x285474\x2c4905\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x285474\x2c4906\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x285475\x2c4904\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x285476\x2c4905\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x285913\x2c4765\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x285913\x2c4766\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x285913\x2c4767\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x285914\x2c4765\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x285915\x2c4766\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286155\x2c2783\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286155\x2c2784\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286155\x2c2785\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286156\x2c2785\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286157\x2c2784\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286316\x2c4676\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286316\x2c4677\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286316\x2c4678\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286317\x2c4676\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286318\x2c4677\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286388\x2c7628\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286388\x2c7629\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286388\x2c7630\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286389\x2c7628\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286390\x2c7629\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286428\x2c2852\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286428\x2c2853\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286428\x2c2854\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286429\x2c2854\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286430\x2c2853\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286731\x2c5688\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286731\x2c5689\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286731\x2c5690\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286732\x2c5688\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x286733\x2c5689\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287147\x2c6992\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287147\x2c6993\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287147\x2c6994\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287148\x2c6992\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287149\x2c6993\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287948\x2c5241\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287948\x2c5242\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287948\x2c5243\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287949\x2c5241\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>45</length><match><data>\x2d\x2d\x7c \x28x\x2cy\x29 \x3d \x287950\x2c5242\x29 \x7c Alive\x3d1 \x7c Bomb\x3d0 \x7c\x0a</data></match></read>
+    <read><length>1</length><match><data>\x0a</data></match></read>
+    <read><length>117</length><match><data>                              \x2d\x2dBoard: REVEALED\x2d\x2d\x0a1. Place Bomb\x0a2. Reveal Board\x0a3. Let them Run!\x0a4. New Game\x0a5. Quit\x0a</data></match></read>
+    <read><length>66</length><match><data>Current Score \x3d 0 \x7c Total Time Remaining: 10000 \x7c High Score \x3d 0 \x0a</data></match></read>
+    <read><length>43</length><match><data>Shots Remaining: 125 \x7c Bombs Remaining: 5\x0a\x0a</data></match></read>
+    <read><length>12</length><match><data>Selection\x2d: </data></match></read>
+    <write><data>5\x0a</data></write>
+    <read><length>30</length><match><data>Thanks for Playing\x0aEXITING...\x0a</data></match></read>
+</replay>
+</pov>

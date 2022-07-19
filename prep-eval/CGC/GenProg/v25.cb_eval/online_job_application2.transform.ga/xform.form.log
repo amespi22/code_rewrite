@@ -1,0 +1,223 @@
+Starting pre-processing
+Processing file online_job_application2/src/include/libcgc.h
+Processing file online_job_application2/src/online_job_application2/lib/cgc_stdarg.h
+Processing file online_job_application2/src/online_job_application2/lib/cgc_stddef.h
+Processing file online_job_application2/src/online_job_application2/lib/cgc_stdlib.h
+Processing file online_job_application2/src/online_job_application2/lib/cgc_string.h
+Processing file online_job_application2/src/online_job_application2/lib/calloc.c
+Processing file online_job_application2/src/online_job_application2/lib/cgc_ctype.h
+Processing file online_job_application2/src/online_job_application2/lib/ctype.c
+Processing file online_job_application2/src/online_job_application2/lib/cgc_stdint.h
+Processing file online_job_application2/src/online_job_application2/lib/cgc_malloc.h
+Processing file online_job_application2/src/online_job_application2/lib/free.c
+Processing file online_job_application2/src/online_job_application2/lib/malloc.c
+Processing file online_job_application2/src/online_job_application2/lib/malloc_common.c
+Processing file online_job_application2/src/online_job_application2/lib/memchr.c
+Processing file online_job_application2/src/online_job_application2/lib/memcmp.c
+Processing file online_job_application2/src/online_job_application2/lib/memcpy.c
+Processing file online_job_application2/src/online_job_application2/lib/memset.c
+Processing file online_job_application2/src/online_job_application2/lib/realloc.c
+Processing file online_job_application2/src/online_job_application2/lib/strcasecmp.c
+Processing file online_job_application2/src/online_job_application2/lib/strcat.c
+Processing file online_job_application2/src/online_job_application2/lib/strchr.c
+Processing file online_job_application2/src/online_job_application2/lib/strcmp.c
+Processing file online_job_application2/src/online_job_application2/lib/strcpy.c
+Processing file online_job_application2/src/online_job_application2/lib/strlen.c
+Processing file online_job_application2/src/online_job_application2/lib/strncasecmp.c
+Processing file online_job_application2/src/online_job_application2/lib/strncmp.c
+Processing file online_job_application2/src/online_job_application2/lib/strsep.c
+Processing file online_job_application2/src/online_job_application2/lib/strtol.c
+Processing file online_job_application2/src/online_job_application2/src/cgc_form.h
+Processing file online_job_application2/src/online_job_application2/src/ab12.c
+Processing file online_job_application2/src/online_job_application2/src/cgc_input.h
+Processing file online_job_application2/src/online_job_application2/src/input.c
+Processing file online_job_application2/src/online_job_application2/src/main.c
+Pre-processing done
+Starting Transformations
+Start expand_case pass
+End pass
+Start expand_conditionals pass
+End pass
+Start expand_blockItems pass
+End pass
+Start if_else_break pass
+End pass
+Start insert_loop_braces pass
+End pass
+Start expand_if_else pass
+End pass
+Start expand_sizeof pass
+End pass
+Start single_declarations pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+all done with passes
+0 :  [cgc_handler_index] <class 'list'>  [all function decls] 
+ - int i ;
+ - char * p ;
+ - char cmd_buf [ MAX_CMD_SIZE ] ;
+ - int tlv1 ;
+ - void * tlv4 ;
+ - void * tlv3 ;
+ - cgc_size_t tlv2 ;
+ - const char * tlv8 = cmd_lbls [ i ] ;
+ - const char * tlv7 = cmd_buf ;
+ - const char * tlv6 = cmd_lbls [ i ] ;
+ - cgc_size_t tlv5 ;
+ - const char * tlv9 = cmd_lbls [ i ] ;
+ - const char * tlv10 = cmd_lbls [ i ] ;
+1 :  [cgc_is_cmd] <class 'list'>  [all function decls] 
+ - int tlv1 ;
+ - const char tlv4 [ ] = "**" ;
+ - const char * tlv3 = buf ;
+ - cgc_size_t tlv2 ;
+2 :  [page_complete] <class 'list'>  [all function decls] 
+ - question_t * cur ;
+ - int completed ;
+3 :  [cgc_print_title] <class 'list'>  [all function decls] 
+ - int tlv1 ;
+ - const char * tlv4 = form -> cur_page -> title ;
+ - const char tlv3 [ ] = "Fin" ;
+ - cgc_size_t tlv2 ;
+4 :  [cgc_handle_cmd] <class 'list'>  [all function decls] 
+ - char * arg ;
+ - int ret ;
+ - char * cmd ;
+ - int i ;
+ - cgc_size_t tlv3 ;
+ - char * tlv2 ;
+ - const char * tlv1 = buf ;
+ - const char * tlv8 = buf ;
+ - char * * tlv5 ;
+ - const char tlv4 [ ] = " " ;
+ - form_t * tlv7 ;
+ - char * tlv6 ;
+ - const char * tlv9 = buf ;
+ - cgc_free ( cmd ) ;
+5 :  [cgc_handle_answer] <class 'list'>  [all function decls] 
+ - cgc_size_t tlv3 ;
+ - char * tlv2 ;
+ - const char * tlv1 = input ;
+ - const char * tlv5 = input ;
+ - void * tlv4 ;
+ - cgc_free ( tlv4 ) ;
+6 :  [cgc_next_question] <class 'list'>  [all function decls] 
+ - 
+7 :  [cgc_print_page] <class 'list'>  [all function decls] 
+ - question_t * cur ;
+ - int tlv1 ;
+ - const char * tlv6 = form -> cur_page -> title ;
+ - const char tlv5 [ ] = "Edu" ;
+ - cgc_size_t tlv4 ;
+ - int tlv2 ;
+ - const char * tlv9 = form -> cur_page -> title ;
+ - const char tlv8 [ ] = "Emp" ;
+ - cgc_size_t tlv7 ;
+ - int tlv3 ;
+ - const char * tlv12 = form -> cur_page -> title ;
+ - const char tlv11 [ ] = "Fin" ;
+ - cgc_size_t tlv10 ;
+8 :  [cgc_prompt_next] <class 'list'>  [all function decls] 
+ - 
+9 :  [cgc_next_page] <class 'list'>  [all function decls] 
+ - 
+10 :  [cgc_print_next_title] <class 'list'>  [all function decls] 
+ - int tlv1 ;
+ - const char * tlv4 = form -> cur_page -> next -> title ;
+ - const char tlv3 [ ] = "Fin" ;
+ - cgc_size_t tlv2 ;
+11 :  [cgc_prompt_q] <class 'list'>  [all function decls] 
+ - 
+12 :  [cgc_handle_next] <class 'list'>  [all function decls] 
+ - int ret ;
+ - form_t * tlv1 ;
+ - cgc_print_next_title ( form ) ;
+13 :  [cgc_handle_exit] <class 'list'>  [all function decls] 
+ - 
+14 :  [cgc_handle_help] <class 'list'>  [all function decls] 
+ - 
+15 :  [cgc_handle_prev] <class 'list'>  [all function decls] 
+ - cgc_print_title ( form ) ;
+16 :  [cgc_handle_update] <class 'list'>  [all function decls] 
+ - question_t * cur ;
+ - char * input_buf ;
+ - cgc_prompt_q ( cur ) ;
+ - int tlv1 ;
+ - cgc_size_t tlv4 ;
+ - char * tlv5 ;
+ - int tlv2 ;
+ - int tlv3 ;
+ - const char * tlv8 = cur -> title ;
+ - const char * tlv7 = arg ;
+ - cgc_size_t tlv6 ;
+ - const char * tlv11 = cur -> answer ;
+ - const char * tlv10 = input_buf ;
+ - cgc_size_t tlv9 ;
+ - cgc_free ( input_buf ) ;
+ - cgc_free ( input_buf ) ;
+ - cgc_free ( input_buf ) ;
+ - const char * tlv16 = cur -> title ;
+ - const char * tlv17 = cur -> answer ;
+ - void * tlv12 ;
+ - cgc_free ( tlv12 ) ;
+ - char * tlv14 ;
+ - const char * tlv13 = input_buf ;
+ - void * tlv15 ;
+ - cgc_free ( tlv15 ) ;
+17 :  [cgc_print_prompt] <class 'list'>  [all function decls] 
+ - question_t * tlv1 ;
+ - cgc_prompt_q ( tlv1 ) ;
+ - cgc_print_title ( form ) ;
+ - cgc_print_page ( form ) ;
+18 :  [cgc_handle_line] <class 'list'>  [all function decls] 
+ - int ret ;
+ - static int tlv1 ;
+ - cgc_size_t tlv2 ;
+ - form_t * tlv4 ;
+ - char * tlv3 ;
+ - const char * tlv5 = buf ;
+ - form_t * tlv6 ;
+ - form_t * tlv8 ;
+ - char * tlv7 ;
+19 :  [cgc_print_greeting] <class 'list'>  [all function decls] 
+ - 
+Processing [cgc_handler_index] :
+Processing [cgc_is_cmd] :
+Processing [page_complete] :
+Processing [cgc_print_title] :
+Processing [cgc_handle_cmd] :
+Processing [cgc_handle_answer] :
+Processing [cgc_next_question] :
+Processing [cgc_print_page] :
+Processing [cgc_prompt_next] :
+Processing [cgc_next_page] :
+Processing [cgc_print_next_title] :
+Processing [cgc_prompt_q] :
+Processing [cgc_handle_next] :
+Processing [cgc_handle_exit] :
+Processing [cgc_handle_help] :
+Processing [cgc_handle_prev] :
+Processing [cgc_handle_update] :
+Processing [cgc_print_prompt] :
+Processing [cgc_handle_line] :
+Processing [cgc_print_greeting] :
+Writing output file xform/t_form.c
+
+real	0m33.909s
+user	0m33.860s
+sys	0m0.046s

@@ -1,0 +1,18 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>d992772735759d4157759d5b86818be519742bd4d496b34ba606839cbb6b8850c55b9d101244450e8e327f362e81c146</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>This is Mapper.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>E\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Map Info\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Map Name: Newville Number of Roads: 0\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Road List:\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>End of road list\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>0\x0a</data></write>
+    <write><data>0\x0a</data></write>
+</replay>
+</pov>

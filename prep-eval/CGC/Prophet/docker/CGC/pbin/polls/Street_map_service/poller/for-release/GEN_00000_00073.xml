@@ -1,0 +1,30 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>75a81f816b013a18141275e959306b0dd23d3ff22360a69f3136a79e77ebf1de67222e7de5eb511eee1dfa27e5be648e</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>This is Mapper.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>C\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Street Number: \x0a</data></match></read>
+    <write><data>87279\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Resident: \x0a</data></match></read>
+    <write><data>6UDLeUv9dSUAGE1MnxiwT\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Invalid road.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>A\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Name:\x0a</data></match></read>
+    <write><data>ISKZmwfHQRhXMcC\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Map Newville is now named ISKZmwfHQRhXMcC.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>I\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>from address \x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>I\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>from address \x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>0\x0a</data></write>
+    <write><data>0\x0a</data></write>
+</replay>
+</pov>

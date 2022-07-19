@@ -1,0 +1,28 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>da22c7f04d252d4ab3b61f9e5f2e6c9d5481a4a7d7813aeffc1b025188b395c538ce5356957f3f8f48e0d78f10cad426</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>Welcome to the diary logger!</data></match></read>
+    <write><data>\x97\x00</data></write>
+    <write><data>BB\xb8l\x08\x00\x00\x00\x00\x04\x0e\x00W\x00\x00\x03\x07\x15\x00\x1c\x00cccacbc\x02\x03\x0f\x23\x002\x00cbbabbacbabccaa\x03\x00\x00\x26\x009\x00\x01\x03\x17\x40\x00\x00\x00baaabababccaabaacacbcab\x00\x04\x5d\x00\x00\x00\x00\x03\x07d\x00k\x00cbbbaba\x02\x03\x17r\x00\x89\x00abccabccbaaabbacaccbbcb\x03\x00\x00\xca\x00\x90\x00\x04\x01\x00c\x06\x00\x00</data></write>
+    <read><delim>\x0a</delim><match><data>Length: 151</data></match></read>
+    <read><delim>\x0a</delim><match><data>Magic number: 0x4242</data></match></read>
+    <read><delim>\x0a</delim><match><data>Future: 0x6cb8</data></match></read>
+    <read><delim>\x0a</delim><match><data>Offset: 0x8</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: identity</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x4</data></match></read>
+    <read><delim>\x0a</delim><match><data>first name: cccacbc</data></match></read>
+    <read><delim>\x0a</delim><match><data>last name: cbbabbacbabccaa</data></match></read>
+    <read><delim>\x0a</delim><match><data>age: 0x26</data></match></read>
+    <read><delim>\x0a</delim><match><data>middle name: baaabababccaabaacacbcab</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: identity</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x4</data></match></read>
+    <read><delim>\x0a</delim><match><data>first name: cbbbaba</data></match></read>
+    <read><delim>\x0a</delim><match><data>last name: abccabccbaaabbacaccbbcb</data></match></read>
+    <read><delim>\x0a</delim><match><data>age: 0xca</data></match></read>
+    <read><delim>\x0a</delim><match><data>weight: 0x663</data></match></read>
+    <read><delim>\x0a</delim><match><data>good book.</data></match></read>
+</replay>
+</pov>

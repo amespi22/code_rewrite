@@ -1,0 +1,201 @@
+Starting pre-processing
+Processing file SCUBA_Dive_Logging/src/include/libcgc.h
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/cgc_stdlib.h
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/include/cgc_malloc.h
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/malloc.c
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/cgc_mymath.h
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/cgc_stdint.h
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/mymath.c
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/cgc_stdarg.h
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/lib/stdlib.c
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/include/cgc_dates.h
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/dates.c
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/include/cgc_service.h
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/dive_statistics.c
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/edit_diver.c
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/include/cgc_menu.h
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/log_dive.c
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/menu.c
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/print_dives.c
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/remove_dives.c
+Processing file SCUBA_Dive_Logging/src/SCUBA_Dive_Logging/src/service.c
+Pre-processing done
+Starting Transformations
+Start expand_case pass
+End pass
+Start expand_conditionals pass
+End pass
+Start expand_blockItems pass
+End pass
+Start if_else_break pass
+End pass
+Start insert_loop_braces pass
+End pass
+Start expand_if_else pass
+End pass
+Start expand_sizeof pass
+End pass
+Start single_declarations pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+all done with passes
+0 :  [cgc_download_dive] <class 'list'>  [all function decls] 
+ - dive_log_type * next_dive ;
+ - char buffer [ 1024 ] ;
+ - char buffer2 [ 1024 ] ;
+ - cgc_size_t count ;
+ - int ret_code ;
+ - time_t sample_time ;
+ - time_t first_sample ;
+ - int sample_depth ;
+ - struct dive_data * temp_ptr ;
+ - datetime_struct_type tm ;
+ - int max_depth ;
+ - int sum_depth ;
+ - int count_samples ;
+ - time_t delta_time ;
+ - int * bins ;
+ - int bin_number ;
+ - int i ;
+ - cgc_free ( bins ) ;
+ - unsigned char * tlv28 ;
+ - cgc_size_t tlv27 ;
+ - unsigned char * tlv30 ;
+ - cgc_size_t tlv29 ;
+ - cgc_size_t tlv32 ;
+ - cgc_size_t tlv31 ;
+ - time_t tlv2 ;
+ - datetime_struct_type * tlv1 ;
+ - datetime_struct_type * tlv4 ;
+ - char * tlv3 ;
+ - datetime_struct_type * tlv6 ;
+ - char * tlv5 ;
+ - cgc_size_t tlv34 ;
+ - cgc_size_t tlv33 ;
+ - const char tlv7 [ ] = "Dive Site" ;
+ - cgc_printf ( tlv7 ) ;
+ - const char tlv8 [ ] = ": " ;
+ - cgc_printf ( tlv8 ) ;
+ - char * tlv36 ;
+ - cgc_size_t tlv35 ;
+ - const char tlv9 [ ] = "Date" ;
+ - cgc_printf ( tlv9 ) ;
+ - const char tlv10 [ ] = ": " ;
+ - cgc_printf ( tlv10 ) ;
+ - char * tlv38 ;
+ - cgc_size_t tlv37 ;
+ - const char tlv11 [ ] = "Time" ;
+ - cgc_printf ( tlv11 ) ;
+ - const char tlv12 [ ] = ": " ;
+ - cgc_printf ( tlv12 ) ;
+ - char * tlv40 ;
+ - cgc_size_t tlv39 ;
+ - const char tlv13 [ ] = "Location (area/city)" ;
+ - cgc_printf ( tlv13 ) ;
+ - const char tlv14 [ ] = ": " ;
+ - cgc_printf ( tlv14 ) ;
+ - char * tlv42 ;
+ - cgc_size_t tlv41 ;
+ - const char tlv15 [ ] = "Max Depth in ft" ;
+ - cgc_printf ( tlv15 ) ;
+ - const char tlv16 [ ] = ": " ;
+ - cgc_printf ( tlv16 ) ;
+ - char * tlv44 ;
+ - cgc_size_t tlv43 ;
+ - const char tlv17 [ ] = "Avg Depth in ft" ;
+ - cgc_printf ( tlv17 ) ;
+ - const char tlv18 [ ] = ": " ;
+ - cgc_printf ( tlv18 ) ;
+ - char * tlv46 ;
+ - cgc_size_t tlv45 ;
+ - const char tlv19 [ ] = "Dive Duration (mins)" ;
+ - cgc_printf ( tlv19 ) ;
+ - const char tlv20 [ ] = ": " ;
+ - cgc_printf ( tlv20 ) ;
+ - char * tlv48 ;
+ - cgc_size_t tlv47 ;
+ - const char tlv21 [ ] = "O2 Percentage" ;
+ - cgc_printf ( tlv21 ) ;
+ - const char tlv22 [ ] = ": " ;
+ - cgc_printf ( tlv22 ) ;
+ - char * tlv50 ;
+ - cgc_size_t tlv49 ;
+ - const char tlv23 [ ] = "Pressure In (psi)" ;
+ - cgc_printf ( tlv23 ) ;
+ - const char tlv24 [ ] = ": " ;
+ - cgc_printf ( tlv24 ) ;
+ - char * tlv52 ;
+ - cgc_size_t tlv51 ;
+ - const char tlv25 [ ] = "Pressure Out (psi)" ;
+ - cgc_printf ( tlv25 ) ;
+ - const char tlv26 [ ] = ": " ;
+ - cgc_printf ( tlv26 ) ;
+ - char * tlv54 ;
+ - cgc_size_t tlv53 ;
+ - const char tlv55 [ ] = "received error code \n" ;
+ - cgc_printf ( tlv55 ) ;
+ - const char tlv56 [ ] = "received error code or zero sample \n" ;
+ - cgc_printf ( tlv56 ) ;
+ - cgc_size_t tlv72 ;
+ - cgc_size_t tlv71 ;
+ - cgc_size_t tlv74 ;
+ - cgc_size_t tlv73 ;
+ - unsigned int tlv57 ;
+ - cgc__terminate ( tlv57 ) ;
+ - unsigned char * tlv76 ;
+ - cgc_size_t tlv75 ;
+ - unsigned char * tlv78 ;
+ - cgc_size_t tlv77 ;
+ - cgc_size_t tlv80 ;
+ - cgc_size_t tlv79 ;
+ - unsigned int tlv58 ;
+ - cgc__terminate ( tlv58 ) ;
+ - char * tlv61 ;
+ - const char * tlv60 = buffer ;
+ - cgc_size_t tlv59 ;
+ - char * tlv64 ;
+ - const char * tlv63 = buffer ;
+ - cgc_size_t tlv62 ;
+ - char * tlv67 ;
+ - const char * tlv66 = buffer2 ;
+ - cgc_size_t tlv65 ;
+ - char * tlv70 ;
+ - const char * tlv69 = buffer ;
+ - cgc_size_t tlv68 ;
+ - const char * tlv81 = buffer ;
+ - const char * tlv82 = buffer ;
+ - const char * tlv83 = buffer ;
+ - const char * tlv84 = buffer ;
+ - const char * tlv85 = buffer ;
+ - const char * tlv86 = buffer ;
+ - unsigned int tlv87 ;
+ - cgc__terminate ( tlv87 ) ;
+ - unsigned int tlv88 ;
+ - cgc__terminate ( tlv88 ) ;
+ - const char tlv89 [ ] = "received error code or zero timestamp \n" ;
+ - cgc_printf ( tlv89 ) ;
+ - const char tlv90 [ ] = "received error code or zero sample \n" ;
+ - cgc_printf ( tlv90 ) ;
+ - unsigned int tlv91 ;
+ - cgc__terminate ( tlv91 ) ;
+Processing [cgc_download_dive] :
+Writing output file xform/t_download_dive.c
+
+real	2m5.436s
+user	2m5.347s
+sys	0m0.068s

@@ -1,0 +1,164 @@
+Starting pre-processing
+Processing file KTY_Pretty_Printer/src/include/libcgc.h
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/cgc_stdarg.h
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/cgc_stddef.h
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/cgc_stdlib.h
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/cgc_string.h
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/calloc.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/cgc_ctype.h
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/ctype.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/cgc_stdint.h
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/cgc_malloc.h
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/free.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/malloc.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/malloc_common.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/memchr.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/memcmp.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/memcpy.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/memset.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/realloc.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/strchr.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/strcmp.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/strcpy.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/strlen.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/strsep.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/strtol.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/src/cgc_array.h
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/src/cgc_hashtable.h
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/src/cgc_kty.h
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/src/array.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/src/cgc_strdup.h
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/src/hashtable.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/src/cgc_strncmp.h
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/src/cgc_strtod.h
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/src/strdup.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/src/strncmp.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/src/strtod.c
+Pre-processing done
+Starting Transformations
+Start expand_case pass
+End pass
+Start expand_conditionals pass
+End pass
+Start expand_blockItems pass
+End pass
+Start if_else_break pass
+End pass
+Start insert_loop_braces pass
+End pass
+Start expand_if_else pass
+End pass
+Start expand_sizeof pass
+End pass
+Start single_declarations pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+all done with passes
+0 :  [cgc_read_until] <class 'list'>  [all function decls] 
+ - cgc_size_t i ;
+ - char * c ;
+ - cgc_size_t rx ;
+ - int tlv1 ;
+ - int tlv5 ;
+ - void * tlv4 ;
+ - cgc_size_t tlv3 ;
+ - cgc_size_t * tlv2 ;
+1 :  [cgc_import_kty] <class 'list'>  [all function decls] 
+ - cgc_free_kty_item ( my_kty ) ;
+ - int tlv2 ;
+ - const char tlv1 [ ] = "Error!\n" ;
+2 :  [cgc_print_kty] <class 'list'>  [all function decls] 
+ - int tlv2 ;
+ - const char tlv1 [ ] = "Error!\n" ;
+3 :  [cgc_nyan] <class 'list'>  [all function decls] 
+ - int i ;
+ - char * c ;
+ - char buf [ 1024 ] = { 0 } ;
+ - char nyan_cat [ ] = "\n\n\
++      o     +              o\n\
+    +             o     +       +\n\
+o          +\n\
+    o  +           +        +\n\
++        o     o       +        o\n\
+-_-_-_-_-_-_-_,------,      o\n\
+_-_-_-_-_-_-_-|   /\\_/\\\n\
+-_-_-_-_-_-_-~|__( ^ .^)  +     +\n\
+_-_-_-_-_-_-_-\"\"  \"\"\n\
++      o         o   +       o\n\
+    +         +\n\
+o        o         o      o     +\n\
+    o           +\n\
++      +     o        o      +\n\n" ;
+ - kty_item_t * item ;
+ - int tlv2 ;
+ - const char tlv1 [ ] = "Error!\n" ;
+ - array_t * tlv6 ;
+ - int tlv5 ;
+ - char * tlv4 ;
+ - const char * tlv3 = item -> item . i_string . s ;
+4 :  [cgc_quit] <class 'list'>  [all function decls] 
+ - int tlv2 ;
+ - const char tlv1 [ ] = "\n\n=^.^=// Bye!\n\n" ;
+5 :  [cgc_menu] <class 'list'>  [all function decls] 
+ - int tlv2 ;
+ - const char tlv1 [ ] = "=======================\n" ;
+ - int tlv4 ;
+ - const char tlv3 [ ] = " 1. Import KTY\n" ;
+ - int tlv6 ;
+ - const char tlv5 [ ] = " 2. Print KTY\n" ;
+ - int tlv8 ;
+ - const char tlv7 [ ] = " 3. Quit\n" ;
+ - int tlv10 ;
+ - const char tlv9 [ ] = "=======================\n" ;
+6 :  [main] <class 'list'>  [all function decls] 
+ - char buf [ MAX_KTY_LENGTH ] ;
+ - char cgc_select [ 16 ] ;
+ - int tlv1 ;
+ - unsigned long tlv_size_0 ;
+ - int tlv4 ;
+ - const char tlv3 [ ] = "KTY Pretty Printer v0.1\n" ;
+ - cgc_size_t tlv6 ;
+ - kty_parser_t * tlv5 ;
+ - int menu ;
+ - int tlv8 ;
+ - const char tlv7 [ ] = "Error!\n" ;
+ - const char * tlv11 = cgc_select ;
+ - char * * tlv10 ;
+ - int tlv9 ;
+ - int tlv2 ;
+ - int tlv17 ;
+ - char * tlv16 ;
+ - cgc_size_t tlv15 ;
+ - char tlv14 ;
+ - int tlv13 ;
+ - const char tlv12 [ ] = "Invalid menu. Try again.\n" ;
+ - cgc_import_kty ( buf ) ;
+ - int tlv19 ;
+ - const char tlv18 [ ] = "Error!\n" ;
+Processing [cgc_read_until] :
+Processing [cgc_import_kty] :
+Processing [cgc_print_kty] :
+Processing [cgc_nyan] :
+Processing [cgc_quit] :
+Processing [cgc_menu] :
+Processing [main] :
+Writing output file xform/t_main.c
+
+real	0m22.493s
+user	0m22.448s
+sys	0m0.041s

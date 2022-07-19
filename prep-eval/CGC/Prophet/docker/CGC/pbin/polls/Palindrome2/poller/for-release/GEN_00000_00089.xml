@@ -1,0 +1,30 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>ccff8761b45d223b9f2a0289df416f085b439324da43fea6c9ad18a067d7d6bf02cabfc998dc8dbbf9368f3a6dd77970</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Welcome to Palindrome Finder\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><length>37</length><match><data>\x09Please enter a possible palindrome: </data></match></read>
+    <write><data>D9L3Z3Gxyz5Obn\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x09\x09Nope\x2c that\x27s not a palindrome\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><length>37</length><match><data>\x09Please enter a possible palindrome: </data></match></read>
+    <write><data>FusteO6gCCQ8\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x09\x09Nope\x2c that\x27s not a palindrome\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><length>37</length><match><data>\x09Please enter a possible palindrome: </data></match></read>
+    <write><data>9I4g93FjMKW\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x09\x09Nope\x2c that\x27s not a palindrome\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><length>37</length><match><data>\x09Please enter a possible palindrome: </data></match></read>
+    <write><data>AfGgSMdrLpfOSYzXGMpX\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x09\x09Nope\x2c that\x27s not a palindrome\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><length>37</length><match><data>\x09Please enter a possible palindrome: </data></match></read>
+    <write><data>pAz3M\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x09\x09Nope\x2c that\x27s not a palindrome\x0a</data></match></read>
+</replay>
+</pov>

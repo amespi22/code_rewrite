@@ -1,0 +1,31 @@
+{
+"DEPEND_VERSION":"1.0.1",
+"filenames":[{"name":"Griswold/src/include/libcgc.h","included_by":["Griswold/src/Griswold/lib/libc.c", "Griswold/src/Griswold/src/assemble.c", "Griswold/src/Griswold/src/components.c", "Griswold/src/Griswold/src/examine.c", "Griswold/src/Griswold/src/operation.c", "Griswold/src/Griswold/src/service.c"]},
+{"name":"Griswold/src/Griswold/lib/cgc_libc.h","included_by":["Griswold/src/Griswold/lib/libc.c", "Griswold/src/Griswold/src/assemble.c", "Griswold/src/Griswold/src/components.c", "Griswold/src/Griswold/src/examine.c", "Griswold/src/Griswold/src/operation.c", "Griswold/src/Griswold/src/service.c"]},
+{"name":"Griswold/src/Griswold/lib/libc.c"},
+{"name":"Griswold/src/Griswold/src/cgc_components.h","included_by":["Griswold/src/Griswold/src/assemble.c", "Griswold/src/Griswold/src/components.c", "Griswold/src/Griswold/src/examine.c", "Griswold/src/Griswold/src/operation.c"]},
+{"name":"Griswold/src/Griswold/src/cgc_assemble.h","included_by":["Griswold/src/Griswold/src/assemble.c", "Griswold/src/Griswold/src/examine.c", "Griswold/src/Griswold/src/operation.c"]},
+{"name":"Griswold/src/Griswold/src/assemble.c"},
+{"name":"Griswold/src/Griswold/src/components.c"},
+{"name":"Griswold/src/Griswold/src/cgc_examine.h","included_by":["Griswold/src/Griswold/src/examine.c", "Griswold/src/Griswold/src/operation.c"]},
+{"name":"Griswold/src/Griswold/src/examine.c"},
+{"name":"Griswold/src/Griswold/src/cgc_operation.h","included_by":["Griswold/src/Griswold/src/operation.c", "Griswold/src/Griswold/src/service.c"]},
+{"name":"Griswold/src/Griswold/src/operation.c"},
+{"name":"Griswold/src/Griswold/src/cgc_service.h","included_by":["Griswold/src/Griswold/src/service.c"]},
+{"name":"Griswold/src/Griswold/src/service.c"}
+],
+"ignore":[
+"Griswold/src/Griswold/src/assemble.c"
+],
+"macros":[
+   {"name": "PATCHED", "value": false }
+],
+"disable_eval":[
+   "cgc_add_breaker_to_load_center","cgc_add_light_string_to_receptacle","cgc_add_n_way_splitter_to_receptacle","cgc_add_outlet_to_breaker","cgc_allocate","cgc_breaker_id_is_installed","cgc_convert_watts_to_amps","cgc_create_breaker","cgc_create_light_string","cgc_create_load_center","cgc_create_n_way_splitter","cgc_create_outlet","cgc_create_receptacle","cgc_deallocate","cgc_do_build","cgc_do_examine","cgc_do_nonce","cgc_do_send_results","cgc_get_amp_rating_of_breaker","cgc_get_amp_rating_of_light_string","cgc_get_amp_rating_of_load_center","cgc_get_amp_rating_of_outlet","cgc_get_amp_rating_of_receptacle","cgc_get_amp_rating_of_splitter","cgc_get_breaker_by_id","cgc_get_count_outlets_on_breaker","cgc_get_first_node","cgc_get_last_node","cgc_get_light_string_by_id","cgc_get_list_head","cgc_get_list_tail","cgc_get_max_amps_of_light_string","cgc_get_max_receptacle_amp_load_on_outlet_by_outlet_id","cgc_get_max_receptacle_amp_load_on_outlet_by_outlet_va","cgc_get_max_receptacle_amp_load_on_splitter_by_splitter_id","cgc_get_max_receptacle_amp_load_on_splitter_by_splitter_va","cgc_get_new_breaker_by_model_id","cgc_get_new_light_string_by_model_id","cgc_get_new_load_center_by_model_id","cgc_get_new_n_way_splitter_by_model_id","cgc_get_new_outlet_by_model_id","cgc_get_number_of_breakers_installed_in_load_center","cgc_get_outlet_by_id","cgc_get_outlet_list_on_breaker","cgc_get_receptacle_by_id","cgc_get_receptacle_by_id_from_breaker_id","cgc_get_receptacle_load_type","cgc_get_splitter_by_id","cgc_get_total_amp_load_on_breaker_by_breaker_id","cgc_get_total_amp_load_on_light_string_by_light_string_id","cgc_get_total_amp_load_on_light_string_by_light_string_va","cgc_get_total_amp_load_on_load_center","cgc_get_total_amp_load_on_outlet_by_outlet_id","cgc_get_total_amp_load_on_outlet_by_outlet_va","cgc_get_total_amp_load_on_receptacle_by_receptacle_id","cgc_get_total_amp_load_on_receptacle_by_receptacle_va","cgc_get_total_amp_load_on_splitter_by_splitter_id","cgc_get_total_amp_load_on_splitter_by_splitter_va","cgc_get_total_breaker_space_count","cgc_init_electric_model","cgc_is_breaker_overloaded","cgc_is_electrical_panel_overloaded","cgc_is_light_string_overloaded","cgc_is_outlet_overloaded","cgc_is_receptacle_overloaded","cgc_is_splitter_overloaded","cgc_is_too_many_outlets_on_breaker","cgc_is_too_much_amp_load_on_breaker","cgc_is_too_much_amp_load_on_light_string","cgc_is_too_much_amp_load_on_load_center","cgc_is_too_much_amp_load_on_one_outlet_receptacle","cgc_is_too_much_amp_load_on_one_splitter_receptacle","cgc_is_too_much_amp_load_on_outlet","cgc_is_too_much_amp_load_on_receptacle","cgc_is_too_much_amp_load_on_splitter","cgc_list_append","cgc_list_create_dup","cgc_load_center_breaker_spaces_are_full","cgc_load_center_is_created","cgc_memset","cgc_node_create","cgc_rand","cgc_random","cgc_read_all","cgc_receive","cgc_receptacle_is_loaded","cgc_recv_all","cgc_recv_uint32","cgc_search_light_string_for_light_string_id","cgc_search_light_string_for_receptacle_id","cgc_search_light_string_for_splitter_id","cgc_search_outlet_for_light_string_id","cgc_search_outlet_for_receptacle_id","cgc_search_outlet_for_splitter_id","cgc_search_receptacle_for_light_string_id","cgc_search_receptacle_for_receptacle_id","cgc_search_receptacle_for_splitter_id","cgc_search_splitter_for_light_string_id","cgc_search_splitter_for_receptacle_id","cgc_search_splitter_for_splitter_id","cgc_send","cgc__terminate","cgc_transmit","cgc_transmit_all","__cxa_finalize@@GLIBC_2.1.3","data_start","deregister_tm_clones","__do_global_dtors_aux","__do_global_dtors_aux_fini_array_entry","_fini","frame_dummy","__frame_dummy_init_array_entry","__gmon_start__","_init","__init_array_end","__init_array_start","_ITM_deregisterTMCloneTable","_ITM_registerTMCloneTable",".L10",".L12",".L13",".L14",".L15",".L21",".L23",".L24",".L25",".L26",".L27","__libc_csu_fini","__libc_csu_init","__libc_start_main@@GLIBC_2.0","main","recv_uint8","register_tm_clones","_start","__x86.get_pc_thunk.ax","__x86.get_pc_thunk.bx","__x86.get_pc_thunk.dx"
+],
+"enable_eval":[
+   "cgc_strlen"
+],
+"struct_ptrs":{
+}
+}

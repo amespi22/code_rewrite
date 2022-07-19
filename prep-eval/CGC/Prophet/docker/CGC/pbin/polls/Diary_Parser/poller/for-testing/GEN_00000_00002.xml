@@ -1,0 +1,68 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>b3312af0a55224c650b364dcb0537726fdb1ceb494134bc7f1ba3d5a3cefe11561e94e53f201fce2ea710e7d10925ab5</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>Welcome to the diary logger!</data></match></read>
+    <write><data>\x16\x02</data></write>
+    <write><data>BBUX\x08\x00\x00\x00\x01\x06\x0e\x00f\x00\x00\x03\x03\x15\x00\x18\x00cca\x05\x03\x04\x1f\x00\x23\x00caca\x04\x01\x00\xa33\x2a\x00\x01\x03\x071\x008\x00cacbacc\x03\x03\x12?\x00Q\x00abcabcabbbbbaaabbc\x02\x03\x0eX\x00\x00\x00accbbbbbacacbb\x03\x03l\x00\x9b\x00\x00\x03\x0as\x00\x7d\x00bbabbcabbb\x05\x04\x00\x01\x00\x84\x00\x02\x03\x10\x8b\x00\x00\x00aaacbcaaacccabbb\x03\x06\xa1\x00\xe2\x00\x00\x03\x08\xa8\x00\xb0\x00abcbcbab\x05\x04\x00\x00\x00\xb7\x00\x04\x03\x07\xbe\x00\xc5\x00bcbacab\x01\x00\x00\x81\x00\xcc\x00\x03\x03\x03\xd3\x00\xd6\x00baa\x02\x03\x05\xdd\x00\x00\x00acacb\x05\x06\xe8\x00\x3b\x01\x00\x03\x07\xef\x00\xf6\x00baccabc\x03\x03\x0c\xfd\x00\x09\x01aabacbccabac\x05\x02\x04\x10\x01\x14\x01Z\x10\x271\x04\x04\x00\x00\x00\x1b\x01\x02\x03\x0a\x22\x01\x2c\x01caaabbbbac\x00\x03\x083\x01\x00\x00caccaacc\x00\x08A\x01\xa3\x01\x00\x03\x02H\x01J\x01ba\x02\x03\x07Q\x01X\x01bcacccc\x03\x00\x00s\x00\x5f\x01\x04\x01\x00\xeeif\x01\x08\x04\x00\x01\x00m\x01\x01\x03\x08t\x01\x7c\x01bbacaccb\x05\x03\x14\x83\x01\x97\x01abbbcbacaabbccbbccac\x06\x03\x05\x9e\x01\x00\x00baccb\x05\x04\xa9\x01\xd6\x01\x00\x03\x0b\xb0\x01\xbb\x01bbbcbbabcbc\x03\x03\x02\xc2\x01\xc4\x01bc\x05\x02\x04\xcb\x01\xcf\x01\xde\xd8\x3e1\x04\x04\x00\x00\x00\x00\x00\x03\x05\xdc\x01\x00\x00\x00\x03\x04\xe3\x01\xe7\x01cbaa\x05\x04\x00\x00\x00\xee\x01\x01\x00\x00\x28\x00\xf5\x01\x03\x03\x01\xfc\x01\xfd\x01b\x02\x03\x12\x04\x02\x00\x00bcbccaacbccbbcaacc</data></write>
+    <read><delim>\x0a</delim><match><data>Length: 534</data></match></read>
+    <read><delim>\x0a</delim><match><data>Magic number: 0x4242</data></match></read>
+    <read><delim>\x0a</delim><match><data>Future: 0x5855</data></match></read>
+    <read><delim>\x0a</delim><match><data>Offset: 0x8</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: movies</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x6</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: cca</data></match></read>
+    <read><delim>\x0a</delim><match><data>plot summary: caca</data></match></read>
+    <read><delim>\x0a</delim><match><data>year released: 0x33a3</data></match></read>
+    <read><delim>\x0a</delim><match><data>actor: cacbacc</data></match></read>
+    <read><delim>\x0a</delim><match><data>producer: abcabcabbbbbaaabbc</data></match></read>
+    <read><delim>\x0a</delim><match><data>director: accbbbbbacacbb</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: books</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x3</data></match></read>
+    <read><delim>\x0a</delim><match><data>author: bbabbcabbb</data></match></read>
+    <read><delim>\x0a</delim><match><data>made into a movie: true</data></match></read>
+    <read><delim>\x0a</delim><match><data>summary: aaacbcaaacccabbb</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: books</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x6</data></match></read>
+    <read><delim>\x0a</delim><match><data>author: abcbcbab</data></match></read>
+    <read><delim>\x0a</delim><match><data>made into a movie: false</data></match></read>
+    <read><delim>\x0a</delim><match><data>character: bcbacab</data></match></read>
+    <read><delim>\x0a</delim><match><data>year: 0x81</data></match></read>
+    <read><delim>\x0a</delim><match><data>publisher: baa</data></match></read>
+    <read><delim>\x0a</delim><match><data>summary: acacb</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: jobs</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x6</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: baccabc</data></match></read>
+    <read><delim>\x0a</delim><match><data>company: aabacbccabac</data></match></read>
+    <read><delim>\x0a</delim><match><data>salary: 0x3127105a</data></match></read>
+    <read><delim>\x0a</delim><match><data>have a best friend: false</data></match></read>
+    <read><delim>\x0a</delim><match><data>job category: caaabbbbac</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: caccaacc</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: identity</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x8</data></match></read>
+    <read><delim>\x0a</delim><match><data>first name: ba</data></match></read>
+    <read><delim>\x0a</delim><match><data>last name: bcacccc</data></match></read>
+    <read><delim>\x0a</delim><match><data>age: 0x73</data></match></read>
+    <read><delim>\x0a</delim><match><data>weight: 0x69ee</data></match></read>
+    <read><delim>\x0a</delim><match><data>married: true</data></match></read>
+    <read><delim>\x0a</delim><match><data>middle name: bbacaccb</data></match></read>
+    <read><delim>\x0a</delim><match><data>birth country: abbbcbacaabbccbbccac</data></match></read>
+    <read><delim>\x0a</delim><match><data>birth state: baccb</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: jobs</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x4</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: bbbcbbabcbc</data></match></read>
+    <read><delim>\x0a</delim><match><data>company: bc</data></match></read>
+    <read><delim>\x0a</delim><match><data>salary: 0x313ed8de</data></match></read>
+    <read><delim>\x0a</delim><match><data>have a best friend: false</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: books</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x5</data></match></read>
+    <read><delim>\x0a</delim><match><data>author: cbaa</data></match></read>
+    <read><delim>\x0a</delim><match><data>made into a movie: false</data></match></read>
+    <read><delim>\x0a</delim><match><data>year: 0x28</data></match></read>
+    <read><delim>\x0a</delim><match><data>publisher: b</data></match></read>
+    <read><delim>\x0a</delim><match><data>summary: bcbccaacbccbbcaacc</data></match></read>
+    <read><delim>\x0a</delim><match><data>good book.</data></match></read>
+</replay>
+</pov>

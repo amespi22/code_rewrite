@@ -1,0 +1,47 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>20f3ced4bd3b9015fb250993643cbe5edc422486f66bc755830aca545b3a7178386923b84a1e6765305f202d5bc3c04b</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>This is Mapper.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>C\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Street Number: \x0a</data></match></read>
+    <write><data>4080206\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Resident: \x0a</data></match></read>
+    <write><data>uRQBf1xRbBh6FsKMrUu\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Invalid road.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>A\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Name:\x0a</data></match></read>
+    <write><data>es8NiXtuzJ8vok\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Map Newville is now named es8NiXtuzJ8vok.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>E\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Map Info\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Map Name: es8NiXtuzJ8vok Number of Roads: 0\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Road List:\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>End of road list\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>D\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Invalid intersection.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>I\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>from address \x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>B\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Road Name:\x0a</data></match></read>
+    <write><data>YGpE9RoyGnfo4sfO9HD5Z\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Road Length:\x0a</data></match></read>
+    <write><data>965\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>A\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Name:\x0a</data></match></read>
+    <write><data>5ABrx11wO8IW58lJM\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Map es8NiXtuzJ8vok is now named 5ABrx11wO8IW58lJM.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>0\x0a</data></write>
+    <write><data>0\x0a</data></write>
+</replay>
+</pov>

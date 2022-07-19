@@ -1,0 +1,39 @@
+{
+"DEPEND_VERSION":"1.0.1",
+"filenames":[{"name":"SPIFFS/src/SPIFFS/lib/cgc_stdarg.h","included_by":["SPIFFS/src/SPIFFS/lib/cgc_stdlib.h", "SPIFFS/src/SPIFFS/src/service.c", "SPIFFS/src/SPIFFS/src/ui.c"]},
+{"name":"SPIFFS/src/include/libcgc.h","included_by":["SPIFFS/src/SPIFFS/lib/cgc_stdlib.h", "SPIFFS/src/SPIFFS/lib/mymath.c", "SPIFFS/src/SPIFFS/lib/stdlib.c", "SPIFFS/src/SPIFFS/src/service.c", "SPIFFS/src/SPIFFS/src/ui.c"]},
+{"name":"SPIFFS/src/SPIFFS/lib/cgc_stdlib.h","included_by":["SPIFFS/src/SPIFFS/lib/malloc.c", "SPIFFS/src/SPIFFS/lib/stdlib.c", "SPIFFS/src/SPIFFS/src/service.c", "SPIFFS/src/SPIFFS/src/ui.c"]},
+{"name":"SPIFFS/src/SPIFFS/lib/cgc_malloc.h","included_by":["SPIFFS/src/SPIFFS/lib/malloc.c", "SPIFFS/src/SPIFFS/src/service.c", "SPIFFS/src/SPIFFS/src/ui.c"]},
+{"name":"SPIFFS/src/SPIFFS/lib/malloc.c"},
+{"name":"SPIFFS/src/SPIFFS/lib/cgc_mymath.h","included_by":["SPIFFS/src/SPIFFS/lib/mymath.c", "SPIFFS/src/SPIFFS/lib/stdlib.c", "SPIFFS/src/SPIFFS/src/service.c", "SPIFFS/src/SPIFFS/src/ui.c"]},
+{"name":"SPIFFS/src/SPIFFS/lib/cgc_stdint.h","included_by":["SPIFFS/src/SPIFFS/lib/mymath.c", "SPIFFS/src/SPIFFS/lib/stdlib.c", "SPIFFS/src/SPIFFS/src/service.c", "SPIFFS/src/SPIFFS/src/ui.c"]},
+{"name":"SPIFFS/src/SPIFFS/lib/mymath.c"},
+{"name":"SPIFFS/src/SPIFFS/lib/stdlib.c"},
+{"name":"SPIFFS/src/SPIFFS/include/cgc_service.h","included_by":["SPIFFS/src/SPIFFS/src/service.c", "SPIFFS/src/SPIFFS/src/ui.c"]},
+{"name":"SPIFFS/src/SPIFFS/include/cgc_ui.h","included_by":["SPIFFS/src/SPIFFS/src/service.c", "SPIFFS/src/SPIFFS/src/ui.c"]},
+{"name":"SPIFFS/src/SPIFFS/src/service.c"},
+{"name":"SPIFFS/src/SPIFFS/src/ui.c"}
+],
+"ignore":[
+"SPIFFS/src/SPIFFS/src/service.c"
+],
+"macros":[
+   {"name": "PATCHED", "value": false }
+],
+"disable_eval":[
+   "cgc_add_directory","cgc_add_file","cgc_add_file_chunk","cgc_add_free_list","cgc__add_group","cgc_add_group","cgc__add_node","cgc_add_perm","cgc__add_user","cgc_add_user","cgc_add_user_to_group","cgc_allocate","cgc_atof","cgc_atoi","cgc_bzero","cgc_calloc","cgc_date_from_epoch","cgc_deallocate","cgc_delete_chunk","cgc_delete_file","cgc_delete_file_bytes","cgc_delete_node","cgc_delete_perms","cgc_die","cgc_find_directory_by_name","cgc_find_file_by_name","cgc_find_file_node_by_name","cgc_find_group","cgc_find_group_by_name","cgc_find_group_by_number","cgc_find_node_by_name","cgc_find_perm_by_name","cgc_find_user","cgc_find_user_by_name","cgc_find_user_by_number","cgc_float_to_str","cgc_floor","cgc_free","cgc_get_file_size","cgc_get_int","cgc_get_string","cgc_get_time","cgc_init_data","cgc_int_to_hex","cgc_int_to_str","cgc_isalnum","cgc_isalpha","cgc_isdigit","cgc_is_group_valid","cgc_isinf","cgc_islower","cgc_isnan","cgc_isspace","cgc_isupper","cgc_is_user_in_group","cgc_is_user_valid","cgc_itoa","cgc_log10","cgc_main_loop","cgc_make_epoch","cgc_malloc","cgc_mallocOrDie","cgc_memcpy","cgc_memset","cgc_parse_arg","cgc_pow","cgc_printf","cgc_print_group_list","cgc_print_help","cgc_print_perms","cgc_print_prompt","cgc_print_user_list","cgc_print_users_in_group","cgc_print_working_dir","cgc_putc","cgc_puts","cgc_receive","cgc_receive_bytes","cgc_receive_until","cgc_receive_until_flush","cgc_recursive_path","cgc_remove_group","cgc_remove_user","cgc_remove_user_from_group","cgc_rint","cgc_round","cgc_round_away_from_zero","cgc_sprintf","cgc_start_UI","cgc_strcat","cgc_strchr","cgc_strcmp","cgc_strcpy","cgc_strdup","cgc_strict_atoi","cgc_strlen","cgc_strncat","cgc_strncpy","cgc_strofdate","cgc_str_of_path","cgc_strtok","cgc__terminate","cgc_transmit","cgc_validate_current_perms","cgc_vprintf","cgc_vsprintf","cgc_write","__cxa_finalize@@GLIBC_2.1.3","data_start","deregister_tm_clones","__do_global_dtors_aux","__do_global_dtors_aux_fini_array_entry","_fini","frame_dummy","__frame_dummy_init_array_entry","__gmon_start__","_init","__init_array_end","__init_array_start","_ITM_deregisterTMCloneTable","_ITM_registerTMCloneTable",".L103",".L105",".L106",".L107",".L108",".L109",".L110",".L111",".L119",".L121",".L122",".L123",".L124",".L125",".L126",".L127",".L164",".L166",".L167",".L168",".L169",".L170",".L171",".L172",".L72",".L74",".L75",".L76",".L77",".L78",".L79",".L80",".L81","__libc_csu_fini","__libc_csu_init","__libc_start_main@@GLIBC_2.0","main","register_tm_clones","_start","__x86.get_pc_thunk.ax","__x86.get_pc_thunk.bx","__x86.get_pc_thunk.dx"
+],
+"enable_eval":[
+   "cgc_strlen"
+],
+"struct_ptrs":{
+"pUser":"sUser",
+"pGroupUserList":"sGroupUserList",
+"pGroup":"sGroup",
+"pFileChunk":"sFileChunk",
+"pFile":"sFile",
+"pPerms":"sPerms",
+"pNode":"sNode",
+"pDataStruct":"sDataStruct"
+}
+}

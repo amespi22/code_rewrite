@@ -1,0 +1,353 @@
+Starting pre-processing
+Processing file KTY_Pretty_Printer/src/include/libcgc.h
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/cgc_stdarg.h
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/cgc_stddef.h
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/cgc_stdlib.h
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/cgc_string.h
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/calloc.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/cgc_ctype.h
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/ctype.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/cgc_stdint.h
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/cgc_malloc.h
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/free.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/malloc.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/malloc_common.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/memchr.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/memcmp.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/memcpy.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/memset.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/realloc.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/strchr.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/strcmp.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/strcpy.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/strlen.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/strsep.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/lib/strtol.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/src/cgc_array.h
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/src/cgc_hashtable.h
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/src/cgc_kty.h
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/src/array.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/src/cgc_strdup.h
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/src/hashtable.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/src/cgc_strncmp.h
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/src/cgc_strtod.h
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/src/strdup.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/src/strncmp.c
+Processing file KTY_Pretty_Printer/src/KTY_Pretty_Printer/src/strtod.c
+Pre-processing done
+Starting Transformations
+Start expand_case pass
+End pass
+Start expand_conditionals pass
+End pass
+Start expand_blockItems pass
+End pass
+Start if_else_break pass
+End pass
+Start insert_loop_braces pass
+End pass
+Start expand_if_else pass
+End pass
+Start expand_sizeof pass
+End pass
+Start single_declarations pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+all done with passes
+0 :  [cgc_eat_ws] <class 'list'>  [all function decls] 
+ - 
+1 :  [cgc_print_escaped] <class 'list'>  [all function decls] 
+ - int i ;
+ - char c [ 2 ] = { 0 } ;
+ - char tmp [ 2 ] = { 0 } ;
+ - char hex_nums [ ] = "0123456789ABCDEF" ;
+ - int tlv2 ;
+ - const char tlv1 [ ] = "\\\"" ;
+ - int tlv4 ;
+ - const char tlv3 [ ] = "\\\\" ;
+ - int tlv6 ;
+ - const char tlv5 [ ] = "\\/" ;
+ - int tlv8 ;
+ - const char tlv7 [ ] = "\\b" ;
+ - int tlv10 ;
+ - const char tlv9 [ ] = "\\f" ;
+ - int tlv12 ;
+ - const char tlv11 [ ] = "\\n" ;
+ - int tlv14 ;
+ - const char tlv13 [ ] = "\\r" ;
+ - int tlv16 ;
+ - const char tlv15 [ ] = "\\t" ;
+2 :  [cgc_print_indent] <class 'list'>  [all function decls] 
+ - int i ;
+ - int tlv2 ;
+ - const char tlv1 [ ] = " " ;
+3 :  [cgc_kty_int_to_string] <class 'list'>  [all function decls] 
+ - 
+4 :  [cgc_kty_double_to_string] <class 'list'>  [all function decls] 
+ - int tmp ;
+ - double val ;
+ - int tlv2 ;
+ - const char tlv1 [ ] = "-" ;
+5 :  [cgc_kty_string_to_string] <class 'list'>  [all function decls] 
+ - int tlv2 ;
+ - const char tlv1 [ ] = "\"" ;
+ - char * tlv4 ;
+ - int tlv3 ;
+ - int tlv6 ;
+ - const char tlv5 [ ] = "\"" ;
+6 :  [cgc_kty_object_to_string] <class 'list'>  [all function decls] 
+ - int count ;
+ - htbl_t * table ;
+ - entry_t * entry ;
+ - int tlv2 ;
+ - const char tlv1 [ ] = "{" ;
+ - int tlv4 ;
+ - const char tlv3 [ ] = "}" ;
+ - cgc_print_indent ( depth ) ;
+ - int tlv6 ;
+ - const char tlv5 [ ] = "\n" ;
+ - int tlv8 ;
+ - const char tlv7 [ ] = "\n" ;
+ - int tlv9 ;
+ - cgc_print_indent ( tlv9 ) ;
+ - int tlv11 ;
+ - const char tlv10 [ ] = "\"" ;
+ - char * tlv13 ;
+ - int tlv12 ;
+ - int tlv15 ;
+ - const char tlv14 [ ] = "\": " ;
+ - kty_item_t * tlv17 ;
+ - int tlv16 ;
+ - const char * tlv20 = entry -> key ;
+ - int tlv19 ;
+ - const char tlv18 [ ] = ",\n" ;
+7 :  [cgc_kty_array_to_string] <class 'list'>  [all function decls] 
+ - int i ;
+ - int count ;
+ - kty_item_t * elem ;
+ - int tlv1 ;
+ - int tlv3 ;
+ - const char tlv2 [ ] = "[" ;
+ - array_t * tlv6 ;
+ - int tlv5 ;
+ - const char tlv4 [ ] = "]" ;
+ - cgc_print_indent ( depth ) ;
+ - int tlv8 ;
+ - const char tlv7 [ ] = "\n" ;
+ - int tlv9 ;
+ - cgc_print_indent ( tlv9 ) ;
+ - array_t * tlv15 ;
+ - int tlv14 ;
+ - kty_item_t * tlv11 ;
+ - int tlv10 ;
+ - int tlv13 ;
+ - const char tlv12 [ ] = "\n" ;
+ - int tlv17 ;
+ - const char tlv16 [ ] = ",\n" ;
+8 :  [cgc_kty_boolean_to_string] <class 'list'>  [all function decls] 
+ - 
+9 :  [cgc_kty_null_to_string] <class 'list'>  [all function decls] 
+ - int tlv2 ;
+ - const char tlv1 [ ] = "null" ;
+10 :  [cgc_kty_cat_to_string] <class 'list'>  [all function decls] 
+ - int tlv2 ;
+ - const char tlv1 [ ] = "=^.^=" ;
+11 :  [cgc_kty_print_item] <class 'list'>  [all function decls] 
+ - cgc_kty_int_to_string ( item ) ;
+ - cgc_kty_double_to_string ( item ) ;
+ - cgc_kty_string_to_string ( item ) ;
+ - cgc_kty_boolean_to_string ( item ) ;
+ - cgc_kty_null_to_string ( item ) ;
+ - cgc_kty_cat_to_string ( item ) ;
+ - kty_item_t * tlv2 ;
+ - int tlv1 ;
+ - kty_item_t * tlv4 ;
+ - int tlv3 ;
+12 :  [cgc_kty_dumps] <class 'list'>  [all function decls] 
+ - int depth ;
+ - kty_item_t * tlv2 ;
+ - int tlv1 ;
+13 :  [cgc_parse_number] <class 'list'>  [all function decls] 
+ - char decimal [ 3 ] = { 0 } ;
+ - char * c1 ;
+ - char * c2 ;
+ - int i ;
+ - double d ;
+ - const char * tlv2 = str ;
+ - int tlv1 ;
+ - const char * tlv4 = str ;
+ - int tlv3 ;
+ - const char * tlv6 = str ;
+ - int tlv5 ;
+ - const char * tlv8 = str ;
+ - int tlv7 ;
+ - const char * tlv10 = str ;
+ - int tlv9 ;
+ - const char * tlv12 = str ;
+ - char * * tlv11 ;
+ - const char * tlv15 = str ;
+ - char * * tlv14 ;
+ - int tlv13 ;
+14 :  [cgc_parse_string] <class 'list'>  [all function decls] 
+ - int cgc_read ;
+ - int len ;
+ - char * c ;
+ - cgc_size_t tlv1 ;
+15 :  [cgc_parse_array] <class 'list'>  [all function decls] 
+ - kty_item_t * new ;
+ - char * tlv3 ;
+ - cgc_size_t tlv7 ;
+ - int tlv5 ;
+ - free_element_fn * tlv4 = cgc_free_kty_item ;
+ - char * tlv6 ;
+ - array_t * tlv2 ;
+ - void * tlv1 ;
+ - kty_item_t * tlv13 ;
+ - char * tlv12 ;
+ - cgc_free_kty_item ( new ) ;
+ - cgc_size_t tlv11 ;
+ - char * tlv10 ;
+ - array_t * tlv9 ;
+ - void * tlv8 ;
+ - char * tlv16 ;
+ - kty_item_t * tlv15 ;
+ - char * tlv14 ;
+ - char * tlv17 ;
+16 :  [cgc_parse_object] <class 'list'>  [all function decls] 
+ - char * key ;
+ - kty_item_t * new ;
+ - kty_item_t * k ;
+ - kty_item_t * dup ;
+ - cgc_free_kty_item ( k ) ;
+ - char * tlv4 ;
+ - cgc_size_t tlv9 ;
+ - int tlv6 ;
+ - free_value_fn * tlv5 = cgc_free_kty_item ;
+ - char * tlv7 ;
+ - cgc_size_t tlv10 ;
+ - char * tlv8 ;
+ - htbl_t * tlv3 ;
+ - char * tlv2 ;
+ - void * tlv1 ;
+ - cgc_free_kty_item ( k ) ;
+ - cgc_free_kty_item ( k ) ;
+ - cgc_free_kty_item ( dup ) ;
+ - kty_item_t * tlv27 ;
+ - char * tlv26 ;
+ - kty_item_t * tlv29 ;
+ - char * tlv28 ;
+ - cgc_free_kty_item ( new ) ;
+ - cgc_size_t tlv19 ;
+ - char * tlv16 ;
+ - array_t * tlv12 ;
+ - void * tlv11 ;
+ - cgc_size_t tlv20 ;
+ - char * tlv17 ;
+ - cgc_size_t tlv21 ;
+ - char * tlv18 ;
+ - htbl_t * tlv15 ;
+ - char * tlv14 ;
+ - void * tlv13 ;
+ - char * tlv34 ;
+ - char * tlv35 ;
+ - kty_item_t * tlv31 ;
+ - char * tlv30 ;
+ - kty_item_t * tlv33 ;
+ - char * tlv32 ;
+ - cgc_size_t tlv25 ;
+ - char * tlv24 ;
+ - array_t * tlv23 ;
+ - void * tlv22 ;
+ - char * tlv36 ;
+ - char * tlv37 ;
+17 :  [cgc_parse_item] <class 'list'>  [all function decls] 
+ - char c ;
+ - int tlv1 ;
+ - int tlv2 ;
+ - int tlv3 ;
+ - int tlv4 ;
+ - char * tlv7 ;
+ - char tlv6 [ ] = "true" ;
+ - int tlv5 ;
+ - char * tlv10 ;
+ - char tlv9 [ ] = "false" ;
+ - int tlv8 ;
+ - char * tlv13 ;
+ - char tlv12 [ ] = "null" ;
+ - int tlv11 ;
+ - char * tlv16 ;
+ - char tlv15 [ ] = "=^.^=" ;
+ - int tlv14 ;
+18 :  [cgc_kty_loads] <class 'list'>  [all function decls] 
+ - char * c ;
+ - char string [ MAX_KTY_STRING ] ;
+ - int i ;
+ - int init ;
+ - int state ;
+ - kty_item_t * root ;
+ - cgc_size_t tlv6 ;
+ - cgc_size_t tlv5 ;
+ - int tlv2 ;
+ - free_element_fn * tlv1 = cgc_free_kty_item ;
+ - kty_item_t * tlv4 ;
+ - char * tlv3 ;
+ - char * tlv8 ;
+ - cgc_free_kty_item ( root ) ;
+ - array_t * tlv7 ;
+ - cgc_array_destroy ( tlv7 ) ;
+19 :  [cgc_kty_init] <class 'list'>  [all function decls] 
+ - 
+20 :  [cgc_free_kty_item] <class 'list'>  [all function decls] 
+ - kty_item_t * item ;
+ - cgc_free ( item ) ;
+ - array_t * tlv1 ;
+ - cgc_array_destroy ( tlv1 ) ;
+ - htbl_t * tlv2 ;
+ - cgc_htbl_destroy ( tlv2 ) ;
+ - void * tlv3 ;
+ - cgc_free ( tlv3 ) ;
+Processing [cgc_eat_ws] :
+Processing [cgc_print_escaped] :
+Processing [cgc_print_indent] :
+Processing [cgc_kty_int_to_string] :
+Processing [cgc_kty_double_to_string] :
+Processing [cgc_kty_string_to_string] :
+Processing [cgc_kty_object_to_string] :
+Processing [cgc_kty_array_to_string] :
+Processing [cgc_kty_boolean_to_string] :
+Processing [cgc_kty_null_to_string] :
+Processing [cgc_kty_cat_to_string] :
+Processing [cgc_kty_print_item] :
+Processing [cgc_kty_dumps] :
+Processing [cgc_parse_number] :
+Processing [cgc_parse_string] :
+Processing [cgc_parse_array] :
+Processing [cgc_parse_object] :
+Processing [cgc_parse_item] :
+Processing [cgc_kty_loads] :
+Processing [cgc_kty_init] :
+Processing [cgc_free_kty_item] :
+Writing output file xform/t_kty.c
+
+real	2m38.181s
+user	2m38.127s
+sys	0m0.044s

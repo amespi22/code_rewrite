@@ -1,0 +1,32 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>868f3ca4cd22e3b7360b57085936608e87d6d569d1122be29f3d294c7182446967f391605b7c55523e8f4fddbbd33a30</seed>
+<replay>
+    <write><data>\xd4\x05\x00\x00</data></write>
+    <write><data>\xd1\x00</data></write>
+    <write><data>rq3B4AHgfY6ZTpl2VEiLvxfqtz1xdd8pvhLbIxzUfb6uZouT4I3vdluy57vc1DnLabhRd0C6zEvHK5AevTanLtMjTGzzNm6l4S36hDJqrr\x07gkZgnZ4o1mRhHEOYUyI\x07Eg904aO0qBgkXBfRaje3751WjeLThDisq7yDtwJDpm7vMjnRsrjvRhqwfRGC9yWPC9Ytr8uyDCuBpWJIq\x07</data></write>
+    <read><length>4</length><match><data>2y\x06\x00</data></match></read>
+    <write><data>j\x0d\x03\x00</data></write>
+    <read><length>4</length><match><pcre>(.+)</pcre></match></read>
+    <read><length>2</length><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <write><data>\xcf\x07\x00\x00</data></write>
+    <write><data>2y\x06\x00</data></write>
+    <read><length>4</length><match><data>2y\x06\x00</data></match></read>
+    <read><length>2</length><match><data>\xd1\x00</data></match></read>
+    <read><length>209</length><match><data>rq3B4AHgfY6ZTpl2VEiLvxfqtz1xdd8pvhLbIxzUfb6uZouT4I3vdluy57vc1DnLabhRd0C6zEvHK5AevTanLtMjTGzzNm6l4S36hDJqrr\x07gkZgnZ4o1mRhHEOYUyI\x07Eg904aO0qBgkXBfRaje3751WjeLThDisq7yDtwJDpm7vMjnRsrjvRhqwfRGC9yWPC9Ytr8uyDCuBpWJIq\x07</data></match></read>
+    <write><data>\xed\x5f\x84\x00</data></write>
+    <read><length>4</length><match><data>\x01\x00\x00\x00</data></match></read>
+    <read><length>4</length><match><data>2y\x06\x00</data></match></read>
+    <write><data>\xd4\x05\x00\x00</data></write>
+    <write><data>w\x01</data></write>
+    <write><data>GJOST2bL0HBH0651YP9OnbWXu5bywln032qih1sFfg4CXAsQ7204vMEufptFd1D4FQ\x07yJixUQHtIZqSaMzIWTEG5b0zO9xuNlzPQd9SO79QmFrs07EJMHgnxBMCgvqmySasQAmQqEx69BJ29KdhlbZWA0KffsVqSeTgoKcgUpSlRJyWWkSUo\x07eUAU45VQLu7A8HsZCOXu3ZIcuNTV6ruUwcx3CPZLSDtrCIYSCgy0XwPoF2LizET0r2ewUU5EUyN8ZanFAcVCwFyXL81ECcruHPwdjbU3se5hXHLfoTsWy4qBqG2e4rhuZDECxEfqnlFIKbhVm1Did7HDPPn2K3XWlcgwtFUX1G3VvT81ozjeqDI26X5wB7GaT\x07</data></write>
+    <read><length>4</length><match><data>3y\x06\x00</data></match></read>
+    <write><data>\x90v\x12\x00</data></write>
+    <read><length>4</length><match><data>\x02\x00\x00\x00</data></match></read>
+</replay>
+</pov>

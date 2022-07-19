@@ -1,0 +1,34 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>0f8b44c32c4c42f55e65c36957072554c2efb18ac32a0c2c9c90462df1d4bb3a8fa9b518dbed93351ad50c7a547f44c9</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Welcome to Palindrome Finder\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><length>37</length><match><data>\x09Please enter a possible palindrome: </data></match></read>
+    <write><data>7QeioXpflu9D9YsILfoFqGIcrqEB\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x09\x09Nope\x2c that\x27s not a palindrome\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><length>37</length><match><data>\x09Please enter a possible palindrome: </data></match></read>
+    <write><data>rPPr\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x09\x09Yes\x2c that\x27s a palindrome!\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><length>37</length><match><data>\x09Please enter a possible palindrome: </data></match></read>
+    <write><data>WVkYYkoj9Yg4dC7P4T5bPD8OwzojFX\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x09\x09Nope\x2c that\x27s not a palindrome\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><length>37</length><match><data>\x09Please enter a possible palindrome: </data></match></read>
+    <write><data>4x11x4\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x09\x09Yes\x2c that\x27s a palindrome!\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><length>37</length><match><data>\x09Please enter a possible palindrome: </data></match></read>
+    <write><data>0leh\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x09\x09Nope\x2c that\x27s not a palindrome\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x0a</data></match></read>
+    <read><length>37</length><match><data>\x09Please enter a possible palindrome: </data></match></read>
+    <write><data>EVZ3am9lpMxo0lBGZkcB7EI5MMUVJb\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x09\x09Nope\x2c that\x27s not a palindrome\x0a</data></match></read>
+</replay>
+</pov>

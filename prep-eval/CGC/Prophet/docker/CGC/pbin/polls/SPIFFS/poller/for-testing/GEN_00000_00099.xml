@@ -1,0 +1,75 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>0341166e96581039a0a53bd16155953236af24f65272ec9e1abe0497b5d59e8a14acec46b03489ecf33705816c1a6b1f</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>Welcome to SPIFFS \x28Somewhat Poorly Implemented Fast File System\x29</data></match></read>
+    <read><delim>\x0a</delim><match><data>Please enter the date as prompted</data></match></read>
+    <read><delim>:</delim><match><data>Enter year between 1970 and 2105 </data></match></read>
+    <write><data>2014\x0a</data></write>
+    <read><delim>:</delim><match><data>Enter month </data></match></read>
+    <write><data>11\x0a</data></write>
+    <read><delim>:</delim><match><data>Enter day :</data></match></read>
+    <write><data>8\x0a</data></write>
+    <read><delim>:</delim><match><data>Enter hour \x2800\x2d23\x29 </data></match></read>
+    <write><data>14\x0a</data></write>
+    <read><delim>:</delim><match><data>Enter Minute \x2800\x2d59\x29 </data></match></read>
+    <write><data>36\x0a</data></write>
+    <read><delim>:</delim><match><data>Enter second \x2800\x2d59\x29 </data></match></read>
+    <write><data>24\x0a</data></write>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>add file </data></write>
+    <write><data>JAxYYVzc 50\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x2d\x2d\x2d\x2d\x2dBegin File\x2d\x2d\x2d\x2d\x2d</data></match></read>
+    <write><data>Z3U6vLd4Gyt1o3KNwh4c6ncgju3ip76f9SfauW43JHoy1UkADz</data></write>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>cat JAxYYVzc\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x2d\x2d\x2d\x2d\x2dBegin File\x2d\x2d\x2d\x2d\x2d</data></match></read>
+    <read><length>50</length><match><pcre>([[:print:]])*</pcre></match></read>
+    <read><delim>\x0a</delim><match><data>\x2d\x2d\x2d\x2d\x2dEND File\x2d\x2d\x2d\x2d\x2d</data></match></read>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>set group root\x0a</data></write>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>get date\x0a</data></write>
+    <read><delim>\x0a</delim><match><pcre>([[:print:]])*</pcre></match></read>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>get userlist\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>UID    NAME</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f</data></match></read>
+    <read><delim>\x0a</delim><match><data>0 root</data></match></read>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>add file </data></write>
+    <write><data>Dcpr8 64\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x2d\x2d\x2d\x2d\x2dBegin File\x2d\x2d\x2d\x2d\x2d</data></match></read>
+    <write><data>NVBL1hHs2czIgBwdG3BnaJFKsXq1efMNmEBOyvI3nv6Ix0I1ZkdJxQENXg85XzwK</data></write>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>ls\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Type  Size     Date     Name       Perms</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f\x5f</data></match></read>
+    <read><delim>\x0a</delim><match><pcre>([[:print:]])*</pcre></match></read>
+    <read><delim>\x0a</delim><match><pcre>([[:print:]])*</pcre></match></read>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>delete file Dcpr8\x0a</data></write>
+    <read><delim>\x40</delim><match><data>root</data></match></read>
+    <read><delim>\x2f</delim><match><data>SPIFF:</data></match></read>
+    <read><delim>\x3e</delim><match><pcre>([[:alnum:]]/)*</pcre></match></read>
+    <write><data>exit\x0a</data></write>
+</replay>
+</pov>

@@ -1,0 +1,25 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>f59a7cea85c294a7f29d18b08e11a44817ebf34dccc676ae3dd08dcf05e67509da8f848d374a809ac883a86b49edea94</seed>
+<replay>
+    <read><delim> </delim><match><data>nk9001\x3e </data></match></read>
+    <write><data>delete\x2dnote mostthreeshouldwhathaveunderyearsand\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Note successfully deleted.\x0a</data></match></read>
+    <read><delim> </delim><match><data>nk9001\x3e </data></match></read>
+    <write><data>new\x2dnote eventhedidlifetwo bothbecausehewerehimareworkhavelife\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Note successfully created.\x0a</data></match></read>
+    <read><delim> </delim><match><data>nk9001\x3e </data></match></read>
+    <write><data>get\x2dnote eventhedidlifetwo\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>bothbecausehewerehimareworkhavelife\x0a</data></match></read>
+    <read><delim> </delim><match><data>nk9001\x3e </data></match></read>
+    <write><data>append\x2dnote eventhedidlifetwo comeknownowsuchitsyearson\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Note successfully appended.\x0a</data></match></read>
+    <read><delim> </delim><match><data>nk9001\x3e </data></match></read>
+    <write><data>seebeingwhotwothey\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>I don\x27t know what you want\x2c but you can\x27t find it here.\x0a</data></match></read>
+    <read><delim> </delim><match><data>nk9001\x3e </data></match></read>
+    <write><data>quit\x0a</data></write>
+</replay>
+</pov>

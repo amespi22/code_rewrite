@@ -1,0 +1,1669 @@
+
+
+#include "cgc_countyParsers.h"
+int cgc_countyMenu(pCounty co)
+{
+    int choice;
+    choice = 0;
+    char selection[30];
+    pBorder pb;
+    pb = NULL;
+    pCity pc;
+    pc = NULL;
+    if (co == NULL) {
+	return 0;
+    }
+    while (1) {
+	cgc_printf("County: @s\n", co->name);
+ {
+     const char tlv4 [ ] = "1) Display County Info\n";
+    	cgc_printf(tlv4);
+ }
+ {
+     const char tlv5 [ ] = "2) Set Seat\n";
+    	cgc_printf(tlv5);
+ }
+ {
+     const char tlv6 [ ] = "3) Set Population\n";
+    	cgc_printf(tlv6);
+ }
+ {
+     const char tlv7 [ ] = "4) Set Area\n";
+    	cgc_printf(tlv7);
+ }
+ {
+     const char tlv8 [ ] = "5) Set Density\n";
+    	cgc_printf(tlv8);
+ }
+ {
+     const char tlv9 [ ] = "6) Add Border\n";
+    	cgc_printf(tlv9);
+ }
+ {
+     const char tlv10 [ ] = "7) Add City\n";
+    	cgc_printf(tlv10);
+ }
+ {
+     const char tlv11 [ ] = "8) Select City\n";
+    	cgc_printf(tlv11);
+ }
+ {
+     const char tlv12 [ ] = "9) Delete County and Exit Menu\n";
+    	cgc_printf(tlv12);
+ }
+ {
+     const char tlv13 [ ] = "10) Exit Menu\n";
+    	cgc_printf(tlv13);
+ }
+ {
+     const char tlv14 [ ] = "Selection: ";
+    	cgc_printf(tlv14);
+ }
+ {
+     void* tlv16;
+     tlv16 = selection;
+     cgc_size_t tlv15;
+     tlv15 = 4;
+    	cgc_bzero(tlv16,tlv15);
+ }
+ {
+     char* tlv19;
+      tlv19 = selection;
+     char tlv18;
+     tlv18 = '\n';
+     cgc_size_t tlv17;
+     tlv17 = 3;
+    	cgc_receive_until(tlv19,tlv18,tlv17);
+ }
+ {
+     const char* tlv22 = selection;
+    	choice = cgc_atoi(tlv22);
+ }
+ {
+     void* tlv21;
+     tlv21 = selection;
+     cgc_size_t tlv20;
+     tlv20 = 30;
+    	cgc_bzero(tlv21,tlv20);
+ }
+	switch (choice) {
+	case 1:
+	    {
+		cgc_printCountyInfo(co);
+	    }
+	    break;
+	case 2:		// Set Seat
+	    {
+  {
+      const char tlv84 [ ] = "\n-> ";
+    		cgc_printf(tlv84);
+  }
+	    }
+     {
+         char* tlv25;
+          tlv25 = selection;
+         char tlv24;
+         tlv24 = '\n';
+         cgc_size_t tlv23;
+         tlv23 = 19;
+    	    cgc_receive_until(tlv25,tlv24,tlv23);
+     }
+
+	    choice = 0;
+	    while (cgc_isalpha(selection[choice])) {
+		co->seat[choice] = selection[choice];
+		choice++;
+	    }
+
+	    /// NULL terminated
+	    co->seat[choice] = '\x00';
+	    break;
+	case 3:		// Set Population
+	    {
+  {
+      const char tlv85 [ ] = "\n-> ";
+    		cgc_printf(tlv85);
+  }
+	    }
+     {
+         char* tlv28;
+          tlv28 = selection;
+         char tlv27;
+         tlv27 = '\n';
+         cgc_size_t tlv26;
+         tlv26 = 19;
+    	    cgc_receive_until(tlv28,tlv27,tlv26);
+     }
+     {
+         const char* tlv69 = selection;
+    	    co->population = cgc_atoi(tlv69);
+     }
+	    break;
+	case 4:		/// Set Area
+	    {
+  {
+      const char tlv86 [ ] = "\n-> ";
+    		cgc_printf(tlv86);
+  }
+	    }
+     {
+         char* tlv31;
+          tlv31 = selection;
+         char tlv30;
+         tlv30 = '\n';
+         cgc_size_t tlv29;
+         tlv29 = 19;
+    	    cgc_receive_until(tlv31,tlv30,tlv29);
+     }
+     {
+         const char* tlv70 = selection;
+    	    co->area = cgc_atof(tlv70);
+     }
+	    break;
+	case 5:		/// Set Density
+	    {
+  {
+      const char tlv87 [ ] = "\n-> ";
+    		cgc_printf(tlv87);
+  }
+	    }
+     {
+         char* tlv34;
+          tlv34 = selection;
+         char tlv33;
+         tlv33 = '\n';
+         cgc_size_t tlv32;
+         tlv32 = 19;
+    	    cgc_receive_until(tlv34,tlv33,tlv32);
+     }
+     {
+         const char* tlv71 = selection;
+    	    co->density = cgc_atof(tlv71);
+     }
+	    break;
+	case 6:		/// Add border
+	    {
+		if (co->border_count >= COUNTYBORDERMAX) {
+      {
+          const char tlv91 [ ] = "!!Max borders reached\n";
+    		    cgc_printf(tlv91);
+      }
+		    break;
+		}
+	    }
+     int tlv1;
+     {
+         cgc_size_t tlv74;
+         tlv74 = sizeof ( Border );
+         int tlv73;
+         tlv73 = 0;
+         void** tlv72;
+         tlv72 = ( void * * ) & pb;
+         tlv1 = cgc_allocate(tlv74,tlv73,tlv72);
+     }
+	    if (tlv1 != 0) {
+		pb = NULL;
+		break;
+	    }
+     {
+         const char tlv35 [ ] = "Lat Start: ";
+    	    cgc_printf(tlv35);
+     }
+     {
+         void* tlv37;
+         tlv37 = selection;
+         cgc_size_t tlv36;
+         tlv36 = 30;
+    	    cgc_bzero(tlv37,tlv36);
+     }
+     {
+         char* tlv40;
+          tlv40 = selection;
+         char tlv39;
+         tlv39 = '\n';
+         cgc_size_t tlv38;
+         tlv38 = 19;
+    	    cgc_receive_until(tlv40,tlv39,tlv38);
+     }
+     {
+         const char* tlv75 = selection;
+    	    pb->latStart = cgc_atof(tlv75);
+     }
+     {
+         const char tlv41 [ ] = "Long Start: ";
+    	    cgc_printf(tlv41);
+     }
+     {
+         void* tlv43;
+         tlv43 = selection;
+         cgc_size_t tlv42;
+         tlv42 = 30;
+    	    cgc_bzero(tlv43,tlv42);
+     }
+     {
+         char* tlv46;
+          tlv46 = selection;
+         char tlv45;
+         tlv45 = '\n';
+         cgc_size_t tlv44;
+         tlv44 = 19;
+    	    cgc_receive_until(tlv46,tlv45,tlv44);
+     }
+     {
+         const char* tlv76 = selection;
+    	    pb->lngStart = cgc_atof(tlv76);
+     }
+     {
+         const char tlv47 [ ] = "Lat End: ";
+    	    cgc_printf(tlv47);
+     }
+     {
+         void* tlv49;
+         tlv49 = selection;
+         cgc_size_t tlv48;
+         tlv48 = 30;
+    	    cgc_bzero(tlv49,tlv48);
+     }
+     {
+         char* tlv52;
+          tlv52 = selection;
+         char tlv51;
+         tlv51 = '\n';
+         cgc_size_t tlv50;
+         tlv50 = 19;
+    	    cgc_receive_until(tlv52,tlv51,tlv50);
+     }
+     {
+         const char* tlv77 = selection;
+    	    pb->latEnd = cgc_atof(tlv77);
+     }
+     {
+         const char tlv53 [ ] = "Long End: ";
+    	    cgc_printf(tlv53);
+     }
+     {
+         void* tlv55;
+         tlv55 = selection;
+         cgc_size_t tlv54;
+         tlv54 = 30;
+    	    cgc_bzero(tlv55,tlv54);
+     }
+     {
+         char* tlv58;
+          tlv58 = selection;
+         char tlv57;
+         tlv57 = '\n';
+         cgc_size_t tlv56;
+         tlv56 = 19;
+    	    cgc_receive_until(tlv58,tlv57,tlv56);
+     }
+     {
+         const char* tlv78 = selection;
+    	    pb->lngEnd = cgc_atof(tlv78);
+     }
+	    co->borders[co->border_count] = pb;
+	    co->border_count++;
+	    break;
+	case 7:
+	    /// Add City
+	    /// Find a free slot
+	    {
+		choice = 0;
+	    }
+	    while (choice < COUNTYCITYMAX) {
+		if (co->cities[choice] == NULL) {
+		    break;
+		}
+		choice++;
+	    }
+	    if (choice == COUNTYCITYMAX) {
+  {
+      const char tlv88 [ ] = "!!Max cities reached\n";
+    		cgc_printf(tlv88);
+  }
+		continue;
+	    }
+     int tlv2;
+     {
+         cgc_size_t tlv81;
+         tlv81 = sizeof ( City );
+         int tlv80;
+         tlv80 = 0;
+         void** tlv79;
+         tlv79 = ( void * * ) ( & pc );
+         tlv2 = cgc_allocate(tlv81,tlv80,tlv79);
+     }
+	    if (tlv2 != 0) {
+		pc = NULL;
+		continue;
+	    }
+	    cgc_initCity(pc);
+	    co->cities[choice] = pc;
+     {
+         const char tlv59 [ ] = "New City Name: ";
+    	    cgc_printf(tlv59);
+     }
+     {
+         char* tlv62;
+          tlv62 = selection;
+         char tlv61;
+         tlv61 = '\n';
+         cgc_size_t tlv60;
+         tlv60 = 19;
+    	    cgc_receive_until(tlv62,tlv61,tlv60);
+     }
+	    choice = 0;
+	    while (cgc_isalnum(selection[choice])) {
+		pc->name[choice] = selection[choice];
+		choice++;
+	    }
+	    pc->name[choice] = '\x00';
+	    co->city_count++;
+	    break;
+	case 8:
+	    /// cgc_select city
+	    {
+		for (choice = 0; choice < COUNTYCITYMAX; choice++) {
+		    if (co->cities[choice] != NULL) {
+			cgc_printf("@d) @s\n", choice + 1, co->cities[choice]);
+		    }
+		}
+	    }
+     {
+         const char tlv63 [ ] = "\n-> ";
+    	    cgc_printf(tlv63);
+     }
+     {
+         void* tlv65;
+         tlv65 = selection;
+         cgc_size_t tlv64;
+         tlv64 = 30;
+    	    cgc_bzero(tlv65,tlv64);
+     }
+     {
+         char* tlv68;
+          tlv68 = selection;
+         char tlv67;
+         tlv67 = '\n';
+         cgc_size_t tlv66;
+         tlv66 = 4;
+    	    cgc_receive_until(tlv68,tlv67,tlv66);
+     }
+     {
+         const char* tlv82 = selection;
+    	    choice = cgc_atoi(tlv82);
+     }
+	    if (choice < 1 || choice > COUNTYCITYMAX || co->cities[choice - 1] == NULL) {
+  {
+      const char tlv89 [ ] = "Invalid choice\n";
+    		cgc_printf(tlv89);
+  }
+		continue;
+	    }
+     int tlv3;
+     {
+         pCity tlv83;
+         tlv83 = co -> cities [ choice - 1 ];
+         tlv3 = cgc_cityMenu(tlv83);
+     }
+	    if (tlv3 == 0) {
+		co->cities[choice - 1] = NULL;
+		co->city_count--;
+	    }
+	    break;
+	case 9:
+	    {
+		cgc_freeCounty(co);
+	    }
+	    return 0;
+	    break;
+	case 10:
+	    {
+		return 1;
+	    }
+	    break;
+	default:
+	    {
+  {
+      const char tlv90 [ ] = "Invalid choice\n";
+    		cgc_printf(tlv90);
+  }
+	    }
+	    continue;
+	};
+    }
+    return 1;
+}
+
+void cgc_freeCounty(pCounty co)
+{
+    int index;
+    index = 0;
+    if (co == NULL) {
+	return;
+    }
+    for (index = 0; index < co->border_count; index++) {
+	if (co->borders[index] != NULL) {
+     {
+         void* tlv5;
+         tlv5 = co -> borders [ index ];
+         cgc_size_t tlv4;
+         tlv4 = sizeof ( Border );
+    	    cgc_deallocate(tlv5,tlv4);
+     }
+	    co->borders[index] = NULL;
+	}
+    }
+    for (index = 0; index < COUNTYCITYMAX; index++) {
+ {
+     pCity tlv3;
+     tlv3 = co -> cities [ index ];
+    	cgc_freeCity(tlv3);
+ }
+	co->cities[index] = NULL;
+    }
+    {
+        void* tlv2;
+        tlv2 = co;
+        cgc_size_t tlv1;
+        tlv1 = sizeof ( County );
+        cgc_deallocate(tlv2,tlv1);
+    }
+
+    return;
+}
+
+void cgc_initCounty(pCounty co)
+{
+    int index;
+    index = 0;
+    if (co == NULL) {
+	return;
+    }
+    for (index = 0; index < 20; index++) {
+	co->name[index] = 0;
+	co->seat[index] = 0;
+	co->cities[index] = NULL;
+	co->borders[index] = NULL;
+    }
+    co->population = -1;
+    co->area = -1.0;
+    co->density = -1.0;
+    co->city_count = 0;
+    co->border_count = 0;
+    return;
+}
+
+void cgc_printCountyInfo(pCounty co)
+{
+    int index;
+    index = 0;
+    if (co == NULL) {
+	return;
+    }
+    {
+        const char tlv1 [ ] = "\t\t\tCounty: ";
+        cgc_printf(tlv1);
+    }
+    if (co->name[0] == '\x00') {
+ {
+     const char tlv3 [ ] = "Unknown\n";
+    	cgc_printf(tlv3);
+ }
+    } else {
+	cgc_printf("@s\n", co->name);
+    }
+    {
+        const char tlv2 [ ] = "\t\t\t\tSeat: ";
+        cgc_printf(tlv2);
+    }
+    if (co->seat[0] == '\x00') {
+ {
+     const char tlv4 [ ] = "Unknown\n";
+    	cgc_printf(tlv4);
+ }
+    } else {
+	cgc_printf("@s\n", co->seat);
+    }
+    if (co->population >= 0) {
+	cgc_printf("\t\t\t\tPopulation: @d\n", co->population);
+    }
+    if (co->area >= 0) {
+	cgc_printf("\t\t\t\tArea: @f\n", co->area);
+    }
+    if (co->density >= 0) {
+	cgc_printf("\t\t\t\tDensity: @f\n", co->density);
+    }
+    for (index = 0; index < co->border_count; index++) {
+	cgc_printf("\t\t\t\tBorder: @f @f @f @f\n", co->borders[index]->latStart, co->borders[index]->lngStart, co->borders[index]->latEnd, co->borders[index]->lngEnd);
+    }
+    for (index = 0; index < COUNTYCITYMAX; index++) {
+	if (co->cities[index] != NULL) {
+     {
+         pCity tlv5;
+         tlv5 = co -> cities [ index ];
+    	    cgc_printCityInfo(tlv5);
+     }
+	}
+    }
+    return;
+}
+
+pCounty cgc_countyTopLevel(pstring str)
+{
+    pCounty newCounty;
+    newCounty = NULL;
+    int startIndex;
+    startIndex = 0;
+    int endIndex;
+    endIndex = 0;
+    int lastGood;
+    lastGood = 0;
+    int tempInt;
+    tempInt = 0;
+    char* tempChar;
+     tempChar = NULL;
+    element el;
+    if (str == NULL) {
+	return NULL;
+    }
+    cgc_skipWhiteSpace(str);
+    lastGood = str->index;
+    int tlv1;
+    {
+        pstring tlv24;
+        tlv24 = str;
+        char tlv23;
+        tlv23 = '{';
+        tlv1 = cgc_atChar(tlv24,tlv23);
+    }
+    if (!tlv1) {
+	goto end;
+    }
+    cgc_incChar(str);
+    cgc_skipWhiteSpace(str);
+    {
+        pstring tlv10;
+        tlv10 = str;
+        int* tlv9;
+        tlv9 = & startIndex;
+        cgc_getIndex(tlv10,tlv9);
+    }
+    {
+        pstring tlv25;
+        tlv25 = str;
+        endIndex = cgc_skipAlpha(tlv25);
+    }
+    if (endIndex == -1) {
+	goto end;
+    }
+    if (startIndex == endIndex) {
+	goto end;
+    }
+    {
+        pstring tlv28;
+        tlv28 = str;
+        int tlv27;
+        tlv27 = startIndex;
+        int tlv26;
+        tlv26 = endIndex;
+        tempChar = cgc_copyData(tlv28,tlv27,tlv26);
+    }
+    if (tempChar == NULL) {
+	goto end;
+    }
+    int tlv2;
+    {
+        const char* tlv30 = tempChar;
+        const char tlv29 [ ] = "County";
+        tlv2 = cgc_strcmp(tlv30,tlv29);
+    }
+    if (tlv2 != 0) {
+	goto end;
+    }
+    {
+        void* tlv12;
+        tlv12 = tempChar;
+        cgc_size_t tlv11;
+        tlv11 = ( endIndex - startIndex ) + 1;
+        cgc_deallocate(tlv12,tlv11);
+    }
+    cgc_skipWhiteSpace(str);
+    int tlv3;
+    {
+        pstring tlv32;
+        tlv32 = str;
+        char tlv31;
+        tlv31 = '}';
+        tlv3 = cgc_atChar(tlv32,tlv31);
+    }
+    if (!tlv3) {
+	goto end;
+    }
+    cgc_skipWhiteSpace(str);
+    /// Skip past the closing brace
+    cgc_incChar(str);
+    int tlv4;
+    {
+        cgc_size_t tlv35;
+        tlv35 = sizeof ( County );
+        int tlv34;
+        tlv34 = 0;
+        void** tlv33;
+        tlv33 = ( void * * ) & newCounty;
+        tlv4 = cgc_allocate(tlv35,tlv34,tlv33);
+    }
+    if (tlv4 != 0) {
+	newCounty = NULL;
+	goto end;
+    }
+    lastGood = str->index;
+    cgc_initCounty(newCounty);
+    {
+        pstring tlv36;
+        tlv36 = str;
+        tempChar = cgc_pullNextElementName(tlv36);
+    }
+    while (tempChar != NULL) {
+ {
+     char* tlv54;
+      tlv54 = tempChar;
+    	el = cgc_elementNameToEnum(tlv54);
+ }
+ {
+     void* tlv49;
+     tlv49 = tempChar;
+     cgc_size_t tlv48;
+     {
+         char* tlv79;
+          tlv79 = tempChar;
+         tlv48 = cgc_strlen(tlv79) + 1;
+     }
+    	cgc_deallocate(tlv49,tlv48);
+ }
+	switch (el) {
+	case name:
+	    {
+  {
+      pstring tlv73;
+      tlv73 = str;
+    		tempChar = cgc_extractName(tlv73);
+  }
+	    }
+	    if (tempChar == NULL) {
+		goto error;
+	    }
+
+     {
+         void* tlv57;
+         tlv57 = newCounty -> name;
+         cgc_size_t tlv56;
+         tlv56 = 20;
+    	    cgc_bzero(tlv57,tlv56);
+     }
+     {
+         char* tlv60;
+          tlv60 = newCounty -> name;
+         char* tlv59;
+          tlv59 = tempChar;
+         cgc_size_t tlv58;
+         tlv58 = 19;
+    	    cgc_strncpy(tlv60,tlv59,tlv58);
+     }
+     {
+         void* tlv62;
+         tlv62 = tempChar;
+         cgc_size_t tlv61;
+         {
+             char* tlv81;
+              tlv81 = tempChar;
+             tlv61 = cgc_strlen(tlv81) + 1;
+         }
+    	    cgc_deallocate(tlv62,tlv61);
+     }
+	    tempChar = NULL;
+	    break;
+	case seat:
+	    {
+  {
+      pstring tlv74;
+      tlv74 = str;
+    		tempChar = cgc_extractSeat(tlv74);
+  }
+	    }
+	    if (tempChar == NULL) {
+		goto error;
+	    }
+     {
+         void* tlv64;
+         tlv64 = newCounty -> seat;
+         cgc_size_t tlv63;
+         tlv63 = 20;
+    	    cgc_bzero(tlv64,tlv63);
+     }
+     {
+         char* tlv67;
+          tlv67 = newCounty -> seat;
+         char* tlv66;
+          tlv66 = tempChar;
+         cgc_size_t tlv65;
+         tlv65 = 19;
+    	    cgc_strncpy(tlv67,tlv66,tlv65);
+     }
+     {
+         void* tlv69;
+         tlv69 = tempChar;
+         cgc_size_t tlv68;
+         {
+             char* tlv82;
+              tlv82 = tempChar;
+             tlv68 = cgc_strlen(tlv82) + 1;
+         }
+    	    cgc_deallocate(tlv69,tlv68);
+     }
+	    tempChar = NULL;
+	    break;
+	case density:
+	    {
+  {
+      pstring tlv75;
+      tlv75 = str;
+    		newCounty->density = cgc_extractDensity(tlv75);
+  }
+	    }
+	    if (newCounty->density < 0.0) {
+		goto error;
+	    }
+	    break;
+	case population:
+	    {
+  {
+      pstring tlv76;
+      tlv76 = str;
+    		newCounty->population = cgc_extractPopulation(tlv76);
+  }
+	    }
+	    if (newCounty->population < 0) {
+		goto error;
+	    }
+	    break;
+	case area:
+	    {
+  {
+      pstring tlv77;
+      tlv77 = str;
+    		newCounty->area = cgc_extractArea(tlv77);
+  }
+	    }
+	    if (newCounty->area < 0.0) {
+		goto error;
+	    }
+	    break;
+	case border:
+	    {
+		tempInt = newCounty->border_count;
+	    }
+	    if (tempInt >= COUNTYBORDERMAX) {
+		goto error;
+	    }
+     {
+         pstring tlv70;
+         tlv70 = str;
+    	    newCounty->borders[tempInt] = cgc_extractBorder(tlv70);
+     }
+	    if (newCounty->borders[tempInt] == NULL) {
+		goto error;
+	    }
+	    newCounty->border_count++;
+	    break;
+	case city:
+	    {
+		tempInt = newCounty->city_count;
+	    }
+	    if (tempInt >= COUNTYCITYMAX) {
+		goto error;
+	    }
+     {
+         pstring tlv71;
+         tlv71 = str;
+    	    newCounty->cities[tempInt] = cgc_cityTopLevel(tlv71);
+     }
+	    if (newCounty->cities[tempInt] == NULL) {
+		goto error;
+	    }
+	    newCounty->city_count++;
+	    break;
+	default:
+	    {
+  {
+      const char tlv72 [ ] = "!!Element not allowed\n";
+    		cgc_printf(tlv72);
+  }
+	    }
+	    goto error;
+	    break;
+
+	};
+ {
+     pstring tlv51;
+     tlv51 = str;
+     int* tlv50;
+     tlv50 = & lastGood;
+    	cgc_getIndex(tlv51,tlv50);
+ }
+ {
+     pstring tlv55;
+     tlv55 = str;
+    	tempChar = cgc_pullNextElementName(tlv55);
+ }
+    }
+    /// Skip any residual white space
+    cgc_skipWhiteSpace(str);
+    /// It must be at the final opening brace
+    int tlv5;
+    {
+        pstring tlv38;
+        tlv38 = str;
+        char tlv37;
+        tlv37 = '{';
+        tlv5 = cgc_atChar(tlv38,tlv37);
+    }
+    if (!tlv5) {
+	goto error;
+    }
+    {
+        pstring tlv14;
+        tlv14 = str;
+        int tlv13;
+        tlv13 = 1;
+        cgc_skipLength(tlv14,tlv13);
+    }
+    cgc_skipWhiteSpace(str);
+    int tlv6;
+    {
+        pstring tlv40;
+        tlv40 = str;
+        char tlv39;
+        tlv39 = '#';
+        tlv6 = cgc_atChar(tlv40,tlv39);
+    }
+    if (!tlv6) {
+	goto error;
+    }
+    {
+        pstring tlv16;
+        tlv16 = str;
+        int tlv15;
+        tlv15 = 1;
+        cgc_skipLength(tlv16,tlv15);
+    }
+
+    {
+        pstring tlv18;
+        tlv18 = str;
+        int* tlv17;
+        tlv17 = & startIndex;
+        cgc_getIndex(tlv18,tlv17);
+    }
+    cgc_skipAlpha(str);
+    {
+        pstring tlv20;
+        tlv20 = str;
+        int* tlv19;
+        tlv19 = & endIndex;
+        cgc_getIndex(tlv20,tlv19);
+    }
+    if (startIndex == endIndex) {
+	goto error;
+    } else {
+	if (endIndex == -1) {
+	    goto error;
+	}
+    }
+    {
+        pstring tlv43;
+        tlv43 = str;
+        int tlv42;
+        tlv42 = startIndex;
+        int tlv41;
+        tlv41 = endIndex;
+        tempChar = cgc_copyData(tlv43,tlv42,tlv41);
+    }
+    int tlv7;
+    {
+        const char* tlv45 = tempChar;
+        const char tlv44 [ ] = "County";
+        tlv7 = cgc_strcmp(tlv45,tlv44);
+    }
+    if (tlv7 != 0) {
+ {
+     void* tlv53;
+     tlv53 = tempChar;
+     cgc_size_t tlv52;
+     {
+         char* tlv80;
+          tlv80 = tempChar;
+         tlv52 = cgc_strlen(tlv80) + 1;
+     }
+    	cgc_deallocate(tlv53,tlv52);
+ }
+	goto error;
+    }
+    {
+        void* tlv22;
+        tlv22 = tempChar;
+        cgc_size_t tlv21;
+        {
+            char* tlv78;
+             tlv78 = tempChar;
+            tlv21 = cgc_strlen(tlv78) + 1;
+        }
+        cgc_deallocate(tlv22,tlv21);
+    }
+    cgc_skipWhiteSpace(str);
+
+    int tlv8;
+    {
+        pstring tlv47;
+        tlv47 = str;
+        char tlv46;
+        tlv46 = '}';
+        tlv8 = cgc_atChar(tlv47,tlv46);
+    }
+    if (!tlv8) {
+	goto error;
+    }
+    cgc_incChar(str);
+    goto end;
+  error:
+    if (newCounty) {
+	cgc_freeCounty(newCounty);
+	newCounty = NULL;
+    }
+    cgc_printf("!!Error at: @s\n", str->buffer + lastGood);
+    str->index = lastGood;
+  end:
+    return newCounty;
+}
+
+int cgc_checkId(pstring str, char *id, int ending)
+{
+    int retval;
+    retval = 0;
+    int startIndex;
+    startIndex = 0;
+    int endIndex;
+    endIndex = 0;
+    char* temp;
+     temp = NULL;
+    if (str == NULL) {
+	goto end;
+    }
+    cgc_skipWhiteSpace(str);
+
+    int tlv1;
+    {
+        pstring tlv7;
+        tlv7 = str;
+        char tlv6;
+        tlv6 = '{';
+        tlv1 = cgc_atChar(tlv7,tlv6);
+    }
+    if (!tlv1) {
+	goto end;
+    }
+    cgc_incChar(str);
+    /// If it is the end check for #
+    if (ending == 1) {
+	cgc_skipWhiteSpace(str);
+ int tlv3;
+ {
+     pstring tlv18;
+     tlv18 = str;
+     char tlv17;
+     tlv17 = '#';
+     tlv3 = cgc_atChar(tlv18,tlv17);
+ }
+	if (!tlv3) {
+	    goto end;
+	}
+	cgc_incChar(str);
+    }
+    {
+        pstring tlv8;
+        tlv8 = str;
+        startIndex = cgc_skipWhiteSpace(tlv8);
+    }
+    {
+        pstring tlv9;
+        tlv9 = str;
+        endIndex = cgc_skipAlpha(tlv9);
+    }
+    if (endIndex == -1) {
+	goto end;
+    } else {
+	if (startIndex == endIndex) {
+	    goto end;
+	}
+    }
+    {
+        pstring tlv12;
+        tlv12 = str;
+        int tlv11;
+        tlv11 = startIndex;
+        int tlv10;
+        tlv10 = endIndex;
+        temp = cgc_copyData(tlv12,tlv11,tlv10);
+    }
+    if (!temp) {
+	goto end;
+    }
+    int tlv2;
+    {
+        const char* tlv14 = temp;
+        const char* tlv13 = id;
+        tlv2 = cgc_strcmp(tlv14,tlv13);
+    }
+    if (tlv2 != 0) {
+ {
+     void* tlv16;
+     tlv16 = temp;
+     cgc_size_t tlv15;
+     {
+         char* tlv20;
+          tlv20 = temp;
+         tlv15 = cgc_strlen(tlv20) + 1;
+     }
+    	cgc_deallocate(tlv16,tlv15);
+ }
+	goto end;
+    }
+    {
+        void* tlv5;
+        tlv5 = temp;
+        cgc_size_t tlv4;
+        {
+            char* tlv19;
+             tlv19 = temp;
+            tlv4 = cgc_strlen(tlv19) + 1;
+        }
+        cgc_deallocate(tlv5,tlv4);
+    }
+    cgc_skipWhiteSpace(str);
+    if (str->buffer[str->index] != '}') {
+	goto end;
+    }
+    cgc_incChar(str);
+    retval = 1;
+  end:
+    return retval;
+}
+
+double cgc_extractDensity(pstring str)
+{
+    double density;
+    density = - 1.0;
+    register int startIndex;
+    startIndex = 0;
+    register int endIndex;
+    endIndex = 0;
+    char* temp;
+     temp = NULL;
+    int lastGood;
+    lastGood = 0;
+    if (str == NULL) {
+	goto end;
+    }
+    {
+        pstring tlv4;
+        tlv4 = str;
+        int* tlv3;
+        tlv3 = & lastGood;
+        cgc_getIndex(tlv4,tlv3);
+    }
+    int tlv1;
+    {
+        pstring tlv9;
+        tlv9 = str;
+        char tlv8[] = "Density";
+        int tlv7;
+        tlv7 = 0;
+        tlv1 = cgc_checkId(tlv9,tlv8,tlv7);
+    }
+    if (tlv1 == 0) {
+	goto error;
+    }
+    {
+        pstring tlv10;
+        tlv10 = str;
+        startIndex = cgc_skipWhiteSpace(tlv10);
+    }
+    {
+        pstring tlv11;
+        tlv11 = str;
+        endIndex = cgc_skipFloat(tlv11);
+    }
+    if (startIndex == endIndex) {
+	goto end;
+    }
+    if (endIndex == -1) {
+	goto end;
+    }
+    {
+        pstring tlv14;
+        tlv14 = str;
+        int tlv13;
+        tlv13 = startIndex;
+        int tlv12;
+        tlv12 = endIndex;
+        temp = cgc_copyData(tlv14,tlv13,tlv12);
+    }
+    if (temp == NULL) {
+	goto end;
+    }
+    {
+        const char* tlv15 = temp;
+        density = cgc_atof(tlv15);
+    }
+    {
+        void* tlv6;
+        tlv6 = temp;
+        cgc_size_t tlv5;
+        tlv5 = ( endIndex - startIndex ) + 1;
+        cgc_deallocate(tlv6,tlv5);
+    }
+    temp = NULL;
+    int tlv2;
+    {
+        pstring tlv18;
+        tlv18 = str;
+        char tlv17[] = "Density";
+        int tlv16;
+        tlv16 = 1;
+        tlv2 = cgc_checkId(tlv18,tlv17,tlv16);
+    }
+    if (tlv2 == 0) {
+	goto error;
+    }
+    goto end;
+
+  error:
+    str->index = lastGood;
+    density = -1.0;
+  end:
+    return density;
+}
+
+double cgc_extractArea(pstring str)
+{
+    double area;
+    area = - 1.0;
+    int startIndex;
+    startIndex = 0;
+    int endIndex;
+    endIndex = 0;
+    char* temp;
+     temp = NULL;
+    int lastGood;
+    lastGood = 0;
+    if (str == NULL) {
+	goto end;
+    }
+    cgc_skipWhiteSpace(str);
+    {
+        pstring tlv7;
+        tlv7 = str;
+        int* tlv6;
+        tlv6 = & lastGood;
+        cgc_getIndex(tlv7,tlv6);
+    }
+
+    if (str->buffer[str->index] != '{') {
+	goto end;
+    }
+    cgc_incChar(str);
+    cgc_skipWhiteSpace(str);
+    {
+        pstring tlv9;
+        tlv9 = str;
+        int* tlv8;
+        tlv8 = & startIndex;
+        cgc_getIndex(tlv9,tlv8);
+    }
+    {
+        pstring tlv16;
+        tlv16 = str;
+        endIndex = cgc_skipAlpha(tlv16);
+    }
+    if (endIndex == -1 || startIndex == endIndex) {
+	goto end;
+    }
+    {
+        pstring tlv19;
+        tlv19 = str;
+        int tlv18;
+        tlv18 = startIndex;
+        int tlv17;
+        tlv17 = endIndex;
+        temp = cgc_copyData(tlv19,tlv18,tlv17);
+    }
+    if (!temp) {
+	goto end;
+    }
+    int tlv1;
+    {
+        const char* tlv21 = temp;
+        const char tlv20 [ ] = "Area";
+        tlv1 = cgc_strcmp(tlv21,tlv20);
+    }
+    if (tlv1 != 0) {
+ {
+     void* tlv42;
+     tlv42 = temp;
+     cgc_size_t tlv41;
+     {
+         char* tlv47;
+          tlv47 = temp;
+         tlv41 = cgc_strlen(tlv47) + 1;
+     }
+    	cgc_deallocate(tlv42,tlv41);
+ }
+	goto end;
+    }
+    {
+        void* tlv11;
+        tlv11 = temp;
+        cgc_size_t tlv10;
+        {
+            char* tlv45;
+             tlv45 = temp;
+            tlv10 = cgc_strlen(tlv45) + 1;
+        }
+        cgc_deallocate(tlv11,tlv10);
+    }
+    cgc_skipWhiteSpace(str);
+    if (str->buffer[str->index] != '}') {
+	goto end;
+    }
+    cgc_incChar(str);
+    {
+        pstring tlv22;
+        tlv22 = str;
+        startIndex = cgc_skipWhiteSpace(tlv22);
+    }
+    {
+        pstring tlv23;
+        tlv23 = str;
+        endIndex = cgc_skipFloat(tlv23);
+    }
+    if (startIndex == endIndex) {
+	goto end;
+    }
+    if (endIndex == -1) {
+	goto end;
+    }
+    {
+        pstring tlv26;
+        tlv26 = str;
+        int tlv25;
+        tlv25 = startIndex;
+        int tlv24;
+        tlv24 = endIndex;
+        temp = cgc_copyData(tlv26,tlv25,tlv24);
+    }
+    if (temp == NULL) {
+	goto end;
+    }
+    {
+        const char* tlv27 = temp;
+        area = cgc_atof(tlv27);
+    }
+    {
+        void* tlv13;
+        tlv13 = temp;
+        cgc_size_t tlv12;
+        tlv12 = ( endIndex - startIndex ) + 1;
+        cgc_deallocate(tlv13,tlv12);
+    }
+    temp = NULL;
+    cgc_skipWhiteSpace(str);
+    int tlv2;
+    {
+        pstring tlv29;
+        tlv29 = str;
+        char tlv28;
+        tlv28 = '{';
+        tlv2 = cgc_atChar(tlv29,tlv28);
+    }
+    if (!tlv2) {
+	goto error;
+    }
+    cgc_incChar(str);
+    cgc_skipWhiteSpace(str);
+    int tlv3;
+    {
+        pstring tlv31;
+        tlv31 = str;
+        char tlv30;
+        tlv30 = '#';
+        tlv3 = cgc_atChar(tlv31,tlv30);
+    }
+    if (!tlv3) {
+	goto error;
+    }
+    {
+        pstring tlv32;
+        tlv32 = str;
+        startIndex = cgc_incChar(tlv32);
+    }
+    {
+        pstring tlv33;
+        tlv33 = str;
+        endIndex = cgc_skipAlpha(tlv33);
+    }
+    {
+        pstring tlv36;
+        tlv36 = str;
+        int tlv35;
+        tlv35 = startIndex;
+        int tlv34;
+        tlv34 = endIndex;
+        temp = cgc_copyData(tlv36,tlv35,tlv34);
+    }
+    if (temp == NULL) {
+	goto error;
+    }
+    int tlv4;
+    {
+        const char* tlv38 = temp;
+        const char tlv37 [ ] = "Area";
+        tlv4 = cgc_strcmp(tlv38,tlv37);
+    }
+    if (tlv4 != 0) {
+ {
+     void* tlv44;
+     tlv44 = temp;
+     cgc_size_t tlv43;
+     {
+         char* tlv48;
+          tlv48 = temp;
+         tlv43 = cgc_strlen(tlv48) + 1;
+     }
+    	cgc_deallocate(tlv44,tlv43);
+ }
+	goto error;
+    }
+    {
+        void* tlv15;
+        tlv15 = temp;
+        cgc_size_t tlv14;
+        {
+            char* tlv46;
+             tlv46 = temp;
+            tlv14 = cgc_strlen(tlv46) + 1;
+        }
+        cgc_deallocate(tlv15,tlv14);
+    }
+    cgc_skipWhiteSpace(str);
+    int tlv5;
+    {
+        pstring tlv40;
+        tlv40 = str;
+        char tlv39;
+        tlv39 = '}';
+        tlv5 = cgc_atChar(tlv40,tlv39);
+    }
+    if (!tlv5) {
+	goto error;
+    }
+    cgc_incChar(str);
+
+    goto end;
+
+  error:
+    str->index = lastGood;
+    area = -1.0;
+  end:
+    return area;
+}
+
+char *cgc_extractSeat(pstring str)
+{
+    char* seat;
+     seat = NULL;
+    int startIndex;
+    startIndex = 0;
+    int endIndex;
+    endIndex = 0;
+    char* temp;
+     temp = NULL;
+    int lastGood;
+    lastGood = 0;
+    if (str == NULL) {
+	goto end;
+    }
+    cgc_skipWhiteSpace(str);
+    {
+        pstring tlv7;
+        tlv7 = str;
+        int* tlv6;
+        tlv6 = & lastGood;
+        cgc_getIndex(tlv7,tlv6);
+    }
+
+    if (str->buffer[str->index] != '{') {
+	goto end;
+    }
+    cgc_incChar(str);
+    cgc_skipWhiteSpace(str);
+    {
+        pstring tlv9;
+        tlv9 = str;
+        int* tlv8;
+        tlv8 = & startIndex;
+        cgc_getIndex(tlv9,tlv8);
+    }
+    {
+        pstring tlv14;
+        tlv14 = str;
+        endIndex = cgc_skipAlpha(tlv14);
+    }
+    if (endIndex == -1 || startIndex == endIndex) {
+	goto end;
+    }
+    {
+        pstring tlv17;
+        tlv17 = str;
+        int tlv16;
+        tlv16 = startIndex;
+        int tlv15;
+        tlv15 = endIndex;
+        temp = cgc_copyData(tlv17,tlv16,tlv15);
+    }
+    if (!temp) {
+	goto end;
+    }
+    int tlv1;
+    {
+        const char* tlv19 = temp;
+        const char tlv18 [ ] = "Seat";
+        tlv1 = cgc_strcmp(tlv19,tlv18);
+    }
+    if (tlv1 != 0) {
+ {
+     void* tlv39;
+     tlv39 = temp;
+     cgc_size_t tlv38;
+     {
+         char* tlv46;
+          tlv46 = temp;
+         tlv38 = cgc_strlen(tlv46) + 1;
+     }
+    	cgc_deallocate(tlv39,tlv38);
+ }
+	goto end;
+    }
+    {
+        void* tlv11;
+        tlv11 = temp;
+        cgc_size_t tlv10;
+        {
+            char* tlv44;
+             tlv44 = temp;
+            tlv10 = cgc_strlen(tlv44) + 1;
+        }
+        cgc_deallocate(tlv11,tlv10);
+    }
+    cgc_skipWhiteSpace(str);
+    if (str->buffer[str->index] != '}') {
+	goto end;
+    }
+    cgc_incChar(str);
+    {
+        pstring tlv20;
+        tlv20 = str;
+        startIndex = cgc_skipWhiteSpace(tlv20);
+    }
+    {
+        pstring tlv21;
+        tlv21 = str;
+        endIndex = cgc_skipAlpha(tlv21);
+    }
+    if (startIndex == endIndex) {
+	goto end;
+    }
+    if (endIndex == -1) {
+	goto end;
+    }
+    {
+        pstring tlv24;
+        tlv24 = str;
+        int tlv23;
+        tlv23 = startIndex;
+        int tlv22;
+        tlv22 = endIndex;
+        seat = cgc_copyData(tlv24,tlv23,tlv22);
+    }
+    if (seat == NULL) {
+	goto end;
+    }
+    cgc_skipWhiteSpace(str);
+    int tlv2;
+    {
+        pstring tlv26;
+        tlv26 = str;
+        char tlv25;
+        tlv25 = '{';
+        tlv2 = cgc_atChar(tlv26,tlv25);
+    }
+    if (!tlv2) {
+	goto error;
+    }
+    cgc_incChar(str);
+    cgc_skipWhiteSpace(str);
+    int tlv3;
+    {
+        pstring tlv28;
+        tlv28 = str;
+        char tlv27;
+        tlv27 = '#';
+        tlv3 = cgc_atChar(tlv28,tlv27);
+    }
+    if (!tlv3) {
+	goto error;
+    }
+    {
+        pstring tlv29;
+        tlv29 = str;
+        startIndex = cgc_incChar(tlv29);
+    }
+    {
+        pstring tlv30;
+        tlv30 = str;
+        endIndex = cgc_skipAlpha(tlv30);
+    }
+    if (startIndex == endIndex) {
+	goto error;
+    }
+    if (endIndex == -1) {
+	goto error;
+    }
+    {
+        pstring tlv33;
+        tlv33 = str;
+        int tlv32;
+        tlv32 = startIndex;
+        int tlv31;
+        tlv31 = endIndex;
+        temp = cgc_copyData(tlv33,tlv32,tlv31);
+    }
+    if (temp == NULL) {
+	goto error;
+    }
+    int tlv4;
+    {
+        const char* tlv35 = temp;
+        const char tlv34 [ ] = "Seat";
+        tlv4 = cgc_strcmp(tlv35,tlv34);
+    }
+    if (tlv4 != 0) {
+ {
+     void* tlv41;
+     tlv41 = temp;
+     cgc_size_t tlv40;
+     {
+         char* tlv47;
+          tlv47 = temp;
+         tlv40 = cgc_strlen(tlv47) + 1;
+     }
+    	cgc_deallocate(tlv41,tlv40);
+ }
+	goto error;
+    }
+    {
+        void* tlv13;
+        tlv13 = temp;
+        cgc_size_t tlv12;
+        {
+            char* tlv45;
+             tlv45 = temp;
+            tlv12 = cgc_strlen(tlv45) + 1;
+        }
+        cgc_deallocate(tlv13,tlv12);
+    }
+    cgc_skipWhiteSpace(str);
+    int tlv5;
+    {
+        pstring tlv37;
+        tlv37 = str;
+        char tlv36;
+        tlv36 = '}';
+        tlv5 = cgc_atChar(tlv37,tlv36);
+    }
+    if (!tlv5) {
+	goto error;
+    }
+    cgc_incChar(str);
+
+    goto end;
+
+  error:
+    if (seat) {
+ {
+     void* tlv43;
+     tlv43 = seat;
+     cgc_size_t tlv42;
+     {
+         char* tlv48;
+          tlv48 = seat;
+         tlv42 = cgc_strlen(tlv48) + 1;
+     }
+    	cgc_deallocate(tlv43,tlv42);
+ }
+	seat = NULL;
+    }
+    str->index = lastGood;
+  end:
+    return seat;
+}
+

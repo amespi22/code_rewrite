@@ -1,0 +1,1762 @@
+
+
+#include "cgc_countryParsers.h"
+#define BSIZE 40
+int cgc_countryMenu(pCountry co)
+{
+    int choice;
+    choice = 0;
+    cgc_size_t length;
+    length = 0;
+    char selection[BSIZE];
+    char* t;
+     t = NULL;
+    pBorder pb;
+    pb = NULL;
+    if (co == NULL) {
+	return 0;
+    }
+    while (1) {
+	cgc_printf("\nCountry: @s\n", co->name);
+ {
+     const char tlv5 [ ] = "1) Display CountryInfo\n";
+    	cgc_printf(tlv5);
+ }
+ {
+     const char tlv6 [ ] = "2) Set Capitol\n";
+    	cgc_printf(tlv6);
+ }
+ {
+     const char tlv7 [ ] = "3) Set Population\n";
+    	cgc_printf(tlv7);
+ }
+ {
+     const char tlv8 [ ] = "4) Add Language\n";
+    	cgc_printf(tlv8);
+ }
+ {
+     const char tlv9 [ ] = "5) Add border\n";
+    	cgc_printf(tlv9);
+ }
+ {
+     const char tlv10 [ ] = "6) Add Territory\n";
+    	cgc_printf(tlv10);
+ }
+ {
+     const char tlv11 [ ] = "7) Select Territory\n";
+    	cgc_printf(tlv11);
+ }
+ {
+     const char tlv12 [ ] = "8) Delete Country and Exit Menu\n";
+    	cgc_printf(tlv12);
+ }
+ {
+     const char tlv13 [ ] = "9) Exit menu\n";
+    	cgc_printf(tlv13);
+ }
+ {
+     void* tlv15;
+     tlv15 = selection;
+     cgc_size_t tlv14;
+     tlv14 = BSIZE;
+    	cgc_bzero(tlv15,tlv14);
+ }
+ {
+     const char tlv16 [ ] = "Selection: ";
+    	cgc_printf(tlv16);
+ }
+ {
+     char* tlv19;
+      tlv19 = selection;
+     char tlv18;
+     tlv18 = '\n';
+     cgc_size_t tlv17;
+     tlv17 = 3;
+    	cgc_receive_until(tlv19,tlv18,tlv17);
+ }
+ {
+     const char* tlv20 = selection;
+    	choice = cgc_atoi(tlv20);
+ }
+	if (choice < 1 || choice > 9) {
+     {
+         const char tlv21 [ ] = "Invalid...\n";
+    	    cgc_printf(tlv21);
+     }
+	    continue;
+	}
+	if (choice == 1) {
+	    cgc_printCountryInfo(co);
+	} else {
+	    if (choice == 2) {
+  {
+      const char tlv22 [ ] = "\n-> ";
+    		cgc_printf(tlv22);
+  }
+  {
+      void* tlv24;
+      tlv24 = selection;
+      cgc_size_t tlv23;
+      tlv23 = BSIZE;
+    		cgc_bzero(tlv24,tlv23);
+  }
+  {
+      char* tlv27;
+       tlv27 = selection;
+      char tlv26;
+      tlv26 = '\n';
+      cgc_size_t tlv25;
+      tlv25 = BSIZE - 1;
+    		cgc_receive_until(tlv27,tlv26,tlv25);
+  }
+		choice = 0;
+		while (cgc_isalpha(selection[choice])) {
+		    co->capitol[choice] = selection[choice];
+		    choice++;
+		}
+		co->capitol[choice] = '\x00';
+	    } else {
+		if (choice == 3) {
+      {
+          const char tlv28 [ ] = "\n-> ";
+    		    cgc_printf(tlv28);
+      }
+      {
+          void* tlv30;
+          tlv30 = selection;
+          cgc_size_t tlv29;
+          tlv29 = BSIZE;
+    		    cgc_bzero(tlv30,tlv29);
+      }
+      {
+          char* tlv33;
+           tlv33 = selection;
+          char tlv32;
+          tlv32 = '\n';
+          cgc_size_t tlv31;
+          tlv31 = 19;
+    		    cgc_receive_until(tlv33,tlv32,tlv31);
+      }
+      {
+          const char* tlv34 = selection;
+    		    co->population = cgc_atoi(tlv34);
+      }
+		} else {
+		    if (choice == 4) {
+			if (co->language_count >= COUNTRYLANGUAGEMAX) {
+       {
+           const char tlv47 [ ] = "!!Max languages reached\n";
+    			    cgc_printf(tlv47);
+       }
+			    continue;
+			}
+   {
+       const char tlv35 [ ] = "\n-> ";
+    			cgc_printf(tlv35);
+   }
+   {
+       void* tlv37;
+       tlv37 = selection;
+       cgc_size_t tlv36;
+       tlv36 = BSIZE;
+    			cgc_bzero(tlv37,tlv36);
+   }
+   {
+       int tlv41;
+       tlv41 = 0;
+       void* tlv40;
+       tlv40 = selection;
+       cgc_size_t tlv39;
+       tlv39 = 19;
+       cgc_size_t* tlv38;
+       tlv38 = & length;
+    			cgc_receive(tlv41,tlv40,tlv39,tlv38);
+   }
+   int tlv1;
+   {
+       cgc_size_t tlv46;
+       {
+           char* tlv108;
+            tlv108 = selection;
+           tlv46 = cgc_strlen(tlv108) + 1;
+       }
+       int tlv45;
+       tlv45 = 0;
+       void** tlv44;
+       tlv44 = ( void * * ) & ( t );
+       tlv1 = cgc_allocate(tlv46,tlv45,tlv44);
+   }
+			if (tlv1 != 0) {
+			    t = NULL;
+			    continue;
+			}
+   {
+       void* tlv43;
+       tlv43 = t;
+       cgc_size_t tlv42;
+       {
+           char* tlv109;
+            tlv109 = selection;
+           tlv42 = cgc_strlen(tlv109) + 1;
+       }
+    			cgc_bzero(tlv43,tlv42);
+   }
+			choice = 0;
+			while (cgc_isalpha(selection[choice])) {
+			    t[choice] = selection[choice];
+			    choice++;
+			}
+			t[choice] = '\x00';
+			co->languages[co->language_count] = t;
+			co->language_count++;
+		    } else {
+			if (choice == 5) {
+			    if (co->border_count >= COUNTRYBORDERMAX) {
+    {
+        const char tlv83 [ ] = "!!Max borders reached\n";
+    				cgc_printf(tlv83);
+    }
+				continue;
+			    }
+       int tlv2;
+       {
+           cgc_size_t tlv78;
+           tlv78 = sizeof ( Border );
+           int tlv77;
+           tlv77 = 0;
+           void** tlv76;
+           tlv76 = ( void * * ) & pb;
+           tlv2 = cgc_allocate(tlv78,tlv77,tlv76);
+       }
+			    if (tlv2 != 0) {
+				pb = NULL;
+				continue;
+			    }
+       {
+           const char tlv48 [ ] = "Lat Start: ";
+    			    cgc_printf(tlv48);
+       }
+       {
+           void* tlv50;
+           tlv50 = selection;
+           cgc_size_t tlv49;
+           tlv49 = BSIZE;
+    			    cgc_bzero(tlv50,tlv49);
+       }
+       {
+           int tlv54;
+           tlv54 = 0;
+           void* tlv53;
+           tlv53 = selection;
+           cgc_size_t tlv52;
+           tlv52 = 19;
+           cgc_size_t* tlv51;
+           tlv51 = & length;
+    			    cgc_receive(tlv54,tlv53,tlv52,tlv51);
+       }
+       {
+           const char* tlv79 = selection;
+    			    pb->latStart = cgc_atof(tlv79);
+       }
+       {
+           const char tlv55 [ ] = "Long Start: ";
+    			    cgc_printf(tlv55);
+       }
+       {
+           void* tlv57;
+           tlv57 = selection;
+           cgc_size_t tlv56;
+           tlv56 = BSIZE;
+    			    cgc_bzero(tlv57,tlv56);
+       }
+       {
+           int tlv61;
+           tlv61 = 0;
+           void* tlv60;
+           tlv60 = selection;
+           cgc_size_t tlv59;
+           tlv59 = 19;
+           cgc_size_t* tlv58;
+           tlv58 = & length;
+    			    cgc_receive(tlv61,tlv60,tlv59,tlv58);
+       }
+       {
+           const char* tlv80 = selection;
+    			    pb->lngStart = cgc_atof(tlv80);
+       }
+       {
+           const char tlv62 [ ] = "Lat End: ";
+    			    cgc_printf(tlv62);
+       }
+       {
+           void* tlv64;
+           tlv64 = selection;
+           cgc_size_t tlv63;
+           tlv63 = BSIZE;
+    			    cgc_bzero(tlv64,tlv63);
+       }
+       {
+           int tlv68;
+           tlv68 = 0;
+           void* tlv67;
+           tlv67 = selection;
+           cgc_size_t tlv66;
+           tlv66 = 19;
+           cgc_size_t* tlv65;
+           tlv65 = & length;
+    			    cgc_receive(tlv68,tlv67,tlv66,tlv65);
+       }
+       {
+           const char* tlv81 = selection;
+    			    pb->latEnd = cgc_atof(tlv81);
+       }
+       {
+           const char tlv69 [ ] = "Long End: ";
+    			    cgc_printf(tlv69);
+       }
+       {
+           void* tlv71;
+           tlv71 = selection;
+           cgc_size_t tlv70;
+           tlv70 = BSIZE;
+    			    cgc_bzero(tlv71,tlv70);
+       }
+       {
+           int tlv75;
+           tlv75 = 0;
+           void* tlv74;
+           tlv74 = selection;
+           cgc_size_t tlv73;
+           tlv73 = 19;
+           cgc_size_t* tlv72;
+           tlv72 = & length;
+    			    cgc_receive(tlv75,tlv74,tlv73,tlv72);
+       }
+       {
+           const char* tlv82 = selection;
+    			    pb->lngEnd = cgc_atof(tlv82);
+       }
+			    co->borders[co->border_count] = pb;
+			    co->border_count++;
+			} else {
+			    if (choice == 6) {
+				if (co->territory_count >= COUNTRYTERRITORYMAX) {
+        {
+            const char tlv94 [ ] = "!!Max Territories reached\n";
+    				    cgc_printf(tlv94);
+        }
+				    continue;
+				}
+				choice = 0;
+				while (choice < COUNTRYTERRITORYMAX && co->territories[choice] != NULL) {
+				    choice++;
+				}
+				if (choice == COUNTRYTERRITORYMAX) {
+        {
+            const char tlv95 [ ] = "!!Max Territories reached\n";
+    				    cgc_printf(tlv95);
+        }
+				    continue;
+				}
+    int tlv3;
+    {
+        cgc_size_t tlv93;
+        tlv93 = sizeof ( Territory );
+        int tlv92;
+        tlv92 = 0;
+        void** tlv91;
+        tlv91 = ( void * * ) ( & co -> territories [ choice ] );
+        tlv3 = cgc_allocate(tlv93,tlv92,tlv91);
+    }
+				if (tlv3 != 0) {
+        {
+            const char tlv96 [ ] = "!!Failed to allocate structure\n";
+    				    cgc_printf(tlv96);
+        }
+				    co->territories[choice] = NULL;
+				    continue;
+				}
+
+    {
+        pTerritory tlv84;
+        tlv84 = co -> territories [ choice ];
+    				cgc_initTerritory(tlv84);
+    }
+
+    {
+        const char tlv85 [ ] = "\nNew Territory: ";
+    				cgc_printf(tlv85);
+    }
+    {
+        void* tlv87;
+        tlv87 = selection;
+        cgc_size_t tlv86;
+        tlv86 = BSIZE;
+    				cgc_bzero(tlv87,tlv86);
+    }
+    {
+        char* tlv90;
+         tlv90 = selection;
+        char tlv89;
+        tlv89 = '\n';
+        cgc_size_t tlv88;
+        tlv88 = 19;
+    				cgc_receive_until(tlv90,tlv89,tlv88);
+    }
+				length = 0;
+				while (cgc_isalnum(selection[length])) {
+				    co->territories[choice]->name[length] = selection[length];
+				    length++;
+				}
+				co->territories[choice]->name[length] = '\x00';
+				co->territory_count++;
+
+			    } else {
+				if (choice == 7) {
+        {
+            const char tlv97 [ ] = "\nTerritories:\n";
+    				    cgc_printf(tlv97);
+        }
+				    for (choice = 0; choice < COUNTRYTERRITORYMAX; choice++) {
+					if (co->territories[choice] != NULL) {
+					    cgc_printf("@d) @s\n", choice + 1, co->territories[choice]);
+					}
+				    }
+        {
+            void* tlv99;
+            tlv99 = selection;
+            cgc_size_t tlv98;
+            tlv98 = BSIZE;
+    				    cgc_bzero(tlv99,tlv98);
+        }
+        {
+            const char tlv100 [ ] = "\n-> ";
+    				    cgc_printf(tlv100);
+        }
+        {
+            int tlv104;
+            tlv104 = 0;
+            void* tlv103;
+            tlv103 = selection;
+            cgc_size_t tlv102;
+            tlv102 = 3;
+            cgc_size_t* tlv101;
+            tlv101 = & length;
+    				    cgc_receive(tlv104,tlv103,tlv102,tlv101);
+        }
+        {
+            const char* tlv105 = selection;
+    				    choice = cgc_atoi(tlv105);
+        }
+				    if (choice < 1 || choice > COUNTRYTERRITORYMAX || co->territories[choice - 1] == NULL) {
+     {
+         const char tlv107 [ ] = "Invalid choice...\n";
+    					cgc_printf(tlv107);
+     }
+					continue;
+				    }
+        int tlv4;
+        {
+            pTerritory tlv106;
+            tlv106 = co -> territories [ choice - 1 ];
+            tlv4 = cgc_territoryMenu(tlv106);
+        }
+				    if (tlv4 == 0) {
+					co->territories[choice - 1] = NULL;
+					co->territory_count--;
+				    }
+				} else {
+				    if (choice == 8) {
+					cgc_freeCountry(co);
+					return 0;
+				    } else {
+					if (choice == 9) {
+					    return 1;
+					}
+				    }
+				}
+			    }
+			}
+		    }
+		}
+	    }
+	}
+
+    }
+  end:
+    return 1;
+}
+
+void cgc_printCountryInfo(pCountry co)
+{
+    int index;
+    index = 0;
+    pBorder b;
+    b = NULL;
+    if (co == NULL) {
+	return;
+    }
+
+    {
+        const char tlv1 [ ] = "\tCountry: ";
+        cgc_printf(tlv1);
+    }
+    if (co->name[0] == '\x00') {
+ {
+     const char tlv3 [ ] = "Unknown\n";
+    	cgc_printf(tlv3);
+ }
+    } else {
+	cgc_printf("@s\n", co->name);
+    }
+    {
+        const char tlv2 [ ] = "\t\tCapitol: ";
+        cgc_printf(tlv2);
+    }
+    if (co->capitol[0] == '\x00') {
+ {
+     const char tlv4 [ ] = "Unknown\n";
+    	cgc_printf(tlv4);
+ }
+    } else {
+	cgc_printf("@s\n", co->capitol);
+    }
+    if (co->population >= 0) {
+	cgc_printf("\t\tPopulation: @d\n", co->population);
+    }
+    while (index < co->language_count) {
+	if (co->languages[index] != NULL) {
+	    cgc_printf("\t\tLanguage: @s\n", co->languages[index]);
+	}
+	index++;
+    }
+    index = 0;
+    while (index < co->border_count) {
+	b = co->borders[index];
+	if (b != NULL) {
+	    cgc_printf("\t\tBorder: @f @f @f @f\n", b->latStart, b->lngStart, b->latEnd, b->lngEnd);
+	}
+	index++;
+    }
+    index = 0;
+    while (index < COUNTRYTERRITORYMAX) {
+	if (co->territories[index] != NULL) {
+     {
+         pTerritory tlv5;
+         tlv5 = co -> territories [ index ];
+    	    cgc_printTerritoryInfo(tlv5);
+     }
+	}
+	index++;
+    }
+    return;
+}
+
+void cgc_freeCountry(pCountry co)
+{
+    int index;
+    index = 0;
+    if (co == NULL) {
+	return;
+    }
+    while (index < co->border_count) {
+	if (co->borders[index] != NULL) {
+     {
+         void* tlv4;
+         tlv4 = co -> borders [ index ];
+         cgc_size_t tlv3;
+         tlv3 = sizeof ( Border );
+    	    cgc_deallocate(tlv4,tlv3);
+     }
+	    co->borders[index] = NULL;
+	}
+	index++;
+    }
+    index = 0;
+    while (index < co->language_count) {
+	if (co->languages[index] != NULL) {
+     {
+         void* tlv6;
+         tlv6 = co -> languages [ index ];
+         cgc_size_t tlv5;
+         {
+             char* tlv8;
+              tlv8 = co -> languages [ index ];
+             tlv5 = cgc_strlen(tlv8) + 1;
+         }
+    	    cgc_deallocate(tlv6,tlv5);
+     }
+	    co->languages[index] = NULL;
+	}
+	index++;
+    }
+    index = 0;
+    while (index < COUNTRYTERRITORYMAX) {
+	if (co->territories[index] != NULL) {
+     {
+         pTerritory tlv7;
+         tlv7 = co -> territories [ index ];
+    	    cgc_freeTerritory(tlv7);
+     }
+	    co->territories[index] = NULL;
+	}
+	index++;
+    }
+    {
+        void* tlv2;
+        tlv2 = co;
+        cgc_size_t tlv1;
+        tlv1 = sizeof ( Country );
+        cgc_deallocate(tlv2,tlv1);
+    }
+    return;
+}
+
+void cgc_initCountry(pCountry co)
+{
+    int index;
+    index = 0;
+    if (co == NULL) {
+	return;
+    }
+    {
+        void* tlv2;
+        tlv2 = co -> name;
+        cgc_size_t tlv1;
+        tlv1 = 20;
+        cgc_bzero(tlv2,tlv1);
+    }
+    co->population = -1;
+    co->language_count = 0;
+    co->border_count = 0;
+    {
+        void* tlv4;
+        tlv4 = co -> languages;
+        cgc_size_t tlv3;
+        tlv3 = sizeof ( char * ) * COUNTRYLANGUAGEMAX;
+        cgc_bzero(tlv4,tlv3);
+    }
+    {
+        void* tlv6;
+        tlv6 = co -> borders;
+        cgc_size_t tlv5;
+        tlv5 = sizeof ( pBorder ) * COUNTRYBORDERMAX;
+        cgc_bzero(tlv6,tlv5);
+    }
+    {
+        void* tlv8;
+        tlv8 = co -> territories;
+        cgc_size_t tlv7;
+        tlv7 = sizeof ( pTerritory ) * COUNTRYTERRITORYMAX;
+        cgc_bzero(tlv8,tlv7);
+    }
+    return;
+}
+
+pCountry cgc_countryTopLevel(pstring str)
+{
+    pCountry newCountry;
+    newCountry = NULL;
+    char* temp_name;
+     temp_name = NULL;
+    int lastGood;
+    lastGood = 0;
+    int startIndex;
+    startIndex = 0;
+    int endIndex;
+    endIndex = 0;
+    element el;
+    el = 0;
+    if (str == NULL) {
+	goto end;
+    }
+    /// Allocate a new country structure
+    int tlv1;
+    {
+        cgc_size_t tlv17;
+        tlv17 = sizeof ( Country );
+        int tlv16;
+        tlv16 = 0;
+        void** tlv15;
+        tlv15 = ( void * * ) & newCountry;
+        tlv1 = cgc_allocate(tlv17,tlv16,tlv15);
+    }
+    if (tlv1 != 0) {
+	newCountry = NULL;
+	goto end;
+    }
+    cgc_initCountry(newCountry);
+    cgc_skipWhiteSpace(str);
+    {
+        pstring tlv19;
+        tlv19 = str;
+        int* tlv18;
+        tlv18 = & lastGood;
+        lastGood = cgc_getIndex(tlv19,tlv18);
+    }
+    int tlv2;
+    {
+        pstring tlv21;
+        tlv21 = str;
+        char tlv20;
+        tlv20 = '{';
+        tlv2 = cgc_atChar(tlv21,tlv20);
+    }
+    if (!tlv2) {
+	goto error;
+    }
+    int tlv3;
+    {
+        pstring tlv23;
+        tlv23 = str;
+        int tlv22;
+        tlv22 = 1;
+        tlv3 = cgc_skipLength(tlv23,tlv22);
+    }
+    if (tlv3 < 0) {
+	goto error;
+    }
+    cgc_skipWhiteSpace(str);
+    startIndex = str->index;
+    {
+        pstring tlv24;
+        tlv24 = str;
+        endIndex = cgc_skipAlpha(tlv24);
+    }
+    if (endIndex == -1 || startIndex == endIndex) {
+	goto error;
+    }
+    /// Confirm the opening element;                
+    {
+        pstring tlv27;
+        tlv27 = str;
+        int tlv26;
+        tlv26 = startIndex;
+        int tlv25;
+        tlv25 = endIndex;
+        temp_name = cgc_copyData(tlv27,tlv26,tlv25);
+    }
+    if (temp_name == NULL) {
+	goto error;
+    }
+    int tlv4;
+    {
+        const char* tlv29 = temp_name;
+        const char tlv28 [ ] = "Country";
+        tlv4 = cgc_strcmp(tlv29,tlv28);
+    }
+    if (tlv4 != 0) {
+ {
+     const char tlv47 [ ] = "!!Country: Invalid opening element id\n";
+    	cgc_printf(tlv47);
+ }
+ {
+     void* tlv49;
+     tlv49 = temp_name;
+     cgc_size_t tlv48;
+     {
+         char* tlv79;
+          tlv79 = temp_name;
+         tlv48 = cgc_strlen(tlv79) + 1;
+     }
+    	cgc_deallocate(tlv49,tlv48);
+ }
+	goto error;
+    }
+    {
+        void* tlv12;
+        tlv12 = temp_name;
+        cgc_size_t tlv11;
+        {
+            char* tlv77;
+             tlv77 = temp_name;
+            tlv11 = cgc_strlen(tlv77) + 1;
+        }
+        cgc_deallocate(tlv12,tlv11);
+    }
+    cgc_skipWhiteSpace(str);
+    if (str->buffer[str->index] != '}') {
+	goto error;
+    }
+    cgc_incChar(str);
+    lastGood = str->index;
+    {
+        pstring tlv30;
+        tlv30 = str;
+        temp_name = cgc_pullNextElementName(tlv30);
+    }
+    while (temp_name != NULL) {
+ {
+     char* tlv54;
+      tlv54 = temp_name;
+    	el = cgc_elementNameToEnum(tlv54);
+ }
+ {
+     void* tlv51;
+     tlv51 = temp_name;
+     cgc_size_t tlv50;
+     {
+         char* tlv80;
+          tlv80 = temp_name;
+         tlv50 = cgc_strlen(tlv80) + 1;
+     }
+    	cgc_deallocate(tlv51,tlv50);
+ }
+	switch (el) {
+	case name:
+	    {
+  {
+      pstring tlv74;
+      tlv74 = str;
+    		temp_name = cgc_extractName(tlv74);
+  }
+	    }
+	    if (temp_name == NULL) {
+		goto error;
+	    }
+     {
+         void* tlv57;
+         tlv57 = newCountry -> name;
+         cgc_size_t tlv56;
+         tlv56 = 20;
+    	    cgc_bzero(tlv57,tlv56);
+     }
+     {
+         char* tlv60;
+          tlv60 = newCountry -> name;
+         char* tlv59;
+          tlv59 = temp_name;
+         cgc_size_t tlv58;
+         tlv58 = 19;
+    	    cgc_strncpy(tlv60,tlv59,tlv58);
+     }
+     {
+         void* tlv62;
+         tlv62 = temp_name;
+         cgc_size_t tlv61;
+         {
+             char* tlv82;
+              tlv82 = temp_name;
+             tlv61 = cgc_strlen(tlv82) + 1;
+         }
+    	    cgc_deallocate(tlv62,tlv61);
+     }
+	    temp_name = NULL;
+	    break;
+	case capitol:
+	    {
+  {
+      pstring tlv75;
+      tlv75 = str;
+    		temp_name = cgc_extractCapitol(tlv75);
+  }
+	    }
+	    if (!temp_name) {
+		goto error;
+	    }
+     {
+         void* tlv64;
+         tlv64 = newCountry -> capitol;
+         cgc_size_t tlv63;
+         tlv63 = 20;
+    	    cgc_bzero(tlv64,tlv63);
+     }
+     {
+         char* tlv67;
+          tlv67 = newCountry -> capitol;
+         char* tlv66;
+          tlv66 = temp_name;
+         cgc_size_t tlv65;
+         tlv65 = 19;
+    	    cgc_strncpy(tlv67,tlv66,tlv65);
+     }
+     {
+         void* tlv69;
+         tlv69 = temp_name;
+         cgc_size_t tlv68;
+         {
+             char* tlv83;
+              tlv83 = temp_name;
+             tlv68 = cgc_strlen(tlv83) + 1;
+         }
+    	    cgc_deallocate(tlv69,tlv68);
+     }
+	    temp_name = NULL;
+	    break;
+	case population:
+	    {
+  {
+      pstring tlv76;
+      tlv76 = str;
+    		newCountry->population = cgc_extractPopulation(tlv76);
+  }
+	    }
+	    if (newCountry->population < 0) {
+		goto error;
+	    }
+	    break;
+	case language:
+	    {
+		if (newCountry->language_count >= COUNTRYLANGUAGEMAX) {
+		    cgc_printf("!!Max country language count is @d\n", COUNTRYLANGUAGEMAX);
+		    goto error;
+		}
+	    }
+     {
+         pstring tlv70;
+         tlv70 = str;
+    	    newCountry->languages[newCountry->language_count] = cgc_extractLanguage(tlv70);
+     }
+	    if (newCountry->languages[newCountry->language_count] == NULL) {
+		goto error;
+	    }
+	    newCountry->language_count++;
+	    break;
+	case border:
+	    {
+		if (newCountry->border_count >= COUNTRYBORDERMAX) {
+		    cgc_printf("!!Max country border count is @d\n", COUNTRYBORDERMAX);
+		    goto error;
+		}
+	    }
+     {
+         pstring tlv71;
+         tlv71 = str;
+    	    newCountry->borders[newCountry->border_count] = cgc_extractBorder(tlv71);
+     }
+	    if (newCountry->borders[newCountry->border_count] == NULL) {
+		goto error;
+	    }
+	    newCountry->border_count++;
+	    break;
+	case territory:
+	    {
+		if (newCountry->territory_count >= COUNTRYTERRITORYMAX) {
+		    cgc_printf("!!Max territories is @d\n", COUNTRYTERRITORYMAX);
+		    goto error;
+		}
+	    }
+     {
+         pstring tlv72;
+         tlv72 = str;
+    	    newCountry->territories[newCountry->territory_count] = cgc_territoryTopLevel(tlv72);
+     }
+	    if (newCountry->territories[newCountry->territory_count] == NULL) {
+		goto error;
+	    }
+
+	    newCountry->territory_count++;
+	    break;
+	default:
+	    {
+  {
+      const char tlv73 [ ] = "Invalid for country\n";
+    		cgc_printf(tlv73);
+  }
+	    }
+	    goto error;
+	    break;
+	};
+	lastGood = str->index;
+ {
+     pstring tlv55;
+     tlv55 = str;
+    	temp_name = cgc_pullNextElementName(tlv55);
+ }
+    }
+    cgc_skipWhiteSpace(str);
+    int tlv5;
+    {
+        pstring tlv32;
+        tlv32 = str;
+        char tlv31;
+        tlv31 = '{';
+        tlv5 = cgc_atChar(tlv32,tlv31);
+    }
+    if (!tlv5) {
+	goto error;
+    }
+    int tlv6;
+    {
+        pstring tlv34;
+        tlv34 = str;
+        int tlv33;
+        tlv33 = 1;
+        tlv6 = cgc_skipLength(tlv34,tlv33);
+    }
+    if (tlv6 < 0) {
+	goto error;
+    }
+    cgc_skipWhiteSpace(str);
+    int tlv7;
+    {
+        pstring tlv36;
+        tlv36 = str;
+        char tlv35;
+        tlv35 = '#';
+        tlv7 = cgc_atChar(tlv36,tlv35);
+    }
+    if (!tlv7) {
+	goto error;
+    }
+    int tlv8;
+    {
+        pstring tlv38;
+        tlv38 = str;
+        int tlv37;
+        tlv37 = 1;
+        tlv8 = cgc_skipLength(tlv38,tlv37);
+    }
+    if (tlv8 < 0) {
+	goto error;
+    }
+    startIndex = str->index;
+    {
+        pstring tlv39;
+        tlv39 = str;
+        endIndex = cgc_skipAlpha(tlv39);
+    }
+    if (endIndex < 0) {
+	goto error;
+    }
+    if (startIndex == endIndex) {
+	goto error;
+    }
+    {
+        pstring tlv42;
+        tlv42 = str;
+        int tlv41;
+        tlv41 = startIndex;
+        int tlv40;
+        tlv40 = endIndex;
+        temp_name = cgc_copyData(tlv42,tlv41,tlv40);
+    }
+    if (temp_name == NULL) {
+	goto error;
+    }
+    int tlv9;
+    {
+        const char* tlv44 = temp_name;
+        const char tlv43 [ ] = "Country";
+        tlv9 = cgc_strcmp(tlv44,tlv43);
+    }
+    if (tlv9 != 0) {
+ {
+     void* tlv53;
+     tlv53 = temp_name;
+     cgc_size_t tlv52;
+     {
+         char* tlv81;
+          tlv81 = temp_name;
+         tlv52 = cgc_strlen(tlv81) + 1;
+     }
+    	cgc_deallocate(tlv53,tlv52);
+ }
+	goto error;
+    }
+    {
+        void* tlv14;
+        tlv14 = temp_name;
+        cgc_size_t tlv13;
+        {
+            char* tlv78;
+             tlv78 = temp_name;
+            tlv13 = cgc_strlen(tlv78) + 1;
+        }
+        cgc_deallocate(tlv14,tlv13);
+    }
+    cgc_skipWhiteSpace(str);
+    int tlv10;
+    {
+        pstring tlv46;
+        tlv46 = str;
+        char tlv45;
+        tlv45 = '}';
+        tlv10 = cgc_atChar(tlv46,tlv45);
+    }
+    if (!tlv10) {
+	goto error;
+    }
+    cgc_incChar(str);
+    goto end;
+  error:
+    if (newCountry != NULL) {
+	cgc_freeCountry(newCountry);
+	newCountry = NULL;
+    }
+    str->index = lastGood;
+    cgc_printf("Error at: @s\n", str->buffer + str->index);
+  end:
+    return newCountry;
+}
+
+char *cgc_extractLanguage(pstring str)
+{
+    char* temp;
+     temp = NULL;
+    char* language;
+     language = NULL;
+    register int start;
+    start = 0;
+    register int end;
+    end = 0;
+    if (str == NULL) {
+	return NULL;
+    }
+    {
+        pstring tlv17;
+        tlv17 = str;
+        start = cgc_skipWhiteSpace(tlv17);
+    }
+    int tlv1;
+    {
+        pstring tlv19;
+        tlv19 = str;
+        char tlv18;
+        tlv18 = '{';
+        tlv1 = cgc_atChar(tlv19,tlv18);
+    }
+    if (!tlv1) {
+ {
+     const char tlv53 [ ] = "!!Failed to locate opening brace\n";
+    	cgc_printf(tlv53);
+ }
+	return language;
+    }
+    /// Skip past the curly brace
+    int tlv2;
+    {
+        pstring tlv21;
+        tlv21 = str;
+        int tlv20;
+        tlv20 = 1;
+        tlv2 = cgc_skipLength(tlv21,tlv20);
+    }
+    if (tlv2 == -1) {
+ {
+     const char tlv54 [ ] = "!!Failed to skip opening brace\n";
+    	cgc_printf(tlv54);
+ }
+	return language;
+    }
+    /// Skip any additional whitespace
+    {
+        pstring tlv22;
+        tlv22 = str;
+        start = cgc_skipWhiteSpace(tlv22);
+    }
+    /// This should skip any to either whitespace or a closing '}'
+    {
+        pstring tlv23;
+        tlv23 = str;
+        end = cgc_skipToNonAlphaNum(tlv23);
+    }
+    if (end == -1) {
+ {
+     const char tlv55 [ ] = "!!Failed to locate the end of the element id\n";
+    	cgc_printf(tlv55);
+ }
+	return language;
+    }
+    /// Copy the element id from the string
+    {
+        pstring tlv26;
+        tlv26 = str;
+        int tlv25;
+        tlv25 = start;
+        int tlv24;
+        tlv24 = end;
+        temp = cgc_copyData(tlv26,tlv25,tlv24);
+    }
+    if (temp == NULL) {
+	cgc_printf("!!Copy from @d to @d failed\n", start, end);
+	return NULL;
+    }
+    /// If the element id is not "Language" then this is the wrong function
+    int tlv3;
+    {
+        const char* tlv28 = temp;
+        const char tlv27 [ ] = "Language";
+        tlv3 = cgc_strcmp(tlv28,tlv27);
+    }
+    if (tlv3 != 0) {
+ {
+     const char tlv56 [ ] = "!!Element id is not \"Language\"\n";
+    	cgc_printf(tlv56);
+ }
+ {
+     void* tlv58;
+     tlv58 = temp;
+     cgc_size_t tlv57;
+     {
+         char* tlv75;
+          tlv75 = temp;
+         tlv57 = cgc_strlen(tlv75) + 1;
+     }
+    	cgc_deallocate(tlv58,tlv57);
+ }
+	temp = NULL;
+	return language;
+    }
+    /// The buffer is no longer needed so free it
+    {
+        void* tlv12;
+        tlv12 = temp;
+        cgc_size_t tlv11;
+        {
+            char* tlv73;
+             tlv73 = temp;
+            tlv11 = cgc_strlen(tlv73) + 1;
+        }
+        cgc_deallocate(tlv12,tlv11);
+    }
+    /// Skip to the end of the element id
+    cgc_skipWhiteSpace(str);
+    /// If it is not a closing brace then this is improperly formatted.
+    int tlv4;
+    {
+        pstring tlv30;
+        tlv30 = str;
+        char tlv29;
+        tlv29 = '}';
+        tlv4 = cgc_atChar(tlv30,tlv29);
+    }
+    if (!tlv4) {
+ {
+     const char tlv59 [ ] = "!!Failed to locate initial closing brace\n";
+    	cgc_printf(tlv59);
+ }
+	return NULL;
+    }
+    /// Skip the closing brace as well as any whitespace
+    int tlv5;
+    {
+        pstring tlv32;
+        tlv32 = str;
+        int tlv31;
+        tlv31 = 1;
+        tlv5 = cgc_skipLength(tlv32,tlv31);
+    }
+    if (tlv5 == -1) {
+ {
+     const char tlv60 [ ] = "!!Failed to skip initial closing brace\n";
+    	cgc_printf(tlv60);
+ }
+	return language;
+    }
+    {
+        pstring tlv33;
+        tlv33 = str;
+        start = cgc_skipWhiteSpace(tlv33);
+    }
+    {
+        pstring tlv34;
+        tlv34 = str;
+        end = cgc_skipAlpha(tlv34);
+    }
+    if (start == end) {
+ {
+     const char tlv61 [ ] = "!!Failed to find language data\n";
+    	cgc_printf(tlv61);
+ }
+	return language;
+    }
+    /// Copy the language element data
+    {
+        pstring tlv37;
+        tlv37 = str;
+        int tlv36;
+        tlv36 = start;
+        int tlv35;
+        tlv35 = end;
+        language = cgc_copyData(tlv37,tlv36,tlv35);
+    }
+    if (language == NULL) {
+ {
+     const char tlv62 [ ] = "!!Failed to copy language data\n";
+    	cgc_printf(tlv62);
+ }
+	return language;
+    }
+    /// The rest of this code is a check to ensure proper formatting except for the copy data
+    cgc_skipWhiteSpace(str);
+    /// If this is not an opening curly brace then fail
+    int tlv6;
+    {
+        pstring tlv39;
+        tlv39 = str;
+        char tlv38;
+        tlv38 = '{';
+        tlv6 = cgc_atChar(tlv39,tlv38);
+    }
+    if (!tlv6) {
+ {
+     const char tlv63 [ ] = "!!Failed to locate the final opening brace\n";
+    	cgc_printf(tlv63);
+ }
+	goto error;
+    }
+    /// Skip past the brace
+    int tlv7;
+    {
+        pstring tlv40;
+        tlv40 = str;
+        tlv7 = cgc_incChar(tlv40);
+    }
+    if (tlv7 == -1) {
+ {
+     const char tlv64 [ ] = "!!Failed to skip the final opening brace\n";
+    	cgc_printf(tlv64);
+ }
+	goto error;
+    }
+
+    cgc_skipWhiteSpace(str);
+    /// If this is not a # indicating the closing brace then fail
+    int tlv8;
+    {
+        pstring tlv42;
+        tlv42 = str;
+        char tlv41;
+        tlv41 = '#';
+        tlv8 = cgc_atChar(tlv42,tlv41);
+    }
+    if (!tlv8) {
+ {
+     const char tlv65 [ ] = "!!Failed to locate the closing mark\n";
+    	cgc_printf(tlv65);
+ }
+	goto error;
+    }
+    /// Skip past the # but save the start
+    {
+        pstring tlv44;
+        tlv44 = str;
+        int tlv43;
+        tlv43 = 1;
+        start = cgc_skipLength(tlv44,tlv43);
+    }
+    if (start == -1) {
+ {
+     const char tlv66 [ ] = "!!Failed to skip closing mark\n";
+    	cgc_printf(tlv66);
+ }
+	goto error;
+    }
+    {
+        pstring tlv45;
+        tlv45 = str;
+        end = cgc_skipToNonAlphaNum(tlv45);
+    }
+    if (end == -1) {
+ {
+     const char tlv67 [ ] = "!!Failed to locate the end of the closing element id\n";
+    	cgc_printf(tlv67);
+ }
+	goto error;
+    }
+
+    {
+        pstring tlv48;
+        tlv48 = str;
+        int tlv47;
+        tlv47 = start;
+        int tlv46;
+        tlv46 = end;
+        temp = cgc_copyData(tlv48,tlv47,tlv46);
+    }
+    int tlv9;
+    {
+        const char* tlv50 = temp;
+        const char tlv49 [ ] = "Language";
+        tlv9 = cgc_strcmp(tlv50,tlv49);
+    }
+    if (tlv9 != 0) {
+	cgc_printf("!!Invalid closing element id: @s\n", temp);
+ {
+     void* tlv69;
+     tlv69 = temp;
+     cgc_size_t tlv68;
+     {
+         char* tlv76;
+          tlv76 = temp;
+         tlv68 = cgc_strlen(tlv76) + 1;
+     }
+    	cgc_deallocate(tlv69,tlv68);
+ }
+	goto error;
+    }
+    {
+        void* tlv14;
+        tlv14 = temp;
+        cgc_size_t tlv13;
+        {
+            char* tlv74;
+             tlv74 = temp;
+            tlv13 = cgc_strlen(tlv74) + 1;
+        }
+        cgc_deallocate(tlv14,tlv13);
+    }
+    cgc_skipWhiteSpace(str);
+    /// Check the final curly brace
+    int tlv10;
+    {
+        pstring tlv52;
+        tlv52 = str;
+        char tlv51;
+        tlv51 = '}';
+        tlv10 = cgc_atChar(tlv52,tlv51);
+    }
+    if (!tlv10) {
+ {
+     const char tlv70 [ ] = "!!Failed to locate final closing brace\n";
+    	cgc_printf(tlv70);
+ }
+	goto error;
+    }
+    /// Skip past the closing brace
+    {
+        pstring tlv16;
+        tlv16 = str;
+        int tlv15;
+        tlv15 = 1;
+        cgc_skipLength(tlv16,tlv15);
+    }
+
+    goto end;
+  error:
+    if (language != NULL) {
+ {
+     void* tlv72;
+     tlv72 = language;
+     cgc_size_t tlv71;
+     {
+         char* tlv77;
+          tlv77 = language;
+         tlv71 = cgc_strlen(tlv77) + 1;
+     }
+    	cgc_deallocate(tlv72,tlv71);
+ }
+	language = NULL;
+    }
+  end:
+    return language;
+}
+
+char *cgc_extractCapitol(pstring str)
+{
+    char* temp;
+     temp = NULL;
+    char* capitol;
+     capitol = NULL;
+    int start;
+    start = 0;
+    int end;
+    end = 0;
+    if (str == NULL) {
+	return NULL;
+    }
+    cgc_skipWhiteSpace(str);
+    int tlv1;
+    {
+        pstring tlv20;
+        tlv20 = str;
+        char tlv19;
+        tlv19 = '{';
+        tlv1 = cgc_atChar(tlv20,tlv19);
+    }
+    if (!tlv1) {
+ {
+     const char tlv52 [ ] = "!!Failed to locate opening brace\n";
+    	cgc_printf(tlv52);
+ }
+	return capitol;
+    }
+    /// Skip past the curly brace
+    int tlv2;
+    {
+        pstring tlv22;
+        tlv22 = str;
+        int tlv21;
+        tlv21 = 1;
+        tlv2 = cgc_skipLength(tlv22,tlv21);
+    }
+    if (tlv2 == -1) {
+ {
+     const char tlv53 [ ] = "!!Failed to skip opening brace\n";
+    	cgc_printf(tlv53);
+ }
+	return NULL;
+    }
+    /// Skip any additional whitespace
+    {
+        pstring tlv23;
+        tlv23 = str;
+        start = cgc_skipWhiteSpace(tlv23);
+    }
+    /// This should skip any to either whitespace or a closing '}'
+    {
+        pstring tlv24;
+        tlv24 = str;
+        end = cgc_skipToNonAlphaNum(tlv24);
+    }
+    if (end == -1) {
+	return NULL;
+    }
+    /// Copy the element id from the string
+    {
+        pstring tlv27;
+        tlv27 = str;
+        int tlv26;
+        tlv26 = start;
+        int tlv25;
+        tlv25 = end;
+        temp = cgc_copyData(tlv27,tlv26,tlv25);
+    }
+    if (temp == NULL) {
+	return NULL;
+    }
+    /// If the element id is not "Capitol" then this is the wrong function
+    int tlv3;
+    {
+        const char* tlv29 = temp;
+        const char tlv28 [ ] = "Capitol";
+        tlv3 = cgc_strcmp(tlv29,tlv28);
+    }
+    if (tlv3 != 0) {
+ {
+     void* tlv55;
+     tlv55 = temp;
+     cgc_size_t tlv54;
+     tlv54 = ( end - start ) + 1;
+    	cgc_deallocate(tlv55,tlv54);
+ }
+	temp = NULL;
+	return temp;
+    }
+    /// The buffer is no longer needed so free it
+    {
+        void* tlv12;
+        tlv12 = temp;
+        cgc_size_t tlv11;
+        tlv11 = ( end - start ) + 1;
+        cgc_deallocate(tlv12,tlv11);
+    }
+    /// Skip to the end of the element id
+    cgc_skipWhiteSpace(str);
+    /// If it is not a closing brace then this is improperly formatted.
+    int tlv4;
+    {
+        pstring tlv31;
+        tlv31 = str;
+        char tlv30;
+        tlv30 = '}';
+        tlv4 = cgc_atChar(tlv31,tlv30);
+    }
+    if (!tlv4) {
+	return NULL;
+    }
+    /// Skip the closing brace as well as any whitespace
+    int tlv5;
+    {
+        pstring tlv32;
+        tlv32 = str;
+        tlv5 = cgc_incChar(tlv32);
+    }
+    if (tlv5 == -1) {
+	return NULL;
+    }
+    cgc_skipWhiteSpace(str);
+    {
+        pstring tlv14;
+        tlv14 = str;
+        int* tlv13;
+        tlv13 = & start;
+        cgc_getIndex(tlv14,tlv13);
+    }
+    {
+        pstring tlv33;
+        tlv33 = str;
+        end = cgc_skipAlpha(tlv33);
+    }
+    if (!(start ^ end)) {
+	return NULL;
+    }
+    /// Copy the capitol element data
+    {
+        pstring tlv36;
+        tlv36 = str;
+        int tlv35;
+        tlv35 = start;
+        int tlv34;
+        tlv34 = end;
+        capitol = cgc_copyData(tlv36,tlv35,tlv34);
+    }
+    if (capitol == NULL) {
+	return NULL;
+    }
+    /// The rest of this code is a check to ensure proper formatting except for the copy data
+    cgc_skipWhiteSpace(str);
+    /// If this is not an opening curly brace then fail
+    int tlv6;
+    {
+        pstring tlv38;
+        tlv38 = str;
+        char tlv37;
+        tlv37 = '{';
+        tlv6 = cgc_atChar(tlv38,tlv37);
+    }
+    if (!tlv6) {
+ {
+     const char tlv56 [ ] = "!!Failed to locate the final opening brace\n";
+    	cgc_printf(tlv56);
+ }
+	goto error;
+    }
+    /// Skip past the brace
+    int tlv7;
+    {
+        pstring tlv39;
+        tlv39 = str;
+        tlv7 = cgc_incChar(tlv39);
+    }
+    if (tlv7 == -1) {
+ {
+     const char tlv57 [ ] = "!!Failed to skip the final opening brace\n";
+    	cgc_printf(tlv57);
+ }
+	goto error;
+    }
+
+    cgc_skipWhiteSpace(str);
+    /// If this is not a # indicating the closing brace then fail
+    int tlv8;
+    {
+        pstring tlv41;
+        tlv41 = str;
+        char tlv40;
+        tlv40 = '#';
+        tlv8 = cgc_atChar(tlv41,tlv40);
+    }
+    if (!tlv8) {
+ {
+     const char tlv58 [ ] = "!!Failed to locate the closing mark\n";
+    	cgc_printf(tlv58);
+ }
+	goto error;
+    }
+    /// Skip past the # but save the start
+    {
+        pstring tlv43;
+        tlv43 = str;
+        int tlv42;
+        tlv42 = 1;
+        start = cgc_skipLength(tlv43,tlv42);
+    }
+    if (start == -1) {
+ {
+     const char tlv59 [ ] = "!!Failed to skip closing mark\n";
+    	cgc_printf(tlv59);
+ }
+	goto error;
+    }
+    {
+        pstring tlv44;
+        tlv44 = str;
+        end = cgc_skipToNonAlphaNum(tlv44);
+    }
+    if (end == -1) {
+ {
+     const char tlv60 [ ] = "!!Failed to locate the end of the closing element id\n";
+    	cgc_printf(tlv60);
+ }
+	goto error;
+    }
+
+    {
+        pstring tlv47;
+        tlv47 = str;
+        int tlv46;
+        tlv46 = start;
+        int tlv45;
+        tlv45 = end;
+        temp = cgc_copyData(tlv47,tlv46,tlv45);
+    }
+    int tlv9;
+    {
+        const char* tlv49 = temp;
+        const char tlv48 [ ] = "Capitol";
+        tlv9 = cgc_strcmp(tlv49,tlv48);
+    }
+    if (tlv9 != 0) {
+	cgc_printf("!!Invalid closing element id: @s\n", temp);
+ {
+     void* tlv62;
+     tlv62 = temp;
+     cgc_size_t tlv61;
+     {
+         char* tlv67;
+          tlv67 = temp;
+         tlv61 = cgc_strlen(tlv67) + 1;
+     }
+    	cgc_deallocate(tlv62,tlv61);
+ }
+	goto error;
+    }
+    {
+        void* tlv16;
+        tlv16 = temp;
+        cgc_size_t tlv15;
+        {
+            char* tlv66;
+             tlv66 = temp;
+            tlv15 = cgc_strlen(tlv66) + 1;
+        }
+        cgc_deallocate(tlv16,tlv15);
+    }
+    cgc_skipWhiteSpace(str);
+    /// Check the final curly brace
+    int tlv10;
+    {
+        pstring tlv51;
+        tlv51 = str;
+        char tlv50;
+        tlv50 = '}';
+        tlv10 = cgc_atChar(tlv51,tlv50);
+    }
+    if (!tlv10) {
+ {
+     const char tlv63 [ ] = "!!Failed to locate final closing brace\n";
+    	cgc_printf(tlv63);
+ }
+	goto error;
+    }
+    /// Skip past the closing brace
+    {
+        pstring tlv18;
+        tlv18 = str;
+        int tlv17;
+        tlv17 = 1;
+        cgc_skipLength(tlv18,tlv17);
+    }
+
+    goto end;
+  error:
+    if (capitol != NULL) {
+ {
+     void* tlv65;
+     tlv65 = capitol;
+     cgc_size_t tlv64;
+     {
+         char* tlv68;
+          tlv68 = capitol;
+         tlv64 = cgc_strlen(tlv68) + 1;
+     }
+    	cgc_deallocate(tlv65,tlv64);
+ }
+	capitol = NULL;
+    }
+  end:
+    return capitol;
+}
+

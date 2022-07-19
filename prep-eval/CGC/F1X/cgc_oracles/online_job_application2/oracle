@@ -1,0 +1,19 @@
+#!/bin/bash
+i=online_job_application2
+bin=$(realpath -- ./build/$i/$i)
+TIMEOUT=5
+if [[ ! -z $ANGELIX_RUN ]]; then TIMEOUT=50; fi; 
+TMP=/tmp/angelix/${i}_$RANDOM
+mkdir -p $(dirname -- $TMP)
+assert-equal () {
+	timeout --preserve-status -k $TIMEOUT $TIMEOUT $ANGELIX_RUN $1 < $2  > $TMP
+	x=$?
+	if (( $x >= 64 )); then rm $TMP ; exit $x; fi; 
+	bc=$(wc -c $3)
+	cat $TMP | head -c $bc > $TMP.bc
+	diff -q $TMP.bc $3 > /dev/null
+	xx=$?
+	rm $TMP $TMP.bc
+	exit $xx
+}
+case "$1" in 

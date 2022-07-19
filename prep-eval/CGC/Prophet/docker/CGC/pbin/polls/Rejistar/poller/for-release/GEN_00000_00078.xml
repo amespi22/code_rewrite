@@ -1,0 +1,11 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>1dd1539ae7ec61111851dd508777d4031de4d661aeb79cf6a50e83ab402e789b03e4c40f946c1ec872faf60ebeba6fcf</seed>
+<replay>
+    <write><data>newTokens\x2cUserPass\x2c8783\x2cuser\x2fpass\x2cUse\x3denroll:newTokens:refreshToken:revokeToken!</data></write>
+    <read><delim>?</delim><match><pcre>Token=63800000;Expiration=(.*);Use=enroll:newTokens:refreshToken:revokeToken?</pcre></match></read>
+    <write><data>quit\x2c \x2c \x2c !</data></write>
+</replay>
+</pov>

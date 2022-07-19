@@ -1,0 +1,116 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>d9905524a02d14a78737b1198447decff0ce36400fb3a37676ace199f72c7a148e4e1f4098c328ced5ac4a96c119e825</seed>
+<replay>
+    <read><length>8</length><assign> <var>nonce</var> <slice begin="0" /> </assign></read>
+    <write><var>nonce</var></write>
+    <write><data>\x9c6\x00\x00</data></write>
+    <write><data>\x18\x04\x00\x00</data></write>
+    <write><data>\xb0:\x00\x00</data></write>
+    <read><length>8</length><assign> <var>nonce</var> <slice begin="0" /> </assign></read>
+    <write><var>nonce</var></write>
+    <write><data>\x9c6\x00\x00</data></write>
+    <write><data>\x19\x04\x00\x00</data></write>
+    <write><data>\x14\x00\x00\x00</data></write>
+    <read><length>37</length><match><data>\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00</data></match></read>
+    <read><length>8</length><assign> <var>nonce</var> <slice begin="0" /> </assign></read>
+    <write><var>nonce</var></write>
+    <write><data>\x9c6\x00\x00</data></write>
+    <write><data>\x1a\x04\x00\x00</data></write>
+    <write><data>\x0f\x00\x00\x00</data></write>
+    <write><data>\x00\x00\x00\x00</data></write>
+    <read><length>37</length><match><data>\x01\x00\x00\x00\x01\x00\x00\x00\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02</data></match></read>
+    <read><length>8</length><assign> <var>nonce</var> <slice begin="0" /> </assign></read>
+    <write><var>nonce</var></write>
+    <write><data>\x9c6\x00\x00</data></write>
+    <write><data>\x1c\x04\x00\x00</data></write>
+    <write><data>\x09\x00\x00\x00</data></write>
+    <write><data>\x01\x00\x00\x00</data></write>
+    <read><length>37</length><match><data>\x01\x00\x00\x00\x03\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01</data></match></read>
+    <read><length>8</length><assign> <var>nonce</var> <slice begin="0" /> </assign></read>
+    <write><var>nonce</var></write>
+    <write><data>\x9c6\x00\x00</data></write>
+    <write><data>\x19\x04\x00\x00</data></write>
+    <write><data>\x14\x00\x00\x00</data></write>
+    <read><length>37</length><match><data>\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00</data></match></read>
+    <read><length>8</length><assign> <var>nonce</var> <slice begin="0" /> </assign></read>
+    <write><var>nonce</var></write>
+    <write><data>\x9c6\x00\x00</data></write>
+    <write><data>\x1a\x04\x00\x00</data></write>
+    <write><data>\x0f\x00\x00\x00</data></write>
+    <write><data>\x00\x00\x00\x00</data></write>
+    <read><length>37</length><match><data>\x02\x00\x00\x00\x04\x00\x00\x00\x05\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02</data></match></read>
+    <read><length>8</length><assign> <var>nonce</var> <slice begin="0" /> </assign></read>
+    <write><var>nonce</var></write>
+    <write><data>\x9c6\x00\x00</data></write>
+    <write><data>\x1c\x04\x00\x00</data></write>
+    <write><data>\x09\x00\x00\x00</data></write>
+    <write><data>\x02\x00\x00\x00</data></write>
+    <read><length>37</length><match><data>\x02\x00\x00\x00\x06\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01</data></match></read>
+    <read><length>8</length><assign> <var>nonce</var> <slice begin="0" /> </assign></read>
+    <write><var>nonce</var></write>
+    <write><data>\x96X\x0c\x00</data></write>
+    <write><data>\x03\x08\x00\x00</data></write>
+    <write><data>\x01\x00\x00\x00</data></write>
+    <read><length>37</length><match><data>\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00</data></match></read>
+    <read><length>8</length><assign> <var>nonce</var> <slice begin="0" /> </assign></read>
+    <write><var>nonce</var></write>
+    <write><data>\x96X\x0c\x00</data></write>
+    <write><data>\x04\x08\x00\x00</data></write>
+    <write><data>\x00\x00\x00\x00</data></write>
+    <read><length>37</length><match><data>\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00</data></match></read>
+    <read><length>8</length><assign> <var>nonce</var> <slice begin="0" /> </assign></read>
+    <write><var>nonce</var></write>
+    <write><data>\x96X\x0c\x00</data></write>
+    <write><data>\x01\x08\x00\x00</data></write>
+    <read><length>37</length><match><data>\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00</data></match></read>
+    <read><length>8</length><assign> <var>nonce</var> <slice begin="0" /> </assign></read>
+    <write><var>nonce</var></write>
+    <write><data>\x96X\x0c\x00</data></write>
+    <write><data>\x01\x08\x00\x00</data></write>
+    <read><length>37</length><match><data>\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00</data></match></read>
+    <read><length>8</length><assign> <var>nonce</var> <slice begin="0" /> </assign></read>
+    <write><var>nonce</var></write>
+    <write><data>\x96X\x0c\x00</data></write>
+    <write><data>\x02\x08\x00\x00</data></write>
+    <write><data>\x00\x00\x00\x00</data></write>
+    <read><length>37</length><match><data>\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00</data></match></read>
+    <read><length>8</length><assign> <var>nonce</var> <slice begin="0" /> </assign></read>
+    <write><var>nonce</var></write>
+    <write><data>\x96X\x0c\x00</data></write>
+    <write><data>\x05\x08\x00\x00</data></write>
+    <write><data>\x01\x00\x00\x00</data></write>
+    <read><length>37</length><match><data>\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00</data></match></read>
+    <read><length>8</length><assign> <var>nonce</var> <slice begin="0" /> </assign></read>
+    <write><var>nonce</var></write>
+    <write><data>\x96X\x0c\x00</data></write>
+    <write><data>\x03\x08\x00\x00</data></write>
+    <write><data>\x01\x00\x00\x00</data></write>
+    <read><length>37</length><match><data>\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00</data></match></read>
+    <read><length>8</length><assign> <var>nonce</var> <slice begin="0" /> </assign></read>
+    <write><var>nonce</var></write>
+    <write><data>\x96X\x0c\x00</data></write>
+    <write><data>\x03\x08\x00\x00</data></write>
+    <write><data>\x01\x00\x00\x00</data></write>
+    <read><length>37</length><match><data>\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00</data></match></read>
+    <read><length>8</length><assign> <var>nonce</var> <slice begin="0" /> </assign></read>
+    <write><var>nonce</var></write>
+    <write><data>\x96X\x0c\x00</data></write>
+    <write><data>\x01\x08\x00\x00</data></write>
+    <read><length>37</length><match><data>\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00</data></match></read>
+    <read><length>8</length><assign> <var>nonce</var> <slice begin="0" /> </assign></read>
+    <write><var>nonce</var></write>
+    <write><data>\x96X\x0c\x00</data></write>
+    <write><data>\x04\x08\x00\x00</data></write>
+    <write><data>\x00\x00\x00\x00</data></write>
+    <read><length>37</length><match><data>\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00</data></match></read>
+    <read><length>8</length><assign> <var>nonce</var> <slice begin="0" /> </assign></read>
+    <write><var>nonce</var></write>
+    <write><data>\x96X\x0c\x00</data></write>
+    <write><data>\x05\x08\x00\x00</data></write>
+    <write><data>\x01\x00\x00\x00</data></write>
+    <read><length>37</length><match><data>\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00</data></match></read>
+</replay>
+</pov>

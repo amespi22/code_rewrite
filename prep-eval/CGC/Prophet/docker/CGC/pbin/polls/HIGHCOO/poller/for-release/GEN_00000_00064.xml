@@ -1,0 +1,25 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>7bfdb928d77e8bac6114d08b6206c412f6deea97cb311206b38404009b5a8c164a713e326463b89686f5d84c82a46160</seed>
+<replay>
+    <write><data>\xd4\x05\x00\x00</data></write>
+    <write><data>\xf4\x00</data></write>
+    <write><data>PUVg2DN5el0uSLDJo9qhfhJeaM9X4cAQaSPCeOAOTJOQlseqR9\x07GDZSLxQHzUOwfkjQcJ0LgarRblOss3S4xNBeN\x07mRhUbM3QkB2YBdSkamwJyZcKxJoN96ozvBuwHkIdwImF1fZi5UPSV1xLq2NH990n37z8qIUuCRnpvyjSim4LbdU9HLsDZ6wF4dN5V5isLZ52i41K7dGbMMWIB6ms8rAMIg88axhmaHcQy9oHRc18OImrGU\x07</data></write>
+    <read><length>4</length><match><data>2y\x06\x00</data></match></read>
+    <write><data>\xcf\x07\x00\x00</data></write>
+    <write><data>2y\x06\x00</data></write>
+    <read><length>4</length><match><data>2y\x06\x00</data></match></read>
+    <read><length>2</length><match><data>\xf4\x00</data></match></read>
+    <read><length>244</length><match><data>PUVg2DN5el0uSLDJo9qhfhJeaM9X4cAQaSPCeOAOTJOQlseqR9\x07GDZSLxQHzUOwfkjQcJ0LgarRblOss3S4xNBeN\x07mRhUbM3QkB2YBdSkamwJyZcKxJoN96ozvBuwHkIdwImF1fZi5UPSV1xLq2NH990n37z8qIUuCRnpvyjSim4LbdU9HLsDZ6wF4dN5V5isLZ52i41K7dGbMMWIB6ms8rAMIg88axhmaHcQy9oHRc18OImrGU\x07</data></match></read>
+    <write><data>j\x0d\x03\x00</data></write>
+    <read><length>4</length><match><pcre>(.+)</pcre></match></read>
+    <read><length>2</length><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <write><data>\x90v\x12\x00</data></write>
+    <read><length>4</length><match><data>\x01\x00\x00\x00</data></match></read>
+</replay>
+</pov>

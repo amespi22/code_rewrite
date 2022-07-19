@@ -1,0 +1,26 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>dc34a37c43b1fddf3e8b2bd0a5385a718b97cc8ef5cd4662116d9c5c920d1e00fd3b915fdad3ec5dbbeb51384e57b282</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>Welcome to the diary logger!</data></match></read>
+    <write><data>b\x00</data></write>
+    <write><data>BBg\x7d\x08\x00\x00\x00\x05\x03\x0e\x006\x00\x00\x03\x0b\x15\x00 \x00acccbbbaccc\x03\x03\x04\x27\x00\x2b\x00abcb\x05\x02\x042\x00\x00\x00\xb0\xa1\x05\x23\x04\x03\x3c\x00\x00\x00\x00\x03\x0dC\x00P\x00baaacacbcbaab\x04\x04\x00\x01\x00W\x00\x00\x03\x04\x5e\x00\x00\x00ccaa</data></write>
+    <read><delim>\x0a</delim><match><data>Length: 98</data></match></read>
+    <read><delim>\x0a</delim><match><data>Magic number: 0x4242</data></match></read>
+    <read><delim>\x0a</delim><match><data>Future: 0x7d67</data></match></read>
+    <read><delim>\x0a</delim><match><data>Offset: 0x8</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: jobs</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x3</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: acccbbbaccc</data></match></read>
+    <read><delim>\x0a</delim><match><data>company: abcb</data></match></read>
+    <read><delim>\x0a</delim><match><data>salary: 0x2305a1b0</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: songs</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x3</data></match></read>
+    <read><delim>\x0a</delim><match><data>writer: baaacacbcbaab</data></match></read>
+    <read><delim>\x0a</delim><match><data>free online: true</data></match></read>
+    <read><delim>\x0a</delim><match><data>writer: ccaa</data></match></read>
+    <read><delim>\x0a</delim><match><data>good book.</data></match></read>
+</replay>
+</pov>

@@ -1,0 +1,197 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>38716ccda2f4513b98eee3ad0a510ef7ce73928d3aba194338a4fb32a3218a41c23de2dd4ce09350dde436ee526f9e3d</seed>
+<replay>
+    <read><length>342</length><match><data>\x0a\x0aThanks for your interest in the Sea Eye Association.\x0aIn order to be considered for the job complete the preliminary online background check\x0aDue to the secure nature of the position you are applying for you may be asked to\x0asubmit additional paperwork after your preliminary background check has been approved.\x0aThank you for your cooperation\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>11</length><match><data>Last Name: </data></match></read>
+    <write><data>\x2a\x2ahelp\x0a</data></write>
+    <read><length>237</length><match><data>All commands begin with \x27\x2a\x2a\x27 and may be entered at any time\x0a\x2a\x2aprev \x3cReturn to the previous page\x3e\x0a\x2a\x2anext \x3cMove to the next page\x3e\x0a\x2a\x2aupdate \x5bid\x5d \x3cUpdate field\x2c ex: \x22Update First Name\x22\x3e\x0a\x2a\x2ahelp \x3cPrint this dialogue\x3e\x0a\x2a\x2aexit \x3cExit application\x3e\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>11</length><match><data>Last Name: </data></match></read>
+    <write><data>mHAImRNfKzRvHBZz\x0a</data></write>
+    <read><length>12</length><match><data>First Name: </data></match></read>
+    <write><data>\x2a\x2ahelp\x0a</data></write>
+    <read><length>237</length><match><data>All commands begin with \x27\x2a\x2a\x27 and may be entered at any time\x0a\x2a\x2aprev \x3cReturn to the previous page\x3e\x0a\x2a\x2anext \x3cMove to the next page\x3e\x0a\x2a\x2aupdate \x5bid\x5d \x3cUpdate field\x2c ex: \x22Update First Name\x22\x3e\x0a\x2a\x2ahelp \x3cPrint this dialogue\x3e\x0a\x2a\x2aexit \x3cExit application\x3e\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>12</length><match><data>First Name: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>19</length><match><data>\x0aContact Info Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>12</length><match><data>First Name: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>19</length><match><data>\x0aContact Info Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>12</length><match><data>First Name: </data></match></read>
+    <write><data>pfkzXFIicTXxJvPbMmxWqhVcWIaXbmJ\x0a</data></write>
+    <read><length>33</length><match><data>Middle Name \x5bMI or Middle Name\x5d: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>19</length><match><data>\x0aContact Info Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>33</length><match><data>Middle Name \x5bMI or Middle Name\x5d: </data></match></read>
+    <write><data>whUTyCFFHtoOZtJeXCgDmXaHQVufo\x0a</data></write>
+    <read><length>26</length><match><data>Suffix \x5bJr\x2c Sr\x2c II\x2c etc\x5d: </data></match></read>
+    <write><data>VIII\x0a</data></write>
+    <read><length>16</length><match><data>DOB Month \x5bMM\x5d: </data></match></read>
+    <write><data>\x2a\x2aprev\x0a</data></write>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>16</length><match><data>DOB Month \x5bMM\x5d: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>19</length><match><data>\x0aContact Info Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>16</length><match><data>DOB Month \x5bMM\x5d: </data></match></read>
+    <write><data>11\x0a</data></write>
+    <read><length>14</length><match><data>DOB Day \x5bDD\x5d: </data></match></read>
+    <write><data>21\x0a</data></write>
+    <read><length>17</length><match><data>DOB Year \x5bYYYY\x5d: </data></match></read>
+    <write><data>1937\x0a</data></write>
+    <read><length>19</length><match><data>Height\x2dFeet \x5b1\x2d9\x5d: </data></match></read>
+    <write><data>9\x0a</data></write>
+    <read><length>22</length><match><data>Height\x2dInches \x5b0\x2d11\x5d: </data></match></read>
+    <write><data>7\x0a</data></write>
+    <read><length>8</length><match><data>Weight: </data></match></read>
+    <write><data>349\x0a</data></write>
+    <read><length>5</length><match><data>Sex: </data></match></read>
+    <write><data>M\x0a</data></write>
+    <read><length>12</length><match><data>Hair Color: </data></match></read>
+    <write><data>\x2a\x2aupdate Hair Color\x0a</data></write>
+    <read><length>50</length><match><data>Cannot update field until all fields are inputted\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>12</length><match><data>Hair Color: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>19</length><match><data>\x0aContact Info Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>12</length><match><data>Hair Color: </data></match></read>
+    <write><data>White\x0a</data></write>
+    <read><length>11</length><match><data>Eye Color: </data></match></read>
+    <write><data>Hazel\x0a</data></write>
+    <read><length>35</length><match><data>\x0a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2aCandidate Info:\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x0a</data></match></read>
+    <read><length>27</length><match><data>Last Name\x3dmHAImRNfKzRvHBZz\x0a</data></match></read>
+    <read><length>43</length><match><data>First Name\x3dpfkzXFIicTXxJvPbMmxWqhVcWIaXbmJ\x0a</data></match></read>
+    <read><length>42</length><match><data>Middle Name\x3dwhUTyCFFHtoOZtJeXCgDmXaHQVufo\x0a</data></match></read>
+    <read><length>12</length><match><data>Suffix\x3dVIII\x0a</data></match></read>
+    <read><length>13</length><match><data>DOB Month\x3d11\x0a</data></match></read>
+    <read><length>11</length><match><data>DOB Day\x3d21\x0a</data></match></read>
+    <read><length>14</length><match><data>DOB Year\x3d1937\x0a</data></match></read>
+    <read><length>14</length><match><data>Height\x2dFeet\x3d9\x0a</data></match></read>
+    <read><length>16</length><match><data>Height\x2dInches\x3d7\x0a</data></match></read>
+    <read><length>11</length><match><data>Weight\x3d349\x0a</data></match></read>
+    <read><length>6</length><match><data>Sex\x3dM\x0a</data></match></read>
+    <read><length>17</length><match><data>Hair Color\x3dWhite\x0a</data></match></read>
+    <read><length>16</length><match><data>Eye Color\x3dHazel\x0a</data></match></read>
+    <read><length>25</length><match><data>\x0aType \x2a\x2anext to continue\x0a</data></match></read>
+    <write><data>\x0a</data></write>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>35</length><match><data>\x0a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2aCandidate Info:\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x0a</data></match></read>
+    <read><length>27</length><match><data>Last Name\x3dmHAImRNfKzRvHBZz\x0a</data></match></read>
+    <read><length>43</length><match><data>First Name\x3dpfkzXFIicTXxJvPbMmxWqhVcWIaXbmJ\x0a</data></match></read>
+    <read><length>42</length><match><data>Middle Name\x3dwhUTyCFFHtoOZtJeXCgDmXaHQVufo\x0a</data></match></read>
+    <read><length>12</length><match><data>Suffix\x3dVIII\x0a</data></match></read>
+    <read><length>13</length><match><data>DOB Month\x3d11\x0a</data></match></read>
+    <read><length>11</length><match><data>DOB Day\x3d21\x0a</data></match></read>
+    <read><length>14</length><match><data>DOB Year\x3d1937\x0a</data></match></read>
+    <read><length>14</length><match><data>Height\x2dFeet\x3d9\x0a</data></match></read>
+    <read><length>16</length><match><data>Height\x2dInches\x3d7\x0a</data></match></read>
+    <read><length>11</length><match><data>Weight\x3d349\x0a</data></match></read>
+    <read><length>6</length><match><data>Sex\x3dM\x0a</data></match></read>
+    <read><length>17</length><match><data>Hair Color\x3dWhite\x0a</data></match></read>
+    <read><length>16</length><match><data>Eye Color\x3dHazel\x0a</data></match></read>
+    <read><length>25</length><match><data>\x0aType \x2a\x2anext to continue\x0a</data></match></read>
+    <write><data>\x0a</data></write>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>35</length><match><data>\x0a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2aCandidate Info:\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x0a</data></match></read>
+    <read><length>27</length><match><data>Last Name\x3dmHAImRNfKzRvHBZz\x0a</data></match></read>
+    <read><length>43</length><match><data>First Name\x3dpfkzXFIicTXxJvPbMmxWqhVcWIaXbmJ\x0a</data></match></read>
+    <read><length>42</length><match><data>Middle Name\x3dwhUTyCFFHtoOZtJeXCgDmXaHQVufo\x0a</data></match></read>
+    <read><length>12</length><match><data>Suffix\x3dVIII\x0a</data></match></read>
+    <read><length>13</length><match><data>DOB Month\x3d11\x0a</data></match></read>
+    <read><length>11</length><match><data>DOB Day\x3d21\x0a</data></match></read>
+    <read><length>14</length><match><data>DOB Year\x3d1937\x0a</data></match></read>
+    <read><length>14</length><match><data>Height\x2dFeet\x3d9\x0a</data></match></read>
+    <read><length>16</length><match><data>Height\x2dInches\x3d7\x0a</data></match></read>
+    <read><length>11</length><match><data>Weight\x3d349\x0a</data></match></read>
+    <read><length>6</length><match><data>Sex\x3dM\x0a</data></match></read>
+    <read><length>17</length><match><data>Hair Color\x3dWhite\x0a</data></match></read>
+    <read><length>16</length><match><data>Eye Color\x3dHazel\x0a</data></match></read>
+    <read><length>25</length><match><data>\x0aType \x2a\x2anext to continue\x0a</data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>19</length><match><data>\x0aContact Info Form\x0a</data></match></read>
+    <read><length>17</length><match><data>Personal e\x2dmail: </data></match></read>
+    <write><data>\x2a\x2aprev\x0a</data></write>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>35</length><match><data>\x0a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2aCandidate Info:\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x0a</data></match></read>
+    <read><length>27</length><match><data>Last Name\x3dmHAImRNfKzRvHBZz\x0a</data></match></read>
+    <read><length>43</length><match><data>First Name\x3dpfkzXFIicTXxJvPbMmxWqhVcWIaXbmJ\x0a</data></match></read>
+    <read><length>42</length><match><data>Middle Name\x3dwhUTyCFFHtoOZtJeXCgDmXaHQVufo\x0a</data></match></read>
+    <read><length>12</length><match><data>Suffix\x3dVIII\x0a</data></match></read>
+    <read><length>13</length><match><data>DOB Month\x3d11\x0a</data></match></read>
+    <read><length>11</length><match><data>DOB Day\x3d21\x0a</data></match></read>
+    <read><length>14</length><match><data>DOB Year\x3d1937\x0a</data></match></read>
+    <read><length>14</length><match><data>Height\x2dFeet\x3d9\x0a</data></match></read>
+    <read><length>16</length><match><data>Height\x2dInches\x3d7\x0a</data></match></read>
+    <read><length>11</length><match><data>Weight\x3d349\x0a</data></match></read>
+    <read><length>6</length><match><data>Sex\x3dM\x0a</data></match></read>
+    <read><length>17</length><match><data>Hair Color\x3dWhite\x0a</data></match></read>
+    <read><length>16</length><match><data>Eye Color\x3dHazel\x0a</data></match></read>
+    <read><length>25</length><match><data>\x0aType \x2a\x2anext to continue\x0a</data></match></read>
+    <write><data>\x0a</data></write>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>35</length><match><data>\x0a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2aCandidate Info:\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x0a</data></match></read>
+    <read><length>27</length><match><data>Last Name\x3dmHAImRNfKzRvHBZz\x0a</data></match></read>
+    <read><length>43</length><match><data>First Name\x3dpfkzXFIicTXxJvPbMmxWqhVcWIaXbmJ\x0a</data></match></read>
+    <read><length>42</length><match><data>Middle Name\x3dwhUTyCFFHtoOZtJeXCgDmXaHQVufo\x0a</data></match></read>
+    <read><length>12</length><match><data>Suffix\x3dVIII\x0a</data></match></read>
+    <read><length>13</length><match><data>DOB Month\x3d11\x0a</data></match></read>
+    <read><length>11</length><match><data>DOB Day\x3d21\x0a</data></match></read>
+    <read><length>14</length><match><data>DOB Year\x3d1937\x0a</data></match></read>
+    <read><length>14</length><match><data>Height\x2dFeet\x3d9\x0a</data></match></read>
+    <read><length>16</length><match><data>Height\x2dInches\x3d7\x0a</data></match></read>
+    <read><length>11</length><match><data>Weight\x3d349\x0a</data></match></read>
+    <read><length>6</length><match><data>Sex\x3dM\x0a</data></match></read>
+    <read><length>17</length><match><data>Hair Color\x3dWhite\x0a</data></match></read>
+    <read><length>16</length><match><data>Eye Color\x3dHazel\x0a</data></match></read>
+    <read><length>25</length><match><data>\x0aType \x2a\x2anext to continue\x0a</data></match></read>
+    <write><data>\x0a</data></write>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>35</length><match><data>\x0a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2aCandidate Info:\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x0a</data></match></read>
+    <read><length>27</length><match><data>Last Name\x3dmHAImRNfKzRvHBZz\x0a</data></match></read>
+    <read><length>43</length><match><data>First Name\x3dpfkzXFIicTXxJvPbMmxWqhVcWIaXbmJ\x0a</data></match></read>
+    <read><length>42</length><match><data>Middle Name\x3dwhUTyCFFHtoOZtJeXCgDmXaHQVufo\x0a</data></match></read>
+    <read><length>12</length><match><data>Suffix\x3dVIII\x0a</data></match></read>
+    <read><length>13</length><match><data>DOB Month\x3d11\x0a</data></match></read>
+    <read><length>11</length><match><data>DOB Day\x3d21\x0a</data></match></read>
+    <read><length>14</length><match><data>DOB Year\x3d1937\x0a</data></match></read>
+    <read><length>14</length><match><data>Height\x2dFeet\x3d9\x0a</data></match></read>
+    <read><length>16</length><match><data>Height\x2dInches\x3d7\x0a</data></match></read>
+    <read><length>11</length><match><data>Weight\x3d349\x0a</data></match></read>
+    <read><length>6</length><match><data>Sex\x3dM\x0a</data></match></read>
+    <read><length>17</length><match><data>Hair Color\x3dWhite\x0a</data></match></read>
+    <read><length>16</length><match><data>Eye Color\x3dHazel\x0a</data></match></read>
+    <read><length>25</length><match><data>\x0aType \x2a\x2anext to continue\x0a</data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>19</length><match><data>\x0aContact Info Form\x0a</data></match></read>
+    <read><length>17</length><match><data>Personal e\x2dmail: </data></match></read>
+    <write><data>w9q4G89noO\x40392BB0UycmDRb4jgrYCwQF5BW\x0a</data></write>
+    <read><length>13</length><match><data>Work e\x2dmail: </data></match></read>
+    <write><data>iQ00B8R6qV7QeQLq\x40SGnRmctRyjcTDSjxd\x0a</data></write>
+    <read><length>38</length><match><data>Home telephone number \x5bXXX\x2dXXX\x2dXXXX\x5d: </data></match></read>
+    <write><data>555\x2d555\x2d5961\x0a</data></write>
+    <read><length>38</length><match><data>Work telephone number \x5bXXX\x2dXXX\x2dXXXX\x5d: </data></match></read>
+    <write><data>555\x2d555\x2d4814\x0a</data></write>
+    <read><length>33</length><match><data>\x0a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2aContact Info:\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x0a</data></match></read>
+    <read><length>53</length><match><data>Personal e\x2dmail\x3dw9q4G89noO\x40392BB0UycmDRb4jgrYCwQF5BW\x0a</data></match></read>
+    <read><length>47</length><match><data>Work e\x2dmail\x3diQ00B8R6qV7QeQLq\x40SGnRmctRyjcTDSjxd\x0a</data></match></read>
+    <read><length>35</length><match><data>Home telephone number\x3d555\x2d555\x2d5961\x0a</data></match></read>
+    <read><length>35</length><match><data>Work telephone number\x3d555\x2d555\x2d4814\x0a</data></match></read>
+    <read><length>25</length><match><data>\x0aType \x2a\x2anext to continue\x0a</data></match></read>
+    <write><data>\x2a\x2aexit\x0a</data></write>
+    <read><length>11</length><match><data>Thank you!\x0a</data></match></read>
+</replay>
+</pov>

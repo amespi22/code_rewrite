@@ -1,0 +1,363 @@
+
+
+#include "cgc_service.h"
+#include "cgc_menu.h"
+#include "cgc_stdlib.h"
+int cgc_edit_dives(logbook_type * Info)
+{
+    char buf[1024];
+    int rcv_cnt;
+    dive_log_type *next_dive;
+    next_dive = Info->dives;
+    int dive_count;
+    dive_count = 1;
+    int dive_number_to_edit;
+    dive_number_to_edit = 0;
+    if (next_dive == 0) {
+ {
+     const char tlv6 [ ] = "\n";
+    	cgc_printf(tlv6);
+ }
+ {
+     const char tlv7 [ ] = "Dive Log is empty\n";
+    	cgc_printf(tlv7);
+ }
+	return 0;
+    }
+    cgc_list_dives(Info);
+    {
+        const char tlv1 [ ] = "\n";
+        cgc_printf(tlv1);
+    }
+    {
+        const char tlv2 [ ] = "Enter Dive # to edit: ";
+        cgc_printf(tlv2);
+    }
+    {
+        char* tlv4;
+         tlv4 = buf;
+        cgc_size_t tlv3;
+        tlv3 = sizeof ( buf );
+        rcv_cnt = cgc_getline(tlv4,tlv3);
+    }
+
+    if (rcv_cnt == 0) {
+	return 0;
+    }
+    {
+        const char* tlv5 = buf;
+        dive_number_to_edit = cgc_atoi(tlv5);
+    }
+    next_dive = Info->dives;
+    dive_count = 1;
+    while (dive_count < dive_number_to_edit && next_dive != 0) {
+	++dive_count;
+	next_dive = next_dive->next;
+    }
+    if (dive_count == dive_number_to_edit && next_dive != 0) {
+	cgc_printf("Editing dive number @d\n", dive_number_to_edit);
+	// now display and allow for updating of the data
+	cgc_update_dive(next_dive);
+    } else {
+ {
+     const char tlv8 [ ] = "Invalid dive number entered\n";
+    	cgc_printf(tlv8);
+ }
+    }
+
+    return 0;
+}
+
+int cgc_update_dive(dive_log_type * dive)
+{
+    char buffer[1024];
+    char buf2[1024];
+    cgc_size_t count;
+    {
+        const char tlv1 [ ] = "Dive Site";
+        cgc_printf(tlv1);
+    }
+    if (dive->dive_site_name[0] != 0) {
+	cgc_printf(" (@s)", dive->dive_site_name);
+    }
+    {
+        const char tlv2 [ ] = ": ";
+        cgc_printf(tlv2);
+    }
+    {
+        char* tlv28;
+         tlv28 = buffer;
+        cgc_size_t tlv27;
+        tlv27 = sizeof ( dive -> dive_site_name );
+        count = cgc_getline(tlv28,tlv27);
+    }
+    if (count > 0) {
+ {
+     char* tlv51;
+      tlv51 = dive -> dive_site_name;
+     const char* tlv50 = buffer;
+     cgc_size_t tlv49;
+     tlv49 = sizeof ( dive -> dive_site_name );
+    	cgc_strncpy(tlv51,tlv50,tlv49);
+ }
+    }
+    {
+        const char tlv3 [ ] = "Date";
+        cgc_printf(tlv3);
+    }
+    if (dive->dive_date[0] != 0) {
+	cgc_printf(" (@s)", dive->dive_date);
+    }
+    {
+        const char tlv4 [ ] = ": ";
+        cgc_printf(tlv4);
+    }
+    {
+        char* tlv30;
+         tlv30 = buffer;
+        cgc_size_t tlv29;
+        tlv29 = sizeof ( dive -> dive_date );
+        count = cgc_getline(tlv30,tlv29);
+    }
+    if (count > 0) {
+ {
+     char* tlv54;
+      tlv54 = dive -> dive_date;
+     const char* tlv53 = buffer;
+     cgc_size_t tlv52;
+     tlv52 = sizeof ( dive -> dive_date );
+    	cgc_strncpy(tlv54,tlv53,tlv52);
+ }
+    }
+    {
+        const char tlv5 [ ] = "Time";
+        cgc_printf(tlv5);
+    }
+    if (dive->dive_time[0] != 0) {
+	cgc_printf(" (@s)", dive->dive_time);
+    }
+    {
+        const char tlv6 [ ] = ": ";
+        cgc_printf(tlv6);
+    }
+    {
+        char* tlv32;
+         tlv32 = buf2;
+        cgc_size_t tlv31;
+        tlv31 = sizeof ( dive -> dive_time );
+        count = cgc_getline(tlv32,tlv31);
+    }
+    if (count > 0) {
+ {
+     char* tlv57;
+      tlv57 = dive -> dive_time;
+     const char* tlv56 = buf2;
+     cgc_size_t tlv55;
+     tlv55 = sizeof ( dive -> dive_time );
+    	cgc_strncpy(tlv57,tlv56,tlv55);
+ }
+    }
+    {
+        char* tlv9;
+         tlv9 = buffer;
+        const char tlv8 [ ] = " ";
+        cgc_size_t tlv7;
+        tlv7 = 1;
+        cgc_strncat(tlv9,tlv8,tlv7);
+    }
+    {
+        char* tlv12;
+         tlv12 = buffer;
+        const char* tlv11 = buf2;
+        cgc_size_t tlv10;
+        {
+            char* tlv67;
+             tlv67 = buf2;
+            tlv10 = cgc_strlen(tlv67);
+        }
+        cgc_strncat(tlv12,tlv11,tlv10);
+    }
+    datetime_struct_type tm;
+    {
+        char* tlv34;
+         tlv34 = buffer;
+        datetime_struct_type* tlv33;
+        tlv33 = & tm;
+        dive->timestamp = cgc_str2datetime(tlv34,tlv33);
+    }
+    {
+        const char tlv13 [ ] = "Location (area/city)";
+        cgc_printf(tlv13);
+    }
+    if (dive->location[0] != 0) {
+	cgc_printf(" (@s)", dive->location);
+    }
+    {
+        const char tlv14 [ ] = ": ";
+        cgc_printf(tlv14);
+    }
+    {
+        char* tlv36;
+         tlv36 = buffer;
+        cgc_size_t tlv35;
+        tlv35 = sizeof ( buffer );
+        count = cgc_getline(tlv36,tlv35);
+    }
+    if (count > 0) {
+ {
+     char* tlv60;
+      tlv60 = dive -> location;
+     const char* tlv59 = buffer;
+     cgc_size_t tlv58;
+     tlv58 = count;
+    	cgc_strncpy(tlv60,tlv59,tlv58);
+ }
+    }
+    {
+        const char tlv15 [ ] = "Max Depth in ft";
+        cgc_printf(tlv15);
+    }
+    if (dive->max_depth != 0) {
+	cgc_printf(" (@d)", dive->max_depth);
+    }
+    {
+        const char tlv16 [ ] = ": ";
+        cgc_printf(tlv16);
+    }
+    {
+        char* tlv38;
+         tlv38 = buffer;
+        cgc_size_t tlv37;
+        tlv37 = sizeof ( buffer );
+        count = cgc_getline(tlv38,tlv37);
+    }
+    if (count > 0) {
+ {
+     const char* tlv61 = buffer;
+    	dive->max_depth = cgc_atoi(tlv61);
+ }
+    }
+    {
+        const char tlv17 [ ] = "Avg Depth in ft";
+        cgc_printf(tlv17);
+    }
+    if (dive->avg_depth != 0) {
+	cgc_printf(" (@d)", dive->avg_depth);
+    }
+    {
+        const char tlv18 [ ] = ": ";
+        cgc_printf(tlv18);
+    }
+    {
+        char* tlv40;
+         tlv40 = buffer;
+        cgc_size_t tlv39;
+        tlv39 = sizeof ( buffer );
+        count = cgc_getline(tlv40,tlv39);
+    }
+    if (count > 0) {
+ {
+     const char* tlv62 = buffer;
+    	dive->avg_depth = cgc_atoi(tlv62);
+ }
+    }
+    {
+        const char tlv19 [ ] = "Dive Duration (mins)";
+        cgc_printf(tlv19);
+    }
+    if (dive->dive_length != 0) {
+	cgc_printf(" (@d)", dive->dive_length);
+    }
+    {
+        const char tlv20 [ ] = ": ";
+        cgc_printf(tlv20);
+    }
+    {
+        char* tlv42;
+         tlv42 = buffer;
+        cgc_size_t tlv41;
+        tlv41 = 13;
+        count = cgc_getline(tlv42,tlv41);
+    }
+    if (count > 0) {
+ {
+     const char* tlv63 = buffer;
+    	dive->dive_length = cgc_atoi(tlv63);
+ }
+    }
+    {
+        const char tlv21 [ ] = "O2 Percentage";
+        cgc_printf(tlv21);
+    }
+    if (dive->O2_percent != 0) {
+	cgc_printf(" (@d)", dive->O2_percent);
+    }
+    {
+        const char tlv22 [ ] = ": ";
+        cgc_printf(tlv22);
+    }
+    {
+        char* tlv44;
+         tlv44 = buffer;
+        cgc_size_t tlv43;
+        tlv43 = 11;
+        count = cgc_getline(tlv44,tlv43);
+    }
+    if (count > 0) {
+ {
+     const char* tlv64 = buffer;
+    	dive->O2_percent = cgc_atoi(tlv64);
+ }
+    }
+
+    {
+        const char tlv23 [ ] = "Pressure In (psi)";
+        cgc_printf(tlv23);
+    }
+    if (dive->pressure_in != 0) {
+	cgc_printf(" (@d)", dive->pressure_in);
+    }
+    {
+        const char tlv24 [ ] = ": ";
+        cgc_printf(tlv24);
+    }
+    {
+        char* tlv46;
+         tlv46 = buffer;
+        cgc_size_t tlv45;
+        tlv45 = 20;
+        count = cgc_getline(tlv46,tlv45);
+    }
+    if (count > 0) {
+ {
+     const char* tlv65 = buffer;
+    	dive->pressure_in = cgc_atoi(tlv65);
+ }
+    }
+    {
+        const char tlv25 [ ] = "Pressure Out (psi)";
+        cgc_printf(tlv25);
+    }
+    if (dive->pressure_out != 0) {
+	cgc_printf(" (@d)", dive->pressure_out);
+    }
+    {
+        const char tlv26 [ ] = ": ";
+        cgc_printf(tlv26);
+    }
+    {
+        char* tlv48;
+         tlv48 = buffer;
+        cgc_size_t tlv47;
+        tlv47 = 11;
+        count = cgc_getline(tlv48,tlv47);
+    }
+    if (count > 0) {
+ {
+     const char* tlv66 = buffer;
+    	dive->pressure_out = cgc_atoi(tlv66);
+ }
+    }
+    return 0;
+}
+

@@ -1,0 +1,35 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>8562ab962ab1cf5ebcc8bd484abf7a2667666322e39ca0ac15b560c9dd037d04e60cc495ba47d6c8ff6109c9b5d443a4</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>This is Mapper.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>I\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>from address \x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>B\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Road Name:\x0a</data></match></read>
+    <write><data>PvncVzLPFowsA650d\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Road Length:\x0a</data></match></read>
+    <write><data>790162\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>C\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Street Number: \x0a</data></match></read>
+    <write><data>73298257</data></write>
+    <read><delim>\x0a</delim><match><data>Resident: \x0a</data></match></read>
+    <write><data>sO\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Only road selected.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>This road has no intersections to choose.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>This road has no intersections to choose.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>D\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Only road selected.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Only road selected.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Invalid intersection.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>0\x0a</data></write>
+    <write><data>0\x0a</data></write>
+</replay>
+</pov>

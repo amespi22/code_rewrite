@@ -1,0 +1,22 @@
+digraph G {
+    delete [label="delete"];
+    new [label="new"];
+    append [label="append"];
+    choose [label="choose"];
+    start [label="start", shape=box];
+    junk [label="junk"];
+    get [label="get"];
+    quit [label="quit", shape=triangle];
+    delete -> choose;
+    new -> choose;
+    append -> choose;
+    choose -> junk;
+    choose -> delete;
+    choose -> append;
+    choose -> new;
+    choose -> quit [label="0.01x"];
+    choose -> get;
+    start -> choose;
+    junk -> choose;
+    get -> choose;
+}

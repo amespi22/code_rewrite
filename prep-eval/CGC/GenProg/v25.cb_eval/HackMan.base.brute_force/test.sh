@@ -1,0 +1,1 @@
+../../../cgc_test/HackMan/test.sh

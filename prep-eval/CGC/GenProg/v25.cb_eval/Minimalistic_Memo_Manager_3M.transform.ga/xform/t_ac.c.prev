@@ -1,0 +1,339 @@
+
+
+#include "cgc_stdlib.h"
+#include "cgc_string.h"
+#include "cgc_ctype.h"
+#include "cgc_wrapper.h"
+#include "libcgc.h"
+#include "cgc_filaments.h"
+#include "cgc_mutex.h"
+#include "cgc_ac.h"
+int cgc_num_words = 0;
+ac_t word_list[MAX_AC_LIST] = {
+    {"acceptible", "acceptable"}, {"amature", "amateur"},
+    {"arguement", "argument"}, {"beleive", "believe"},
+    {"calender", "calendar"}, {"cemetary", "cemetery"},
+    {"collectable", "collectible"}, {"concensus", "consensus"},
+    {"equiptment", "equipment"}, {"existance", "existence"},
+    {"firey", "fiery"}, {"foriegn", "foreign"},
+    {"guage", "gauge"}, {"greatful", "grateful"},
+    {"harrass", "harass"}, {"ignorence", "ignorance"},
+    {"lisense", "license"}, {"maintenence", "maintenance"},
+    {"relevent", "relevant"}, {"wierd", "weird"},
+};
+
+#define MAX_QUEUE 1024
+static struct {
+    cgc_size_t start;
+    cgc_size_t end;
+} ac_queue[MAX_QUEUE];
+static cgc_size_t ac_queue_head;
+static cgc_size_t ac_queue_tail;
+static cgc_size_t ac_queue_count;
+static char *ac_buffer;
+static cgc_size_t ac_idx;
+static mutex_t ac_mutex;
+void cgc_ac_init()
+{
+    int i;
+    for (i = 0; i < MAX_AC_LIST; ++i) {
+	if (word_list[i].typo[0] == 0) {
+	    break;
+	}
+	cgc_num_words++;
+    }
+    mutex_init(&ac_mutex);
+}
+
+void cgc_ac_add_custom(char *typo, char *correct)
+{
+    if (typo && correct && cgc_num_words < MAX_AC_LIST) {
+	int i;
+	for (i = 0; i < cgc_num_words; ++i) {
+     int tlv4;
+     {
+         const char* tlv13 = typo;
+         const char* tlv12 = word_list [ i ] . typo;
+         tlv4 = cgc_strcmp(tlv13,tlv12);
+     }
+	    if (tlv4 == 0) {
+		return;
+	    }
+	}
+ cgc_size_t tlv1;
+ {
+     const char* tlv5 = typo;
+     tlv1 = cgc_strlen(tlv5);
+ }
+ cgc_size_t tlv2;
+ {
+     const char* tlv6 = correct;
+     tlv2 = cgc_strlen(tlv6);
+ }
+ cgc_size_t tlv3;
+ {
+     const char* tlv7 = typo;
+     tlv3 = cgc_strlen(tlv7);
+ }
+	if (tlv1 < MAX_AC_LEN && tlv2 < MAX_AC_LEN && tlv3 > 0) {
+     {
+         char* tlv9;
+          tlv9 = word_list [ cgc_num_words ] . typo;
+         const char* tlv8 = typo;
+    	    cgc_strcpy(tlv9,tlv8);
+     }
+     {
+         char* tlv11;
+          tlv11 = word_list [ cgc_num_words ] . correct;
+         const char* tlv10 = correct;
+    	    cgc_strcpy(tlv11,tlv10);
+     }
+	    cgc_num_words++;
+	}
+    }
+}
+
+void cgc_ac_process(void *ud)
+{
+    char word[MAX_AC_LEN];
+    int dummy;
+    while (1) {
+	cgc_size_t i;
+	int j;
+	while (ac_buffer != NULL && ac_queue_count > 0) {
+     {
+         mutex_t* tlv2;
+         tlv2 = & ac_mutex;
+    	    cgc_mutex_lock(tlv2);
+     }
+	    i = ac_queue_head;
+     cgc_size_t start;
+     start = ac_queue [ i ] . start;
+     cgc_size_t end;
+     end = ac_queue [ i ] . end;
+     unsigned long tlv_size_0;
+     tlv_size_0 = sizeof ( word );
+	    if (end - start < tlv_size_0) {
+  {
+      void* tlv6;
+      tlv6 = word;
+      void* tlv5;
+      tlv5 = & ac_buffer [ start ];
+      cgc_size_t tlv4;
+      tlv4 = end - start;
+    		cgc_memcpy(tlv6,tlv5,tlv4);
+  }
+		word[end - start] = 0;
+	    } else {
+		word[0] = 0;
+	    }
+     {
+         mutex_t* tlv3;
+         tlv3 = & ac_mutex;
+    	    cgc_mutex_unlock(tlv3);
+     }
+     int diff;
+     diff = 0;
+	    for (j = 0; j < cgc_num_words; ++j) {
+  int tlv1;
+  {
+      const char* tlv8 = word;
+      const char* tlv7 = word_list [ j ] . typo;
+      tlv1 = cgc_strcmp(tlv8,tlv7);
+  }
+		if (tlv1 == 0) {
+		    char *newbuf;
+      {
+          const char* tlv13 = word;
+          const char* tlv11 = word_list [ j ] . correct;
+    		    diff = cgc_strlen(tlv11) - cgc_strlen(tlv13);
+      }
+      {
+          mutex_t* tlv9;
+          tlv9 = & ac_mutex;
+    		    cgc_mutex_lock(tlv9);
+      }
+		    if (diff < 0)
+			// memmove before we shrink the buffer
+		    {
+   {
+       void* tlv17;
+       tlv17 = & ac_buffer [ end + diff ];
+       void* tlv16;
+       tlv16 = & ac_buffer [ end ];
+       cgc_size_t tlv15;
+       tlv15 = ac_idx - end;
+    			cgc_memmove(tlv17,tlv16,tlv15);
+   }
+		    }
+		    // adjust buffer size to new size plus null character
+      {
+          void* tlv14;
+          tlv14 = ac_buffer;
+          cgc_size_t tlv12;
+          tlv12 = ac_idx + 1 + diff;
+    		    newbuf = cgc_realloc(tlv14,tlv12);
+      }
+		    if (newbuf != NULL) {
+			ac_buffer = newbuf;
+			if (diff > 0)
+			    // memmove after we enlarge the buffer
+			{
+       {
+           void* tlv23;
+           tlv23 = & ac_buffer [ end + diff ];
+           void* tlv22;
+           tlv22 = & ac_buffer [ end ];
+           cgc_size_t tlv21;
+           tlv21 = ac_idx - end;
+    			    cgc_memmove(tlv23,tlv22,tlv21);
+       }
+			}
+   {
+       void* tlv20;
+       tlv20 = & ac_buffer [ start ];
+       void* tlv19;
+       tlv19 = word_list [ j ] . correct;
+       cgc_size_t tlv18;
+       {
+           const char* tlv24 = word_list [ j ] . correct;
+           tlv18 = cgc_strlen(tlv24);
+       }
+    			cgc_memcpy(tlv20,tlv19,tlv18);
+   }
+			ac_idx += diff;
+		    }
+      {
+          mutex_t* tlv10;
+          tlv10 = & ac_mutex;
+    		    cgc_mutex_unlock(tlv10);
+      }
+		    break;
+		}
+	    }
+	    for (j = 0, i = ac_queue_head; j < ac_queue_count; j++, i = (i + 1) % MAX_QUEUE) {
+		ac_queue[i].start += diff;
+		ac_queue[i].end += diff;
+	    }
+	    // remove from queue once we finished all the processing
+	    ac_queue_head = (ac_queue_head + 1) % MAX_QUEUE;
+	    ac_queue_count--;
+	}
+	cgc_filaments_yield();
+    }
+}
+
+char *cgc_ac_read(int fd, char term)
+{
+    cgc_size_t rx;
+    ac_queue_count = ac_queue_head = ac_queue_tail = ac_idx = 0;
+    ac_buffer = NULL;
+    while (1) {
+	// cgc_read next word
+ cgc_size_t count;
+ count = 0;
+	char word[MAX_AC_LEN];
+	for (count = 0; count < MAX_AC_LEN; count++) {
+     int tlv1;
+     {
+         int tlv15;
+         tlv15 = fd;
+         void* tlv14;
+         tlv14 = & word [ count ];
+         cgc_size_t tlv13;
+         tlv13 = 1;
+         cgc_size_t* tlv12;
+         tlv12 = & rx;
+         tlv1 = cgc_receive(tlv15,tlv14,tlv13,tlv12);
+     }
+	    if (tlv1 != 0 || rx == 0) {
+		goto fail;
+	    }
+     int tlv2;
+     {
+         int tlv16;
+         tlv16 = word [ count ];
+         tlv2 = cgc_isalpha(tlv16);
+     }
+	    if (word[count] == term || !tlv2) {
+		count++;
+		break;
+	    }
+	}
+ char* newbuf;
+  {
+      void* tlv11;
+      tlv11 = ac_buffer;
+      cgc_size_t tlv10;
+      tlv10 = ac_idx + count + 1;
+      newbuf = cgc_realloc(tlv11,tlv10);
+  }
+	if (newbuf == NULL) {
+	    goto fail;
+	}
+ {
+     mutex_t* tlv5;
+     tlv5 = & ac_mutex;
+    	cgc_mutex_lock(tlv5);
+ }
+	ac_buffer = newbuf;
+ {
+     void* tlv8;
+     tlv8 = & ac_buffer [ ac_idx ];
+     void* tlv7;
+     tlv7 = word;
+     cgc_size_t tlv6;
+     tlv6 = count;
+    	cgc_memcpy(tlv8,tlv7,tlv6);
+ }
+	ac_idx += count;
+	ac_buffer[ac_idx] = 0;
+ {
+     mutex_t* tlv9;
+     tlv9 = & ac_mutex;
+    	cgc_mutex_unlock(tlv9);
+ }
+	if (count > 1) {
+	    // append word to ac queue [start, ac_idx)
+	    while (ac_queue_count >= MAX_QUEUE)
+		// wait until queue is no longer full
+  {
+		cgc_filaments_yield();
+  }
+     cgc_size_t i;
+     i = ac_queue_tail;
+	    ac_queue_tail = (ac_queue_tail + 1) % MAX_QUEUE;
+	    ac_queue_count++;
+	    ac_queue[i].start = ac_idx - count;
+	    ac_queue[i].end = ac_idx - 1;
+	}
+	if (ac_buffer[ac_idx - 1] == term) {
+	    break;
+	}
+    }
+    // wait for ac process to finish
+    while (ac_queue_count > 0)
+    {
+	cgc_filaments_yield();
+    }
+    char* buf;
+     buf = ac_buffer;
+    ac_buffer = NULL;
+    buf[ac_idx - 1] = 0;
+    return buf;
+  fail:
+    {
+        mutex_t* tlv4;
+        tlv4 = & ac_mutex;
+        cgc_mutex_lock(tlv4);
+    }
+    cgc_free(ac_buffer);
+    ac_buffer = NULL;
+    {
+        mutex_t* tlv3;
+        tlv3 = & ac_mutex;
+        cgc_mutex_unlock(tlv3);
+    }
+    return NULL;
+}
+

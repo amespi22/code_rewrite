@@ -1,0 +1,31 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>d96d8a968eab6c2efb71d7e54c175b03c3d02bae7730c43086718903ef4fe097335d568008966162409b7cd4344a03b9</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>Welcome to the diary logger!</data></match></read>
+    <write><data>\xde\x00</data></write>
+    <write><data>BB\x93A\x08\x00\x00\x00\x01\x05\x0e\x00\x80\x00\x00\x03\x15\x15\x00\x2a\x00aabbbacbbbababbbcbccc\x05\x03\x181\x00I\x00baaaccbcbacabacabbaaabac\x04\x01\x00\xa7\xe7P\x00\x03\x03\x17W\x00n\x00aabbacabcabaacaaacbcaac\x01\x03\x0bu\x00\x00\x00cababcaaaaa\x00\x06\x86\x00\x00\x00\x00\x03\x14\x8d\x00\xa1\x00baccaccacacabcbacbba\x02\x03\x0c\xa8\x00\xb4\x00caababbbbbbb\x03\x00\x00\x1a\x00\xbb\x00\x06\x03\x0d\xc2\x00\xcf\x00bacabbbacbbbc\x04\x01\x00\xcb\x5d\xd6\x00\x05\x03\x01\xdd\x00\x00\x00c</data></write>
+    <read><delim>\x0a</delim><match><data>Length: 222</data></match></read>
+    <read><delim>\x0a</delim><match><data>Magic number: 0x4242</data></match></read>
+    <read><delim>\x0a</delim><match><data>Future: 0x4193</data></match></read>
+    <read><delim>\x0a</delim><match><data>Offset: 0x8</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: movies</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x5</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: aabbbacbbbababbbcbccc</data></match></read>
+    <read><delim>\x0a</delim><match><data>plot summary: baaaccbcbacabacabbaaabac</data></match></read>
+    <read><delim>\x0a</delim><match><data>year released: 0xe7a7</data></match></read>
+    <read><delim>\x0a</delim><match><data>producer: aabbacabcabaacaaacbcaac</data></match></read>
+    <read><delim>\x0a</delim><match><data>actor: cababcaaaaa</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: identity</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x6</data></match></read>
+    <read><delim>\x0a</delim><match><data>first name: baccaccacacabcbacbba</data></match></read>
+    <read><delim>\x0a</delim><match><data>last name: caababbbbbbb</data></match></read>
+    <read><delim>\x0a</delim><match><data>age: 0x1a</data></match></read>
+    <read><delim>\x0a</delim><match><data>birth state: bacabbbacbbbc</data></match></read>
+    <read><delim>\x0a</delim><match><data>weight: 0x5dcb</data></match></read>
+    <read><delim>\x0a</delim><match><data>birth country: c</data></match></read>
+    <read><delim>\x0a</delim><match><data>good book.</data></match></read>
+</replay>
+</pov>

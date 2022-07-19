@@ -1,0 +1,1 @@
+../../../cgc_test/stack_vm/test-pov_1.sh

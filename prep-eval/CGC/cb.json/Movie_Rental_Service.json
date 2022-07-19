@@ -1,0 +1,44 @@
+{
+"DEPEND_VERSION":"1.0.1",
+"filenames":[{"name":"Movie_Rental_Service/src/include/libcgc.h","included_by":["Movie_Rental_Service/src/Movie_Rental_Service/lib/calloc.c", "Movie_Rental_Service/src/Movie_Rental_Service/lib/free.c", "Movie_Rental_Service/src/Movie_Rental_Service/lib/malloc.c", "Movie_Rental_Service/src/Movie_Rental_Service/lib/malloc_common.c", "Movie_Rental_Service/src/Movie_Rental_Service/lib/memchr.c", "Movie_Rental_Service/src/Movie_Rental_Service/lib/memset.c", "Movie_Rental_Service/src/Movie_Rental_Service/lib/cgc_stdlib.h", "Movie_Rental_Service/src/Movie_Rental_Service/lib/realloc.c", "Movie_Rental_Service/src/Movie_Rental_Service/lib/strchr.c", "Movie_Rental_Service/src/Movie_Rental_Service/lib/strcmp.c", "Movie_Rental_Service/src/Movie_Rental_Service/lib/strlen.c", "Movie_Rental_Service/src/Movie_Rental_Service/lib/strsep.c", "Movie_Rental_Service/src/Movie_Rental_Service/src/main.c"]},
+{"name":"Movie_Rental_Service/src/Movie_Rental_Service/lib/cgc_stdarg.h","included_by":["Movie_Rental_Service/src/Movie_Rental_Service/lib/cgc_stdlib.h", "Movie_Rental_Service/src/Movie_Rental_Service/src/main.c"]},
+{"name":"Movie_Rental_Service/src/Movie_Rental_Service/lib/cgc_stddef.h","included_by":["Movie_Rental_Service/src/Movie_Rental_Service/lib/cgc_stdlib.h", "Movie_Rental_Service/src/Movie_Rental_Service/lib/cgc_string.h"]},
+{"name":"Movie_Rental_Service/src/Movie_Rental_Service/lib/cgc_stdlib.h","included_by":["Movie_Rental_Service/src/Movie_Rental_Service/lib/calloc.c", "Movie_Rental_Service/src/Movie_Rental_Service/lib/free.c", "Movie_Rental_Service/src/Movie_Rental_Service/lib/malloc.c", "Movie_Rental_Service/src/Movie_Rental_Service/lib/malloc_common.c", "Movie_Rental_Service/src/Movie_Rental_Service/lib/printf.c", "Movie_Rental_Service/src/Movie_Rental_Service/lib/realloc.c", "Movie_Rental_Service/src/Movie_Rental_Service/src/main.c", "Movie_Rental_Service/src/Movie_Rental_Service/src/movie.c"]},
+{"name":"Movie_Rental_Service/src/Movie_Rental_Service/lib/cgc_string.h","included_by":["Movie_Rental_Service/src/Movie_Rental_Service/lib/calloc.c", "Movie_Rental_Service/src/Movie_Rental_Service/lib/memcpy.c", "Movie_Rental_Service/src/Movie_Rental_Service/lib/printf.c", "Movie_Rental_Service/src/Movie_Rental_Service/lib/realloc.c", "Movie_Rental_Service/src/Movie_Rental_Service/lib/strcpy.c", "Movie_Rental_Service/src/Movie_Rental_Service/lib/strlen.c", "Movie_Rental_Service/src/Movie_Rental_Service/lib/strsep.c", "Movie_Rental_Service/src/Movie_Rental_Service/src/main.c", "Movie_Rental_Service/src/Movie_Rental_Service/src/movie.c"]},
+{"name":"Movie_Rental_Service/src/Movie_Rental_Service/lib/calloc.c"},
+{"name":"Movie_Rental_Service/src/Movie_Rental_Service/lib/ctype.c"},
+{"name":"Movie_Rental_Service/src/Movie_Rental_Service/lib/cgc_stdint.h","included_by":["Movie_Rental_Service/src/Movie_Rental_Service/lib/cgc_malloc.h", "Movie_Rental_Service/src/Movie_Rental_Service/lib/memchr.c"]},
+{"name":"Movie_Rental_Service/src/Movie_Rental_Service/lib/cgc_malloc.h","included_by":["Movie_Rental_Service/src/Movie_Rental_Service/lib/free.c", "Movie_Rental_Service/src/Movie_Rental_Service/lib/malloc.c", "Movie_Rental_Service/src/Movie_Rental_Service/lib/malloc_common.c", "Movie_Rental_Service/src/Movie_Rental_Service/lib/realloc.c"]},
+{"name":"Movie_Rental_Service/src/Movie_Rental_Service/lib/free.c"},
+{"name":"Movie_Rental_Service/src/Movie_Rental_Service/lib/malloc.c"},
+{"name":"Movie_Rental_Service/src/Movie_Rental_Service/lib/malloc_common.c"},
+{"name":"Movie_Rental_Service/src/Movie_Rental_Service/lib/memchr.c"},
+{"name":"Movie_Rental_Service/src/Movie_Rental_Service/lib/memcpy.c"},
+{"name":"Movie_Rental_Service/src/Movie_Rental_Service/lib/memset.c"},
+{"name":"Movie_Rental_Service/src/Movie_Rental_Service/lib/printf.c"},
+{"name":"Movie_Rental_Service/src/Movie_Rental_Service/lib/realloc.c"},
+{"name":"Movie_Rental_Service/src/Movie_Rental_Service/lib/strchr.c"},
+{"name":"Movie_Rental_Service/src/Movie_Rental_Service/lib/strcmp.c"},
+{"name":"Movie_Rental_Service/src/Movie_Rental_Service/lib/strcpy.c"},
+{"name":"Movie_Rental_Service/src/Movie_Rental_Service/lib/strlen.c"},
+{"name":"Movie_Rental_Service/src/Movie_Rental_Service/lib/strsep.c"},
+{"name":"Movie_Rental_Service/src/Movie_Rental_Service/lib/strtol.c"},
+{"name":"Movie_Rental_Service/src/Movie_Rental_Service/src/cgc_movie.h","included_by":["Movie_Rental_Service/src/Movie_Rental_Service/src/main.c", "Movie_Rental_Service/src/Movie_Rental_Service/src/movie.c"]},
+{"name":"Movie_Rental_Service/src/Movie_Rental_Service/src/main.c"},
+{"name":"Movie_Rental_Service/src/Movie_Rental_Service/src/movie.c"}
+],
+"ignore":[
+"Movie_Rental_Service/src/Movie_Rental_Service/src/main.c"
+],
+"macros":[
+   {"name": "PATCHED", "value": false }
+],
+"disable_eval":[
+   "cgc_add_movie","cgc_allocate","cgc_allocate_new_blk","cgc_calloc","cgc_coalesce","cgc_exit","cgc_exit","cgc_exit","cgc_exit","cgc_exit","cgc_exit","cgc_exit","cgc_exit","cgc_find_fit","cgc_free","cgc_free_movie","cgc_get_size_class","cgc_initialize","cgc_insert_into_flist","cgc_isalnum","cgc_isalpha","cgc_isascii","cgc_islower","cgc_isprint","cgc_ispunct","cgc_isspace","cgc_isupper","cgc_list_movies","cgc_login","cgc_malloc","cgc_memchr","cgc_memcpy","cgc_memset","cgc_movie_add","cgc_movie_delete","cgc_movie_find","cgc_movie_find_by_id","cgc_movie_g2s","cgc_movie_r2s","cgc_movie_update","cgc_output_number","cgc_printf","cgc_print_movie_detail","cgc_quit","cgc_random","cgc_readuntil","cgc_realloc","cgc_receive","cgc_remove_from_blist","cgc_remove_from_flist","cgc_remove_movie","cgc_rent_movie","cgc_return_movie","cgc_strchr","cgc_strcmp","cgc_strcpy","cgc_strlen","cgc_strsep","cgc_strtol","cgc_strtoul","cgc__terminate","cgc_tolower","cgc_toupper","cgc_transmit","cgc_update_movie","__cxa_finalize@@GLIBC_2.1.3","data_start","deregister_tm_clones","__do_global_dtors_aux","__do_global_dtors_aux_fini_array_entry","_fini","frame_dummy","__frame_dummy_init_array_entry","__gmon_start__","_init","__init_array_end","__init_array_start","_ITM_deregisterTMCloneTable","_ITM_registerTMCloneTable",".L100",".L101",".L102",".L103",".L107",".L108",".L110",".L111",".L112",".L113",".L177",".L178",".L180",".L181",".L182",".L183",".L190",".L191",".L193",".L194",".L195",".L196",".L233",".L235",".L236",".L237",".L238",".L97",".L98","__libc_csu_fini","__libc_csu_init","__libc_start_main@@GLIBC_2.0","main","register_tm_clones","_start","__x86.get_pc_thunk.ax","__x86.get_pc_thunk.bx","__x86.get_pc_thunk.dx"
+],
+"enable_eval":[
+   "cgc_strlen"
+],
+"struct_ptrs":{
+}
+}

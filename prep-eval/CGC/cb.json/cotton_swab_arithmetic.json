@@ -1,0 +1,23 @@
+{
+"DEPEND_VERSION":"1.0.1",
+"filenames":[{"name":"cotton_swab_arithmetic/src/include/libcgc.h","included_by":["cotton_swab_arithmetic/src/cotton_swab_arithmetic/lib/cgc_libc.h", "cotton_swab_arithmetic/src/cotton_swab_arithmetic/src/cgc_service.h"]},
+{"name":"cotton_swab_arithmetic/src/cotton_swab_arithmetic/lib/cgc_libc.h","included_by":["cotton_swab_arithmetic/src/cotton_swab_arithmetic/lib/libc.c", "cotton_swab_arithmetic/src/cotton_swab_arithmetic/src/cgc_service.h"]},
+{"name":"cotton_swab_arithmetic/src/cotton_swab_arithmetic/lib/libc.c"},
+{"name":"cotton_swab_arithmetic/src/cotton_swab_arithmetic/src/cgc_service.h","included_by":["cotton_swab_arithmetic/src/cotton_swab_arithmetic/src/service.c"]},
+{"name":"cotton_swab_arithmetic/src/cotton_swab_arithmetic/src/service.c"}
+],
+"ignore":[
+"cotton_swab_arithmetic/src/cotton_swab_arithmetic/src/service.c"
+],
+"macros":[
+   {"name": "PATCHED", "value": false }
+],
+"disable_eval":[
+   "cgc_allocate","cgc_bytecode_exec","cgc_bytecode_vrfy","cgc_deallocate","cgc_inst_decode","cgc_receive","cgc_receive_all","cgc_transmit","cgc_transmit_all","__cxa_finalize@@GLIBC_2.1.3","data_start","deregister_tm_clones","__do_global_dtors_aux","__do_global_dtors_aux_fini_array_entry","_fini","frame_dummy","__frame_dummy_init_array_entry","__gmon_start__","_init","__init_array_end","__init_array_start","_ITM_deregisterTMCloneTable","_ITM_registerTMCloneTable","__libc_csu_fini","__libc_csu_init","__libc_start_main@@GLIBC_2.0","main","register_tm_clones","_start","__x86.get_pc_thunk.ax","__x86.get_pc_thunk.bx","__x86.get_pc_thunk.dx"
+],
+"enable_eval":[
+   "cgc_strlen"
+],
+"struct_ptrs":{
+}
+}

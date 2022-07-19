@@ -1,0 +1,1 @@
+../../../cgc_test/WordCompletion/test.sh

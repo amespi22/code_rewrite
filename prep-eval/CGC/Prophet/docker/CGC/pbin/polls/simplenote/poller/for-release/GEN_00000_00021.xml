@@ -1,0 +1,25 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>65bebfc7ddc20b4d73d1d1fa4f68bebc5457a5d8bb7a5dbf052c068bf1f4c2c0bcea6a5686e77bef4f6f4631efa78bff</seed>
+<replay>
+    <read><delim> </delim><match><data>nk9001\x3e </data></match></read>
+    <write><data>delete\x2dnote throughwasintoaonementhesesuchabeen\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Note successfully deleted.\x0a</data></match></read>
+    <read><delim> </delim><match><data>nk9001\x3e </data></match></read>
+    <write><data>get\x2dnote muchmewaydidonlylifesuchfor\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Unknown note.\x0a</data></match></read>
+    <read><delim> </delim><match><data>nk9001\x3e </data></match></read>
+    <write><data>get\x2dnote saidcomesomemost\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Unknown note.\x0a</data></match></read>
+    <read><delim> </delim><match><data>nk9001\x3e </data></match></read>
+    <write><data>new\x2dnote thanmuchdaysameyoupeopleshould aboutifcomewould\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Note successfully created.\x0a</data></match></read>
+    <read><delim> </delim><match><data>nk9001\x3e </data></match></read>
+    <write><data>new\x2dnote asmoremuchdidknowpeoplelastdown alltakeasoneworldtheseinneverin an\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Note successfully created.\x0a</data></match></read>
+    <read><delim> </delim><match><data>nk9001\x3e </data></match></read>
+    <write><data>quit\x0a</data></write>
+</replay>
+</pov>

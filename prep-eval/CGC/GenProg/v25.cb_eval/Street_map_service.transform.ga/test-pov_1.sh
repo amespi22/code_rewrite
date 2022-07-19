@@ -1,0 +1,1 @@
+../../../cgc_test/Street_map_service/test-pov_1.sh

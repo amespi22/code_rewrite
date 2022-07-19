@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/libcgc.h
+
+../include/libpov/libpov.h
+libcgc.h
+-
+pov/cgc_string.h
+-
+pov/cgc_stdlib.h
+-
+pov/cgc_ctype.h
+-
+pov/cgc_pcre.h
+-
+
+../include/libpov/pov/cgc_ctype.h
+
+../include/libpov/pov/cgc_pcre.h
+pov/cgc_stdlib.h
+-
+
+../include/libpov/pov/cgc_stdlib.h
+cgc_types.h
+../include/libpov/pov/cgc_types.h
+
+../include/libpov/pov/cgc_string.h
+cgc_types.h
+../include/libpov/pov/cgc_types.h
+
+../include/libpov/pov/cgc_types.h
+libcgc.h
+../include/libpov/pov/libcgc.h
+stdarg.h
+-
+
+/home/pdreiter/Data/APR_eval/GenProg/trans.src-v24.cb_eval/SCUBA_Dive_Logging/pov_1/pov.c
+libpov.h
+/home/pdreiter/Data/APR_eval/GenProg/trans.src-v24.cb_eval/SCUBA_Dive_Logging/pov_1/libpov.h
+

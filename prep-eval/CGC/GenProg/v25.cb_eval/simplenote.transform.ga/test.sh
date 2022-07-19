@@ -1,0 +1,1 @@
+../../../cgc_test/simplenote/test.sh

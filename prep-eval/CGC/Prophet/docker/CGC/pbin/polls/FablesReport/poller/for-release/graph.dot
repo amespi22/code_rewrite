@@ -1,0 +1,27 @@
+digraph G {
+    newRecord [label="newRecord"];
+    filterReport [label="filterReport"];
+    sendReport [label="sendReport"];
+    start [label="start", shape=box];
+    sortReport [label="sortReport"];
+    newReport [label="newReport"];
+    quit [label="quit", shape=triangle];
+    newRecord -> sendReport;
+    newRecord -> newRecord;
+    newRecord -> sortReport;
+    newRecord -> filterReport;
+    filterReport -> sendReport;
+    filterReport -> newRecord;
+    filterReport -> sortReport;
+    filterReport -> filterReport;
+    sendReport -> sortReport;
+    sendReport -> newRecord;
+    sendReport -> filterReport;
+    sendReport -> quit [label="0.1x"];
+    start -> newReport;
+    sortReport -> sendReport;
+    sortReport -> newRecord;
+    sortReport -> filterReport;
+    sortReport -> sortReport;
+    newReport -> newRecord;
+}

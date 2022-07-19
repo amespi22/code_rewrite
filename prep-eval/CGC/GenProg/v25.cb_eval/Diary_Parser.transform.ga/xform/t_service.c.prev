@@ -1,0 +1,3303 @@
+
+
+#include "libcgc.h"
+#include "cgc_service.h"
+uint16_t entry_count;
+uint16_t chapter_count;
+uint16_t cgc_read_short()
+{
+    uint16_t val;
+    //cgc_size_t rx;
+    //if ( receive( STDIN, &val, sizeof(val), &rx ) != 0 ) 
+    cgc_size_t tlv1;
+    {
+        unsigned char* tlv3;
+         tlv3 = ( uint8_t * ) & val;
+        cgc_size_t tlv2;
+        tlv2 = sizeof ( val );
+        tlv1 = cgc_receive_bytes(tlv3,tlv2);
+    }
+    if (tlv1 != 2) {
+	return 0;
+    }
+    return val;
+}
+
+void cgc_populate_entry(int entry, int num, char *str, int str_len, uint8_t req, uint8_t mult, uint8_t type)
+{
+    {
+        cgc_size_t tlv6;
+        tlv6 = sizeof ( Entry_Info );
+        entry_info_table[entry][num] = (Entry_Info *) cgc_malloc(tlv6);
+    }
+    entry_info_table[entry][num]->format = type;
+    entry_info_table[entry][num]->mult_ok = mult;
+    entry_info_table[entry][num]->required = req;
+    entry_info_table[entry][num]->str_len = str_len;
+    {
+        char* tlv3;
+         tlv3 = entry_info_table [ entry ] [ num ] -> entry_str;
+        const char* tlv2 = str;
+        cgc_size_t tlv1;
+        tlv1 = str_len;
+        cgc_strncpy(tlv3,tlv2,tlv1);
+    }
+    {
+        void* tlv5;
+        tlv5 = str;
+        cgc_size_t tlv4;
+        tlv4 = NAME_LEN_MAX;
+        cgc_bzero(tlv5,tlv4);
+    }
+}
+
+void cgc_populate_sub_entry(int entry, int num, char *str, int str_len, uint8_t req, uint8_t mult, uint8_t type)
+{
+    {
+        cgc_size_t tlv6;
+        tlv6 = sizeof ( Entry_Info );
+        sub_entry_info_list[entry][num] = (Entry_Info *) cgc_malloc(tlv6);
+    }
+    sub_entry_info_list[entry][num]->format = type;
+    sub_entry_info_list[entry][num]->mult_ok = mult;
+    sub_entry_info_list[entry][num]->required = req;
+    sub_entry_info_list[entry][num]->str_len = str_len;
+    {
+        char* tlv3;
+         tlv3 = sub_entry_info_list [ entry ] [ num ] -> entry_str;
+        const char* tlv2 = str;
+        cgc_size_t tlv1;
+        tlv1 = str_len;
+        cgc_strncpy(tlv3,tlv2,tlv1);
+    }
+    {
+        void* tlv5;
+        tlv5 = str;
+        cgc_size_t tlv4;
+        tlv4 = NAME_LEN_MAX;
+        cgc_bzero(tlv5,tlv4);
+    }
+}
+
+#define REQ 1
+#define REQ_NO 0
+#define MULT_OK 1
+#define MULT_NO 0
+// populate the entry_info_table with valid fields
+void cgc_populateEntryInfo()
+{
+    char ss[NAME_LEN_MAX];
+    {
+        void* tlv2;
+        tlv2 = ss;
+        cgc_size_t tlv1;
+        tlv1 = NAME_LEN_MAX;
+        cgc_bzero(tlv2,tlv1);
+    }
+    int num;
+    int entry;
+// IDENTITY
+    num = 0;
+    entry = IDENTITY;
+    {
+        char* tlv4;
+         tlv4 = ss;
+        char tlv3[] = "first name";
+        cgc_strcpy(tlv4,tlv3);
+    }
+    {
+        int tlv11;
+        tlv11 = entry;
+        int tlv10;
+        tlv10 = num ++;
+        char* tlv9;
+         tlv9 = ss;
+        int tlv8;
+        {
+            char* tlv453;
+             tlv453 = ss;
+            tlv8 = cgc_strlen(tlv453);
+        }
+        uint8_t tlv7;
+        tlv7 = REQ;
+        uint8_t tlv6;
+        tlv6 = 0;
+        uint8_t tlv5;
+        tlv5 = STR;
+        cgc_populate_entry(tlv11,tlv10,tlv9,tlv8,tlv7,tlv6,tlv5);
+    }
+    {
+        char* tlv13;
+         tlv13 = ss;
+        char tlv12[] = "middle name";
+        cgc_strcpy(tlv13,tlv12);
+    }
+    {
+        int tlv20;
+        tlv20 = entry;
+        int tlv19;
+        tlv19 = num ++;
+        char* tlv18;
+         tlv18 = ss;
+        int tlv17;
+        {
+            char* tlv454;
+             tlv454 = ss;
+            tlv17 = cgc_strlen(tlv454);
+        }
+        uint8_t tlv16;
+        tlv16 = 0;
+        uint8_t tlv15;
+        tlv15 = 0;
+        uint8_t tlv14;
+        tlv14 = STR;
+        cgc_populate_entry(tlv20,tlv19,tlv18,tlv17,tlv16,tlv15,tlv14);
+    }
+    {
+        char* tlv22;
+         tlv22 = ss;
+        char tlv21[] = "last name";
+        cgc_strcpy(tlv22,tlv21);
+    }
+    {
+        int tlv29;
+        tlv29 = entry;
+        int tlv28;
+        tlv28 = num ++;
+        char* tlv27;
+         tlv27 = ss;
+        int tlv26;
+        {
+            char* tlv455;
+             tlv455 = ss;
+            tlv26 = cgc_strlen(tlv455);
+        }
+        uint8_t tlv25;
+        tlv25 = REQ;
+        uint8_t tlv24;
+        tlv24 = 0;
+        uint8_t tlv23;
+        tlv23 = STR;
+        cgc_populate_entry(tlv29,tlv28,tlv27,tlv26,tlv25,tlv24,tlv23);
+    }
+    {
+        char* tlv31;
+         tlv31 = ss;
+        char tlv30[] = "age";
+        cgc_strcpy(tlv31,tlv30);
+    }
+    {
+        int tlv38;
+        tlv38 = entry;
+        int tlv37;
+        tlv37 = num ++;
+        char* tlv36;
+         tlv36 = ss;
+        int tlv35;
+        {
+            char* tlv456;
+             tlv456 = ss;
+            tlv35 = cgc_strlen(tlv456);
+        }
+        uint8_t tlv34;
+        tlv34 = REQ;
+        uint8_t tlv33;
+        tlv33 = 0;
+        uint8_t tlv32;
+        tlv32 = CHAR;
+        cgc_populate_entry(tlv38,tlv37,tlv36,tlv35,tlv34,tlv33,tlv32);
+    }
+    {
+        char* tlv40;
+         tlv40 = ss;
+        char tlv39[] = "weight";
+        cgc_strcpy(tlv40,tlv39);
+    }
+    {
+        int tlv47;
+        tlv47 = entry;
+        int tlv46;
+        tlv46 = num ++;
+        char* tlv45;
+         tlv45 = ss;
+        int tlv44;
+        {
+            char* tlv457;
+             tlv457 = ss;
+            tlv44 = cgc_strlen(tlv457);
+        }
+        uint8_t tlv43;
+        tlv43 = 0;
+        uint8_t tlv42;
+        tlv42 = 0;
+        uint8_t tlv41;
+        tlv41 = SHORT;
+        cgc_populate_entry(tlv47,tlv46,tlv45,tlv44,tlv43,tlv42,tlv41);
+    }
+    {
+        char* tlv49;
+         tlv49 = ss;
+        char tlv48[] = "birth country";
+        cgc_strcpy(tlv49,tlv48);
+    }
+    {
+        int tlv56;
+        tlv56 = entry;
+        int tlv55;
+        tlv55 = num ++;
+        char* tlv54;
+         tlv54 = ss;
+        int tlv53;
+        {
+            char* tlv458;
+             tlv458 = ss;
+            tlv53 = cgc_strlen(tlv458);
+        }
+        uint8_t tlv52;
+        tlv52 = 0;
+        uint8_t tlv51;
+        tlv51 = 0;
+        uint8_t tlv50;
+        tlv50 = STR;
+        cgc_populate_entry(tlv56,tlv55,tlv54,tlv53,tlv52,tlv51,tlv50);
+    }
+    {
+        char* tlv58;
+         tlv58 = ss;
+        char tlv57[] = "birth state";
+        cgc_strcpy(tlv58,tlv57);
+    }
+    {
+        int tlv65;
+        tlv65 = entry;
+        int tlv64;
+        tlv64 = num ++;
+        char* tlv63;
+         tlv63 = ss;
+        int tlv62;
+        {
+            char* tlv459;
+             tlv459 = ss;
+            tlv62 = cgc_strlen(tlv459);
+        }
+        uint8_t tlv61;
+        tlv61 = 0;
+        uint8_t tlv60;
+        tlv60 = 0;
+        uint8_t tlv59;
+        tlv59 = STR;
+        cgc_populate_entry(tlv65,tlv64,tlv63,tlv62,tlv61,tlv60,tlv59);
+    }
+    {
+        char* tlv67;
+         tlv67 = ss;
+        char tlv66[] = "birth city";
+        cgc_strcpy(tlv67,tlv66);
+    }
+    {
+        int tlv74;
+        tlv74 = entry;
+        int tlv73;
+        tlv73 = num ++;
+        char* tlv72;
+         tlv72 = ss;
+        int tlv71;
+        {
+            char* tlv460;
+             tlv460 = ss;
+            tlv71 = cgc_strlen(tlv460);
+        }
+        uint8_t tlv70;
+        tlv70 = 0;
+        uint8_t tlv69;
+        tlv69 = 0;
+        uint8_t tlv68;
+        tlv68 = STR;
+        cgc_populate_entry(tlv74,tlv73,tlv72,tlv71,tlv70,tlv69,tlv68);
+    }
+    {
+        char* tlv76;
+         tlv76 = ss;
+        char tlv75[] = "married";
+        cgc_strcpy(tlv76,tlv75);
+    }
+    {
+        int tlv83;
+        tlv83 = entry;
+        int tlv82;
+        tlv82 = num ++;
+        char* tlv81;
+         tlv81 = ss;
+        int tlv80;
+        {
+            char* tlv461;
+             tlv461 = ss;
+            tlv80 = cgc_strlen(tlv461);
+        }
+        uint8_t tlv79;
+        tlv79 = 0;
+        uint8_t tlv78;
+        tlv78 = 0;
+        uint8_t tlv77;
+        tlv77 = BOOL;
+        cgc_populate_entry(tlv83,tlv82,tlv81,tlv80,tlv79,tlv78,tlv77);
+    }
+// MOVIE
+    num = 0;
+    entry = MOVIES;
+    {
+        char* tlv85;
+         tlv85 = ss;
+        char tlv84[] = "title";
+        cgc_strcpy(tlv85,tlv84);
+    }
+    {
+        int tlv92;
+        tlv92 = entry;
+        int tlv91;
+        tlv91 = num ++;
+        char* tlv90;
+         tlv90 = ss;
+        int tlv89;
+        {
+            char* tlv462;
+             tlv462 = ss;
+            tlv89 = cgc_strlen(tlv462);
+        }
+        uint8_t tlv88;
+        tlv88 = REQ;
+        uint8_t tlv87;
+        tlv87 = 0;
+        uint8_t tlv86;
+        tlv86 = STR;
+        cgc_populate_entry(tlv92,tlv91,tlv90,tlv89,tlv88,tlv87,tlv86);
+    }
+    {
+        char* tlv94;
+         tlv94 = ss;
+        char tlv93[] = "actor";
+        cgc_strcpy(tlv94,tlv93);
+    }
+    {
+        int tlv101;
+        tlv101 = entry;
+        int tlv100;
+        tlv100 = num ++;
+        char* tlv99;
+         tlv99 = ss;
+        int tlv98;
+        {
+            char* tlv463;
+             tlv463 = ss;
+            tlv98 = cgc_strlen(tlv463);
+        }
+        uint8_t tlv97;
+        tlv97 = 0;
+        uint8_t tlv96;
+        tlv96 = MULT_OK;
+        uint8_t tlv95;
+        tlv95 = STR;
+        cgc_populate_entry(tlv101,tlv100,tlv99,tlv98,tlv97,tlv96,tlv95);
+    }
+    {
+        char* tlv103;
+         tlv103 = ss;
+        char tlv102[] = "director";
+        cgc_strcpy(tlv103,tlv102);
+    }
+    {
+        int tlv110;
+        tlv110 = entry;
+        int tlv109;
+        tlv109 = num ++;
+        char* tlv108;
+         tlv108 = ss;
+        int tlv107;
+        {
+            char* tlv464;
+             tlv464 = ss;
+            tlv107 = cgc_strlen(tlv464);
+        }
+        uint8_t tlv106;
+        tlv106 = 0;
+        uint8_t tlv105;
+        tlv105 = MULT_OK;
+        uint8_t tlv104;
+        tlv104 = STR;
+        cgc_populate_entry(tlv110,tlv109,tlv108,tlv107,tlv106,tlv105,tlv104);
+    }
+    {
+        char* tlv112;
+         tlv112 = ss;
+        char tlv111[] = "producer";
+        cgc_strcpy(tlv112,tlv111);
+    }
+    {
+        int tlv119;
+        tlv119 = entry;
+        int tlv118;
+        tlv118 = num ++;
+        char* tlv117;
+         tlv117 = ss;
+        int tlv116;
+        {
+            char* tlv465;
+             tlv465 = ss;
+            tlv116 = cgc_strlen(tlv465);
+        }
+        uint8_t tlv115;
+        tlv115 = 0;
+        uint8_t tlv114;
+        tlv114 = MULT_OK;
+        uint8_t tlv113;
+        tlv113 = STR;
+        cgc_populate_entry(tlv119,tlv118,tlv117,tlv116,tlv115,tlv114,tlv113);
+    }
+    {
+        char* tlv121;
+         tlv121 = ss;
+        char tlv120[] = "year released";
+        cgc_strcpy(tlv121,tlv120);
+    }
+    {
+        int tlv128;
+        tlv128 = entry;
+        int tlv127;
+        tlv127 = num ++;
+        char* tlv126;
+         tlv126 = ss;
+        int tlv125;
+        {
+            char* tlv466;
+             tlv466 = ss;
+            tlv125 = cgc_strlen(tlv466);
+        }
+        uint8_t tlv124;
+        tlv124 = 0;
+        uint8_t tlv123;
+        tlv123 = 0;
+        uint8_t tlv122;
+        tlv122 = SHORT;
+        cgc_populate_entry(tlv128,tlv127,tlv126,tlv125,tlv124,tlv123,tlv122);
+    }
+    {
+        char* tlv130;
+         tlv130 = ss;
+        char tlv129[] = "plot summary";
+        cgc_strcpy(tlv130,tlv129);
+    }
+    {
+        int tlv137;
+        tlv137 = entry;
+        int tlv136;
+        tlv136 = num ++;
+        char* tlv135;
+         tlv135 = ss;
+        int tlv134;
+        {
+            char* tlv467;
+             tlv467 = ss;
+            tlv134 = cgc_strlen(tlv467);
+        }
+        uint8_t tlv133;
+        tlv133 = REQ;
+        uint8_t tlv132;
+        tlv132 = 0;
+        uint8_t tlv131;
+        tlv131 = STR;
+        cgc_populate_entry(tlv137,tlv136,tlv135,tlv134,tlv133,tlv132,tlv131);
+    }
+// VEHICLES
+    num = 0;
+    entry = VEHICLES;
+    {
+        char* tlv139;
+         tlv139 = ss;
+        char tlv138[] = "make";
+        cgc_strcpy(tlv139,tlv138);
+    }
+    {
+        int tlv146;
+        tlv146 = entry;
+        int tlv145;
+        tlv145 = num ++;
+        char* tlv144;
+         tlv144 = ss;
+        int tlv143;
+        {
+            char* tlv468;
+             tlv468 = ss;
+            tlv143 = cgc_strlen(tlv468);
+        }
+        uint8_t tlv142;
+        tlv142 = REQ;
+        uint8_t tlv141;
+        tlv141 = 0;
+        uint8_t tlv140;
+        tlv140 = STR;
+        cgc_populate_entry(tlv146,tlv145,tlv144,tlv143,tlv142,tlv141,tlv140);
+    }
+    {
+        char* tlv148;
+         tlv148 = ss;
+        char tlv147[] = "model";
+        cgc_strcpy(tlv148,tlv147);
+    }
+    {
+        int tlv155;
+        tlv155 = entry;
+        int tlv154;
+        tlv154 = num ++;
+        char* tlv153;
+         tlv153 = ss;
+        int tlv152;
+        {
+            char* tlv469;
+             tlv469 = ss;
+            tlv152 = cgc_strlen(tlv469);
+        }
+        uint8_t tlv151;
+        tlv151 = REQ;
+        uint8_t tlv150;
+        tlv150 = 0;
+        uint8_t tlv149;
+        tlv149 = STR;
+        cgc_populate_entry(tlv155,tlv154,tlv153,tlv152,tlv151,tlv150,tlv149);
+    }
+    {
+        char* tlv157;
+         tlv157 = ss;
+        char tlv156[] = "color";
+        cgc_strcpy(tlv157,tlv156);
+    }
+    {
+        int tlv164;
+        tlv164 = entry;
+        int tlv163;
+        tlv163 = num ++;
+        char* tlv162;
+         tlv162 = ss;
+        int tlv161;
+        {
+            char* tlv470;
+             tlv470 = ss;
+            tlv161 = cgc_strlen(tlv470);
+        }
+        uint8_t tlv160;
+        tlv160 = 0;
+        uint8_t tlv159;
+        tlv159 = MULT_OK;
+        uint8_t tlv158;
+        tlv158 = STR;
+        cgc_populate_entry(tlv164,tlv163,tlv162,tlv161,tlv160,tlv159,tlv158);
+    }
+    {
+        char* tlv166;
+         tlv166 = ss;
+        char tlv165[] = "displacement";
+        cgc_strcpy(tlv166,tlv165);
+    }
+    {
+        int tlv173;
+        tlv173 = entry;
+        int tlv172;
+        tlv172 = num ++;
+        char* tlv171;
+         tlv171 = ss;
+        int tlv170;
+        {
+            char* tlv471;
+             tlv471 = ss;
+            tlv170 = cgc_strlen(tlv471);
+        }
+        uint8_t tlv169;
+        tlv169 = 0;
+        uint8_t tlv168;
+        tlv168 = 0;
+        uint8_t tlv167;
+        tlv167 = SHORT;
+        cgc_populate_entry(tlv173,tlv172,tlv171,tlv170,tlv169,tlv168,tlv167);
+    }
+    {
+        char* tlv175;
+         tlv175 = ss;
+        char tlv174[] = "displacement units";
+        cgc_strcpy(tlv175,tlv174);
+    }
+    {
+        int tlv182;
+        tlv182 = entry;
+        int tlv181;
+        tlv181 = num ++;
+        char* tlv180;
+         tlv180 = ss;
+        int tlv179;
+        {
+            char* tlv472;
+             tlv472 = ss;
+            tlv179 = cgc_strlen(tlv472);
+        }
+        uint8_t tlv178;
+        tlv178 = 0;
+        uint8_t tlv177;
+        tlv177 = 0;
+        uint8_t tlv176;
+        tlv176 = CHAR;
+        cgc_populate_entry(tlv182,tlv181,tlv180,tlv179,tlv178,tlv177,tlv176);
+    }
+    {
+        char* tlv184;
+         tlv184 = ss;
+        char tlv183[] = "doors";
+        cgc_strcpy(tlv184,tlv183);
+    }
+    {
+        int tlv191;
+        tlv191 = entry;
+        int tlv190;
+        tlv190 = num ++;
+        char* tlv189;
+         tlv189 = ss;
+        int tlv188;
+        {
+            char* tlv473;
+             tlv473 = ss;
+            tlv188 = cgc_strlen(tlv473);
+        }
+        uint8_t tlv187;
+        tlv187 = REQ;
+        uint8_t tlv186;
+        tlv186 = 0;
+        uint8_t tlv185;
+        tlv185 = CHAR;
+        cgc_populate_entry(tlv191,tlv190,tlv189,tlv188,tlv187,tlv186,tlv185);
+    }
+// BOOKS
+    num = 0;
+    entry = BOOKS;
+    {
+        char* tlv193;
+         tlv193 = ss;
+        char tlv192[] = "author";
+        cgc_strcpy(tlv193,tlv192);
+    }
+    {
+        int tlv200;
+        tlv200 = entry;
+        int tlv199;
+        tlv199 = num ++;
+        char* tlv198;
+         tlv198 = ss;
+        int tlv197;
+        {
+            char* tlv474;
+             tlv474 = ss;
+            tlv197 = cgc_strlen(tlv474);
+        }
+        uint8_t tlv196;
+        tlv196 = REQ;
+        uint8_t tlv195;
+        tlv195 = MULT_OK;
+        uint8_t tlv194;
+        tlv194 = STR;
+        cgc_populate_entry(tlv200,tlv199,tlv198,tlv197,tlv196,tlv195,tlv194);
+    }
+    {
+        char* tlv202;
+         tlv202 = ss;
+        char tlv201[] = "year";
+        cgc_strcpy(tlv202,tlv201);
+    }
+    {
+        int tlv209;
+        tlv209 = entry;
+        int tlv208;
+        tlv208 = num ++;
+        char* tlv207;
+         tlv207 = ss;
+        int tlv206;
+        {
+            char* tlv475;
+             tlv475 = ss;
+            tlv206 = cgc_strlen(tlv475);
+        }
+        uint8_t tlv205;
+        tlv205 = 0;
+        uint8_t tlv204;
+        tlv204 = 0;
+        uint8_t tlv203;
+        tlv203 = CHAR;
+        cgc_populate_entry(tlv209,tlv208,tlv207,tlv206,tlv205,tlv204,tlv203);
+    }
+    {
+        char* tlv211;
+         tlv211 = ss;
+        char tlv210[] = "summary";
+        cgc_strcpy(tlv211,tlv210);
+    }
+    {
+        int tlv218;
+        tlv218 = entry;
+        int tlv217;
+        tlv217 = num ++;
+        char* tlv216;
+         tlv216 = ss;
+        int tlv215;
+        {
+            char* tlv476;
+             tlv476 = ss;
+            tlv215 = cgc_strlen(tlv476);
+        }
+        uint8_t tlv214;
+        tlv214 = 0;
+        uint8_t tlv213;
+        tlv213 = 0;
+        uint8_t tlv212;
+        tlv212 = STR;
+        cgc_populate_entry(tlv218,tlv217,tlv216,tlv215,tlv214,tlv213,tlv212);
+    }
+    {
+        char* tlv220;
+         tlv220 = ss;
+        char tlv219[] = "publisher";
+        cgc_strcpy(tlv220,tlv219);
+    }
+    {
+        int tlv227;
+        tlv227 = entry;
+        int tlv226;
+        tlv226 = num ++;
+        char* tlv225;
+         tlv225 = ss;
+        int tlv224;
+        {
+            char* tlv477;
+             tlv477 = ss;
+            tlv224 = cgc_strlen(tlv477);
+        }
+        uint8_t tlv223;
+        tlv223 = 0;
+        uint8_t tlv222;
+        tlv222 = 0;
+        uint8_t tlv221;
+        tlv221 = STR;
+        cgc_populate_entry(tlv227,tlv226,tlv225,tlv224,tlv223,tlv222,tlv221);
+    }
+    {
+        char* tlv229;
+         tlv229 = ss;
+        char tlv228[] = "character";
+        cgc_strcpy(tlv229,tlv228);
+    }
+    {
+        int tlv236;
+        tlv236 = entry;
+        int tlv235;
+        tlv235 = num ++;
+        char* tlv234;
+         tlv234 = ss;
+        int tlv233;
+        {
+            char* tlv478;
+             tlv478 = ss;
+            tlv233 = cgc_strlen(tlv478);
+        }
+        uint8_t tlv232;
+        tlv232 = 0;
+        uint8_t tlv231;
+        tlv231 = MULT_OK;
+        uint8_t tlv230;
+        tlv230 = STR;
+        cgc_populate_entry(tlv236,tlv235,tlv234,tlv233,tlv232,tlv231,tlv230);
+    }
+    {
+        char* tlv238;
+         tlv238 = ss;
+        char tlv237[] = "made into a movie";
+        cgc_strcpy(tlv238,tlv237);
+    }
+    {
+        int tlv245;
+        tlv245 = entry;
+        int tlv244;
+        tlv244 = num ++;
+        char* tlv243;
+         tlv243 = ss;
+        int tlv242;
+        {
+            char* tlv479;
+             tlv479 = ss;
+            tlv242 = cgc_strlen(tlv479);
+        }
+        uint8_t tlv241;
+        tlv241 = REQ;
+        uint8_t tlv240;
+        tlv240 = 0;
+        uint8_t tlv239;
+        tlv239 = BOOL;
+        cgc_populate_entry(tlv245,tlv244,tlv243,tlv242,tlv241,tlv240,tlv239);
+    }
+// SONG
+    num = 0;
+    entry = SONGS;
+    {
+        char* tlv247;
+         tlv247 = ss;
+        char tlv246[] = "writer";
+        cgc_strcpy(tlv247,tlv246);
+    }
+    {
+        int tlv254;
+        tlv254 = entry;
+        int tlv253;
+        tlv253 = num ++;
+        char* tlv252;
+         tlv252 = ss;
+        int tlv251;
+        {
+            char* tlv480;
+             tlv480 = ss;
+            tlv251 = cgc_strlen(tlv480);
+        }
+        uint8_t tlv250;
+        tlv250 = REQ;
+        uint8_t tlv249;
+        tlv249 = MULT_OK;
+        uint8_t tlv248;
+        tlv248 = STR;
+        cgc_populate_entry(tlv254,tlv253,tlv252,tlv251,tlv250,tlv249,tlv248);
+    }
+    {
+        char* tlv256;
+         tlv256 = ss;
+        char tlv255[] = "year";
+        cgc_strcpy(tlv256,tlv255);
+    }
+    {
+        int tlv263;
+        tlv263 = entry;
+        int tlv262;
+        tlv262 = num ++;
+        char* tlv261;
+         tlv261 = ss;
+        int tlv260;
+        {
+            char* tlv481;
+             tlv481 = ss;
+            tlv260 = cgc_strlen(tlv481);
+        }
+        uint8_t tlv259;
+        tlv259 = 0;
+        uint8_t tlv258;
+        tlv258 = 0;
+        uint8_t tlv257;
+        tlv257 = CHAR;
+        cgc_populate_entry(tlv263,tlv262,tlv261,tlv260,tlv259,tlv258,tlv257);
+    }
+    {
+        char* tlv265;
+         tlv265 = ss;
+        char tlv264[] = "genre";
+        cgc_strcpy(tlv265,tlv264);
+    }
+    {
+        int tlv272;
+        tlv272 = entry;
+        int tlv271;
+        tlv271 = num ++;
+        char* tlv270;
+         tlv270 = ss;
+        int tlv269;
+        {
+            char* tlv482;
+             tlv482 = ss;
+            tlv269 = cgc_strlen(tlv482);
+        }
+        uint8_t tlv268;
+        tlv268 = 0;
+        uint8_t tlv267;
+        tlv267 = 0;
+        uint8_t tlv266;
+        tlv266 = STR;
+        cgc_populate_entry(tlv272,tlv271,tlv270,tlv269,tlv268,tlv267,tlv266);
+    }
+    {
+        char* tlv274;
+         tlv274 = ss;
+        char tlv273[] = "publisher";
+        cgc_strcpy(tlv274,tlv273);
+    }
+    {
+        int tlv281;
+        tlv281 = entry;
+        int tlv280;
+        tlv280 = num ++;
+        char* tlv279;
+         tlv279 = ss;
+        int tlv278;
+        {
+            char* tlv483;
+             tlv483 = ss;
+            tlv278 = cgc_strlen(tlv483);
+        }
+        uint8_t tlv277;
+        tlv277 = 0;
+        uint8_t tlv276;
+        tlv276 = 0;
+        uint8_t tlv275;
+        tlv275 = STR;
+        cgc_populate_entry(tlv281,tlv280,tlv279,tlv278,tlv277,tlv276,tlv275);
+    }
+    {
+        char* tlv283;
+         tlv283 = ss;
+        char tlv282[] = "free online";
+        cgc_strcpy(tlv283,tlv282);
+    }
+    {
+        int tlv290;
+        tlv290 = entry;
+        int tlv289;
+        tlv289 = num ++;
+        char* tlv288;
+         tlv288 = ss;
+        int tlv287;
+        {
+            char* tlv484;
+             tlv484 = ss;
+            tlv287 = cgc_strlen(tlv484);
+        }
+        uint8_t tlv286;
+        tlv286 = REQ;
+        uint8_t tlv285;
+        tlv285 = 0;
+        uint8_t tlv284;
+        tlv284 = BOOL;
+        cgc_populate_entry(tlv290,tlv289,tlv288,tlv287,tlv286,tlv285,tlv284);
+    }
+// JOB
+    num = 0;
+    entry = JOBS;
+    {
+        char* tlv292;
+         tlv292 = ss;
+        char tlv291[] = "title";
+        cgc_strcpy(tlv292,tlv291);
+    }
+    {
+        int tlv299;
+        tlv299 = entry;
+        int tlv298;
+        tlv298 = num ++;
+        char* tlv297;
+         tlv297 = ss;
+        int tlv296;
+        {
+            char* tlv485;
+             tlv485 = ss;
+            tlv296 = cgc_strlen(tlv485);
+        }
+        uint8_t tlv295;
+        tlv295 = REQ;
+        uint8_t tlv294;
+        tlv294 = MULT_OK;
+        uint8_t tlv293;
+        tlv293 = STR;
+        cgc_populate_entry(tlv299,tlv298,tlv297,tlv296,tlv295,tlv294,tlv293);
+    }
+    {
+        char* tlv301;
+         tlv301 = ss;
+        char tlv300[] = "years";
+        cgc_strcpy(tlv301,tlv300);
+    }
+    {
+        int tlv308;
+        tlv308 = entry;
+        int tlv307;
+        tlv307 = num ++;
+        char* tlv306;
+         tlv306 = ss;
+        int tlv305;
+        {
+            char* tlv486;
+             tlv486 = ss;
+            tlv305 = cgc_strlen(tlv486);
+        }
+        uint8_t tlv304;
+        tlv304 = 0;
+        uint8_t tlv303;
+        tlv303 = 0;
+        uint8_t tlv302;
+        tlv302 = CHAR;
+        cgc_populate_entry(tlv308,tlv307,tlv306,tlv305,tlv304,tlv303,tlv302);
+    }
+    {
+        char* tlv310;
+         tlv310 = ss;
+        char tlv309[] = "job category";
+        cgc_strcpy(tlv310,tlv309);
+    }
+    {
+        int tlv317;
+        tlv317 = entry;
+        int tlv316;
+        tlv316 = num ++;
+        char* tlv315;
+         tlv315 = ss;
+        int tlv314;
+        {
+            char* tlv487;
+             tlv487 = ss;
+            tlv314 = cgc_strlen(tlv487);
+        }
+        uint8_t tlv313;
+        tlv313 = 0;
+        uint8_t tlv312;
+        tlv312 = 0;
+        uint8_t tlv311;
+        tlv311 = STR;
+        cgc_populate_entry(tlv317,tlv316,tlv315,tlv314,tlv313,tlv312,tlv311);
+    }
+    {
+        char* tlv319;
+         tlv319 = ss;
+        char tlv318[] = "company";
+        cgc_strcpy(tlv319,tlv318);
+    }
+    {
+        int tlv326;
+        tlv326 = entry;
+        int tlv325;
+        tlv325 = num ++;
+        char* tlv324;
+         tlv324 = ss;
+        int tlv323;
+        {
+            char* tlv488;
+             tlv488 = ss;
+            tlv323 = cgc_strlen(tlv488);
+        }
+        uint8_t tlv322;
+        tlv322 = REQ;
+        uint8_t tlv321;
+        tlv321 = 0;
+        uint8_t tlv320;
+        tlv320 = STR;
+        cgc_populate_entry(tlv326,tlv325,tlv324,tlv323,tlv322,tlv321,tlv320);
+    }
+    {
+        char* tlv328;
+         tlv328 = ss;
+        char tlv327[] = "have a best friend";
+        cgc_strcpy(tlv328,tlv327);
+    }
+    {
+        int tlv335;
+        tlv335 = entry;
+        int tlv334;
+        tlv334 = num ++;
+        char* tlv333;
+         tlv333 = ss;
+        int tlv332;
+        {
+            char* tlv489;
+             tlv489 = ss;
+            tlv332 = cgc_strlen(tlv489);
+        }
+        uint8_t tlv331;
+        tlv331 = 0;
+        uint8_t tlv330;
+        tlv330 = 0;
+        uint8_t tlv329;
+        tlv329 = BOOL;
+        cgc_populate_entry(tlv335,tlv334,tlv333,tlv332,tlv331,tlv330,tlv329);
+    }
+    {
+        char* tlv337;
+         tlv337 = ss;
+        char tlv336[] = "salary";
+        cgc_strcpy(tlv337,tlv336);
+    }
+    {
+        int tlv344;
+        tlv344 = entry;
+        int tlv343;
+        tlv343 = num ++;
+        char* tlv342;
+         tlv342 = ss;
+        int tlv341;
+        {
+            char* tlv490;
+             tlv490 = ss;
+            tlv341 = cgc_strlen(tlv490);
+        }
+        uint8_t tlv340;
+        tlv340 = REQ;
+        uint8_t tlv339;
+        tlv339 = 0;
+        uint8_t tlv338;
+        tlv338 = INT;
+        cgc_populate_entry(tlv344,tlv343,tlv342,tlv341,tlv340,tlv339,tlv338);
+    }
+    num = 0;
+    entry = HOBBIES;
+    {
+        char* tlv346;
+         tlv346 = ss;
+        char tlv345[] = "";
+        cgc_strcpy(tlv346,tlv345);
+    }
+    {
+        int tlv353;
+        tlv353 = entry;
+        int tlv352;
+        tlv352 = num ++;
+        char* tlv351;
+         tlv351 = ss;
+        int tlv350;
+        {
+            char* tlv491;
+             tlv491 = ss;
+            tlv350 = cgc_strlen(tlv491);
+        }
+        uint8_t tlv349;
+        tlv349 = 0;
+        uint8_t tlv348;
+        tlv348 = 0;
+        uint8_t tlv347;
+        tlv347 = PTR;
+        cgc_populate_entry(tlv353,tlv352,tlv351,tlv350,tlv349,tlv348,tlv347);
+    }
+    {
+        char* tlv355;
+         tlv355 = ss;
+        char tlv354[] = "";
+        cgc_strcpy(tlv355,tlv354);
+    }
+    {
+        int tlv362;
+        tlv362 = entry;
+        int tlv361;
+        tlv361 = num ++;
+        char* tlv360;
+         tlv360 = ss;
+        int tlv359;
+        {
+            char* tlv492;
+             tlv492 = ss;
+            tlv359 = cgc_strlen(tlv492);
+        }
+        uint8_t tlv358;
+        tlv358 = 0;
+        uint8_t tlv357;
+        tlv357 = 0;
+        uint8_t tlv356;
+        tlv356 = PTR;
+        cgc_populate_entry(tlv362,tlv361,tlv360,tlv359,tlv358,tlv357,tlv356);
+    }
+    {
+        char* tlv364;
+         tlv364 = ss;
+        char tlv363[] = "";
+        cgc_strcpy(tlv364,tlv363);
+    }
+    {
+        int tlv371;
+        tlv371 = entry;
+        int tlv370;
+        tlv370 = num ++;
+        char* tlv369;
+         tlv369 = ss;
+        int tlv368;
+        {
+            char* tlv493;
+             tlv493 = ss;
+            tlv368 = cgc_strlen(tlv493);
+        }
+        uint8_t tlv367;
+        tlv367 = 0;
+        uint8_t tlv366;
+        tlv366 = 0;
+        uint8_t tlv365;
+        tlv365 = PTR;
+        cgc_populate_entry(tlv371,tlv370,tlv369,tlv368,tlv367,tlv366,tlv365);
+    }
+    {
+        char* tlv373;
+         tlv373 = ss;
+        char tlv372[] = "";
+        cgc_strcpy(tlv373,tlv372);
+    }
+    {
+        int tlv380;
+        tlv380 = entry;
+        int tlv379;
+        tlv379 = num ++;
+        char* tlv378;
+         tlv378 = ss;
+        int tlv377;
+        {
+            char* tlv494;
+             tlv494 = ss;
+            tlv377 = cgc_strlen(tlv494);
+        }
+        uint8_t tlv376;
+        tlv376 = 0;
+        uint8_t tlv375;
+        tlv375 = 0;
+        uint8_t tlv374;
+        tlv374 = PTR;
+        cgc_populate_entry(tlv380,tlv379,tlv378,tlv377,tlv376,tlv375,tlv374);
+    }
+    {
+        char* tlv382;
+         tlv382 = ss;
+        char tlv381[] = "";
+        cgc_strcpy(tlv382,tlv381);
+    }
+    {
+        int tlv389;
+        tlv389 = entry;
+        int tlv388;
+        tlv388 = num ++;
+        char* tlv387;
+         tlv387 = ss;
+        int tlv386;
+        {
+            char* tlv495;
+             tlv495 = ss;
+            tlv386 = cgc_strlen(tlv495);
+        }
+        uint8_t tlv385;
+        tlv385 = 0;
+        uint8_t tlv384;
+        tlv384 = 0;
+        uint8_t tlv383;
+        tlv383 = PTR;
+        cgc_populate_entry(tlv389,tlv388,tlv387,tlv386,tlv385,tlv384,tlv383);
+    }
+    {
+        char* tlv391;
+         tlv391 = ss;
+        char tlv390[] = "";
+        cgc_strcpy(tlv391,tlv390);
+    }
+    {
+        int tlv398;
+        tlv398 = entry;
+        int tlv397;
+        tlv397 = num ++;
+        char* tlv396;
+         tlv396 = ss;
+        int tlv395;
+        {
+            char* tlv496;
+             tlv496 = ss;
+            tlv395 = cgc_strlen(tlv496);
+        }
+        uint8_t tlv394;
+        tlv394 = 0;
+        uint8_t tlv393;
+        tlv393 = 0;
+        uint8_t tlv392;
+        tlv392 = PTR;
+        cgc_populate_entry(tlv398,tlv397,tlv396,tlv395,tlv394,tlv393,tlv392);
+    }
+    num = 0;
+    entry = PETS;
+    {
+        char* tlv400;
+         tlv400 = ss;
+        char tlv399[] = "name";
+        cgc_strcpy(tlv400,tlv399);
+    }
+    {
+        int tlv407;
+        tlv407 = entry;
+        int tlv406;
+        tlv406 = num ++;
+        char* tlv405;
+         tlv405 = ss;
+        int tlv404;
+        {
+            char* tlv497;
+             tlv497 = ss;
+            tlv404 = cgc_strlen(tlv497);
+        }
+        uint8_t tlv403;
+        tlv403 = REQ;
+        uint8_t tlv402;
+        tlv402 = MULT_OK;
+        uint8_t tlv401;
+        tlv401 = STR;
+        cgc_populate_entry(tlv407,tlv406,tlv405,tlv404,tlv403,tlv402,tlv401);
+    }
+    {
+        char* tlv409;
+         tlv409 = ss;
+        char tlv408[] = "species";
+        cgc_strcpy(tlv409,tlv408);
+    }
+    {
+        int tlv416;
+        tlv416 = entry;
+        int tlv415;
+        tlv415 = num ++;
+        char* tlv414;
+         tlv414 = ss;
+        int tlv413;
+        {
+            char* tlv498;
+             tlv498 = ss;
+            tlv413 = cgc_strlen(tlv498);
+        }
+        uint8_t tlv412;
+        tlv412 = REQ;
+        uint8_t tlv411;
+        tlv411 = 0;
+        uint8_t tlv410;
+        tlv410 = STR;
+        cgc_populate_entry(tlv416,tlv415,tlv414,tlv413,tlv412,tlv411,tlv410);
+    }
+    {
+        char* tlv418;
+         tlv418 = ss;
+        char tlv417[] = "legs";
+        cgc_strcpy(tlv418,tlv417);
+    }
+    {
+        int tlv425;
+        tlv425 = entry;
+        int tlv424;
+        tlv424 = num ++;
+        char* tlv423;
+         tlv423 = ss;
+        int tlv422;
+        {
+            char* tlv499;
+             tlv499 = ss;
+            tlv422 = cgc_strlen(tlv499);
+        }
+        uint8_t tlv421;
+        tlv421 = 0;
+        uint8_t tlv420;
+        tlv420 = 0;
+        uint8_t tlv419;
+        tlv419 = CHAR;
+        cgc_populate_entry(tlv425,tlv424,tlv423,tlv422,tlv421,tlv420,tlv419);
+    }
+    {
+        char* tlv427;
+         tlv427 = ss;
+        char tlv426[] = "inside only";
+        cgc_strcpy(tlv427,tlv426);
+    }
+    {
+        int tlv434;
+        tlv434 = entry;
+        int tlv433;
+        tlv433 = num ++;
+        char* tlv432;
+         tlv432 = ss;
+        int tlv431;
+        {
+            char* tlv500;
+             tlv500 = ss;
+            tlv431 = cgc_strlen(tlv500);
+        }
+        uint8_t tlv430;
+        tlv430 = 0;
+        uint8_t tlv429;
+        tlv429 = 0;
+        uint8_t tlv428;
+        tlv428 = BOOL;
+        cgc_populate_entry(tlv434,tlv433,tlv432,tlv431,tlv430,tlv429,tlv428);
+    }
+    {
+        char* tlv436;
+         tlv436 = ss;
+        char tlv435[] = "age";
+        cgc_strcpy(tlv436,tlv435);
+    }
+    {
+        int tlv443;
+        tlv443 = entry;
+        int tlv442;
+        tlv442 = num ++;
+        char* tlv441;
+         tlv441 = ss;
+        int tlv440;
+        {
+            char* tlv501;
+             tlv501 = ss;
+            tlv440 = cgc_strlen(tlv501);
+        }
+        uint8_t tlv439;
+        tlv439 = 0;
+        uint8_t tlv438;
+        tlv438 = 0;
+        uint8_t tlv437;
+        tlv437 = CHAR;
+        cgc_populate_entry(tlv443,tlv442,tlv441,tlv440,tlv439,tlv438,tlv437);
+    }
+    {
+        char* tlv445;
+         tlv445 = ss;
+        char tlv444[] = "shots updated";
+        cgc_strcpy(tlv445,tlv444);
+    }
+    {
+        int tlv452;
+        tlv452 = entry;
+        int tlv451;
+        tlv451 = num ++;
+        char* tlv450;
+         tlv450 = ss;
+        int tlv449;
+        {
+            char* tlv502;
+             tlv502 = ss;
+            tlv449 = cgc_strlen(tlv502);
+        }
+        uint8_t tlv448;
+        tlv448 = REQ;
+        uint8_t tlv447;
+        tlv447 = 0;
+        uint8_t tlv446;
+        tlv446 = BOOL;
+        cgc_populate_entry(tlv452,tlv451,tlv450,tlv449,tlv448,tlv447,tlv446);
+    }
+}
+
+void cgc_populateSubEntryInfo()
+{
+    char ss[NAME_LEN_MAX];
+    {
+        void* tlv2;
+        tlv2 = ss;
+        cgc_size_t tlv1;
+        tlv1 = NAME_LEN_MAX;
+        cgc_bzero(tlv2,tlv1);
+    }
+    int num;
+    int entry;
+// HOBBIES
+// SHOOTING
+    num = 0;
+    entry = SHOOTING;
+    {
+        char* tlv4;
+         tlv4 = ss;
+        char tlv3[] = "make";
+        cgc_strcpy(tlv4,tlv3);
+    }
+    {
+        int tlv11;
+        tlv11 = entry;
+        int tlv10;
+        tlv10 = num ++;
+        char* tlv9;
+         tlv9 = ss;
+        int tlv8;
+        {
+            char* tlv408;
+             tlv408 = ss;
+            tlv8 = cgc_strlen(tlv408);
+        }
+        uint8_t tlv7;
+        tlv7 = REQ;
+        uint8_t tlv6;
+        tlv6 = MULT_OK;
+        uint8_t tlv5;
+        tlv5 = STR;
+        cgc_populate_sub_entry(tlv11,tlv10,tlv9,tlv8,tlv7,tlv6,tlv5);
+    }
+    {
+        char* tlv13;
+         tlv13 = ss;
+        char tlv12[] = "model";
+        cgc_strcpy(tlv13,tlv12);
+    }
+    {
+        int tlv20;
+        tlv20 = entry;
+        int tlv19;
+        tlv19 = num ++;
+        char* tlv18;
+         tlv18 = ss;
+        int tlv17;
+        {
+            char* tlv409;
+             tlv409 = ss;
+            tlv17 = cgc_strlen(tlv409);
+        }
+        uint8_t tlv16;
+        tlv16 = REQ;
+        uint8_t tlv15;
+        tlv15 = MULT_OK;
+        uint8_t tlv14;
+        tlv14 = STR;
+        cgc_populate_sub_entry(tlv20,tlv19,tlv18,tlv17,tlv16,tlv15,tlv14);
+    }
+    {
+        char* tlv22;
+         tlv22 = ss;
+        char tlv21[] = "league";
+        cgc_strcpy(tlv22,tlv21);
+    }
+    {
+        int tlv29;
+        tlv29 = entry;
+        int tlv28;
+        tlv28 = num ++;
+        char* tlv27;
+         tlv27 = ss;
+        int tlv26;
+        {
+            char* tlv410;
+             tlv410 = ss;
+            tlv26 = cgc_strlen(tlv410);
+        }
+        uint8_t tlv25;
+        tlv25 = 0;
+        uint8_t tlv24;
+        tlv24 = 0;
+        uint8_t tlv23;
+        tlv23 = STR;
+        cgc_populate_sub_entry(tlv29,tlv28,tlv27,tlv26,tlv25,tlv24,tlv23);
+    }
+    {
+        char* tlv31;
+         tlv31 = ss;
+        char tlv30[] = "length";
+        cgc_strcpy(tlv31,tlv30);
+    }
+    {
+        int tlv38;
+        tlv38 = entry;
+        int tlv37;
+        tlv37 = num ++;
+        char* tlv36;
+         tlv36 = ss;
+        int tlv35;
+        {
+            char* tlv411;
+             tlv411 = ss;
+            tlv35 = cgc_strlen(tlv411);
+        }
+        uint8_t tlv34;
+        tlv34 = 0;
+        uint8_t tlv33;
+        tlv33 = 0;
+        uint8_t tlv32;
+        tlv32 = CHAR;
+        cgc_populate_sub_entry(tlv38,tlv37,tlv36,tlv35,tlv34,tlv33,tlv32);
+    }
+    {
+        char* tlv40;
+         tlv40 = ss;
+        char tlv39[] = "length units";
+        cgc_strcpy(tlv40,tlv39);
+    }
+    {
+        int tlv47;
+        tlv47 = entry;
+        int tlv46;
+        tlv46 = num ++;
+        char* tlv45;
+         tlv45 = ss;
+        int tlv44;
+        {
+            char* tlv412;
+             tlv412 = ss;
+            tlv44 = cgc_strlen(tlv412);
+        }
+        uint8_t tlv43;
+        tlv43 = 0;
+        uint8_t tlv42;
+        tlv42 = 0;
+        uint8_t tlv41;
+        tlv41 = STR;
+        cgc_populate_sub_entry(tlv47,tlv46,tlv45,tlv44,tlv43,tlv42,tlv41);
+    }
+    {
+        char* tlv49;
+         tlv49 = ss;
+        char tlv48[] = "years experience";
+        cgc_strcpy(tlv49,tlv48);
+    }
+    {
+        int tlv56;
+        tlv56 = entry;
+        int tlv55;
+        tlv55 = num ++;
+        char* tlv54;
+         tlv54 = ss;
+        int tlv53;
+        {
+            char* tlv413;
+             tlv413 = ss;
+            tlv53 = cgc_strlen(tlv413);
+        }
+        uint8_t tlv52;
+        tlv52 = REQ;
+        uint8_t tlv51;
+        tlv51 = 0;
+        uint8_t tlv50;
+        tlv50 = CHAR;
+        cgc_populate_sub_entry(tlv56,tlv55,tlv54,tlv53,tlv52,tlv51,tlv50);
+    }
+    {
+        char* tlv58;
+         tlv58 = ss;
+        char tlv57[] = "injury";
+        cgc_strcpy(tlv58,tlv57);
+    }
+    {
+        int tlv65;
+        tlv65 = entry;
+        int tlv64;
+        tlv64 = num ++;
+        char* tlv63;
+         tlv63 = ss;
+        int tlv62;
+        {
+            char* tlv414;
+             tlv414 = ss;
+            tlv62 = cgc_strlen(tlv414);
+        }
+        uint8_t tlv61;
+        tlv61 = 0;
+        uint8_t tlv60;
+        tlv60 = 0;
+        uint8_t tlv59;
+        tlv59 = BOOL;
+        cgc_populate_sub_entry(tlv65,tlv64,tlv63,tlv62,tlv61,tlv60,tlv59);
+    }
+// KNIVES
+    num = 0;
+    entry = KNIVES;
+    {
+        char* tlv67;
+         tlv67 = ss;
+        char tlv66[] = "make";
+        cgc_strcpy(tlv67,tlv66);
+    }
+    {
+        int tlv74;
+        tlv74 = entry;
+        int tlv73;
+        tlv73 = num ++;
+        char* tlv72;
+         tlv72 = ss;
+        int tlv71;
+        {
+            char* tlv415;
+             tlv415 = ss;
+            tlv71 = cgc_strlen(tlv415);
+        }
+        uint8_t tlv70;
+        tlv70 = 0;
+        uint8_t tlv69;
+        tlv69 = 0;
+        uint8_t tlv68;
+        tlv68 = STR;
+        cgc_populate_sub_entry(tlv74,tlv73,tlv72,tlv71,tlv70,tlv69,tlv68);
+    }
+    {
+        char* tlv76;
+         tlv76 = ss;
+        char tlv75[] = "model";
+        cgc_strcpy(tlv76,tlv75);
+    }
+    {
+        int tlv83;
+        tlv83 = entry;
+        int tlv82;
+        tlv82 = num ++;
+        char* tlv81;
+         tlv81 = ss;
+        int tlv80;
+        {
+            char* tlv416;
+             tlv416 = ss;
+            tlv80 = cgc_strlen(tlv416);
+        }
+        uint8_t tlv79;
+        tlv79 = REQ;
+        uint8_t tlv78;
+        tlv78 = 0;
+        uint8_t tlv77;
+        tlv77 = STR;
+        cgc_populate_sub_entry(tlv83,tlv82,tlv81,tlv80,tlv79,tlv78,tlv77);
+    }
+    {
+        char* tlv85;
+         tlv85 = ss;
+        char tlv84[] = "value";
+        cgc_strcpy(tlv85,tlv84);
+    }
+    {
+        int tlv92;
+        tlv92 = entry;
+        int tlv91;
+        tlv91 = num ++;
+        char* tlv90;
+         tlv90 = ss;
+        int tlv89;
+        {
+            char* tlv417;
+             tlv417 = ss;
+            tlv89 = cgc_strlen(tlv417);
+        }
+        uint8_t tlv88;
+        tlv88 = 0;
+        uint8_t tlv87;
+        tlv87 = 0;
+        uint8_t tlv86;
+        tlv86 = SHORT;
+        cgc_populate_sub_entry(tlv92,tlv91,tlv90,tlv89,tlv88,tlv87,tlv86);
+    }
+    {
+        char* tlv94;
+         tlv94 = ss;
+        char tlv93[] = "style";
+        cgc_strcpy(tlv94,tlv93);
+    }
+    {
+        int tlv101;
+        tlv101 = entry;
+        int tlv100;
+        tlv100 = num ++;
+        char* tlv99;
+         tlv99 = ss;
+        int tlv98;
+        {
+            char* tlv418;
+             tlv418 = ss;
+            tlv98 = cgc_strlen(tlv418);
+        }
+        uint8_t tlv97;
+        tlv97 = 0;
+        uint8_t tlv96;
+        tlv96 = 0;
+        uint8_t tlv95;
+        tlv95 = STR;
+        cgc_populate_sub_entry(tlv101,tlv100,tlv99,tlv98,tlv97,tlv96,tlv95);
+    }
+    {
+        char* tlv103;
+         tlv103 = ss;
+        char tlv102[] = "blade length";
+        cgc_strcpy(tlv103,tlv102);
+    }
+    {
+        int tlv110;
+        tlv110 = entry;
+        int tlv109;
+        tlv109 = num ++;
+        char* tlv108;
+         tlv108 = ss;
+        int tlv107;
+        {
+            char* tlv419;
+             tlv419 = ss;
+            tlv107 = cgc_strlen(tlv419);
+        }
+        uint8_t tlv106;
+        tlv106 = REQ;
+        uint8_t tlv105;
+        tlv105 = 0;
+        uint8_t tlv104;
+        tlv104 = CHAR;
+        cgc_populate_sub_entry(tlv110,tlv109,tlv108,tlv107,tlv106,tlv105,tlv104);
+    }
+    {
+        char* tlv112;
+         tlv112 = ss;
+        char tlv111[] = "length units";
+        cgc_strcpy(tlv112,tlv111);
+    }
+    {
+        int tlv119;
+        tlv119 = entry;
+        int tlv118;
+        tlv118 = num ++;
+        char* tlv117;
+         tlv117 = ss;
+        int tlv116;
+        {
+            char* tlv420;
+             tlv420 = ss;
+            tlv116 = cgc_strlen(tlv420);
+        }
+        uint8_t tlv115;
+        tlv115 = REQ;
+        uint8_t tlv114;
+        tlv114 = 0;
+        uint8_t tlv113;
+        tlv113 = STR;
+        cgc_populate_sub_entry(tlv119,tlv118,tlv117,tlv116,tlv115,tlv114,tlv113);
+    }
+    {
+        char* tlv121;
+         tlv121 = ss;
+        char tlv120[] = "comes with sheath";
+        cgc_strcpy(tlv121,tlv120);
+    }
+    {
+        int tlv128;
+        tlv128 = entry;
+        int tlv127;
+        tlv127 = num ++;
+        char* tlv126;
+         tlv126 = ss;
+        int tlv125;
+        {
+            char* tlv421;
+             tlv421 = ss;
+            tlv125 = cgc_strlen(tlv421);
+        }
+        uint8_t tlv124;
+        tlv124 = 0;
+        uint8_t tlv123;
+        tlv123 = 0;
+        uint8_t tlv122;
+        tlv122 = BOOL;
+        cgc_populate_sub_entry(tlv128,tlv127,tlv126,tlv125,tlv124,tlv123,tlv122);
+    }
+    {
+        char* tlv130;
+         tlv130 = ss;
+        char tlv129[] = "injury";
+        cgc_strcpy(tlv130,tlv129);
+    }
+    {
+        int tlv137;
+        tlv137 = entry;
+        int tlv136;
+        tlv136 = num ++;
+        char* tlv135;
+         tlv135 = ss;
+        int tlv134;
+        {
+            char* tlv422;
+             tlv422 = ss;
+            tlv134 = cgc_strlen(tlv422);
+        }
+        uint8_t tlv133;
+        tlv133 = REQ;
+        uint8_t tlv132;
+        tlv132 = 0;
+        uint8_t tlv131;
+        tlv131 = BOOL;
+        cgc_populate_sub_entry(tlv137,tlv136,tlv135,tlv134,tlv133,tlv132,tlv131);
+    }
+// STAMPS
+    num = 0;
+    entry = STAMPS;
+    {
+        char* tlv139;
+         tlv139 = ss;
+        char tlv138[] = "name";
+        cgc_strcpy(tlv139,tlv138);
+    }
+    {
+        int tlv146;
+        tlv146 = entry;
+        int tlv145;
+        tlv145 = num ++;
+        char* tlv144;
+         tlv144 = ss;
+        int tlv143;
+        {
+            char* tlv423;
+             tlv423 = ss;
+            tlv143 = cgc_strlen(tlv423);
+        }
+        uint8_t tlv142;
+        tlv142 = REQ;
+        uint8_t tlv141;
+        tlv141 = 0;
+        uint8_t tlv140;
+        tlv140 = STR;
+        cgc_populate_sub_entry(tlv146,tlv145,tlv144,tlv143,tlv142,tlv141,tlv140);
+    }
+    {
+        char* tlv148;
+         tlv148 = ss;
+        char tlv147[] = "value";
+        cgc_strcpy(tlv148,tlv147);
+    }
+    {
+        int tlv155;
+        tlv155 = entry;
+        int tlv154;
+        tlv154 = num ++;
+        char* tlv153;
+         tlv153 = ss;
+        int tlv152;
+        {
+            char* tlv424;
+             tlv424 = ss;
+            tlv152 = cgc_strlen(tlv424);
+        }
+        uint8_t tlv151;
+        tlv151 = REQ;
+        uint8_t tlv150;
+        tlv150 = 0;
+        uint8_t tlv149;
+        tlv149 = SHORT;
+        cgc_populate_sub_entry(tlv155,tlv154,tlv153,tlv152,tlv151,tlv150,tlv149);
+    }
+    {
+        char* tlv157;
+         tlv157 = ss;
+        char tlv156[] = "seller";
+        cgc_strcpy(tlv157,tlv156);
+    }
+    {
+        int tlv164;
+        tlv164 = entry;
+        int tlv163;
+        tlv163 = num ++;
+        char* tlv162;
+         tlv162 = ss;
+        int tlv161;
+        {
+            char* tlv425;
+             tlv425 = ss;
+            tlv161 = cgc_strlen(tlv425);
+        }
+        uint8_t tlv160;
+        tlv160 = 0;
+        uint8_t tlv159;
+        tlv159 = 0;
+        uint8_t tlv158;
+        tlv158 = STR;
+        cgc_populate_sub_entry(tlv164,tlv163,tlv162,tlv161,tlv160,tlv159,tlv158);
+    }
+    {
+        char* tlv166;
+         tlv166 = ss;
+        char tlv165[] = "mint";
+        cgc_strcpy(tlv166,tlv165);
+    }
+    {
+        int tlv173;
+        tlv173 = entry;
+        int tlv172;
+        tlv172 = num ++;
+        char* tlv171;
+         tlv171 = ss;
+        int tlv170;
+        {
+            char* tlv426;
+             tlv426 = ss;
+            tlv170 = cgc_strlen(tlv426);
+        }
+        uint8_t tlv169;
+        tlv169 = REQ;
+        uint8_t tlv168;
+        tlv168 = 0;
+        uint8_t tlv167;
+        tlv167 = BOOL;
+        cgc_populate_sub_entry(tlv173,tlv172,tlv171,tlv170,tlv169,tlv168,tlv167);
+    }
+    {
+        char* tlv175;
+         tlv175 = ss;
+        char tlv174[] = "count";
+        cgc_strcpy(tlv175,tlv174);
+    }
+    {
+        int tlv182;
+        tlv182 = entry;
+        int tlv181;
+        tlv181 = num ++;
+        char* tlv180;
+         tlv180 = ss;
+        int tlv179;
+        {
+            char* tlv427;
+             tlv427 = ss;
+            tlv179 = cgc_strlen(tlv427);
+        }
+        uint8_t tlv178;
+        tlv178 = REQ;
+        uint8_t tlv177;
+        tlv177 = 0;
+        uint8_t tlv176;
+        tlv176 = CHAR;
+        cgc_populate_sub_entry(tlv182,tlv181,tlv180,tlv179,tlv178,tlv177,tlv176);
+    }
+// KAYAKING
+    num = 0;
+    entry = KAYAKING;
+    {
+        char* tlv184;
+         tlv184 = ss;
+        char tlv183[] = "make";
+        cgc_strcpy(tlv184,tlv183);
+    }
+    {
+        int tlv191;
+        tlv191 = entry;
+        int tlv190;
+        tlv190 = num ++;
+        char* tlv189;
+         tlv189 = ss;
+        int tlv188;
+        {
+            char* tlv428;
+             tlv428 = ss;
+            tlv188 = cgc_strlen(tlv428);
+        }
+        uint8_t tlv187;
+        tlv187 = REQ;
+        uint8_t tlv186;
+        tlv186 = 0;
+        uint8_t tlv185;
+        tlv185 = STR;
+        cgc_populate_sub_entry(tlv191,tlv190,tlv189,tlv188,tlv187,tlv186,tlv185);
+    }
+    {
+        char* tlv193;
+         tlv193 = ss;
+        char tlv192[] = "model";
+        cgc_strcpy(tlv193,tlv192);
+    }
+    {
+        int tlv200;
+        tlv200 = entry;
+        int tlv199;
+        tlv199 = num ++;
+        char* tlv198;
+         tlv198 = ss;
+        int tlv197;
+        {
+            char* tlv429;
+             tlv429 = ss;
+            tlv197 = cgc_strlen(tlv429);
+        }
+        uint8_t tlv196;
+        tlv196 = REQ;
+        uint8_t tlv195;
+        tlv195 = 0;
+        uint8_t tlv194;
+        tlv194 = STR;
+        cgc_populate_sub_entry(tlv200,tlv199,tlv198,tlv197,tlv196,tlv195,tlv194);
+    }
+    {
+        char* tlv202;
+         tlv202 = ss;
+        char tlv201[] = "length";
+        cgc_strcpy(tlv202,tlv201);
+    }
+    {
+        int tlv209;
+        tlv209 = entry;
+        int tlv208;
+        tlv208 = num ++;
+        char* tlv207;
+         tlv207 = ss;
+        int tlv206;
+        {
+            char* tlv430;
+             tlv430 = ss;
+            tlv206 = cgc_strlen(tlv430);
+        }
+        uint8_t tlv205;
+        tlv205 = 0;
+        uint8_t tlv204;
+        tlv204 = 0;
+        uint8_t tlv203;
+        tlv203 = CHAR;
+        cgc_populate_sub_entry(tlv209,tlv208,tlv207,tlv206,tlv205,tlv204,tlv203);
+    }
+    {
+        char* tlv211;
+         tlv211 = ss;
+        char tlv210[] = "style";
+        cgc_strcpy(tlv211,tlv210);
+    }
+    {
+        int tlv218;
+        tlv218 = entry;
+        int tlv217;
+        tlv217 = num ++;
+        char* tlv216;
+         tlv216 = ss;
+        int tlv215;
+        {
+            char* tlv431;
+             tlv431 = ss;
+            tlv215 = cgc_strlen(tlv431);
+        }
+        uint8_t tlv214;
+        tlv214 = 0;
+        uint8_t tlv213;
+        tlv213 = 0;
+        uint8_t tlv212;
+        tlv212 = STR;
+        cgc_populate_sub_entry(tlv218,tlv217,tlv216,tlv215,tlv214,tlv213,tlv212);
+    }
+    {
+        char* tlv220;
+         tlv220 = ss;
+        char tlv219[] = "initial stability";
+        cgc_strcpy(tlv220,tlv219);
+    }
+    {
+        int tlv227;
+        tlv227 = entry;
+        int tlv226;
+        tlv226 = num ++;
+        char* tlv225;
+         tlv225 = ss;
+        int tlv224;
+        {
+            char* tlv432;
+             tlv432 = ss;
+            tlv224 = cgc_strlen(tlv432);
+        }
+        uint8_t tlv223;
+        tlv223 = 0;
+        uint8_t tlv222;
+        tlv222 = 0;
+        uint8_t tlv221;
+        tlv221 = CHAR;
+        cgc_populate_sub_entry(tlv227,tlv226,tlv225,tlv224,tlv223,tlv222,tlv221);
+    }
+    {
+        char* tlv229;
+         tlv229 = ss;
+        char tlv228[] = "years experience";
+        cgc_strcpy(tlv229,tlv228);
+    }
+    {
+        int tlv236;
+        tlv236 = entry;
+        int tlv235;
+        tlv235 = num ++;
+        char* tlv234;
+         tlv234 = ss;
+        int tlv233;
+        {
+            char* tlv433;
+             tlv433 = ss;
+            tlv233 = cgc_strlen(tlv433);
+        }
+        uint8_t tlv232;
+        tlv232 = 0;
+        uint8_t tlv231;
+        tlv231 = 0;
+        uint8_t tlv230;
+        tlv230 = CHAR;
+        cgc_populate_sub_entry(tlv236,tlv235,tlv234,tlv233,tlv232,tlv231,tlv230);
+    }
+    {
+        char* tlv238;
+         tlv238 = ss;
+        char tlv237[] = "highest class";
+        cgc_strcpy(tlv238,tlv237);
+    }
+    {
+        int tlv245;
+        tlv245 = entry;
+        int tlv244;
+        tlv244 = num ++;
+        char* tlv243;
+         tlv243 = ss;
+        int tlv242;
+        {
+            char* tlv434;
+             tlv434 = ss;
+            tlv242 = cgc_strlen(tlv434);
+        }
+        uint8_t tlv241;
+        tlv241 = 0;
+        uint8_t tlv240;
+        tlv240 = 0;
+        uint8_t tlv239;
+        tlv239 = CHAR;
+        cgc_populate_sub_entry(tlv245,tlv244,tlv243,tlv242,tlv241,tlv240,tlv239);
+    }
+    {
+        char* tlv247;
+         tlv247 = ss;
+        char tlv246[] = "touring";
+        cgc_strcpy(tlv247,tlv246);
+    }
+    {
+        int tlv254;
+        tlv254 = entry;
+        int tlv253;
+        tlv253 = num ++;
+        char* tlv252;
+         tlv252 = ss;
+        int tlv251;
+        {
+            char* tlv435;
+             tlv435 = ss;
+            tlv251 = cgc_strlen(tlv435);
+        }
+        uint8_t tlv250;
+        tlv250 = 0;
+        uint8_t tlv249;
+        tlv249 = 0;
+        uint8_t tlv248;
+        tlv248 = BOOL;
+        cgc_populate_sub_entry(tlv254,tlv253,tlv252,tlv251,tlv250,tlv249,tlv248);
+    }
+    {
+        char* tlv256;
+         tlv256 = ss;
+        char tlv255[] = "surfing";
+        cgc_strcpy(tlv256,tlv255);
+    }
+    {
+        int tlv263;
+        tlv263 = entry;
+        int tlv262;
+        tlv262 = num ++;
+        char* tlv261;
+         tlv261 = ss;
+        int tlv260;
+        {
+            char* tlv436;
+             tlv436 = ss;
+            tlv260 = cgc_strlen(tlv436);
+        }
+        uint8_t tlv259;
+        tlv259 = 0;
+        uint8_t tlv258;
+        tlv258 = 0;
+        uint8_t tlv257;
+        tlv257 = BOOL;
+        cgc_populate_sub_entry(tlv263,tlv262,tlv261,tlv260,tlv259,tlv258,tlv257);
+    }
+    {
+        char* tlv265;
+         tlv265 = ss;
+        char tlv264[] = "tricking";
+        cgc_strcpy(tlv265,tlv264);
+    }
+    {
+        int tlv272;
+        tlv272 = entry;
+        int tlv271;
+        tlv271 = num ++;
+        char* tlv270;
+         tlv270 = ss;
+        int tlv269;
+        {
+            char* tlv437;
+             tlv437 = ss;
+            tlv269 = cgc_strlen(tlv437);
+        }
+        uint8_t tlv268;
+        tlv268 = 0;
+        uint8_t tlv267;
+        tlv267 = 0;
+        uint8_t tlv266;
+        tlv266 = BOOL;
+        cgc_populate_sub_entry(tlv272,tlv271,tlv270,tlv269,tlv268,tlv267,tlv266);
+    }
+    {
+        char* tlv274;
+         tlv274 = ss;
+        char tlv273[] = "injury";
+        cgc_strcpy(tlv274,tlv273);
+    }
+    {
+        int tlv281;
+        tlv281 = entry;
+        int tlv280;
+        tlv280 = num ++;
+        char* tlv279;
+         tlv279 = ss;
+        int tlv278;
+        {
+            char* tlv438;
+             tlv438 = ss;
+            tlv278 = cgc_strlen(tlv438);
+        }
+        uint8_t tlv277;
+        tlv277 = 0;
+        uint8_t tlv276;
+        tlv276 = 0;
+        uint8_t tlv275;
+        tlv275 = BOOL;
+        cgc_populate_sub_entry(tlv281,tlv280,tlv279,tlv278,tlv277,tlv276,tlv275);
+    }
+// COINS
+    num = 0;
+    entry = COINS;
+    {
+        char* tlv283;
+         tlv283 = ss;
+        char tlv282[] = "name";
+        cgc_strcpy(tlv283,tlv282);
+    }
+    {
+        int tlv290;
+        tlv290 = entry;
+        int tlv289;
+        tlv289 = num ++;
+        char* tlv288;
+         tlv288 = ss;
+        int tlv287;
+        {
+            char* tlv439;
+             tlv439 = ss;
+            tlv287 = cgc_strlen(tlv439);
+        }
+        uint8_t tlv286;
+        tlv286 = REQ;
+        uint8_t tlv285;
+        tlv285 = 0;
+        uint8_t tlv284;
+        tlv284 = STR;
+        cgc_populate_sub_entry(tlv290,tlv289,tlv288,tlv287,tlv286,tlv285,tlv284);
+    }
+    {
+        char* tlv292;
+         tlv292 = ss;
+        char tlv291[] = "seller";
+        cgc_strcpy(tlv292,tlv291);
+    }
+    {
+        int tlv299;
+        tlv299 = entry;
+        int tlv298;
+        tlv298 = num ++;
+        char* tlv297;
+         tlv297 = ss;
+        int tlv296;
+        {
+            char* tlv440;
+             tlv440 = ss;
+            tlv296 = cgc_strlen(tlv440);
+        }
+        uint8_t tlv295;
+        tlv295 = 0;
+        uint8_t tlv294;
+        tlv294 = 0;
+        uint8_t tlv293;
+        tlv293 = STR;
+        cgc_populate_sub_entry(tlv299,tlv298,tlv297,tlv296,tlv295,tlv294,tlv293);
+    }
+    {
+        char* tlv301;
+         tlv301 = ss;
+        char tlv300[] = "value";
+        cgc_strcpy(tlv301,tlv300);
+    }
+    {
+        int tlv308;
+        tlv308 = entry;
+        int tlv307;
+        tlv307 = num ++;
+        char* tlv306;
+         tlv306 = ss;
+        int tlv305;
+        {
+            char* tlv441;
+             tlv441 = ss;
+            tlv305 = cgc_strlen(tlv441);
+        }
+        uint8_t tlv304;
+        tlv304 = REQ;
+        uint8_t tlv303;
+        tlv303 = 0;
+        uint8_t tlv302;
+        tlv302 = INT;
+        cgc_populate_sub_entry(tlv308,tlv307,tlv306,tlv305,tlv304,tlv303,tlv302);
+    }
+    {
+        char* tlv310;
+         tlv310 = ss;
+        char tlv309[] = "mint";
+        cgc_strcpy(tlv310,tlv309);
+    }
+    {
+        int tlv317;
+        tlv317 = entry;
+        int tlv316;
+        tlv316 = num ++;
+        char* tlv315;
+         tlv315 = ss;
+        int tlv314;
+        {
+            char* tlv442;
+             tlv442 = ss;
+            tlv314 = cgc_strlen(tlv442);
+        }
+        uint8_t tlv313;
+        tlv313 = REQ;
+        uint8_t tlv312;
+        tlv312 = 0;
+        uint8_t tlv311;
+        tlv311 = BOOL;
+        cgc_populate_sub_entry(tlv317,tlv316,tlv315,tlv314,tlv313,tlv312,tlv311);
+    }
+    {
+        char* tlv319;
+         tlv319 = ss;
+        char tlv318[] = "count";
+        cgc_strcpy(tlv319,tlv318);
+    }
+    {
+        int tlv326;
+        tlv326 = entry;
+        int tlv325;
+        tlv325 = num ++;
+        char* tlv324;
+         tlv324 = ss;
+        int tlv323;
+        {
+            char* tlv443;
+             tlv443 = ss;
+            tlv323 = cgc_strlen(tlv443);
+        }
+        uint8_t tlv322;
+        tlv322 = REQ;
+        uint8_t tlv321;
+        tlv321 = 0;
+        uint8_t tlv320;
+        tlv320 = CHAR;
+        cgc_populate_sub_entry(tlv326,tlv325,tlv324,tlv323,tlv322,tlv321,tlv320);
+    }
+// EXERCISES
+    num = 0;
+    entry = EXERCISES;
+    {
+        char* tlv328;
+         tlv328 = ss;
+        char tlv327[] = "name";
+        cgc_strcpy(tlv328,tlv327);
+    }
+    {
+        int tlv335;
+        tlv335 = entry;
+        int tlv334;
+        tlv334 = num ++;
+        char* tlv333;
+         tlv333 = ss;
+        int tlv332;
+        {
+            char* tlv444;
+             tlv444 = ss;
+            tlv332 = cgc_strlen(tlv444);
+        }
+        uint8_t tlv331;
+        tlv331 = REQ;
+        uint8_t tlv330;
+        tlv330 = MULT_OK;
+        uint8_t tlv329;
+        tlv329 = STR;
+        cgc_populate_sub_entry(tlv335,tlv334,tlv333,tlv332,tlv331,tlv330,tlv329);
+    }
+    {
+        char* tlv337;
+         tlv337 = ss;
+        char tlv336[] = "max weight";
+        cgc_strcpy(tlv337,tlv336);
+    }
+    {
+        int tlv344;
+        tlv344 = entry;
+        int tlv343;
+        tlv343 = num ++;
+        char* tlv342;
+         tlv342 = ss;
+        int tlv341;
+        {
+            char* tlv445;
+             tlv445 = ss;
+            tlv341 = cgc_strlen(tlv445);
+        }
+        uint8_t tlv340;
+        tlv340 = REQ;
+        uint8_t tlv339;
+        tlv339 = 0;
+        uint8_t tlv338;
+        tlv338 = SHORT;
+        cgc_populate_sub_entry(tlv344,tlv343,tlv342,tlv341,tlv340,tlv339,tlv338);
+    }
+    {
+        char* tlv346;
+         tlv346 = ss;
+        char tlv345[] = "reps";
+        cgc_strcpy(tlv346,tlv345);
+    }
+    {
+        int tlv353;
+        tlv353 = entry;
+        int tlv352;
+        tlv352 = num ++;
+        char* tlv351;
+         tlv351 = ss;
+        int tlv350;
+        {
+            char* tlv446;
+             tlv446 = ss;
+            tlv350 = cgc_strlen(tlv446);
+        }
+        uint8_t tlv349;
+        tlv349 = 0;
+        uint8_t tlv348;
+        tlv348 = 0;
+        uint8_t tlv347;
+        tlv347 = CHAR;
+        cgc_populate_sub_entry(tlv353,tlv352,tlv351,tlv350,tlv349,tlv348,tlv347);
+    }
+    {
+        char* tlv355;
+         tlv355 = ss;
+        char tlv354[] = "sets";
+        cgc_strcpy(tlv355,tlv354);
+    }
+    {
+        int tlv362;
+        tlv362 = entry;
+        int tlv361;
+        tlv361 = num ++;
+        char* tlv360;
+         tlv360 = ss;
+        int tlv359;
+        {
+            char* tlv447;
+             tlv447 = ss;
+            tlv359 = cgc_strlen(tlv447);
+        }
+        uint8_t tlv358;
+        tlv358 = REQ;
+        uint8_t tlv357;
+        tlv357 = 0;
+        uint8_t tlv356;
+        tlv356 = CHAR;
+        cgc_populate_sub_entry(tlv362,tlv361,tlv360,tlv359,tlv358,tlv357,tlv356);
+    }
+    {
+        char* tlv364;
+         tlv364 = ss;
+        char tlv363[] = "injury";
+        cgc_strcpy(tlv364,tlv363);
+    }
+    {
+        int tlv371;
+        tlv371 = entry;
+        int tlv370;
+        tlv370 = num ++;
+        char* tlv369;
+         tlv369 = ss;
+        int tlv368;
+        {
+            char* tlv448;
+             tlv448 = ss;
+            tlv368 = cgc_strlen(tlv448);
+        }
+        uint8_t tlv367;
+        tlv367 = 0;
+        uint8_t tlv366;
+        tlv366 = 0;
+        uint8_t tlv365;
+        tlv365 = BOOL;
+        cgc_populate_sub_entry(tlv371,tlv370,tlv369,tlv368,tlv367,tlv366,tlv365);
+    }
+// SPORTS
+    num = 0;
+    entry = SPORTS;
+    {
+        char* tlv373;
+         tlv373 = ss;
+        char tlv372[] = "name";
+        cgc_strcpy(tlv373,tlv372);
+    }
+    {
+        int tlv380;
+        tlv380 = entry;
+        int tlv379;
+        tlv379 = num ++;
+        char* tlv378;
+         tlv378 = ss;
+        int tlv377;
+        {
+            char* tlv449;
+             tlv449 = ss;
+            tlv377 = cgc_strlen(tlv449);
+        }
+        uint8_t tlv376;
+        tlv376 = REQ;
+        uint8_t tlv375;
+        tlv375 = 0;
+        uint8_t tlv374;
+        tlv374 = STR;
+        cgc_populate_sub_entry(tlv380,tlv379,tlv378,tlv377,tlv376,tlv375,tlv374);
+    }
+    {
+        char* tlv382;
+         tlv382 = ss;
+        char tlv381[] = "position";
+        cgc_strcpy(tlv382,tlv381);
+    }
+    {
+        int tlv389;
+        tlv389 = entry;
+        int tlv388;
+        tlv388 = num ++;
+        char* tlv387;
+         tlv387 = ss;
+        int tlv386;
+        {
+            char* tlv450;
+             tlv450 = ss;
+            tlv386 = cgc_strlen(tlv450);
+        }
+        uint8_t tlv385;
+        tlv385 = REQ;
+        uint8_t tlv384;
+        tlv384 = MULT_OK;
+        uint8_t tlv383;
+        tlv383 = STR;
+        cgc_populate_sub_entry(tlv389,tlv388,tlv387,tlv386,tlv385,tlv384,tlv383);
+    }
+    {
+        char* tlv391;
+         tlv391 = ss;
+        char tlv390[] = "years experience";
+        cgc_strcpy(tlv391,tlv390);
+    }
+    {
+        int tlv398;
+        tlv398 = entry;
+        int tlv397;
+        tlv397 = num ++;
+        char* tlv396;
+         tlv396 = ss;
+        int tlv395;
+        {
+            char* tlv451;
+             tlv451 = ss;
+            tlv395 = cgc_strlen(tlv451);
+        }
+        uint8_t tlv394;
+        tlv394 = REQ;
+        uint8_t tlv393;
+        tlv393 = 0;
+        uint8_t tlv392;
+        tlv392 = CHAR;
+        cgc_populate_sub_entry(tlv398,tlv397,tlv396,tlv395,tlv394,tlv393,tlv392);
+    }
+    {
+        char* tlv400;
+         tlv400 = ss;
+        char tlv399[] = "injury";
+        cgc_strcpy(tlv400,tlv399);
+    }
+    {
+        int tlv407;
+        tlv407 = entry;
+        int tlv406;
+        tlv406 = num ++;
+        char* tlv405;
+         tlv405 = ss;
+        int tlv404;
+        {
+            char* tlv452;
+             tlv452 = ss;
+            tlv404 = cgc_strlen(tlv452);
+        }
+        uint8_t tlv403;
+        tlv403 = 0;
+        uint8_t tlv402;
+        tlv402 = 0;
+        uint8_t tlv401;
+        tlv401 = BOOL;
+        cgc_populate_sub_entry(tlv407,tlv406,tlv405,tlv404,tlv403,tlv402,tlv401);
+    }
+}
+
+// return an entry_info with the proper title field name
+uint8_t cgc_getEntryInfo(uint16_t title, uint8_t entry, uint8_t is_sub, Entry_Info * entry_info)
+{
+    if (is_sub) {
+ {
+     void* tlv3;
+     tlv3 = entry_info;
+     void* tlv2;
+     tlv2 = sub_entry_info_list [ title ] [ entry ];
+     cgc_size_t tlv1;
+     tlv1 = sizeof ( Entry_Info );
+    	cgc_memcpy(tlv3,tlv2,tlv1);
+ }
+    } else {
+ {
+     void* tlv6;
+     tlv6 = entry_info;
+     void* tlv5;
+     tlv5 = entry_info_table [ title ] [ entry ];
+     cgc_size_t tlv4;
+     tlv4 = sizeof ( Entry_Info );
+    	cgc_memcpy(tlv6,tlv5,tlv4);
+ }
+    }
+    if (entry_info->mult_ok > 1 || entry_info->required > 1) {
+ {
+     const char tlv7 [ ] = "WRONG FORMAT in getEntryInfo\n";
+    	cgc_printf(tlv7);
+ }
+    }
+    return 1;
+}
+
+int buffer_length;
+int cgc_verify_entry(Entry * entry)
+{
+    if (!entry) {
+	return 1;
+    }
+    if (entry->entry > MAX_ENTRY_PER_TITLE) {
+	return 2;
+    }
+    if (entry->format > PTR) {
+	return 3;
+    }
+    if (entry->format == STR || entry->format == INT) {
+	if (entry->offset_data >= buffer_length) {
+	    return 4;
+	}
+    }
+    if (entry->len > NAME_LEN_MAX) {
+	return 5;
+    }
+    if (entry->offset_next_entry >= buffer_length) {
+	return 6;
+    }
+    return 0;
+}
+
+int cgc_verify_chapter(Chapter * chap)
+{
+    if (!chap) {
+	return 1;
+    }
+    if (chap->title >= TITLE_COUNT) {
+	return 2;
+    }
+    if (chap->entry_count > MAX_ENTRY_PER_TITLE) {
+	return 3;
+    }
+    if (chap->offset_first_entry >= buffer_length) {
+	return 4;
+    }
+    if (chap->offset_next_chapter >= buffer_length) {
+	return 5;
+    }
+    return 0;
+}
+
+int cgc_parse_book(uint8_t * buff, int rcv_len, int first_offset)
+{
+    Entry *entry;
+    uint16_t next_offset;
+    next_offset = first_offset;
+    int first;
+    first = 1;
+;		// used for checking required entries in a chapter
+    char is_subtitle;
+    is_subtitle = 0;
+    uint16_t parent_of_subtitle;
+    parent_of_subtitle = 0;
+
+    char **names;
+    char is_initial_subtitle;
+    is_initial_subtitle = 0;
+    Entry_Info *(*entry_table)[MAX_ENTRY_PER_TITLE];
+    Chapter* chapter;
+    chapter = NULL;
+    do {
+	// start parsing a new chapter
+	if (chapter) {
+	    if (!chapter->offset_next_chapter && !is_initial_subtitle) {
+		// this is the end of this chapter
+		if (is_subtitle) {
+		    // reverting to chapter after hobby
+		    is_subtitle = 0;
+		    if (!parent_of_subtitle) {
+			continue;
+		    }
+		    chapter = (Chapter *) (buff + parent_of_subtitle);
+		}
+	    } else {
+		chapter = (Chapter *) (buff + next_offset);
+;	// normal flow after a chapter is done
+		is_initial_subtitle = 0;
+	    }
+	} else {
+	    // first chapter handled here
+	    chapter = (Chapter *) (buff + next_offset);
+	}
+ int t;
+ t = 0;
+	//if (chapter->title >= NUM_TITLES-1 && !is_subtitle)
+	if (chapter->title == HOBBIES && !is_subtitle) {	// we just found HOBBIES, change over
+	    cgc_printf("Title: @s\n", titles[chapter->title]);
+	    cgc_printf("Entry Count: 0x@x\n", chapter->entry_count);
+	    names = subtitles;
+	    entry_table = sub_entry_info_list;
+	    next_offset = (chapter->offset_first_entry);
+	    parent_of_subtitle = (chapter->offset_next_chapter);
+	    is_subtitle = 1;
+	    is_initial_subtitle = 1;
+	    // Problem: this chapter is over, need to point to the next chapter
+	    continue;
+	} else {
+	    if (!is_subtitle) {	// this is a normal chapter, so point to titles
+		names = titles;
+		entry_table = entry_info_table;
+  int tlv3;
+  {
+      Chapter* tlv28;
+      tlv28 = chapter;
+      tlv3 = cgc_verify_chapter(tlv28);
+  }
+		if ((t = tlv3) != 0) {
+		    cgc_printf("Malformed chapter found! @d Exiting.\n", t);
+      {
+          unsigned int tlv29;
+          tlv29 = - 2;
+    		    cgc__terminate(tlv29);
+      }
+		}
+	    }
+	}
+
+	cgc_printf("Title: @s\n", names[chapter->title]);
+	if (chapter->entry_count > MAX_NUM_ENTRIES) {
+	    cgc_printf("ERROR: Too many entries: @d\n", chapter->entry_count);
+     {
+         unsigned int tlv5;
+         tlv5 = - 1;
+    	    cgc__terminate(tlv5);
+     }
+	}
+	cgc_printf("Entry Count: 0x@x\n", chapter->entry_count);
+	if (!chapter->offset_first_entry || !chapter->entry_count) {
+	    // go to the next chapter. no entries here
+	    next_offset = (chapter->offset_next_chapter);
+     {
+         const char tlv6 [ ] = "NO entries found\n";
+    	    cgc_printf(tlv6);
+     }
+	    continue;
+	}
+ int req_cnt;
+ req_cnt = 1;
+ int prev_read_counter;
+ prev_read_counter = 0;
+	first = 1;
+	entry = (Entry *) (buff + ((chapter->offset_first_entry)));
+	//int t = 0;
+ int tlv1;
+ {
+     Entry* tlv4;
+     tlv4 = entry;
+     tlv1 = cgc_verify_entry(tlv4);
+ }
+	if ((t = tlv1) != 0) {
+	    cgc_printf("Malformed entry found! @d Exiting.\n", t);
+     {
+         unsigned int tlv7;
+         tlv7 = - 1;
+    	    cgc__terminate(tlv7);
+     }
+	}
+	do {
+	    // parse a chapter. all of its entries
+     int data_offset;
+     data_offset = 0;
+	    Entry_Info entry_info;
+	    if (names == subtitles) {
+  {
+      uint16_t tlv12;
+      tlv12 = chapter -> title;
+      uint8_t tlv11;
+      tlv11 = entry -> entry;
+      uint8_t tlv10;
+      tlv10 = 1;
+      Entry_Info* tlv9;
+      tlv9 = & entry_info;
+    		cgc_getEntryInfo(tlv12,tlv11,tlv10,tlv9);
+  }
+	    } else {
+  {
+      uint16_t tlv16;
+      tlv16 = chapter -> title;
+      uint8_t tlv15;
+      tlv15 = entry -> entry;
+      uint8_t tlv14;
+      tlv14 = 0;
+      Entry_Info* tlv13;
+      tlv13 = & entry_info;
+    		cgc_getEntryInfo(tlv16,tlv15,tlv14,tlv13);
+  }
+	    }
+	    // once per chapter, check the required entries
+	    if (first) {
+  {
+      void* tlv19;
+      tlv19 = prev_read_entries;
+      int tlv18;
+      tlv18 = - 1;
+      cgc_size_t tlv17;
+      tlv17 = chapter -> entry_count;
+    		cgc_memset(tlv19,tlv18,tlv17);
+  }
+  {
+      void* tlv22;
+      tlv22 = required_entries;
+      int tlv21;
+      tlv21 = - 1;
+      cgc_size_t tlv20;
+      tlv20 = MAX_ENTRY_PER_TITLE;
+    		cgc_memset(tlv22,tlv21,tlv20);
+  }
+		// record the required entries for this chapter
+		// later, make sure that these are populated 
+		first = 0;
+		prev_read_counter = 0;
+		required_entries[0] = 0;
+		for (int i = 0; i < MAX_ENTRY_PER_TITLE; i++) {
+		    if (entry_table[chapter->title][i] != NULL) {
+			// check all entries for required entries
+			if (entry_table[chapter->title][i]->required == 1) {
+			    // this is a required entry
+			    required_entries[req_cnt++] = i;
+			}
+		    }
+		}
+		req_cnt--;
+		required_entries[0] = req_cnt;
+	    }
+	    // if this entry was in the required_entry list, remove it (it has been satisfied)
+	    for (uint8_t i = 1; i <= req_cnt; i++) {
+		if (entry->entry == required_entries[i]) {
+		    // remove this from the required_entries list
+		    required_entries[i] = 70;
+		    required_entries[0] -= 1;
+		}
+	    }
+	    for (uint8_t i = 1; i <= prev_read_counter; i++) {
+		if (entry->entry == prev_read_entries[i]) {
+		    if (entry_info.mult_ok != MULT_OK) {
+			// Duplicate! Not allowed.
+   {
+       const char tlv30 [ ] = "Duplicate entry found! Exiting...\n";
+    			cgc_printf(tlv30);
+   }
+   {
+       unsigned int tlv31;
+       tlv31 = - 1;
+    			cgc__terminate(tlv31);
+   }
+		    }
+		}
+	    }
+	    prev_read_entries[prev_read_counter++] = entry->entry;
+	    if (entry_info.format != entry->format) {
+		// they sent us the wrong format. cgc_exit
+		cgc_printf("WRONG FORMAT: @d vs @d\n", entry_info.format, entry->format);
+  {
+      unsigned int tlv23;
+      tlv23 = - 2;
+    		cgc__terminate(tlv23);
+  }
+	    }
+	    if (chapter->title == PETS) {
+		if (entry->entry == 0) {
+		    // 2 pets are required to set successful[3] to 1
+		    if (successful[3] == -1) {
+			successful[3] = 1;
+		    }
+		    if (successful[3] == 0) {
+			successful[3] = -1;
+		    }
+		}
+	    }
+	    if (chapter->title == JOBS) {
+		if (entry->entry == 1) {
+		    if (entry->offset_data > 20) {
+			// more than 20 years on this job
+			successful[4] = 1;
+		    }
+		}
+	    }
+	    if (entry_info.format == STR) {
+		// go to the offset and retrieve the string
+		char str[NAME_LEN_MAX];
+  {
+      void* tlv26;
+      tlv26 = str;
+      void* tlv25;
+      tlv25 = ( char * ) & buff [ ( entry -> offset_data ) ];
+      cgc_size_t tlv24;
+      tlv24 = entry -> len;
+    		cgc_memcpy(tlv26,tlv25,tlv24);
+  }
+		if (entry->len < NAME_LEN_MAX) {
+		    str[entry->len] = '\0';
+		} else {
+		    str[NAME_LEN_MAX - 1] = '\0';
+		}
+		cgc_printf("@s: @s\n", entry_info.entry_str, str);
+		data_offset += entry->len;
+	    } else {
+		if (entry_info.format == INT) {
+      uint32_t num;
+      num = * ( uint32_t * ) & buff [ ( entry -> offset_data ) ];
+		    cgc_printf("@s: 0x@x\n", entry_info.entry_str, num);
+		    data_offset += 4;
+		} else {
+		    if (entry_info.format == BOOL) {
+   short num;
+   num = * ( short * ) & entry -> offset_data;
+			if (num == 1) {
+			    cgc_printf("@s: true\n", entry_info.entry_str);
+			} else {
+			    if (num == 0) {
+				cgc_printf("@s: false\n", entry_info.entry_str);
+			    } else {
+				cgc_printf("@s!!: 0x@x\n", entry_info.entry_str, num);
+			    }
+			}
+			data_offset += 0;
+		    } else {
+			cgc_printf("@s: 0x@x\n", entry_info.entry_str, (entry->offset_data));
+		    }
+		}
+	    }
+	    if (chapter->title == IDENTITY) {
+		if (entry->entry == 8) {
+		    // this ID is married
+		    if (successful[0] == 1) {
+			success_info[1][0] = entry->offset_data;
+			success_info[1][1] = entry->len;
+			successful[1] = 1;
+		    } else {
+			success_info[0][0] = entry->offset_data;
+			success_info[0][1] = entry->len;
+			successful[0] = 1;
+		    }
+		} else {
+		    if (entry->entry == 3 && entry->offset_data < 11) {
+			// ID with age less than 11
+			successful[2] = 1;
+			success_info[2][0] = entry->offset_data;
+			success_info[2][1] = entry->len;
+		    }
+		}
+	    }
+	    if ((entry->offset_next_entry) == 0) {
+		break;
+	    }
+	    entry = (Entry *) (buff + ((entry->offset_next_entry)));
+     int tlv2;
+     {
+         Entry* tlv8;
+         tlv8 = entry;
+         tlv2 = cgc_verify_entry(tlv8);
+     }
+	    if ((t = tlv2) != 0) {
+		cgc_printf("Malformed entry found! @d @d Exiting..\n", t, entry->format);
+  {
+      unsigned int tlv27;
+      tlv27 = - 1;
+    		cgc__terminate(tlv27);
+  }
+	    }
+	} while (entry != NULL);
+	next_offset = (chapter->offset_next_chapter);
+	// if there are any left in 'required_entries', fail
+	if (required_entries[0] != 0) {
+	    cgc_printf("DIDN'T SEND ME ALL THE REQUIRED ENTRIES! @c  ", required_entries[0]);
+	    return -1;
+	}
+    } while ((chapter->offset_next_chapter) || is_subtitle);
+    return 1;
+}
+
+void cgc_init()
+{
+    cgc_populateEntryInfo();
+    cgc_populateSubEntryInfo();
+}
+
+void cgc_test_win()
+{
+    int success;
+    success = 0;
+    for (int i = 0; i < 5; i++) {
+	if (successful[i] == 1) {
+	    success += 1;
+	}
+    }
+
+    if (success == 5) {
+	char buff[10];
+ int max_len;
+ max_len = 25;
+	// WIN
+ {
+     const char tlv1 [ ] = "What is your family's last name?\n";
+    	cgc_printf(tlv1);
+ }
+ int len;
+ {
+     char* tlv4;
+      tlv4 = buff;
+     char tlv3;
+     tlv3 = '\n';
+     cgc_size_t tlv2;
+     tlv2 = max_len;
+     len = cgc_receive_until(tlv4,tlv3,tlv2);
+ }
+	buff[len] = 0;
+	// names of two parents and kid put together
+	cgc_printf("Congratulations, @s family! You have a great diary!\n", buff);
+    }
+}
+
+// cgc_read the file
+// parse and print the content
+int main(int cgc_argc, char *cgc_argv[])
+{
+    cgc_init();
+    {
+        void* tlv3;
+        tlv3 = successful;
+        int tlv2;
+        tlv2 = 0;
+        cgc_size_t tlv1;
+        tlv1 = 5;
+        cgc_memset(tlv3,tlv2,tlv1);
+    }
+    {
+        void* tlv6;
+        tlv6 = success_info;
+        int tlv5;
+        tlv5 = 0;
+        cgc_size_t tlv4;
+        tlv4 = 10 * sizeof ( uint16_t );
+        cgc_memset(tlv6,tlv5,tlv4);
+    }
+    int current_buffer_offset;
+    current_buffer_offset = 0;
+    {
+        const char tlv7 [ ] = "Welcome to the diary logger!\n";
+        cgc_printf(tlv7);
+    }
+    // cgc_read the size of the input (uint16)
+    uint16_t buffer_size;
+    buffer_size = cgc_read_short ( );
+    buffer_length = buffer_size;
+    if (buffer_size < 1) {
+ {
+     const char tlv15 [ ] = "Buffer length is too small.\n";
+    	cgc_printf(tlv15);
+ }
+ {
+     unsigned int tlv16;
+     tlv16 = - 3;
+    	cgc__terminate(tlv16);
+ }
+    }
+    // create a buffer of 'size' size
+    uint8_t* buffer;
+    {
+        cgc_size_t tlv14;
+        tlv14 = buffer_size;
+        buffer = ( uint8_t * ) cgc_malloc(tlv14);
+    }
+    if (buffer == NULL) {
+ {
+     const char tlv17 [ ] = "Failed to allocate enough space for this buffer.\n";
+    	cgc_printf(tlv17);
+ }
+ {
+     unsigned int tlv18;
+     tlv18 = - 3;
+    	cgc__terminate(tlv18);
+ }
+    }
+    int rcv_len;
+    {
+        unsigned char* tlv10;
+         tlv10 = buffer;
+        cgc_size_t tlv9;
+        tlv9 = buffer_size;
+        rcv_len = cgc_receive_bytes(tlv10,tlv9);
+    }
+    if (rcv_len != buffer_size) {
+ {
+     const char tlv19 [ ] = "Buffer received is not correct size.\n";
+    	cgc_printf(tlv19);
+ }
+ {
+     unsigned int tlv20;
+     tlv20 = - 3;
+    	cgc__terminate(tlv20);
+ }
+    }
+    unsigned long tlv_size_0;
+    tlv_size_0 = sizeof ( Header );
+    if (buffer_size < tlv_size_0) {
+ {
+     const char tlv21 [ ] = "Buffer received is not correct size.\n";
+    	cgc_printf(tlv21);
+ }
+ {
+     unsigned int tlv22;
+     tlv22 = - 3;
+    	cgc__terminate(tlv22);
+ }
+    }
+    // cgc_read in the HEADER
+    Header* header;
+    header = ( Header * ) ( buffer + current_buffer_offset );
+    current_buffer_offset += sizeof(Header);
+    // print header info
+    cgc_printf("Length: @d\n", buffer_size);
+    cgc_printf("Magic number: 0x@x\n", header->magic_number);
+    cgc_printf("Future: 0x@x\n", header->future);
+    cgc_printf("Offset: 0x@x\n", header->offset_to_first_chapter);
+    int ret;
+    {
+        uint8_t* tlv13;
+        tlv13 = buffer;
+        int tlv12;
+        tlv12 = rcv_len;
+        int tlv11;
+        tlv11 = header -> offset_to_first_chapter;
+        ret = cgc_parse_book(tlv13,tlv12,tlv11);
+    }
+    if (ret == -1) {
+ {
+     const char tlv23 [ ] = "bad book.\n";
+    	cgc_printf(tlv23);
+ }
+	return -1;
+    }
+    cgc_test_win();
+
+    cgc_free(buffer);
+    {
+        const char tlv8 [ ] = "good book.\n";
+        cgc_printf(tlv8);
+    }
+    return 0;
+}
+

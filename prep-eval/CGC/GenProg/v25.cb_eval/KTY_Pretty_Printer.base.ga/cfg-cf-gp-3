@@ -1,0 +1,22 @@
+--label-repair
+--sanity yes
+--multi-file 
+--search ww
+--compiler-command perl compile.pl __EXE_NAME__ KTY_Pretty_Printer >> logs/build.log 2>&1
+--test-command __TEST_SCRIPT__ __EXE_NAME__ __TEST_NAME__ >> logs/__TEST_NAME__.log 2>&1
+--crossover subset
+--rep cilpatch
+--suffix-extension .c
+--describe-machine
+--program bugged-program.txt
+--prefix preprocessed
+--popsize 40
+--generations 10
+--promut 1
+--mutp 0
+--fitness-in-parallel 1
+--semantic-check name
+--rep-cache default.3.cache
+--pos-tests 100
+--neg-tests 1
+--test-script ./test-pov_3.sh

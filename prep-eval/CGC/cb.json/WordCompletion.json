@@ -1,0 +1,23 @@
+{
+"DEPEND_VERSION":"1.0.1",
+"filenames":[{"name":"WordCompletion/src/include/libcgc.h","included_by":["WordCompletion/src/WordCompletion/src/main.c"]},
+{"name":"WordCompletion/src/WordCompletion/src/cgc_words.h","included_by":["WordCompletion/src/WordCompletion/src/main.c"]},
+{"name":"WordCompletion/src/WordCompletion/src/main.c"}
+],
+"ignore":[
+"WordCompletion/src/WordCompletion/src/main.c"
+],
+"macros":[
+   {"name": "PATCHED", "value": false }
+],
+"disable_eval":[
+   "cgc_allocate","cgc_init","cgc_my_srand","cgc_RANDOM","cgc_readline","cgc_receive","cgc_receive_all","cgc_rotN","cgc_scramble","cgc_strcmp","cgc_strlen","cgc_strrotcpy","cgc__terminate","cgc_toInt","cgc_transmit","cgc_transmit_all","cgc_transmit_str","__cxa_finalize@@GLIBC_2.1.3","data_start","deregister_tm_clones","__do_global_dtors_aux","__do_global_dtors_aux_fini_array_entry","_fini","frame_dummy","__frame_dummy_init_array_entry","__gmon_start__","_init","__init_array_end","__init_array_start","_ITM_deregisterTMCloneTable","_ITM_registerTMCloneTable","__libc_csu_fini","__libc_csu_init","__libc_start_main@@GLIBC_2.0","main","register_tm_clones","_start","__x86.get_pc_thunk.ax","__x86.get_pc_thunk.bx","__x86.get_pc_thunk.dx"
+],
+"enable_eval":[
+   "cgc_strlen"
+],
+"struct_ptrs":{
+},
+"defines":[                                                                                                                                                                  "PAGE_SIZE","VALID_CHARS_LEN","IS_VALID_CHAR","NUM_WORDS","NUM_ROUNDS","ENTER_NUM_MSG","WORD_MSG","LOSE_MSG","WIN_MSG","NEXT_WORD_MSG","FINAL_RND_MSG","BUF_SIZE","READLINE" 
+]
+}

@@ -1,0 +1,1 @@
+../../../cgc_test/FISHYXML/test-pov_1.sh

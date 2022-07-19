@@ -1,0 +1,1 @@
+../../../cgc_test/The_Longest_Road/test.sh

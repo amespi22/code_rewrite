@@ -314,6 +314,15 @@ class CListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by CParser#fptypeSpecifier.
+    def enterFptypeSpecifier(self, ctx:CParser.FptypeSpecifierContext):
+        pass
+
+    # Exit a parse tree produced by CParser#fptypeSpecifier.
+    def exitFptypeSpecifier(self, ctx:CParser.FptypeSpecifierContext):
+        pass
+
+
     # Enter a parse tree produced by CParser#typeSpecifier.
     def enterTypeSpecifier(self, ctx:CParser.TypeSpecifierContext):
         pass
@@ -824,6 +833,15 @@ class CListener(ParseTreeListener):
 
     # Exit a parse tree produced by CParser#externalDeclaration.
     def exitExternalDeclaration(self, ctx:CParser.ExternalDeclarationContext):
+        pass
+
+
+    # Enter a parse tree produced by CParser#functionPtrDeclaration.
+    def enterFunctionPtrDeclaration(self, ctx:CParser.FunctionPtrDeclarationContext):
+        pass
+
+    # Exit a parse tree produced by CParser#functionPtrDeclaration.
+    def exitFunctionPtrDeclaration(self, ctx:CParser.FunctionPtrDeclarationContext):
         pass
 
 

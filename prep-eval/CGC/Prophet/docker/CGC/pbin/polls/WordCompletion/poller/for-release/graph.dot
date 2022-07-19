@@ -1,0 +1,12 @@
+digraph G {
+    start [label="start", shape=box];
+    play [label="play"];
+    lose [label="lose"];
+    end [label="end", shape=triangle];
+    win [label="win"];
+    start -> play;
+    play -> win;
+    play -> lose [label="0.5x"];
+    lose -> end;
+    win -> play;
+}

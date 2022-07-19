@@ -1,0 +1,400 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>ca08c58b39161f1b73f1104e7ed28153da7c4fce47899a303d183b5438661e4b63304d44bccd9431ce0e735993b55e9c</seed>
+<replay>
+    <read><length>342</length><match><data>\x0a\x0aThanks for your interest in the Sea Eye Association.\x0aIn order to be considered for the job complete the preliminary online background check\x0aDue to the secure nature of the position you are applying for you may be asked to\x0asubmit additional paperwork after your preliminary background check has been approved.\x0aThank you for your cooperation\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>11</length><match><data>Last Name: </data></match></read>
+    <write><data>VCIjdYJgXyFCykmr\x0a</data></write>
+    <read><length>12</length><match><data>First Name: </data></match></read>
+    <write><data>\x2a\x2ahelp\x0a</data></write>
+    <read><length>237</length><match><data>All commands begin with \x27\x2a\x2a\x27 and may be entered at any time\x0a\x2a\x2aprev \x3cReturn to the previous page\x3e\x0a\x2a\x2anext \x3cMove to the next page\x3e\x0a\x2a\x2aupdate \x5bid\x5d \x3cUpdate field\x2c ex: \x22Update First Name\x22\x3e\x0a\x2a\x2ahelp \x3cPrint this dialogue\x3e\x0a\x2a\x2aexit \x3cExit application\x3e\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>12</length><match><data>First Name: </data></match></read>
+    <write><data>aaWSdMQnTfpnh\x0a</data></write>
+    <read><length>33</length><match><data>Middle Name \x5bMI or Middle Name\x5d: </data></match></read>
+    <write><data>YFUghPzhMQ\x0a</data></write>
+    <read><length>26</length><match><data>Suffix \x5bJr\x2c Sr\x2c II\x2c etc\x5d: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>19</length><match><data>\x0aContact Info Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>26</length><match><data>Suffix \x5bJr\x2c Sr\x2c II\x2c etc\x5d: </data></match></read>
+    <write><data>VII\x0a</data></write>
+    <read><length>16</length><match><data>DOB Month \x5bMM\x5d: </data></match></read>
+    <write><data>12\x0a</data></write>
+    <read><length>14</length><match><data>DOB Day \x5bDD\x5d: </data></match></read>
+    <write><data>\x2a\x2aprev\x0a</data></write>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>14</length><match><data>DOB Day \x5bDD\x5d: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>19</length><match><data>\x0aContact Info Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>14</length><match><data>DOB Day \x5bDD\x5d: </data></match></read>
+    <write><data>02\x0a</data></write>
+    <read><length>17</length><match><data>DOB Year \x5bYYYY\x5d: </data></match></read>
+    <write><data>1945\x0a</data></write>
+    <read><length>19</length><match><data>Height\x2dFeet \x5b1\x2d9\x5d: </data></match></read>
+    <write><data>7\x0a</data></write>
+    <read><length>22</length><match><data>Height\x2dInches \x5b0\x2d11\x5d: </data></match></read>
+    <write><data>3\x0a</data></write>
+    <read><length>8</length><match><data>Weight: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>19</length><match><data>\x0aContact Info Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>8</length><match><data>Weight: </data></match></read>
+    <write><data>\x2a\x2aprev\x0a</data></write>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>8</length><match><data>Weight: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>19</length><match><data>\x0aContact Info Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>8</length><match><data>Weight: </data></match></read>
+    <write><data>106\x0a</data></write>
+    <read><length>5</length><match><data>Sex: </data></match></read>
+    <write><data>M\x0a</data></write>
+    <read><length>12</length><match><data>Hair Color: </data></match></read>
+    <write><data>\x2a\x2aupdate First Name\x0a</data></write>
+    <read><length>50</length><match><data>Cannot update field until all fields are inputted\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>12</length><match><data>Hair Color: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>19</length><match><data>\x0aContact Info Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>12</length><match><data>Hair Color: </data></match></read>
+    <write><data>Purple\x0a</data></write>
+    <read><length>11</length><match><data>Eye Color: </data></match></read>
+    <write><data>Blue\x0a</data></write>
+    <read><length>35</length><match><data>\x0a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2aCandidate Info:\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x0a</data></match></read>
+    <read><length>27</length><match><data>Last Name\x3dVCIjdYJgXyFCykmr\x0a</data></match></read>
+    <read><length>25</length><match><data>First Name\x3daaWSdMQnTfpnh\x0a</data></match></read>
+    <read><length>23</length><match><data>Middle Name\x3dYFUghPzhMQ\x0a</data></match></read>
+    <read><length>11</length><match><data>Suffix\x3dVII\x0a</data></match></read>
+    <read><length>13</length><match><data>DOB Month\x3d12\x0a</data></match></read>
+    <read><length>11</length><match><data>DOB Day\x3d02\x0a</data></match></read>
+    <read><length>14</length><match><data>DOB Year\x3d1945\x0a</data></match></read>
+    <read><length>14</length><match><data>Height\x2dFeet\x3d7\x0a</data></match></read>
+    <read><length>16</length><match><data>Height\x2dInches\x3d3\x0a</data></match></read>
+    <read><length>11</length><match><data>Weight\x3d106\x0a</data></match></read>
+    <read><length>6</length><match><data>Sex\x3dM\x0a</data></match></read>
+    <read><length>18</length><match><data>Hair Color\x3dPurple\x0a</data></match></read>
+    <read><length>15</length><match><data>Eye Color\x3dBlue\x0a</data></match></read>
+    <read><length>25</length><match><data>\x0aType \x2a\x2anext to continue\x0a</data></match></read>
+    <write><data>\x0a</data></write>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>35</length><match><data>\x0a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2aCandidate Info:\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x0a</data></match></read>
+    <read><length>27</length><match><data>Last Name\x3dVCIjdYJgXyFCykmr\x0a</data></match></read>
+    <read><length>25</length><match><data>First Name\x3daaWSdMQnTfpnh\x0a</data></match></read>
+    <read><length>23</length><match><data>Middle Name\x3dYFUghPzhMQ\x0a</data></match></read>
+    <read><length>11</length><match><data>Suffix\x3dVII\x0a</data></match></read>
+    <read><length>13</length><match><data>DOB Month\x3d12\x0a</data></match></read>
+    <read><length>11</length><match><data>DOB Day\x3d02\x0a</data></match></read>
+    <read><length>14</length><match><data>DOB Year\x3d1945\x0a</data></match></read>
+    <read><length>14</length><match><data>Height\x2dFeet\x3d7\x0a</data></match></read>
+    <read><length>16</length><match><data>Height\x2dInches\x3d3\x0a</data></match></read>
+    <read><length>11</length><match><data>Weight\x3d106\x0a</data></match></read>
+    <read><length>6</length><match><data>Sex\x3dM\x0a</data></match></read>
+    <read><length>18</length><match><data>Hair Color\x3dPurple\x0a</data></match></read>
+    <read><length>15</length><match><data>Eye Color\x3dBlue\x0a</data></match></read>
+    <read><length>25</length><match><data>\x0aType \x2a\x2anext to continue\x0a</data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>19</length><match><data>\x0aContact Info Form\x0a</data></match></read>
+    <read><length>17</length><match><data>Personal e\x2dmail: </data></match></read>
+    <write><data>\x2a\x2aupdate Home telephone number\x0a</data></write>
+    <read><length>50</length><match><data>Cannot update field until all fields are inputted\x0a</data></match></read>
+    <read><length>19</length><match><data>\x0aContact Info Form\x0a</data></match></read>
+    <read><length>17</length><match><data>Personal e\x2dmail: </data></match></read>
+    <write><data>50Jd\x40RHyMGa3f\x0a</data></write>
+    <read><length>13</length><match><data>Work e\x2dmail: </data></match></read>
+    <write><data>4TN0OtPrEJhklw9dFhZoZdgnoNu\x40ROv5OqD4\x0a</data></write>
+    <read><length>38</length><match><data>Home telephone number \x5bXXX\x2dXXX\x2dXXXX\x5d: </data></match></read>
+    <write><data>555\x2d555\x2d5834\x0a</data></write>
+    <read><length>38</length><match><data>Work telephone number \x5bXXX\x2dXXX\x2dXXXX\x5d: </data></match></read>
+    <write><data>555\x2d555\x2d2052\x0a</data></write>
+    <read><length>33</length><match><data>\x0a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2aContact Info:\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x0a</data></match></read>
+    <read><length>30</length><match><data>Personal e\x2dmail\x3d50Jd\x40RHyMGa3f\x0a</data></match></read>
+    <read><length>49</length><match><data>Work e\x2dmail\x3d4TN0OtPrEJhklw9dFhZoZdgnoNu\x40ROv5OqD4\x0a</data></match></read>
+    <read><length>35</length><match><data>Home telephone number\x3d555\x2d555\x2d5834\x0a</data></match></read>
+    <read><length>35</length><match><data>Work telephone number\x3d555\x2d555\x2d2052\x0a</data></match></read>
+    <read><length>25</length><match><data>\x0aType \x2a\x2anext to continue\x0a</data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>14</length><match><data>\x0aAddress Form\x0a</data></match></read>
+    <read><length>20</length><match><data>Move\x2dIn Month \x5bMM\x5d: </data></match></read>
+    <write><data>12\x0a</data></write>
+    <read><length>21</length><match><data>Move\x2dIn Year \x5bYYYY\x5d: </data></match></read>
+    <write><data>1958\x0a</data></write>
+    <read><length>8</length><match><data>Street: </data></match></read>
+    <write><data>0 JsvEwCVJimX St\x0a</data></write>
+    <read><length>6</length><match><data>City: </data></match></read>
+    <write><data>UfLV\x0a</data></write>
+    <read><length>7</length><match><data>State: </data></match></read>
+    <write><data>SD\x0a</data></write>
+    <read><length>10</length><match><data>Zip Code: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>16</length><match><data>\x0aEducation Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>14</length><match><data>\x0aAddress Form\x0a</data></match></read>
+    <read><length>10</length><match><data>Zip Code: </data></match></read>
+    <write><data>\x2a\x2aupdate Move\x2dIn Month\x0a</data></write>
+    <read><length>50</length><match><data>Cannot update field until all fields are inputted\x0a</data></match></read>
+    <read><length>14</length><match><data>\x0aAddress Form\x0a</data></match></read>
+    <read><length>10</length><match><data>Zip Code: </data></match></read>
+    <write><data>45158\x0a</data></write>
+    <read><length>21</length><match><data>Owned by you? \x5bY\x2fN\x5d: </data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><length>28</length><match><data>\x0a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2aAddress:\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x0a</data></match></read>
+    <read><length>17</length><match><data>Move\x2dIn Month\x3d12\x0a</data></match></read>
+    <read><length>18</length><match><data>Move\x2dIn Year\x3d1958\x0a</data></match></read>
+    <read><length>24</length><match><data>Street\x3d0 JsvEwCVJimX St\x0a</data></match></read>
+    <read><length>10</length><match><data>City\x3dUfLV\x0a</data></match></read>
+    <read><length>9</length><match><data>State\x3dSD\x0a</data></match></read>
+    <read><length>15</length><match><data>Zip Code\x3d45158\x0a</data></match></read>
+    <read><length>15</length><match><data>Owned by you\x3dN\x0a</data></match></read>
+    <read><length>25</length><match><data>\x0aType \x2a\x2anext to continue\x0a</data></match></read>
+    <write><data>\x0a</data></write>
+    <read><length>14</length><match><data>\x0aAddress Form\x0a</data></match></read>
+    <read><length>28</length><match><data>\x0a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2aAddress:\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x0a</data></match></read>
+    <read><length>17</length><match><data>Move\x2dIn Month\x3d12\x0a</data></match></read>
+    <read><length>18</length><match><data>Move\x2dIn Year\x3d1958\x0a</data></match></read>
+    <read><length>24</length><match><data>Street\x3d0 JsvEwCVJimX St\x0a</data></match></read>
+    <read><length>10</length><match><data>City\x3dUfLV\x0a</data></match></read>
+    <read><length>9</length><match><data>State\x3dSD\x0a</data></match></read>
+    <read><length>15</length><match><data>Zip Code\x3d45158\x0a</data></match></read>
+    <read><length>15</length><match><data>Owned by you\x3dN\x0a</data></match></read>
+    <read><length>25</length><match><data>\x0aType \x2a\x2anext to continue\x0a</data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>16</length><match><data>\x0aEducation Form\x0a</data></match></read>
+    <read><length>36</length><match><data>Highest Education \x5bHS\x2fCOLLEGE\x2fADV\x5d: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>17</length><match><data>\x0aEmployment Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>16</length><match><data>\x0aEducation Form\x0a</data></match></read>
+    <read><length>36</length><match><data>Highest Education \x5bHS\x2fCOLLEGE\x2fADV\x5d: </data></match></read>
+    <write><data>\x2a\x2ahelp\x0a</data></write>
+    <read><length>237</length><match><data>All commands begin with \x27\x2a\x2a\x27 and may be entered at any time\x0a\x2a\x2aprev \x3cReturn to the previous page\x3e\x0a\x2a\x2anext \x3cMove to the next page\x3e\x0a\x2a\x2aupdate \x5bid\x5d \x3cUpdate field\x2c ex: \x22Update First Name\x22\x3e\x0a\x2a\x2ahelp \x3cPrint this dialogue\x3e\x0a\x2a\x2aexit \x3cExit application\x3e\x0a</data></match></read>
+    <read><length>16</length><match><data>\x0aEducation Form\x0a</data></match></read>
+    <read><length>36</length><match><data>Highest Education \x5bHS\x2fCOLLEGE\x2fADV\x5d: </data></match></read>
+    <write><data>HS\x0a</data></write>
+    <read><length>18</length><match><data>Start Month \x5bMM\x5d: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>17</length><match><data>\x0aEmployment Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>16</length><match><data>\x0aEducation Form\x0a</data></match></read>
+    <read><length>18</length><match><data>Start Month \x5bMM\x5d: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>17</length><match><data>\x0aEmployment Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>16</length><match><data>\x0aEducation Form\x0a</data></match></read>
+    <read><length>18</length><match><data>Start Month \x5bMM\x5d: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>17</length><match><data>\x0aEmployment Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>16</length><match><data>\x0aEducation Form\x0a</data></match></read>
+    <read><length>18</length><match><data>Start Month \x5bMM\x5d: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>17</length><match><data>\x0aEmployment Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>16</length><match><data>\x0aEducation Form\x0a</data></match></read>
+    <read><length>18</length><match><data>Start Month \x5bMM\x5d: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>17</length><match><data>\x0aEmployment Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>16</length><match><data>\x0aEducation Form\x0a</data></match></read>
+    <read><length>18</length><match><data>Start Month \x5bMM\x5d: </data></match></read>
+    <write><data>01\x0a</data></write>
+    <read><length>19</length><match><data>Start Year \x5bYYYY\x5d: </data></match></read>
+    <write><data>1953\x0a</data></write>
+    <read><length>16</length><match><data>End Month \x5bMM\x5d: </data></match></read>
+    <write><data>11\x0a</data></write>
+    <read><length>17</length><match><data>End Year \x5bYYYY\x5d: </data></match></read>
+    <write><data>\x2a\x2aupdate Street\x0a</data></write>
+    <read><length>50</length><match><data>Cannot update field until all fields are inputted\x0a</data></match></read>
+    <read><length>16</length><match><data>\x0aEducation Form\x0a</data></match></read>
+    <read><length>17</length><match><data>End Year \x5bYYYY\x5d: </data></match></read>
+    <write><data>\x2a\x2ahelp\x0a</data></write>
+    <read><length>237</length><match><data>All commands begin with \x27\x2a\x2a\x27 and may be entered at any time\x0a\x2a\x2aprev \x3cReturn to the previous page\x3e\x0a\x2a\x2anext \x3cMove to the next page\x3e\x0a\x2a\x2aupdate \x5bid\x5d \x3cUpdate field\x2c ex: \x22Update First Name\x22\x3e\x0a\x2a\x2ahelp \x3cPrint this dialogue\x3e\x0a\x2a\x2aexit \x3cExit application\x3e\x0a</data></match></read>
+    <read><length>16</length><match><data>\x0aEducation Form\x0a</data></match></read>
+    <read><length>17</length><match><data>End Year \x5bYYYY\x5d: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>17</length><match><data>\x0aEmployment Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>16</length><match><data>\x0aEducation Form\x0a</data></match></read>
+    <read><length>17</length><match><data>End Year \x5bYYYY\x5d: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>17</length><match><data>\x0aEmployment Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>16</length><match><data>\x0aEducation Form\x0a</data></match></read>
+    <read><length>17</length><match><data>End Year \x5bYYYY\x5d: </data></match></read>
+    <write><data>1980\x0a</data></write>
+    <read><length>13</length><match><data>School Name: </data></match></read>
+    <write><data>sjOyZBY8Wb!Icm2.IlAa6pEf sYqOD41R!8mzODwaX9Rl?Y2q4UyF3zsj\x0a</data></write>
+    <read><length>8</length><match><data>Street: </data></match></read>
+    <write><data>5374 RiQXgx elqqOynok St\x0a</data></write>
+    <read><length>6</length><match><data>City: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>17</length><match><data>\x0aEmployment Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>16</length><match><data>\x0aEducation Form\x0a</data></match></read>
+    <read><length>6</length><match><data>City: </data></match></read>
+    <write><data>hdRxDYeqikntJqhDncAQ\x0a</data></write>
+    <read><length>7</length><match><data>State: </data></match></read>
+    <write><data>\x2a\x2ahelp\x0a</data></write>
+    <read><length>237</length><match><data>All commands begin with \x27\x2a\x2a\x27 and may be entered at any time\x0a\x2a\x2aprev \x3cReturn to the previous page\x3e\x0a\x2a\x2anext \x3cMove to the next page\x3e\x0a\x2a\x2aupdate \x5bid\x5d \x3cUpdate field\x2c ex: \x22Update First Name\x22\x3e\x0a\x2a\x2ahelp \x3cPrint this dialogue\x3e\x0a\x2a\x2aexit \x3cExit application\x3e\x0a</data></match></read>
+    <read><length>16</length><match><data>\x0aEducation Form\x0a</data></match></read>
+    <read><length>7</length><match><data>State: </data></match></read>
+    <write><data>\x2a\x2ahelp\x0a</data></write>
+    <read><length>237</length><match><data>All commands begin with \x27\x2a\x2a\x27 and may be entered at any time\x0a\x2a\x2aprev \x3cReturn to the previous page\x3e\x0a\x2a\x2anext \x3cMove to the next page\x3e\x0a\x2a\x2aupdate \x5bid\x5d \x3cUpdate field\x2c ex: \x22Update First Name\x22\x3e\x0a\x2a\x2ahelp \x3cPrint this dialogue\x3e\x0a\x2a\x2aexit \x3cExit application\x3e\x0a</data></match></read>
+    <read><length>16</length><match><data>\x0aEducation Form\x0a</data></match></read>
+    <read><length>7</length><match><data>State: </data></match></read>
+    <write><data>AK\x0a</data></write>
+    <read><length>10</length><match><data>Zip Code: </data></match></read>
+    <write><data>23424\x0a</data></write>
+    <read><length>12</length><match><data>GPA \x5bX.XX\x5d: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>17</length><match><data>\x0aEmployment Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>16</length><match><data>\x0aEducation Form\x0a</data></match></read>
+    <read><length>12</length><match><data>GPA \x5bX.XX\x5d: </data></match></read>
+    <write><data>2.42\x0a</data></write>
+    <read><length>19</length><match><data>Major \x5bNA for HS\x5d: </data></match></read>
+    <write><data>4COaUnzGyDXmZJw3LsUt8wrc5E..OxYKZMnNs6W1\x0a</data></write>
+    <read><length>38</length><match><data>\x0a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2aHighest Education:\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x0a</data></match></read>
+    <read><length>21</length><match><data>Highest Education\x3dHS\x0a</data></match></read>
+    <read><length>15</length><match><data>Start Month\x3d01\x0a</data></match></read>
+    <read><length>16</length><match><data>Start Year\x3d1953\x0a</data></match></read>
+    <read><length>13</length><match><data>End Month\x3d11\x0a</data></match></read>
+    <read><length>14</length><match><data>End Year\x3d1980\x0a</data></match></read>
+    <read><length>70</length><match><data>School Name\x3dsjOyZBY8Wb!Icm2.IlAa6pEf sYqOD41R!8mzODwaX9Rl?Y2q4UyF3zsj\x0a</data></match></read>
+    <read><length>32</length><match><data>Street\x3d5374 RiQXgx elqqOynok St\x0a</data></match></read>
+    <read><length>26</length><match><data>City\x3dhdRxDYeqikntJqhDncAQ\x0a</data></match></read>
+    <read><length>9</length><match><data>State\x3dAK\x0a</data></match></read>
+    <read><length>15</length><match><data>Zip Code\x3d23424\x0a</data></match></read>
+    <read><length>9</length><match><data>GPA\x3d2.42\x0a</data></match></read>
+    <read><length>47</length><match><data>Major\x3d4COaUnzGyDXmZJw3LsUt8wrc5E..OxYKZMnNs6W1\x0a</data></match></read>
+    <read><length>25</length><match><data>\x0aType \x2a\x2anext to continue\x0a</data></match></read>
+    <write><data>\x0a</data></write>
+    <read><length>16</length><match><data>\x0aEducation Form\x0a</data></match></read>
+    <read><length>38</length><match><data>\x0a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2aHighest Education:\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x0a</data></match></read>
+    <read><length>21</length><match><data>Highest Education\x3dHS\x0a</data></match></read>
+    <read><length>15</length><match><data>Start Month\x3d01\x0a</data></match></read>
+    <read><length>16</length><match><data>Start Year\x3d1953\x0a</data></match></read>
+    <read><length>13</length><match><data>End Month\x3d11\x0a</data></match></read>
+    <read><length>14</length><match><data>End Year\x3d1980\x0a</data></match></read>
+    <read><length>70</length><match><data>School Name\x3dsjOyZBY8Wb!Icm2.IlAa6pEf sYqOD41R!8mzODwaX9Rl?Y2q4UyF3zsj\x0a</data></match></read>
+    <read><length>32</length><match><data>Street\x3d5374 RiQXgx elqqOynok St\x0a</data></match></read>
+    <read><length>26</length><match><data>City\x3dhdRxDYeqikntJqhDncAQ\x0a</data></match></read>
+    <read><length>9</length><match><data>State\x3dAK\x0a</data></match></read>
+    <read><length>15</length><match><data>Zip Code\x3d23424\x0a</data></match></read>
+    <read><length>9</length><match><data>GPA\x3d2.42\x0a</data></match></read>
+    <read><length>47</length><match><data>Major\x3d4COaUnzGyDXmZJw3LsUt8wrc5E..OxYKZMnNs6W1\x0a</data></match></read>
+    <read><length>25</length><match><data>\x0aType \x2a\x2anext to continue\x0a</data></match></read>
+    <write><data>\x2a\x2ahelp\x0a</data></write>
+    <read><length>237</length><match><data>All commands begin with \x27\x2a\x2a\x27 and may be entered at any time\x0a\x2a\x2aprev \x3cReturn to the previous page\x3e\x0a\x2a\x2anext \x3cMove to the next page\x3e\x0a\x2a\x2aupdate \x5bid\x5d \x3cUpdate field\x2c ex: \x22Update First Name\x22\x3e\x0a\x2a\x2ahelp \x3cPrint this dialogue\x3e\x0a\x2a\x2aexit \x3cExit application\x3e\x0a</data></match></read>
+    <read><length>16</length><match><data>\x0aEducation Form\x0a</data></match></read>
+    <read><length>38</length><match><data>\x0a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2aHighest Education:\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x0a</data></match></read>
+    <read><length>21</length><match><data>Highest Education\x3dHS\x0a</data></match></read>
+    <read><length>15</length><match><data>Start Month\x3d01\x0a</data></match></read>
+    <read><length>16</length><match><data>Start Year\x3d1953\x0a</data></match></read>
+    <read><length>13</length><match><data>End Month\x3d11\x0a</data></match></read>
+    <read><length>14</length><match><data>End Year\x3d1980\x0a</data></match></read>
+    <read><length>70</length><match><data>School Name\x3dsjOyZBY8Wb!Icm2.IlAa6pEf sYqOD41R!8mzODwaX9Rl?Y2q4UyF3zsj\x0a</data></match></read>
+    <read><length>32</length><match><data>Street\x3d5374 RiQXgx elqqOynok St\x0a</data></match></read>
+    <read><length>26</length><match><data>City\x3dhdRxDYeqikntJqhDncAQ\x0a</data></match></read>
+    <read><length>9</length><match><data>State\x3dAK\x0a</data></match></read>
+    <read><length>15</length><match><data>Zip Code\x3d23424\x0a</data></match></read>
+    <read><length>9</length><match><data>GPA\x3d2.42\x0a</data></match></read>
+    <read><length>47</length><match><data>Major\x3d4COaUnzGyDXmZJw3LsUt8wrc5E..OxYKZMnNs6W1\x0a</data></match></read>
+    <read><length>25</length><match><data>\x0aType \x2a\x2anext to continue\x0a</data></match></read>
+    <write><data>\x0a</data></write>
+    <read><length>16</length><match><data>\x0aEducation Form\x0a</data></match></read>
+    <read><length>38</length><match><data>\x0a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2aHighest Education:\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x0a</data></match></read>
+    <read><length>21</length><match><data>Highest Education\x3dHS\x0a</data></match></read>
+    <read><length>15</length><match><data>Start Month\x3d01\x0a</data></match></read>
+    <read><length>16</length><match><data>Start Year\x3d1953\x0a</data></match></read>
+    <read><length>13</length><match><data>End Month\x3d11\x0a</data></match></read>
+    <read><length>14</length><match><data>End Year\x3d1980\x0a</data></match></read>
+    <read><length>70</length><match><data>School Name\x3dsjOyZBY8Wb!Icm2.IlAa6pEf sYqOD41R!8mzODwaX9Rl?Y2q4UyF3zsj\x0a</data></match></read>
+    <read><length>32</length><match><data>Street\x3d5374 RiQXgx elqqOynok St\x0a</data></match></read>
+    <read><length>26</length><match><data>City\x3dhdRxDYeqikntJqhDncAQ\x0a</data></match></read>
+    <read><length>9</length><match><data>State\x3dAK\x0a</data></match></read>
+    <read><length>15</length><match><data>Zip Code\x3d23424\x0a</data></match></read>
+    <read><length>9</length><match><data>GPA\x3d2.42\x0a</data></match></read>
+    <read><length>47</length><match><data>Major\x3d4COaUnzGyDXmZJw3LsUt8wrc5E..OxYKZMnNs6W1\x0a</data></match></read>
+    <read><length>25</length><match><data>\x0aType \x2a\x2anext to continue\x0a</data></match></read>
+    <write><data>\x0a</data></write>
+    <read><length>16</length><match><data>\x0aEducation Form\x0a</data></match></read>
+    <read><length>38</length><match><data>\x0a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2aHighest Education:\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x0a</data></match></read>
+    <read><length>21</length><match><data>Highest Education\x3dHS\x0a</data></match></read>
+    <read><length>15</length><match><data>Start Month\x3d01\x0a</data></match></read>
+    <read><length>16</length><match><data>Start Year\x3d1953\x0a</data></match></read>
+    <read><length>13</length><match><data>End Month\x3d11\x0a</data></match></read>
+    <read><length>14</length><match><data>End Year\x3d1980\x0a</data></match></read>
+    <read><length>70</length><match><data>School Name\x3dsjOyZBY8Wb!Icm2.IlAa6pEf sYqOD41R!8mzODwaX9Rl?Y2q4UyF3zsj\x0a</data></match></read>
+    <read><length>32</length><match><data>Street\x3d5374 RiQXgx elqqOynok St\x0a</data></match></read>
+    <read><length>26</length><match><data>City\x3dhdRxDYeqikntJqhDncAQ\x0a</data></match></read>
+    <read><length>9</length><match><data>State\x3dAK\x0a</data></match></read>
+    <read><length>15</length><match><data>Zip Code\x3d23424\x0a</data></match></read>
+    <read><length>9</length><match><data>GPA\x3d2.42\x0a</data></match></read>
+    <read><length>47</length><match><data>Major\x3d4COaUnzGyDXmZJw3LsUt8wrc5E..OxYKZMnNs6W1\x0a</data></match></read>
+    <read><length>25</length><match><data>\x0aType \x2a\x2anext to continue\x0a</data></match></read>
+    <write><data>\x0a</data></write>
+    <read><length>16</length><match><data>\x0aEducation Form\x0a</data></match></read>
+    <read><length>38</length><match><data>\x0a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2aHighest Education:\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x2a\x0a</data></match></read>
+    <read><length>21</length><match><data>Highest Education\x3dHS\x0a</data></match></read>
+    <read><length>15</length><match><data>Start Month\x3d01\x0a</data></match></read>
+    <read><length>16</length><match><data>Start Year\x3d1953\x0a</data></match></read>
+    <read><length>13</length><match><data>End Month\x3d11\x0a</data></match></read>
+    <read><length>14</length><match><data>End Year\x3d1980\x0a</data></match></read>
+    <read><length>70</length><match><data>School Name\x3dsjOyZBY8Wb!Icm2.IlAa6pEf sYqOD41R!8mzODwaX9Rl?Y2q4UyF3zsj\x0a</data></match></read>
+    <read><length>32</length><match><data>Street\x3d5374 RiQXgx elqqOynok St\x0a</data></match></read>
+    <read><length>26</length><match><data>City\x3dhdRxDYeqikntJqhDncAQ\x0a</data></match></read>
+    <read><length>9</length><match><data>State\x3dAK\x0a</data></match></read>
+    <read><length>15</length><match><data>Zip Code\x3d23424\x0a</data></match></read>
+    <read><length>9</length><match><data>GPA\x3d2.42\x0a</data></match></read>
+    <read><length>47</length><match><data>Major\x3d4COaUnzGyDXmZJw3LsUt8wrc5E..OxYKZMnNs6W1\x0a</data></match></read>
+    <read><length>25</length><match><data>\x0aType \x2a\x2anext to continue\x0a</data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>17</length><match><data>\x0aEmployment Form\x0a</data></match></read>
+    <read><length>22</length><match><data>Most Recent Employer: </data></match></read>
+    <write><data>WIDlwS2KACgBZtda3T8zLJtUm3Yv9 CA!dTqmHSuiNxR4z7hBLmVasX.sGu\x0a</data></write>
+    <read><length>18</length><match><data>Start Month \x5bMM\x5d: </data></match></read>
+    <write><data>12\x0a</data></write>
+    <read><length>19</length><match><data>Start Year \x5bYYYY\x5d: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>17</length><match><data>\x0aFinal Questions\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>17</length><match><data>\x0aEmployment Form\x0a</data></match></read>
+    <read><length>19</length><match><data>Start Year \x5bYYYY\x5d: </data></match></read>
+    <write><data>1989\x0a</data></write>
+    <read><length>16</length><match><data>End Month \x5bMM\x5d: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>17</length><match><data>\x0aFinal Questions\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>17</length><match><data>\x0aEmployment Form\x0a</data></match></read>
+    <read><length>16</length><match><data>End Month \x5bMM\x5d: </data></match></read>
+    <write><data>\x2a\x2ahelp\x0a</data></write>
+    <read><length>237</length><match><data>All commands begin with \x27\x2a\x2a\x27 and may be entered at any time\x0a\x2a\x2aprev \x3cReturn to the previous page\x3e\x0a\x2a\x2anext \x3cMove to the next page\x3e\x0a\x2a\x2aupdate \x5bid\x5d \x3cUpdate field\x2c ex: \x22Update First Name\x22\x3e\x0a\x2a\x2ahelp \x3cPrint this dialogue\x3e\x0a\x2a\x2aexit \x3cExit application\x3e\x0a</data></match></read>
+    <read><length>17</length><match><data>\x0aEmployment Form\x0a</data></match></read>
+    <read><length>16</length><match><data>End Month \x5bMM\x5d: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>17</length><match><data>\x0aFinal Questions\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>17</length><match><data>\x0aEmployment Form\x0a</data></match></read>
+    <read><length>16</length><match><data>End Month \x5bMM\x5d: </data></match></read>
+    <write><data>11\x0a</data></write>
+    <read><length>17</length><match><data>End Year \x5bYYYY\x5d: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>17</length><match><data>\x0aFinal Questions\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>17</length><match><data>\x0aEmployment Form\x0a</data></match></read>
+    <read><length>17</length><match><data>End Year \x5bYYYY\x5d: </data></match></read>
+    <write><data>\x2a\x2aexit\x0a</data></write>
+    <read><length>11</length><match><data>Thank you!\x0a</data></match></read>
+</replay>
+</pov>

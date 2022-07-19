@@ -1,0 +1,31 @@
+digraph G {
+    quit [label="quit", shape=triangle];
+    buy_products [label="buy_products"];
+    list_products [label="list_products"];
+    rm_product [label="rm_product"];
+    start [label="start", shape=box];
+    set_nosale [label="set_nosale"];
+    add_product [label="add_product"];
+    check_product [label="check_product"];
+    update_product [label="update_product"];
+    broker [label="broker"];
+    set_onsale [label="set_onsale"];
+    buy_products -> broker;
+    update_product -> broker;
+    list_products -> broker;
+    check_product -> broker;
+    set_onsale -> broker;
+    start -> broker;
+    add_product -> broker;
+    rm_product -> broker;
+    set_nosale -> broker;
+    broker -> buy_products [label="0.1x"];
+    broker -> update_product;
+    broker -> set_onsale;
+    broker -> list_products [label="0.01x"];
+    broker -> add_product;
+    broker -> rm_product;
+    broker -> quit [label="0.2x"];
+    broker -> set_nosale;
+    broker -> check_product;
+}

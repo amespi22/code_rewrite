@@ -1,0 +1,12 @@
+digraph G {
+    new_program [label="new_program"];
+    start [label="start", shape=box];
+    execute_program [label="execute_program"];
+    quit [label="quit", shape=triangle];
+    new_program -> new_program;
+    new_program -> execute_program;
+    start -> new_program;
+    execute_program -> execute_program;
+    execute_program -> new_program;
+    execute_program -> quit [label="0.1x"];
+}

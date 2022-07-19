@@ -1,0 +1,34 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>793750c2583900096d38b3ae1a2a087bc54a933ec3d50c6ef2055ee55b6f04b0ad6c76988581068a1d8fad7af04e66f2</seed>
+<replay>
+    <read><delim> </delim><match><data>nk9001\x3e </data></match></read>
+    <write><data>append\x2dnote nototherwellanysodoagainst isanotherisaboutlifemakehere\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Note successfully appended.\x0a</data></match></read>
+    <read><delim> </delim><match><data>nk9001\x3e </data></match></read>
+    <write><data>delete\x2dnote timewasyoumorethemtheirinmadetwothroughourday\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Note successfully deleted.\x0a</data></match></read>
+    <read><delim> </delim><match><data>nk9001\x3e </data></match></read>
+    <write><data>append\x2dnote oldboththeythemistolifewhatsome havelikeonerightgooververygoodrightand\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Note successfully appended.\x0a</data></match></read>
+    <read><delim> </delim><match><data>nk9001\x3e </data></match></read>
+    <write><data>andororallbackmoremyheretheydothatthere\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>I don\x27t know what you want\x2c but you can\x27t find it here.\x0a</data></match></read>
+    <read><delim> </delim><match><data>nk9001\x3e </data></match></read>
+    <write><data>delete\x2dnote somedoisherthemyday\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Note successfully deleted.\x0a</data></match></read>
+    <read><delim> </delim><match><data>nk9001\x3e </data></match></read>
+    <write><data>new\x2dnote seeitthesedoneverorstateoffthenmanhe samemayownjustwhichownallseetoalso\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Note successfully created.\x0a</data></match></read>
+    <read><delim> </delim><match><data>nk9001\x3e </data></match></read>
+    <write><data>append\x2dnote seeitthesedoneverorstateoffthenmanhe iwhowayunder\x09whileheashave\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Note successfully appended.\x0a</data></match></read>
+    <read><delim> </delim><match><data>nk9001\x3e </data></match></read>
+    <write><data>longthereitdownseesincemuchmustthoseshethere\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>I don\x27t know what you want\x2c but you can\x27t find it here.\x0a</data></match></read>
+    <read><delim> </delim><match><data>nk9001\x3e </data></match></read>
+    <write><data>quit\x0a</data></write>
+</replay>
+</pov>

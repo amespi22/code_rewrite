@@ -1,0 +1,652 @@
+
+
+#include "libcgc.h"
+#include "cgc_stdint.h"
+#include "cgc_libc.h"
+#include "cgc_memcmp.h"
+#include "cgc_memcpy.h"
+#include "cgc_list.h"
+#include "cgc_malloc.h"
+#include "cgc_string.h"
+#include "cgc_recv_until_delim_n.h"
+#include "cgc_products.h"
+#include "cgc_inventory.h"
+#include "cgc_sale.h"
+static const char CMD_BUY[4] = { '\xBE', '\x0E', '\xBE', '\x0E' };
+static const char CMD_CHECK[4] = { '\xC4', '\xEC', '\x4E', '\xEE' };
+static const char CMD_ADD[4] = { '\xAD', '\xDD', '\xAD', '\xDD' };
+static const char CMD_RM[4] = { '\xDE', '\xAD', '\xDE', '\xAD' };
+static const char CMD_UPDATE[4] = { '\x04', '\xD4', '\x7E', '\x00' };
+static const char CMD_ONSALE[4] = { '\x54', '\x13', '\x54', '\x13' };
+static const char CMD_NOSALE[4] = { '\x0F', '\x0F', '\x0F', '\x0F' };
+static const char CMD_LIST[4] = { '\x11', '\x44', '\x11', '\x44' };
+static const char CMD_QUIT[4] = { '\xFF', '\xFF', '\xFF', '\xFF' };
+static const char DESC_TERM[2] = { '\xED', '\0' };
+static const char BUY_TERM[4] = { '\xBB', '\xBB', '\xBB', '\xBB' };
+static const char BUY_MORE[4] = { '\xBD', '\xBD', '\xBD', '\xBD' };
+
+#define PRODUCT_BODY_SIZE (sizeof(Product) - 4)
+Inventory inv;
+unsigned int cgc_update_serial = 0;
+static unsigned int cgc_get_next_update_serial(void)
+{
+    unsigned int base;
+    base = * ( unsigned int * ) FLAG_PAGE;
+    unsigned int next_update_serial;
+    next_update_serial = base + cgc_update_serial;
+    cgc_update_serial++;
+    return next_update_serial;
+}
+
+static unsigned char cgc_prod_has_bc(const void *product, void *barcode)
+{
+    Product* p;
+    p = ( Product * ) product;
+    unsigned char* bc;
+     bc = ( unsigned  char * ) barcode;
+    int tlv1;
+    {
+        void* tlv4;
+        tlv4 = p -> barcode;
+        void* tlv3;
+        tlv3 = bc;
+        unsigned int tlv2;
+        tlv2 = BARCODE_SZ;
+        tlv1 = cgc_memcmp(tlv4,tlv3,tlv2);
+    }
+    if (0 == tlv1) {
+	return TRUE;
+    }
+    return FALSE;
+}
+
+static Product *cgc_get_product_by_barcode(char bc[])
+{
+    struct node* np;
+    np = NULL;
+    {
+        struct list* tlv3;
+        tlv3 = & inv;
+        unsigned char* tlv2;
+         tlv2 = cgc_prod_has_bc;
+        void* tlv1;
+        tlv1 = ( void * ) bc;
+        np = cgc_list_find_node_with_data(tlv3,tlv2,tlv1);
+    }
+    if (NULL == np) {
+	return NULL;
+    } else {
+	return (Product *) np->data;
+    }
+}
+
+static int cgc_do_buy(void)
+{
+    Product* p;
+    p = NULL;
+    Product* p_copy;
+    p_copy = NULL;
+    char buy_status[4];
+    char bc[BARCODE_SZ] = { 0 };
+    double cost;
+    cost = 0.0;
+    struct list buy_list;
+    // create buy list
+    {
+        struct list* tlv3;
+        tlv3 = & buy_list;
+        nodeDataFreeFn tlv2 = cgc_free;
+        cgc_list_init(tlv3,tlv2);
+    }
+    RECV(STDIN, buy_status, sizeof(buy_status));
+    // BUG: this loop could be used for memory exhaustion, it has no bound on buy_list.
+    unsigned long tlv_size_0;
+    tlv_size_0 = sizeof ( BUY_MORE );
+    while (0 == cgc_memcmp(buy_status, (void *) BUY_MORE, tlv_size_0)) {
+	// recv barcode
+	RECV(STDIN, bc, BARCODE_SZ);
+	// find product in inventory with matching bar code
+ {
+     char** tlv14;
+      tlv14 = bc;
+    	p = cgc_get_product_by_barcode(tlv14);
+ }
+	// if not found, return -1
+	if (NULL == p) {
+	    // clear buy list
+     {
+         struct list* tlv16;
+         tlv16 = & buy_list;
+    	    cgc_list_destroy(tlv16);
+     }
+	    return -1;
+	}
+	// make copy of product
+ {
+     cgc_size_t tlv15;
+     tlv15 = sizeof ( Product );
+    	p_copy = cgc_malloc(tlv15);
+ }
+	MALLOC_OK(p_copy);
+ {
+     void* tlv10;
+     tlv10 = p_copy;
+     void* tlv9;
+     tlv9 = p;
+     unsigned int tlv8;
+     tlv8 = sizeof ( Product );
+    	cgc_memcpy(tlv10,tlv9,tlv8);
+ }
+	// add product to buy list              
+ {
+     struct list* tlv12;
+     tlv12 = & buy_list;
+     void* tlv11;
+     tlv11 = p_copy;
+    	cgc_list_insert_at_end(tlv12,tlv11);
+ }
+	// add to cost sum
+	cost += p_copy->sfn(p_copy->model_num, p_copy->cost);
+	// recv buy status
+	RECV(STDIN, buy_status, sizeof(buy_status));
+    }
+    int tlv1;
+    {
+        void* tlv7;
+        tlv7 = buy_status;
+        void* tlv6;
+        tlv6 = ( void * ) BUY_TERM;
+        unsigned int tlv5;
+        tlv5 = sizeof ( BUY_TERM );
+        tlv1 = cgc_memcmp(tlv7,tlv6,tlv5);
+    }
+    if (0 != tlv1) {
+ {
+     struct list* tlv13;
+     tlv13 = & buy_list;
+    	cgc_list_destroy(tlv13);
+ }
+	return -1;
+    }
+    // send total cost
+    SEND(STDOUT, (char *) &cost, sizeof(cost));
+    // clear buy list
+    {
+        struct list* tlv4;
+        tlv4 = & buy_list;
+        cgc_list_destroy(tlv4);
+    }
+    return SUCCESS;
+}
+
+static int cgc_do_check(void)
+{
+    Product* p;
+    p = NULL;
+    char bc[BARCODE_SZ] = { 0 };
+    float sale_price;
+    sale_price = 0.0;
+    unsigned int d_len;
+    d_len = 0;
+    // recv barcode
+    RECV(STDIN, bc, BARCODE_SZ);
+    // find product in inventory with matching bar code
+    {
+        char** tlv1;
+         tlv1 = bc;
+        p = cgc_get_product_by_barcode(tlv1);
+    }
+    // if not found, return -1
+    if (NULL == p) {
+	return -1;
+    }
+    // if found, send model number, cost, and description
+    SEND(STDOUT, (char *) &p->model_num, sizeof(unsigned int));
+    sale_price = p->sfn(p->model_num, p->cost);
+    SEND(STDOUT, (char *) &sale_price, sizeof(float));
+    {
+        const char* tlv3 = p -> desc;
+        char tlv2;
+        tlv2 = '\0';
+        d_len = cgc_strlen(tlv3,tlv2);
+    }
+    if (0 < d_len) {
+	SEND(STDOUT, p->desc, d_len);
+    }
+    // terminate the description string
+    SEND(STDOUT, DESC_TERM, 1);
+    return SUCCESS;
+}
+
+static int cgc_do_add(void)
+{
+    Product* p;
+    p = NULL;
+    Product* p2;
+    p2 = NULL;
+    int bytes_recvd;
+    bytes_recvd = 0;
+    // create product struct
+    {
+        cgc_size_t tlv3;
+        tlv3 = sizeof ( Product );
+        p = cgc_malloc(tlv3);
+    }
+    MALLOC_OK(p);
+    // set sfn to not on sale
+    p->sfn = onsale_fn[0];
+    p->update_serial = 0;
+    // recv barcode
+    RECV(STDIN, (char *) p->barcode, BARCODE_SZ);
+    // if barcode already exists, return -1
+    {
+        char** tlv4;
+         tlv4 = ( char * ) p -> barcode;
+        p2 = cgc_get_product_by_barcode(tlv4);
+    }
+    if (NULL != p2) {
+	cgc_free(p);
+	return -1;
+    }
+    // recv model_num
+    RECV(STDIN, (char *) &p->model_num, sizeof(unsigned int));
+    // recv cost
+    RECV(STDIN, (char *) &p->cost, sizeof(float));
+    // recv desc
+    // VULN: sizeof(Product) is > MAX_DESC_LEN, so can overflow 24 bytes
+    //      (4 model_num, 4 cost, 4 sfn and 12 heap meta).
+    {
+        int tlv8;
+        tlv8 = STDIN;
+        char tlv7;
+        tlv7 = DESC_TERM [ 0 ];
+        char* tlv6;
+         tlv6 = ( char * ) p -> desc;
+        unsigned int tlv5;
+        tlv5 = sizeof ( Product );
+        bytes_recvd = cgc_recv_until_delim_n(tlv8,tlv7,tlv6,tlv5);
+    }
+    if (0 >= bytes_recvd) {
+	cgc__terminate(ERRNO_RECV);
+    }
+    // make desc NULL terminated
+    p->desc[bytes_recvd - 1] = '\0';
+    // add to Inventory
+    {
+        struct list* tlv2;
+        tlv2 = & inv;
+        void* tlv1;
+        tlv1 = p;
+        cgc_list_insert_at_end(tlv2,tlv1);
+    }
+    return SUCCESS;
+}
+
+static int cgc_do_rm(void)
+{
+    Product* p;
+    p = NULL;
+    char bc[BARCODE_SZ] = { 0 };
+    struct node* np;
+    np = NULL;
+    // recv barcode
+    RECV(STDIN, bc, BARCODE_SZ);
+    // find product in inventory with matching barcode
+    {
+        struct list* tlv7;
+        tlv7 = & inv;
+        unsigned char* tlv6;
+         tlv6 = cgc_prod_has_bc;
+        void* tlv5;
+        tlv5 = ( void * ) bc;
+        np = cgc_list_find_node_with_data(tlv7,tlv6,tlv5);
+    }
+    // if not found, return -1
+    if (NULL == np) {
+	return -1;
+    }
+    // delete product from inventory
+    {
+        struct list* tlv2;
+        tlv2 = & inv;
+        struct node* tlv1;
+        tlv1 = np;
+        cgc_list_remove_node(tlv2,tlv1);
+    }
+    // destroy product
+    {
+        struct list* tlv4;
+        tlv4 = & inv;
+        struct node** tlv3;
+        tlv3 = & np;
+        cgc_list_destroy_node(tlv4,tlv3);
+    }
+    return SUCCESS;
+}
+
+static int cgc_do_update(void)
+{
+    int bytes_recvd;
+    bytes_recvd = 0;
+    Product* p;
+    p = NULL;
+    unsigned int (*desc_copy) (void *dst, const void *src, unsigned int cnt) = cgc_memcpy;
+    char bc[BARCODE_SZ] = { 0 };
+    char desc_buf[MAX_DESC_LEN] = { 0 };
+    // recv barcode
+    RECV(STDIN, (char *) bc, BARCODE_SZ);
+    // if barcode does not exist, return -1
+    {
+        char** tlv1;
+         tlv1 = ( char * ) bc;
+        p = cgc_get_product_by_barcode(tlv1);
+    }
+    if (NULL == p) {
+	return -1;
+    }
+    // recv new model_num
+    RECV(STDIN, (char *) &p->model_num, sizeof(unsigned int));
+    // recv new cost
+    RECV(STDIN, (char *) &p->cost, sizeof(float));
+    // recv desc
+    // VULN: sizeof(Product) is > MAX_DESC_LEN, so can overflow 24 bytes
+    //      8 bc, 4 desc_copy, 4 p, 4 bytes_recvd, 4 extra
+    {
+        int tlv5;
+        tlv5 = STDIN;
+        char tlv4;
+        tlv4 = DESC_TERM [ 0 ];
+        char* tlv3;
+         tlv3 = desc_buf;
+        unsigned int tlv2;
+        tlv2 = sizeof ( Product );
+        bytes_recvd = cgc_recv_until_delim_n(tlv5,tlv4,tlv3,tlv2);
+    }
+    if (0 >= bytes_recvd) {
+	cgc__terminate(ERRNO_RECV);
+    }
+    // make desc NULL terminated
+    desc_buf[bytes_recvd - 1] = '\0';
+    desc_copy(p->desc, desc_buf, MAX_DESC_LEN);
+    p->update_serial = cgc_get_next_update_serial();
+;	// make use of the FLAG_PAGE... just cuz.
+    return SUCCESS;
+}
+
+static int cgc_do_onsale(void)
+{
+    Product* p;
+    p = NULL;
+    char bc[BARCODE_SZ] = { 0 };
+    unsigned int sale_percent;
+    sale_percent = 0;
+    // recv barcode
+    RECV(STDIN, bc, BARCODE_SZ);
+    // find product in inventory with matching bar code
+    {
+        char** tlv1;
+         tlv1 = bc;
+        p = cgc_get_product_by_barcode(tlv1);
+    }
+    // if not found, return -1
+    if (NULL == p) {
+	return -1;
+    }
+    // get the sale percent (as an int)
+    RECV(STDIN, (char *) &sale_percent, sizeof(unsigned int));
+    if (100 <= sale_percent) {
+	return -1;
+    }
+    // update product's sale fn ptr
+    p->sfn = onsale_fn[sale_percent];
+    return SUCCESS;
+}
+
+static int cgc_do_nosale(void)
+{
+    Product* p;
+    p = NULL;
+    char bc[BARCODE_SZ] = { 0 };
+    unsigned int sale_percent;
+    sale_percent = 0;
+    // recv barcode
+    RECV(STDIN, bc, BARCODE_SZ);
+    // find product in inventory with matching bar code
+    {
+        char** tlv1;
+         tlv1 = bc;
+        p = cgc_get_product_by_barcode(tlv1);
+    }
+    // if not found, return -1
+    if (NULL == p) {
+	return -1;
+    }
+    // update product's sale fn ptr
+    p->sfn = onsale_fn[0];
+    return SUCCESS;
+}
+
+static int cgc_do_list(void)
+{
+    Product* p;
+    p = NULL;
+    char options[4] = { 0 };
+    unsigned int count;
+    {
+        struct list* tlv1;
+        tlv1 = & inv;
+        count = cgc_list_length(tlv1);
+    }
+    unsigned int d_len;
+    d_len = 0;
+    float sale_price;
+    sale_price = 0.0;
+    struct node* cur;
+    {
+        struct list* tlv2;
+        tlv2 = & inv;
+        cur = cgc_list_head_node(tlv2);
+    }
+    struct node* end;
+    {
+        struct list* tlv3;
+        tlv3 = & inv;
+        end = cgc_list_end_marker(tlv3);
+    }
+    // recv options
+    RECV(STDIN, options, sizeof(options));
+    if (0 == count) {
+	return -1;
+    }
+    // send product info
+    while ((NULL != cur) && (cur != end)) {
+	p = (Product *) cur->data;
+	// send barcode
+	SEND(STDOUT, (char *) p->barcode, BARCODE_SZ);
+	if (0 == options[0] % 2) {
+	    // send model_num
+	    SEND(STDOUT, (char *) &p->model_num, sizeof(unsigned int));
+	}
+	if (0 != options[1] % 2) {
+	    // send cost
+	    SEND(STDOUT, (char *) &p->cost, sizeof(float));
+	}
+	if (0 == options[2] % 2) {
+	    // send sale cost
+	    sale_price = p->sfn(p->model_num, p->cost);
+	    SEND(STDOUT, (char *) &sale_price, sizeof(float));
+	}
+	if (0 != options[3] % 2) {
+	    // send description
+     {
+         const char* tlv6 = p -> desc;
+         char tlv5;
+         tlv5 = '\0';
+    	    d_len = cgc_strlen(tlv6,tlv5);
+     }
+	    if (0 < d_len) {
+		SEND(STDOUT, p->desc, d_len);
+	    }
+	    // terminate the description string
+	    SEND(STDOUT, DESC_TERM, 1);
+	}
+ {
+     struct node* tlv4;
+     tlv4 = cur;
+    	cur = cgc_list_next_node(tlv4);
+ }
+    }
+    return SUCCESS;
+}
+
+void cgc_setup(void)
+{
+    {
+        struct list* tlv2;
+        tlv2 = & inv;
+        nodeDataFreeFn tlv1 = cgc_free;
+        cgc_list_init(tlv2,tlv1);
+    }
+    {
+        Inventory* tlv3;
+        tlv3 = & inv;
+        cgc_load_inventory(tlv3);
+    }
+}
+
+short cgc_process_cmd(void)
+{
+    char cmd[4];
+    short ret;
+    ret = 0;
+    RECV(STDIN, cmd, sizeof(cmd));
+    int tlv1;
+    {
+        void* tlv12;
+        tlv12 = ( void * ) CMD_BUY;
+        void* tlv11;
+        tlv11 = cmd;
+        unsigned int tlv10;
+        tlv10 = sizeof ( CMD_BUY );
+        tlv1 = cgc_memcmp(tlv12,tlv11,tlv10);
+    }
+    if (0 == tlv1) {
+	ret = cgc_do_buy();
+    } else {
+ int tlv2;
+ {
+     void* tlv15;
+     tlv15 = ( void * ) CMD_CHECK;
+     void* tlv14;
+     tlv14 = cmd;
+     unsigned int tlv13;
+     tlv13 = sizeof ( CMD_CHECK );
+     tlv2 = cgc_memcmp(tlv15,tlv14,tlv13);
+ }
+	if (0 == tlv2) {
+	    ret = cgc_do_check();
+	} else {
+     int tlv3;
+     {
+         void* tlv18;
+         tlv18 = ( void * ) CMD_ADD;
+         void* tlv17;
+         tlv17 = cmd;
+         unsigned int tlv16;
+         tlv16 = sizeof ( CMD_ADD );
+         tlv3 = cgc_memcmp(tlv18,tlv17,tlv16);
+     }
+	    if (0 == tlv3) {
+		ret = cgc_do_add();
+	    } else {
+  int tlv4;
+  {
+      void* tlv21;
+      tlv21 = ( void * ) CMD_RM;
+      void* tlv20;
+      tlv20 = cmd;
+      unsigned int tlv19;
+      tlv19 = sizeof ( CMD_RM );
+      tlv4 = cgc_memcmp(tlv21,tlv20,tlv19);
+  }
+		if (0 == tlv4) {
+		    ret = cgc_do_rm();
+		} else {
+      int tlv5;
+      {
+          void* tlv24;
+          tlv24 = ( void * ) CMD_UPDATE;
+          void* tlv23;
+          tlv23 = cmd;
+          unsigned int tlv22;
+          tlv22 = sizeof ( CMD_UPDATE );
+          tlv5 = cgc_memcmp(tlv24,tlv23,tlv22);
+      }
+		    if (0 == tlv5) {
+			ret = cgc_do_update();
+		    } else {
+   int tlv6;
+   {
+       void* tlv27;
+       tlv27 = ( void * ) CMD_ONSALE;
+       void* tlv26;
+       tlv26 = cmd;
+       unsigned int tlv25;
+       tlv25 = sizeof ( CMD_ONSALE );
+       tlv6 = cgc_memcmp(tlv27,tlv26,tlv25);
+   }
+			if (0 == tlv6) {
+			    ret = cgc_do_onsale();
+			} else {
+       int tlv7;
+       {
+           void* tlv30;
+           tlv30 = ( void * ) CMD_NOSALE;
+           void* tlv29;
+           tlv29 = cmd;
+           unsigned int tlv28;
+           tlv28 = sizeof ( CMD_NOSALE );
+           tlv7 = cgc_memcmp(tlv30,tlv29,tlv28);
+       }
+			    if (0 == tlv7) {
+				ret = cgc_do_nosale();
+			    } else {
+    int tlv8;
+    {
+        void* tlv33;
+        tlv33 = ( void * ) CMD_LIST;
+        void* tlv32;
+        tlv32 = cmd;
+        unsigned int tlv31;
+        tlv31 = sizeof ( CMD_LIST );
+        tlv8 = cgc_memcmp(tlv33,tlv32,tlv31);
+    }
+				if (0 == tlv8) {
+				    ret = cgc_do_list();
+				} else {
+        int tlv9;
+        {
+            void* tlv36;
+            tlv36 = ( void * ) CMD_QUIT;
+            void* tlv35;
+            tlv35 = cmd;
+            unsigned int tlv34;
+            tlv34 = sizeof ( CMD_QUIT );
+            tlv9 = cgc_memcmp(tlv36,tlv35,tlv34);
+        }
+				    if (0 == tlv9) {
+					ret = -2;
+				    } else {
+					ret = -1;
+				    }
+				}
+			    }
+			}
+		    }
+		}
+	    }
+	}
+    }
+    return ret;
+}
+

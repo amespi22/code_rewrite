@@ -1,0 +1,995 @@
+
+
+#include "libcgc.h"
+#include "cgc_libc.h"
+#include "cgc_service.h"
+char *cgc_setValue(char *buffer, char *value)
+{
+    char* ptr;
+     ptr = NULL;
+    int count;
+    count = 0;
+    int i;
+    i = 0;
+    char* delim;
+     delim = PARAM_DELIM;
+    ptr = buffer;
+    while (*ptr && (*ptr != *delim) && count < RESULT_VALUE_SIZE)
+    {
+	ptr++, count++;
+    }
+    {
+        void* tlv3;
+        tlv3 = value;
+        void* tlv2;
+        tlv2 = buffer;
+        cgc_size_t tlv1;
+        tlv1 = count;
+        cgc_memcpy(tlv3,tlv2,tlv1);
+    }
+    return ++ptr;
+}
+
+int cgc_parseResultSize(char *buffer)
+{
+    char* start;
+     start = NULL;
+    char* end;
+     end = NULL;
+    char key[KEY_SIZE] = { 0 };
+    char value[RESULT_VALUE_SIZE] = { 0 };
+    int count;
+    count = 0;
+    int i;
+    i = 0;
+    char* delim;
+     delim = KEYVAL_DELIM;
+    int ret;
+    ret = 0;
+    int num_results;
+    num_results = 0;
+    start = buffer;
+    end = start;
+    count = 0;
+    while (*end && (*end != *delim) && count < KEY_SIZE)
+    {
+	end++, count++;
+    }
+    {
+        void* tlv4;
+        tlv4 = key;
+        void* tlv3;
+        tlv3 = start;
+        cgc_size_t tlv2;
+        tlv2 = count;
+        cgc_memcpy(tlv4,tlv3,tlv2);
+    }
+    int tlv1;
+    {
+        const char* tlv6 = key;
+        const char* tlv5 = NUM_STR;
+        tlv1 = cgc_strcmp(tlv6,tlv5);
+    }
+    if (tlv1 == 0) {
+ {
+     char* tlv8;
+      tlv8 = ++ end;
+     char* tlv7;
+      tlv7 = value;
+    	cgc_setValue(tlv8,tlv7);
+ }
+ {
+     const char* tlv9 = value;
+    	num_results = cgc_str2int(tlv9);
+ }
+	return num_results;
+    }
+    return 0;
+}
+
+int cgc_parseBalanceResult(char *buffer)
+{
+    char* start;
+     start = NULL;
+    char* end;
+     end = NULL;
+    char key[KEY_SIZE] = { 0 };
+    char value[RESULT_VALUE_SIZE] = { 0 };
+    int count;
+    count = 0;
+    int i;
+    i = 0;
+    char* delim;
+     delim = KEYVAL_DELIM;
+    int ret;
+    ret = 0;
+    int balance;
+    balance = 0;
+    start = buffer;
+    end = start;
+    count = 0;
+    while (*end && (*end != *delim) && count < KEY_SIZE)
+    {
+	end++, count++;
+    }
+    {
+        void* tlv4;
+        tlv4 = key;
+        void* tlv3;
+        tlv3 = start;
+        cgc_size_t tlv2;
+        tlv2 = count;
+        cgc_memcpy(tlv4,tlv3,tlv2);
+    }
+    int tlv1;
+    {
+        const char* tlv6 = key;
+        const char* tlv5 = BAL_STR;
+        tlv1 = cgc_strcmp(tlv6,tlv5);
+    }
+    if (tlv1 == 0) {
+ {
+     char* tlv8;
+      tlv8 = ++ end;
+     char* tlv7;
+      tlv7 = value;
+    	cgc_setValue(tlv8,tlv7);
+ }
+ {
+     const char* tlv9 = value;
+    	balance = cgc_str2int(tlv9);
+ }
+	if (balance < 0 || balance > 255) {
+	    return 0;
+	}
+	return balance;
+    }
+    return 0;
+}
+
+int cgc_parseSearchResult(char *buffer, Song * song)
+{
+    char* start;
+     start = NULL;
+    char* end;
+     end = NULL;
+    char key[KEY_SIZE] = { 0 };
+    int count;
+    count = 0;
+    int i;
+    i = 0;
+    char* delim;
+     delim = KEYVAL_DELIM;
+    int ret;
+    ret = 0;
+    {
+        void* tlv8;
+        tlv8 = song;
+        int tlv7;
+        tlv7 = 0;
+        cgc_size_t tlv6;
+        tlv6 = SONG_SIZE;
+        cgc_memset(tlv8,tlv7,tlv6);
+    }
+    start = buffer;
+    while (1) {
+	end = start;
+	count = 0;
+	while (*end && (*end != *delim) && count < KEY_SIZE)
+ {
+	    end++, count++;
+ }
+
+ {
+     void* tlv11;
+     tlv11 = key;
+     void* tlv10;
+     tlv10 = start;
+     cgc_size_t tlv9;
+     tlv9 = count;
+    	cgc_memcpy(tlv11,tlv10,tlv9);
+ }
+ int tlv1;
+ {
+     const char* tlv16 = key;
+     const char* tlv15 = SONG_ID_STR;
+     tlv1 = cgc_strcmp(tlv16,tlv15);
+ }
+	if (tlv1 == 0) {
+     {
+         char* tlv18;
+          tlv18 = ++ end;
+         char* tlv17;
+          tlv17 = song -> id;
+    	    start = cgc_setValue(tlv18,tlv17);
+     }
+	} else {
+     int tlv2;
+     {
+         const char* tlv20 = key;
+         const char* tlv19 = PRICE_STR;
+         tlv2 = cgc_strcmp(tlv20,tlv19);
+     }
+	    if (tlv2 == 0) {
+  {
+      char* tlv22;
+       tlv22 = ++ end;
+      char* tlv21;
+       tlv21 = song -> price;
+    		start = cgc_setValue(tlv22,tlv21);
+  }
+	    } else {
+  int tlv3;
+  {
+      const char* tlv24 = key;
+      const char* tlv23 = ARTIST_STR;
+      tlv3 = cgc_strcmp(tlv24,tlv23);
+  }
+		if (tlv3 == 0) {
+      {
+          char* tlv26;
+           tlv26 = ++ end;
+          char* tlv25;
+           tlv25 = song -> artist;
+    		    start = cgc_setValue(tlv26,tlv25);
+      }
+		} else {
+      int tlv4;
+      {
+          const char* tlv28 = key;
+          const char* tlv27 = ALBUM_STR;
+          tlv4 = cgc_strcmp(tlv28,tlv27);
+      }
+		    if (tlv4 == 0) {
+   {
+       char* tlv30;
+        tlv30 = ++ end;
+       char* tlv29;
+        tlv29 = song -> album;
+    			start = cgc_setValue(tlv30,tlv29);
+   }
+		    } else {
+   int tlv5;
+   {
+       const char* tlv32 = key;
+       const char* tlv31 = SONG_STR;
+       tlv5 = cgc_strcmp(tlv32,tlv31);
+   }
+			if (tlv5 == 0) {
+       {
+           char* tlv34;
+            tlv34 = ++ end;
+           char* tlv33;
+            tlv33 = song -> song;
+    			    cgc_setValue(tlv34,tlv33);
+       }
+			    return 0;
+			} else {
+			    return 0;
+			}
+		    }
+		}
+	    }
+	}
+ {
+     void* tlv14;
+     tlv14 = key;
+     int tlv13;
+     tlv13 = 0;
+     cgc_size_t tlv12;
+     tlv12 = KEY_SIZE;
+    	cgc_memset(tlv14,tlv13,tlv12);
+ }
+    }
+    return 0;
+}
+
+int cgc_receiveBalance(int socket)
+{
+    char buf[1024] = { 0 };
+    int bytes_read;
+    bytes_read = 0;
+    int balance;
+    balance = 0;
+    {
+        int tlv3;
+        tlv3 = socket;
+        char* tlv2;
+         tlv2 = buf;
+        cgc_size_t tlv1;
+        tlv1 = sizeof ( buf ) - 1;
+        bytes_read = cgc_recvline(tlv3,tlv2,tlv1);
+    }
+    if (bytes_read < 0) {
+ {
+     unsigned int tlv5;
+     tlv5 = 2;
+    	cgc__terminate(tlv5);
+ }
+    }
+    if (bytes_read == 0) {
+	return 0;
+    }
+    {
+        char* tlv4;
+         tlv4 = buf;
+        balance = cgc_parseBalanceResult(tlv4);
+    }
+    return balance;
+}
+
+int cgc_receiveNumResults(int socket)
+{
+    char buf[1024] = { 0 };
+    int bytes_read;
+    bytes_read = 0;
+    int num_results;
+    num_results = 0;
+    {
+        int tlv3;
+        tlv3 = socket;
+        char* tlv2;
+         tlv2 = buf;
+        cgc_size_t tlv1;
+        tlv1 = sizeof ( buf ) - 1;
+        bytes_read = cgc_recvline(tlv3,tlv2,tlv1);
+    }
+    if (bytes_read < 0) {
+ {
+     unsigned int tlv5;
+     tlv5 = 2;
+    	cgc__terminate(tlv5);
+ }
+    }
+    if (bytes_read == 0) {
+	return 0;
+    }
+    {
+        char* tlv4;
+         tlv4 = buf;
+        num_results = cgc_parseResultSize(tlv4);
+    }
+    if (num_results > 0) {
+	return num_results;
+    }
+
+    return 0;
+}
+
+int cgc_receiveSearchResults(int socket, SongList * songList, int limit)
+{
+    char buf[1024] = { 0 };
+    int ret;
+    ret = 0;
+    int bytes_read;
+    bytes_read = 0;
+    int num_results;
+    num_results = 0;
+    {
+        int tlv1;
+        tlv1 = socket;
+        num_results = cgc_receiveNumResults(tlv1);
+    }
+    while (num_results) {
+ {
+     int tlv4;
+     tlv4 = socket;
+     char* tlv3;
+      tlv3 = buf;
+     cgc_size_t tlv2;
+     tlv2 = sizeof ( buf ) - 1;
+    	bytes_read = cgc_recvline(tlv4,tlv3,tlv2);
+ }
+	if (bytes_read < 0) {
+     {
+         unsigned int tlv5;
+         tlv5 = 2;
+    	    cgc__terminate(tlv5);
+     }
+	}
+	if (bytes_read == 0) {
+	    return 0;
+	}
+	if (songList->size < limit) {
+     {
+         char* tlv7;
+          tlv7 = buf;
+         Song* tlv6;
+         tlv6 = & songList -> songs [ songList -> size ];
+    	    ret = cgc_parseSearchResult(tlv7,tlv6);
+     }
+	    if (ret != 0) {
+  {
+      unsigned int tlv8;
+      tlv8 = 10;
+    		cgc__terminate(tlv8);
+  }
+	    }
+	    songList->size++;
+	}
+	num_results--;
+    }
+    return 0;
+}
+
+char *cgc_createSearchString(Request request)
+{
+    char* buffer;
+     buffer = NULL;
+    int ret;
+    ret = 0;
+    {
+        cgc_size_t tlv30;
+        tlv30 = sizeof ( request ) + cgc_MIN_REQ_LEN;
+        int tlv29;
+        tlv29 = 0;
+        void** tlv28;
+        tlv28 = ( void * * ) & buffer;
+        ret = cgc_allocate(tlv30,tlv29,tlv28);
+    }
+    if (ret != 0) {
+ {
+     unsigned int tlv31;
+     tlv31 = 3;
+    	cgc__terminate(tlv31);
+ }
+    }
+    {
+        void* tlv3;
+        tlv3 = buffer;
+        int tlv2;
+        tlv2 = 0;
+        cgc_size_t tlv1;
+        tlv1 = sizeof ( request ) + cgc_MIN_REQ_LEN;
+        cgc_memset(tlv3,tlv2,tlv1);
+    }
+    {
+        char* tlv5;
+         tlv5 = buffer;
+        const char* tlv4 = TERM_STR;
+        cgc_strcat(tlv5,tlv4);
+    }
+    {
+        char* tlv7;
+         tlv7 = buffer;
+        const char* tlv6 = KEYVAL_DELIM;
+        cgc_strcat(tlv7,tlv6);
+    }
+    {
+        char* tlv9;
+         tlv9 = buffer;
+        const char* tlv8 = request . term;
+        cgc_strcat(tlv9,tlv8);
+    }
+    {
+        char* tlv11;
+         tlv11 = buffer;
+        const char* tlv10 = PARAM_DELIM;
+        cgc_strcat(tlv11,tlv10);
+    }
+    {
+        char* tlv13;
+         tlv13 = buffer;
+        const char* tlv12 = ATTRIBUTE_STR;
+        cgc_strcat(tlv13,tlv12);
+    }
+    {
+        char* tlv15;
+         tlv15 = buffer;
+        const char* tlv14 = KEYVAL_DELIM;
+        cgc_strcat(tlv15,tlv14);
+    }
+    {
+        char* tlv17;
+         tlv17 = buffer;
+        const char* tlv16 = request . attribute;
+        cgc_strcat(tlv17,tlv16);
+    }
+    {
+        char* tlv19;
+         tlv19 = buffer;
+        const char* tlv18 = PARAM_DELIM;
+        cgc_strcat(tlv19,tlv18);
+    }
+    {
+        char* tlv21;
+         tlv21 = buffer;
+        const char* tlv20 = LIMIT_STR;
+        cgc_strcat(tlv21,tlv20);
+    }
+    {
+        char* tlv23;
+         tlv23 = buffer;
+        const char* tlv22 = KEYVAL_DELIM;
+        cgc_strcat(tlv23,tlv22);
+    }
+    {
+        char* tlv25;
+         tlv25 = buffer;
+        const char* tlv24 = request . limit;
+        cgc_strcat(tlv25,tlv24);
+    }
+    {
+        char* tlv27;
+         tlv27 = buffer;
+        const char* tlv26 = EOL_STR;
+        cgc_strcat(tlv27,tlv26);
+    }
+    return buffer;
+}
+
+unsigned int cgc_getRandomNumber(unsigned int max)
+{
+    cgc_size_t bytes_written;
+    bytes_written = 0;
+    unsigned int index;
+    index = 0;
+    int ret;
+    ret = 0;
+    {
+        void* tlv3;
+        tlv3 = & index;
+        cgc_size_t tlv2;
+        tlv2 = sizeof ( index );
+        cgc_size_t* tlv1;
+        tlv1 = & bytes_written;
+        ret = cgc_random(tlv3,tlv2,tlv1);
+    }
+    if (ret != 0) {
+ {
+     unsigned int tlv4;
+     tlv4 = 1;
+    	cgc__terminate(tlv4);
+ }
+    }
+    unsigned long tlv_size_0;
+    tlv_size_0 = sizeof ( index );
+    if (bytes_written != tlv_size_0) {
+ {
+     unsigned int tlv5;
+     tlv5 = 2;
+    	cgc__terminate(tlv5);
+ }
+    }
+    index = index % max;
+    return index;
+}
+
+void cgc_getRandomAttribute(Request * request)
+{
+    int index;
+    index = 0;
+    {
+        unsigned int tlv4;
+        tlv4 = ATTR_NUM;
+        index = cgc_getRandomNumber(tlv4);
+    }
+    {
+        void* tlv3;
+        tlv3 = request -> attribute;
+        void* tlv2;
+        tlv2 = attributes [ index ];
+        cgc_size_t tlv1;
+        {
+            const char* tlv5 = attributes [ index ];
+            tlv1 = cgc_strlen(tlv5);
+        }
+        cgc_memcpy(tlv3,tlv2,tlv1);
+    }
+}
+
+void cgc_getRandomTerm(Request * request)
+{
+    unsigned int size;
+    size = 0;
+    unsigned int charset_size;
+    charset_size = 0;
+    int index;
+    index = 0;
+    while (size == 0) {
+ {
+     unsigned int tlv2;
+     tlv2 = RESULT_VALUE_SIZE;
+    	size = cgc_getRandomNumber(tlv2);
+ }
+    }
+    {
+        const char* tlv1 = cgc_charset;
+        charset_size = cgc_strlen(tlv1);
+    }
+    for (index = 0; index < size; index++) {
+ int letter;
+ {
+     unsigned int tlv3;
+     tlv3 = charset_size;
+     letter = cgc_getRandomNumber(tlv3);
+ }
+	request->term[index] = cgc_charset[letter];
+    }
+    request->term[size] = '\0';
+}
+
+void cgc_createRandomRequest(Request * request)
+{
+    {
+        void* tlv3;
+        tlv3 = request;
+        int tlv2;
+        tlv2 = 0;
+        cgc_size_t tlv1;
+        tlv1 = REQUEST_SIZE;
+        cgc_memset(tlv3,tlv2,tlv1);
+    }
+    cgc_getRandomTerm(request);
+    cgc_getRandomAttribute(request);
+    {
+        void* tlv6;
+        tlv6 = request -> limit;
+        void* tlv5;
+        tlv5 = RESULT_LIMIT_STR;
+        cgc_size_t tlv4;
+        tlv4 = sizeof ( RESULT_LIMIT_STR );
+        cgc_memcpy(tlv6,tlv5,tlv4);
+    }
+}
+
+cgc_size_t cgc_getRandomGiftCard(char **gift_card)
+{
+    unsigned int charset_size;
+    charset_size = 0;
+    int index;
+    index = 0;
+    int section;
+    section = 0;
+    int ret;
+    ret = 0;
+    {
+        cgc_size_t tlv6;
+        tlv6 = GIFT_CARD_LEN + 1;
+        int tlv5;
+        tlv5 = 0;
+        void** tlv4;
+        tlv4 = ( void * * ) gift_card;
+        ret = cgc_allocate(tlv6,tlv5,tlv4);
+    }
+    if (ret != 0) {
+ {
+     unsigned int tlv8;
+     tlv8 = 3;
+    	cgc__terminate(tlv8);
+ }
+    }
+    {
+        void* tlv3;
+        tlv3 = * gift_card;
+        int tlv2;
+        tlv2 = 0;
+        cgc_size_t tlv1;
+        tlv1 = GIFT_CARD_LEN;
+        cgc_memset(tlv3,tlv2,tlv1);
+    }
+    {
+        const char* tlv7 = cgc_charset;
+        charset_size = cgc_strlen(tlv7);
+    }
+    for (index = 0; index < GIFT_CARD_LEN; index++) {
+ int letter;
+ {
+     unsigned int tlv9;
+     tlv9 = charset_size;
+     letter = cgc_getRandomNumber(tlv9);
+ }
+	(*gift_card)[index] = cgc_charset[letter];
+    }
+    (*gift_card)[GIFT_CARD_LEN] = '\0';
+    return GIFT_CARD_LEN + 1;
+}
+
+int cgc_purchaseSong(int socket, Song * selectedSong, SongList * mySongList)
+{
+    int ret;
+    ret = 0;
+    char price;
+    price = 0;
+    {
+        const char* tlv1 = selectedSong -> price;
+        price = cgc_str2int(tlv1);
+    }
+    if (mySongList->balance >= price) {
+	mySongList->balance -= price;
+	mySongList->size++;
+ {
+     void* tlv4;
+     tlv4 = & mySongList -> songs [ mySongList -> size - 1 ];
+     void* tlv3;
+     tlv3 = selectedSong;
+     cgc_size_t tlv2;
+     tlv2 = RESULT_VALUE_SIZE * 3;
+    	cgc_memcpy(tlv4,tlv3,tlv2);
+ }
+ {
+     int tlv7;
+     tlv7 = socket;
+     const char* tlv6 = mySongList -> songs [ mySongList -> size - 1 ] . id;
+     cgc_size_t tlv5;
+     {
+         const char* tlv13 = mySongList -> songs [ mySongList -> size - 1 ] . id;
+         tlv5 = cgc_strlen(tlv13);
+     }
+    	ret = cgc_transmit_all(tlv7,tlv6,tlv5);
+ }
+	if (ret != 0) {
+     {
+         unsigned int tlv11;
+         tlv11 = 10;
+    	    cgc__terminate(tlv11);
+     }
+	}
+ {
+     int tlv10;
+     tlv10 = socket;
+     const char tlv9 [ ] = "\n";
+     cgc_size_t tlv8;
+     {
+         const char tlv14 [ ] = "\n";
+         tlv8 = cgc_strlen(tlv14);
+     }
+    	ret = cgc_transmit_all(tlv10,tlv9,tlv8);
+ }
+	if (ret != 0) {
+     {
+         unsigned int tlv12;
+         tlv12 = 10;
+    	    cgc__terminate(tlv12);
+     }
+	}
+	return SUCCESS;
+    }
+    return LOW_BALANCE;
+}
+
+int cgc_sendSearchString(int socket, Request request)
+{
+    int ret;
+    ret = 0;
+    char* search_string;
+     search_string = NULL;
+    {
+        Request tlv1;
+        tlv1 = request;
+        search_string = cgc_createSearchString(tlv1);
+    }
+    {
+        int tlv4;
+        tlv4 = socket;
+        const char* tlv3 = search_string;
+        cgc_size_t tlv2;
+        {
+            const char* tlv6 = search_string;
+            tlv2 = cgc_strlen(tlv6);
+        }
+        ret = cgc_transmit_all(tlv4,tlv3,tlv2);
+    }
+    if (ret != 0) {
+ {
+     unsigned int tlv5;
+     tlv5 = 4;
+    	cgc__terminate(tlv5);
+ }
+    }
+    return 0;
+}
+
+int cgc_getBalance(SongList * mySongList)
+{
+    cgc_size_t size;
+    size = 0;
+    char* gift_card;
+     gift_card = NULL;
+    char* buffer;
+     buffer = NULL;
+    int ret;
+    ret = 0;
+    {
+        char** tlv10;
+         tlv10 = & gift_card;
+        size = cgc_getRandomGiftCard(tlv10);
+    }
+    {
+        cgc_size_t tlv13;
+        tlv13 = size + sizeof ( "ID=" ) + sizeof ( "\n" ) + 1;
+        int tlv12;
+        tlv12 = 0;
+        void** tlv11;
+        tlv11 = ( void * * ) & buffer;
+        ret = cgc_allocate(tlv13,tlv12,tlv11);
+    }
+    if (ret != 0) {
+ {
+     unsigned int tlv25;
+     tlv25 = 3;
+    	cgc__terminate(tlv25);
+ }
+    }
+    {
+        void* tlv3;
+        tlv3 = buffer;
+        int tlv2;
+        tlv2 = 0;
+        cgc_size_t tlv1;
+        tlv1 = size + sizeof ( "ID=" ) + sizeof ( "\n" ) + 1;
+        cgc_memset(tlv3,tlv2,tlv1);
+    }
+    {
+        char* tlv5;
+         tlv5 = buffer;
+        const char tlv4 [ ] = "ID=";
+        cgc_strcat(tlv5,tlv4);
+    }
+    {
+        char* tlv7;
+         tlv7 = buffer;
+        const char* tlv6 = gift_card;
+        cgc_strcat(tlv7,tlv6);
+    }
+    {
+        char* tlv9;
+         tlv9 = buffer;
+        const char tlv8 [ ] = "\n";
+        cgc_strcat(tlv9,tlv8);
+    }
+    {
+        void* tlv15;
+        tlv15 = gift_card;
+        cgc_size_t tlv14;
+        tlv14 = size;
+        ret = cgc_deallocate(tlv15,tlv14);
+    }
+    if (ret != 0) {
+ {
+     unsigned int tlv26;
+     tlv26 = 3;
+    	cgc__terminate(tlv26);
+ }
+    }
+    {
+        int tlv18;
+        tlv18 = STDOUT;
+        const char* tlv17 = buffer;
+        cgc_size_t tlv16;
+        {
+            const char* tlv30 = buffer;
+            tlv16 = cgc_strlen(tlv30);
+        }
+        ret = cgc_transmit_all(tlv18,tlv17,tlv16);
+    }
+    if (ret != 0) {
+ {
+     unsigned int tlv27;
+     tlv27 = 10;
+    	cgc__terminate(tlv27);
+ }
+    }
+    {
+        void* tlv20;
+        tlv20 = buffer;
+        cgc_size_t tlv19;
+        tlv19 = size + sizeof ( "ID=" ) + sizeof ( "\n" ) + 1;
+        ret = cgc_deallocate(tlv20,tlv19);
+    }
+    if (ret != 0) {
+ {
+     unsigned int tlv28;
+     tlv28 = 3;
+    	cgc__terminate(tlv28);
+ }
+    }
+    {
+        int tlv21;
+        tlv21 = STDIN;
+        mySongList->balance = cgc_receiveBalance(tlv21);
+    }
+    {
+        cgc_size_t tlv24;
+        tlv24 = sizeof ( Song ) * mySongList -> balance;
+        int tlv23;
+        tlv23 = 0;
+        void** tlv22;
+        tlv22 = ( void * * ) & mySongList -> songs;
+        ret = cgc_allocate(tlv24,tlv23,tlv22);
+    }
+    if (ret != 0) {
+ {
+     unsigned int tlv29;
+     tlv29 = 3;
+    	cgc__terminate(tlv29);
+ }
+    }
+    return 0;
+}
+
+Song *cgc_selectSong(SongList results, Request request)
+{
+    return &results.songs[0];
+}
+
+int main(int cgc_argc, char *cgc_argv[])
+{
+    int ret;
+    ret = 0;
+    int starting_balance;
+    starting_balance = 0;
+    SongList mySongList = { 0, NULL, 0 };
+    SongList results = { 0, NULL, 0 };
+    Request request = { 0, 0, 0 };
+    Song songs[RESULT_LIMIT] = { 0 };
+    Song* selectedSong;
+    selectedSong = NULL;
+    results.songs = songs;
+    {
+        SongList* tlv1;
+        tlv1 = & mySongList;
+        cgc_getBalance(tlv1);
+    }
+    starting_balance = mySongList.balance;
+    while (mySongList.balance > 0) {
+	results.size = 0;
+ {
+     Request* tlv4;
+     tlv4 = & request;
+    	cgc_createRandomRequest(tlv4);
+ }
+ {
+     int tlv6;
+     tlv6 = STDOUT;
+     Request tlv5;
+     tlv5 = request;
+    	cgc_sendSearchString(tlv6,tlv5);
+ }
+ {
+     int tlv9;
+     tlv9 = STDIN;
+     SongList* tlv8;
+     tlv8 = & results;
+     int tlv7;
+     tlv7 = RESULT_LIMIT;
+    	cgc_receiveSearchResults(tlv9,tlv8,tlv7);
+ }
+ {
+     SongList tlv12;
+     tlv12 = results;
+     Request tlv11;
+     tlv11 = request;
+    	selectedSong = cgc_selectSong(tlv12,tlv11);
+ }
+ {
+     int tlv15;
+     tlv15 = STDOUT;
+     Song* tlv14;
+     tlv14 = selectedSong;
+     SongList* tlv13;
+     tlv13 = & mySongList;
+    	ret = cgc_purchaseSong(tlv15,tlv14,tlv13);
+ }
+	if (ret == LOW_BALANCE) {
+	    break;
+	}
+	cgc_receiveBalance(STDIN);
+    }
+    {
+        void* tlv3;
+        tlv3 = mySongList . songs;
+        cgc_size_t tlv2;
+        tlv2 = sizeof ( Song ) * starting_balance;
+        ret = cgc_deallocate(tlv3,tlv2);
+    }
+    if (ret != 0) {
+ {
+     unsigned int tlv10;
+     tlv10 = 3;
+    	cgc__terminate(tlv10);
+ }
+    }
+    return ret;
+}
+

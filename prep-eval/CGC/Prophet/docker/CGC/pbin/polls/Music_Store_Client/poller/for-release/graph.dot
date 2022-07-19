@@ -1,0 +1,30 @@
+digraph G {
+    get_search [label="get_search"];
+    start [label="start", shape=box];
+    create_artist_result [label="create_artist_result"];
+    purchase_song [label="purchase_song"];
+    send_number [label="send_number"];
+    create_album_result [label="create_album_result"];
+    create_song_result [label="create_song_result"];
+    quit [label="quit", shape=triangle];
+    send_results [label="send_results"];
+    get_search -> send_number;
+    start -> get_search;
+    create_artist_result -> create_album_result;
+    create_artist_result -> create_artist_result;
+    create_artist_result -> create_song_result;
+    create_artist_result -> send_results [label="0.1x"];
+    purchase_song -> quit;
+    send_number -> create_album_result;
+    send_number -> create_artist_result;
+    send_number -> create_song_result;
+    create_album_result -> create_album_result;
+    create_album_result -> create_artist_result;
+    create_album_result -> create_song_result;
+    create_album_result -> send_results [label="0.1x"];
+    create_song_result -> create_album_result;
+    create_song_result -> create_artist_result;
+    create_song_result -> create_song_result;
+    create_song_result -> send_results [label="0.1x"];
+    send_results -> purchase_song;
+}

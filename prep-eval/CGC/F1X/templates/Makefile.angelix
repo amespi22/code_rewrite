@@ -1,0 +1,30 @@
+BUILD_DIR=./build
+#all:    INIT CLEANME default_target POST
+#include $(BUILD_DIR)/Makefile
+all:    INIT CLEANME BUILD POST
+#include $(BUILD_DIR)/Makefile
+VERBOSE?=OFF
+
+.PROXY: INIT
+
+INIT:
+	@mkdir -p cb
+	@[ -d cb/${CB} ] || [ ! -d ${CB} ] || mv ${CB} cb/
+	@[ -d cb/include ] || [ ! -d include ] || mv include cb/
+	@[ -e cb/CMakeLists.txt ] || [ ! -e CMakeLists.txt ] || mv CMakeLists.txt cb/
+
+CLEANME: INIT
+	@[ -d $(BUILD_DIR) ] || mkdir -p $(BUILD_DIR)
+	@cd $(BUILD_DIR) && rm -f CMakeCache.txt
+	@cd $(BUILD_DIR) && cmake -DANGELIX_RUNTIME=ON  -DANGELIX_LIBRARY_PATH_TEST=${ANGELIX_LIBRARY_PATH_TEST} -DKLEE_LIBRARY_PATH=${KLEE_LIBRARY_PATH} -DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_LIBS=ON -DBINARY=${CB} -DCMAKE_VERBOSE_MAKEFILE=$(VERBOSE)  ../cb/ 
+
+BUILD:
+	@cd $(BUILD_DIR) && make ${CB}
+
+POST:
+	@cd $(BUILD_DIR) &&  cp compile_commands.json ../
+
+CLEAN:
+	@cd $(BUILD_DIR) && make clean
+
+clean: CLEAN

@@ -1,0 +1,5 @@
+digraph G {
+    bytes [label="bytes", shape=triangle];
+    start [label="start", shape=box];
+    start -> bytes;
+}

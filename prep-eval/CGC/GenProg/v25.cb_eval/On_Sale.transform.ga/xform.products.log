@@ -1,0 +1,235 @@
+Starting pre-processing
+Processing file On_Sale/src/include/libcgc.h
+Processing file On_Sale/src/On_Sale/include/cgc_stdint.h
+Processing file On_Sale/src/On_Sale/lib/cgc_list.h
+Processing file On_Sale/src/On_Sale/lib/cgc_malloc.h
+Processing file On_Sale/src/On_Sale/lib/cgc_memset.h
+Processing file On_Sale/src/On_Sale/lib/list.c
+Processing file On_Sale/src/On_Sale/lib/malloc.c
+Processing file On_Sale/src/On_Sale/lib/cgc_memcmp.h
+Processing file On_Sale/src/On_Sale/lib/memcmp.c
+Processing file On_Sale/src/On_Sale/lib/cgc_memcpy.h
+Processing file On_Sale/src/On_Sale/lib/memcpy.c
+Processing file On_Sale/src/On_Sale/lib/memset.c
+Processing file On_Sale/src/On_Sale/include/cgc_errno.h
+Processing file On_Sale/src/On_Sale/lib/cgc_recv_bytes.h
+Processing file On_Sale/src/On_Sale/lib/recv_bytes.c
+Processing file On_Sale/src/On_Sale/lib/cgc_send_bytes.h
+Processing file On_Sale/src/On_Sale/lib/cgc_libc.h
+Processing file On_Sale/src/On_Sale/lib/cgc_recv_until_delim_n.h
+Processing file On_Sale/src/On_Sale/lib/recv_until_delim_n.c
+Processing file On_Sale/src/On_Sale/lib/send_bytes.c
+Processing file On_Sale/src/On_Sale/lib/cgc_string.h
+Processing file On_Sale/src/On_Sale/lib/string.c
+Processing file On_Sale/src/On_Sale/src/cgc_products.h
+Processing file On_Sale/src/On_Sale/src/cgc_inventory.h
+Processing file On_Sale/src/On_Sale/src/cgc_sale.h
+Processing file On_Sale/src/On_Sale/src/inventory.c
+Processing file On_Sale/src/On_Sale/src/sale.c
+Processing file On_Sale/src/On_Sale/src/service.c
+Pre-processing done
+Starting Transformations
+Start expand_case pass
+End pass
+Start expand_conditionals pass
+End pass
+Start expand_blockItems pass
+End pass
+Start if_else_break pass
+End pass
+Start insert_loop_braces pass
+End pass
+Start expand_if_else pass
+End pass
+Start expand_sizeof pass
+End pass
+Start single_declarations pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+all done with passes
+0 :  [cgc_get_next_update_serial] <class 'list'>  [all function decls] 
+ - unsigned int base ;
+ - unsigned int next_update_serial ;
+1 :  [cgc_prod_has_bc] <class 'list'>  [all function decls] 
+ - Product * p ;
+ - unsigned char * bc ;
+ - int tlv1 ;
+ - void * tlv4 ;
+ - void * tlv3 ;
+ - unsigned int tlv2 ;
+2 :  [cgc_get_product_by_barcode] <class 'list'>  [all function decls] 
+ - struct node * np ;
+ - struct list * tlv3 ;
+ - unsigned char * tlv2 ;
+ - void * tlv1 ;
+3 :  [cgc_do_buy] <class 'list'>  [all function decls] 
+ - Product * p ;
+ - Product * p_copy ;
+ - char buy_status [ 4 ] ;
+ - char bc [ BARCODE_SZ ] = { 0 } ;
+ - double cost ;
+ - struct list buy_list ;
+ - unsigned long tlv_size_0 ;
+ - int tlv1 ;
+ - struct list * tlv3 ;
+ - nodeDataFreeFn tlv2 = cgc_free ;
+ - void * tlv7 ;
+ - void * tlv6 ;
+ - unsigned int tlv5 ;
+ - struct list * tlv4 ;
+ - cgc_list_destroy ( tlv4 ) ;
+ - MALLOC_OK ( p_copy ) ;
+ - char * * tlv14 ;
+ - cgc_size_t tlv15 ;
+ - void * tlv10 ;
+ - void * tlv9 ;
+ - unsigned int tlv8 ;
+ - struct list * tlv12 ;
+ - void * tlv11 ;
+ - struct list * tlv13 ;
+ - cgc_list_destroy ( tlv13 ) ;
+ - struct list * tlv16 ;
+ - cgc_list_destroy ( tlv16 ) ;
+4 :  [cgc_do_check] <class 'list'>  [all function decls] 
+ - Product * p ;
+ - char bc [ BARCODE_SZ ] = { 0 } ;
+ - float sale_price ;
+ - unsigned int d_len ;
+ - char * * tlv1 ;
+ - const char * tlv3 = p -> desc ;
+ - char tlv2 ;
+5 :  [cgc_do_add] <class 'list'>  [all function decls] 
+ - Product * p ;
+ - Product * p2 ;
+ - int bytes_recvd ;
+ - MALLOC_OK ( p ) ;
+ - cgc_size_t tlv3 ;
+ - char * * tlv4 ;
+ - int tlv8 ;
+ - char tlv7 ;
+ - char * tlv6 ;
+ - unsigned int tlv5 ;
+ - struct list * tlv2 ;
+ - void * tlv1 ;
+ - cgc_free ( p ) ;
+ - cgc__terminate ( ERRNO_RECV ) ;
+6 :  [cgc_do_rm] <class 'list'>  [all function decls] 
+ - Product * p ;
+ - char bc [ BARCODE_SZ ] = { 0 } ;
+ - struct node * np ;
+ - struct list * tlv7 ;
+ - unsigned char * tlv6 ;
+ - void * tlv5 ;
+ - struct list * tlv2 ;
+ - struct node * tlv1 ;
+ - struct list * tlv4 ;
+ - struct node * * tlv3 ;
+7 :  [cgc_do_update] <class 'list'>  [all function decls] 
+ - int bytes_recvd ;
+ - Product * p ;
+ - unsigned int ( * desc_copy ) ( void * dst , const void * src , unsigned int cnt ) = cgc_memcpy ;
+ - char bc [ BARCODE_SZ ] = { 0 } ;
+ - char desc_buf [ MAX_DESC_LEN ] = { 0 } ;
+ - char * * tlv1 ;
+ - int tlv5 ;
+ - char tlv4 ;
+ - char * tlv3 ;
+ - unsigned int tlv2 ;
+ - cgc__terminate ( ERRNO_RECV ) ;
+8 :  [cgc_do_onsale] <class 'list'>  [all function decls] 
+ - Product * p ;
+ - char bc [ BARCODE_SZ ] = { 0 } ;
+ - unsigned int sale_percent ;
+ - char * * tlv1 ;
+9 :  [cgc_do_nosale] <class 'list'>  [all function decls] 
+ - Product * p ;
+ - char bc [ BARCODE_SZ ] = { 0 } ;
+ - unsigned int sale_percent ;
+ - char * * tlv1 ;
+10 :  [cgc_do_list] <class 'list'>  [all function decls] 
+ - Product * p ;
+ - char options [ 4 ] = { 0 } ;
+ - unsigned int count ;
+ - unsigned int d_len ;
+ - float sale_price ;
+ - struct node * cur ;
+ - struct node * end ;
+ - struct list * tlv1 ;
+ - struct list * tlv2 ;
+ - struct list * tlv3 ;
+ - struct node * tlv4 ;
+ - const char * tlv6 = p -> desc ;
+ - char tlv5 ;
+11 :  [cgc_setup] <class 'list'>  [all function decls] 
+ - struct list * tlv2 ;
+ - nodeDataFreeFn tlv1 = cgc_free ;
+ - Inventory * tlv3 ;
+ - cgc_load_inventory ( tlv3 ) ;
+12 :  [cgc_process_cmd] <class 'list'>  [all function decls] 
+ - char cmd [ 4 ] ;
+ - short ret ;
+ - int tlv1 ;
+ - void * tlv12 ;
+ - void * tlv11 ;
+ - unsigned int tlv10 ;
+ - int tlv2 ;
+ - void * tlv15 ;
+ - void * tlv14 ;
+ - unsigned int tlv13 ;
+ - int tlv3 ;
+ - void * tlv18 ;
+ - void * tlv17 ;
+ - unsigned int tlv16 ;
+ - int tlv4 ;
+ - void * tlv21 ;
+ - void * tlv20 ;
+ - unsigned int tlv19 ;
+ - int tlv5 ;
+ - void * tlv24 ;
+ - void * tlv23 ;
+ - unsigned int tlv22 ;
+ - int tlv6 ;
+ - void * tlv27 ;
+ - void * tlv26 ;
+ - unsigned int tlv25 ;
+ - int tlv7 ;
+ - void * tlv30 ;
+ - void * tlv29 ;
+ - unsigned int tlv28 ;
+ - int tlv8 ;
+ - void * tlv33 ;
+ - void * tlv32 ;
+ - unsigned int tlv31 ;
+ - int tlv9 ;
+ - void * tlv36 ;
+ - void * tlv35 ;
+ - unsigned int tlv34 ;
+Processing [cgc_get_next_update_serial] :
+Processing [cgc_prod_has_bc] :
+Processing [cgc_get_product_by_barcode] :
+Processing [cgc_do_buy] :
+Processing [cgc_do_check] :
+Processing [cgc_do_add] :
+Processing [cgc_do_rm] :
+Processing [cgc_do_update] :
+Processing [cgc_do_onsale] :
+Processing [cgc_do_nosale] :
+Processing [cgc_do_list] :
+Processing [cgc_setup] :
+Processing [cgc_process_cmd] :
+Writing output file xform/t_products.c
+
+real	0m45.067s
+user	0m45.004s
+sys	0m0.061s

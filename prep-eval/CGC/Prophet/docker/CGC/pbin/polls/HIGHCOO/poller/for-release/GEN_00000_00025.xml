@@ -1,0 +1,38 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>252effecee2a0b8e94cce131bbe343ee1e86d9ccaeae12cd9ba0f73405a678b7290756ab4a1ff6f158f8b3aed0a27090</seed>
+<replay>
+    <write><data>\xd4\x05\x00\x00</data></write>
+    <write><data>\x9c\x01</data></write>
+    <write><data>GMrchKT8AdujsVb8yK1eX1G1ukcr0dIa16IxITmfhyBYjqGyDE4YWrOvlaE6OxAQdv1BU9ZSoL1j8kJQswB2nbPQy0ioPfuVNtG7iVcmqGBrmsn46MgY\x07syqsekjUDVT16tUlIWkN1Qfwk6BCMJGsQsvfHht9M6bzjLredHF1YEJSCo3pG0TNxstbqONrq0zwwzGcwgcfPyR1Gl7TR2I5gcjvAT3V3rqKtiHwu9oRrScuxdkct4dt2wE5I9CzMWaM5XjiiSbM4LHmMEYMs1e8HJUExxxpsWGR\x07gZDsQy1agIXZVy1GuPoIMk6cyLoQO8Nbq4x13j0OsiK7uJdYDd8V7on4AqvAEInFPF2zmcdMAwsq4OudKOTxBQGDWiD2lWohXYSBunxxRx7P7OV9U91slwhpg\x07</data></write>
+    <read><length>4</length><match><data>2y\x06\x00</data></match></read>
+    <write><data>j\x0d\x03\x00</data></write>
+    <read><length>4</length><match><pcre>(.+)</pcre></match></read>
+    <read><length>2</length><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <write><data>\xcf\x07\x00\x00</data></write>
+    <write><data>2y\x06\x00</data></write>
+    <read><length>4</length><match><data>2y\x06\x00</data></match></read>
+    <read><length>2</length><match><data>\x9c\x01</data></match></read>
+    <read><length>412</length><match><data>GMrchKT8AdujsVb8yK1eX1G1ukcr0dIa16IxITmfhyBYjqGyDE4YWrOvlaE6OxAQdv1BU9ZSoL1j8kJQswB2nbPQy0ioPfuVNtG7iVcmqGBrmsn46MgY\x07syqsekjUDVT16tUlIWkN1Qfwk6BCMJGsQsvfHht9M6bzjLredHF1YEJSCo3pG0TNxstbqONrq0zwwzGcwgcfPyR1Gl7TR2I5gcjvAT3V3rqKtiHwu9oRrScuxdkct4dt2wE5I9CzMWaM5XjiiSbM4LHmMEYMs1e8HJUExxxpsWGR\x07gZDsQy1agIXZVy1GuPoIMk6cyLoQO8Nbq4x13j0OsiK7uJdYDd8V7on4AqvAEInFPF2zmcdMAwsq4OudKOTxBQGDWiD2lWohXYSBunxxRx7P7OV9U91slwhpg\x07</data></match></read>
+    <write><data>\xd4\x05\x00\x00</data></write>
+    <write><data>M\x01</data></write>
+    <write><data>iHVEUfYRZcFXLheWHDPbtYPmTKAte3zvkh5kBgg4dHs2IZlc4LwfAnxuh5bWA1kAioA2o1DM5HZyvADrtIpxAyxNAkjXzG8ezGbALEdc1EdFxrBD2AUbYaIPbKsI42btYMd8jRU3OvKQWpTKKDaOx7jodPyhmKLYv6xTyhQEt\x07qycO9LxKsir3xuJvyuo4Ixe2voj0gCX4v7B2KB\x07XHLfV0Xgzm9pdzCdeszBiSrfX6BLUMrZKIVHUhbHG8MaLELkRvupSIebEXdok48sFZkC78ZKUWPlXkZrkYFOevHXPsvIbftsW7XyY1nxuW3gYfK9N7zddjvdquz\x07</data></write>
+    <read><length>4</length><match><data>3y\x06\x00</data></match></read>
+    <write><data>j\x0d\x03\x00</data></write>
+    <read><length>4</length><match><pcre>(.+)</pcre></match></read>
+    <read><length>2</length><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <write><data>\xed\x5f\x84\x00</data></write>
+    <read><length>4</length><match><data>\x02\x00\x00\x00</data></match></read>
+    <read><length>8</length><match><data>2y\x06\x003y\x06\x00</data></match></read>
+    <write><data>\x90v\x12\x00</data></write>
+    <read><length>4</length><match><data>\x02\x00\x00\x00</data></match></read>
+</replay>
+</pov>

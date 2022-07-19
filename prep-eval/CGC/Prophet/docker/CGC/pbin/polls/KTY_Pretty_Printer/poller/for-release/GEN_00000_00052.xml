@@ -1,0 +1,16 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>2fb13938aeaa2366f9a51ce6d9fc9706884b09bb0030ed7b98da59d718547dac233e40089cb23b29e3d42f172fcf6006</seed>
+<replay>
+    <read><length>24</length><match><data>KTY Pretty Printer v0.1\x0a</data></match></read>
+    <read><length>86</length><match><data>\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x0a 1. Import KTY\x0a 2. Print KTY\x0a 3. Quit\x0a\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x0a</data></match></read>
+    <write><data>926\x0a</data></write>
+    <read><length>25</length><match><data>Invalid menu. Try again.\x0a</data></match></read>
+    <write><data>2\x0a</data></write>
+    <read><length>7</length><match><data>Error!\x0a</data></match></read>
+    <write><data>3\x0a</data></write>
+    <read><length>16</length><match><data>\x0a\x0a\x3d\x5e.\x5e\x3d\x2f\x2f Bye!\x0a\x0a</data></match></read>
+</replay>
+</pov>

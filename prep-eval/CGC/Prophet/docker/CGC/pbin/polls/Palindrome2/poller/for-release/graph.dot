@@ -1,0 +1,13 @@
+digraph G {
+    start [label="start", shape=box];
+    banner [label="banner"];
+    palindrome [label="palindrome\ncontinue=0.90"];
+    not_palindrome [label="not_palindrome\ncontinue=0.90"];
+    request [label="request"];
+    start -> banner;
+    banner -> request;
+    palindrome -> request;
+    not_palindrome -> request;
+    request -> palindrome [label="0.2x"];
+    request -> not_palindrome [label="0.8x"];
+}

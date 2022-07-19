@@ -1,0 +1,22 @@
+digraph G {
+    start [label="start", shape=box];
+    rent_movie [label="rent_movie"];
+    invalid_menu [label="invalid_menu"];
+    return_movie [label="return_movie"];
+    menu [label="menu"];
+    try_login [label="try_login"];
+    list_movie [label="list_movie"];
+    quit [label="quit", shape=triangle];
+    start -> menu;
+    rent_movie -> menu;
+    invalid_menu -> menu;
+    return_movie -> menu;
+    menu -> rent_movie;
+    menu -> invalid_menu;
+    menu -> return_movie;
+    menu -> try_login;
+    menu -> quit;
+    menu -> list_movie;
+    try_login -> menu;
+    list_movie -> menu;
+}

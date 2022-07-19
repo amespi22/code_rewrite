@@ -1,0 +1,42 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/pov.dir/ctype.c.o"
+  "CMakeFiles/pov.dir/getenv.c.o"
+  "CMakeFiles/pov.dir/malloc.c.o"
+  "CMakeFiles/pov.dir/memcpy.c.o"
+  "CMakeFiles/pov.dir/memset.c.o"
+  "CMakeFiles/pov.dir/pcre_byte_order.c.o"
+  "CMakeFiles/pov.dir/pcre_chartables.c.o"
+  "CMakeFiles/pov.dir/pcre_compile.c.o"
+  "CMakeFiles/pov.dir/pcre_config.c.o"
+  "CMakeFiles/pov.dir/pcre_dfa_exec.c.o"
+  "CMakeFiles/pov.dir/pcre_exec.c.o"
+  "CMakeFiles/pov.dir/pcre_fullinfo.c.o"
+  "CMakeFiles/pov.dir/pcre_get.c.o"
+  "CMakeFiles/pov.dir/pcre_globals.c.o"
+  "CMakeFiles/pov.dir/pcre_jit_compile.c.o"
+  "CMakeFiles/pov.dir/pcre_maketables.c.o"
+  "CMakeFiles/pov.dir/pcre_newline.c.o"
+  "CMakeFiles/pov.dir/pcre_ord2utf8.c.o"
+  "CMakeFiles/pov.dir/pcre_refcount.c.o"
+  "CMakeFiles/pov.dir/pcre_string_utils.c.o"
+  "CMakeFiles/pov.dir/pcre_study.c.o"
+  "CMakeFiles/pov.dir/pcre_tables.c.o"
+  "CMakeFiles/pov.dir/pcre_ucd.c.o"
+  "CMakeFiles/pov.dir/pcre_valid_utf8.c.o"
+  "CMakeFiles/pov.dir/pcre_version.c.o"
+  "CMakeFiles/pov.dir/pcre_xclass.c.o"
+  "CMakeFiles/pov.dir/pov.c.o"
+  "CMakeFiles/pov.dir/strchr.c.o"
+  "CMakeFiles/pov.dir/strcmp.c.o"
+  "CMakeFiles/pov.dir/strcpy.c.o"
+  "CMakeFiles/pov.dir/strlen.c.o"
+  "CMakeFiles/pov.dir/strtol.c.o"
+  "CMakeFiles/pov.dir/toupper.c.o"
+  "libpov.pdb"
+  "libpov.so"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang C)
+  include(CMakeFiles/pov.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

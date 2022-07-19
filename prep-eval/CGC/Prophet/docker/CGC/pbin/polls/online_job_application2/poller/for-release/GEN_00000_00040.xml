@@ -1,0 +1,35 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>85602d3d7dfa8ec8a3fc322785b8f60124f2b94a17c15ce35a8183133979a34c7954bcfe382aa3613e2c190b258f15f3</seed>
+<replay>
+    <read><length>342</length><match><data>\x0a\x0aThanks for your interest in the Sea Eye Association.\x0aIn order to be considered for the job complete the preliminary online background check\x0aDue to the secure nature of the position you are applying for you may be asked to\x0asubmit additional paperwork after your preliminary background check has been approved.\x0aThank you for your cooperation\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>11</length><match><data>Last Name: </data></match></read>
+    <write><data>\x2a\x2ahelp\x0a</data></write>
+    <read><length>237</length><match><data>All commands begin with \x27\x2a\x2a\x27 and may be entered at any time\x0a\x2a\x2aprev \x3cReturn to the previous page\x3e\x0a\x2a\x2anext \x3cMove to the next page\x3e\x0a\x2a\x2aupdate \x5bid\x5d \x3cUpdate field\x2c ex: \x22Update First Name\x22\x3e\x0a\x2a\x2ahelp \x3cPrint this dialogue\x3e\x0a\x2a\x2aexit \x3cExit application\x3e\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>11</length><match><data>Last Name: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>19</length><match><data>\x0aContact Info Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>11</length><match><data>Last Name: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>19</length><match><data>\x0aContact Info Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>11</length><match><data>Last Name: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>19</length><match><data>\x0aContact Info Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>11</length><match><data>Last Name: </data></match></read>
+    <write><data>\x2a\x2aprev\x0a</data></write>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>11</length><match><data>Last Name: </data></match></read>
+    <write><data>\x2a\x2aexit\x0a</data></write>
+    <read><length>11</length><match><data>Thank you!\x0a</data></match></read>
+</replay>
+</pov>

@@ -1,0 +1,72 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>e8e6751f4627852277a85c6cb3e3b51b0d7554d898eb6e1df2ef354ab535f4fa5eefd2a1067b0ba7acb1862c9d0c1895</seed>
+<replay>
+    <write><data>\xd4\x05\x00\x00</data></write>
+    <write><data>W\x01</data></write>
+    <write><data>NABkxGEX6Le3KWKvCpRYV4uYAl85gz00BAaO1IuUkTAXahVnCcYQdCsAzfNSDVf5ytJ7h9xXaEYLXe5N16ewwRZBJnfUF2d8nm11lZxtqApGDKu43px7PCrd4sPyBLH05Q526YRCW1DKjOGRVURtZIYA9PHD\x07qXzFKU5QXBIPAANtktlLlTKv2aQEq\x07Wh7E7eGaKrLiBDDNQrJFdUNK8L4nBnzcak8QakYJibq890NYqBwxzv6bnCkw1f60F2ewj7f8ClMyRG3vMpCKuDkviN03q64JWdQe9VSGl6GCiDjTDpPxeHjpq8EI2LXdxSF8uWU1Db7nrsReYks9qgGEaGI\x07</data></write>
+    <read><length>4</length><match><data>2y\x06\x00</data></match></read>
+    <write><data>\xcf\x07\x00\x00</data></write>
+    <write><data>2y\x06\x00</data></write>
+    <read><length>4</length><match><data>2y\x06\x00</data></match></read>
+    <read><length>2</length><match><data>W\x01</data></match></read>
+    <read><length>343</length><match><data>NABkxGEX6Le3KWKvCpRYV4uYAl85gz00BAaO1IuUkTAXahVnCcYQdCsAzfNSDVf5ytJ7h9xXaEYLXe5N16ewwRZBJnfUF2d8nm11lZxtqApGDKu43px7PCrd4sPyBLH05Q526YRCW1DKjOGRVURtZIYA9PHD\x07qXzFKU5QXBIPAANtktlLlTKv2aQEq\x07Wh7E7eGaKrLiBDDNQrJFdUNK8L4nBnzcak8QakYJibq890NYqBwxzv6bnCkw1f60F2ewj7f8ClMyRG3vMpCKuDkviN03q64JWdQe9VSGl6GCiDjTDpPxeHjpq8EI2LXdxSF8uWU1Db7nrsReYks9qgGEaGI\x07</data></match></read>
+    <write><data>\xd4\x05\x00\x00</data></write>
+    <write><data>\xf5\x01</data></write>
+    <write><data>lwKrv93DYRMcQLpa3tJ2g06Np0vk780jBI7FaCGIdzlBW4OHUyR6QCV1uK5Gv6OOO5Qa1vcxFBDNEGJu5075AwnztFSb9luno1pNuJZwHepL8B2yXyPzjy0ELGGG7EMPaQnqHIB9kAnW0e6l8FFrshb1je7AfODO7dbSiQDeoiI\x07KFHiybaFGc3OuPQXdtvEvv4oSFmacazNxclpCP1hPZwO1wDV3aWGc82WMwNFvQNO8oHSgXxeK0Wd0DonU6aHF2L8SRiOzn2rgD75FJcNUG5F84P5JeX9hHfccIChxm0dWUDfB11HLRANV8SS33LN3GCtz1ukWxiv7pg39AYeJY\x07yYpppDddCHN3VmTWCnDYbEqTagfxXY3SLU64jpfuesULi8AhBsaUmIsV0v6oDbaKhr9ix11MrXT7kDw5geuuHMChRp8b3WRcr69QC00neP6mF9MDvtLRco3hQZgBYwsVhGZfki3MddmMYg0HmKNUPznwczICH\x07</data></write>
+    <read><length>4</length><match><data>3y\x06\x00</data></match></read>
+    <write><data>j\x0d\x03\x00</data></write>
+    <read><length>4</length><match><pcre>(.+)</pcre></match></read>
+    <read><length>2</length><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <write><data>j\x0d\x03\x00</data></write>
+    <read><length>4</length><match><pcre>(.+)</pcre></match></read>
+    <read><length>2</length><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <write><data>\xcf\x07\x00\x00</data></write>
+    <write><data>3y\x06\x00</data></write>
+    <read><length>4</length><match><data>3y\x06\x00</data></match></read>
+    <read><length>2</length><match><data>\xf5\x01</data></match></read>
+    <read><length>501</length><match><data>lwKrv93DYRMcQLpa3tJ2g06Np0vk780jBI7FaCGIdzlBW4OHUyR6QCV1uK5Gv6OOO5Qa1vcxFBDNEGJu5075AwnztFSb9luno1pNuJZwHepL8B2yXyPzjy0ELGGG7EMPaQnqHIB9kAnW0e6l8FFrshb1je7AfODO7dbSiQDeoiI\x07KFHiybaFGc3OuPQXdtvEvv4oSFmacazNxclpCP1hPZwO1wDV3aWGc82WMwNFvQNO8oHSgXxeK0Wd0DonU6aHF2L8SRiOzn2rgD75FJcNUG5F84P5JeX9hHfccIChxm0dWUDfB11HLRANV8SS33LN3GCtz1ukWxiv7pg39AYeJY\x07yYpppDddCHN3VmTWCnDYbEqTagfxXY3SLU64jpfuesULi8AhBsaUmIsV0v6oDbaKhr9ix11MrXT7kDw5geuuHMChRp8b3WRcr69QC00neP6mF9MDvtLRco3hQZgBYwsVhGZfki3MddmMYg0HmKNUPznwczICH\x07</data></match></read>
+    <write><data>\xcf\x07\x00\x00</data></write>
+    <write><data>3y\x06\x00</data></write>
+    <read><length>4</length><match><data>3y\x06\x00</data></match></read>
+    <read><length>2</length><match><data>\xf5\x01</data></match></read>
+    <read><length>501</length><match><data>lwKrv93DYRMcQLpa3tJ2g06Np0vk780jBI7FaCGIdzlBW4OHUyR6QCV1uK5Gv6OOO5Qa1vcxFBDNEGJu5075AwnztFSb9luno1pNuJZwHepL8B2yXyPzjy0ELGGG7EMPaQnqHIB9kAnW0e6l8FFrshb1je7AfODO7dbSiQDeoiI\x07KFHiybaFGc3OuPQXdtvEvv4oSFmacazNxclpCP1hPZwO1wDV3aWGc82WMwNFvQNO8oHSgXxeK0Wd0DonU6aHF2L8SRiOzn2rgD75FJcNUG5F84P5JeX9hHfccIChxm0dWUDfB11HLRANV8SS33LN3GCtz1ukWxiv7pg39AYeJY\x07yYpppDddCHN3VmTWCnDYbEqTagfxXY3SLU64jpfuesULi8AhBsaUmIsV0v6oDbaKhr9ix11MrXT7kDw5geuuHMChRp8b3WRcr69QC00neP6mF9MDvtLRco3hQZgBYwsVhGZfki3MddmMYg0HmKNUPznwczICH\x07</data></match></read>
+    <write><data>\xcf\x07\x00\x00</data></write>
+    <write><data>2y\x06\x00</data></write>
+    <read><length>4</length><match><data>2y\x06\x00</data></match></read>
+    <read><length>2</length><match><data>W\x01</data></match></read>
+    <read><length>343</length><match><data>NABkxGEX6Le3KWKvCpRYV4uYAl85gz00BAaO1IuUkTAXahVnCcYQdCsAzfNSDVf5ytJ7h9xXaEYLXe5N16ewwRZBJnfUF2d8nm11lZxtqApGDKu43px7PCrd4sPyBLH05Q526YRCW1DKjOGRVURtZIYA9PHD\x07qXzFKU5QXBIPAANtktlLlTKv2aQEq\x07Wh7E7eGaKrLiBDDNQrJFdUNK8L4nBnzcak8QakYJibq890NYqBwxzv6bnCkw1f60F2ewj7f8ClMyRG3vMpCKuDkviN03q64JWdQe9VSGl6GCiDjTDpPxeHjpq8EI2LXdxSF8uWU1Db7nrsReYks9qgGEaGI\x07</data></match></read>
+    <write><data>\xed\x5f\x84\x00</data></write>
+    <read><length>4</length><match><data>\x02\x00\x00\x00</data></match></read>
+    <read><length>8</length><match><data>2y\x06\x003y\x06\x00</data></match></read>
+    <write><data>j\x0d\x03\x00</data></write>
+    <read><length>4</length><match><pcre>(.+)</pcre></match></read>
+    <read><length>2</length><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <write><data>\xd4\x05\x00\x00</data></write>
+    <write><data>\x05\x01</data></write>
+    <write><data>CEJYikhccNg0RLjWuKh7g\x077X2f5Yhk4Mv4U8olHlvot1xqsVx4vp9hZd3uhpcrjxDEODfB4VsyzyYpyTyZvoUo6B8lpJl8co5C5UrcOprdpdFMXueYlSlUe0xod50diPs86lEJnALaWGXNqe6FHFNvurKqGpBcDkB59KZiimgTXJs4joSrZstot5m4kllIBaghP7nNKGaOXnyqiCY0lh\x077e4niQdIc7txafJ0JOMl9At0x3Iq1Dtsc1wJgI3kCqmztW9\x07</data></write>
+    <read><length>4</length><match><data>4y\x06\x00</data></match></read>
+    <write><data>\xcf\x07\x00\x00</data></write>
+    <write><data>2y\x06\x00</data></write>
+    <read><length>4</length><match><data>2y\x06\x00</data></match></read>
+    <read><length>2</length><match><data>W\x01</data></match></read>
+    <read><length>343</length><match><data>NABkxGEX6Le3KWKvCpRYV4uYAl85gz00BAaO1IuUkTAXahVnCcYQdCsAzfNSDVf5ytJ7h9xXaEYLXe5N16ewwRZBJnfUF2d8nm11lZxtqApGDKu43px7PCrd4sPyBLH05Q526YRCW1DKjOGRVURtZIYA9PHD\x07qXzFKU5QXBIPAANtktlLlTKv2aQEq\x07Wh7E7eGaKrLiBDDNQrJFdUNK8L4nBnzcak8QakYJibq890NYqBwxzv6bnCkw1f60F2ewj7f8ClMyRG3vMpCKuDkviN03q64JWdQe9VSGl6GCiDjTDpPxeHjpq8EI2LXdxSF8uWU1Db7nrsReYks9qgGEaGI\x07</data></match></read>
+    <write><data>\xd4\x05\x00\x00</data></write>
+    <write><data>l\x00</data></write>
+    <write><data>SFeG8CR4H6FW6n1ZT9slNJiD\x07RwhtXusajlqoo0BawnCh4eSQGds73wgIsmb8Y4uPsE411WRrZDRe\x07hbKqGVysJPjtiKZ2zQaDCI9T18vaI\x07</data></write>
+    <read><length>4</length><match><data>5y\x06\x00</data></match></read>
+    <write><data>\x90v\x12\x00</data></write>
+    <read><length>4</length><match><data>\x04\x00\x00\x00</data></match></read>
+</replay>
+</pov>

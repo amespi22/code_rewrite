@@ -1,0 +1,20 @@
+digraph G {
+    help [label="help"];
+    read_msg [label="read_msg"];
+    finish [label="finish", shape=triangle];
+    list [label="list"];
+    menu [label="menu"];
+    start [label="start", shape=box];
+    post [label="post"];
+    quit [label="quit", shape=triangle];
+    help -> menu;
+    read_msg -> menu;
+    list -> menu;
+    menu -> list;
+    menu -> quit [label="0.3x"];
+    menu -> help [label="0.01x"];
+    menu -> read_msg;
+    menu -> post;
+    start -> menu;
+    post -> menu;
+}

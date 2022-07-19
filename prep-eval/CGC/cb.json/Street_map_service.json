@@ -1,0 +1,43 @@
+{
+"DEPEND_VERSION":"1.0.1",
+"filenames":[{"name":"Street_map_service/src/include/libcgc.h","included_by":["Street_map_service/src/Street_map_service/lib/mymath.c", "Street_map_service/src/Street_map_service/lib/printf.c", "Street_map_service/src/Street_map_service/lib/stdlib.c", "Street_map_service/src/Street_map_service/src/llist.c", "Street_map_service/src/Street_map_service/src/map.c", "Street_map_service/src/Street_map_service/src/service.c", "Street_map_service/src/Street_map_service/src/ui.c"]},
+{"name":"Street_map_service/src/Street_map_service/lib/cgc_mymath.h","included_by":["Street_map_service/src/Street_map_service/lib/mymath.c", "Street_map_service/src/Street_map_service/lib/printf.c", "Street_map_service/src/Street_map_service/src/llist.c", "Street_map_service/src/Street_map_service/src/map.c", "Street_map_service/src/Street_map_service/src/service.c", "Street_map_service/src/Street_map_service/src/ui.c"]},
+{"name":"Street_map_service/src/Street_map_service/lib/cgc_stdint.h","included_by":["Street_map_service/src/Street_map_service/lib/mymath.c", "Street_map_service/src/Street_map_service/lib/printf.c", "Street_map_service/src/Street_map_service/lib/stdlib.c", "Street_map_service/src/Street_map_service/src/llist.c", "Street_map_service/src/Street_map_service/src/map.c", "Street_map_service/src/Street_map_service/src/service.c", "Street_map_service/src/Street_map_service/src/ui.c"]},
+{"name":"Street_map_service/src/Street_map_service/lib/mymath.c"},
+{"name":"Street_map_service/src/Street_map_service/lib/cgc_stdarg.h","included_by":["Street_map_service/src/Street_map_service/lib/printf.c", "Street_map_service/src/Street_map_service/src/llist.c", "Street_map_service/src/Street_map_service/src/map.c", "Street_map_service/src/Street_map_service/src/service.c", "Street_map_service/src/Street_map_service/src/ui.c"]},
+{"name":"Street_map_service/src/Street_map_service/lib/cgc_stdlib.h","included_by":["Street_map_service/src/Street_map_service/lib/printf.c", "Street_map_service/src/Street_map_service/lib/stdlib.c", "Street_map_service/src/Street_map_service/src/llist.c", "Street_map_service/src/Street_map_service/src/map.c", "Street_map_service/src/Street_map_service/src/service.c", "Street_map_service/src/Street_map_service/src/ui.c"]},
+{"name":"Street_map_service/src/Street_map_service/lib/printf.c"},
+{"name":"Street_map_service/src/Street_map_service/lib/stdlib.c"},
+{"name":"Street_map_service/src/Street_map_service/src/cgc_llist.h","included_by":["Street_map_service/src/Street_map_service/src/cgc_service.h", "Street_map_service/src/Street_map_service/src/llist.c", "Street_map_service/src/Street_map_service/src/map.c", "Street_map_service/src/Street_map_service/src/cgc_map.h", "Street_map_service/src/Street_map_service/src/service.c", "Street_map_service/src/Street_map_service/src/cgc_ui.h", "Street_map_service/src/Street_map_service/src/ui.c"]},
+{"name":"Street_map_service/src/Street_map_service/src/cgc_service.h","included_by":["Street_map_service/src/Street_map_service/src/llist.c", "Street_map_service/src/Street_map_service/src/map.c", "Street_map_service/src/Street_map_service/src/service.c", "Street_map_service/src/Street_map_service/src/cgc_ui.h", "Street_map_service/src/Street_map_service/src/ui.c"]},
+{"name":"Street_map_service/src/Street_map_service/src/llist.c"},
+{"name":"Street_map_service/src/Street_map_service/src/cgc_map.h","included_by":["Street_map_service/src/Street_map_service/src/map.c", "Street_map_service/src/Street_map_service/src/service.c", "Street_map_service/src/Street_map_service/src/cgc_ui.h", "Street_map_service/src/Street_map_service/src/ui.c"]},
+{"name":"Street_map_service/src/Street_map_service/src/map.c"},
+{"name":"Street_map_service/src/Street_map_service/src/cgc_ui.h","included_by":["Street_map_service/src/Street_map_service/src/service.c"]},
+{"name":"Street_map_service/src/Street_map_service/src/service.c"},
+{"name":"Street_map_service/src/Street_map_service/src/ui.c"}
+],
+"ignore":[
+"Street_map_service/src/Street_map_service/src/map.c"
+],
+"macros":[
+   {"name": "PATCHED", "value": false }
+],
+"disable_eval":[
+   "cgc_add_address","cgc_add_intersection","cgc_add_new_address","cgc_add_new_intersection","cgc_add_new_road","cgc_add_road","cgc_allocate","cgc_atof","cgc_atoi","cgc_bzero","cgc_calloc","cgc_create_double_list","cgc_create_single_list","cgc_deallocate","cgc_delete_double_list_node","cgc_delete_intersection","cgc_find_pintersection","cgc_find_pintersection_addresses","cgc_float_to_str","cgc_floor","cgc_free","cgc_get_char32","cgc_get_last_element_d","cgc_get_last_element_s","cgc_get_positive_float","cgc_get_positive_int","cgc_get_route","cgc_init_map","cgc_init_turnList","cgc_insert_double_list_node","cgc_insert_single_list_node","cgc_int_to_str","cgc_isdigit","cgc_isinf","cgc_is_in_turn_list","cgc_isnan","cgc_isspace","cgc_itoa","cgc_log10","cgc_malloc","cgc_memcpy","cgc_memset","cgc_name_map","cgc_pow","cgc_print_addresses","cgc_printf","cgc_print_intersections","cgc_print_map_info","cgc_print_roads","cgc_prompt_loop","cgc_push_to_turn_list","cgc_putc","cgc_puts","cgc_receive","cgc_receive_until","cgc_rint","cgc_round","cgc_round_away_from_zero","cgc_select_address","cgc_select_intersection","cgc_select_road","cgc_show_route","cgc_strcat","cgc_strchr","cgc_strcmp","cgc_strcpy","cgc_strlen","cgc_strncat","cgc__terminate","cgc_transmit","cgc_vprintf","__cxa_finalize@@GLIBC_2.1.3","data_start","deregister_tm_clones","__do_global_dtors_aux","__do_global_dtors_aux_fini_array_entry","_fini","frame_dummy","__frame_dummy_init_array_entry","__gmon_start__","_init","__init_array_end","__init_array_start","_ITM_deregisterTMCloneTable","_ITM_registerTMCloneTable",".L129",".L130",".L132",".L133",".L134",".L135",".L136",".L137","__libc_csu_fini","__libc_csu_init","__libc_start_main@@GLIBC_2.0","main","register_tm_clones","_start","__x86.get_pc_thunk.ax","__x86.get_pc_thunk.bx","__x86.get_pc_thunk.dx"
+],
+"enable_eval":[
+   "cgc_strlen"
+],
+"struct_ptrs":{
+"pdListNode":"dListNode",
+"psListNode":"sListNode",
+"pdList":"dList",
+"psList":"sList",
+"pintersection":"intersection",
+"proad":"road",
+"pmap":"map",
+"paddress":"address",
+"prouteList":"routeList"
+}
+}

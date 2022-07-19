@@ -1,0 +1,530 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>6e1059406c91f04a709ff7322ae7138280c12f4a57e4cccfd54903821af8138706be628e559475df71271753d848b80e</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>This is Mapper.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>B\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Road Name:\x0a</data></match></read>
+    <write><data>192\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Road Length:\x0a</data></match></read>
+    <write><data>7\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>B\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Road Name:\x0a</data></match></read>
+    <write><data>Vn\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Road Length:\x0a</data></match></read>
+    <write><data>805\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>B\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Road Name:\x0a</data></match></read>
+    <write><data>nmGb02lLwJ\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Road Length:\x0a</data></match></read>
+    <write><data>59\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>B\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Road Name:\x0a</data></match></read>
+    <write><data>D6tZR\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Road Length:\x0a</data></match></read>
+    <write><data>0\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Invalid Road.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>B\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Road Name:\x0a</data></match></read>
+    <write><data>PzdhcF3US\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Road Length:\x0a</data></match></read>
+    <write><data>4991\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>D\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>1\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>2\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Prev intersection on road 1.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>This road has no intersections to choose.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Prev intersection on road 2.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>This road has no intersections to choose.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>D\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>1\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>3\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Prev intersection on road 1.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d1:\x0a</data></match></read>
+    <write><data>1\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Distance to prev\x0a</data></match></read>
+    <write><data>341106\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Prev intersection on road 2.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>This road has no intersections to choose.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>D\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>3\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>1\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Prev intersection on road 1.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>O\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Distance to next\x0a</data></match></read>
+    <write><data>486123\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Prev intersection on road 2.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d2:\x0a</data></match></read>
+    <write><data>2\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Distance to prev\x0a</data></match></read>
+    <write><data>02\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>D\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>4\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>1\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Prev intersection on road 1.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>This road has no intersections to choose.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Prev intersection on road 2.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d3:\x0a</data></match></read>
+    <write><data>2\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Distance to prev\x0a</data></match></read>
+    <write><data>84\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Distance to next\x0a</data></match></read>
+    <write><data>598073\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>D\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>4\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>4\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Invalid intersection.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>D\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>1\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>1\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Invalid intersection.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>D\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>3\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>4\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Prev intersection on road 1.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d2:\x0a</data></match></read>
+    <write><data>1\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Distance to prev\x0a</data></match></read>
+    <write><data>8\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Distance to next\x0a</data></match></read>
+    <write><data>58\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Prev intersection on road 2.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>O\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Distance to next\x0a</data></match></read>
+    <write><data>3415352182</data></write>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>D\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>1\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>2\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Prev intersection on road 1.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>4\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Distance to prev\x0a</data></match></read>
+    <write><data>4\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Prev intersection on road 2.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d1:\x0a</data></match></read>
+    <write><data>1\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Distance to prev\x0a</data></match></read>
+    <write><data>5\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>D\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>4\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>1\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Prev intersection on road 1.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d2:\x0a</data></match></read>
+    <write><data>1\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Distance to prev\x0a</data></match></read>
+    <write><data>517915\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Distance to next\x0a</data></match></read>
+    <write><data>48\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Prev intersection on road 2.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d5:\x0a</data></match></read>
+    <write><data>2\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Distance to prev\x0a</data></match></read>
+    <write><data>5207448021</data></write>
+    <read><delim>\x0a</delim><match><data>Distance to next\x0a</data></match></read>
+    <write><data>0339\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>D\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>1\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>4\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Prev intersection on road 1.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d6:\x0a</data></match></read>
+    <write><data>1\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Distance to prev\x0a</data></match></read>
+    <write><data>4167101\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Distance to next\x0a</data></match></read>
+    <write><data>867785\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Prev intersection on road 2.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>O\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Distance to next\x0a</data></match></read>
+    <write><data>67324\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>C\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Street Number: \x0a</data></match></read>
+    <write><data>4639\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Resident: \x0a</data></match></read>
+    <write><data>yLKFM77\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>2\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d2:\x0a</data></match></read>
+    <write><data>2\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Distance to intersection: \x0a</data></match></read>
+    <write><data>78\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>O\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>C\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Street Number: \x0a</data></match></read>
+    <write><data>4\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Resident: \x0a</data></match></read>
+    <write><data>U2QGBqF\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>1\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d7:\x0a</data></match></read>
+    <write><data>1\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Distance to intersection: \x0a</data></match></read>
+    <write><data>6722\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d7:\x0a</data></match></read>
+    <write><data>2\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Distance to intersection: \x0a</data></match></read>
+    <write><data>2184\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>C\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Street Number: \x0a</data></match></read>
+    <write><data>1505\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Resident: \x0a</data></match></read>
+    <write><data>B1gnNjAJ\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>4\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>O\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>2\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Distance to intersection: \x0a</data></match></read>
+    <write><data>72\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>C\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Street Number: \x0a</data></match></read>
+    <write><data>81\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Resident: \x0a</data></match></read>
+    <write><data>faE6zkp\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>2\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d2:\x0a</data></match></read>
+    <write><data>1\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Distance to intersection: \x0a</data></match></read>
+    <write><data>16\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>O\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>C\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Street Number: \x0a</data></match></read>
+    <write><data>1\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Resident: \x0a</data></match></read>
+    <write><data>1ItdrCFyLE\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>3\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>O\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>O\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>C\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Street Number: \x0a</data></match></read>
+    <write><data>8\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Resident: \x0a</data></match></read>
+    <write><data>ixGTpf4\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>4\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>O\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>1\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Distance to intersection: \x0a</data></match></read>
+    <write><data>7\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>C\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Street Number: \x0a</data></match></read>
+    <write><data>5276\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Resident: \x0a</data></match></read>
+    <write><data>Snvf9\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>2\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d2:\x0a</data></match></read>
+    <write><data>2\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Distance to intersection: \x0a</data></match></read>
+    <write><data>878\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d2:\x0a</data></match></read>
+    <write><data>1\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Distance to intersection: \x0a</data></match></read>
+    <write><data>055\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>C\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Street Number: \x0a</data></match></read>
+    <write><data>03\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Resident: \x0a</data></match></read>
+    <write><data>WXq\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>3\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d3:\x0a</data></match></read>
+    <write><data>1\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Distance to intersection: \x0a</data></match></read>
+    <write><data>4\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d3:\x0a</data></match></read>
+    <write><data>1\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Distance to intersection: \x0a</data></match></read>
+    <write><data>8\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>C\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Street Number: \x0a</data></match></read>
+    <write><data>8\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Resident: \x0a</data></match></read>
+    <write><data>zMO\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>2\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>O\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>O\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>C\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Street Number: \x0a</data></match></read>
+    <write><data>620\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Resident: \x0a</data></match></read>
+    <write><data>5h\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>1\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>O\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d7:\x0a</data></match></read>
+    <write><data>4\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Distance to intersection: \x0a</data></match></read>
+    <write><data>284\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>C\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Street Number: \x0a</data></match></read>
+    <write><data>06\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Resident: \x0a</data></match></read>
+    <write><data>CFOfUZ0u1kiuiBlY2B7O42Srwl\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>L\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>The map Newville contains 4 roads.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x281\x29 192 is 7.00000 units long\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x282\x29 Vn is 805.00000 units long\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x283\x29 nmGb02lLwJ is 59.00000 units long\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x284\x29 PzdhcF3US is 4991.00000 units long\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Select Road by \x28N\x29umber\x2c or \x28L\x29ist or \x280\x29Exit.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d4:\x0a</data></match></read>
+    <write><data>3\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d3:\x0a</data></match></read>
+    <write><data>3\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Distance to intersection: \x0a</data></match></read>
+    <write><data>2\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>L\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>The road nmGb02lLwJ contains 3 intersections.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x281\x29\x09nmGb02lLwJ intersects 192\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x09\x09486123.00000 units before the intersection of PzdhcF3US\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x282\x29\x09nmGb02lLwJ intersects PzdhcF3US\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x09\x098.00000 units after the intersection of 192\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x09\x0958.00000 units before the intersection of 192\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x283\x29\x09nmGb02lLwJ intersects 192\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>\x09\x090.00000 units after the intersection of PzdhcF3US\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Select intersection by \x28N\x29umber\x2c \x28L\x29ist\x2c or set to N\x28O\x29TDEFINED.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>N\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>1\x2d3:\x0a</data></match></read>
+    <write><data>0\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Invalid number.\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>choice:\x0a</data></match></read>
+    <write><data>0\x0a</data></write>
+    <write><data>0\x0a</data></write>
+</replay>
+</pov>

@@ -1,0 +1,15 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>cb4774dba352891a55a394264cce96b66bb086f394407d204032a91fb0d09620cccaa6fe3ebc7bf0331627ef613008d0</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d Movie Rental Service v0.1 \x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>   . . . Initializing the inventory . . .\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>         \x28movie info from IMDb.com\x29\x0a</data></match></read>
+    <read><length>45</length><match><data>\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d</data></match></read>
+    <read><length>77</length><match><data>\x0a1. List movies\x0a2. Rent movie\x0a3. Return movie\x0a4. Admin mode\x0a5. Exit\x0a\x0aChoice: </data></match></read>
+    <write><data>5 quit\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Bye!\x0a</data></match></read>
+</replay>
+</pov>

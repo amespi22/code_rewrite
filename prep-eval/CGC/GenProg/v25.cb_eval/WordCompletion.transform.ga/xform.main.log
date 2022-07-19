@@ -1,0 +1,163 @@
+Starting pre-processing
+Processing file WordCompletion/src/include/libcgc.h
+Processing file WordCompletion/src/WordCompletion/src/cgc_words.h
+Pre-processing done
+Starting Transformations
+Start expand_case pass
+End pass
+Start expand_conditionals pass
+End pass
+Start expand_blockItems pass
+End pass
+Start if_else_break pass
+End pass
+Start insert_loop_braces pass
+End pass
+Start expand_if_else pass
+End pass
+Start expand_sizeof pass
+End pass
+Start single_declarations pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+all done with passes
+0 :  [cgc_strlen] <class 'list'>  [all function decls] 
+ - cgc_size_t ret ;
+1 :  [cgc_transmit_all] <class 'list'>  [all function decls] 
+ - cgc_size_t rx_bytes ;
+ - cgc_size_t total ;
+ - int ret ;
+ - int tlv4 ;
+ - void * tlv3 ;
+ - cgc_size_t tlv2 ;
+ - cgc_size_t * tlv1 ;
+ - unsigned int tlv5 ;
+ - cgc__terminate ( tlv5 ) ;
+2 :  [cgc_transmit_str] <class 'list'>  [all function decls] 
+ - cgc_size_t len ;
+ - char * tlv1 ;
+3 :  [cgc_receive_all] <class 'list'>  [all function decls] 
+ - cgc_size_t rx_bytes ;
+ - cgc_size_t total ;
+ - int ret ;
+ - int tlv4 ;
+ - void * tlv3 ;
+ - cgc_size_t tlv2 ;
+ - cgc_size_t * tlv1 ;
+ - unsigned int tlv5 ;
+ - cgc__terminate ( tlv5 ) ;
+4 :  [cgc_readline] <class 'list'>  [all function decls] 
+ - cgc_size_t count ;
+ - int ret ;
+ - char c ;
+ - cgc_size_t rx_bytes ;
+ - int tlv4 ;
+ - void * tlv3 ;
+ - cgc_size_t tlv2 ;
+ - cgc_size_t * tlv1 ;
+ - unsigned int tlv5 ;
+ - cgc__terminate ( tlv5 ) ;
+5 :  [cgc_rotN] <class 'list'>  [all function decls] 
+ - int temp ;
+6 :  [cgc_strrotcpy] <class 'list'>  [all function decls] 
+ - cgc_size_t ret ;
+ - char tlv2 ;
+ - int tlv1 ;
+7 :  [cgc_init] <class 'list'>  [all function decls] 
+ - int ret ;
+ - cgc_size_t numWords ;
+ - cgc_size_t total ;
+ - int i ;
+ - cgc_size_t temp ;
+ - char * pTemp ;
+ - cgc_size_t tlv3 ;
+ - int tlv2 ;
+ - void * * tlv1 ;
+ - cgc_size_t tlv6 ;
+ - int tlv5 ;
+ - void * * tlv4 ;
+ - char * tlv7 ;
+ - char * tlv10 ;
+ - char * tlv9 ;
+ - int tlv8 ;
+8 :  [cgc_toInt] <class 'list'>  [all function decls] 
+ - int ret ;
+9 :  [cgc_RANDOM] <class 'list'>  [all function decls] 
+ - 
+10 :  [cgc_strcmp] <class 'list'>  [all function decls] 
+ - int i ;
+11 :  [cgc_my_srand] <class 'list'>  [all function decls] 
+ - 
+12 :  [cgc_scramble] <class 'list'>  [all function decls] 
+ - int i ;
+ - uint32_t r ;
+13 :  [main] <class 'list'>  [all function decls] 
+ - char buf [ BUF_SIZE ] = { } ;
+ - int i ;
+ - int ret ;
+ - int temp ;
+ - cgc_size_t sret ;
+ - char c ;
+ - cgc_transmit_str ( ENTER_NUM_MSG ) ;
+ - int tlv1 ;
+ - cgc_transmit_str ( FINAL_RND_MSG ) ;
+ - cgc_transmit_str ( buf ) ;
+ - int tlv2 ;
+ - char tlv11 ;
+ - char tlv10 ;
+ - int tlv12 ;
+ - uint32_t tlv4 ;
+ - cgc_my_srand ( tlv4 ) ;
+ - char tlv14 ;
+ - char tlv13 ;
+ - char * tlv7 ;
+ - char * tlv6 ;
+ - cgc_size_t tlv5 ;
+ - char * tlv9 ;
+ - cgc_size_t tlv8 ;
+ - char * tlv16 ;
+ - char * tlv15 ;
+ - cgc_transmit_str ( buf ) ;
+ - int tlv3 ;
+ - cgc_transmit_str ( LOSE_MSG ) ;
+ - cgc_transmit_str ( WIN_MSG ) ;
+ - char * tlv19 ;
+ - char * tlv18 ;
+ - cgc_size_t tlv17 ;
+ - char * tlv21 ;
+ - cgc_size_t tlv20 ;
+ - char * tlv23 ;
+ - char * tlv22 ;
+ - cgc_transmit_str ( WORD_MSG ) ;
+ - cgc_transmit_str ( NEXT_WORD_MSG ) ;
+ - cgc_transmit_str ( LOSE_MSG ) ;
+Processing [cgc_strlen] :
+Processing [cgc_transmit_all] :
+Processing [cgc_transmit_str] :
+Processing [cgc_receive_all] :
+Processing [cgc_readline] :
+Processing [cgc_rotN] :
+Processing [cgc_strrotcpy] :
+Processing [cgc_init] :
+Processing [cgc_toInt] :
+Processing [cgc_RANDOM] :
+Processing [cgc_strcmp] :
+Processing [cgc_my_srand] :
+Processing [cgc_scramble] :
+Processing [main] :
+Writing output file xform/t_main.c
+
+real	0m22.791s
+user	0m22.739s
+sys	0m0.048s

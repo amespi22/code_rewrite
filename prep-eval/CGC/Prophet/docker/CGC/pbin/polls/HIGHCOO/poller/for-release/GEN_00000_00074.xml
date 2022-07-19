@@ -1,0 +1,20 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>41446a9ca5d58b921ffa3b1d15b1670b3e9cc535ac977addb37d378f5954119a81f2a4ea5f416cba1c263a4a73d2f6c8</seed>
+<replay>
+    <write><data>\xd4\x05\x00\x00</data></write>
+    <write><data>\x0f\x01</data></write>
+    <write><data>UipxClA4f2XeWAj6mRbcAiELs7EZ1W3KvV\x07JqlrBKQXOeonx0mlcG1Nk6G1uzQjoGfZ2pFsFzabPFIDWpAxIKxdSEaXC3j9d0sKDMtP2UDDekRubWFXJfr5UqP8kyKnjBDDbAA0YsyrdSmqrkZwkpzkGhtq4hi3TERj7tFAWX\x07YldhcINLerLrPA94da2bWQ8P7uDvbS3VhHtzB23eTWAltmCaHqFokXKwOddMMa2PEZZ5c5K8OqX3xIkRYmSYwGyNnkZYBJ85RClL\x07</data></write>
+    <read><length>4</length><match><data>2y\x06\x00</data></match></read>
+    <write><data>j\x0d\x03\x00</data></write>
+    <read><length>4</length><match><pcre>(.+)</pcre></match></read>
+    <read><length>2</length><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <write><data>\x90v\x12\x00</data></write>
+    <read><length>4</length><match><data>\x01\x00\x00\x00</data></match></read>
+</replay>
+</pov>

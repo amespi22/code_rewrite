@@ -1,0 +1,64 @@
+{
+"DEPEND_VERSION":"1.0.1",
+"filenames":[{"name":"FSK_BBS/src/include/libcgc.h","included_by":["FSK_BBS/src/FSK_BBS/lib/calloc.c", "FSK_BBS/src/FSK_BBS/lib/free.c", "FSK_BBS/src/FSK_BBS/lib/malloc.c", "FSK_BBS/src/FSK_BBS/lib/malloc_common.c", "FSK_BBS/src/FSK_BBS/lib/memchr.c", "FSK_BBS/src/FSK_BBS/lib/memcmp.c", "FSK_BBS/src/FSK_BBS/lib/memset.c", "FSK_BBS/src/FSK_BBS/lib/cgc_stdlib.h", "FSK_BBS/src/FSK_BBS/lib/realloc.c", "FSK_BBS/src/FSK_BBS/lib/strchr.c", "FSK_BBS/src/FSK_BBS/lib/strcmp.c", "FSK_BBS/src/FSK_BBS/lib/strlen.c", "FSK_BBS/src/FSK_BBS/lib/strncasecmp.c", "FSK_BBS/src/FSK_BBS/lib/strncmp.c", "FSK_BBS/src/FSK_BBS/lib/strsep.c"]},
+{"name":"FSK_BBS/src/FSK_BBS/lib/cgc_stdarg.h","included_by":["FSK_BBS/src/FSK_BBS/lib/cgc_stdlib.h"]},
+{"name":"FSK_BBS/src/FSK_BBS/lib/cgc_stddef.h","included_by":["FSK_BBS/src/FSK_BBS/lib/cgc_stdlib.h", "FSK_BBS/src/FSK_BBS/lib/cgc_string.h"]},
+{"name":"FSK_BBS/src/FSK_BBS/lib/cgc_stdlib.h","included_by":["FSK_BBS/src/FSK_BBS/lib/calloc.c", "FSK_BBS/src/FSK_BBS/lib/free.c", "FSK_BBS/src/FSK_BBS/lib/malloc.c", "FSK_BBS/src/FSK_BBS/lib/malloc_common.c", "FSK_BBS/src/FSK_BBS/lib/printf.c", "FSK_BBS/src/FSK_BBS/lib/realloc.c", "FSK_BBS/src/FSK_BBS/lib/strdup.c", "FSK_BBS/src/FSK_BBS/lib/strncasecmp.c", "FSK_BBS/src/FSK_BBS/lib/strncmp.c", "FSK_BBS/src/FSK_BBS/src/bbs.c", "FSK_BBS/src/FSK_BBS/src/buffer.c", "FSK_BBS/src/FSK_BBS/src/checksum.c", "FSK_BBS/src/FSK_BBS/src/ecc.c", "FSK_BBS/src/FSK_BBS/src/frame.c", "FSK_BBS/src/FSK_BBS/src/modem.c"]},
+{"name":"FSK_BBS/src/FSK_BBS/lib/cgc_string.h","included_by":["FSK_BBS/src/FSK_BBS/lib/calloc.c", "FSK_BBS/src/FSK_BBS/lib/memcpy.c", "FSK_BBS/src/FSK_BBS/lib/memmove.c", "FSK_BBS/src/FSK_BBS/lib/printf.c", "FSK_BBS/src/FSK_BBS/lib/realloc.c", "FSK_BBS/src/FSK_BBS/lib/strcat.c", "FSK_BBS/src/FSK_BBS/lib/strcpy.c", "FSK_BBS/src/FSK_BBS/lib/strdup.c", "FSK_BBS/src/FSK_BBS/lib/strlen.c", "FSK_BBS/src/FSK_BBS/lib/strncpy.c", "FSK_BBS/src/FSK_BBS/lib/strsep.c", "FSK_BBS/src/FSK_BBS/src/bbs.c", "FSK_BBS/src/FSK_BBS/src/buffer.c", "FSK_BBS/src/FSK_BBS/src/ecc.c", "FSK_BBS/src/FSK_BBS/src/frame.c", "FSK_BBS/src/FSK_BBS/src/modem.c"]},
+{"name":"FSK_BBS/src/FSK_BBS/lib/calloc.c"},
+{"name":"FSK_BBS/src/FSK_BBS/lib/cgc_ctype.h","included_by":["FSK_BBS/src/FSK_BBS/lib/ctype.c", "FSK_BBS/src/FSK_BBS/lib/strcasecmp.c", "FSK_BBS/src/FSK_BBS/lib/strncasecmp.c", "FSK_BBS/src/FSK_BBS/src/bbs.c"]},
+{"name":"FSK_BBS/src/FSK_BBS/lib/ctype.c"},
+{"name":"FSK_BBS/src/FSK_BBS/lib/cgc_stdint.h","included_by":["FSK_BBS/src/FSK_BBS/lib/cgc_malloc.h", "FSK_BBS/src/FSK_BBS/lib/memchr.c", "FSK_BBS/src/FSK_BBS/src/bbs.c", "FSK_BBS/src/FSK_BBS/src/buffer.c", "FSK_BBS/src/FSK_BBS/src/checksum.c", "FSK_BBS/src/FSK_BBS/src/ecc.c", "FSK_BBS/src/FSK_BBS/src/frame.c", "FSK_BBS/src/FSK_BBS/src/modem.c"]},
+{"name":"FSK_BBS/src/FSK_BBS/lib/cgc_malloc.h","included_by":["FSK_BBS/src/FSK_BBS/lib/free.c", "FSK_BBS/src/FSK_BBS/lib/malloc.c", "FSK_BBS/src/FSK_BBS/lib/malloc_common.c", "FSK_BBS/src/FSK_BBS/lib/realloc.c"]},
+{"name":"FSK_BBS/src/FSK_BBS/lib/free.c"},
+{"name":"FSK_BBS/src/FSK_BBS/lib/malloc.c"},
+{"name":"FSK_BBS/src/FSK_BBS/lib/malloc_common.c"},
+{"name":"FSK_BBS/src/FSK_BBS/lib/memchr.c"},
+{"name":"FSK_BBS/src/FSK_BBS/lib/memcmp.c"},
+{"name":"FSK_BBS/src/FSK_BBS/lib/memcpy.c"},
+{"name":"FSK_BBS/src/FSK_BBS/lib/memmove.c"},
+{"name":"FSK_BBS/src/FSK_BBS/lib/memset.c"},
+{"name":"FSK_BBS/src/FSK_BBS/lib/printf.c"},
+{"name":"FSK_BBS/src/FSK_BBS/lib/realloc.c"},
+{"name":"FSK_BBS/src/FSK_BBS/lib/strcasecmp.c"},
+{"name":"FSK_BBS/src/FSK_BBS/lib/strcat.c"},
+{"name":"FSK_BBS/src/FSK_BBS/lib/strchr.c"},
+{"name":"FSK_BBS/src/FSK_BBS/lib/strcmp.c"},
+{"name":"FSK_BBS/src/FSK_BBS/lib/strcpy.c"},
+{"name":"FSK_BBS/src/FSK_BBS/lib/strdup.c"},
+{"name":"FSK_BBS/src/FSK_BBS/lib/strlen.c"},
+{"name":"FSK_BBS/src/FSK_BBS/lib/strncasecmp.c"},
+{"name":"FSK_BBS/src/FSK_BBS/lib/strncmp.c"},
+{"name":"FSK_BBS/src/FSK_BBS/lib/strncpy.c"},
+{"name":"FSK_BBS/src/FSK_BBS/lib/strsep.c"},
+{"name":"FSK_BBS/src/FSK_BBS/lib/strtol.c"},
+{"name":"FSK_BBS/src/FSK_BBS/src/cgc_modem.h","included_by":["FSK_BBS/src/FSK_BBS/src/bbs.c", "FSK_BBS/src/FSK_BBS/src/modem.c"]},
+{"name":"FSK_BBS/src/FSK_BBS/src/bbs.c"},
+{"name":"FSK_BBS/src/FSK_BBS/src/cgc_buffer.h","included_by":["FSK_BBS/src/FSK_BBS/src/buffer.c", "FSK_BBS/src/FSK_BBS/src/checksum.c", "FSK_BBS/src/FSK_BBS/src/frame.c", "FSK_BBS/src/FSK_BBS/src/modem.c"]},
+{"name":"FSK_BBS/src/FSK_BBS/src/buffer.c"},
+{"name":"FSK_BBS/src/FSK_BBS/src/cgc_checksum.h","included_by":["FSK_BBS/src/FSK_BBS/src/checksum.c", "FSK_BBS/src/FSK_BBS/src/frame.c"]},
+{"name":"FSK_BBS/src/FSK_BBS/src/checksum.c"},
+{"name":"FSK_BBS/src/FSK_BBS/src/cgc_ecc.h","included_by":["FSK_BBS/src/FSK_BBS/src/ecc.c", "FSK_BBS/src/FSK_BBS/src/frame.c", "FSK_BBS/src/FSK_BBS/src/modem.c"]},
+{"name":"FSK_BBS/src/FSK_BBS/src/ecc.c"},
+{"name":"FSK_BBS/src/FSK_BBS/src/cgc_frame.h","included_by":["FSK_BBS/src/FSK_BBS/src/frame.c", "FSK_BBS/src/FSK_BBS/src/modem.c"]},
+{"name":"FSK_BBS/src/FSK_BBS/src/frame.c"},
+{"name":"FSK_BBS/src/FSK_BBS/src/cgc_modem_data.h","included_by":["FSK_BBS/src/FSK_BBS/src/modem.c"]},
+{"name":"FSK_BBS/src/FSK_BBS/src/cgc_sin.h","included_by":["FSK_BBS/src/FSK_BBS/src/modem.c"]},
+{"name":"FSK_BBS/src/FSK_BBS/src/cgc_comp.h","included_by":["FSK_BBS/src/FSK_BBS/src/modem.c"]},
+{"name":"FSK_BBS/src/FSK_BBS/src/modem.c"}
+],
+"ignore":[
+"FSK_BBS/src/FSK_BBS/src/bbs.c"
+],
+"macros":[
+   {"name": "PATCHED", "value": false }
+],
+"disable_eval":[
+   "allocate_new_blk","bandpass_filter","cgc_allocate","cgc_bbs_help","cgc_bbs_menu","cgc_bbs_rx","cgc_buffer_init","cgc_buffer_read_bit","cgc_buffer_read_bits","cgc_buffer_read_bytes","cgc_buffer_read_remaining","cgc_buffer_read_seek","cgc_buffer_read_tell","cgc_buffer_write_bit","cgc_buffer_write_bits","cgc_buffer_write_bytes","cgc_buffer_write_seek","cgc_buffer_write_tell","cgc_calloc","cgc_checksum8","cgc_coalesce","cgc_deallocate","cgc_do_list","cgc_do_post","cgc_do_read","cgc_ecc_decode","cgc_ecc_encode","cgc_ecc_init","cgc_exit","cgc_exit","cgc_exit","cgc_exit","cgc_exit","cgc_exit","cgc_exit","cgc_exit","cgc_exit","cgc_exit","cgc_exit","cgc_exit","cgc_exit","cgc_exit","cgc_exit","cgc_fdprintf","cgc_fdwait","cgc_find_message","cgc_find_thread","cgc_flush_output","cgc_frame_decode","cgc_frame_encode","cgc_free","cgc_get_byte","cgc_get_size_class","cgc_handle_list","cgc_handle_menu","cgc_handle_post","cgc_insert_into_flist","cgc_isalnum","cgc_isalpha","cgc_isascii","cgc_isblank","cgc_iscntrl","cgc_isdigit","cgc_isgraph","cgc_islower","cgc_isprint","cgc_ispunct","cgc_isspace","cgc_isupper","cgc_isxdigit","cgc_malloc","cgc_memchr","cgc_memcmp","cgc_memcpy","cgc_memmove","cgc_memset","cgc_modem_decode","cgc__modem_encode","cgc_modem_encode","cgc_modem_encode_frame","cgc_modem_init","cgc_modem_loop","cgc_modem_output","cgc_output_number_printf","cgc_output_number_sprintf","cgc_ready_to_read","cgc_realloc","cgc_receive","cgc_remove_from_flist","cgc_send_message","cgc_send_message_brief","cgc_send_message_list","cgc_send_n_bytes","cgc_send_thread","cgc_send_thread_list","cgc_sprintf","cgc_strcasecmp","cgc_strcat","cgc_strchr","cgc_strcmp","cgc_strcpy","cgc_strdup","cgc_strlen","cgc_strncasecmp","cgc_strncmp","cgc_strncpy","cgc_strsep","cgc_strtol","cgc_strtoul","cgc__terminate","cgc_toascii","cgc_tolower","cgc_toupper","cgc_transmit","cgc_write_byte","comp_decode","comp_encode","convolution","__cxa_finalize@@GLIBC_2.1.3","data_start","deregister_tm_clones","__do_global_dtors_aux","__do_global_dtors_aux_fini_array_entry","fastsin","filter","find_fit","_fini","frame_dummy","__frame_dummy_init_array_entry","free_huge","__gmon_start__","increment_read","increment_write","_init","__init_array_end","__init_array_start","_ITM_deregisterTMCloneTable","_ITM_registerTMCloneTable",".L101",".L102",".L103",".L104",".L73",".L74",".L76",".L77",".L78",".L79",".L99","__libc_csu_fini","__libc_csu_init","__libc_start_main@@GLIBC_2.0","lowpass_filter","main","malloc_huge","register_tm_clones","remove_from_blist","send_string","_start","t.1393","__x86.get_pc_thunk.ax","__x86.get_pc_thunk.bx","__x86.get_pc_thunk.cx","__x86.get_pc_thunk.dx","__x86.get_pc_thunk.si"
+],
+"enable_eval":[
+   "cgc_strlen"
+],
+"struct_ptrs":{
+}
+}

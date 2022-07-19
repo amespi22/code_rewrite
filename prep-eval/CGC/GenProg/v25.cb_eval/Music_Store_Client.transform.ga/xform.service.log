@@ -1,0 +1,375 @@
+Starting pre-processing
+Processing file Music_Store_Client/src/include/libcgc.h
+Processing file Music_Store_Client/src/Music_Store_Client/lib/cgc_libc.h
+Processing file Music_Store_Client/src/Music_Store_Client/lib/libc.c
+Processing file Music_Store_Client/src/Music_Store_Client/src/cgc_service.h
+Pre-processing done
+Starting Transformations
+Start expand_case pass
+End pass
+Start expand_conditionals pass
+End pass
+Start expand_blockItems pass
+End pass
+Start if_else_break pass
+End pass
+Start insert_loop_braces pass
+End pass
+Start expand_if_else pass
+End pass
+Start expand_sizeof pass
+End pass
+Start single_declarations pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+all done with passes
+0 :  [cgc_setValue] <class 'list'>  [all function decls] 
+ - char * ptr ;
+ - int count ;
+ - int i ;
+ - char * delim ;
+ - void * tlv3 ;
+ - void * tlv2 ;
+ - cgc_size_t tlv1 ;
+1 :  [cgc_parseResultSize] <class 'list'>  [all function decls] 
+ - char * start ;
+ - char * end ;
+ - char key [ KEY_SIZE ] = { 0 } ;
+ - char value [ RESULT_VALUE_SIZE ] = { 0 } ;
+ - int count ;
+ - int i ;
+ - char * delim ;
+ - int ret ;
+ - int num_results ;
+ - int tlv1 ;
+ - void * tlv4 ;
+ - void * tlv3 ;
+ - cgc_size_t tlv2 ;
+ - const char * tlv6 = key ;
+ - const char * tlv5 = NUM_STR ;
+ - char * tlv8 ;
+ - char * tlv7 ;
+ - const char * tlv9 = value ;
+2 :  [cgc_parseBalanceResult] <class 'list'>  [all function decls] 
+ - char * start ;
+ - char * end ;
+ - char key [ KEY_SIZE ] = { 0 } ;
+ - char value [ RESULT_VALUE_SIZE ] = { 0 } ;
+ - int count ;
+ - int i ;
+ - char * delim ;
+ - int ret ;
+ - int balance ;
+ - int tlv1 ;
+ - void * tlv4 ;
+ - void * tlv3 ;
+ - cgc_size_t tlv2 ;
+ - const char * tlv6 = key ;
+ - const char * tlv5 = BAL_STR ;
+ - char * tlv8 ;
+ - char * tlv7 ;
+ - const char * tlv9 = value ;
+3 :  [cgc_parseSearchResult] <class 'list'>  [all function decls] 
+ - char * start ;
+ - char * end ;
+ - char key [ KEY_SIZE ] = { 0 } ;
+ - int count ;
+ - int i ;
+ - char * delim ;
+ - int ret ;
+ - void * tlv8 ;
+ - int tlv7 ;
+ - cgc_size_t tlv6 ;
+ - int tlv1 ;
+ - void * tlv11 ;
+ - void * tlv10 ;
+ - cgc_size_t tlv9 ;
+ - const char * tlv16 = key ;
+ - const char * tlv15 = SONG_ID_STR ;
+ - void * tlv14 ;
+ - int tlv13 ;
+ - cgc_size_t tlv12 ;
+ - int tlv2 ;
+ - char * tlv18 ;
+ - char * tlv17 ;
+ - const char * tlv20 = key ;
+ - const char * tlv19 = PRICE_STR ;
+ - int tlv3 ;
+ - char * tlv22 ;
+ - char * tlv21 ;
+ - const char * tlv24 = key ;
+ - const char * tlv23 = ARTIST_STR ;
+ - int tlv4 ;
+ - char * tlv26 ;
+ - char * tlv25 ;
+ - const char * tlv28 = key ;
+ - const char * tlv27 = ALBUM_STR ;
+ - int tlv5 ;
+ - char * tlv30 ;
+ - char * tlv29 ;
+ - const char * tlv32 = key ;
+ - const char * tlv31 = SONG_STR ;
+ - char * tlv34 ;
+ - char * tlv33 ;
+4 :  [cgc_receiveBalance] <class 'list'>  [all function decls] 
+ - char buf [ 1024 ] = { 0 } ;
+ - int bytes_read ;
+ - int balance ;
+ - int tlv3 ;
+ - char * tlv2 ;
+ - cgc_size_t tlv1 ;
+ - char * tlv4 ;
+ - unsigned int tlv5 ;
+ - cgc__terminate ( tlv5 ) ;
+5 :  [cgc_receiveNumResults] <class 'list'>  [all function decls] 
+ - char buf [ 1024 ] = { 0 } ;
+ - int bytes_read ;
+ - int num_results ;
+ - int tlv3 ;
+ - char * tlv2 ;
+ - cgc_size_t tlv1 ;
+ - char * tlv4 ;
+ - unsigned int tlv5 ;
+ - cgc__terminate ( tlv5 ) ;
+6 :  [cgc_receiveSearchResults] <class 'list'>  [all function decls] 
+ - char buf [ 1024 ] = { 0 } ;
+ - int ret ;
+ - int bytes_read ;
+ - int num_results ;
+ - int tlv1 ;
+ - int tlv4 ;
+ - char * tlv3 ;
+ - cgc_size_t tlv2 ;
+ - unsigned int tlv5 ;
+ - cgc__terminate ( tlv5 ) ;
+ - char * tlv7 ;
+ - Song * tlv6 ;
+ - unsigned int tlv8 ;
+ - cgc__terminate ( tlv8 ) ;
+7 :  [cgc_createSearchString] <class 'list'>  [all function decls] 
+ - char * buffer ;
+ - int ret ;
+ - cgc_size_t tlv30 ;
+ - int tlv29 ;
+ - void * * tlv28 ;
+ - void * tlv3 ;
+ - int tlv2 ;
+ - cgc_size_t tlv1 ;
+ - char * tlv5 ;
+ - const char * tlv4 = TERM_STR ;
+ - char * tlv7 ;
+ - const char * tlv6 = KEYVAL_DELIM ;
+ - char * tlv9 ;
+ - const char * tlv8 = request . term ;
+ - char * tlv11 ;
+ - const char * tlv10 = PARAM_DELIM ;
+ - char * tlv13 ;
+ - const char * tlv12 = ATTRIBUTE_STR ;
+ - char * tlv15 ;
+ - const char * tlv14 = KEYVAL_DELIM ;
+ - char * tlv17 ;
+ - const char * tlv16 = request . attribute ;
+ - char * tlv19 ;
+ - const char * tlv18 = PARAM_DELIM ;
+ - char * tlv21 ;
+ - const char * tlv20 = LIMIT_STR ;
+ - char * tlv23 ;
+ - const char * tlv22 = KEYVAL_DELIM ;
+ - char * tlv25 ;
+ - const char * tlv24 = request . limit ;
+ - char * tlv27 ;
+ - const char * tlv26 = EOL_STR ;
+ - unsigned int tlv31 ;
+ - cgc__terminate ( tlv31 ) ;
+8 :  [cgc_getRandomNumber] <class 'list'>  [all function decls] 
+ - cgc_size_t bytes_written ;
+ - unsigned int index ;
+ - int ret ;
+ - unsigned long tlv_size_0 ;
+ - void * tlv3 ;
+ - cgc_size_t tlv2 ;
+ - cgc_size_t * tlv1 ;
+ - unsigned int tlv4 ;
+ - cgc__terminate ( tlv4 ) ;
+ - unsigned int tlv5 ;
+ - cgc__terminate ( tlv5 ) ;
+9 :  [cgc_getRandomAttribute] <class 'list'>  [all function decls] 
+ - int index ;
+ - unsigned int tlv4 ;
+ - void * tlv3 ;
+ - void * tlv2 ;
+ - cgc_size_t tlv1 ;
+ - const char * tlv5 = attributes [ index ] ;
+10 :  [cgc_getRandomTerm] <class 'list'>  [all function decls] 
+ - unsigned int size ;
+ - unsigned int charset_size ;
+ - int index ;
+ - const char * tlv1 = cgc_charset ;
+ - int letter ;
+ - unsigned int tlv2 ;
+ - unsigned int tlv3 ;
+11 :  [cgc_createRandomRequest] <class 'list'>  [all function decls] 
+ - cgc_getRandomTerm ( request ) ;
+ - cgc_getRandomAttribute ( request ) ;
+ - void * tlv3 ;
+ - int tlv2 ;
+ - cgc_size_t tlv1 ;
+ - void * tlv6 ;
+ - void * tlv5 ;
+ - cgc_size_t tlv4 ;
+12 :  [cgc_getRandomGiftCard] <class 'list'>  [all function decls] 
+ - unsigned int charset_size ;
+ - int index ;
+ - int section ;
+ - int ret ;
+ - cgc_size_t tlv6 ;
+ - int tlv5 ;
+ - void * * tlv4 ;
+ - void * tlv3 ;
+ - int tlv2 ;
+ - cgc_size_t tlv1 ;
+ - const char * tlv7 = cgc_charset ;
+ - int letter ;
+ - unsigned int tlv8 ;
+ - cgc__terminate ( tlv8 ) ;
+ - unsigned int tlv9 ;
+13 :  [cgc_purchaseSong] <class 'list'>  [all function decls] 
+ - int ret ;
+ - char price ;
+ - const char * tlv1 = selectedSong -> price ;
+ - void * tlv4 ;
+ - void * tlv3 ;
+ - cgc_size_t tlv2 ;
+ - int tlv7 ;
+ - const char * tlv6 = mySongList -> songs [ mySongList -> size - 1 ] . id ;
+ - cgc_size_t tlv5 ;
+ - int tlv10 ;
+ - const char tlv9 [ ] = "\n" ;
+ - cgc_size_t tlv8 ;
+ - const char * tlv13 = mySongList -> songs [ mySongList -> size - 1 ] . id ;
+ - const char tlv14 [ ] = "\n" ;
+ - unsigned int tlv11 ;
+ - cgc__terminate ( tlv11 ) ;
+ - unsigned int tlv12 ;
+ - cgc__terminate ( tlv12 ) ;
+14 :  [cgc_sendSearchString] <class 'list'>  [all function decls] 
+ - int ret ;
+ - char * search_string ;
+ - Request tlv1 ;
+ - int tlv4 ;
+ - const char * tlv3 = search_string ;
+ - cgc_size_t tlv2 ;
+ - const char * tlv6 = search_string ;
+ - unsigned int tlv5 ;
+ - cgc__terminate ( tlv5 ) ;
+15 :  [cgc_getBalance] <class 'list'>  [all function decls] 
+ - cgc_size_t size ;
+ - char * gift_card ;
+ - char * buffer ;
+ - int ret ;
+ - char * * tlv10 ;
+ - cgc_size_t tlv13 ;
+ - int tlv12 ;
+ - void * * tlv11 ;
+ - void * tlv3 ;
+ - int tlv2 ;
+ - cgc_size_t tlv1 ;
+ - char * tlv5 ;
+ - const char tlv4 [ ] = "ID=" ;
+ - char * tlv7 ;
+ - const char * tlv6 = gift_card ;
+ - char * tlv9 ;
+ - const char tlv8 [ ] = "\n" ;
+ - void * tlv15 ;
+ - cgc_size_t tlv14 ;
+ - int tlv18 ;
+ - const char * tlv17 = buffer ;
+ - cgc_size_t tlv16 ;
+ - void * tlv20 ;
+ - cgc_size_t tlv19 ;
+ - int tlv21 ;
+ - cgc_size_t tlv24 ;
+ - int tlv23 ;
+ - void * * tlv22 ;
+ - const char * tlv30 = buffer ;
+ - unsigned int tlv25 ;
+ - cgc__terminate ( tlv25 ) ;
+ - unsigned int tlv26 ;
+ - cgc__terminate ( tlv26 ) ;
+ - unsigned int tlv27 ;
+ - cgc__terminate ( tlv27 ) ;
+ - unsigned int tlv28 ;
+ - cgc__terminate ( tlv28 ) ;
+ - unsigned int tlv29 ;
+ - cgc__terminate ( tlv29 ) ;
+16 :  [cgc_selectSong] <class 'list'>  [all function decls] 
+ - 
+17 :  [main] <class 'list'>  [all function decls] 
+ - int ret ;
+ - int starting_balance ;
+ - SongList mySongList = { 0 , NULL , 0 } ;
+ - SongList results = { 0 , NULL , 0 } ;
+ - Request request = { 0 , 0 , 0 } ;
+ - Song songs [ RESULT_LIMIT ] = { 0 } ;
+ - Song * selectedSong ;
+ - SongList * tlv1 ;
+ - cgc_getBalance ( tlv1 ) ;
+ - void * tlv3 ;
+ - cgc_size_t tlv2 ;
+ - cgc_receiveBalance ( STDIN ) ;
+ - Request * tlv4 ;
+ - cgc_createRandomRequest ( tlv4 ) ;
+ - int tlv6 ;
+ - Request tlv5 ;
+ - int tlv9 ;
+ - SongList * tlv8 ;
+ - int tlv7 ;
+ - SongList tlv12 ;
+ - Request tlv11 ;
+ - int tlv15 ;
+ - Song * tlv14 ;
+ - SongList * tlv13 ;
+ - unsigned int tlv10 ;
+ - cgc__terminate ( tlv10 ) ;
+Processing [cgc_setValue] :
+Processing [cgc_parseResultSize] :
+Processing [cgc_parseBalanceResult] :
+Processing [cgc_parseSearchResult] :
+Processing [cgc_receiveBalance] :
+Processing [cgc_receiveNumResults] :
+Processing [cgc_receiveSearchResults] :
+Processing [cgc_createSearchString] :
+Processing [cgc_getRandomNumber] :
+Processing [cgc_getRandomAttribute] :
+Processing [cgc_getRandomTerm] :
+Processing [cgc_createRandomRequest] :
+Processing [cgc_getRandomGiftCard] :
+Processing [cgc_purchaseSong] :
+Processing [cgc_sendSearchString] :
+Processing [cgc_getBalance] :
+Processing [cgc_selectSong] :
+Processing [main] :
+Writing output file xform/t_service.c
+
+real	1m9.173s
+user	1m9.103s
+sys	0m0.051s

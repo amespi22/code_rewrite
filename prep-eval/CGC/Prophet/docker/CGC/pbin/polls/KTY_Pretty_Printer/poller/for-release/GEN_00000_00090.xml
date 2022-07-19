@@ -1,0 +1,44 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>9b30d44dd828a543948e701f58e5deedb16af114bb82e11343299f9dcd014174da3c2953d988ff1c920110b78e4760ca</seed>
+<replay>
+    <read><length>24</length><match><data>KTY Pretty Printer v0.1\x0a</data></match></read>
+    <read><length>86</length><match><data>\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x0a 1. Import KTY\x0a 2. Print KTY\x0a 3. Quit\x0a\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x0a</data></match></read>
+    <write><data>401\x0a</data></write>
+    <read><length>25</length><match><data>Invalid menu. Try again.\x0a</data></match></read>
+    <write><data>858\x0a</data></write>
+    <read><length>25</length><match><data>Invalid menu. Try again.\x0a</data></match></read>
+    <write><data>1\x0a</data></write>
+    <write><data>\x22ziaHfiWVaS\x22\x00</data></write>
+    <write><data>593\x0a</data></write>
+    <read><length>25</length><match><data>Invalid menu. Try again.\x0a</data></match></read>
+    <write><data>1\x0a</data></write>
+    <write><data>true\x00</data></write>
+    <write><data>1\x0a</data></write>
+    <write><data>\x22DgNC\x22\x00</data></write>
+    <write><data>1\x0a</data></write>
+    <write><data>\x22EDWkdp\x22\x00</data></write>
+    <write><data>2\x0a</data></write>
+    <read><length>8</length><match><data>\x22EDWkdp\x22</data></match></read>
+    <write><data>702\x0a</data></write>
+    <read><length>25</length><match><data>Invalid menu. Try again.\x0a</data></match></read>
+    <write><data>606\x0a</data></write>
+    <read><length>25</length><match><data>Invalid menu. Try again.\x0a</data></match></read>
+    <write><data>1\x0a</data></write>
+    <write><data>2042804658\x00</data></write>
+    <write><data>976\x0a</data></write>
+    <read><length>25</length><match><data>Invalid menu. Try again.\x0a</data></match></read>
+    <write><data>2\x0a</data></write>
+    <read><length>10</length><match><data>2042804658</data></match></read>
+    <write><data>1\x0a</data></write>
+    <write><data>\x7b\x22AkGReRVICKnZcXLDrLOnNSj\x22: 0.46\x2c \x22eMtnINCWltKvhSmpkdQtg\x22: null\x2c \x22avygSiXTIDYQMVxMCQNfVbBSavA\x22: 4.54\x2c \x22QxcTmVppRcA\x22: \x5b\x22DJYENswHkiWVM\x22\x2c \x2d1.34\x2c null\x5d\x2c \x22lgfsIvQf\x22: \x7b\x22ofqTzQFQNtz\x22: 33999082\x7d\x2c \x22hut\x22: null\x2c \x22Uzpk\x22: 1462425009\x2c \x22xOHzRNm\x22: \x2d1.41\x2c \x22qkW\x22: true\x2c \x22dlwEWCcGnWFepaVa\x22: \x2d378193664\x2c \x22reHPKRKNcpdzqjiCWAFpQuPntfYcCPeuILmVyWMEulMGWNJoiiHKaLRBjxHYYPYKr\x22: 3.26\x2c \x22nyan\x5fsays\x22: \x22qZmsgDyhabUNAXDbRUOjojTpmrbRVgA\x22\x7d\x00</data></write>
+    <write><data>1\x0a</data></write>
+    <write><data>\x2d4.31\x00</data></write>
+    <write><data>777\x0a</data></write>
+    <read><length>5</length><match><data>\x2d4.31</data></match></read>
+    <write><data>3\x0a</data></write>
+    <read><length>16</length><match><data>\x0a\x0a\x3d\x5e.\x5e\x3d\x2f\x2f Bye!\x0a\x0a</data></match></read>
+</replay>
+</pov>

@@ -1,0 +1,49 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>5b14ecdd4b3379b3bc787c2cf6d2fbf9666e9747dfb146d4d81b8790c047d0e03ce21727b20f43990cbb320048d67e45</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>Welcome to the diary logger!</data></match></read>
+    <write><data>\x94\x01</data></write>
+    <write><data>BBw\x1a\x08\x00\x00\x00\x07\x05\x0e\x00P\x00\x00\x03\x0a\x15\x00\x1f\x00aaaabbbbab\x01\x03\x15\x26\x00\x3b\x00cbbcabcaaaabccbbbaaaa\x05\x04\x00\x00\x00B\x00\x03\x04\x00\x01\x00I\x00\x02\x00\x00m\x00\x00\x00\x05\x04V\x00\xb2\x00\x00\x03\x17\x5d\x00t\x00accaacbbcccabababbacaaa\x03\x03\x14\x7b\x00\x8f\x00aabcbacccaabcccbbbca\x05\x02\x04\x96\x00\x9a\x00\x06\x22\xd6\x5d\x02\x03\x11\xa1\x00\x00\x00aaccaaacacbbcbbba\x01\x03\xb8\x00\xea\x00\x00\x03\x07\xbf\x00\xc6\x00acbcbcb\x05\x03\x16\xcd\x00\xe3\x00cacaccbbaaacbcaaccaaba\x04\x01\x00\x0bb\x00\x00\x00\x07\xf0\x00B\x01\x00\x03\x0b\xf7\x00\x02\x01aacacbbaaaa\x02\x03\x06\x09\x01\x0f\x01baabca\x03\x00\x00\xea\x00\x16\x01\x05\x03\x01\x1d\x01\x1e\x01b\x07\x03\x06\x25\x01\x2b\x01cbbcaa\x04\x01\x00\xbe\xc22\x01\x01\x03\x099\x01\x00\x00cbabcacab\x07\x04H\x01\x00\x00\x00\x03\x14O\x01c\x01babaccaabcabbbcbcbaa\x01\x03\x0cj\x01v\x01abbcaacbacbc\x05\x04\x00\x01\x00\x7d\x01\x00\x03\x10\x84\x01\x00\x00abcbcccbccbbaaab</data></write>
+    <read><delim>\x0a</delim><match><data>Length: 404</data></match></read>
+    <read><delim>\x0a</delim><match><data>Magic number: 0x4242</data></match></read>
+    <read><delim>\x0a</delim><match><data>Future: 0x1a77</data></match></read>
+    <read><delim>\x0a</delim><match><data>Offset: 0x8</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: pets</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x5</data></match></read>
+    <read><delim>\x0a</delim><match><data>name: aaaabbbbab</data></match></read>
+    <read><delim>\x0a</delim><match><data>species: cbbcabcaaaabccbbbaaaa</data></match></read>
+    <read><delim>\x0a</delim><match><data>shots updated: false</data></match></read>
+    <read><delim>\x0a</delim><match><data>inside only: true</data></match></read>
+    <read><delim>\x0a</delim><match><data>legs: 0x6d</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: jobs</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x4</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: accaacbbcccabababbacaaa</data></match></read>
+    <read><delim>\x0a</delim><match><data>company: aabcbacccaabcccbbbca</data></match></read>
+    <read><delim>\x0a</delim><match><data>salary: 0x5dd62206</data></match></read>
+    <read><delim>\x0a</delim><match><data>job category: aaccaaacacbbcbbba</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: movies</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x3</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: acbcbcb</data></match></read>
+    <read><delim>\x0a</delim><match><data>plot summary: cacaccbbaaacbcaaccaaba</data></match></read>
+    <read><delim>\x0a</delim><match><data>year released: 0x620b</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: identity</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x7</data></match></read>
+    <read><delim>\x0a</delim><match><data>first name: aacacbbaaaa</data></match></read>
+    <read><delim>\x0a</delim><match><data>last name: baabca</data></match></read>
+    <read><delim>\x0a</delim><match><data>age: 0xea</data></match></read>
+    <read><delim>\x0a</delim><match><data>birth country: b</data></match></read>
+    <read><delim>\x0a</delim><match><data>birth city: cbbcaa</data></match></read>
+    <read><delim>\x0a</delim><match><data>weight: 0xc2be</data></match></read>
+    <read><delim>\x0a</delim><match><data>middle name: cbabcacab</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: pets</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x4</data></match></read>
+    <read><delim>\x0a</delim><match><data>name: babaccaabcabbbcbcbaa</data></match></read>
+    <read><delim>\x0a</delim><match><data>species: abbcaacbacbc</data></match></read>
+    <read><delim>\x0a</delim><match><data>shots updated: true</data></match></read>
+    <read><delim>\x0a</delim><match><data>name: abcbcccbccbbaaab</data></match></read>
+    <read><delim>\x0a</delim><match><data>good book.</data></match></read>
+</replay>
+</pov>

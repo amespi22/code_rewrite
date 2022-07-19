@@ -1,0 +1,34 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>a42f65e1b37fcd23b1cd601a2037c96d45534c25c8fc6c114ddfd47742360c2dddc3f5b3055eeee42a765f7d9ad8c2f5</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d Movie Rental Service v0.1 \x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>   . . . Initializing the inventory . . .\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>         \x28movie info from IMDb.com\x29\x0a</data></match></read>
+    <read><length>45</length><match><data>\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d</data></match></read>
+    <read><length>77</length><match><data>\x0a1. List movies\x0a2. Rent movie\x0a3. Return movie\x0a4. Admin mode\x0a5. Exit\x0a\x0aChoice: </data></match></read>
+    <write><data>4 login\x0a</data></write>
+    <read><length>10</length><match><data>username: </data></match></read>
+    <write><data>admin\x0a</data></write>
+    <read><length>10</length><match><data>password: </data></match></read>
+    <write><data>CbOWEmIEDR\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x5bERROR\x5d Permission Denied: Wrong credentials\x0a</data></match></read>
+    <read><length>77</length><match><data>\x0a1. List movies\x0a2. Rent movie\x0a3. Return movie\x0a4. Admin mode\x0a5. Exit\x0a\x0aChoice: </data></match></read>
+    <write><data>4 login\x0a</data></write>
+    <read><length>10</length><match><data>username: </data></match></read>
+    <write><data>admin\x0a</data></write>
+    <read><length>10</length><match><data>password: </data></match></read>
+    <write><data>M\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x5bERROR\x5d Permission Denied: Wrong credentials\x0a</data></match></read>
+    <read><length>77</length><match><data>\x0a1. List movies\x0a2. Rent movie\x0a3. Return movie\x0a4. Admin mode\x0a5. Exit\x0a\x0aChoice: </data></match></read>
+    <write><data>4 login\x0a</data></write>
+    <read><length>10</length><match><data>username: </data></match></read>
+    <write><data>DiamUXNzwe\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x5bERROR\x5d Permission Denied: Wrong credentials\x0a</data></match></read>
+    <read><length>77</length><match><data>\x0a1. List movies\x0a2. Rent movie\x0a3. Return movie\x0a4. Admin mode\x0a5. Exit\x0a\x0aChoice: </data></match></read>
+    <write><data>5 quit\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Bye!\x0a</data></match></read>
+</replay>
+</pov>

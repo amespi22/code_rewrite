@@ -1,0 +1,1 @@
+../../../cgc_test/Movie_Rental_Service/test.sh

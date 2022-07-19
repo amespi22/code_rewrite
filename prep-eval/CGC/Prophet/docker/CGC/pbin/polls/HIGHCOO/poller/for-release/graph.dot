@@ -1,0 +1,19 @@
+digraph G {
+    add_haiku [label="add_haiku"];
+    start [label="start", shape=box];
+    get_haiku_by_id [label="get_haiku_by_id"];
+    get_haiku_random [label="get_haiku_random"];
+    cmd_done [label="cmd_done"];
+    get_haiku_ids [label="get_haiku_ids"];
+    get_haiku_count [label="get_haiku_count", shape=triangle];
+    add_haiku -> cmd_done;
+    cmd_done -> get_haiku_random;
+    cmd_done -> get_haiku_by_id;
+    cmd_done -> add_haiku;
+    cmd_done -> get_haiku_count;
+    cmd_done -> get_haiku_ids;
+    get_haiku_by_id -> cmd_done;
+    get_haiku_random -> cmd_done;
+    get_haiku_ids -> cmd_done;
+    start -> add_haiku;
+}

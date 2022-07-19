@@ -1,0 +1,1 @@
+../../../cgc_test/KTY_Pretty_Printer/test-pov_3.sh

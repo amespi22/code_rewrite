@@ -1,0 +1,27 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>dcd966100f59273852c18bcb4eccb187a639129e0affe823c344b3cadb4bc2fc493c2400801f6f872ed2a184a0c40f39</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>Welcome to the diary logger!</data></match></read>
+    <write><data>\x7e\x00</data></write>
+    <write><data>BB\xfa\x7f\x08\x00\x00\x00\x05\x03\x0e\x00A\x00\x00\x03\x04\x15\x00\x19\x00baaa\x03\x03\x16 \x006\x00bcbcbabbbbcababcbcabaa\x05\x02\x04\x3d\x00\x00\x00\xdb\xb1\x9aQ\x01\x04G\x00\x00\x00\x00\x03\x01N\x00O\x00b\x05\x03\x0fV\x00e\x00acbbcbacbcabcca\x04\x01\x00f\xe5l\x00\x02\x03\x0bs\x00\x00\x00accacaaaacc</data></write>
+    <read><delim>\x0a</delim><match><data>Length: 126</data></match></read>
+    <read><delim>\x0a</delim><match><data>Magic number: 0x4242</data></match></read>
+    <read><delim>\x0a</delim><match><data>Future: 0x7ffa</data></match></read>
+    <read><delim>\x0a</delim><match><data>Offset: 0x8</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: jobs</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x3</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: baaa</data></match></read>
+    <read><delim>\x0a</delim><match><data>company: bcbcbabbbbcababcbcabaa</data></match></read>
+    <read><delim>\x0a</delim><match><data>salary: 0x519ab1db</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: movies</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x4</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: b</data></match></read>
+    <read><delim>\x0a</delim><match><data>plot summary: acbbcbacbcabcca</data></match></read>
+    <read><delim>\x0a</delim><match><data>year released: 0xe566</data></match></read>
+    <read><delim>\x0a</delim><match><data>director: accacaaaacc</data></match></read>
+    <read><delim>\x0a</delim><match><data>good book.</data></match></read>
+</replay>
+</pov>

@@ -1,0 +1,26 @@
+{
+"DEPEND_VERSION":"1.0.1",
+"filenames":[{"name":"Music_Store_Client/src/include/libcgc.h","included_by":["Music_Store_Client/src/Music_Store_Client/lib/libc.c", "Music_Store_Client/src/Music_Store_Client/src/service.c"]},
+{"name":"Music_Store_Client/src/Music_Store_Client/lib/cgc_libc.h","included_by":["Music_Store_Client/src/Music_Store_Client/lib/libc.c", "Music_Store_Client/src/Music_Store_Client/src/service.c"]},
+{"name":"Music_Store_Client/src/Music_Store_Client/lib/libc.c"},
+{"name":"Music_Store_Client/src/Music_Store_Client/src/cgc_service.h","included_by":["Music_Store_Client/src/Music_Store_Client/src/service.c"]},
+{"name":"Music_Store_Client/src/Music_Store_Client/src/service.c"}
+],
+"ignore":[
+"Music_Store_Client/src/Music_Store_Client/src/service.c"
+],
+"macros":[
+   {"name": "PATCHED", "value": false }
+],
+"disable_eval":[
+   "cgc_allocate","cgc_bzero","cgc_createRandomRequest","cgc_createSearchString","cgc_deallocate","cgc_fdwait","cgc_getBalance","cgc_getRandomAttribute","cgc_getRandomGiftCard","cgc_getRandomNumber","cgc_getRandomTerm","cgc_memcpy","cgc_memset","cgc_parseBalanceResult","cgc_parseResultSize","cgc_parseSearchResult","cgc_purchaseSong","cgc_random","cgc_ready","cgc_receive","cgc_receiveBalance","cgc_receiveNumResults","cgc_receiveSearchResults","cgc_recvline","cgc_selectSong","cgc_sendSearchString","cgc_setValue","cgc_str2int","cgc_strcat","cgc_strcmp","cgc_strlen","cgc__terminate","cgc_transmit","cgc_transmit_all","__cxa_finalize@@GLIBC_2.1.3","data_start","deregister_tm_clones","__do_global_dtors_aux","__do_global_dtors_aux_fini_array_entry","_fini","frame_dummy","__frame_dummy_init_array_entry","__gmon_start__","_init","__init_array_end","__init_array_start","_ITM_deregisterTMCloneTable","_ITM_registerTMCloneTable","__libc_csu_fini","__libc_csu_init","__libc_start_main@@GLIBC_2.0","main","register_tm_clones","_start","__x86.get_pc_thunk.ax","__x86.get_pc_thunk.bx","__x86.get_pc_thunk.dx"
+],
+"enable_eval":[
+   "cgc_strlen"
+],
+"struct_ptrs":{
+},
+"defines":[
+"LIBC_H","RESULT_VALUE_SIZE","TERM_SIZE","ARTIST_STR","ALBUM_STR","SONG_STR","KEYVAL_DELIM","PARAM_DELIM","TERM_STR","ENTITY_STR","ATTRIBUTE_STR","LIMIT_STR","MAX_LIMIT","EOL_STR","ATTR_NUM","BAL_STR","GIFT_CARD_LEN","NUM_STR","RESULT_LIMIT","RESULT_LIMIT_STR","KEY_SIZE","SONG_ID_STR","PRICE_STR","MAX_PRICE","SUCCESS","LOW_BALANCE","INVALID_PRICE","SONG_SIZE","REQUEST_SIZE","INVALID_PRICE_MSG"
+]
+}

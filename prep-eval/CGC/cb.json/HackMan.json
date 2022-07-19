@@ -1,0 +1,44 @@
+{
+"DEPEND_VERSION":"1.0.1",
+"filenames":[{"name":"HackMan/src/include/libcgc.h","included_by":["HackMan/src/HackMan/lib/calloc.c", "HackMan/src/HackMan/lib/free.c", "HackMan/src/HackMan/lib/malloc.c", "HackMan/src/HackMan/lib/malloc_common.c", "HackMan/src/HackMan/lib/memchr.c", "HackMan/src/HackMan/lib/memcmp.c", "HackMan/src/HackMan/lib/memset.c", "HackMan/src/HackMan/lib/cgc_stdlib.h", "HackMan/src/HackMan/lib/realloc.c", "HackMan/src/HackMan/lib/strchr.c", "HackMan/src/HackMan/lib/strcmp.c", "HackMan/src/HackMan/lib/strlen.c", "HackMan/src/HackMan/lib/strsep.c", "HackMan/src/HackMan/src/main.c"]},
+{"name":"HackMan/src/HackMan/lib/cgc_stdarg.h","included_by":["HackMan/src/HackMan/lib/cgc_stdlib.h", "HackMan/src/HackMan/src/main.c"]},
+{"name":"HackMan/src/HackMan/lib/cgc_stddef.h","included_by":["HackMan/src/HackMan/lib/cgc_stdlib.h", "HackMan/src/HackMan/lib/cgc_string.h"]},
+{"name":"HackMan/src/HackMan/lib/cgc_stdlib.h","included_by":["HackMan/src/HackMan/lib/calloc.c", "HackMan/src/HackMan/lib/free.c", "HackMan/src/HackMan/lib/malloc.c", "HackMan/src/HackMan/lib/malloc_common.c", "HackMan/src/HackMan/lib/printf.c", "HackMan/src/HackMan/lib/realloc.c", "HackMan/src/HackMan/src/main.c"]},
+{"name":"HackMan/src/HackMan/lib/cgc_string.h","included_by":["HackMan/src/HackMan/lib/calloc.c", "HackMan/src/HackMan/lib/memcpy.c", "HackMan/src/HackMan/lib/printf.c", "HackMan/src/HackMan/lib/realloc.c", "HackMan/src/HackMan/lib/strcpy.c", "HackMan/src/HackMan/lib/strlen.c", "HackMan/src/HackMan/lib/strsep.c", "HackMan/src/HackMan/src/main.c"]},
+{"name":"HackMan/src/HackMan/lib/calloc.c"},
+{"name":"HackMan/src/HackMan/lib/cgc_ctype.h","included_by":["HackMan/src/HackMan/lib/ctype.c", "HackMan/src/HackMan/src/main.c"]},
+{"name":"HackMan/src/HackMan/lib/ctype.c"},
+{"name":"HackMan/src/HackMan/lib/cgc_stdint.h","included_by":["HackMan/src/HackMan/lib/cgc_malloc.h", "HackMan/src/HackMan/lib/memchr.c", "HackMan/src/HackMan/lib/memcmp.c"]},
+{"name":"HackMan/src/HackMan/lib/cgc_malloc.h","included_by":["HackMan/src/HackMan/lib/free.c", "HackMan/src/HackMan/lib/malloc.c", "HackMan/src/HackMan/lib/malloc_common.c", "HackMan/src/HackMan/lib/realloc.c"]},
+{"name":"HackMan/src/HackMan/lib/free.c"},
+{"name":"HackMan/src/HackMan/lib/malloc.c"},
+{"name":"HackMan/src/HackMan/lib/malloc_common.c"},
+{"name":"HackMan/src/HackMan/lib/memchr.c"},
+{"name":"HackMan/src/HackMan/lib/memcmp.c"},
+{"name":"HackMan/src/HackMan/lib/memcpy.c"},
+{"name":"HackMan/src/HackMan/lib/memset.c"},
+{"name":"HackMan/src/HackMan/lib/printf.c"},
+{"name":"HackMan/src/HackMan/lib/realloc.c"},
+{"name":"HackMan/src/HackMan/lib/strchr.c"},
+{"name":"HackMan/src/HackMan/lib/strcmp.c"},
+{"name":"HackMan/src/HackMan/lib/strcpy.c"},
+{"name":"HackMan/src/HackMan/lib/strlen.c"},
+{"name":"HackMan/src/HackMan/lib/strsep.c"},
+{"name":"HackMan/src/HackMan/lib/strtol.c"},
+{"name":"HackMan/src/HackMan/src/main.c"}
+],
+"ignore":[
+"HackMan/src/HackMan/src/main.c"
+],
+"macros":[
+   {"name": "PATCHED", "value": false }
+],
+"disable_eval":[
+   "cgc_allocate","cgc_allocate_new_blk","cgc_banner","cgc_calloc","cgc_coalesce","cgc_deallocate","cgc_exit","cgc_exit","cgc_exit","cgc_exit","cgc_exit","cgc_exit","cgc_exit","cgc_fdprintf","cgc_find_fit","cgc_free","cgc_free_huge","cgc_get_size_class","cgc_insert_into_flist","cgc_isalnum","cgc_isalpha","cgc_isascii","cgc_isblank","cgc_iscntrl","cgc_isdigit","cgc_isgraph","cgc_islower","cgc_isprint","cgc_ispunct","cgc_isspace","cgc_isupper","cgc_isxdigit","cgc_malloc","cgc_malloc_huge","cgc_memchr","cgc_memcmp","cgc_memcpy","cgc_memset","cgc_new_challenge","cgc_output_number_printf","cgc_output_number_sprintf","cgc_parse_input","cgc_play_game","cgc_quit_game","cgc_read_until","cgc_realloc","cgc_receive","cgc_record_winner","cgc_remove_from_blist","cgc_remove_from_flist","cgc_sprintf","cgc_strchr","cgc_strcmp","cgc_strcpy","cgc_strlen","cgc_strsep","cgc_strtol","cgc_strtoul","cgc__terminate","cgc_toascii","cgc_tolower","cgc_toupper","cgc_transmit","__cxa_finalize@@GLIBC_2.1.3","data_start","deregister_tm_clones","__do_global_dtors_aux","__do_global_dtors_aux_fini_array_entry","_fini","frame_dummy","__frame_dummy_init_array_entry","__gmon_start__","_init","__init_array_end","__init_array_start","_ITM_deregisterTMCloneTable","_ITM_registerTMCloneTable","__libc_csu_fini","__libc_csu_init","__libc_start_main@@GLIBC_2.0","main","register_tm_clones","_start","__x86.get_pc_thunk.ax","__x86.get_pc_thunk.bx","__x86.get_pc_thunk.dx"
+],
+"enable_eval":[
+   "cgc_strlen"
+],
+"struct_ptrs":{
+}
+}

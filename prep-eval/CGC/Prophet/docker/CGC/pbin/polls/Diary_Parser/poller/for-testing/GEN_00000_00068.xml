@@ -1,0 +1,70 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>5fef041901ab2feddab82d94806ffffcd94b0b2d3aa9b1dddc82cf5b30a3fcd549b6d2dcf638ee73480915bcc69befad</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>Welcome to the diary logger!</data></match></read>
+    <write><data>\x2a\x02</data></write>
+    <write><data>BB\xadF\x08\x00\x00\x00\x06\x05\x0e\x00Y\x01\x01\x08\x14\x00\x7b\x00\x01\x03\x17\x1b\x002\x00bacacbccbcabbcabacababa\x04\x00\x00\x94\x009\x00\x05\x03\x02\x40\x00B\x00cc\x07\x04\x00\x00\x00I\x00\x00\x03\x0fP\x00\x5f\x00ccbbaccbbbbcbaa\x02\x01\x00\x00\x99f\x00\x03\x03\x07m\x00t\x00bbcbbac\x06\x04\x00\x00\x00\x00\x00\x01\x05\x81\x00\xca\x00\x01\x03\x05\x88\x00\x8d\x00baaaa\x04\x00\x00\xc8\x00\x94\x00\x05\x03\x0e\x9b\x00\xa9\x00aabcbbbcababbb\x07\x04\x00\x01\x00\xb0\x00\x00\x03\x13\xb7\x00\x00\x00cabacabcbbababbbccc\x02\x04\xd0\x00\xf0\x00\x00\x03\x04\xd7\x00\xdb\x00acba\x01\x01\x00H\xd0\xe2\x00\x03\x04\x00\x00\x00\xe9\x00\x04\x00\x00\xb7\x00\x00\x00\x02\x04\xf6\x00\x2a\x01\x00\x03\x18\xfd\x00\x15\x01bbbcbbbbccbbbaaaaaabcaac\x01\x01\x00\x19c\x1c\x01\x03\x04\x00\x01\x00\x23\x01\x04\x00\x00W\x00\x00\x00\x03\x020\x01\x00\x00\x00\x03\x0c7\x01C\x01cbbcbcabaaca\x01\x03\x0fJ\x01\x00\x00bbbcabbbabbbbcb\x04\x02\x5f\x01v\x01\x00\x03\x09f\x01o\x01bcbaabaca\x04\x04\x00\x01\x00\x00\x00\x00\x07\x7c\x01\xe6\x01\x00\x03\x10\x83\x01\x93\x01aacbbaccbcccaacc\x02\x03\x01\x9a\x01\x9b\x01a\x03\x00\x00\xb7\x00\xa2\x01\x04\x01\x00\x01\x2a\xa9\x01\x01\x03\x11\xb0\x01\xc1\x01ccbcabcbcacbcaacb\x08\x04\x00\x01\x00\xc8\x01\x05\x03\x17\xcf\x01\x00\x00bcccbbbcbbbabccaaccbaab\x00\x04\xec\x01\x00\x00\x00\x03\x12\xf3\x01\x05\x02bbcabccaccaccabbca\x02\x03\x10\x0c\x02\x1c\x02bccbababaccaccbb\x03\x00\x00\x3d\x00\x23\x02\x08\x04\x00\x01\x00\x00\x00</data></write>
+    <read><delim>\x0a</delim><match><data>Length: 554</data></match></read>
+    <read><delim>\x0a</delim><match><data>Magic number: 0x4242</data></match></read>
+    <read><delim>\x0a</delim><match><data>Future: 0x46ad</data></match></read>
+    <read><delim>\x0a</delim><match><data>Offset: 0x8</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: hobbies</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x5</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: knives</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x8</data></match></read>
+    <read><delim>\x0a</delim><match><data>model: bacacbccbcabbcabacababa</data></match></read>
+    <read><delim>\x0a</delim><match><data>blade length: 0x94</data></match></read>
+    <read><delim>\x0a</delim><match><data>length units: cc</data></match></read>
+    <read><delim>\x0a</delim><match><data>injury: false</data></match></read>
+    <read><delim>\x0a</delim><match><data>make: ccbbaccbbbbcbaa</data></match></read>
+    <read><delim>\x0a</delim><match><data>value: 0x9900</data></match></read>
+    <read><delim>\x0a</delim><match><data>style: bbcbbac</data></match></read>
+    <read><delim>\x0a</delim><match><data>comes with sheath: false</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: knives</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x5</data></match></read>
+    <read><delim>\x0a</delim><match><data>model: baaaa</data></match></read>
+    <read><delim>\x0a</delim><match><data>blade length: 0xc8</data></match></read>
+    <read><delim>\x0a</delim><match><data>length units: aabcbbbcababbb</data></match></read>
+    <read><delim>\x0a</delim><match><data>injury: true</data></match></read>
+    <read><delim>\x0a</delim><match><data>make: cabacabcbbababbbccc</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: stamps</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x4</data></match></read>
+    <read><delim>\x0a</delim><match><data>name: acba</data></match></read>
+    <read><delim>\x0a</delim><match><data>value: 0xd048</data></match></read>
+    <read><delim>\x0a</delim><match><data>mint: false</data></match></read>
+    <read><delim>\x0a</delim><match><data>count: 0xb7</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: stamps</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x4</data></match></read>
+    <read><delim>\x0a</delim><match><data>name: bbbcbbbbccbbbaaaaaabcaac</data></match></read>
+    <read><delim>\x0a</delim><match><data>value: 0x6319</data></match></read>
+    <read><delim>\x0a</delim><match><data>mint: true</data></match></read>
+    <read><delim>\x0a</delim><match><data>count: 0x57</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: kayaking</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x2</data></match></read>
+    <read><delim>\x0a</delim><match><data>make: cbbcbcabaaca</data></match></read>
+    <read><delim>\x0a</delim><match><data>model: bbbcabbbabbbbcb</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: songs</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x2</data></match></read>
+    <read><delim>\x0a</delim><match><data>writer: bcbaabaca</data></match></read>
+    <read><delim>\x0a</delim><match><data>free online: true</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: identity</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x7</data></match></read>
+    <read><delim>\x0a</delim><match><data>first name: aacbbaccbcccaacc</data></match></read>
+    <read><delim>\x0a</delim><match><data>last name: a</data></match></read>
+    <read><delim>\x0a</delim><match><data>age: 0xb7</data></match></read>
+    <read><delim>\x0a</delim><match><data>weight: 0x2a01</data></match></read>
+    <read><delim>\x0a</delim><match><data>middle name: ccbcabcbcacbcaacb</data></match></read>
+    <read><delim>\x0a</delim><match><data>married: true</data></match></read>
+    <read><delim>\x0a</delim><match><data>birth country: bcccbbbcbbbabccaaccbaab</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: identity</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x4</data></match></read>
+    <read><delim>\x0a</delim><match><data>first name: bbcabccaccaccabbca</data></match></read>
+    <read><delim>\x0a</delim><match><data>last name: bccbababaccaccbb</data></match></read>
+    <read><delim>\x0a</delim><match><data>age: 0x3d</data></match></read>
+    <read><delim>\x0a</delim><match><data>married: true</data></match></read>
+    <read><delim>\x0a</delim><match><data>good book.</data></match></read>
+</replay>
+</pov>

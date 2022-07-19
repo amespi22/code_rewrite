@@ -1,0 +1,33 @@
+{
+"DEPEND_VERSION":"1.0.1",
+"filenames":[{"name":"Diary_Parser/src/include/libcgc.h","included_by":["Diary_Parser/src/Diary_Parser/lib/mymath.c", "Diary_Parser/src/Diary_Parser/lib/new_printf.c", "Diary_Parser/src/Diary_Parser/lib/stdlib.c", "Diary_Parser/src/Diary_Parser/src/service.c"]},
+{"name":"Diary_Parser/src/Diary_Parser/lib/cgc_mymath.h","included_by":["Diary_Parser/src/Diary_Parser/lib/mymath.c", "Diary_Parser/src/Diary_Parser/lib/new_printf.c"]},
+{"name":"Diary_Parser/src/Diary_Parser/lib/cgc_stdint.h","included_by":["Diary_Parser/src/Diary_Parser/lib/mymath.c", "Diary_Parser/src/Diary_Parser/lib/new_printf.c", "Diary_Parser/src/Diary_Parser/lib/prng.c", "Diary_Parser/src/Diary_Parser/lib/stdlib.c", "Diary_Parser/src/Diary_Parser/include/cgc_service.h"]},
+{"name":"Diary_Parser/src/Diary_Parser/lib/mymath.c"},
+{"name":"Diary_Parser/src/Diary_Parser/lib/cgc_stdarg.h","included_by":["Diary_Parser/src/Diary_Parser/lib/new_printf.c"]},
+{"name":"Diary_Parser/src/Diary_Parser/lib/cgc_stdlib.h","included_by":["Diary_Parser/src/Diary_Parser/lib/new_printf.c", "Diary_Parser/src/Diary_Parser/lib/stdlib.c", "Diary_Parser/src/Diary_Parser/include/cgc_service.h"]},
+{"name":"Diary_Parser/src/Diary_Parser/lib/new_printf.c"},
+{"name":"Diary_Parser/src/Diary_Parser/lib/cgc_prng.h","included_by":["Diary_Parser/src/Diary_Parser/lib/prng.c"]},
+{"name":"Diary_Parser/src/Diary_Parser/lib/prng.c"},
+{"name":"Diary_Parser/src/Diary_Parser/lib/stdlib.c"},
+{"name":"Diary_Parser/src/Diary_Parser/include/cgc_service.h","included_by":["Diary_Parser/src/Diary_Parser/src/service.c"]},
+{"name":"Diary_Parser/src/Diary_Parser/src/service.c"}
+],
+"ignore":[
+"Diary_Parser/src/Diary_Parser/src/service.c"
+],
+"macros":[
+   {"name": "PATCHED", "value": false }
+],
+"disable_eval":[
+   "cgc_allocate","cgc_atof","cgc_atoi","cgc_bzero","cgc_calloc","cgc_deallocate","cgc_float_to_str","cgc_floor","cgc_free","cgc_getEntryInfo","cgc_init","cgc_int_to_hex","cgc_int_to_str","cgc_isalnum","cgc_isalpha","cgc_isdigit","cgc_isinf","cgc_islower","cgc_isnan","cgc_isspace","cgc_isupper","cgc_itoa","cgc_log10","cgc_malloc","cgc_memcpy","cgc_memset","cgc_parse_book","cgc_populate_entry","cgc_populateEntryInfo","cgc_populate_sub_entry","cgc_populateSubEntryInfo","cgc_pow","cgc_printf","cgc_prng","cgc_putc","cgc_puts","cgc_random_in_range","cgc_read_short","cgc_receive","cgc_receive_bytes","cgc_receive_until","cgc_rint","cgc_round","cgc_round_away_from_zero","cgc_sprintf","cgc_sprng","cgc_strcat","cgc_strchr","cgc_strcmp","cgc_strcpy","cgc_strdup","cgc_strlen","cgc_strncat","cgc_strncpy","cgc_strtok","cgc__terminate","cgc_test_win","cgc_transmit","cgc_verify_chapter","cgc_verify_entry","cgc_vprintf","cgc_vsprintf","cgc_write","__cxa_finalize@@GLIBC_2.1.3","data_start","deregister_tm_clones","__do_global_dtors_aux","__do_global_dtors_aux_fini_array_entry","_fini","frame_dummy","__frame_dummy_init_array_entry","__gmon_start__","_init","__init_array_end","__init_array_start","_ITM_deregisterTMCloneTable","_ITM_registerTMCloneTable","__libc_csu_fini","__libc_csu_init","__libc_start_main@@GLIBC_2.0","main","register_tm_clones","_start","__x86.get_pc_thunk.ax","__x86.get_pc_thunk.bx","__x86.get_pc_thunk.cx","__x86.get_pc_thunk.dx"
+],
+"enable_eval":[
+   "cgc_strlen"
+],
+"struct_ptrs":{
+},
+"defines":[
+"__MYMATH_H__","__STDINT_H__","__STDARG_H__","va_start","va_end","va_arg","PRNG_H","COEFFICIENT_A_64","COEFFICIENT_B_64","COEFFICIENT_C_64","COEFFICIENT_A_1024","COEFFICIENT_B_1024","COEFFICIENT_C_1024","MULTIPLIER_1024","MULTIPLIER_64","F32_PRECISION","__STDLIB_H__","INUSE_FLAG","FREE_FLAG","REQ","REQ_NO","MULT_OK","MULT_NO","__service_h__","MAX_ENTRY_PER_TITLE","MAX_NUM_ENTRIES","NAME_LEN_MAX","NUM_SUBTITLES"
+]
+}

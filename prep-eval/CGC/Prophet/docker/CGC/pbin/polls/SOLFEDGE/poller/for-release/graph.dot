@@ -1,0 +1,10 @@
+digraph G {
+    to_notes [label="to_notes"];
+    start [label="start", shape=box];
+    to_syllables [label="to_syllables"];
+    to_notes -> to_notes;
+    to_notes -> to_syllables;
+    start -> to_notes;
+    to_syllables -> to_syllables;
+    to_syllables -> to_notes;
+}

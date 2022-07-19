@@ -1,0 +1,1146 @@
+
+
+#include "cgc_stdlib.h"
+#include "cgc_string.h"
+#include "cgc_kty.h"
+#include "cgc_strdup.h"
+#include "cgc_strncmp.h"
+#include "cgc_strtod.h"
+kty_parser_t *g_parser;
+void cgc_kty_print_item(kty_item_t * item, int depth);
+char *cgc_parse_item(kty_item_t * item, char *str);
+char *cgc_eat_ws(char *str)
+{
+    while (str && str[0] && str[0] <= ' ')
+    {
+	str++;
+    }
+    return str;
+}
+
+void cgc_print_escaped(char *str, int len)
+{
+    int i;
+    i = 0;
+    char c[2]={0};
+    char tmp[2]={0};
+    char hex_nums[] = "0123456789ABCDEF";
+    while (len--) {
+	c[0] = str[i++];
+	switch (c[0]) {
+	case '"':
+	    {
+  {
+      int tlv2;
+      tlv2 = STDOUT;
+      const char tlv1 [ ] = "\\\"";
+    		cgc_fdprintf(tlv2,tlv1);
+  }
+	    }
+	    break;
+	case '\\':
+	    {
+  {
+      int tlv4;
+      tlv4 = STDOUT;
+      const char tlv3 [ ] = "\\\\";
+    		cgc_fdprintf(tlv4,tlv3);
+  }
+	    }
+	    break;
+	case '/':
+	    {
+  {
+      int tlv6;
+      tlv6 = STDOUT;
+      const char tlv5 [ ] = "\\/";
+    		cgc_fdprintf(tlv6,tlv5);
+  }
+	    }
+	    break;
+	case '\b':
+	    {
+  {
+      int tlv8;
+      tlv8 = STDOUT;
+      const char tlv7 [ ] = "\\b";
+    		cgc_fdprintf(tlv8,tlv7);
+  }
+	    }
+	    break;
+	case '\f':
+	    {
+  {
+      int tlv10;
+      tlv10 = STDOUT;
+      const char tlv9 [ ] = "\\f";
+    		cgc_fdprintf(tlv10,tlv9);
+  }
+	    }
+	    break;
+	case '\n':
+	    {
+  {
+      int tlv12;
+      tlv12 = STDOUT;
+      const char tlv11 [ ] = "\\n";
+    		cgc_fdprintf(tlv12,tlv11);
+  }
+	    }
+	    break;
+	case '\r':
+	    {
+  {
+      int tlv14;
+      tlv14 = STDOUT;
+      const char tlv13 [ ] = "\\r";
+    		cgc_fdprintf(tlv14,tlv13);
+  }
+	    }
+	    break;
+	case '\t':
+	    {
+  {
+      int tlv16;
+      tlv16 = STDOUT;
+      const char tlv15 [ ] = "\\t";
+    		cgc_fdprintf(tlv16,tlv15);
+  }
+	    }
+	    break;
+	default:
+	    {
+		cgc_fdprintf(STDOUT, "%s", c);
+	    }
+	    break;
+	}
+    }
+}
+
+void cgc_print_indent(int depth)
+{
+    int i;
+    for (i = 0; i < depth * 2; ++i)
+    {
+ {
+     int tlv2;
+     tlv2 = STDOUT;
+     const char tlv1 [ ] = " ";
+    	cgc_fdprintf(tlv2,tlv1);
+ }
+    }
+}
+
+void cgc_kty_int_to_string(kty_item_t * item)
+{
+    cgc_fdprintf(STDOUT, "%d", item->item.i_int);
+}
+
+void cgc_kty_double_to_string(kty_item_t * item)
+{
+    int tmp;
+    double val;
+    val = item->item.i_double;
+    tmp = (int) val;
+    if (val < 0.0 && tmp == 0) {
+ {
+     int tlv2;
+     tlv2 = STDOUT;
+     const char tlv1 [ ] = "-";
+    	cgc_fdprintf(tlv2,tlv1);
+ }
+    }
+    cgc_fdprintf(STDOUT, "%d.", tmp);
+    tmp = ((int) (val * 100.0)) % 100;
+    if (tmp < 0) {
+	tmp = -tmp;
+    }
+    cgc_fdprintf(STDOUT, "%02d", tmp);
+}
+
+void cgc_kty_string_to_string(kty_item_t * item)
+{
+    {
+        int tlv2;
+        tlv2 = STDOUT;
+        const char tlv1 [ ] = "\"";
+        cgc_fdprintf(tlv2,tlv1);
+    }
+    {
+        char* tlv4;
+         tlv4 = item -> item . i_string . s;
+        int tlv3;
+        tlv3 = item -> item . i_string . len;
+        cgc_print_escaped(tlv4,tlv3);
+    }
+    {
+        int tlv6;
+        tlv6 = STDOUT;
+        const char tlv5 [ ] = "\"";
+        cgc_fdprintf(tlv6,tlv5);
+    }
+}
+
+void cgc_kty_object_to_string(kty_item_t * item, int depth)
+{
+    int count;
+    count = 0;
+    htbl_t *table;
+    entry_t *entry;
+    {
+        int tlv2;
+        tlv2 = STDOUT;
+        const char tlv1 [ ] = "{";
+        cgc_fdprintf(tlv2,tlv1);
+    }
+    table = item->item.i_object;
+    if (table) {
+ {
+     int tlv6;
+     tlv6 = STDOUT;
+     const char tlv5 [ ] = "\n";
+    	cgc_fdprintf(tlv6,tlv5);
+ }
+	for (entry = table->head; entry != NULL; entry = entry->next) {
+	    if (count > 0) {
+  {
+      int tlv19;
+      tlv19 = STDOUT;
+      const char tlv18 [ ] = ",\n";
+    		cgc_fdprintf(tlv19,tlv18);
+  }
+	    }
+	    count++;
+     {
+         int tlv9;
+         tlv9 = depth + 1;
+    	    cgc_print_indent(tlv9);
+     }
+     {
+         int tlv11;
+         tlv11 = STDOUT;
+         const char tlv10 [ ] = "\"";
+    	    cgc_fdprintf(tlv11,tlv10);
+     }
+     {
+         char* tlv13;
+          tlv13 = entry -> key;
+         int tlv12;
+         {
+             const char* tlv20 = entry -> key;
+             tlv12 = cgc_strlen(tlv20);
+         }
+    	    cgc_print_escaped(tlv13,tlv12);
+     }
+     {
+         int tlv15;
+         tlv15 = STDOUT;
+         const char tlv14 [ ] = "\": ";
+    	    cgc_fdprintf(tlv15,tlv14);
+     }
+     {
+         kty_item_t* tlv17;
+         tlv17 = entry -> val;
+         int tlv16;
+         tlv16 = depth + 1;
+    	    cgc_kty_print_item(tlv17,tlv16);
+     }
+	}
+    }
+    if (count > 0) {
+ {
+     int tlv8;
+     tlv8 = STDOUT;
+     const char tlv7 [ ] = "\n";
+    	cgc_fdprintf(tlv8,tlv7);
+ }
+	cgc_print_indent(depth);
+    }
+    {
+        int tlv4;
+        tlv4 = STDOUT;
+        const char tlv3 [ ] = "}";
+        cgc_fdprintf(tlv4,tlv3);
+    }
+}
+
+void cgc_kty_array_to_string(kty_item_t * item, int depth)
+{
+    int i;
+    int count;
+    count = 0;
+    kty_item_t *elem;
+    {
+        int tlv3;
+        tlv3 = STDOUT;
+        const char tlv2 [ ] = "[";
+        cgc_fdprintf(tlv3,tlv2);
+    }
+    int tlv1;
+    {
+        array_t* tlv6;
+        tlv6 = item -> item . i_array;
+        tlv1 = cgc_array_length(tlv6);
+    }
+    if (tlv1 > 0) {
+ {
+     int tlv8;
+     tlv8 = STDOUT;
+     const char tlv7 [ ] = "\n";
+    	cgc_fdprintf(tlv8,tlv7);
+ }
+    }
+    for (i = 0; i < cgc_array_length(item->item.i_array); ++i) {
+	if (count > 0) {
+     {
+         int tlv17;
+         tlv17 = STDOUT;
+         const char tlv16 [ ] = ",\n";
+    	    cgc_fdprintf(tlv17,tlv16);
+     }
+	}
+	count++;
+ {
+     int tlv9;
+     tlv9 = depth + 1;
+    	cgc_print_indent(tlv9);
+ }
+ {
+     array_t* tlv15;
+     tlv15 = item -> item . i_array;
+     int tlv14;
+     tlv14 = i;
+    	elem = cgc_array_get(tlv15,tlv14);
+ }
+ {
+     kty_item_t* tlv11;
+     tlv11 = elem;
+     int tlv10;
+     tlv10 = depth + 1;
+    	cgc_kty_print_item(tlv11,tlv10);
+ }
+    }
+    if (count > 0) {
+ {
+     int tlv13;
+     tlv13 = STDOUT;
+     const char tlv12 [ ] = "\n";
+    	cgc_fdprintf(tlv13,tlv12);
+ }
+	cgc_print_indent(depth);
+    }
+    {
+        int tlv5;
+        tlv5 = STDOUT;
+        const char tlv4 [ ] = "]";
+        cgc_fdprintf(tlv5,tlv4);
+    }
+}
+
+void cgc_kty_boolean_to_string(kty_item_t * item)
+{
+    cgc_fdprintf(STDOUT, "%s", item->item.i_bool ? "true" : "false");
+}
+
+void cgc_kty_null_to_string(kty_item_t * item)
+{
+    {
+        int tlv2;
+        tlv2 = STDOUT;
+        const char tlv1 [ ] = "null";
+        cgc_fdprintf(tlv2,tlv1);
+    }
+}
+
+void cgc_kty_cat_to_string(kty_item_t * item)
+{
+    g_parser->cats++;
+    {
+        int tlv2;
+        tlv2 = STDOUT;
+        const char tlv1 [ ] = "=^.^=";
+        cgc_fdprintf(tlv2,tlv1);
+    }
+}
+
+void cgc_kty_print_item(kty_item_t * item, int depth)
+{
+    switch (item->type) {
+    case KTY_INT:
+	{
+	    cgc_kty_int_to_string(item);
+	}
+	break;
+    case KTY_DOUBLE:
+	{
+	    cgc_kty_double_to_string(item);
+	}
+	break;
+    case KTY_STRING:
+	{
+	    cgc_kty_string_to_string(item);
+	}
+	break;
+    case KTY_OBJECT:
+	{
+     {
+         kty_item_t* tlv2;
+         tlv2 = item;
+         int tlv1;
+         tlv1 = depth;
+    	    cgc_kty_object_to_string(tlv2,tlv1);
+     }
+	}
+	break;
+    case KTY_ARRAY:
+	{
+     {
+         kty_item_t* tlv4;
+         tlv4 = item;
+         int tlv3;
+         tlv3 = depth;
+    	    cgc_kty_array_to_string(tlv4,tlv3);
+     }
+	}
+	break;
+    case KTY_BOOLEAN:
+	{
+	    cgc_kty_boolean_to_string(item);
+	}
+	break;
+    case KTY_NULL:
+	{
+	    cgc_kty_null_to_string(item);
+	}
+	break;
+    case KTY_CAT:
+	{
+	    cgc_kty_cat_to_string(item);
+	}
+	break;
+    default:
+	{
+	    break;
+	}
+    }
+}
+
+void cgc_kty_dumps(kty_item_t * kty)
+{
+    int depth;
+    depth = 0;
+    g_parser->cats = 0;
+    if (kty) {
+ {
+     kty_item_t* tlv2;
+     tlv2 = kty;
+     int tlv1;
+     tlv1 = depth;
+    	cgc_kty_print_item(tlv2,tlv1);
+ }
+    }
+}
+
+char *cgc_parse_number(kty_item_t * item, char *str)
+{
+    char decimal[3] = { 0 };
+    char *c1;
+    char *c2;
+    int i;
+    double d;
+    {
+        const char* tlv2 = str;
+        int tlv1;
+        tlv1 = ' ';
+        c1 = cgc_strchr(tlv2,tlv1);
+    }
+    if (c1 == NULL) {
+ {
+     const char* tlv6 = str;
+     int tlv5;
+     tlv5 = ',';
+    	c1 = cgc_strchr(tlv6,tlv5);
+ }
+    }
+    if (c1 == NULL) {
+ {
+     const char* tlv8 = str;
+     int tlv7;
+     tlv7 = ']';
+    	c1 = cgc_strchr(tlv8,tlv7);
+ }
+    }
+    if (c1 == NULL) {
+ {
+     const char* tlv10 = str;
+     int tlv9;
+     tlv9 = '}';
+    	c1 = cgc_strchr(tlv10,tlv9);
+ }
+    }
+    {
+        const char* tlv4 = str;
+        int tlv3;
+        tlv3 = '.';
+        c2 = cgc_strchr(tlv4,tlv3);
+    }
+    if ((c1 && c2 && c2 < c1) || (c2 && c1 == NULL)) {
+	// Double
+ {
+     const char* tlv12 = str;
+     char** tlv11;
+      tlv11 = & str;
+    	d = cgc_strtod(tlv12,tlv11);
+ }
+	item->type = KTY_DOUBLE;
+	item->item.i_double = d;
+    } else {
+	// Int
+ {
+     const char* tlv15 = str;
+     char** tlv14;
+      tlv14 = & str;
+     int tlv13;
+     tlv13 = 10;
+    	i = cgc_strtol(tlv15,tlv14,tlv13);
+ }
+	item->type = KTY_INT;
+	item->item.i_int = i;
+    }
+    return str;
+}
+
+char *cgc_parse_string(kty_item_t * item, char *str)
+{
+    int cgc_read;
+    cgc_read = 0;
+    int len;
+    len = 0;
+    char* c;
+     c = str + 1;
+    item->type = KTY_STRING;
+    item->item.i_string.s = NULL;
+    if (str[0] != '\"') {
+	return NULL;
+    }
+    while (c[0] && c[0] != '\"') {
+	if (c[0] == '\\') {
+	    c++;
+	    cgc_read++;
+	}
+	c++;
+	len++;
+	cgc_read++;
+    }
+    if (len >= MAX_KTY_STRING) {
+	return NULL;
+    }
+    {
+        cgc_size_t tlv1;
+        tlv1 = len + 1;
+        item->item.i_string.s = cgc_malloc(tlv1);
+    }
+    if (item->item.i_string.s == NULL) {
+	return NULL;
+    }
+    c = str + 1;
+    cgc_read += 2;
+    len = 0;
+    while (c[0] && c[0] != '\"') {
+	if (c[0] == '\\') {
+	    c++;
+	    switch (c[0]) {
+	    case 'b':
+		{
+		    item->item.i_string.s[len] = '\b';
+		}
+		break;
+	    case 'f':
+		{
+		    item->item.i_string.s[len] = '\f';
+		}
+		break;
+	    case 'n':
+		{
+		    item->item.i_string.s[len] = '\n';
+		}
+		break;
+	    case 'r':
+		{
+		    item->item.i_string.s[len] = '\r';
+		}
+		break;
+	    case 't':
+		{
+		    item->item.i_string.s[len] = '\t';
+		}
+		break;
+	    default:
+		{
+		    item->item.i_string.s[len] = c[0];
+		}
+		break;
+	    }
+	} else {
+	    item->item.i_string.s[len] = c[0];
+	}
+	c++;
+	len++;
+    }
+    item->item.i_string.s[len] = '\0';
+    item->item.i_string.len = len;
+    return str + cgc_read;
+}
+
+char *cgc_parse_array(kty_item_t * item, char *str)
+{
+    kty_item_t *new;
+    item->type = KTY_ARRAY;
+    item->item.i_array = NULL;
+    {
+        char* tlv3;
+         tlv3 = str + 1;
+        str = cgc_eat_ws(tlv3);
+    }
+    if (str[0] == ']') {
+	return str + 1;
+    }
+    {
+        cgc_size_t tlv7;
+        tlv7 = sizeof ( kty_item_t );
+        new = (kty_item_t *) cgc_malloc(tlv7);
+    }
+    if (new == NULL) {
+	goto fail;
+    }
+    {
+        int tlv5;
+        tlv5 = 4;
+        free_element_fn* tlv4 = cgc_free_kty_item;
+        item->item.i_array = cgc_array_create(tlv5,tlv4);
+    }
+    if (item->item.i_array == NULL) {
+	goto fail;
+    }
+    {
+        char* tlv6;
+         {
+             kty_item_t* tlv13;
+             tlv13 = new;
+             char* tlv12;
+              {
+                  char* tlv16;
+                   tlv16 = str;
+                  tlv12 = cgc_eat_ws(tlv16);
+              }
+             tlv6 = cgc_parse_item(tlv13,tlv12);
+         }
+        str = cgc_eat_ws(tlv6);
+    }
+    if (str == NULL) {
+	goto fail;
+    }
+    {
+        array_t* tlv2;
+        tlv2 = item -> item . i_array;
+        void* tlv1;
+        tlv1 = new;
+        cgc_array_append(tlv2,tlv1);
+    }
+    new = NULL;
+    while (str[0] == ',') {
+ {
+     cgc_size_t tlv11;
+     tlv11 = sizeof ( kty_item_t );
+    	new = (kty_item_t *) cgc_malloc(tlv11);
+ }
+	if (new == NULL) {
+	    goto fail;
+	}
+	str++;
+ {
+     char* tlv10;
+      {
+          kty_item_t* tlv15;
+          tlv15 = new;
+          char* tlv14;
+           {
+               char* tlv17;
+                tlv17 = str;
+               tlv14 = cgc_eat_ws(tlv17);
+           }
+          tlv10 = cgc_parse_item(tlv15,tlv14);
+      }
+    	str = cgc_eat_ws(tlv10);
+ }
+	if (str == NULL) {
+	    goto fail;
+	}
+ {
+     array_t* tlv9;
+     tlv9 = item -> item . i_array;
+     void* tlv8;
+     tlv8 = new;
+    	cgc_array_append(tlv9,tlv8);
+ }
+	new = NULL;
+    }
+    if (str[0] == ']') {
+	return str + 1;
+    }
+  fail:
+    if (new) {
+	cgc_free_kty_item(new);
+    }
+    return NULL;
+}
+
+char *cgc_parse_object(kty_item_t * item, char *str)
+{
+    char* key;
+     key = NULL;
+    kty_item_t* new;
+    new = NULL;
+    kty_item_t* k;
+    k = NULL;
+    kty_item_t* dup;
+    dup = NULL;
+    item->type = KTY_OBJECT;
+    item->item.i_object = NULL;
+    {
+        char* tlv4;
+         tlv4 = str + 1;
+        str = cgc_eat_ws(tlv4);
+    }
+    if (str[0] == '}') {
+	return str + 1;
+    }
+    {
+        cgc_size_t tlv9;
+        tlv9 = sizeof ( kty_item_t );
+        k = (kty_item_t *) cgc_malloc(tlv9);
+    }
+    if (k == NULL) {
+	goto fail;
+    }
+    {
+        int tlv6;
+        tlv6 = 4;
+        free_value_fn* tlv5 = cgc_free_kty_item;
+        item->item.i_object = cgc_htbl_create(tlv6,tlv5);
+    }
+    if (item->item.i_object == NULL) {
+	goto fail;
+    }
+    {
+        char* tlv7;
+         {
+             kty_item_t* tlv27;
+             tlv27 = k;
+             char* tlv26;
+              {
+                  char* tlv34;
+                   tlv34 = str;
+                  tlv26 = cgc_eat_ws(tlv34);
+              }
+             tlv7 = cgc_parse_string(tlv27,tlv26);
+         }
+        str = cgc_eat_ws(tlv7);
+    }
+    key = k->item.i_string.s;
+    if (str == NULL || str[0] != ':') {
+	goto fail;
+    }
+    str++;
+    {
+        cgc_size_t tlv10;
+        tlv10 = sizeof ( kty_item_t );
+        new = (kty_item_t *) cgc_malloc(tlv10);
+    }
+    if (new == NULL) {
+	goto fail;
+    }
+    {
+        char* tlv8;
+         {
+             kty_item_t* tlv29;
+             tlv29 = new;
+             char* tlv28;
+              {
+                  char* tlv35;
+                   tlv35 = str;
+                  tlv28 = cgc_eat_ws(tlv35);
+              }
+             tlv8 = cgc_parse_item(tlv29,tlv28);
+         }
+        str = cgc_eat_ws(tlv8);
+    }
+    if (str == NULL) {
+	goto fail;
+    }
+    {
+        htbl_t* tlv3;
+        tlv3 = item -> item . i_object;
+        char* tlv2;
+         tlv2 = key;
+        void* tlv1;
+        tlv1 = new;
+        cgc_htbl_put(tlv3,tlv2,tlv1);
+    }
+    if (cgc_strcmp("nyan_says", key) == 0 && new->type == KTY_STRING) {
+ {
+     cgc_size_t tlv19;
+     tlv19 = sizeof ( kty_item_t );
+    	dup = (kty_item_t *) cgc_malloc(tlv19);
+ }
+	if (dup == NULL) {
+	    goto fail;
+	}
+	dup->type = new->type;
+ {
+     char* tlv16;
+      tlv16 = new -> item . i_string . s;
+    	dup->item.i_string.s = cgc_strdup(tlv16);
+ }
+	dup->item.i_string.len = new->item.i_string.len;
+ {
+     array_t* tlv12;
+     tlv12 = g_parser -> nyan_says;
+     void* tlv11;
+     tlv11 = dup;
+    	cgc_array_append(tlv12,tlv11);
+ }
+	dup = NULL;
+    }
+    cgc_free_kty_item(k);
+    k = NULL;
+    new = NULL;
+    while (str[0] == ',') {
+ {
+     cgc_size_t tlv20;
+     tlv20 = sizeof ( kty_item_t );
+    	k = (kty_item_t *) cgc_malloc(tlv20);
+ }
+	if (k == NULL) {
+	    goto fail;
+	}
+ {
+     char* tlv17;
+      {
+          kty_item_t* tlv31;
+          tlv31 = k;
+          char* tlv30;
+           {
+               char* tlv36;
+                tlv36 = str + 1;
+               tlv30 = cgc_eat_ws(tlv36);
+           }
+          tlv17 = cgc_parse_string(tlv31,tlv30);
+      }
+    	str = cgc_eat_ws(tlv17);
+ }
+	key = k->item.i_string.s;
+	if (str == NULL || str[0] != ':') {
+	    goto fail;
+	}
+	str++;
+ {
+     cgc_size_t tlv21;
+     tlv21 = sizeof ( kty_item_t );
+    	new = (kty_item_t *) cgc_malloc(tlv21);
+ }
+	if (new == NULL) {
+	    goto fail;
+	}
+ {
+     char* tlv18;
+      {
+          kty_item_t* tlv33;
+          tlv33 = new;
+          char* tlv32;
+           {
+               char* tlv37;
+                tlv37 = str;
+               tlv32 = cgc_eat_ws(tlv37);
+           }
+          tlv18 = cgc_parse_item(tlv33,tlv32);
+      }
+    	str = cgc_eat_ws(tlv18);
+ }
+	if (str == NULL) {
+	    goto fail;
+	}
+ {
+     htbl_t* tlv15;
+     tlv15 = item -> item . i_object;
+     char* tlv14;
+      tlv14 = key;
+     void* tlv13;
+     tlv13 = new;
+    	cgc_htbl_put(tlv15,tlv14,tlv13);
+ }
+	if (cgc_strcmp("nyan_says", key) == 0 && new->type == KTY_STRING) {
+     {
+         cgc_size_t tlv25;
+         tlv25 = sizeof ( kty_item_t );
+    	    dup = (kty_item_t *) cgc_malloc(tlv25);
+     }
+	    if (dup == NULL) {
+		goto fail;
+	    }
+	    dup->type = new->type;
+     {
+         char* tlv24;
+          tlv24 = new -> item . i_string . s;
+    	    dup->item.i_string.s = cgc_strdup(tlv24);
+     }
+	    dup->item.i_string.len = new->item.i_string.len;
+     {
+         array_t* tlv23;
+         tlv23 = g_parser -> nyan_says;
+         void* tlv22;
+         tlv22 = dup;
+    	    cgc_array_append(tlv23,tlv22);
+     }
+	    dup = NULL;
+	}
+	cgc_free_kty_item(k);
+	k = NULL;
+	new = NULL;
+    }
+    if (str[0] == '}') {
+	return str + 1;
+    }
+  fail:
+    if (new) {
+	cgc_free_kty_item(new);
+    }
+    if (k) {
+	cgc_free_kty_item(k);
+    }
+    if (dup) {
+	cgc_free_kty_item(dup);
+    }
+    return NULL;
+}
+
+char *cgc_parse_item(kty_item_t * item, char *str)
+{
+    char c;
+    if (item && str) {
+	c = str[0];
+ int tlv1;
+ {
+     char* tlv7;
+      tlv7 = str;
+     char tlv6[] = "true";
+     int tlv5;
+     tlv5 = 4;
+     tlv1 = cgc_strncmp(tlv7,tlv6,tlv5);
+ }
+	if (tlv1 == 0) {
+	    item->type = KTY_BOOLEAN;
+	    item->item.i_bool = 1;
+	    return str + 4;
+	}
+ int tlv2;
+ {
+     char* tlv10;
+      tlv10 = str;
+     char tlv9[] = "false";
+     int tlv8;
+     tlv8 = 5;
+     tlv2 = cgc_strncmp(tlv10,tlv9,tlv8);
+ }
+	if (tlv2 == 0) {
+	    item->type = KTY_BOOLEAN;
+	    item->item.i_bool = 0;
+	    return str + 5;
+	}
+ int tlv3;
+ {
+     char* tlv13;
+      tlv13 = str;
+     char tlv12[] = "null";
+     int tlv11;
+     tlv11 = 4;
+     tlv3 = cgc_strncmp(tlv13,tlv12,tlv11);
+ }
+	if (tlv3 == 0) {
+	    item->type = KTY_NULL;
+	    return str + 4;
+	}
+ int tlv4;
+ {
+     char* tlv16;
+      tlv16 = str;
+     char tlv15[] = "=^.^=";
+     int tlv14;
+     tlv14 = 5;
+     tlv4 = cgc_strncmp(tlv16,tlv15,tlv14);
+ }
+	if (tlv4 == 0) {
+	    item->type = KTY_CAT;
+	    return str + 5;
+	}
+	switch (c) {
+	case '[':
+	    {
+		return cgc_parse_array(item, str);
+	    }
+	case '{':
+	    {
+		return cgc_parse_object(item, str);
+	    }
+	case '-':{
+	case '0':{
+	case '1':  {
+	case '2':	{
+	case '3':	    {
+	case '4':
+				{
+	case '5':		    {
+	case '6':			{
+	case '7':			    {
+	case '8':				{
+	case '9':				    {
+	case '+':
+							{
+							    return cgc_parse_number(item, str);
+							}
+						    }
+						}
+					    }
+					}
+				    }
+				}
+			    }
+			}
+		    }
+		}
+	    }
+	case '\"':
+	    {
+		return cgc_parse_string(item, str);
+	    }
+	}
+    }
+    return NULL;
+}
+
+kty_item_t *cgc_kty_loads(char *str)
+{
+    char *c;
+    char string[MAX_KTY_STRING];
+    int i;
+    i = 0;
+    int init;
+    init = 0;
+    int state;
+    state = - 1;
+    kty_item_t *root;
+    {
+        cgc_size_t tlv6;
+        tlv6 = 1;
+        cgc_size_t tlv5;
+        tlv5 = sizeof ( kty_item_t );
+        root = (kty_item_t *) cgc_calloc(tlv6,tlv5);
+    }
+    if (root == NULL) {
+	goto fail;
+    }
+    if (g_parser->nyan_says) {
+ {
+     array_t* tlv7;
+     tlv7 = g_parser -> nyan_says;
+    	cgc_array_destroy(tlv7);
+ }
+    }
+    {
+        int tlv2;
+        tlv2 = 16;
+        free_element_fn* tlv1 = cgc_free_kty_item;
+        g_parser->nyan_says = cgc_array_create(tlv2,tlv1);
+    }
+    if (g_parser->nyan_says == NULL) {
+	goto fail;
+    }
+    {
+        kty_item_t* tlv4;
+        tlv4 = root;
+        char* tlv3;
+         {
+             char* tlv8;
+              tlv8 = str;
+             tlv3 = cgc_eat_ws(tlv8);
+         }
+        c = cgc_parse_item(tlv4,tlv3);
+    }
+    if (c == NULL) {
+	goto fail;
+    }
+    return root;
+  fail:
+    if (root) {
+	cgc_free_kty_item(root);
+    }
+    return NULL;
+}
+
+int cgc_kty_init(kty_parser_t * parser)
+{
+    if (parser) {
+	parser->cats = 0;
+	parser->nyan_says = NULL;
+	parser->dumps = cgc_kty_dumps;
+	parser->loads = cgc_kty_loads;
+	g_parser = parser;
+	return 0;
+    }
+    return -1;
+}
+
+void cgc_free_kty_item(void *e)
+{
+    if (e) {
+ kty_item_t* item;
+ item = ( kty_item_t * ) e;
+	switch (item->type) {
+	case KTY_STRING:
+	    {
+		if (item->item.i_string.s) {
+      {
+          void* tlv3;
+          tlv3 = item -> item . i_string . s;
+    		    cgc_free(tlv3);
+      }
+		}
+	    }
+	    break;
+	case KTY_ARRAY:
+	    {
+  {
+      array_t* tlv1;
+      tlv1 = item -> item . i_array;
+    		cgc_array_destroy(tlv1);
+  }
+	    }
+	    break;
+	case KTY_OBJECT:
+	    {
+  {
+      htbl_t* tlv2;
+      tlv2 = item -> item . i_object;
+    		cgc_htbl_destroy(tlv2);
+  }
+	    }
+	    break;
+	default:
+	    {
+		break;
+	    }
+	}
+	cgc_free(item);
+    }
+}
+

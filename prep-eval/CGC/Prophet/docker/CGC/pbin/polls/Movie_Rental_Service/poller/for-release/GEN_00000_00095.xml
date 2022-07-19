@@ -1,0 +1,22 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>2e4c7768955d26f6909b67e5c18103cc6a28e2aaeecba08bead9d6a1ac477bdf53dc878645ade58b0e589a577fb39113</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d Movie Rental Service v0.1 \x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>   . . . Initializing the inventory . . .\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>         \x28movie info from IMDb.com\x29\x0a</data></match></read>
+    <read><length>45</length><match><data>\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d</data></match></read>
+    <read><length>77</length><match><data>\x0a1. List movies\x0a2. Rent movie\x0a3. Return movie\x0a4. Admin mode\x0a5. Exit\x0a\x0aChoice: </data></match></read>
+    <write><data>4 login\x0a</data></write>
+    <read><length>10</length><match><data>username: </data></match></read>
+    <write><data>admin\x0a</data></write>
+    <read><length>10</length><match><data>password: </data></match></read>
+    <write><data>eJMcqrCCm\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x5bERROR\x5d Permission Denied: Wrong credentials\x0a</data></match></read>
+    <read><length>77</length><match><data>\x0a1. List movies\x0a2. Rent movie\x0a3. Return movie\x0a4. Admin mode\x0a5. Exit\x0a\x0aChoice: </data></match></read>
+    <write><data>5 quit\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Bye!\x0a</data></match></read>
+</replay>
+</pov>

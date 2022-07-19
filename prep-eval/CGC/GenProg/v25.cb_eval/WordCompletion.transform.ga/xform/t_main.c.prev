@@ -1,0 +1,495 @@
+
+
+#include "libcgc.h"
+#include "cgc_words.h"
+typedef unsigned int uint32_t;
+#define PAGE_SIZE 4096
+char gValidChars[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+#define VALID_CHARS_LEN (sizeof(gValidChars) - 1)
+#define IS_VALID_CHAR(_c) ( ((_c >= 'a') && (_c <= 'z')) || ((_c >= 'A') && (_c <= 'Z')) || ((_c >= '0') && (_c <= '9')) )
+#define NUM_WORDS (sizeof(gSeedWords) / sizeof(char*))
+#define NUM_ROUNDS 10
+#define ENTER_NUM_MSG "Please Enter a 2 Digit Number\n"
+#define WORD_MSG "Word: "
+#define LOSE_MSG "You Lose\n"
+#define WIN_MSG "You Win!\n"
+#define NEXT_WORD_MSG "Next Word: "
+#define FINAL_RND_MSG "Final Round. Chose another 2 digit number\n"
+cgc_size_t cgc_strlen(char *str)
+{
+    cgc_size_t ret;
+    ret = 0;
+    if (str == NULL) {
+	return (0);
+    }
+    for (ret = 0; str[ret] != '\0'; ret++) {
+    }
+    return (ret);
+}
+
+cgc_size_t cgc_transmit_all(char *buf, cgc_size_t size)
+{
+    cgc_size_t rx_bytes;
+    rx_bytes = 0;
+    cgc_size_t total;
+    total = 0;
+    int ret;
+    ret = 0;
+    if (buf == NULL) {
+	return (0);
+    }
+
+    do {
+ {
+     int tlv4;
+     tlv4 = STDOUT;
+     void* tlv3;
+     tlv3 = buf;
+     cgc_size_t tlv2;
+     tlv2 = size - total;
+     cgc_size_t* tlv1;
+     tlv1 = & rx_bytes;
+    	ret = cgc_transmit(tlv4,tlv3,tlv2,tlv1);
+ }
+	if ((ret != 0) || (rx_bytes == 0)) {
+     {
+         unsigned int tlv5;
+         tlv5 = 1;
+    	    cgc__terminate(tlv5);
+     }
+	}
+	total += rx_bytes;
+    }
+    while (total < size);
+    return (size);
+}
+
+cgc_size_t cgc_transmit_str(char *buf)
+{
+    cgc_size_t len;
+    {
+        char* tlv1;
+         tlv1 = buf;
+        len = cgc_strlen(tlv1);
+    }
+    return (cgc_transmit_all(buf, len));
+}
+
+cgc_size_t cgc_receive_all(char *buf, cgc_size_t size)
+{
+    cgc_size_t rx_bytes;
+    rx_bytes = 0;
+    cgc_size_t total;
+    total = 0;
+    int ret;
+    ret = 0;
+    if (buf == NULL) {
+	return (0);
+    }
+
+    do {
+ {
+     int tlv4;
+     tlv4 = STDIN;
+     void* tlv3;
+     tlv3 = buf;
+     cgc_size_t tlv2;
+     tlv2 = size - total;
+     cgc_size_t* tlv1;
+     tlv1 = & rx_bytes;
+    	ret = cgc_receive(tlv4,tlv3,tlv2,tlv1);
+ }
+	if ((ret != 0) || (rx_bytes == 0)) {
+     {
+         unsigned int tlv5;
+         tlv5 = 1;
+    	    cgc__terminate(tlv5);
+     }
+	}
+	total += rx_bytes;
+    }
+    while (total < size);
+
+    return (size);
+}
+
+cgc_size_t cgc_readline(char *buf, cgc_size_t len)
+{
+    if (buf == NULL) {
+	return (0);
+    }
+    cgc_size_t count;
+    count = 0;
+    int ret;
+    ret = 0;
+    char c;
+    c = 0;
+    cgc_size_t rx_bytes;
+    rx_bytes = 0;
+    do {
+ {
+     int tlv4;
+     tlv4 = STDIN;
+     void* tlv3;
+     tlv3 = & c;
+     cgc_size_t tlv2;
+     tlv2 = 1;
+     cgc_size_t* tlv1;
+     tlv1 = & rx_bytes;
+    	ret = cgc_receive(tlv4,tlv3,tlv2,tlv1);
+ }
+	if ((ret != 0) || (rx_bytes == 0)) {
+     {
+         unsigned int tlv5;
+         tlv5 = 1;
+    	    cgc__terminate(tlv5);
+     }
+	}
+	buf[count] = c;
+	count++;
+    } while ((c != '\n') && (count < len));
+    return (count);
+}
+
+char cgc_rotN(char c, int n)
+{
+    int temp;
+    temp = 0;
+    n = n % VALID_CHARS_LEN;
+    if ((c >= 'a') && (c <= 'z')) {
+	temp = c - 'a';
+;		//temp is the offset
+    } else {
+	if ((c >= 'A') && (c <= 'Z')) {
+	    temp = c - 'A' + 26;
+	} else {
+	    if ((c >= '0') && (c <= '9')) {
+		temp = c - '0' + 52;
+	    } else {
+		return (c);
+;	//no rotation
+	    }
+	}
+    }
+    temp += n;
+    temp = temp % VALID_CHARS_LEN;
+    return (gValidChars[temp]);
+}
+
+cgc_size_t cgc_strrotcpy(char *dst, char *src, int rot)
+{
+    if ((src == NULL) || (dst == NULL)) {
+	return (0);
+    }
+    cgc_size_t ret;
+    ret = 0;
+    for (ret = 0; src[ret] != '\0'; ret++) {
+ {
+     char tlv2;
+     tlv2 = src [ ret ];
+     int tlv1;
+     tlv1 = rot;
+    	dst[ret] = cgc_rotN(tlv2,tlv1);
+ }
+    }
+    dst[ret] = '\0';
+    return (ret);
+}
+
+char **cgc_gWords = NULL;
+char *cgc_gWordData = NULL;
+int cgc_init(int rot)
+{
+    int ret;
+    ret = 0;
+    cgc_size_t numWords;
+    numWords = NUM_WORDS;
+    //first allocate enough space for the wordlist
+    {
+        cgc_size_t tlv3;
+        tlv3 = sizeof ( gSeedWords );
+        int tlv2;
+        tlv2 = 0;
+        void** tlv1;
+        tlv1 = ( void * * ) ( & cgc_gWords );
+        ret = cgc_allocate(tlv3,tlv2,tlv1);
+    }
+    if (ret != 0) {
+	return (ret);
+    }
+    //now calculate how many bytes we need to store the words themselves
+    cgc_size_t total;
+    total = 0;
+    int i;
+    i = 0;
+    for (i = 0; i < numWords; i++) {
+ {
+     char* tlv7;
+      tlv7 = gSeedWords [ i ];
+    	total += cgc_strlen(tlv7);
+ }
+	total += 1;
+;		//for the NULL character
+    }
+
+    {
+        cgc_size_t tlv6;
+        tlv6 = total;
+        int tlv5;
+        tlv5 = 0;
+        void** tlv4;
+        tlv4 = ( void * * ) ( & cgc_gWordData );
+        ret = cgc_allocate(tlv6,tlv5,tlv4);
+    }
+    if (ret != 0) {
+	return (ret);
+    }
+    //now that we have both we can fill in the data  
+    cgc_size_t temp;
+    temp = 0;
+    char* pTemp;
+     pTemp = cgc_gWordData;
+    for (i = 0; i < numWords; i++) {
+	cgc_gWords[i] = pTemp;
+ {
+     char* tlv10;
+      tlv10 = pTemp;
+     char* tlv9;
+      tlv9 = gSeedWords [ i ];
+     int tlv8;
+     tlv8 = rot;
+    	pTemp += cgc_strrotcpy(tlv10,tlv9,tlv8);
+ }
+	pTemp += 1;
+;		//for the NULL character
+    }
+
+    for (; i < (PAGE_SIZE / sizeof(char *)); i++) {
+	cgc_gWords[i] = 0;
+    }
+    return (0);
+}
+
+int cgc_toInt(char c1, char c2)
+{
+    int ret;
+    ret = 0;
+    if ((c1 >= '0') && (c1 <= '9')) {
+	ret = c1 - '0';
+	if ((c2 >= '0') && (c2 <= '9')) {
+	    ret *= 10;
+	    ret += c2 - '0';
+	    return (ret);
+	} else {
+	    if (c2 != '\0') {
+		return (ret);
+	    } else {
+		return (0);
+	    }
+	}
+    }
+    return (0);
+}
+
+static uint32_t gRandRegister = 0xDA2bAC9C;
+uint32_t cgc_RANDOM()
+{
+    gRandRegister = ((((gRandRegister >> 31)
+		       ^ (gRandRegister >> 6)
+		       ^ (gRandRegister >> 4)
+		       ^ (gRandRegister >> 2)
+		       ^ (gRandRegister >> 1)
+		       ^ gRandRegister)
+		      & 0x00000001)
+		     << 31)
+	| (gRandRegister >> 1);
+    return (gRandRegister);
+}
+
+int cgc_strcmp(char *s1, char *s2)
+{
+    if (s1 == NULL) {
+	if (s2 == NULL) {
+	    return (0);
+	} else {
+	    return (-1);
+	}
+    }
+    if (s2 == NULL) {
+	return (1);
+    }
+    int i;
+    i = 0;
+    while (s1[i] != '\0') {
+	if (s2[i] == '\0') {
+	    return (1);
+	}
+	if (s1[i] < s2[i]) {
+	    return (-1);
+	} else {
+	    if (s1[i] > s2[i]) {
+		return (1);
+	    }
+	}
+	i++;
+    }
+    if (s2[i] == '\0') {
+	return (0);
+    }
+
+    return (-1);
+}
+
+void cgc_my_srand(uint32_t seed)
+{
+    gRandRegister = seed;
+}
+
+void cgc_scramble(char *dst, char *src, cgc_size_t len)
+{
+    int i;
+    i = 0;
+    uint32_t r;
+    r = ( cgc_RANDOM ( ) % 3 ) + 2;
+    while ((src[i] != '\0') && (i < len)) {
+	if (IS_VALID_CHAR(src[i])) {
+	    if (i % r) {
+		dst[i] = src[i];
+	    } else {
+		dst[i] = '_';
+	    }
+	} else {
+	    dst[i] = src[i];
+	}
+	i++;
+    }
+    dst[i] = '\0';
+}
+
+int main(int cgc_argc, char *cgc_argv[])
+{
+#define BUF_SIZE 64
+#define READLINE(_buf, _len) do { sret = cgc_readline(_buf, _len); if (sret == 0) { cgc__terminate(1); } } while (0)
+    char buf[BUF_SIZE] = { };
+    int i;
+    i = 0;
+    int ret;
+    ret = 0;
+    int temp;
+    temp = 0;
+    cgc_size_t sret;
+    sret = 0;
+    char c;
+    c = '\n';
+    cgc_transmit_str(ENTER_NUM_MSG);
+    READLINE(buf, BUF_SIZE);
+
+    {
+        char tlv11;
+        tlv11 = buf [ 0 ];
+        char tlv10;
+        tlv10 = buf [ 1 ];
+        i = cgc_toInt(tlv11,tlv10);
+    }
+    int tlv1;
+    {
+        int tlv12;
+        tlv12 = i + 1;
+        tlv1 = cgc_init(tlv12);
+    }
+    if (tlv1 != 0) {
+	return (-1);
+    }
+    //initialize the LFSR
+    {
+        uint32_t tlv4;
+        tlv4 = * ( ( int * ) buf );
+        cgc_my_srand(tlv4);
+    }
+
+    for (i = 0; i < NUM_ROUNDS; i++) {
+	if (i == 0) {
+	    cgc_transmit_str(WORD_MSG);
+	} else {
+	    cgc_transmit_str(NEXT_WORD_MSG);
+	}
+	temp = cgc_RANDOM() % NUM_WORDS;
+ {
+     char* tlv19;
+      tlv19 = buf;
+     char* tlv18;
+      tlv18 = cgc_gWords [ temp ];
+     cgc_size_t tlv17;
+     tlv17 = BUF_SIZE;
+    	cgc_scramble(tlv19,tlv18,tlv17);
+ }
+	cgc_transmit_str(buf);
+ {
+     char* tlv21;
+      tlv21 = & c;
+     cgc_size_t tlv20;
+     tlv20 = 1;
+    	cgc_transmit_all(tlv21,tlv20);
+ }
+	READLINE(buf, BUF_SIZE);
+
+	buf[sret - 1] = '\0';
+ int tlv3;
+ {
+     char* tlv23;
+      tlv23 = buf;
+     char* tlv22;
+      tlv22 = cgc_gWords [ temp ];
+     tlv3 = cgc_strcmp(tlv23,tlv22);
+ }
+	if (tlv3 != 0) {
+	    cgc_transmit_str(LOSE_MSG);
+	    return (0);
+	}
+    }
+    cgc_transmit_str(FINAL_RND_MSG);
+    READLINE(buf, BUF_SIZE);
+
+    {
+        char tlv14;
+        tlv14 = buf [ 0 ];
+        char tlv13;
+        tlv13 = buf [ 1 ];
+        i = cgc_toInt(tlv14,tlv13);
+    }
+    {
+        char* tlv7;
+         tlv7 = buf;
+        char* tlv6;
+         tlv6 = cgc_gWords [ i ];
+        cgc_size_t tlv5;
+        tlv5 = BUF_SIZE;
+        cgc_scramble(tlv7,tlv6,tlv5);
+    }
+    cgc_transmit_str(buf);
+    {
+        char* tlv9;
+         tlv9 = & c;
+        cgc_size_t tlv8;
+        tlv8 = 1;
+        cgc_transmit_all(tlv9,tlv8);
+    }
+    READLINE(buf, BUF_SIZE);
+
+    buf[sret - 1] = '\0';
+    int tlv2;
+    {
+        char* tlv16;
+         tlv16 = buf;
+        char* tlv15;
+         tlv15 = cgc_gWords [ i ];
+        tlv2 = cgc_strcmp(tlv16,tlv15);
+    }
+    if (tlv2 != 0) {
+	cgc_transmit_str(LOSE_MSG);
+    } else {
+	cgc_transmit_str(WIN_MSG);
+    }
+    return (0);
+}
+

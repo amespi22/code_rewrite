@@ -1,0 +1,36 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>3426139b34ff7b7e1cb4a2fdfb7e30f24c19e5415d15fc77164e5410a2037545a7b99c5b71f1b324c38cd421dbabd1e5</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>Welcome to the diary logger!</data></match></read>
+    <write><data>\xb6\x00</data></write>
+    <write><data>BB\x2d4\x08\x00\x00\x00\x01\x02\x0e\x00\x2d\x00\x00\x03\x0b\x15\x00 \x00baaacccbcca\x05\x03\x06\x27\x00\x00\x00acaabc\x02\x063\x00y\x00\x00\x03\x0e:\x00H\x00abacbccbccbcbc\x01\x03\x0dO\x00\x5c\x00cccbcbacbbaac\x05\x00\x00\xbc\x00c\x00\x04\x00\x00\x5f\x00j\x00\x02\x03\x01q\x00r\x00a\x03\x01\x00Y\x16\x00\x00\x07\x06\x7f\x00\x00\x00\x00\x03\x01\x86\x00\x87\x00b\x01\x03\x0c\x8e\x00\x9a\x00bbaaaccbaabc\x05\x04\x00\x00\x00\xa1\x00\x04\x00\x00\xc3\x00\xa8\x00\x03\x04\x00\x00\x00\xaf\x00\x02\x00\x00\x7e\x00\x00\x00</data></write>
+    <read><delim>\x0a</delim><match><data>Length: 182</data></match></read>
+    <read><delim>\x0a</delim><match><data>Magic number: 0x4242</data></match></read>
+    <read><delim>\x0a</delim><match><data>Future: 0x342d</data></match></read>
+    <read><delim>\x0a</delim><match><data>Offset: 0x8</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: movies</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x2</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: baaacccbcca</data></match></read>
+    <read><delim>\x0a</delim><match><data>plot summary: acaabc</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: vehicles</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x6</data></match></read>
+    <read><delim>\x0a</delim><match><data>make: abacbccbccbcbc</data></match></read>
+    <read><delim>\x0a</delim><match><data>model: cccbcbacbbaac</data></match></read>
+    <read><delim>\x0a</delim><match><data>doors: 0xbc</data></match></read>
+    <read><delim>\x0a</delim><match><data>displacement units: 0x5f</data></match></read>
+    <read><delim>\x0a</delim><match><data>color: a</data></match></read>
+    <read><delim>\x0a</delim><match><data>displacement: 0x1659</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: pets</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x6</data></match></read>
+    <read><delim>\x0a</delim><match><data>name: b</data></match></read>
+    <read><delim>\x0a</delim><match><data>species: bbaaaccbaabc</data></match></read>
+    <read><delim>\x0a</delim><match><data>shots updated: false</data></match></read>
+    <read><delim>\x0a</delim><match><data>age: 0xc3</data></match></read>
+    <read><delim>\x0a</delim><match><data>inside only: false</data></match></read>
+    <read><delim>\x0a</delim><match><data>legs: 0x7e</data></match></read>
+    <read><delim>\x0a</delim><match><data>good book.</data></match></read>
+</replay>
+</pov>

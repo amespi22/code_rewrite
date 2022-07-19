@@ -1,0 +1,22 @@
+digraph G {
+    cmd_delete [label="cmd_delete"];
+    cmd_view [label="cmd_view"];
+    cmd_add_ac [label="cmd_add_ac"];
+    commands [label="commands"];
+    start [label="start", shape=box];
+    cmd_update [label="cmd_update"];
+    quit [label="quit", shape=triangle];
+    cmd_new [label="cmd_new"];
+    cmd_delete -> commands;
+    cmd_view -> commands;
+    cmd_add_ac -> commands;
+    commands -> cmd_delete;
+    commands -> quit [label="0.1x"];
+    commands -> cmd_update;
+    commands -> cmd_view;
+    commands -> cmd_add_ac;
+    commands -> cmd_new;
+    start -> commands;
+    cmd_update -> commands;
+    cmd_new -> commands;
+}

@@ -1,0 +1,1 @@
+../../../cgc_test/SPIFFS/test-pov_2.sh

@@ -1,0 +1,38 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>22cec4079417e364e43ae846a0a03e3bef1a303bd0773da535ecd4a16c4aefd0e31b69bbb9cdef5bc24943bd64d07238</seed>
+<replay>
+    <read><length>22</length><match><data>\x3d\x3d\x3d\x3d\x3d\x3d 3M v0.2 \x3d\x3d\x3d\x3d\x3d\x3d\x0a</data></match></read>
+    <read><length>137</length><match><data>\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x0a 1. New memo\x0a 2. View memo\x0a 3. Update memo\x0a 4. Delete memo\x0a 5. Add custom AC word\x0a 6. Quit\x0a\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x0a</data></match></read>
+    <write><data>3\x0a</data></write>
+    <read><length>4</length><match><data>id? </data></match></read>
+    <write><data>277\x0a</data></write>
+    <write><data>2\x0a</data></write>
+    <read><length>4</length><match><data>id? </data></match></read>
+    <write><data>42\x0a</data></write>
+    <write><data>3\x0a</data></write>
+    <read><length>4</length><match><data>id? </data></match></read>
+    <write><data>278\x0a</data></write>
+    <write><data>3\x0a</data></write>
+    <read><length>4</length><match><data>id? </data></match></read>
+    <write><data>458\x0a</data></write>
+    <write><data>2\x0a</data></write>
+    <read><length>4</length><match><data>id? </data></match></read>
+    <write><data>357\x0a</data></write>
+    <write><data>2\x0a</data></write>
+    <read><length>4</length><match><data>id? </data></match></read>
+    <write><data>79\x0a</data></write>
+    <write><data>5\x0a</data></write>
+    <read><length>6</length><match><data>typo? </data></match></read>
+    <write><data>jjQvFAdftIZTDaDnAURyFmQa\x0a</data></write>
+    <read><length>9</length><match><data>correct? </data></match></read>
+    <write><data>MqMkHegPzCtcTotnyUbw\x0a</data></write>
+    <write><data>2\x0a</data></write>
+    <read><length>4</length><match><data>id? </data></match></read>
+    <write><data>177\x0a</data></write>
+    <write><data>6\x0a</data></write>
+    <read><length>5</length><match><data>bye!\x0a</data></match></read>
+</replay>
+</pov>

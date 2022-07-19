@@ -1,0 +1,33 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>c05997129338da3573bb9ec6b8c91dd7cd482184d61b8e2ce95b02b4b896b047e997b675c3ac07bd752ef39bcad270c4</seed>
+<replay>
+    <write><data>\xd4\x05\x00\x00</data></write>
+    <write><data>\x92\x01</data></write>
+    <write><data>yHDwNCaQ1hPUMQBatXIiQMUKvfEyKj96vQedf6eTAHQNx0CYUYEYfLXvZ7xPErNvM35cXOeduUEzig2pHhqTSx3xJsN2P2VfjKw9QdYWsTSeCTnPGhFrAuTX4W5gIZUO7GnCFcGcXxUL\x07VQdvo4LieeT4x9AfbU3OxJLlf1wYeKntuCwkbWrdJWWjJ3LJl01hZLVbcCEIzF2siQqy8MOj0lJb3kcg9Sj16DAYkGIDXr5OO29uLzv83v6icYQ2vcGYqAbXeWEfBBXy3EshCYUdxMIxyMLVR3mJU7EInfLiAus8w2NoBCpAxxnzFvk9fFLLCLMCmZRNu1qB7v\x07SWiBvfW2WAOzYotpxrgYT4POgXnmKKAeq2wQ7DV9rFEPYWVqyiz8GA1hsmBJT10Mx\x07</data></write>
+    <read><length>4</length><match><data>2y\x06\x00</data></match></read>
+    <write><data>j\x0d\x03\x00</data></write>
+    <read><length>4</length><match><pcre>(.+)</pcre></match></read>
+    <read><length>2</length><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <write><data>\xd4\x05\x00\x00</data></write>
+    <write><data>\x12\x01</data></write>
+    <write><data>KkmfyRZFz7UywkJtFMSYpFU17d347TwTVGE51FTNR3MPLRIKpWsbYn8d4PD4lqtT7xdkS0mAwggIonl\x07N7YN0X8qF6cljbjVoixO4lrAijaaCSaeuAt8JodGn7UAEau3C08XoDooAGd2CYnq3eMT4ki4j4BbtVWCAvMPcBmpf2pXw9r1aXYHcrb2EDU3qRUJEKCKYmxq04M8DkzejejHm31Nqq01KO\x07xavQgOhsXLnkAyYmxcIvUo9vcvR5xxfwy3LtRjoSkK0vBHJGBV\x07</data></write>
+    <read><length>4</length><match><data>3y\x06\x00</data></match></read>
+    <write><data>j\x0d\x03\x00</data></write>
+    <read><length>4</length><match><pcre>(.+)</pcre></match></read>
+    <read><length>2</length><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <write><data>\xed\x5f\x84\x00</data></write>
+    <read><length>4</length><match><data>\x02\x00\x00\x00</data></match></read>
+    <read><length>8</length><match><data>2y\x06\x003y\x06\x00</data></match></read>
+    <write><data>\x90v\x12\x00</data></write>
+    <read><length>4</length><match><data>\x02\x00\x00\x00</data></match></read>
+</replay>
+</pov>

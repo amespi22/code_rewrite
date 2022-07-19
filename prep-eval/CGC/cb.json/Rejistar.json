@@ -1,0 +1,49 @@
+{
+"DEPEND_VERSION":"1.0.1",
+"filenames":[{"name":"Rejistar/src/Rejistar/lib/atoi.c"},
+{"name":"Rejistar/src/Rejistar/lib/atox.c"},
+{"name":"Rejistar/src/Rejistar/lib/bzero.c"},
+{"name":"Rejistar/src/include/libcgc.h","included_by":["Rejistar/src/Rejistar/lib/cgc_comms.h", "Rejistar/src/Rejistar/lib/cgc_malloc.h", "Rejistar/src/Rejistar/lib/memcpy.c", "Rejistar/src/Rejistar/lib/cgc_strncmp.h", "Rejistar/src/Rejistar/lib/strtok.c", "Rejistar/src/Rejistar/src/service.c"]},
+{"name":"Rejistar/src/Rejistar/lib/cgc_comms.h","included_by":["Rejistar/src/Rejistar/lib/comms.c", "Rejistar/src/Rejistar/src/certificate.c", "Rejistar/src/Rejistar/src/service.c", "Rejistar/src/Rejistar/src/token.c", "Rejistar/src/Rejistar/src/util.c"]},
+{"name":"Rejistar/src/Rejistar/lib/comms.c"},
+{"name":"Rejistar/src/Rejistar/lib/cgc_cbstring.h","included_by":["Rejistar/src/Rejistar/lib/cgc_malloc.h", "Rejistar/src/Rejistar/lib/sprintf.c", "Rejistar/src/Rejistar/src/service.c"]},
+{"name":"Rejistar/src/Rejistar/lib/cgc_malloc.h","included_by":["Rejistar/src/Rejistar/lib/malloc.c", "Rejistar/src/Rejistar/src/certificate.c", "Rejistar/src/Rejistar/src/service.c", "Rejistar/src/Rejistar/src/token.c", "Rejistar/src/Rejistar/src/util.c"]},
+{"name":"Rejistar/src/Rejistar/lib/malloc.c"},
+{"name":"Rejistar/src/Rejistar/lib/memcpy.c"},
+{"name":"Rejistar/src/Rejistar/lib/cgc_cbstdio.h","included_by":["Rejistar/src/Rejistar/lib/sprintf.c", "Rejistar/src/Rejistar/lib/strlen.c", "Rejistar/src/Rejistar/src/certificate.c", "Rejistar/src/Rejistar/src/service.c", "Rejistar/src/Rejistar/src/token.c", "Rejistar/src/Rejistar/src/util.c"]},
+{"name":"Rejistar/src/Rejistar/lib/sprintf.c"},
+{"name":"Rejistar/src/Rejistar/lib/strlen.c"},
+{"name":"Rejistar/src/Rejistar/lib/cgc_strncmp.h","included_by":["Rejistar/src/Rejistar/lib/strncmp.c", "Rejistar/src/Rejistar/src/certificate.c", "Rejistar/src/Rejistar/src/service.c", "Rejistar/src/Rejistar/src/token.c", "Rejistar/src/Rejistar/src/util.c"]},
+{"name":"Rejistar/src/Rejistar/lib/strncmp.c"},
+{"name":"Rejistar/src/Rejistar/lib/strtok.c"},
+{"name":"Rejistar/src/Rejistar/src/cgc_certificate.h","included_by":["Rejistar/src/Rejistar/src/certificate.c", "Rejistar/src/Rejistar/src/service.c"]},
+{"name":"Rejistar/src/Rejistar/src/cgc_util.h","included_by":["Rejistar/src/Rejistar/src/certificate.c", "Rejistar/src/Rejistar/src/service.c", "Rejistar/src/Rejistar/src/token.c", "Rejistar/src/Rejistar/src/util.c"]},
+{"name":"Rejistar/src/Rejistar/lib/cgc_memcpy.h","included_by":["Rejistar/src/Rejistar/src/certificate.c", "Rejistar/src/Rejistar/src/service.c", "Rejistar/src/Rejistar/src/token.c", "Rejistar/src/Rejistar/src/util.c"]},
+{"name":"Rejistar/src/Rejistar/lib/cgc_strtok.h","included_by":["Rejistar/src/Rejistar/src/certificate.c", "Rejistar/src/Rejistar/src/service.c", "Rejistar/src/Rejistar/src/token.c", "Rejistar/src/Rejistar/src/util.c"]},
+{"name":"Rejistar/src/Rejistar/src/certificate.c"},
+{"name":"Rejistar/src/Rejistar/src/cgc_service.h","included_by":["Rejistar/src/Rejistar/src/service.c"]},
+{"name":"Rejistar/src/Rejistar/lib/cgc_atox.h","included_by":["Rejistar/src/Rejistar/src/service.c"]},
+{"name":"Rejistar/src/Rejistar/lib/cgc_atoi.h","included_by":["Rejistar/src/Rejistar/src/service.c", "Rejistar/src/Rejistar/src/token.c", "Rejistar/src/Rejistar/src/util.c"]},
+{"name":"Rejistar/src/Rejistar/src/cgc_token.h","included_by":["Rejistar/src/Rejistar/src/service.c", "Rejistar/src/Rejistar/src/token.c"]},
+{"name":"Rejistar/src/Rejistar/src/service.c"},
+{"name":"Rejistar/src/Rejistar/src/token.c"},
+{"name":"Rejistar/src/Rejistar/src/util.c"}
+],
+"ignore":[
+"Rejistar/src/Rejistar/src/service.c",
+"Rejistar/src/Rejistar/src/token.c"
+],
+"macros":[
+   {"name": "PATCHED", "value": false },
+   {"name": "PATCHED_1", "value": false },
+   {"name": "PATCHED_2", "value": false }
+],
+"disable_eval":[
+   "cgc_addService","cgc_allocate","cgc_atoi","cgc_atox","cgc_authenticate","cgc_b10_uint","cgc_b16_2w","cgc_bzero","cgc_calculateCertSize","cgc_calculateTokenSize","cgc_checkCertUse","cgc_checkCRLs","cgc_checkTokenUse","cgc_clearAttributes","cgc_clearRun","cgc_crls","cgc_deallocate","cgc_enroll","cgc_fill_buffer","cgc_findToken","cgc_free","cgc_freeCert","cgc_freeMessage","cgc_get_char","cgc_getIntegerAttribute","cgc_getMessage","cgc_getMSB","cgc_getNextFreeChunk","cgc_getRun","cgc_getStringAttribute","cgc_getToken","cgc_initializeAttributes","cgc_initIssuer","cgc_initRun","cgc_initServices","cgc_isCertCommand","cgc_isClear","cgc_isdigit","cgc_isTokenCommand","cgc_malloc","cgc_memcpy","cgc_parseCertificate","cgc_parseToken","cgc_random","cgc_read_n_bytes","cgc_read_until_delim_or_n","cgc_receive","cgc_reenroll","cgc_refreshToken","cgc_removeToken","cgc_requestToken","cgc_revokeCert","cgc_revokeToken","cgc_runService","cgc_sendCerts","cgc_sendErrorResponse","cgc_sendToken","cgc_signCert","cgc_sprintf","cgc_strchr","cgc_strcspn","cgc_strlen","cgc_strncmp","cgc_strspn","cgc_strtok","cgc__terminate","cgc_transmit","cgc_transmit_all","cgc_validateCert","cgc_validateToken","cgc_vsprintf","__cxa_finalize@@GLIBC_2.1.3","data_start","deregister_tm_clones","__do_global_dtors_aux","__do_global_dtors_aux_fini_array_entry","_fini","frame_dummy","__frame_dummy_init_array_entry","__gmon_start__","_init","__init_array_end","__init_array_start","_ITM_deregisterTMCloneTable","_ITM_registerTMCloneTable","__libc_csu_fini","__libc_csu_init","__libc_start_main@@GLIBC_2.0","main","register_tm_clones","_start","__x86.get_pc_thunk.ax","__x86.get_pc_thunk.bx","__x86.get_pc_thunk.cx","__x86.get_pc_thunk.dx"
+],
+"enable_eval":[
+   "cgc_strlen"
+],
+"struct_ptrs":{
+}
+}

@@ -1,0 +1,40 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>d17fb302b4a6dca4161765eed85a98e10eb37f71d081643659adc1b87d639b92318b9c7989bff36666d6bcdfc7147e77</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>Welcome to the diary logger!</data></match></read>
+    <write><data>L\x01</data></write>
+    <write><data>BBQ\x7c\x08\x00\x00\x00\x01\x04\x0e\x00h\x00\x00\x03\x08\x15\x00\x1d\x00bccabacc\x05\x03\x16\x24\x00:\x00abbbcabacbabacbccacbab\x03\x03\x10A\x00Q\x00bccacabacbbcbacb\x02\x03\x10X\x00\x00\x00bacacbaacbaabaac\x02\x04n\x00\xca\x00\x00\x03\x18u\x00\x8d\x00aabacbbcbcaacccaccbcaabc\x01\x03\x13\x94\x00\xa7\x00bcacbacaabcbabcbcab\x05\x00\x00\xae\x00\xae\x00\x02\x03\x15\xb5\x00\x00\x00aacbccbcaaacbabbcaccc\x00\x03\xd0\x00\xfb\x00\x00\x03\x0a\xd7\x00\xe1\x00aabacbcaba\x02\x03\x0c\xe8\x00\xf4\x00cbbbaaacabba\x03\x00\x00\xc0\x00\x00\x00\x03\x05\x01\x01\x00\x00\x00\x03\x0b\x08\x01\x13\x01bacbbbaaaab\x05\x04\x00\x00\x00\x1a\x01\x00\x03\x08!\x01\x29\x01acbbcbcb\x04\x03\x0f0\x01?\x01abaaaaabacbaacb\x02\x03\x06F\x01\x00\x00abcaaa</data></write>
+    <read><delim>\x0a</delim><match><data>Length: 332</data></match></read>
+    <read><delim>\x0a</delim><match><data>Magic number: 0x4242</data></match></read>
+    <read><delim>\x0a</delim><match><data>Future: 0x7c51</data></match></read>
+    <read><delim>\x0a</delim><match><data>Offset: 0x8</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: movies</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x4</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: bccabacc</data></match></read>
+    <read><delim>\x0a</delim><match><data>plot summary: abbbcabacbabacbccacbab</data></match></read>
+    <read><delim>\x0a</delim><match><data>producer: bccacabacbbcbacb</data></match></read>
+    <read><delim>\x0a</delim><match><data>director: bacacbaacbaabaac</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: vehicles</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x4</data></match></read>
+    <read><delim>\x0a</delim><match><data>make: aabacbbcbcaacccaccbcaabc</data></match></read>
+    <read><delim>\x0a</delim><match><data>model: bcacbacaabcbabcbcab</data></match></read>
+    <read><delim>\x0a</delim><match><data>doors: 0xae</data></match></read>
+    <read><delim>\x0a</delim><match><data>color: aacbccbcaaacbabbcaccc</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: identity</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x3</data></match></read>
+    <read><delim>\x0a</delim><match><data>first name: aabacbcaba</data></match></read>
+    <read><delim>\x0a</delim><match><data>last name: cbbbaaacabba</data></match></read>
+    <read><delim>\x0a</delim><match><data>age: 0xc0</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: books</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x5</data></match></read>
+    <read><delim>\x0a</delim><match><data>author: bacbbbaaaab</data></match></read>
+    <read><delim>\x0a</delim><match><data>made into a movie: false</data></match></read>
+    <read><delim>\x0a</delim><match><data>author: acbbcbcb</data></match></read>
+    <read><delim>\x0a</delim><match><data>character: abaaaaabacbaacb</data></match></read>
+    <read><delim>\x0a</delim><match><data>summary: abcaaa</data></match></read>
+    <read><delim>\x0a</delim><match><data>good book.</data></match></read>
+</replay>
+</pov>

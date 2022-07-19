@@ -1,0 +1,29 @@
+digraph G {
+    NAME_MAP [label="NAME_MAP\ncontinue=0.80"];
+    start [label="start", shape=box];
+    FINDROUTE [label="FINDROUTE\ncontinue=0.80"];
+    GenerateMapContext [label="GenerateMapContext\ncontinue=0.80"];
+    choice [label="choice\ncontinue=0.90"];
+    finish [label="finish", shape=triangle];
+    Banner [label="Banner"];
+    ADDROAD [label="ADDROAD\ncontinue=0.80"];
+    ADDINTERSECTION [label="ADDINTERSECTION\ncontinue=0.80"];
+    PRINTMAP [label="PRINTMAP\ncontinue=0.80"];
+    ADDADDRESS [label="ADDADDRESS\ncontinue=0.80"];
+    NAME_MAP -> choice;
+    start -> Banner;
+    FINDROUTE -> choice;
+    GenerateMapContext -> choice;
+    choice -> NAME_MAP [label="0.05x"];
+    choice -> finish;
+    choice -> ADDROAD [label="0.2x"];
+    choice -> FINDROUTE [label="0.9x"];
+    choice -> ADDINTERSECTION [label="0.2x"];
+    choice -> PRINTMAP [label="0.05x"];
+    choice -> ADDADDRESS [label="0.2x"];
+    Banner -> GenerateMapContext;
+    ADDROAD -> choice;
+    ADDINTERSECTION -> choice;
+    PRINTMAP -> choice;
+    ADDADDRESS -> choice;
+}

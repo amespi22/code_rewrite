@@ -1,0 +1,24 @@
+{
+"DEPEND_VERSION":"1.0.1",
+"filenames":[{"name":"FablesReport/src/include/libcgc.h","included_by":["FablesReport/src/FablesReport/lib/libc.c", "FablesReport/src/FablesReport/src/service.c"]},
+{"name":"FablesReport/src/FablesReport/include/cgc_stdint.h","included_by":["FablesReport/src/FablesReport/lib/cgc_libc.h"]},
+{"name":"FablesReport/src/FablesReport/lib/cgc_libc.h","included_by":["FablesReport/src/FablesReport/lib/libc.c", "FablesReport/src/FablesReport/src/service.c"]},
+{"name":"FablesReport/src/FablesReport/lib/libc.c"},
+{"name":"FablesReport/src/FablesReport/src/cgc_service.h","included_by":["FablesReport/src/FablesReport/src/service.c"]},
+{"name":"FablesReport/src/FablesReport/src/service.c"}
+],
+"ignore":[
+"FablesReport/src/FablesReport/src/service.c"
+],
+"macros":[
+   {"name": "PATCHED", "value": false }
+],
+"disable_eval":[
+   "cgc_allocate","cgc_b2hex","cgc_calloc","cgc_checkheap","cgc_fdwait","cgc_filterReport","cgc_free","cgc_heapinit","cgc_insert","cgc_int2str","cgc_malloc","cgc_memcmp","cgc_memcpy","cgc_memset","cgc_mergeReport","cgc_newRecord","cgc_newReport","cgc_promptc","cgc_random","cgc_receive","cgc_recv","cgc_recvline","cgc_remove","cgc_sendall","cgc_sendline","cgc_sendReport","cgc_sleep","cgc_sortReport","cgc_splitReport","cgc___stack_cookie_fail","cgc___stack_cookie_init","cgc_startswith","cgc_str2uint","cgc_strcat","cgc_strchr","cgc_strcmp","cgc_strcpy","cgc_streq","cgc_strlen","cgc_strncmp","cgc_strncpy","cgc_strnlen","cgc__terminate","cgc_transmit","cgc_transmit_all","cgc_uint2str","cgc___umoddi3","__cxa_finalize@@GLIBC_2.1.3","data_start","deregister_tm_clones","__do_global_dtors_aux","__do_global_dtors_aux_fini_array_entry","_fini","frame_dummy","__frame_dummy_init_array_entry","__gmon_start__","_init","__init_array_end","__init_array_start","_ITM_deregisterTMCloneTable","_ITM_registerTMCloneTable","__libc_csu_fini","__libc_csu_init","__libc_start_main@@GLIBC_2.0","main","register_tm_clones","_start","__x86.get_pc_thunk.ax","__x86.get_pc_thunk.bx","__x86.get_pc_thunk.dx"
+],
+"enable_eval":[
+   "cgc_strlen"
+],
+"struct_ptrs":{
+}
+}

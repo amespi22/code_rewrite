@@ -1,0 +1,28 @@
+{
+"DEPEND_VERSION":"1.0.1",
+"filenames":[{"name":"stack_vm/src/include/libcgc.h","included_by":["stack_vm/src/stack_vm/lib/lib.c", "stack_vm/src/stack_vm/src/service.c", "stack_vm/src/stack_vm/src/stack.c", "stack_vm/src/stack_vm/src/vm.c"]},
+{"name":"stack_vm/src/stack_vm/lib/cgc_libc.h","included_by":["stack_vm/src/stack_vm/lib/lib.c", "stack_vm/src/stack_vm/src/service.c", "stack_vm/src/stack_vm/src/stack.c", "stack_vm/src/stack_vm/src/vm.c"]},
+{"name":"stack_vm/src/stack_vm/lib/lib.c"},
+{"name":"stack_vm/src/stack_vm/src/cgc_stack.h","included_by":["stack_vm/src/stack_vm/src/cgc_vm.h", "stack_vm/src/stack_vm/src/stack.c"]},
+{"name":"stack_vm/src/stack_vm/src/cgc_vm.h","included_by":["stack_vm/src/stack_vm/src/service.c", "stack_vm/src/stack_vm/src/vm.c"]},
+{"name":"stack_vm/src/stack_vm/src/cgc_service.h","included_by":["stack_vm/src/stack_vm/src/service.c"]},
+{"name":"stack_vm/src/stack_vm/src/service.c"},
+{"name":"stack_vm/src/stack_vm/src/stack.c"},
+{"name":"stack_vm/src/stack_vm/src/vm.c"}
+],
+"ignore":[
+"stack_vm/src/stack_vm/src/service.c",
+"stack_vm/src/stack_vm/src/stack.c"
+],
+"macros":[
+   {"name": "PATCHED", "value": false }
+],
+"disable_eval":[
+   "cgc_addLine","cgc_allocate","cgc_deallocate","cgc_destroyStack","cgc_executeProgram","cgc_initProgram","cgc_initStack","cgc_invalid_command","cgc_isProgramFull","cgc_isStackEmpty","cgc_isStackFull","cgc_itoaB10","cgc_memcpy","cgc_memset","cgc_parseCmd","cgc_popElement","cgc_pushElement","cgc_receive","cgc_receiveProgramSize","cgc_recvline","cgc_strlen","cgc_strn2int","cgc_strncmp","cgc_strnlen","cgc__terminate","cgc_transmit","cgc_transmit_all","__cxa_finalize@@GLIBC_2.1.3","data_start","deregister_tm_clones","__do_global_dtors_aux","__do_global_dtors_aux_fini_array_entry","_fini","frame_dummy","__frame_dummy_init_array_entry","__gmon_start__","_init","__init_array_end","__init_array_start","_ITM_deregisterTMCloneTable","_ITM_registerTMCloneTable","__libc_csu_fini","__libc_csu_init","__libc_start_main@@GLIBC_2.0","main","register_tm_clones","_start","__x86.get_pc_thunk.ax","__x86.get_pc_thunk.bx","__x86.get_pc_thunk.dx"
+],
+"enable_eval":[
+   "cgc_strlen"
+],
+"struct_ptrs":{
+}
+}

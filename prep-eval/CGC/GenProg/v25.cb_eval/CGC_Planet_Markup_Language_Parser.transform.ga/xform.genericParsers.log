@@ -1,0 +1,417 @@
+Starting pre-processing
+Processing file CGC_Planet_Markup_Language_Parser/src/include/libcgc.h
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/lib/cgc_mymath.h
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/lib/cgc_stdint.h
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/lib/mymath.c
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/lib/cgc_stdarg.h
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/lib/cgc_stdlib.h
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/lib/stdlib.c
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/src/cgc_string.h
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/src/cgc_service.h
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/src/cgc_helper.h
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/src/cgc_genericParsers.h
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/src/cgc_cityParsers.h
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/src/cgc_countyParsers.h
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/src/cgc_territoryParsers.h
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/src/cgc_countryParsers.h
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/src/helper.c
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/src/cgc_planetParsers.h
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/src/service.c
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/src/string.c
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/src/territoryParsers.c
+Pre-processing done
+Starting Transformations
+Start expand_case pass
+End pass
+Start expand_conditionals pass
+End pass
+Start expand_blockItems pass
+End pass
+Start if_else_break pass
+End pass
+Start insert_loop_braces pass
+End pass
+Start expand_if_else pass
+End pass
+Start expand_sizeof pass
+End pass
+Start single_declarations pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+all done with passes
+0 :  [cgc_extractBorder] <class 'list'>  [all function decls] 
+ - char * temp ;
+ - pBorder bor ;
+ - int start ;
+ - int end ;
+ - int tlv1 ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv2 ;
+ - int tlv3 ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv4 ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv5 ;
+ - int tlv6 ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv7 ;
+ - int tlv8 ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv9 ;
+ - int tlv10 ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv11 ;
+ - cgc_size_t tlv28 ;
+ - int tlv27 ;
+ - void * * tlv26 ;
+ - pstring tlv30 ;
+ - char tlv29 ;
+ - pstring tlv32 ;
+ - int tlv31 ;
+ - pstring tlv33 ;
+ - pstring tlv36 ;
+ - int tlv35 ;
+ - int tlv34 ;
+ - const char * tlv38 = temp ;
+ - const char tlv37 [ ] = "Border" ;
+ - void * tlv13 ;
+ - cgc_size_t tlv12 ;
+ - pstring tlv40 ;
+ - char tlv39 ;
+ - pstring tlv42 ;
+ - int tlv41 ;
+ - pstring tlv43 ;
+ - pstring tlv44 ;
+ - pstring tlv47 ;
+ - int tlv46 ;
+ - int tlv45 ;
+ - const char * tlv48 = temp ;
+ - void * tlv15 ;
+ - cgc_size_t tlv14 ;
+ - pstring tlv49 ;
+ - pstring tlv50 ;
+ - pstring tlv53 ;
+ - int tlv52 ;
+ - int tlv51 ;
+ - const char * tlv54 = temp ;
+ - void * tlv17 ;
+ - cgc_size_t tlv16 ;
+ - pstring tlv55 ;
+ - pstring tlv56 ;
+ - pstring tlv59 ;
+ - int tlv58 ;
+ - int tlv57 ;
+ - const char * tlv60 = temp ;
+ - void * tlv19 ;
+ - cgc_size_t tlv18 ;
+ - pstring tlv61 ;
+ - pstring tlv62 ;
+ - pstring tlv65 ;
+ - int tlv64 ;
+ - int tlv63 ;
+ - const char * tlv66 = temp ;
+ - void * tlv21 ;
+ - cgc_size_t tlv20 ;
+ - pstring tlv68 ;
+ - char tlv67 ;
+ - pstring tlv70 ;
+ - int tlv69 ;
+ - pstring tlv72 ;
+ - char tlv71 ;
+ - pstring tlv74 ;
+ - int tlv73 ;
+ - pstring tlv75 ;
+ - pstring tlv78 ;
+ - int tlv77 ;
+ - int tlv76 ;
+ - const char * tlv80 = temp ;
+ - const char tlv79 [ ] = "Border" ;
+ - void * tlv23 ;
+ - cgc_size_t tlv22 ;
+ - pstring tlv82 ;
+ - char tlv81 ;
+ - pstring tlv25 ;
+ - int tlv24 ;
+ - void * tlv84 ;
+ - cgc_size_t tlv83 ;
+ - char * tlv113 ;
+ - char * tlv114 ;
+ - const char tlv85 [ ] = "!!Failed to locate opening brace\n" ;
+ - cgc_printf ( tlv85 ) ;
+ - const char tlv86 [ ] = "!!Failed to skip opening brace\n" ;
+ - cgc_printf ( tlv86 ) ;
+ - const char tlv87 [ ] = "!!Failed to locate the end of the element id\n" ;
+ - cgc_printf ( tlv87 ) ;
+ - const char tlv88 [ ] = "!!Element id is not \"Border\"\n" ;
+ - cgc_printf ( tlv88 ) ;
+ - void * tlv90 ;
+ - cgc_size_t tlv89 ;
+ - const char tlv91 [ ] = "!!Failed to locate initial closing brace\n" ;
+ - cgc_printf ( tlv91 ) ;
+ - const char tlv92 [ ] = "!!Failed to skip initial closing brace\n" ;
+ - cgc_printf ( tlv92 ) ;
+ - const char tlv93 [ ] = "!!Failed to locate first lat\n" ;
+ - cgc_printf ( tlv93 ) ;
+ - const char tlv94 [ ] = "!!Failed to locate the end of the first latitude float\n" ;
+ - cgc_printf ( tlv94 ) ;
+ - const char tlv95 [ ] = "!!Failed to copy first latitude float\n" ;
+ - cgc_printf ( tlv95 ) ;
+ - const char tlv96 [ ] = "!!Failed to locate first long\n" ;
+ - cgc_printf ( tlv96 ) ;
+ - const char tlv97 [ ] = "!!Failed to locate first longitude float\n" ;
+ - cgc_printf ( tlv97 ) ;
+ - const char tlv98 [ ] = "!!Failed to copy first longitude float\n" ;
+ - cgc_printf ( tlv98 ) ;
+ - const char tlv99 [ ] = "!!Failed to locate second lat\n" ;
+ - cgc_printf ( tlv99 ) ;
+ - const char tlv100 [ ] = "!!Failed to locate second latitude float\n" ;
+ - cgc_printf ( tlv100 ) ;
+ - const char tlv101 [ ] = "!!Failed to copy second latitude float\n" ;
+ - cgc_printf ( tlv101 ) ;
+ - const char tlv102 [ ] = "!!Failed to locate second long\n" ;
+ - cgc_printf ( tlv102 ) ;
+ - const char tlv103 [ ] = "!!Failed to locate second longitude float\n" ;
+ - cgc_printf ( tlv103 ) ;
+ - const char tlv104 [ ] = "!!Failed to copy second longitude float\n" ;
+ - cgc_printf ( tlv104 ) ;
+ - const char tlv105 [ ] = "!!Failed to locate the final opening brace\n" ;
+ - cgc_printf ( tlv105 ) ;
+ - const char tlv106 [ ] = "!!Failed to skip the final opening brace\n" ;
+ - cgc_printf ( tlv106 ) ;
+ - const char tlv107 [ ] = "!!Failed to locate the closing mark\n" ;
+ - cgc_printf ( tlv107 ) ;
+ - const char tlv108 [ ] = "!!Failed to skip closing mark\n" ;
+ - cgc_printf ( tlv108 ) ;
+ - const char tlv109 [ ] = "!!Failed to locate the end of the closing element id\n" ;
+ - cgc_printf ( tlv109 ) ;
+ - void * tlv111 ;
+ - cgc_size_t tlv110 ;
+ - const char tlv112 [ ] = "!!Failed to locate final closing brace\n" ;
+ - cgc_printf ( tlv112 ) ;
+ - char * tlv115 ;
+ - char * tlv116 ;
+1 :  [cgc_extractPopulation] <class 'list'>  [all function decls] 
+ - char * temp ;
+ - int pop ;
+ - int start ;
+ - int end ;
+ - int ps ;
+ - int pe ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv1 ;
+ - int tlv2 ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv3 ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv4 ;
+ - int tlv5 ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv6 ;
+ - int tlv7 ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv8 ;
+ - int tlv9 ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv10 ;
+ - pstring tlv20 ;
+ - char tlv19 ;
+ - pstring tlv22 ;
+ - int tlv21 ;
+ - pstring tlv23 ;
+ - pstring tlv26 ;
+ - int tlv25 ;
+ - int tlv24 ;
+ - const char * tlv28 = temp ;
+ - const char tlv27 [ ] = "Population" ;
+ - void * tlv12 ;
+ - cgc_size_t tlv11 ;
+ - pstring tlv30 ;
+ - char tlv29 ;
+ - pstring tlv32 ;
+ - int tlv31 ;
+ - pstring tlv33 ;
+ - pstring tlv35 ;
+ - char tlv34 ;
+ - pstring tlv37 ;
+ - int tlv36 ;
+ - pstring tlv39 ;
+ - char tlv38 ;
+ - pstring tlv41 ;
+ - int tlv40 ;
+ - pstring tlv42 ;
+ - pstring tlv45 ;
+ - int tlv44 ;
+ - int tlv43 ;
+ - const char * tlv47 = temp ;
+ - const char tlv46 [ ] = "Population" ;
+ - void * tlv14 ;
+ - cgc_size_t tlv13 ;
+ - pstring tlv49 ;
+ - char tlv48 ;
+ - pstring tlv16 ;
+ - int tlv15 ;
+ - pstring tlv52 ;
+ - int tlv51 ;
+ - int tlv50 ;
+ - const char * tlv53 = temp ;
+ - void * tlv18 ;
+ - cgc_size_t tlv17 ;
+ - char * tlv72 ;
+ - char * tlv73 ;
+ - char * tlv74 ;
+ - const char tlv54 [ ] = "!!Failed to locate opening brace\n" ;
+ - cgc_printf ( tlv54 ) ;
+ - const char tlv55 [ ] = "!!Failed to skip opening brace\n" ;
+ - cgc_printf ( tlv55 ) ;
+ - const char tlv56 [ ] = "!!Failed to locate the end of the element id\n" ;
+ - cgc_printf ( tlv56 ) ;
+ - const char tlv57 [ ] = "!!Element id is not \"Population\"\n" ;
+ - cgc_printf ( tlv57 ) ;
+ - void * tlv59 ;
+ - cgc_size_t tlv58 ;
+ - const char tlv60 [ ] = "!!Failed to locate initial closing brace\n" ;
+ - cgc_printf ( tlv60 ) ;
+ - const char tlv61 [ ] = "!!Failed to skip initial closing brace\n" ;
+ - cgc_printf ( tlv61 ) ;
+ - const char tlv62 [ ] = "!!Failed to locate the end of the population data\n" ;
+ - cgc_printf ( tlv62 ) ;
+ - const char tlv63 [ ] = "!!Failed to locate the final opening brace\n" ;
+ - cgc_printf ( tlv63 ) ;
+ - const char tlv64 [ ] = "!!Failed to skip the final opening brace\n" ;
+ - cgc_printf ( tlv64 ) ;
+ - const char tlv65 [ ] = "!!Failed to locate the closing mark\n" ;
+ - cgc_printf ( tlv65 ) ;
+ - const char tlv66 [ ] = "!!Failed to skip closing mark\n" ;
+ - cgc_printf ( tlv66 ) ;
+ - const char tlv67 [ ] = "!!Failed to locate the end of the closing element id\n" ;
+ - cgc_printf ( tlv67 ) ;
+ - void * tlv69 ;
+ - cgc_size_t tlv68 ;
+ - const char tlv70 [ ] = "!!Failed to locate final closing brace\n" ;
+ - cgc_printf ( tlv70 ) ;
+ - const char tlv71 [ ] = "!!Failed to copy population data\n" ;
+ - cgc_printf ( tlv71 ) ;
+ - char * tlv75 ;
+ - char * tlv76 ;
+2 :  [cgc_extractName] <class 'list'>  [all function decls] 
+ - char * temp ;
+ - char * name ;
+ - int start ;
+ - int end ;
+ - int ns ;
+ - int ne ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv1 ;
+ - int tlv2 ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv3 ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv4 ;
+ - int tlv5 ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv6 ;
+ - int tlv7 ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv8 ;
+ - int tlv9 ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv10 ;
+ - pstring tlv18 ;
+ - char tlv17 ;
+ - pstring tlv20 ;
+ - int tlv19 ;
+ - pstring tlv21 ;
+ - pstring tlv24 ;
+ - int tlv23 ;
+ - int tlv22 ;
+ - const char * tlv26 = temp ;
+ - const char tlv25 [ ] = "Name" ;
+ - void * tlv12 ;
+ - cgc_size_t tlv11 ;
+ - pstring tlv28 ;
+ - char tlv27 ;
+ - pstring tlv30 ;
+ - int tlv29 ;
+ - pstring tlv31 ;
+ - pstring tlv33 ;
+ - char tlv32 ;
+ - pstring tlv35 ;
+ - int tlv34 ;
+ - pstring tlv37 ;
+ - char tlv36 ;
+ - pstring tlv39 ;
+ - int tlv38 ;
+ - pstring tlv40 ;
+ - pstring tlv43 ;
+ - int tlv42 ;
+ - int tlv41 ;
+ - const char * tlv45 = temp ;
+ - const char tlv44 [ ] = "Name" ;
+ - void * tlv14 ;
+ - cgc_size_t tlv13 ;
+ - pstring tlv47 ;
+ - char tlv46 ;
+ - pstring tlv16 ;
+ - int tlv15 ;
+ - pstring tlv50 ;
+ - int tlv49 ;
+ - int tlv48 ;
+ - char * tlv68 ;
+ - char * tlv69 ;
+ - const char tlv51 [ ] = "!!Failed to locate opening brace\n" ;
+ - cgc_printf ( tlv51 ) ;
+ - const char tlv52 [ ] = "!!Failed to skip opening brace\n" ;
+ - cgc_printf ( tlv52 ) ;
+ - const char tlv53 [ ] = "!!Failed to locate the end of the element id\n" ;
+ - cgc_printf ( tlv53 ) ;
+ - const char tlv54 [ ] = "!!Element id is not \"Name\"\n" ;
+ - cgc_printf ( tlv54 ) ;
+ - void * tlv56 ;
+ - cgc_size_t tlv55 ;
+ - const char tlv57 [ ] = "!!Failed to locate initial closing brace\n" ;
+ - cgc_printf ( tlv57 ) ;
+ - const char tlv58 [ ] = "!!Failed to skip initial closing brace\n" ;
+ - cgc_printf ( tlv58 ) ;
+ - const char tlv59 [ ] = "!!Failed to locate the end of the name data\n" ;
+ - cgc_printf ( tlv59 ) ;
+ - const char tlv60 [ ] = "!!Failed to locate the final opening brace\n" ;
+ - cgc_printf ( tlv60 ) ;
+ - const char tlv61 [ ] = "!!Failed to skip the final opening brace\n" ;
+ - cgc_printf ( tlv61 ) ;
+ - const char tlv62 [ ] = "!!Failed to locate the closing mark\n" ;
+ - cgc_printf ( tlv62 ) ;
+ - const char tlv63 [ ] = "!!Failed to skip closing mark\n" ;
+ - cgc_printf ( tlv63 ) ;
+ - const char tlv64 [ ] = "!!Failed to locate the end of the closing element id\n" ;
+ - cgc_printf ( tlv64 ) ;
+ - void * tlv66 ;
+ - cgc_size_t tlv65 ;
+ - const char tlv67 [ ] = "!!Failed to locate final closing brace\n" ;
+ - cgc_printf ( tlv67 ) ;
+ - char * tlv70 ;
+ - char * tlv71 ;
+Processing [cgc_extractBorder] :
+Processing [cgc_extractPopulation] :
+Processing [cgc_extractName] :
+Writing output file xform/t_genericParsers.c
+
+real	2m16.047s
+user	2m15.962s
+sys	0m0.076s

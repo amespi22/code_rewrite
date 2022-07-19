@@ -1,0 +1,19 @@
+FROM prophet-1.0-multi-base
+
+
+COPY CGC /CGC
+WORKDIR /CGC
+
+#PROPHET_64_BIN = /PROPHET/prophet/prophet-gpl/src/prophet 
+#PROPHET_32_BIN = /PROPHET/prophet/prophet-gpl-32/src/prophet 
+#PBIN = /CGC/pbin
+#POLLS = /CGC/pbin/polls
+#BASELINE-SRC = /CGC/baseline.src
+#TRANSFORM-SRC = /CGC/transform.src
+
+RUN apt-get install -y python3-pip
+RUN python3 -m pip install -r requirements.txt
+
+RUN ./make_tests-by-size.bash 5
+
+RUN cat trans-chunk-1.bash

@@ -1,0 +1,63 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>73d153061882d27c885a5757b1edb428f66145013a40efcfd2dbc5a407c1e91ae77befc01e4be5adb72559bd02700b4d</seed>
+<replay>
+    <read><length>342</length><match><data>\x0a\x0aThanks for your interest in the Sea Eye Association.\x0aIn order to be considered for the job complete the preliminary online background check\x0aDue to the secure nature of the position you are applying for you may be asked to\x0asubmit additional paperwork after your preliminary background check has been approved.\x0aThank you for your cooperation\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>11</length><match><data>Last Name: </data></match></read>
+    <write><data>\x27\x0a</data></write>
+    <read><length>12</length><match><data>First Name: </data></match></read>
+    <write><data>Lzrqi\x27HgluvDUtegbKeJJ\x0a</data></write>
+    <read><length>33</length><match><data>Middle Name \x5bMI or Middle Name\x5d: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>19</length><match><data>\x0aContact Info Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>33</length><match><data>Middle Name \x5bMI or Middle Name\x5d: </data></match></read>
+    <write><data>\x2a\x2aprev\x0a</data></write>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>33</length><match><data>Middle Name \x5bMI or Middle Name\x5d: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>19</length><match><data>\x0aContact Info Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>33</length><match><data>Middle Name \x5bMI or Middle Name\x5d: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>19</length><match><data>\x0aContact Info Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>33</length><match><data>Middle Name \x5bMI or Middle Name\x5d: </data></match></read>
+    <write><data>DdqCchbdoghse\x0a</data></write>
+    <read><length>26</length><match><data>Suffix \x5bJr\x2c Sr\x2c II\x2c etc\x5d: </data></match></read>
+    <write><data>VIII\x0a</data></write>
+    <read><length>16</length><match><data>DOB Month \x5bMM\x5d: </data></match></read>
+    <write><data>04\x0a</data></write>
+    <read><length>14</length><match><data>DOB Day \x5bDD\x5d: </data></match></read>
+    <write><data>28\x0a</data></write>
+    <read><length>17</length><match><data>DOB Year \x5bYYYY\x5d: </data></match></read>
+    <write><data>\x2a\x2anext\x0a</data></write>
+    <read><length>19</length><match><data>\x0aContact Info Form\x0a</data></match></read>
+    <read><length>67</length><match><data>You must complete the previous page before proceeding to this page\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>17</length><match><data>DOB Year \x5bYYYY\x5d: </data></match></read>
+    <write><data>1921\x0a</data></write>
+    <read><length>19</length><match><data>Height\x2dFeet \x5b1\x2d9\x5d: </data></match></read>
+    <write><data>6\x0a</data></write>
+    <read><length>22</length><match><data>Height\x2dInches \x5b0\x2d11\x5d: </data></match></read>
+    <write><data>\x2a\x2aprev\x0a</data></write>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>22</length><match><data>Height\x2dInches \x5b0\x2d11\x5d: </data></match></read>
+    <write><data>\x2a\x2aupdate Suffix\x0a</data></write>
+    <read><length>50</length><match><data>Cannot update field until all fields are inputted\x0a</data></match></read>
+    <read><length>21</length><match><data>\x0aCandidate Info Form\x0a</data></match></read>
+    <read><length>22</length><match><data>Height\x2dInches \x5b0\x2d11\x5d: </data></match></read>
+    <write><data>9\x0a</data></write>
+    <read><length>8</length><match><data>Weight: </data></match></read>
+    <write><data>117\x0a</data></write>
+    <read><length>5</length><match><data>Sex: </data></match></read>
+    <write><data>\x2a\x2aexit\x0a</data></write>
+    <read><length>11</length><match><data>Thank you!\x0a</data></match></read>
+</replay>
+</pov>

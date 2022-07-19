@@ -1,0 +1,45 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>a6404ee8ecf9121df5f9b3f5f8eb208630ce31b51473e23dfe67c799a3209319a89470986815365bb6319aecd6019067</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>Welcome to the diary logger!</data></match></read>
+    <write><data>\x2a\x01</data></write>
+    <write><data>BB\xbef\x08\x00\x00\x00\x01\x03\x0e\x00\x3c\x00\x00\x03\x13\x15\x00\x28\x00bacbacaabbacaccbaab\x05\x03\x06\x2f\x005\x00aaacab\x04\x01\x00\xf6\x15\x00\x00\x07\x05B\x00z\x00\x00\x03\x0eI\x00W\x00abbabcabcaabaa\x01\x03\x07\x5e\x00e\x00ccbbbab\x05\x04\x00\x01\x00l\x00\x02\x00\x00S\x00s\x00\x03\x04\x00\x00\x00\x00\x00\x05\x03\x80\x00\xb8\x00\x00\x03\x0f\x87\x00\x96\x00bbacbaccacbbaac\x03\x03\x10\x9d\x00\xad\x00bccaabbaabbaaabb\x05\x02\x04\xb4\x00\x00\x00\xba\xd0\xd5\x0c\x02\x04\xbe\x00\xf4\x00\x00\x03\x0f\xc5\x00\xd4\x00bccabbacacccbac\x01\x03\x0b\xdb\x00\xe6\x00cbcccacaaca\x05\x00\x00\x7f\x00\xed\x00\x03\x01\x00\xace\x00\x00\x01\x04\xfa\x00\x00\x00\x00\x03\x08\x01\x01\x09\x01bababaca\x05\x03\x05\x10\x01\x15\x01caabc\x04\x01\x00\xee\xdf\x1c\x01\x02\x03\x07\x23\x01\x00\x00cbbbaca</data></write>
+    <read><delim>\x0a</delim><match><data>Length: 298</data></match></read>
+    <read><delim>\x0a</delim><match><data>Magic number: 0x4242</data></match></read>
+    <read><delim>\x0a</delim><match><data>Future: 0x66be</data></match></read>
+    <read><delim>\x0a</delim><match><data>Offset: 0x8</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: movies</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x3</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: bacbacaabbacaccbaab</data></match></read>
+    <read><delim>\x0a</delim><match><data>plot summary: aaacab</data></match></read>
+    <read><delim>\x0a</delim><match><data>year released: 0x15f6</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: pets</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x5</data></match></read>
+    <read><delim>\x0a</delim><match><data>name: abbabcabcaabaa</data></match></read>
+    <read><delim>\x0a</delim><match><data>species: ccbbbab</data></match></read>
+    <read><delim>\x0a</delim><match><data>shots updated: true</data></match></read>
+    <read><delim>\x0a</delim><match><data>legs: 0x53</data></match></read>
+    <read><delim>\x0a</delim><match><data>inside only: false</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: jobs</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x3</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: bbacbaccacbbaac</data></match></read>
+    <read><delim>\x0a</delim><match><data>company: bccaabbaabbaaabb</data></match></read>
+    <read><delim>\x0a</delim><match><data>salary: 0xcd5d0ba</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: vehicles</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x4</data></match></read>
+    <read><delim>\x0a</delim><match><data>make: bccabbacacccbac</data></match></read>
+    <read><delim>\x0a</delim><match><data>model: cbcccacaaca</data></match></read>
+    <read><delim>\x0a</delim><match><data>doors: 0x7f</data></match></read>
+    <read><delim>\x0a</delim><match><data>displacement: 0x65ac</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: movies</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x4</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: bababaca</data></match></read>
+    <read><delim>\x0a</delim><match><data>plot summary: caabc</data></match></read>
+    <read><delim>\x0a</delim><match><data>year released: 0xdfee</data></match></read>
+    <read><delim>\x0a</delim><match><data>director: cbbbaca</data></match></read>
+    <read><delim>\x0a</delim><match><data>good book.</data></match></read>
+</replay>
+</pov>

@@ -1,0 +1,60 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>11f7661cd51643c36c24cc25d92d59616826268717606fd0bd5ffd9cc35c45fa5c77c68f23fb91a7da114b058df7e0fa</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>Welcome to the diary logger!</data></match></read>
+    <write><data>\xf9\x01</data></write>
+    <write><data>BB\xa33\x08\x00\x00\x00\x02\x03\x0e\x000\x00\x00\x03\x09\x15\x00\x1e\x00aaabaaacc\x01\x03\x04\x25\x00\x29\x00cbac\x05\x00\x00\x0f\x00\x00\x00\x04\x046\x00\x7e\x00\x00\x03\x05\x3d\x00B\x00aabca\x04\x04\x00\x00\x00I\x00\x03\x03\x18P\x00h\x00bcaccaacaacbacccbaabbccc\x02\x03\x0fo\x00\x00\x00cabbcbaaaaacacc\x05\x04\x84\x00\xc5\x00\x00\x03\x09\x8b\x00\x94\x00abbaabcbb\x03\x03\x18\x9b\x00\xb3\x00accbcccccaacacaacacabaac\x05\x02\x04\xba\x00\xbe\x00\xd2\xdc\xbba\x01\x00\x00\xd2\x00\x00\x00\x05\x05\xcb\x00\x22\x01\x00\x03\x14\xd2\x00\xe6\x00accaaaabaabbbbaccbaa\x03\x03\x17\xed\x00\x04\x01cccabaabacaababcbccaaab\x05\x02\x04\x0b\x01\x0f\x01\x85\x12\x84H\x01\x00\x00X\x00\x16\x01\x00\x03\x05\x1d\x01\x00\x00acbaa\x04\x05\x28\x01\x7c\x01\x00\x03\x10\x2f\x01?\x01bcacacacaacaccbc\x04\x04\x00\x00\x00F\x01\x02\x03\x0eM\x01\x5b\x01cbbbabcaacabcc\x01\x00\x00\x83\x00b\x01\x00\x03\x13i\x01\x00\x00bbbbbbabababcaacaba\x05\x03\x82\x01\xa9\x01\x00\x03\x0c\x89\x01\x95\x01bcabbcbcbccb\x03\x03\x02\x9c\x01\x9e\x01ab\x05\x02\x04\xa5\x01\x00\x00\x25\x5e\xa5\x23\x02\x06\xaf\x01\x00\x00\x00\x03\x13\xb6\x01\xc9\x01baacabbaacbcccaaabc\x01\x03\x06\xd0\x01\xd6\x01aababb\x05\x00\x00j\x00\xdd\x01\x03\x01\x00\xf3k\xe4\x01\x02\x03\x07\xeb\x01\xf2\x01bcbbccc\x04\x00\x00D\x00\x00\x00</data></write>
+    <read><delim>\x0a</delim><match><data>Length: 505</data></match></read>
+    <read><delim>\x0a</delim><match><data>Magic number: 0x4242</data></match></read>
+    <read><delim>\x0a</delim><match><data>Future: 0x33a3</data></match></read>
+    <read><delim>\x0a</delim><match><data>Offset: 0x8</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: vehicles</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x3</data></match></read>
+    <read><delim>\x0a</delim><match><data>make: aaabaaacc</data></match></read>
+    <read><delim>\x0a</delim><match><data>model: cbac</data></match></read>
+    <read><delim>\x0a</delim><match><data>doors: 0xf</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: songs</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x4</data></match></read>
+    <read><delim>\x0a</delim><match><data>writer: aabca</data></match></read>
+    <read><delim>\x0a</delim><match><data>free online: false</data></match></read>
+    <read><delim>\x0a</delim><match><data>publisher: bcaccaacaacbacccbaabbccc</data></match></read>
+    <read><delim>\x0a</delim><match><data>genre: cabbcbaaaaacacc</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: jobs</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x4</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: abbaabcbb</data></match></read>
+    <read><delim>\x0a</delim><match><data>company: accbcccccaacacaacacabaac</data></match></read>
+    <read><delim>\x0a</delim><match><data>salary: 0x61bbdcd2</data></match></read>
+    <read><delim>\x0a</delim><match><data>years: 0xd2</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: jobs</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x5</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: accaaaabaabbbbaccbaa</data></match></read>
+    <read><delim>\x0a</delim><match><data>company: cccabaabacaababcbccaaab</data></match></read>
+    <read><delim>\x0a</delim><match><data>salary: 0x48841285</data></match></read>
+    <read><delim>\x0a</delim><match><data>years: 0x58</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: acbaa</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: songs</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x5</data></match></read>
+    <read><delim>\x0a</delim><match><data>writer: bcacacacaacaccbc</data></match></read>
+    <read><delim>\x0a</delim><match><data>free online: false</data></match></read>
+    <read><delim>\x0a</delim><match><data>genre: cbbbabcaacabcc</data></match></read>
+    <read><delim>\x0a</delim><match><data>year: 0x83</data></match></read>
+    <read><delim>\x0a</delim><match><data>writer: bbbbbbabababcaacaba</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: jobs</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x3</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: bcabbcbcbccb</data></match></read>
+    <read><delim>\x0a</delim><match><data>company: ab</data></match></read>
+    <read><delim>\x0a</delim><match><data>salary: 0x23a55e25</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: vehicles</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x6</data></match></read>
+    <read><delim>\x0a</delim><match><data>make: baacabbaacbcccaaabc</data></match></read>
+    <read><delim>\x0a</delim><match><data>model: aababb</data></match></read>
+    <read><delim>\x0a</delim><match><data>doors: 0x6a</data></match></read>
+    <read><delim>\x0a</delim><match><data>displacement: 0x6bf3</data></match></read>
+    <read><delim>\x0a</delim><match><data>color: bcbbccc</data></match></read>
+    <read><delim>\x0a</delim><match><data>displacement units: 0x44</data></match></read>
+    <read><delim>\x0a</delim><match><data>good book.</data></match></read>
+</replay>
+</pov>

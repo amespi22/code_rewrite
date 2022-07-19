@@ -1,0 +1,34 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>8fa574f9f2c2b4aeaad9454f58f391e12c4de1d29b0cccff027603a9c8fa68385dc0f25d6d3b4444eafb865d0dccd941</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>Welcome to the diary logger!</data></match></read>
+    <write><data>\xc5\x00</data></write>
+    <write><data>BB\x04e\x08\x00\x00\x00\x04\x05\x0e\x00P\x00\x00\x03\x04\x15\x00\x19\x00cbbb\x04\x04\x00\x01\x00 \x00\x00\x03\x08\x27\x00\x2f\x00aababaab\x03\x03\x046\x00:\x00bacc\x00\x03\x0fA\x00\x00\x00cbabbcaabbbbaaa\x04\x04V\x00\x8d\x00\x00\x03\x05\x5d\x00b\x00ccbaa\x04\x04\x00\x01\x00i\x00\x03\x03\x15p\x00\x85\x00baccaabacacbbacccbcba\x02\x03\x01\x8c\x00\x00\x00a\x01\x03\x93\x00\x00\x00\x00\x03\x15\x9a\x00\xaf\x00bacaccabcabbbbccbbbab\x05\x03\x01\xb6\x00\xb7\x00c\x02\x03\x07\xbe\x00\x00\x00acbbbaa</data></write>
+    <read><delim>\x0a</delim><match><data>Length: 197</data></match></read>
+    <read><delim>\x0a</delim><match><data>Magic number: 0x4242</data></match></read>
+    <read><delim>\x0a</delim><match><data>Future: 0x6504</data></match></read>
+    <read><delim>\x0a</delim><match><data>Offset: 0x8</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: songs</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x5</data></match></read>
+    <read><delim>\x0a</delim><match><data>writer: cbbb</data></match></read>
+    <read><delim>\x0a</delim><match><data>free online: true</data></match></read>
+    <read><delim>\x0a</delim><match><data>writer: aababaab</data></match></read>
+    <read><delim>\x0a</delim><match><data>publisher: bacc</data></match></read>
+    <read><delim>\x0a</delim><match><data>writer: cbabbcaabbbbaaa</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: songs</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x4</data></match></read>
+    <read><delim>\x0a</delim><match><data>writer: ccbaa</data></match></read>
+    <read><delim>\x0a</delim><match><data>free online: true</data></match></read>
+    <read><delim>\x0a</delim><match><data>publisher: baccaabacacbbacccbcba</data></match></read>
+    <read><delim>\x0a</delim><match><data>genre: a</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: movies</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x3</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: bacaccabcabbbbccbbbab</data></match></read>
+    <read><delim>\x0a</delim><match><data>plot summary: c</data></match></read>
+    <read><delim>\x0a</delim><match><data>director: acbbbaa</data></match></read>
+    <read><delim>\x0a</delim><match><data>good book.</data></match></read>
+</replay>
+</pov>

@@ -34,7 +34,7 @@ primaryExpression
     :   Identifier
     |   Constant
     |   StringLiteral+
-    |   '(' expression ')'
+    |   '__extension__'? '(' expression ')'
     |   genericSelection
     |   '__extension__'? '(' compoundStatement ')' // Blocks (GCC extension)
     |   '__builtin_va_arg' '(' unaryExpression ',' typeName ')'
@@ -157,7 +157,8 @@ constantExpression
     ;
 
 declaration
-    :   declarationSpecifiers initDeclaratorList? ';'
+    :   fptypeSpecifier
+    |   declarationSpecifiers initDeclaratorList? ';'
     |   staticAssertDeclaration
     ;
 
@@ -187,6 +188,7 @@ declarationSpecifier
     |   functionSpecifier
     |   alignmentSpecifier
     ;
+//    |   pointer
 
 initDeclaratorList
     :   initDeclarator (',' initDeclarator)*
@@ -205,6 +207,10 @@ storageClassSpecifier
     |   'register'
     ;
 
+fptypeSpecifier
+    :   'typedef' functionPtrDeclaration
+    ;
+
 typeSpecifier
     :   ('void'
     |   'char'
@@ -220,13 +226,15 @@ typeSpecifier
     |   '__m128'
     |   '__m128d'
     |   '__m128i')+
+    |   '__extension__' 'typedef'? typeSpecifier+
     |   '__extension__' '(' ('__m128' | '__m128d' | '__m128i') ')'
     |   atomicTypeSpecifier
-    |   structOrUnionSpecifier
+    |   '__extension__'? structOrUnionSpecifier
     |   enumSpecifier
     |   '__typeof__' '(' constantExpression ')' // GCC extension
     |   typeSpecifier pointer
     |   typedefName
+    |   gccAttributeSpecifier
     ;
 
 structOrUnionSpecifier
@@ -249,7 +257,7 @@ structDeclaration
     ;
 
 specifierQualifierList
-    :   (typeSpecifier| typeQualifier) specifierQualifierList?
+    :   (functionPtrDeclaration | typeSpecifier| typeQualifier) specifierQualifierList?
     ;
 
 structDeclaratorList
@@ -285,13 +293,18 @@ atomicTypeSpecifier
 typeQualifier
     :   'const'
     |   'restrict'
+    |   '__restrict'
+    |   '__restrict__'
     |   'volatile'
+    |   'register'
     |   '_Atomic'
     ;
 
 functionSpecifier
     :   ('inline'
+    |   '__extension__'
     |   '_Noreturn'
+    |   '__inline' // GCC extension
     |   '__inline__' // GCC extension
     |   '__stdcall')
     |   gccAttributeSpecifier
@@ -330,6 +343,7 @@ directDeclarator
 
 gccDeclaratorExtension
     :   '__asm' '(' StringLiteral+ ')'
+    |   '__asm__' '(' StringLiteral+ ')'
     |   gccAttributeSpecifier
     ;
 
@@ -442,10 +456,18 @@ statement
     |   ('__asm' | '__asm__') ('volatile' | '__volatile__') '(' (logicalOrExpression (',' logicalOrExpression)*)? (':' (logicalOrExpression (',' logicalOrExpression)*)?)* ')' ';'
     ;
 
+/*
 labeledStatement
     :   Identifier ':' blockItemList
     |   'case' constantExpression ':' blockItemList
     |   'default' ':' blockItemList
+    ;
+*/
+
+labeledStatement
+    :   Identifier ':' statement
+    |   'case' constantExpression ':' ( declaration | statement )
+    |   'default' ':' ( declaration | statement )
     ;
 
 compoundStatement
@@ -513,11 +535,18 @@ translationUnit
     ;
 
 externalDeclaration
-    :   functionDeclaration
+    :   fptypeSpecifier
+    |   functionDeclaration
     |   functionDefinition
     |   declaration
     |   macroDefinition
     |   ';' // stray ;
+    ;
+
+
+functionPtrDeclaration
+    :   typeSpecifier+  gccAttributeSpecifier? '(' pointer Identifier ')' '(' parameterTypeList? ')'
+    |   typeSpecifier+  '(' gccAttributeSpecifier? '(' pointer Identifier ')' ')'  '(' parameterTypeList? ')'
     ;
 
 
@@ -895,6 +924,11 @@ ComplexDefine
         -> skip
     ;
 
+Macroundef
+    :   '#' Whitespace? 'undef'  ~[\r\n]*
+        -> skip
+    ;
+
 Macroifdef
     :   '#' Whitespace? 'ifdef'  ~[\r\n]*
         -> skip
@@ -916,7 +950,7 @@ Macroendif
     ;
 
 IncludeDirective
-    :   '#' Whitespace? 'include' Whitespace? (('"' ~[\r\n]* '"') | ('<' ~[\r\n]* '>' )) Whitespace? LineComment? Newline
+    :   '#' Whitespace? ('include'|'import') Whitespace? (('"' ~[\r\n]* '"') | ('<' ~[\r\n]* '>' )) Whitespace? LineComment? Newline
         -> skip
     ;
 

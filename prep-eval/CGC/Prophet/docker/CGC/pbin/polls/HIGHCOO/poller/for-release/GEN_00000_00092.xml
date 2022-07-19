@@ -1,0 +1,37 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>c7adfe4237252bbc5110a27eddf8eb066bad26ff72cf6eb5ff9c2791dc17ce0724e0db6e78ed942aa6fa92df6095525d</seed>
+<replay>
+    <write><data>\xd4\x05\x00\x00</data></write>
+    <write><data>\x9e\x01</data></write>
+    <write><data>oFWQk7CrDPtAOuFIHQ965IgsA8H2XKhAiqHJKNa48rFgOMIDMYARbOWeOy4Gd93gjip42BBu8OBx480n2JWHgQdoMWmK8jNPWTV5EQZo4ZeTnzRG5xd58XFeVMImDwSIUkDcPo5tFW2A2DHgoYiJXmQBpOUSOHxoWpIwjNbJ0uRIAvNK0SeStMrwMsli2IuipmbM\x07e5bLZMfRq9RrRaSdtOetbpxXGRNj7v2HgWoEWlqWR0uUnUU9jzvaNPQ8m4XumAtqY3bxFiovcC6vkf\x07KbZPVcQUqSXuhs7m3hmHnzCh8tPdfm3RnCq1D8r4nBh4YbUDHioQWrJGlamdw2zSIEQjj505jFFyjF9G1qpjQjiWjxbvPEGuwYU6MDmBh9uyTl469PVn8yWjleo5ftzjvPDUdFb2Q\x07</data></write>
+    <read><length>4</length><match><data>2y\x06\x00</data></match></read>
+    <write><data>\xd4\x05\x00\x00</data></write>
+    <write><data>\xb5\x00</data></write>
+    <write><data>UYrbOJvrmmLNvMcBlQOt9RWpOvp0jyUoAR78IfMVwGKHF6qR4TczoSuPr0xbRXUhzs90BptkzElSAFgjl4e4B1n7TelKudU\x07qb7Oj04j8JcJnv0IMoVldmtZilxu7knvZ6L5SeI\x07YIDnucTxbMcZy1aA538J2tphDrASXWhtwirT4yostvcm\x07</data></write>
+    <read><length>4</length><match><data>3y\x06\x00</data></match></read>
+    <write><data>j\x0d\x03\x00</data></write>
+    <read><length>4</length><match><pcre>(.+)</pcre></match></read>
+    <read><length>2</length><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <write><data>\xed\x5f\x84\x00</data></write>
+    <read><length>4</length><match><data>\x02\x00\x00\x00</data></match></read>
+    <read><length>8</length><match><data>2y\x06\x003y\x06\x00</data></match></read>
+    <write><data>\xd4\x05\x00\x00</data></write>
+    <write><data>\xb6\x01</data></write>
+    <write><data>9RPzrRPa1TREckElmsgtsvHYoAa4vufPiy5xolhpuNrPrEv6EdbpFFkbBj4d4h0KrbM5N4JDXYC6bekqetKCvnxLn41PYIAmhXsDO16LjsWzLm2gj7NcXt58FnV3xe5pXE83qVBUsUEtKYdqCXoiAoqf1JCLPUL2DdoSBW\x07XjyCC2S3riplCdVhCBkqeJfiqt8iU6yYwoMFqaGUnNh8EVNIUOMbwSkiAn5cqaL7xTgED5OMZnlzBvpqv33NfvFFQtamBjHrB8J0oaadRXISkSVN1SDDpYNoHNE7lmw18TR26j9m8hnn5hFvFkMf98cRlmrnkHHe90IaRCnVTdxZ2F1bx3amJiQIhauDFQG\x07J80UZuvj64kPz0UYfRskAnWagWRCU3Wj9hjCPM9yAHb0DX0lu7jg4HTbKrBLfQhPF28qAREBKGuJDH\x07</data></write>
+    <read><length>4</length><match><data>4y\x06\x00</data></match></read>
+    <write><data>\xcf\x07\x00\x00</data></write>
+    <write><data>3y\x06\x00</data></write>
+    <read><length>4</length><match><data>3y\x06\x00</data></match></read>
+    <read><length>2</length><match><data>\xb5\x00</data></match></read>
+    <read><length>181</length><match><data>UYrbOJvrmmLNvMcBlQOt9RWpOvp0jyUoAR78IfMVwGKHF6qR4TczoSuPr0xbRXUhzs90BptkzElSAFgjl4e4B1n7TelKudU\x07qb7Oj04j8JcJnv0IMoVldmtZilxu7knvZ6L5SeI\x07YIDnucTxbMcZy1aA538J2tphDrASXWhtwirT4yostvcm\x07</data></match></read>
+    <write><data>\xcf\x07\x00\x00</data></write>
+    <write><data>\x0a\x00\x00\x00</data></write>
+    <read><length>4</length><match><data>\x80\xf2\xff\xff</data></match></read>
+</replay>
+</pov>

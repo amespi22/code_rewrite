@@ -1,0 +1,48 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>c211b611043b677b04f6974d29ab8780662a98b4662182404c1cfa86d4cb0e751f6cd60cbaa4fa82d0c3f107293d8ba0</seed>
+<replay>
+    <write><data>\xd4\x05\x00\x00</data></write>
+    <write><data>\x8e\x01</data></write>
+    <write><data>42m2ylLsdKp3RG6XHskr6ERLKyUxuaza7m7j7wtUHxWfzy93y07tI64PX2bM7AEtsu1Q2L5kHjZqGxmaceGvZFZNEPPXksFOx91Lw04LAjSecIs8JB7yepQ\x07TDF6ZIHxS92UAD1gXe09BLbUl4S0BHXD5N4ALQiL61gdXOLLVhV9kiphOjNvrJ1vi6XQPJuOWdrXiJqkqW5DAXFF5G0G7uKj80heKN3GQixkQ9jCEBP8ZJqJ3aTUGkNoCk4qQPBvgHHeQmQCaDqLcpKaNE\x07fgqNVUDkJBHWlxvjOmkUElWC6d28fehFh5EIcCo2dFPQAgAqf4pWBXefokKBd9mKSBn5lZGHfywIkGC2Rk6dRKApenugMWRsnNZEC7bdcrSeDaBwZDuayF8Ntf\x07</data></write>
+    <read><length>4</length><match><data>2y\x06\x00</data></match></read>
+    <write><data>j\x0d\x03\x00</data></write>
+    <read><length>4</length><match><pcre>(.+)</pcre></match></read>
+    <read><length>2</length><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <read><delim>\x07</delim><match><pcre>(.+)</pcre></match></read>
+    <write><data>\xed\x5f\x84\x00</data></write>
+    <read><length>4</length><match><data>\x01\x00\x00\x00</data></match></read>
+    <read><length>4</length><match><data>2y\x06\x00</data></match></read>
+    <write><data>\xed\x5f\x84\x00</data></write>
+    <read><length>4</length><match><data>\x01\x00\x00\x00</data></match></read>
+    <read><length>4</length><match><data>2y\x06\x00</data></match></read>
+    <write><data>\xcf\x07\x00\x00</data></write>
+    <write><data>2y\x06\x00</data></write>
+    <read><length>4</length><match><data>2y\x06\x00</data></match></read>
+    <read><length>2</length><match><data>\x8e\x01</data></match></read>
+    <read><length>398</length><match><data>42m2ylLsdKp3RG6XHskr6ERLKyUxuaza7m7j7wtUHxWfzy93y07tI64PX2bM7AEtsu1Q2L5kHjZqGxmaceGvZFZNEPPXksFOx91Lw04LAjSecIs8JB7yepQ\x07TDF6ZIHxS92UAD1gXe09BLbUl4S0BHXD5N4ALQiL61gdXOLLVhV9kiphOjNvrJ1vi6XQPJuOWdrXiJqkqW5DAXFF5G0G7uKj80heKN3GQixkQ9jCEBP8ZJqJ3aTUGkNoCk4qQPBvgHHeQmQCaDqLcpKaNE\x07fgqNVUDkJBHWlxvjOmkUElWC6d28fehFh5EIcCo2dFPQAgAqf4pWBXefokKBd9mKSBn5lZGHfywIkGC2Rk6dRKApenugMWRsnNZEC7bdcrSeDaBwZDuayF8Ntf\x07</data></match></read>
+    <write><data>\xcf\x07\x00\x00</data></write>
+    <write><data>2y\x06\x00</data></write>
+    <read><length>4</length><match><data>2y\x06\x00</data></match></read>
+    <read><length>2</length><match><data>\x8e\x01</data></match></read>
+    <read><length>398</length><match><data>42m2ylLsdKp3RG6XHskr6ERLKyUxuaza7m7j7wtUHxWfzy93y07tI64PX2bM7AEtsu1Q2L5kHjZqGxmaceGvZFZNEPPXksFOx91Lw04LAjSecIs8JB7yepQ\x07TDF6ZIHxS92UAD1gXe09BLbUl4S0BHXD5N4ALQiL61gdXOLLVhV9kiphOjNvrJ1vi6XQPJuOWdrXiJqkqW5DAXFF5G0G7uKj80heKN3GQixkQ9jCEBP8ZJqJ3aTUGkNoCk4qQPBvgHHeQmQCaDqLcpKaNE\x07fgqNVUDkJBHWlxvjOmkUElWC6d28fehFh5EIcCo2dFPQAgAqf4pWBXefokKBd9mKSBn5lZGHfywIkGC2Rk6dRKApenugMWRsnNZEC7bdcrSeDaBwZDuayF8Ntf\x07</data></match></read>
+    <write><data>\xd4\x05\x00\x00</data></write>
+    <write><data>\x82\x01</data></write>
+    <write><data>PU5PpMpepbK3Tb8x4poyMtvkkA1eaO32AXGYTRwht4hJv0D7C3Km4jmOS8BNi1HXCC5znorEvRv9LrKhw0ExsXBrtHXKifwjHk3Wj7PAbF3i9jsBk4WF8IlM2hbSdIzWzL0kfW\x07CBco81cVZJRRviJYzM9W2UoAAKUgnMRA0tjj444mV9JoDIcIF0n74lkMv3aix0RDNyGyXV3RUn20e19CODA1WWyMlMEl81RIk845tNXSa7JUFJCQkqAUqKLpdW3wsJvPUU459uPlSMV6rufYjdpQTCJoHFEKlcljFmzKLNsKWt1CzLLLMT8\x07pmkzRAuLPqt5ZA1CUtEKPBjeQOUiJuH42SYWwYEsViOksd5BjqHwubRkBAv2wXMWXY5wNJ\x07</data></write>
+    <read><length>4</length><match><data>3y\x06\x00</data></match></read>
+    <write><data>\xd4\x05\x00\x00</data></write>
+    <write><data>\xe6\x00</data></write>
+    <write><data>tGQvMvryFHlHwVkOb4zMT7YI5PkcOx3IaC4PNmO5tLVlbPiMKacoVQPaqDemDKvEktQa1by8Y\x07T5Zr3clod6JrQ38f\x078BWtQnMdfBjfGqUVMGduePOKmuJ3TDeQ6VSIbp722tYhfuYhaDUYkrNYKL9EBTGbS6eth4oWcz47AaK24lxe5jFNNgA3eHRO5V9VMJVZay1V9cLJJMpGJ2KZDIQ9Y4WyLmxR2Gd2G2\x07</data></write>
+    <read><length>4</length><match><data>4y\x06\x00</data></match></read>
+    <write><data>\xd4\x05\x00\x00</data></write>
+    <write><data>\xf5\x00</data></write>
+    <write><data>9LFq1TIGxvyGoxCSX4jvNwmZCAcK3zxgQtoNkif1nqKxMCwDKN7Fi8Q3Uab2u4VvoO5n42sibME1wTFhff6w4lcihA9cSVxR56WXbFvvVYaKBfMDXfa7RM9FAVqp\x07Xl2p0yVoJKxFoBLXj80REJ1T1DB04y2zinfU7j3j3E4K2DVEhL2euG92\x07p28IPLqAQFdN8SW50LmsRbAdb14yTCWaLsCPChr1O64JdOUPgpzaV2zpUX5Crs\x07</data></write>
+    <read><length>4</length><match><data>5y\x06\x00</data></match></read>
+    <write><data>\x90v\x12\x00</data></write>
+    <read><length>4</length><match><data>\x04\x00\x00\x00</data></match></read>
+</replay>
+</pov>

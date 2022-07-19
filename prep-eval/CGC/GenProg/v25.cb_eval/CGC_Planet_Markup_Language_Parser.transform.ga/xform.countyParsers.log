@@ -1,0 +1,503 @@
+Starting pre-processing
+Processing file CGC_Planet_Markup_Language_Parser/src/include/libcgc.h
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/lib/cgc_mymath.h
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/lib/cgc_stdint.h
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/lib/mymath.c
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/lib/cgc_stdarg.h
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/lib/cgc_stdlib.h
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/lib/stdlib.c
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/src/cgc_string.h
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/src/cgc_service.h
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/src/cgc_helper.h
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/src/cgc_genericParsers.h
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/src/cgc_cityParsers.h
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/src/cgc_countyParsers.h
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/src/cgc_territoryParsers.h
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/src/cgc_countryParsers.h
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/src/helper.c
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/src/cgc_planetParsers.h
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/src/service.c
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/src/string.c
+Processing file CGC_Planet_Markup_Language_Parser/src/CGC_Planet_Markup_Language_Parser/src/territoryParsers.c
+Pre-processing done
+Starting Transformations
+Start expand_case pass
+End pass
+Start expand_conditionals pass
+End pass
+Start expand_blockItems pass
+End pass
+Start if_else_break pass
+End pass
+Start insert_loop_braces pass
+End pass
+Start expand_if_else pass
+End pass
+Start expand_sizeof pass
+End pass
+Start single_declarations pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+Start expand_decs pass
+End pass
+Start expand_func_args pass
+End pass
+all done with passes
+0 :  [cgc_countyMenu] <class 'list'>  [all function decls] 
+ - int choice ;
+ - char selection [ 30 ] ;
+ - pBorder pb ;
+ - pCity pc ;
+ - const char tlv4 [ ] = "1) Display County Info\n" ;
+ - cgc_printf ( tlv4 ) ;
+ - const char tlv5 [ ] = "2) Set Seat\n" ;
+ - cgc_printf ( tlv5 ) ;
+ - const char tlv6 [ ] = "3) Set Population\n" ;
+ - cgc_printf ( tlv6 ) ;
+ - const char tlv7 [ ] = "4) Set Area\n" ;
+ - cgc_printf ( tlv7 ) ;
+ - const char tlv8 [ ] = "5) Set Density\n" ;
+ - cgc_printf ( tlv8 ) ;
+ - const char tlv9 [ ] = "6) Add Border\n" ;
+ - cgc_printf ( tlv9 ) ;
+ - const char tlv10 [ ] = "7) Add City\n" ;
+ - cgc_printf ( tlv10 ) ;
+ - const char tlv11 [ ] = "8) Select City\n" ;
+ - cgc_printf ( tlv11 ) ;
+ - const char tlv12 [ ] = "9) Delete County and Exit Menu\n" ;
+ - cgc_printf ( tlv12 ) ;
+ - const char tlv13 [ ] = "10) Exit Menu\n" ;
+ - cgc_printf ( tlv13 ) ;
+ - const char tlv14 [ ] = "Selection: " ;
+ - cgc_printf ( tlv14 ) ;
+ - void * tlv16 ;
+ - cgc_size_t tlv15 ;
+ - char * tlv19 ;
+ - char tlv18 ;
+ - cgc_size_t tlv17 ;
+ - const char * tlv22 = selection ;
+ - void * tlv21 ;
+ - cgc_size_t tlv20 ;
+ - int tlv1 ;
+ - int tlv2 ;
+ - cgc_initCity ( pc ) ;
+ - int tlv3 ;
+ - char * tlv25 ;
+ - char tlv24 ;
+ - cgc_size_t tlv23 ;
+ - char * tlv28 ;
+ - char tlv27 ;
+ - cgc_size_t tlv26 ;
+ - const char * tlv69 = selection ;
+ - char * tlv31 ;
+ - char tlv30 ;
+ - cgc_size_t tlv29 ;
+ - const char * tlv70 = selection ;
+ - char * tlv34 ;
+ - char tlv33 ;
+ - cgc_size_t tlv32 ;
+ - const char * tlv71 = selection ;
+ - cgc_size_t tlv74 ;
+ - int tlv73 ;
+ - void * * tlv72 ;
+ - const char tlv35 [ ] = "Lat Start: " ;
+ - cgc_printf ( tlv35 ) ;
+ - void * tlv37 ;
+ - cgc_size_t tlv36 ;
+ - char * tlv40 ;
+ - char tlv39 ;
+ - cgc_size_t tlv38 ;
+ - const char * tlv75 = selection ;
+ - const char tlv41 [ ] = "Long Start: " ;
+ - cgc_printf ( tlv41 ) ;
+ - void * tlv43 ;
+ - cgc_size_t tlv42 ;
+ - char * tlv46 ;
+ - char tlv45 ;
+ - cgc_size_t tlv44 ;
+ - const char * tlv76 = selection ;
+ - const char tlv47 [ ] = "Lat End: " ;
+ - cgc_printf ( tlv47 ) ;
+ - void * tlv49 ;
+ - cgc_size_t tlv48 ;
+ - char * tlv52 ;
+ - char tlv51 ;
+ - cgc_size_t tlv50 ;
+ - const char * tlv77 = selection ;
+ - const char tlv53 [ ] = "Long End: " ;
+ - cgc_printf ( tlv53 ) ;
+ - void * tlv55 ;
+ - cgc_size_t tlv54 ;
+ - char * tlv58 ;
+ - char tlv57 ;
+ - cgc_size_t tlv56 ;
+ - const char * tlv78 = selection ;
+ - cgc_size_t tlv81 ;
+ - int tlv80 ;
+ - void * * tlv79 ;
+ - const char tlv59 [ ] = "New City Name: " ;
+ - cgc_printf ( tlv59 ) ;
+ - char * tlv62 ;
+ - char tlv61 ;
+ - cgc_size_t tlv60 ;
+ - const char tlv63 [ ] = "\n-> " ;
+ - cgc_printf ( tlv63 ) ;
+ - void * tlv65 ;
+ - cgc_size_t tlv64 ;
+ - char * tlv68 ;
+ - char tlv67 ;
+ - cgc_size_t tlv66 ;
+ - const char * tlv82 = selection ;
+ - pCity tlv83 ;
+ - cgc_printCountyInfo ( co ) ;
+ - cgc_freeCounty ( co ) ;
+ - const char tlv84 [ ] = "\n-> " ;
+ - cgc_printf ( tlv84 ) ;
+ - const char tlv85 [ ] = "\n-> " ;
+ - cgc_printf ( tlv85 ) ;
+ - const char tlv86 [ ] = "\n-> " ;
+ - cgc_printf ( tlv86 ) ;
+ - const char tlv87 [ ] = "\n-> " ;
+ - cgc_printf ( tlv87 ) ;
+ - const char tlv88 [ ] = "!!Max cities reached\n" ;
+ - cgc_printf ( tlv88 ) ;
+ - const char tlv89 [ ] = "Invalid choice\n" ;
+ - cgc_printf ( tlv89 ) ;
+ - const char tlv90 [ ] = "Invalid choice\n" ;
+ - cgc_printf ( tlv90 ) ;
+ - const char tlv91 [ ] = "!!Max borders reached\n" ;
+ - cgc_printf ( tlv91 ) ;
+1 :  [cgc_freeCounty] <class 'list'>  [all function decls] 
+ - int index ;
+ - void * tlv2 ;
+ - cgc_size_t tlv1 ;
+ - pCity tlv3 ;
+ - cgc_freeCity ( tlv3 ) ;
+ - void * tlv5 ;
+ - cgc_size_t tlv4 ;
+2 :  [cgc_initCounty] <class 'list'>  [all function decls] 
+ - int index ;
+3 :  [cgc_printCountyInfo] <class 'list'>  [all function decls] 
+ - int index ;
+ - const char tlv1 [ ] = "\t\t\tCounty: " ;
+ - cgc_printf ( tlv1 ) ;
+ - const char tlv2 [ ] = "\t\t\t\tSeat: " ;
+ - cgc_printf ( tlv2 ) ;
+ - const char tlv3 [ ] = "Unknown\n" ;
+ - cgc_printf ( tlv3 ) ;
+ - const char tlv4 [ ] = "Unknown\n" ;
+ - cgc_printf ( tlv4 ) ;
+ - pCity tlv5 ;
+ - cgc_printCityInfo ( tlv5 ) ;
+4 :  [cgc_countyTopLevel] <class 'list'>  [all function decls] 
+ - pCounty newCounty ;
+ - int startIndex ;
+ - int endIndex ;
+ - int lastGood ;
+ - int tempInt ;
+ - char * tempChar ;
+ - element el ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv1 ;
+ - cgc_incChar ( str ) ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv2 ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv3 ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - cgc_incChar ( str ) ;
+ - int tlv4 ;
+ - cgc_initCounty ( newCounty ) ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv5 ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv6 ;
+ - cgc_skipAlpha ( str ) ;
+ - int tlv7 ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv8 ;
+ - cgc_incChar ( str ) ;
+ - pstring tlv24 ;
+ - char tlv23 ;
+ - pstring tlv10 ;
+ - int * tlv9 ;
+ - pstring tlv25 ;
+ - pstring tlv28 ;
+ - int tlv27 ;
+ - int tlv26 ;
+ - const char * tlv30 = tempChar ;
+ - const char tlv29 [ ] = "County" ;
+ - void * tlv12 ;
+ - cgc_size_t tlv11 ;
+ - pstring tlv32 ;
+ - char tlv31 ;
+ - cgc_size_t tlv35 ;
+ - int tlv34 ;
+ - void * * tlv33 ;
+ - pstring tlv36 ;
+ - pstring tlv38 ;
+ - char tlv37 ;
+ - pstring tlv14 ;
+ - int tlv13 ;
+ - pstring tlv40 ;
+ - char tlv39 ;
+ - pstring tlv16 ;
+ - int tlv15 ;
+ - pstring tlv18 ;
+ - int * tlv17 ;
+ - pstring tlv20 ;
+ - int * tlv19 ;
+ - pstring tlv43 ;
+ - int tlv42 ;
+ - int tlv41 ;
+ - const char * tlv45 = tempChar ;
+ - const char tlv44 [ ] = "County" ;
+ - void * tlv22 ;
+ - cgc_size_t tlv21 ;
+ - pstring tlv47 ;
+ - char tlv46 ;
+ - char * tlv78 ;
+ - cgc_freeCounty ( newCounty ) ;
+ - char * tlv54 ;
+ - void * tlv49 ;
+ - cgc_size_t tlv48 ;
+ - pstring tlv51 ;
+ - int * tlv50 ;
+ - pstring tlv55 ;
+ - void * tlv53 ;
+ - cgc_size_t tlv52 ;
+ - char * tlv79 ;
+ - char * tlv80 ;
+ - void * tlv57 ;
+ - cgc_size_t tlv56 ;
+ - char * tlv60 ;
+ - char * tlv59 ;
+ - cgc_size_t tlv58 ;
+ - void * tlv62 ;
+ - cgc_size_t tlv61 ;
+ - void * tlv64 ;
+ - cgc_size_t tlv63 ;
+ - char * tlv67 ;
+ - char * tlv66 ;
+ - cgc_size_t tlv65 ;
+ - void * tlv69 ;
+ - cgc_size_t tlv68 ;
+ - pstring tlv70 ;
+ - pstring tlv71 ;
+ - char * tlv81 ;
+ - char * tlv82 ;
+ - pstring tlv73 ;
+ - pstring tlv74 ;
+ - pstring tlv75 ;
+ - pstring tlv76 ;
+ - pstring tlv77 ;
+ - const char tlv72 [ ] = "!!Element not allowed\n" ;
+ - cgc_printf ( tlv72 ) ;
+5 :  [cgc_checkId] <class 'list'>  [all function decls] 
+ - int retval ;
+ - int startIndex ;
+ - int endIndex ;
+ - char * temp ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv1 ;
+ - cgc_incChar ( str ) ;
+ - int tlv2 ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - cgc_incChar ( str ) ;
+ - pstring tlv7 ;
+ - char tlv6 ;
+ - pstring tlv8 ;
+ - pstring tlv9 ;
+ - pstring tlv12 ;
+ - int tlv11 ;
+ - int tlv10 ;
+ - const char * tlv14 = temp ;
+ - const char * tlv13 = id ;
+ - void * tlv5 ;
+ - cgc_size_t tlv4 ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv3 ;
+ - cgc_incChar ( str ) ;
+ - char * tlv19 ;
+ - pstring tlv18 ;
+ - char tlv17 ;
+ - void * tlv16 ;
+ - cgc_size_t tlv15 ;
+ - char * tlv20 ;
+6 :  [cgc_extractDensity] <class 'list'>  [all function decls] 
+ - double density ;
+ - register int startIndex ;
+ - register int endIndex ;
+ - char * temp ;
+ - int lastGood ;
+ - int tlv1 ;
+ - int tlv2 ;
+ - pstring tlv4 ;
+ - int * tlv3 ;
+ - pstring tlv9 ;
+ - char tlv8 [ ] = "Density" ;
+ - int tlv7 ;
+ - pstring tlv10 ;
+ - pstring tlv11 ;
+ - pstring tlv14 ;
+ - int tlv13 ;
+ - int tlv12 ;
+ - const char * tlv15 = temp ;
+ - void * tlv6 ;
+ - cgc_size_t tlv5 ;
+ - pstring tlv18 ;
+ - char tlv17 [ ] = "Density" ;
+ - int tlv16 ;
+7 :  [cgc_extractArea] <class 'list'>  [all function decls] 
+ - double area ;
+ - int startIndex ;
+ - int endIndex ;
+ - char * temp ;
+ - int lastGood ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - cgc_incChar ( str ) ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv1 ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - cgc_incChar ( str ) ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv2 ;
+ - cgc_incChar ( str ) ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv3 ;
+ - int tlv4 ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv5 ;
+ - cgc_incChar ( str ) ;
+ - pstring tlv7 ;
+ - int * tlv6 ;
+ - pstring tlv9 ;
+ - int * tlv8 ;
+ - pstring tlv16 ;
+ - pstring tlv19 ;
+ - int tlv18 ;
+ - int tlv17 ;
+ - const char * tlv21 = temp ;
+ - const char tlv20 [ ] = "Area" ;
+ - void * tlv11 ;
+ - cgc_size_t tlv10 ;
+ - pstring tlv22 ;
+ - pstring tlv23 ;
+ - pstring tlv26 ;
+ - int tlv25 ;
+ - int tlv24 ;
+ - const char * tlv27 = temp ;
+ - void * tlv13 ;
+ - cgc_size_t tlv12 ;
+ - pstring tlv29 ;
+ - char tlv28 ;
+ - pstring tlv31 ;
+ - char tlv30 ;
+ - pstring tlv32 ;
+ - pstring tlv33 ;
+ - pstring tlv36 ;
+ - int tlv35 ;
+ - int tlv34 ;
+ - const char * tlv38 = temp ;
+ - const char tlv37 [ ] = "Area" ;
+ - void * tlv15 ;
+ - cgc_size_t tlv14 ;
+ - pstring tlv40 ;
+ - char tlv39 ;
+ - char * tlv45 ;
+ - char * tlv46 ;
+ - void * tlv42 ;
+ - cgc_size_t tlv41 ;
+ - void * tlv44 ;
+ - cgc_size_t tlv43 ;
+ - char * tlv47 ;
+ - char * tlv48 ;
+8 :  [cgc_extractSeat] <class 'list'>  [all function decls] 
+ - char * seat ;
+ - int startIndex ;
+ - int endIndex ;
+ - char * temp ;
+ - int lastGood ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - cgc_incChar ( str ) ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv1 ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - cgc_incChar ( str ) ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv2 ;
+ - cgc_incChar ( str ) ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv3 ;
+ - int tlv4 ;
+ - cgc_skipWhiteSpace ( str ) ;
+ - int tlv5 ;
+ - cgc_incChar ( str ) ;
+ - pstring tlv7 ;
+ - int * tlv6 ;
+ - pstring tlv9 ;
+ - int * tlv8 ;
+ - pstring tlv14 ;
+ - pstring tlv17 ;
+ - int tlv16 ;
+ - int tlv15 ;
+ - const char * tlv19 = temp ;
+ - const char tlv18 [ ] = "Seat" ;
+ - void * tlv11 ;
+ - cgc_size_t tlv10 ;
+ - pstring tlv20 ;
+ - pstring tlv21 ;
+ - pstring tlv24 ;
+ - int tlv23 ;
+ - int tlv22 ;
+ - pstring tlv26 ;
+ - char tlv25 ;
+ - pstring tlv28 ;
+ - char tlv27 ;
+ - pstring tlv29 ;
+ - pstring tlv30 ;
+ - pstring tlv33 ;
+ - int tlv32 ;
+ - int tlv31 ;
+ - const char * tlv35 = temp ;
+ - const char tlv34 [ ] = "Seat" ;
+ - void * tlv13 ;
+ - cgc_size_t tlv12 ;
+ - pstring tlv37 ;
+ - char tlv36 ;
+ - char * tlv44 ;
+ - char * tlv45 ;
+ - void * tlv39 ;
+ - cgc_size_t tlv38 ;
+ - void * tlv41 ;
+ - cgc_size_t tlv40 ;
+ - void * tlv43 ;
+ - cgc_size_t tlv42 ;
+ - char * tlv46 ;
+ - char * tlv47 ;
+ - char * tlv48 ;
+Processing [cgc_countyMenu] :
+Processing [cgc_freeCounty] :
+Processing [cgc_initCounty] :
+Processing [cgc_printCountyInfo] :
+Processing [cgc_countyTopLevel] :
+Processing [cgc_checkId] :
+Processing [cgc_extractDensity] :
+Processing [cgc_extractArea] :
+Processing [cgc_extractSeat] :
+Writing output file xform/t_countyParsers.c
+
+real	2m55.375s
+user	2m55.293s
+sys	0m0.069s

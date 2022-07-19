@@ -1,0 +1,16 @@
+--multi-file 
+--compiler-command perl compile.pl __EXE_NAME__ SCUBA_Dive_Logging >> logs/build.log 2>&1
+--test-command __TEST_SCRIPT__ __EXE_NAME__ __TEST_NAME__ >> logs/__TEST_NAME__.log 2>&1
+--suffix-extension .c
+--program bugged-program.txt
+--prefix preprocessed
+--search ga
+--popsize 40
+--generations 10
+--pos-tests 198
+--neg-tests 1
+--rep-cache default.2.cache
+--semantic-check name
+--rep cilpatch
+--test-script ./test-pov_2.sh
+--allow-coverage-fail

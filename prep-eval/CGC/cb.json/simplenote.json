@@ -1,0 +1,62 @@
+{
+"DEPEND_VERSION":"1.0.1",
+"filenames":[{"name":"simplenote/src/include/libcgc.h","included_by":["simplenote/src/simplenote/lib/calloc.c", "simplenote/src/simplenote/lib/free.c", "simplenote/src/simplenote/lib/malloc.c", "simplenote/src/simplenote/lib/malloc_common.c", "simplenote/src/simplenote/lib/memchr.c", "simplenote/src/simplenote/lib/memcmp.c", "simplenote/src/simplenote/lib/memset.c", "simplenote/src/simplenote/lib/cgc_stdlib.h", "simplenote/src/simplenote/lib/realloc.c", "simplenote/src/simplenote/lib/strchr.c", "simplenote/src/simplenote/lib/strcmp.c", "simplenote/src/simplenote/lib/strlen.c", "simplenote/src/simplenote/lib/strncasecmp.c", "simplenote/src/simplenote/lib/strncmp.c", "simplenote/src/simplenote/lib/strsep.c"]},
+{"name":"simplenote/src/simplenote/lib/cgc_stdarg.h","included_by":["simplenote/src/simplenote/lib/cgc_stdlib.h"]},
+{"name":"simplenote/src/simplenote/lib/cgc_stddef.h","included_by":["simplenote/src/simplenote/lib/cgc_stdlib.h", "simplenote/src/simplenote/lib/cgc_string.h"]},
+{"name":"simplenote/src/simplenote/lib/cgc_stdlib.h","included_by":["simplenote/src/simplenote/lib/calloc.c", "simplenote/src/simplenote/lib/free.c", "simplenote/src/simplenote/lib/malloc.c", "simplenote/src/simplenote/lib/malloc_common.c", "simplenote/src/simplenote/lib/printf.c", "simplenote/src/simplenote/lib/realloc.c", "simplenote/src/simplenote/lib/strdup.c", "simplenote/src/simplenote/lib/strncasecmp.c", "simplenote/src/simplenote/lib/strncmp.c", "simplenote/src/simplenote/src/io.c"]},
+{"name":"simplenote/src/simplenote/lib/cgc_string.h","included_by":["simplenote/src/simplenote/lib/calloc.c", "simplenote/src/simplenote/lib/memcpy.c", "simplenote/src/simplenote/lib/memmove.c", "simplenote/src/simplenote/lib/printf.c", "simplenote/src/simplenote/lib/realloc.c", "simplenote/src/simplenote/lib/strcat.c", "simplenote/src/simplenote/lib/strcpy.c", "simplenote/src/simplenote/lib/strdup.c", "simplenote/src/simplenote/lib/strlen.c", "simplenote/src/simplenote/lib/strncpy.c", "simplenote/src/simplenote/lib/strsep.c", "simplenote/src/simplenote/src/io.c"]},
+{"name":"simplenote/src/simplenote/lib/calloc.c"},
+{"name":"simplenote/src/simplenote/lib/cgc_ctype.h","included_by":["simplenote/src/simplenote/lib/ctype.c", "simplenote/src/simplenote/lib/strcasecmp.c", "simplenote/src/simplenote/lib/strncasecmp.c"]},
+{"name":"simplenote/src/simplenote/lib/ctype.c"},
+{"name":"simplenote/src/simplenote/lib/cgc_stdint.h","included_by":["simplenote/src/simplenote/lib/cgc_malloc.h", "simplenote/src/simplenote/lib/memchr.c"]},
+{"name":"simplenote/src/simplenote/lib/cgc_malloc.h","included_by":["simplenote/src/simplenote/lib/free.c", "simplenote/src/simplenote/lib/malloc.c", "simplenote/src/simplenote/lib/malloc_common.c", "simplenote/src/simplenote/lib/realloc.c"]},
+{"name":"simplenote/src/simplenote/lib/free.c"},
+{"name":"simplenote/src/simplenote/lib/malloc.c"},
+{"name":"simplenote/src/simplenote/lib/malloc_common.c"},
+{"name":"simplenote/src/simplenote/lib/memchr.c"},
+{"name":"simplenote/src/simplenote/lib/memcmp.c"},
+{"name":"simplenote/src/simplenote/lib/memcpy.c"},
+{"name":"simplenote/src/simplenote/lib/memmove.c"},
+{"name":"simplenote/src/simplenote/lib/memset.c"},
+{"name":"simplenote/src/simplenote/lib/printf.c"},
+{"name":"simplenote/src/simplenote/lib/realloc.c"},
+{"name":"simplenote/src/simplenote/lib/strcasecmp.c"},
+{"name":"simplenote/src/simplenote/lib/strcat.c"},
+{"name":"simplenote/src/simplenote/lib/strchr.c"},
+{"name":"simplenote/src/simplenote/lib/strcmp.c"},
+{"name":"simplenote/src/simplenote/lib/strcpy.c"},
+{"name":"simplenote/src/simplenote/lib/strdup.c"},
+{"name":"simplenote/src/simplenote/lib/strlen.c"},
+{"name":"simplenote/src/simplenote/lib/strncasecmp.c"},
+{"name":"simplenote/src/simplenote/lib/strncmp.c"},
+{"name":"simplenote/src/simplenote/lib/strncpy.c"},
+{"name":"simplenote/src/simplenote/lib/strsep.c"},
+{"name":"simplenote/src/simplenote/lib/strtol.c"},
+{"name":"simplenote/src/simplenote/src/cgc_io.h","included_by":["simplenote/src/simplenote/src/io.c"]},
+{"name":"simplenote/src/simplenote/src/io.c"},
+{"name":"simplenote/src/<command","included_by":["simplenote/src/<built-in>"]},
+{"name":"simplenote/src/<built-in>","included_by":["simplenote/src/simplenote/src/main.c"]},
+{"name":"simplenote/src/lib/libcgc.h","included_by":["simplenote/src/simplenote/src/main.c"]},
+{"name":"simplenote/src/lib/ctype.h","included_by":["simplenote/src/simplenote/src/main.c"]},
+{"name":"simplenote/src/lib/stdarg.h","included_by":["simplenote/src/lib/stdlib.h"]},
+{"name":"simplenote/src/lib/stddef.h","included_by":["simplenote/src/lib/stdlib.h"]},
+{"name":"simplenote/src/lib/stdlib.h","included_by":["simplenote/src/simplenote/src/main.c"]},
+{"name":"simplenote/src/lib/string.h","included_by":["simplenote/src/simplenote/src/main.c"]},
+{"name":"simplenote/src/src/io.h","included_by":["simplenote/src/simplenote/src/main.c"]},
+{"name":"simplenote/src/simplenote/src/main.c"}
+],
+"ignore":[
+"simplenote/src/simplenote/src/main.c"
+],
+"macros":[
+   {"name": "PATCHED", "value": false }
+],
+"disable_eval":[
+   "allocate_new_blk","cgc_allocate","cgc_append_list","cgc_append_note","cgc_append_thunk","cgc_calloc","cgc_coalesce","cgc_deallocate","cgc_delete_note","cgc_delete_thunk","cgc_exit","cgc_exit","cgc_exit","cgc_exit","cgc_exit","cgc_exit","cgc_exit","cgc_exit","cgc_exit","cgc_exit","cgc_exit","cgc_fdprintf","cgc_free","cgc_free_argv","cgc_free_thunk","cgc_get_note","cgc_get_size_class","cgc_insert_into_flist","cgc_isalnum","cgc_isalpha","cgc_isascii","cgc_isblank","cgc_iscntrl","cgc_isdigit","cgc_isgraph","cgc_islower","cgc_isprint","cgc_ispunct","cgc_isspace","cgc_isupper","cgc_isxdigit","cgc_len_list","cgc_make_argv","cgc_malloc","cgc_memchr","cgc_memcmp","cgc_memcpy","cgc_memmove","cgc_memset","cgc_new_list","cgc_new_note","cgc_new_thunk","cgc_nth_word","cgc_output_number_printf","cgc_output_number_sprintf","cgc_print_argv","cgc_prompt","cgc_read_n_bytes","cgc_read_until","cgc_realloc","cgc_receive","cgc_remove_from_flist","cgc_remove_head_list","cgc_run_thunk","cgc_send_n_bytes","cgc_sprintf","cgc_strcasecmp","cgc_strcat","cgc_strchr","cgc_strcmp","cgc_strcpy","cgc_strdup","cgc_strlen","cgc_strncasecmp","cgc_strncmp","cgc_strncpy","cgc_strsep","cgc_strtol","cgc_strtoul","cgc__terminate","cgc_toascii","cgc_tolower","cgc_toupper","cgc_transmit","cgc_transmit_string","cgc_yell","__cxa_finalize@@GLIBC_2.1.3","data_start","deregister_tm_clones","__do_global_dtors_aux","__do_global_dtors_aux_fini_array_entry","find_fit","_fini","frame_dummy","__frame_dummy_init_array_entry","free_huge","__gmon_start__","_init","__init_array_end","__init_array_start","_ITM_deregisterTMCloneTable","_ITM_registerTMCloneTable","__libc_csu_fini","__libc_csu_init","__libc_start_main@@GLIBC_2.0","main","malloc_huge","register_tm_clones","remove_from_blist","_start","__x86.get_pc_thunk.ax","__x86.get_pc_thunk.bx","__x86.get_pc_thunk.dx"
+],
+"enable_eval":[
+   "cgc_strlen"
+],
+"struct_ptrs":{
+}
+}

@@ -1,0 +1,23 @@
+{
+"DEPEND_VERSION":"1.0.1",
+"filenames":[{"name":"Palindrome2/src/include/libcgc.h","included_by":["Palindrome2/src/Palindrome2/lib/libc.c", "Palindrome2/src/Palindrome2/src/service.c"]},
+{"name":"Palindrome2/src/Palindrome2/lib/cgc_libc.h","included_by":["Palindrome2/src/Palindrome2/lib/libc.c", "Palindrome2/src/Palindrome2/src/service.c"]},
+{"name":"Palindrome2/src/Palindrome2/lib/libc.c"},
+{"name":"Palindrome2/src/Palindrome2/src/service.c"}
+],
+"ignore":[
+"Palindrome2/src/Palindrome2/src/service.c"
+],
+"macros":[
+   {"name": "PATCHED", "value": false },
+   {"name": "PATCHED_1", "value": false }
+],
+"disable_eval":[
+   "cgc_check","cgc_receive","cgc_receive_delim","cgc__terminate","cgc_transmit","cgc_transmit_all","__cxa_finalize@@GLIBC_2.1.3","data_start","deregister_tm_clones","__do_global_dtors_aux","__do_global_dtors_aux_fini_array_entry","_fini","frame_dummy","__frame_dummy_init_array_entry","__gmon_start__","_init","__init_array_end","__init_array_start","_ITM_deregisterTMCloneTable","_ITM_registerTMCloneTable","__libc_csu_fini","__libc_csu_init","__libc_start_main@@GLIBC_2.0","main","register_tm_clones","_start","__x86.get_pc_thunk.bx","__x86.get_pc_thunk.dx"
+],
+"enable_eval":[
+   "cgc_strlen","sizeof"
+],
+"struct_ptrs":{
+}
+}

@@ -1,0 +1,424 @@
+#!/bin/bash
+i=FSK_BBS
+bin=$(realpath -- ./build/$i/$i)
+TIMEOUT=5
+if [[ ! -z $ANGELIX_RUN ]]; then TIMEOUT=50; fi; 
+TMP=/tmp/angelix/${i}_$RANDOM
+mkdir -p $(dirname -- $TMP)
+assert-equal () {
+	timeout --preserve-status -k $TIMEOUT $TIMEOUT $ANGELIX_RUN $1 < $2  > $TMP
+	x=$?
+	if (( $x >= 64 )); then rm $TMP ; exit $x; fi; 
+	bc=$(wc -c $3)
+	cat $TMP | head -c $bc > $TMP.bc
+	diff -q $TMP.bc $3 > /dev/null
+	xx=$?
+	rm $TMP $TMP.bc
+	exit $xx
+}
+case "$1" in 
+1)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.n1 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/n1.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/n1.out"
+	;;
+2)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.n2 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/n2.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/n2.out"
+	;;
+3)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.n3 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/n3.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/n3.out"
+	;;
+4)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p1 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p1.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p1.out"
+	;;
+5)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p2 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p2.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p2.out"
+	;;
+6)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p3 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p3.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p3.out"
+	;;
+7)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p4 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p4.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p4.out"
+	;;
+8)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p5 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p5.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p5.out"
+	;;
+9)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p6 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p6.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p6.out"
+	;;
+10)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p7 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p7.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p7.out"
+	;;
+11)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p8 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p8.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p8.out"
+	;;
+12)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p9 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p9.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p9.out"
+	;;
+13)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p10 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p10.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p10.out"
+	;;
+14)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p11 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p11.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p11.out"
+	;;
+15)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p12 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p12.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p12.out"
+	;;
+16)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p13 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p13.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p13.out"
+	;;
+17)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p14 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p14.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p14.out"
+	;;
+18)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p15 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p15.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p15.out"
+	;;
+19)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p16 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p16.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p16.out"
+	;;
+20)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p17 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p17.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p17.out"
+	;;
+21)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p18 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p18.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p18.out"
+	;;
+22)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p19 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p19.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p19.out"
+	;;
+23)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p20 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p20.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p20.out"
+	;;
+24)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p21 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p21.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p21.out"
+	;;
+25)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p22 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p22.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p22.out"
+	;;
+26)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p23 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p23.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p23.out"
+	;;
+27)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p24 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p24.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p24.out"
+	;;
+28)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p25 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p25.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p25.out"
+	;;
+29)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p26 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p26.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p26.out"
+	;;
+30)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p27 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p27.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p27.out"
+	;;
+31)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p28 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p28.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p28.out"
+	;;
+32)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p29 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p29.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p29.out"
+	;;
+33)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p30 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p30.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p30.out"
+	;;
+34)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p31 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p31.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p31.out"
+	;;
+35)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p32 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p32.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p32.out"
+	;;
+36)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p33 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p33.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p33.out"
+	;;
+37)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p34 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p34.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p34.out"
+	;;
+38)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p35 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p35.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p35.out"
+	;;
+39)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p36 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p36.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p36.out"
+	;;
+40)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p37 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p37.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p37.out"
+	;;
+41)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p38 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p38.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p38.out"
+	;;
+42)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p39 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p39.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p39.out"
+	;;
+43)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p40 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p40.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p40.out"
+	;;
+44)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p41 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p41.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p41.out"
+	;;
+45)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p42 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p42.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p42.out"
+	;;
+46)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p43 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p43.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p43.out"
+	;;
+47)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p44 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p44.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p44.out"
+	;;
+48)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p45 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p45.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p45.out"
+	;;
+49)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p46 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p46.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p46.out"
+	;;
+50)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p47 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p47.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p47.out"
+	;;
+51)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p48 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p48.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p48.out"
+	;;
+52)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p49 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p49.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p49.out"
+	;;
+53)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p50 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p50.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p50.out"
+	;;
+54)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p51 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p51.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p51.out"
+	;;
+55)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p52 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p52.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p52.out"
+	;;
+56)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p53 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p53.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p53.out"
+	;;
+57)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p54 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p54.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p54.out"
+	;;
+58)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p55 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p55.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p55.out"
+	;;
+59)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p56 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p56.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p56.out"
+	;;
+60)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p57 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p57.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p57.out"
+	;;
+61)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p58 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p58.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p58.out"
+	;;
+62)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p59 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p59.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p59.out"
+	;;
+63)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p60 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p60.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p60.out"
+	;;
+64)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p61 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p61.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p61.out"
+	;;
+65)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p62 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p62.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p62.out"
+	;;
+66)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p63 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p63.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p63.out"
+	;;
+67)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p64 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p64.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p64.out"
+	;;
+68)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p65 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p65.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p65.out"
+	;;
+69)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p66 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p66.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p66.out"
+	;;
+70)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p67 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p67.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p67.out"
+	;;
+71)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p68 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p68.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p68.out"
+	;;
+72)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p69 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p69.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p69.out"
+	;;
+73)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p70 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p70.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p70.out"
+	;;
+74)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p71 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p71.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p71.out"
+	;;
+75)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p72 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p72.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p72.out"
+	;;
+76)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p73 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p73.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p73.out"
+	;;
+77)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p74 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p74.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p74.out"
+	;;
+78)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p75 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p75.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p75.out"
+	;;
+79)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p76 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p76.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p76.out"
+	;;
+80)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p77 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p77.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p77.out"
+	;;
+81)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p78 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p78.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p78.out"
+	;;
+82)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p79 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p79.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p79.out"
+	;;
+83)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p80 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p80.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p80.out"
+	;;
+84)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p81 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p81.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p81.out"
+	;;
+85)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p82 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p82.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p82.out"
+	;;
+86)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p83 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p83.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p83.out"
+	;;
+87)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p84 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p84.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p84.out"
+	;;
+88)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p85 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p85.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p85.out"
+	;;
+89)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p86 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p86.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p86.out"
+	;;
+90)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p87 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p87.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p87.out"
+	;;
+91)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p88 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p88.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p88.out"
+	;;
+92)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p89 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p89.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p89.out"
+	;;
+93)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p90 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p90.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p90.out"
+	;;
+94)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p91 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p91.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p91.out"
+	;;
+95)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p92 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p92.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p92.out"
+	;;
+96)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p93 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p93.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p93.out"
+	;;
+97)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p94 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p94.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p94.out"
+	;;
+98)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p95 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p95.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p95.out"
+	;;
+99)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p96 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p96.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p96.out"
+	;;
+100)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p97 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p97.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p97.out"
+	;;
+101)
+	export seed=$(cat /mnt/Data/APR_eval/cgc_oracles/FSK_BBS/seed.p98 | head -n1)
+	assert-equal "$bin" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p98.in" "/mnt/Data/APR_eval/cgc_oracles/FSK_BBS/p98.out"
+	;;
+esac

@@ -1,0 +1,509 @@
+
+
+#include "libcgc.h"
+#include "cgc_service.h"
+#include "cgc_stdlib.h"
+#include "cgc_malloc.h"
+#include "cgc_dates.h"
+int cgc_download_dive(logbook_type * Info)
+{
+    dive_log_type *next_dive;
+    char buffer[1024];
+    char buffer2[1024];
+    cgc_size_t count;
+    int ret_code;
+    time_t sample_time;
+    time_t first_sample;
+    int sample_depth;
+    struct dive_data *temp_ptr;
+    datetime_struct_type tm;
+    int max_depth;
+    max_depth = 0;
+    int sum_depth;
+    sum_depth = 0;
+    int count_samples;
+    count_samples = 0;
+    time_t delta_time;
+    int *bins;
+    int bin_number;
+    int i;
+    // receive the first samples outside of the loop to start the linked list
+    {
+        unsigned char* tlv28;
+         tlv28 = ( unsigned  char * ) & first_sample;
+        cgc_size_t tlv27;
+        tlv27 = sizeof ( first_sample );
+        ret_code = cgc_receive_bytes(tlv28,tlv27);
+    }
+    if (ret_code < 0) {
+ {
+     const char tlv55 [ ] = "received error code \n";
+    	cgc_printf(tlv55);
+ }
+	return -1;
+    }
+
+    {
+        unsigned char* tlv30;
+         tlv30 = ( unsigned  char * ) & sample_depth;
+        cgc_size_t tlv29;
+        tlv29 = sizeof ( sample_depth );
+        ret_code = cgc_receive_bytes(tlv30,tlv29);
+    }
+    if (ret_code < 0) {
+ {
+     const char tlv56 [ ] = "received error code or zero sample \n";
+    	cgc_printf(tlv56);
+ }
+	return -1;
+    }
+    // ok we got a valid sample, so allocate the data for the new dive 
+    // if its the first dive in the log
+    if (Info->dives == 0) {
+ {
+     cgc_size_t tlv72;
+     tlv72 = 1;
+     cgc_size_t tlv71;
+     tlv71 = sizeof ( dive_log_type );
+    	Info->dives = cgc_calloc(tlv72,tlv71);
+ }
+	if (Info->dives == 0) {
+     {
+         unsigned int tlv87;
+         tlv87 = - 1;
+    	    cgc__terminate(tlv87);
+     }
+	}
+	next_dive = Info->dives;
+    }
+    // otherwise, add it to the end of the log
+    else {
+	next_dive = Info->dives;
+	while (next_dive->next != 0)
+ {
+	    next_dive = next_dive->next;
+ }
+ {
+     cgc_size_t tlv74;
+     tlv74 = 1;
+     cgc_size_t tlv73;
+     tlv73 = sizeof ( dive_log_type );
+    	next_dive->next = cgc_calloc(tlv74,tlv73);
+ }
+	if (next_dive->next == 0) {
+     {
+         unsigned int tlv88;
+         tlv88 = - 1;
+    	    cgc__terminate(tlv88);
+     }
+	}
+	next_dive = next_dive->next;
+    }
+    // now allocate memory for the first data point in the dive
+    {
+        cgc_size_t tlv32;
+        tlv32 = 1;
+        cgc_size_t tlv31;
+        tlv31 = sizeof ( struct dive_data );
+        next_dive->data = cgc_calloc(tlv32,tlv31);
+    }
+    if (next_dive->data == 0) {
+ {
+     unsigned int tlv57;
+     tlv57 = - 1;
+    	cgc__terminate(tlv57);
+ }
+    }
+    temp_ptr = next_dive->data;
+    temp_ptr->timestamp = first_sample;
+    temp_ptr->depth = sample_depth;
+    // if (sample_depth > max_depth)
+    //      max_depth=sample_depth;
+    // sum_depth+=sample_depth;
+    // count_samples++;
+    // convert the timestamp value into a broken out structure of the date/time
+    // this will be used to fill out part of the meta data about the dive
+    {
+        time_t tlv2;
+        tlv2 = first_sample;
+        datetime_struct_type* tlv1;
+        tlv1 = & tm;
+        cgc_time_t2datetime(tlv2,tlv1);
+    }
+    // now loops and get more data samples
+    while (1) {
+ {
+     unsigned char* tlv76;
+      tlv76 = ( unsigned  char * ) & sample_time;
+     cgc_size_t tlv75;
+     tlv75 = sizeof ( sample_time );
+    	ret_code = cgc_receive_bytes(tlv76,tlv75);
+ }
+	if (ret_code < 0) {
+     {
+         const char tlv89 [ ] = "received error code or zero timestamp \n";
+    	    cgc_printf(tlv89);
+     }
+	    return -1;
+	}
+	// input is terminated by a zero timestamp value 
+	if (sample_time == 0) {
+	    break;
+	}
+ {
+     unsigned char* tlv78;
+      tlv78 = ( unsigned  char * ) & sample_depth;
+     cgc_size_t tlv77;
+     tlv77 = sizeof ( sample_depth );
+    	ret_code = cgc_receive_bytes(tlv78,tlv77);
+ }
+	if (ret_code < 0) {
+     {
+         const char tlv90 [ ] = "received error code or zero sample \n";
+    	    cgc_printf(tlv90);
+     }
+	    return -1;
+	}
+ {
+     cgc_size_t tlv80;
+     tlv80 = 1;
+     cgc_size_t tlv79;
+     tlv79 = sizeof ( dive_data_type );
+    	temp_ptr->next = cgc_calloc(tlv80,tlv79);
+ }
+	if (temp_ptr->next == 0) {
+     {
+         unsigned int tlv91;
+         tlv91 = - 1;
+    	    cgc__terminate(tlv91);
+     }
+	}
+	temp_ptr = temp_ptr->next;
+	temp_ptr->timestamp = sample_time;
+	temp_ptr->depth = sample_depth;
+    }
+    temp_ptr->next = 0;
+    // calculate the start to finish duration of the dive in seconds
+    delta_time = temp_ptr->timestamp - first_sample;
+    // set the dive time to the first sample
+    next_dive->timestamp = first_sample;
+    {
+        datetime_struct_type* tlv4;
+        tlv4 = & tm;
+        char* tlv3;
+         tlv3 = next_dive -> dive_date;
+        cgc_to_date_str(tlv4,tlv3);
+    }
+    {
+        datetime_struct_type* tlv6;
+        tlv6 = & tm;
+        char* tlv5;
+         tlv5 = next_dive -> dive_time;
+        cgc_to_time_str(tlv6,tlv5);
+    }
+    //timestamps are in seconds, convert the delta to minutes for the dive log
+    next_dive->dive_length = delta_time / 60;
+    //setup bins per minute of the dive
+    {
+        cgc_size_t tlv34;
+        tlv34 = next_dive -> dive_length + 1;
+        cgc_size_t tlv33;
+        tlv33 = sizeof ( int );
+        bins = cgc_calloc(tlv34,tlv33);
+    }
+    if (bins == 0) {
+ {
+     unsigned int tlv58;
+     tlv58 = - 1;
+    	cgc__terminate(tlv58);
+ }
+    }
+    // now run through the samples to collect meta data for the dive log
+    max_depth = 0;
+    sum_depth = 0;
+    count_samples = 0;
+    temp_ptr = next_dive->data;
+    while (temp_ptr != 0) {
+	if (temp_ptr->depth > max_depth) {
+	    max_depth = temp_ptr->depth;
+	}
+	sum_depth += temp_ptr->depth;
+	count_samples++;
+	bin_number = (temp_ptr->timestamp - first_sample) / 60;
+	bins[bin_number]++;
+	temp_ptr = temp_ptr->next;
+    }
+    next_dive->bincount = 0;
+    for (i = 0; i < next_dive->dive_length + 1; ++i)
+    {
+	next_dive->bincount += bins[i];
+    }
+    cgc_free(bins);
+    next_dive->max_depth = max_depth;
+    if (count_samples > 0) {
+	next_dive->avg_depth = sum_depth / count_samples;
+    } else {
+	next_dive->avg_depth = 0;
+    }
+    // now prompt for the remaining entries, but also allow editing of stuff from the data
+    {
+        const char tlv7 [ ] = "Dive Site";
+        cgc_printf(tlv7);
+    }
+    if (next_dive->dive_site_name[0] != 0) {
+	cgc_printf(" (@s)", next_dive->dive_site_name);
+    }
+    {
+        const char tlv8 [ ] = ": ";
+        cgc_printf(tlv8);
+    }
+    {
+        char* tlv36;
+         tlv36 = buffer;
+        cgc_size_t tlv35;
+        tlv35 = sizeof ( next_dive -> dive_site_name );
+        count = cgc_getline(tlv36,tlv35);
+    }
+    if (count > 0) {
+ {
+     char* tlv61;
+      tlv61 = next_dive -> dive_site_name;
+     const char* tlv60 = buffer;
+     cgc_size_t tlv59;
+     tlv59 = sizeof ( next_dive -> dive_site_name );
+    	cgc_strncpy(tlv61,tlv60,tlv59);
+ }
+    }
+    {
+        const char tlv9 [ ] = "Date";
+        cgc_printf(tlv9);
+    }
+    if (next_dive->dive_date[0] != 0) {
+	cgc_printf(" (@s)", next_dive->dive_date);
+    }
+    {
+        const char tlv10 [ ] = ": ";
+        cgc_printf(tlv10);
+    }
+    {
+        char* tlv38;
+         tlv38 = buffer;
+        cgc_size_t tlv37;
+        tlv37 = sizeof ( next_dive -> dive_date );
+        count = cgc_getline(tlv38,tlv37);
+    }
+    if (count > 0) {
+ {
+     char* tlv64;
+      tlv64 = next_dive -> dive_date;
+     const char* tlv63 = buffer;
+     cgc_size_t tlv62;
+     tlv62 = count;
+    	cgc_strncpy(tlv64,tlv63,tlv62);
+ }
+    }
+    {
+        const char tlv11 [ ] = "Time";
+        cgc_printf(tlv11);
+    }
+    if (next_dive->dive_time[0] != 0) {
+	cgc_printf(" (@s)", next_dive->dive_time);
+    }
+    {
+        const char tlv12 [ ] = ": ";
+        cgc_printf(tlv12);
+    }
+    {
+        char* tlv40;
+         tlv40 = buffer2;
+        cgc_size_t tlv39;
+        tlv39 = sizeof ( next_dive -> dive_time );
+        count = cgc_getline(tlv40,tlv39);
+    }
+    if (count > 0) {
+ {
+     char* tlv67;
+      tlv67 = next_dive -> dive_time;
+     const char* tlv66 = buffer2;
+     cgc_size_t tlv65;
+     tlv65 = count;
+    	cgc_strncpy(tlv67,tlv66,tlv65);
+ }
+    }
+    {
+        const char tlv13 [ ] = "Location (area/city)";
+        cgc_printf(tlv13);
+    }
+    if (next_dive->location[0] != 0) {
+	cgc_printf(" (@s)", next_dive->location);
+    }
+    {
+        const char tlv14 [ ] = ": ";
+        cgc_printf(tlv14);
+    }
+    {
+        char* tlv42;
+         tlv42 = buffer;
+        cgc_size_t tlv41;
+        tlv41 = sizeof ( next_dive -> location );
+        count = cgc_getline(tlv42,tlv41);
+    }
+    if (count > 0) {
+ {
+     char* tlv70;
+      tlv70 = next_dive -> location;
+     const char* tlv69 = buffer;
+     cgc_size_t tlv68;
+     tlv68 = count;
+    	cgc_strncpy(tlv70,tlv69,tlv68);
+ }
+    }
+    {
+        const char tlv15 [ ] = "Max Depth in ft";
+        cgc_printf(tlv15);
+    }
+    if (next_dive->max_depth != 0) {
+	cgc_printf(" (@d)", next_dive->max_depth);
+    }
+    {
+        const char tlv16 [ ] = ": ";
+        cgc_printf(tlv16);
+    }
+    {
+        char* tlv44;
+         tlv44 = buffer;
+        cgc_size_t tlv43;
+        tlv43 = sizeof ( buffer );
+        count = cgc_getline(tlv44,tlv43);
+    }
+    if (count > 0) {
+ {
+     const char* tlv81 = buffer;
+    	next_dive->max_depth = cgc_atoi(tlv81);
+ }
+    }
+    {
+        const char tlv17 [ ] = "Avg Depth in ft";
+        cgc_printf(tlv17);
+    }
+    if (next_dive->avg_depth != 0) {
+	cgc_printf(" (@d)", next_dive->avg_depth);
+    }
+    {
+        const char tlv18 [ ] = ": ";
+        cgc_printf(tlv18);
+    }
+    {
+        char* tlv46;
+         tlv46 = buffer;
+        cgc_size_t tlv45;
+        tlv45 = sizeof ( buffer );
+        count = cgc_getline(tlv46,tlv45);
+    }
+    if (count > 0) {
+ {
+     const char* tlv82 = buffer;
+    	next_dive->avg_depth = cgc_atoi(tlv82);
+ }
+    }
+    {
+        const char tlv19 [ ] = "Dive Duration (mins)";
+        cgc_printf(tlv19);
+    }
+    if (next_dive->dive_length != 0) {
+	cgc_printf(" (@d)", next_dive->dive_length);
+    }
+    {
+        const char tlv20 [ ] = ": ";
+        cgc_printf(tlv20);
+    }
+    {
+        char* tlv48;
+         tlv48 = buffer;
+        cgc_size_t tlv47;
+        tlv47 = 13;
+        count = cgc_getline(tlv48,tlv47);
+    }
+    if (count > 0) {
+ {
+     const char* tlv83 = buffer;
+    	next_dive->dive_length = cgc_atoi(tlv83);
+ }
+    }
+    {
+        const char tlv21 [ ] = "O2 Percentage";
+        cgc_printf(tlv21);
+    }
+    if (next_dive->O2_percent != 0) {
+	cgc_printf(" (@d)", next_dive->O2_percent);
+    }
+    {
+        const char tlv22 [ ] = ": ";
+        cgc_printf(tlv22);
+    }
+    {
+        char* tlv50;
+         tlv50 = buffer;
+        cgc_size_t tlv49;
+        tlv49 = 11;
+        count = cgc_getline(tlv50,tlv49);
+    }
+    if (count > 0) {
+ {
+     const char* tlv84 = buffer;
+    	next_dive->O2_percent = cgc_atoi(tlv84);
+ }
+    }
+
+    {
+        const char tlv23 [ ] = "Pressure In (psi)";
+        cgc_printf(tlv23);
+    }
+    if (next_dive->pressure_in != 0) {
+	cgc_printf(" (@d)", next_dive->pressure_in);
+    }
+    {
+        const char tlv24 [ ] = ": ";
+        cgc_printf(tlv24);
+    }
+    {
+        char* tlv52;
+         tlv52 = buffer;
+        cgc_size_t tlv51;
+        tlv51 = 20;
+        count = cgc_getline(tlv52,tlv51);
+    }
+    if (count > 0) {
+ {
+     const char* tlv85 = buffer;
+    	next_dive->pressure_in = cgc_atoi(tlv85);
+ }
+    }
+    {
+        const char tlv25 [ ] = "Pressure Out (psi)";
+        cgc_printf(tlv25);
+    }
+    if (next_dive->pressure_out != 0) {
+	cgc_printf(" (@d)", next_dive->pressure_out);
+    }
+    {
+        const char tlv26 [ ] = ": ";
+        cgc_printf(tlv26);
+    }
+    {
+        char* tlv54;
+         tlv54 = buffer;
+        cgc_size_t tlv53;
+        tlv53 = 11;
+        count = cgc_getline(tlv54,tlv53);
+    }
+    if (count > 0) {
+ {
+     const char* tlv86 = buffer;
+    	next_dive->pressure_out = cgc_atoi(tlv86);
+ }
+    }
+    next_dive->next = 0;
+    return 0;
+}
+

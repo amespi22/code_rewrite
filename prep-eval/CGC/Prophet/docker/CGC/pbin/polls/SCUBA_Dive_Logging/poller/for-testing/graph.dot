@@ -1,0 +1,28 @@
+digraph G {
+    edit_dive [label="edit_dive"];
+    dive_statistics [label="dive_statistics"];
+    remove_dive [label="remove_dive"];
+    exit [label="exit", shape=triangle];
+    enter_diver_info [label="enter_diver_info"];
+    download_dive [label="download_dive"];
+    start [label="start", shape=box];
+    print_dives [label="print_dives"];
+    enter_a_dive [label="enter_a_dive"];
+    menu [label="menu"];
+    menu -> edit_dive;
+    menu -> exit [label="0.5x"];
+    menu -> remove_dive;
+    menu -> enter_diver_info;
+    menu -> download_dive;
+    menu -> dive_statistics;
+    menu -> print_dives;
+    menu -> enter_a_dive;
+    edit_dive -> menu;
+    remove_dive -> menu;
+    enter_diver_info -> menu;
+    download_dive -> menu;
+    dive_statistics -> menu;
+    print_dives -> menu;
+    enter_a_dive -> menu;
+    start -> menu;
+}

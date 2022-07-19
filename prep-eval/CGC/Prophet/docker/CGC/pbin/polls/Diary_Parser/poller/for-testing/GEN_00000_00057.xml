@@ -1,0 +1,48 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>13b881f4e9b95e9e0ce6eca8a43c92cb04ffefce73aad9f0a7edee3ec8e8998bfd59ae395e4a3c0af0e4e944a2498168</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>Welcome to the diary logger!</data></match></read>
+    <write><data>C\x01</data></write>
+    <write><data>BB\x97F\x08\x00\x00\x00\x00\x03\x0e\x000\x00\x00\x03\x02\x15\x00\x17\x00cb\x02\x03\x0b\x1e\x00\x29\x00acccabacbba\x03\x00\x00\xdc\x00\x00\x00\x05\x056\x00\x88\x00\x00\x03\x18\x3d\x00U\x00acbacccacaccbcbaacacabbc\x03\x03\x13\x5c\x00o\x00caccccaacbcabbcccab\x05\x02\x04v\x00z\x00\x1c\xb9s\x1d\x01\x00\x00\xd0\x00\x81\x00\x04\x04\x00\x01\x00\x00\x00\x06\x03\x8e\x00\x00\x00\x00\x04\x94\x00\xce\x00\x00\x03\x08\x9b\x00\xa3\x00cabcaaac\x01\x03\x08\xaa\x00\xb2\x00cbbcaaca\x05\x00\x00\xf9\x00\xb9\x00\x02\x03\x0e\xc0\x00\x00\x00caaaccbabbcaac\x02\x04\xd4\x00\xfd\x00\x00\x03\x0d\xdb\x00\xe8\x00acabcaaabcaab\x01\x01\x00\xf3\xd5\xef\x00\x03\x04\x00\x00\x00\xf6\x00\x04\x00\x00\x85\x00\x00\x00\x06\x04\x03\x01\x00\x00\x00\x03\x11\x0a\x01\x1b\x01acbbacbccbabccacc\x01\x03\x13\x22\x015\x01abbacaaacbacaaccbcc\x02\x00\x00\x2a\x00\x3c\x01\x03\x04\x00\x01\x00\x00\x00</data></write>
+    <read><delim>\x0a</delim><match><data>Length: 323</data></match></read>
+    <read><delim>\x0a</delim><match><data>Magic number: 0x4242</data></match></read>
+    <read><delim>\x0a</delim><match><data>Future: 0x4697</data></match></read>
+    <read><delim>\x0a</delim><match><data>Offset: 0x8</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: identity</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x3</data></match></read>
+    <read><delim>\x0a</delim><match><data>first name: cb</data></match></read>
+    <read><delim>\x0a</delim><match><data>last name: acccabacbba</data></match></read>
+    <read><delim>\x0a</delim><match><data>age: 0xdc</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: jobs</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x5</data></match></read>
+    <read><delim>\x0a</delim><match><data>title: acbacccacaccbcbaacacabbc</data></match></read>
+    <read><delim>\x0a</delim><match><data>company: caccccaacbcabbcccab</data></match></read>
+    <read><delim>\x0a</delim><match><data>salary: 0x1d73b91c</data></match></read>
+    <read><delim>\x0a</delim><match><data>years: 0xd0</data></match></read>
+    <read><delim>\x0a</delim><match><data>have a best friend: true</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: hobbies</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x3</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: shooting</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x4</data></match></read>
+    <read><delim>\x0a</delim><match><data>make: cabcaaac</data></match></read>
+    <read><delim>\x0a</delim><match><data>model: cbbcaaca</data></match></read>
+    <read><delim>\x0a</delim><match><data>years experience: 0xf9</data></match></read>
+    <read><delim>\x0a</delim><match><data>league: caaaccbabbcaac</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: stamps</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x4</data></match></read>
+    <read><delim>\x0a</delim><match><data>name: acabcaaabcaab</data></match></read>
+    <read><delim>\x0a</delim><match><data>value: 0xd5f3</data></match></read>
+    <read><delim>\x0a</delim><match><data>mint: false</data></match></read>
+    <read><delim>\x0a</delim><match><data>count: 0x85</data></match></read>
+    <read><delim>\x0a</delim><match><data>Title: sports</data></match></read>
+    <read><delim>\x0a</delim><match><data>Entry Count: 0x4</data></match></read>
+    <read><delim>\x0a</delim><match><data>name: acbbacbccbabccacc</data></match></read>
+    <read><delim>\x0a</delim><match><data>position: abbacaaacbacaaccbcc</data></match></read>
+    <read><delim>\x0a</delim><match><data>years experience: 0x2a</data></match></read>
+    <read><delim>\x0a</delim><match><data>injury: true</data></match></read>
+    <read><delim>\x0a</delim><match><data>good book.</data></match></read>
+</replay>
+</pov>

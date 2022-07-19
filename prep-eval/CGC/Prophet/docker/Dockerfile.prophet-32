@@ -1,0 +1,185 @@
+FROM ubuntu:18.04
+
+
+RUN apt-get -y install apt-transport-https
+
+RUN apt-get -y update
+
+RUN apt-get -y install git wget xz-utils build-essential \
+                       curl libcap-dev \
+                       cmake libncurses5-dev libboost-all-dev \
+                       libexplain-dev \
+                       gcc-5-multilib \
+                       g++-5-multilib
+
+RUN apt-get install -y autoconf
+
+
+RUN apt-get install software-properties-common -y --no-install-recommends
+
+# need GCC-4.8 or GCC-5
+
+WORKDIR /PROPHET
+RUN mkdir -p /PROPHET
+
+COPY patches /PROPHET/patches
+COPY lib32/libexplain.a /usr/lib/i386-linux-gnu/libexplain.a 
+COPY lib32/libexplain.so.51.5.0 /usr/lib/i386-linux-gnu/libexplain.so.51.5.0 
+
+ENV GCC_VERS=5
+
+
+RUN mkdir llvm-3.6.2 
+
+WORKDIR /PROPHET/llvm-3.6.2
+
+RUN \
+ wget https://releases.llvm.org/3.6.2/llvm-3.6.2.src.tar.xz \
+ && tar xf llvm-3.6.2.src.tar.xz 
+
+RUN mv llvm-3.6.2.src llvm 
+
+RUN cat /PROPHET/patches/llvm.patch
+RUN patch -f -s -p0  < /PROPHET/patches/llvm.patch 
+
+RUN \
+ wget https://releases.llvm.org/3.6.2/cfe-3.6.2.src.tar.xz \
+ && tar xf cfe-3.6.2.src.tar.xz \
+ && mv cfe-3.6.2.src llvm/tools/clang  \
+ && ln -sf llvm/tools/clang cfe 
+
+RUN \
+ wget https://releases.llvm.org/3.6.2/compiler-rt-3.6.2.src.tar.xz \
+ && tar xf compiler-rt-3.6.2.src.tar.xz \
+ && mv compiler-rt-3.6.2.src llvm/projects/compiler-rt  \
+ && ln -sf llvm/projects/compiler-rt compiler-rt 
+
+RUN mkdir build 
+
+WORKDIR /PROPHET/llvm-3.6.2/build
+RUN cmake \
+	 -DLLVM_ENABLE_PROJECTS="all" \
+	 -DCMAKE_C_COMPILER="gcc-$GCC_VERS" \
+	 -DCMAKE_CXX_COMPILER="g++-$GCC_VERS" \
+	 -DCMAKE_INSTALL_PREFIX=$(realpath ../tools) \
+	 -DCMAKE_C_FLAGS=" -Wno-unused-function " \
+	 -DCMAKE_CXX_FLAGS=" -Wno-unused-function "  \
+	 -DCMAKE_CPP_FLAGS=" -Wno-unused-function " \
+	 ../llvm/
+RUN make 
+RUN make clang
+RUN make compiler-rt
+RUN make install 
+
+# installing 32-bit libraries
+RUN dpkg --add-architecture i386 && apt-get -y update && \
+ apt-get -y install  libcap-dev:i386 \
+                        libncurses5-dev:i386 
+
+# trying without the 32b libboost : libboost-all-dev:i386 
+RUN add-apt-repository universe && apt-get -y update
+#RUN apt-get -y install -f libboost-iostreams-dev:i386 \
+#    libboost-python-dev:i386 \
+#    libboost-regex-dev:i386 \
+#    libboost-all-dev:i386 
+RUN apt-get -y install -f zlib1g-dev:i386
+
+
+RUN mkdir /PROPHET/llvm-3.6.2/build32
+WORKDIR /PROPHET/llvm-3.6.2/build32
+RUN \
+ cmake -DLLVM_BUILD_32_BITS=ON \
+	 -DLLVM_ENABLE_PROJECTS="all" \
+	 -DCMAKE_C_COMPILER="gcc-$GCC_VERS" \
+	 -DCMAKE_CXX_COMPILER="g++-$GCC_VERS" \
+	 -DCMAKE_INSTALL_PREFIX=$(realpath ../tools/32) \
+	 -DCMAKE_C_FLAGS="-m32 -Wno-unused-function " \
+	 -DCMAKE_CXX_FLAGS="-m32 -Wno-unused-function "  \
+	 -DCMAKE_CPP_FLAGS="-m32 -Wno-unused-function " \
+	 ../llvm/
+RUN make 
+RUN make clang
+RUN make compiler-rt
+RUN make install 
+
+
+ENV LLVM_36_DIR=/PROPHET/llvm-3.6.2/tools
+ENV LLVM_36_32b_DIR=/PROPHET/llvm-3.6.2/tools/32
+
+ENV PREVPATH="${PATH}"
+
+RUN echo "export PATH=\$PATH:/PROPHET/llvm-3.6.2/tools/32/bin" > /PROPHET/prophet_setup.bash
+
+WORKDIR /PROPHET
+RUN \
+ mkdir -p /PROPHET/prophet/patches \
+ && cp -r /PROPHET/patches/prophet-gpl /PROPHET/prophet/patches/
+
+
+ # please read fanl's README.html
+ #  http://www.cs.toronto.edu/~fanl/program_repair/prophet-rep/README.html 
+ # pre-requisites:
+ #  + llvm-3.6.2
+ #  + gcc<=4.9
+WORKDIR /PROPHET/prophet
+
+RUN \
+  wget http://www.cs.toronto.edu/~fanl/program_repair/prophet-rep/prophet-0.1-src.tar.gz 
+
+RUN tar -xvzf prophet-0.1-src.tar.gz > /dev/null 
+
+# NEED TO APPLY PATCHES HERE
+RUN ls 
+RUN pwd 
+RUN \
+    for i in $(find /PROPHET/prophet/patches -type f -name "*.patch") ; do \
+        f=$(echo $i | perl -p -e's#^.*patches/##;s#\.patch##'); \
+        patch $f $i ; \
+    done
+
+RUN \
+ perl -pi -e's/-Werror(\s*)/-Wno-unused-function$1/' prophet-gpl/configure.ac prophet-gpl/src/Makefile.am
+
+
+RUN  cp -r /PROPHET/prophet/prophet-gpl /PROPHET/prophet/prophet-gpl-32 
+WORKDIR /PROPHET/prophet/prophet-gpl
+ENV PATH="${PREVPATH}:${LLVM_36_DIR}/bin"
+ENV FLAGS=' -Wno-unused-function -g -O2 -fno-rtti' 
+
+RUN  apt-get install libstdc++-5-dev lib32stdc++-5-dev
+
+# source /PROPHET/prophet_setup.bash 
+RUN \
+ autoreconf --install \
+ &&  CC=gcc-$GCC_VERS CXX=g++-$GCC_VERS ./configure -v --with-sysroot=/usr/lib/gcc/x86_64-linux-gnu/$GCC_VERS \
+         CFLAGS="$FLAGS" CPPFLAGS="$FLAGS" CXXFLAGS="$FLAGS"
+
+RUN cd src && make 
+RUN cd wrap && make 
+RUN cd include && make 
+
+ENV PROPHET64_BASE=/PROPHET/prophet/prophet-gpl
+RUN echo "export PROPHET64_BASE=${PROPHET64_BASE}" >> /PROPHET/prophet_setup.bash
+
+
+WORKDIR /PROPHET/prophet/prophet-gpl-32
+ENV PATH="${PREVPATH}:${LLVM_36_32b_DIR}/bin"
+ENV FLAGS='-m32 -Wno-unused-function -g -O2 -fno-rtti'
+# source /PROPHET/prophet_setup.bash 
+RUN \
+ autoreconf --install \
+ &&  CC=gcc-$GCC_VERS CXX=g++-$GCC_VERS ./configure -v --with-sysroot=/usr/lib/gcc/x86_64-linux-gnu/$GCC_VERS \
+         CFLAGS="$FLAGS" CPPFLAGS="$FLAGS" CXXFLAGS="$FLAGS" \
+ && make src wrap include
+
+RUN cd src && make 
+RUN cd wrap && make 
+RUN cd include && make 
+
+ENV PROPHET32_BASE=/PROPHET/prophet/prophet-gpl-32
+RUN echo "export PROPHET32_BASE=${PROPHET32_BASE}" >> /PROPHET/prophet_setup.bash
+
+RUN mkdir -p /tmp_proj/prophet
+RUN ln -sf /PROPHET/prophet/prophet-gpl-32 /PROPHET/prophet/prophet-gpl/32
+
+WORKDIR /PROPHET

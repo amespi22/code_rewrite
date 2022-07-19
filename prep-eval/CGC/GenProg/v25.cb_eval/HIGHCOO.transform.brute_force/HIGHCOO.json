@@ -1,0 +1,28 @@
+{
+"DEPEND_VERSION":"1.0.1",
+"filenames":[{"name":"HIGHCOO/src/include/libcgc.h","included_by":["HIGHCOO/src/HIGHCOO/lib/cgc_libc.h", "HIGHCOO/src/HIGHCOO/src/operation.c", "HIGHCOO/src/HIGHCOO/src/service.c"]},
+{"name":"HIGHCOO/src/HIGHCOO/lib/cgc_libc.h","included_by":["HIGHCOO/src/HIGHCOO/lib/libc.c", "HIGHCOO/src/HIGHCOO/src/operation.c", "HIGHCOO/src/HIGHCOO/src/service.c"]},
+{"name":"HIGHCOO/src/HIGHCOO/lib/libc.c"},
+{"name":"HIGHCOO/src/HIGHCOO/src/cgc_operation.h","included_by":["HIGHCOO/src/HIGHCOO/src/operation.c", "HIGHCOO/src/HIGHCOO/src/service.c"]},
+{"name":"HIGHCOO/src/HIGHCOO/src/operation.c"},
+{"name":"HIGHCOO/src/HIGHCOO/src/cgc_service.h","included_by":["HIGHCOO/src/HIGHCOO/src/service.c"]},
+{"name":"HIGHCOO/src/HIGHCOO/src/service.c"}
+],
+"ignore":[
+"HIGHCOO/src/HIGHCOO/src/operation.c"
+],
+"macros":[
+   {"name": "PATCHED", "value": false }
+],
+"disable_eval":[
+   "cgc_add_haiku","cgc_add_haiku_to_list","cgc_allocate","cgc_deallocate","cgc_find_haiku_with_id","cgc_get_count","cgc_get_haiku_by_id","cgc_get_haiku_cgc_random","cgc_get_haiku_count","cgc_get_haiku_ids","cgc_get_id_from_haiku","cgc_get_next_haiku_id","cgc_get_random_idx","cgc_haiku_list_exists","cgc_init_haiku_list","cgc_int2str","cgc_is_haiku_list_empty","cgc_list_create","cgc_list_push","cgc_memcpy","cgc_memset","cgc_node_create","cgc_populate_array_with_haiku_ids","cgc_rand","cgc_random","cgc_read_all","cgc_receive","cgc_recv_all","cgc_recv_haiku","cgc_recv_haiku_line","cgc_recv_haiku_size","cgc_recvline","cgc_recv_uint16","cgc_recv_uint32","cgc_send","cgc_sendall","cgc_send_easter_egg_haiku","cgc_send_haiku","cgc_send_haiku_id","cgc_snprintf","cgc_strlen","cgc__terminate","cgc_transmit","cgc_vsnprintf","__cxa_finalize@@GLIBC_2.1.3","data_start","deregister_tm_clones","__do_global_dtors_aux","__do_global_dtors_aux_fini_array_entry","_fini","frame_dummy","__frame_dummy_init_array_entry","__gmon_start__","_init","__init_array_end","__init_array_start","_ITM_deregisterTMCloneTable","_ITM_registerTMCloneTable","__libc_csu_fini","__libc_csu_init","__libc_start_main@@GLIBC_2.0","main","register_tm_clones","_start","__x86.get_pc_thunk.ax","__x86.get_pc_thunk.bx","__x86.get_pc_thunk.dx"
+],
+"enable_eval":[
+   "cgc_strlen"
+],
+"struct_ptrs":{
+},
+"defines":[
+"NARF_LIBC_H","_VA_LIST","_VA_LIST","va_start","va_end","va_arg","va_copy","SUCCESS","ERRNO_LIST_PUSH","ERRNO_ALLOC","SERVICE_H","OPERATION_H","ALLOC","DEALLOC","RECV","SENDSI","SENDUI","INIT_HAIKU_ID","MAX_HAIKU_LINE_LEN","MAX_HAIKU_LEN","EGG_ID","EGG_HAIKU"
+]
+}

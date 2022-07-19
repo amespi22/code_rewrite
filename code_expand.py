@@ -33,18 +33,28 @@ def main():
     global macros
     dont_eval=[]
     okay_to_eval=[]
+    okay_ = ["sizeof"]
+    global struct_ptrs
+    global keywords
+    global defines
+    keywords=None
+    defines=None
     if pre_process != "":
         #This means we have a file to parse
         #File should have a new line for each file to parse
         #Files named should be .c files
         print("Starting pre-processing")
-        funcs_and_args,funcs_and_rts,macros,dont_eval,okay_to_eval = get_json_data(pre_process,infile=prog_name)
+        funcs_and_args,funcs_and_rts,macros,dont_eval,okay_to_eval,struct_ptrs,keywords,defines = get_json_data(pre_process,infile=prog_name)
         print("Pre-processing done")
     else:
         funcs_and_rts = {}
         funcs_and_args = {}
+        struct_ptrs = {}
         macros = None
-
+    for x in okay_:
+        if x not in okay_to_eval:
+            okay_to_eval.append(x)
+    
     _pp_prog_name=f"{prog_name}.pp"
     macros=preprocess(macros,prog_name,_pp_prog_name)
 
@@ -57,14 +67,14 @@ def main():
 
 
     from os import path as path
-    fix_ingred_id=path.splitext(path.basename(f"{prog_name}"))[0]
-    bl_filename=f"fn_blacklist.{fix_ingred_id}.txt"
+    fix_ingred_fileid=path.splitext(path.basename(f"{prog_name}"))[0]
+    bl_filename=f"fn_blacklist.{fix_ingred_fileid}.txt"
+    fix_ingred_id=re.sub(r'-',r'_',fix_ingred_fileid)
 
     #original program
     cur_pro = ""
     with open(_pp_prog_name, 'r') as infile:
         cur_pro = infile.read()
-
     #get the dictionary that maps line numbers with the re-write
     p,t = get_tree_from_file(_pp_prog_name)
     print_ctx_bfs(t,"original_tree")
@@ -131,10 +141,11 @@ def main():
     walker.walk(printer,t)
     scope_vars = get_function_info(functions=get_functions(t),fscope=printer.scopes,dont_eval=dont_eval)
     #fix_loc_rewrites = get_fix_loc_rewrites(scope_vars)
-    fix_loc_rewrites,new_funcs = get_fix_loc_subfns(scope_vars,new_decs,okay_to_eval,id_=fix_ingred_id,root=t)
+    fix_loc_rewrites,new_funcs = get_fix_loc_subfns(scope_vars,new_decs,okay_to_eval,id_=fix_ingred_id,root=t,ptr_t=struct_ptrs,defines=defines)
     cur_pro = gen_fix_loc_changes(cur_pro, fix_loc_rewrites)
 
     #write out the new program
+    print(f"Writing output file {out_name}")
     write_new_program(cur_pro, out_name)
     with open(bl_filename,"w") as o:
         for i in new_funcs:
@@ -255,7 +266,9 @@ def insert_loop_braces(ctx):
                 continue
             #check to see if there are curly braces
             l_body = l.getChild(4)
-            if l_body.getText().startswith("{"):
+            if not l_body:
+                pass
+            elif l_body.getText().startswith("{"):
                 pass
             else:
                 #add if necessary
@@ -292,7 +305,7 @@ def expand_conditionals(ctx):
 
 def gen_conditionals(cur_prog, rewrite):
     lns = cur_prog.split('\n')
-    deltas = {}
+    i = 0
     for r in rewrite:
         s,e = r
         #may want to do this with a line delta but I'll test this first
@@ -300,40 +313,45 @@ def gen_conditionals(cur_prog, rewrite):
             #start and end are on the same line and need to add 1 to the index for the end
 
             #start curly
-            if s[0]-1 in deltas:
-                d = deltas[s[0]-1]
-                deltas[s[0]-1] += 1
-            else:
-                deltas[s[0]-1] = 1
-                d = 0
-
+            d = calc_delta_conditionals(rewrite[:i],s) 
             ln = lns[s[0]-1]
             lns[s[0]-1] = f"{ln[:s[1]-1+d]}{{{ln[s[1]-1+d:]}"
 
-            #end curly
-            if e[0]-1 in deltas:
-                d = deltas[e[0]-1]
-                deltas[e[0]-1] += 1
+            d = calc_delta_conditionals(rewrite[:i],e) 
+            ln = lns[e[0]-1]
+            lns[s[0]-1] = f"{ln[:e[1]+2+d]}}}{ln[e[1]+2+d:]}"
+        else:
+            d = calc_delta_conditionals(rewrite[:i],s) 
+            ln = lns[s[0]-1]
+            lns[s[0]-1] = f"{ln[:s[1]-1+d]}{{{ln[s[1]-1+d:]}"
 
             ln = lns[e[0]-1]
-            lns[s[0]-1] = f"{ln[:e[1]+1+d]}}}{ln[e[1]+1+d:]}"
-        else:
-            ln = lns[s[0]-1]
-            lns[s[0]-1] = f"{ln[:s[1]-1]}{{{ln[s[1]-1:]}"
-            if s[0]-1 in deltas:
-                deltas[s[0]-1] += 1
-            else:
-                deltas[s[0]-1] = 1
-            ln = lns[e[0]-1]
-            lns[e[0]-1] = f"{ln[:e[1]+1]}}}{ln[e[1]+1:]}"
+            d = calc_delta_conditionals(rewrite[:i],e) 
+            lns[e[0]-1] = f"{ln[:e[1]+1+d]}}}{ln[e[1]+1+d:]}"
             #start and end are on different lines and don't need to add 1 to the index
+        i += 1
     ret = "\n".join(lns)
     of = open('tmp_fmt', 'w')
     of.write(ret)
     of.close()
-    s,o = subprocess.getstatusoutput(f"indent -kr -st -l300 tmp_fmt")
+    s,o = subprocess.getstatusoutput(f"indent -kr -st -l300 tmp_fmt 2>/dev/null")
     return o
     #return ret
+
+def calc_delta_conditionals(before, cur):
+    ret = 0
+    for b in before:
+        s,e = b
+        #cur[0] = line
+        #cur[0] = column in line
+        if cur[0] == s[0]:
+            #this means they are the same line
+            if cur[1] > s[1]:
+                ret += 1
+        if cur[0] == e[0]:
+            if cur[1] > e[1]:
+                ret += 1
+    return ret
 
 def if_else_break(ctx):
     if_stmt = "<class 'CParser.CParser.SelectionStatementContext'>"
@@ -433,7 +451,7 @@ def expand_if_else(ctx):
                     dec = r_vars[0]
                     pctx = get_top_dec_parent(i)
                     func_loc = get_start_loc(pctx)
-                    rewrites[start_loc, end_loc] = (f"{funcs_and_rts[f_name]} {dec} = {c.getText()};", dec, func_loc)
+                    rewrites[start_loc, end_loc] = (f"{fix_type(funcs_and_rts[f_name])} {dec} = {c.getText()};", dec, func_loc)
                     #rewrites[start_loc, end_loc] = (f"{funcs_and_rts[f_name]} {dec} = {c.getText()};", dec)
     return rewrites
 
@@ -511,9 +529,11 @@ def gen_expand_changes(cur_prog, rewrite):
     lns = lns[:-1]
     diff = 0
     prev_line = 0
-    for key,val in rewrite.items():
+    keys = list(rewrite.keys())
+    keys.sort()
+    for key in keys:
         start_loc, end_loc = key
-        func_call,var_use = val
+        func_call,var_use = rewrite[key]
         #if the start and end loc lines are the same
         if key[0][0] == key[1][0]:
             if prev_line != start_loc[0]:
@@ -543,18 +563,34 @@ def expand_func_args(ctx):
     loops = find_ctx(ctx, loop_stmt)
     if_stmt = "<class 'CParser.CParser.SelectionStatementContext'>"
     ifcons = find_ctx(ctx, if_stmt)
+    jump_stmt = "<class 'CParser.CParser.JumpStatementContext'>"
+    jumps = find_ctx(ctx, jump_stmt)
+
     whiles = [x for x in loops if ('for' in x.getChild(0).getText() or 'while' in x.getChild(0).getText())]
     ifcons = [x.getChild(2) for x in ifcons if 'if' in x.getChild(0).getText() ]
+    #make sure we are not messing with the contents of a return statement
+    rets =  [x for x in jumps if 'return' in x.getChild(0).getText()]
 
     lps = [x.getChild(2) for x in whiles]
     #find all functions, record their names and paramaters
     fns = get_functions(ctx)
     rewrites = {}
     start_locs = {}
-    #This gives us all functions in the file and it's args
+    tmp = {}
+    for k,v in struct_ptrs.items():
+        tmp[v] = k
+    #This gives us all functions in the file and its args
     for f in fns:
-        funcs_and_args[get_func_name(f)] = get_func_args(f)
-    #print(funcs_and_args)
+        args = []
+        fn_args = get_func_args(f)
+        for i,j in fn_args:
+            if i in tmp:
+                args.append((f"{tmp[i]}*",j))
+            if '[' in j:
+                args.append((f"{i}*",j))
+            else:
+                args.append((i,j))
+        funcs_and_args[get_func_name(f)] = args
     #for each function find all <class 'CParser.CParser.PostfixExpressionContext'>
     for f in fns:
         skip = False
@@ -568,11 +604,8 @@ def expand_func_args(ctx):
             for p in pecs:
                 #make sure we don't do anything with things inside the conditional check
                 #of the while or for loop
-                for l in lps:
+                for l in lps + ifcons + rets:
                     if is_descendant(p, l):
-                        skip = True
-                for f in ifcons:
-                    if is_descendant(p, f):
                         skip = True
                 if skip:
                     skip = False
@@ -634,6 +667,7 @@ def expand_func_args(ctx):
                             #replace that variable
                             v = r_vars.pop()
                             new_var_dec += f"{fun_arg_types[i][0]} {v} = {func_arg_names[i]};\n"
+                            new_vars.append(v)
                             new_arg_string += f"{v},"
                             #print(f"{fun_arg_types[i][0]} {v} = {func_arg_names[i]};\n")
                         else:
@@ -670,8 +704,11 @@ def gen_func_changes(cur_prog, rewrite):
     tab = chr(32) * 4
     line_deltas = {}
     #of = open("tmp_ln_prints", 'a')
-    for key,val in rewrite.items():
+    keys = list(rewrite.keys())
+    keys.sort()
+    for key in keys:
         start_loc, end_loc = key
+        val = rewrite[key]
         var_decs,func_call = val
         #if the start and end loc lines are the same
         if key[0][0] == key[1][0]:
@@ -690,7 +727,7 @@ def gen_func_changes(cur_prog, rewrite):
             else:
                 orig_len = len(lns[start_loc[0]-1]) + line_deltas[key[0][0]]
                 s_lns = lns[start_loc[0]-1].split('\n')
-                ln = s_lns[2]
+                ln = s_lns[len(s_lns)-3]
                 spaces = get_line_spaces(s_lns[1])
                 var_decs = indent_by_newline(var_decs, spaces,' ')
                 delta = line_deltas[key[0][0]]
@@ -703,7 +740,7 @@ def gen_func_changes(cur_prog, rewrite):
                 #of.write(line_change)
 
                 # add var decs to s_lns
-                s_lns[2] = line_change
+                s_lns[len(s_lns)-3] = line_change
                 s_lns[1] = f"{var_decs}{s_lns[1]}"
 
                 # add line change to s_lns
@@ -780,21 +817,34 @@ def single_declarations(ctx):
                     #we are with more than one declaration and one is initialized
                     typ = d.getChild(0).getText()
                     typ = fix_type(typ)
-                    all_vars = [d.getChild(1).getChild(x).getText() for x in range(cc) if d.getChild(1).getChild(x).getText() != ',']
+                    all_vars_o = [d.getChild(1).getChild(x).getText() for x in range(cc) if d.getChild(1).getChild(x).getText() != ',']
+                    all_vars = []
+                    for a in all_vars_o:
+                        if '(' in a:
+                            nv = fix_type(a[:a.rfind(')')]) + a[a.rfind(')'):]
+                            all_vars.append(nv)
+                        else:
+                            all_vars.append(a)
+
                 else:
                     #if here we don't have more than one variable in the
                     #declaration and expand_decs will get it
                     continue
-                #line_num - 1 cause I think it's not 0 indexed
+                if '*' in typ:
+                    all_vars[0] = f"{typ[typ.find('*'):]}{all_vars[0]}"
+                    typ = typ[:typ.find('*')]
                 rs = ""
+                """
                 if len(all_vars) > 1:
                     #we need to see if the type ends with a *
                     #if so, remove the * and place it on the first var
                     if typ.endswith("*"):
-                        all_vars[0] = f"*{all_vars[0]}" 
+                        all_vars[0] = f"*{all_vars[0]}"
                         typ = typ[:-1]
+                """
                 for a in all_vars:
                     rs+= f"{typ} {a};\n"
+                #line_num - 1 cause I think it's not 0 indexed
                 rewrite[(get_line_num(d)-1,get_last_line_num(d))] = rs
             except:
                 continue
@@ -816,7 +866,7 @@ def expand_decs(ctx):
                 pass
                 #print("No initializer+declarations found")
             else:
-                if ("const" in d.getText() or "char*" in d.getText()):
+                if ("const" in d.getChild(0).getText() or "char*" in d.getChild(0).getText()):
                     #Here if we have a const that can't be broken up
                     typ = d.getChild(0).getText()
                     stmt = d.getChild(1).getText()
@@ -850,6 +900,9 @@ def expand_decs(ctx):
                         stmt = d.getChild(1).getText()
                         var = get_string2(d.getChild(1).getChild(0).getChild(0))
                         rhs = get_string2(d.getChild(1).getChild(0).getChild(2))
+                        #don't break up thigns that are setting function pointers
+                        if rhs in funcs_and_args:
+                            continue
                         #trying to fix the way getText handles structs
                         #rhs = fix_rhs(rhs)
                         typ = fix_type(typ)
@@ -861,7 +914,8 @@ def expand_decs(ctx):
                         #print(f"rewrite number {get_line_num(d)-1}")
                         #line_num - 1 cause I think it's not 0 indexed
                         rewrite[(get_line_num(d)-1,get_last_line_num(d))] = f"{typ} {var};\n{var} = {rhs};\n"
-                    except:
+                    except Exception as e:
+                        print(f"got exception {e}")
                         continue
     return rewrite
 
@@ -905,6 +959,8 @@ def write_new_program(p,prog_name):
 #antlr seems to squish things together so if this happesn to you
 #just follow the example of the const fix
 def fix_type(typ):
+    if "extern" in typ:
+        typ = typ.replace("extern", "extern ")
     if "const" in typ:
         typ = typ.replace("const", "const ")
     if "register" in typ:
@@ -927,6 +983,12 @@ def fix_type(typ):
         typ = typ.replace("unsignedint", "unsigned int")
     if "struct" in typ and typ.startswith("struct"):
         typ = typ.replace("struct", "struct ", 1)
+    z = re.search(r"struct[A-Za-z0-9_]", typ)
+    if z:
+        if keywords:
+            srchk='|'.join(keywords)
+        if not re.search(r"("+srchk+r")",typ):
+            typ = typ.replace("struct", "struct ")
     typ = typ.replace("  ", " ")
     return typ
 
@@ -983,6 +1045,7 @@ def remove_multiline_comments(prog:str):
     return ol
 
 def preprocess_string(pragmas:dict,prog:str):
+    MACRO_EXPANSION_ENABLED=False
     _pragmas=[ x.strip() if '(' not in x else x.split('(',1)[0] for x in pragmas.keys()] if pragmas else []
     _macros=[]
     if pragmas:
@@ -993,6 +1056,7 @@ def preprocess_string(pragmas:dict,prog:str):
         pragmas=dict()
     _macs='|'.join(list(_macros))
     _prags='|'.join(list(_pragmas))
+    #print(f"[PRAGMAS] {_prags} [from '{pragmas}'")
     #print(f"[PRAGMAS] {_macs}")
     pragma_re = None
     macro_re = None
@@ -1016,7 +1080,25 @@ def preprocess_string(pragmas:dict,prog:str):
     cur_define=None
     cur_value=None
     new_pragma=dict()
-    for l in lines:
+    for iil, l in enumerate(lines):
+        prag=pragma_re.search(l) if pragma_re else None
+        define=define_re.search(l)
+        if prag:
+            #print(f"[NOTE!] PRAGMA {prag.group(0)} {l} {pragma_re}")
+            key=prag.group(1)
+            skip=False
+            if define:
+               val=define.group(1)
+               if val.startswith(key):
+                  skip=True
+            if not skip:
+                val=pragmas.get(key,None)
+                #print(f"[NOTE!] basic PRAGMA expansion for '{key}':'{val}' => '{l}'")
+                if val:
+                    post_l = re.sub(key,val,l)
+                    #print(f"[NOTE!]  PRAGMA RESULT =>  '{post_l}'")
+                    l=post_l
+        
         #print(f"[LINE] '{l}'")
         start=False
         p=positive_re.search(l)
@@ -1026,7 +1108,6 @@ def preprocess_string(pragmas:dict,prog:str):
         end=end_re.search(l)
         define=define_re.search(l)
         mac=macro_re.search(l) if macro_re else None
-        
         if p:
             start=True
             in_cascade=True
@@ -1115,9 +1196,11 @@ def preprocess_string(pragmas:dict,prog:str):
                     else:
                         cur_value=True
     
-                if cur_define[0] not in _pragmas:
+                # note to future debugger : MACRO_EXPANSION_ENABLED is broken
+                #if (cur_define[0] not in _pragmas):
+                if MACRO_EXPANSION_ENABLED and (cur_define[0] not in _pragmas):
                     _pragmas.append(cur_define[0])
-                    _prags='|'+cur_define[0]
+                    _prags+='|'+cur_define[0]
                     try:
                         pragma_re=re.compile(r'\b('+_prags+r")\b")
                     except Exception as e:
@@ -1139,10 +1222,18 @@ def preprocess_string(pragmas:dict,prog:str):
                 if not append_to_define:
                     d=f"{cur_define[0]}{cur_define[1]}" if cur_define[1] else cur_define[0]
                     pragmas[d.strip()]=cur_value
-            elif mac:
+            elif MACRO_EXPANSION_ENABLED and mac:
                 #print(f"[Found macro] {mac.group(1)} {mac.span(1)}")
                 macro_dict={key:val for key,val in pragmas.items() if key.startswith(mac.group(1)) }
                 k_pragmas=list(macro_dict.keys())
+                #inst_mac=l[mac.span(1)[0]:-1]
+                #l_cont=0
+                #while inst_mac.count('(') != inst_mac.count(')'): # and (inst_mac.count('"')%2==0 ):
+                #    l_cont+=1
+                #    next_l=lines[iil+l_cont].strip()
+                #    inst_mac+=next_l
+                #if l_cont>0:
+                #    l[e:-1]=inst_mac
                 if len(k_pragmas)<1 and mac.group(1):
                     print("[WARNING!] we have an unmatched pragma!")
                 else:
@@ -1161,6 +1252,8 @@ def preprocess_string(pragmas:dict,prog:str):
                         index=e-1
                     while(open_b!=close_b) and (open_b!=0):
                         #print(f"[params] {params}")
+                        if e>len(l):    
+                            print(f"[ERROR] looks like we're spanning more than one line")
                         char=l[e];e+=1
                         if char == ',' :
                             if open_b==close_b+1:
@@ -1222,14 +1315,17 @@ def preprocess_string(pragmas:dict,prog:str):
 def preprocess(pragmas:dict,inf:str,outf:str):
 
     pgrm=None
-    with open(inf,'r') as _in:
+    with open(inf,'r',encoding="ascii",errors="replace") as _in:
         pgrm=_in.read()
+    pgrm = pgrm.replace('©',"")
 
     ol,updated_pragmas = preprocess_string(pragmas, pgrm)
 
-    with open(outf,'w') as _out:
+    with open(outf,'w',encoding='ascii',errors="replace") as _out:
+        _out.write(f"\n\n")
         for i in ol:
             _out.write(f"{i}\n")
+        _out.write(f"\n\n")
     return updated_pragmas
 
 if __name__ == "__main__":

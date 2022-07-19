@@ -1,0 +1,37 @@
+digraph G {
+    cmd_outlet_overloaded [label="cmd_outlet_overloaded"];
+    cmd_add_outlet [label="cmd_add_outlet"];
+    cmd_receptacle_overloaded [label="cmd_receptacle_overloaded"];
+    cmd_add_breaker [label="cmd_add_breaker"];
+    start [label="start", shape=box];
+    cmd_panel_overloaded [label="cmd_panel_overloaded"];
+    cmd_splitter_overloaded [label="cmd_splitter_overloaded"];
+    cmd_init_panel [label="cmd_init_panel"];
+    build_finished [label="build_finished"];
+    cmd_light_string_overloaded [label="cmd_light_string_overloaded"];
+    cmd_add_splitter [label="cmd_add_splitter"];
+    cmd_add_light_string [label="cmd_add_light_string"];
+    cmd_breaker_overloaded [label="cmd_breaker_overloaded"];
+    cmd_outlet_overloaded -> build_finished;
+    cmd_add_outlet -> cmd_add_splitter;
+    cmd_add_outlet -> cmd_add_light_string;
+    cmd_receptacle_overloaded -> build_finished;
+    cmd_add_breaker -> cmd_add_outlet;
+    start -> cmd_init_panel;
+    cmd_panel_overloaded -> build_finished;
+    cmd_splitter_overloaded -> build_finished;
+    cmd_init_panel -> cmd_add_breaker;
+    build_finished -> cmd_breaker_overloaded;
+    build_finished -> cmd_panel_overloaded;
+    build_finished -> cmd_light_string_overloaded;
+    build_finished -> cmd_splitter_overloaded;
+    build_finished -> cmd_receptacle_overloaded;
+    build_finished -> cmd_outlet_overloaded;
+    cmd_light_string_overloaded -> build_finished;
+    cmd_add_splitter -> cmd_add_light_string;
+    cmd_add_light_string -> cmd_add_outlet;
+    cmd_add_light_string -> cmd_add_breaker;
+    cmd_add_light_string -> cmd_add_light_string;
+    cmd_add_light_string -> build_finished;
+    cmd_breaker_overloaded -> build_finished;
+}

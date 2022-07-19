@@ -1,0 +1,77 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>cbe099cef1d6e04b0f27ae596cdf4a309afe16f558220488eee42302933c0eaeeb2eb7fb32512763ba7b916803e67703</seed>
+<replay>
+    <read><delim>\x0a</delim><match><data>\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d Movie Rental Service v0.1 \x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>   . . . Initializing the inventory . . .\x0a</data></match></read>
+    <read><delim>\x0a</delim><match><data>         \x28movie info from IMDb.com\x29\x0a</data></match></read>
+    <read><length>45</length><match><data>\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d</data></match></read>
+    <read><length>77</length><match><data>\x0a1. List movies\x0a2. Rent movie\x0a3. Return movie\x0a4. Admin mode\x0a5. Exit\x0a\x0aChoice: </data></match></read>
+    <write><data>1 list\x0a</data></write>
+    <read><length>30</length><match><data>\x0aMovies \x28Full\x29\x0a\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x0a</data></match></read>
+    <read><length>185</length><match><data>\x5b1\x5d The Shawshank Redemption \x281994\x2c R\x29 \x2d Other \x5b93\x2f100\x5d\x0a  \x3d\x3e Two imprisoned men bond over a number of years\x2c finding solace and eventual\x0a     redemption through acts of common decency.\x0a</data></match></read>
+    <read><length>171</length><match><data>\x5b2\x5d The Godfather \x281972\x2c R\x29 \x2d Other \x5b92\x2f100\x5d\x0a  \x3d\x3e The aging patriarch of an organized crime dynasty transfers control of his clandestine\x0a     empire to his reluctant son.\x0a</data></match></read>
+    <read><length>255</length><match><data>\x5b3\x5d The Dark Knight \x282008\x2c PG13\x29 \x2d Action \x5b90\x2f100\x5d\x0a  \x3d\x3e When Batman\x2c Gordon have Harvey Dent launch an assault on the mob\x2c they let the clown\x0a     out of the box\x2c the Joker\x2c bent on turning Gotham on itself and bringing any heroes\x0a     down to his level.\x0a</data></match></read>
+    <read><length>202</length><match><data>\x5b4\x5d Inception \x282010\x2c PG13\x29 \x2d Action \x5b88\x2f100\x5d\x0a  \x3d\x3e A thief who steals corporate secrets through use of dream\x2dsharing technology is given the\x0a     inverse task of planting an idea into the mind of a CEO.\x0a</data></match></read>
+    <read><length>187</length><match><data>\x5b5\x5d The Matrix \x281999\x2c R\x29 \x2d Action \x5b87\x2f100\x5d\x0a  \x3d\x3e A computer hacker learns from mysterious rebels about the true nature of his reality and\x0a     his role in the war against its controllers.\x0a</data></match></read>
+    <read><length>153</length><match><data>\x5b6\x5d Modern Times \x281936\x2c G\x29 \x2d Comedy \x5b86\x2f100\x5d\x0a  \x3d\x3e The Tramp struggles to live in modern industrial society with the help of a young\x0a     homeless woman.\x0a</data></match></read>
+    <read><length>289</length><match><data>\x5b7\x5d About Time \x282013\x2c R\x29 \x2d Romance \x5b78\x2f100\x5d\x0a  \x3d\x3e At the age of 21\x2c Tim discovers he can travel in time and change what happens and has\x0a     happened in his own life. His decision to make his world a better place by getting\x0a     a girlfriend turns out not to be as easy as you might think.\x0a</data></match></read>
+    <read><length>120</length><match><data>\x5b8\x5d Yes Man \x282008\x2c PG13\x29 \x2d Comedy \x5b69\x2f100\x5d\x0a  \x3d\x3e A guy challenges himself to say \x22yes\x22 to everything for an entire year.\x0a</data></match></read>
+    <read><length>176</length><match><data>\x5b9\x5d The Conjuring \x282013\x2c R\x29 \x2d Horror \x5b75\x2f100\x5d\x0a  \x3d\x3e Paranormal investigators Ed and Lorraine Warren work to help a family terrorized\x0a     by a dark presence in their farmhouse.\x0a</data></match></read>
+    <read><length>218</length><match><data>\x5b10\x5d The Lion King \x281994\x2c G\x29 \x2d Other \x5b85\x2f100\x5d\x0a  \x3d\x3e Lion cub and future king Simba searches for his identity. His eagerness to please others\x0a     and penchant for testing his boundaries sometimes gets him into trouble.\x0a</data></match></read>
+    <read><length>27</length><match><data>\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x0a10 movie\x28s\x29\x0a</data></match></read>
+    <read><length>32</length><match><data>\x0aMovies \x28Rented\x29\x0a\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x0a</data></match></read>
+    <read><length>26</length><match><data>\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x0a0 movie\x28s\x29\x0a</data></match></read>
+    <read><length>77</length><match><data>\x0a1. List movies\x0a2. Rent movie\x0a3. Return movie\x0a4. Admin mode\x0a5. Exit\x0a\x0aChoice: </data></match></read>
+    <write><data>4 login\x0a</data></write>
+    <read><length>10</length><match><data>username: </data></match></read>
+    <write><data>bosAbTGAHKgtz\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x5bERROR\x5d Permission Denied: Wrong credentials\x0a</data></match></read>
+    <read><length>77</length><match><data>\x0a1. List movies\x0a2. Rent movie\x0a3. Return movie\x0a4. Admin mode\x0a5. Exit\x0a\x0aChoice: </data></match></read>
+    <write><data>2 rent\x0a</data></write>
+    <read><length>30</length><match><data>\x0aMovies \x28Full\x29\x0a\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x0a</data></match></read>
+    <read><length>185</length><match><data>\x5b1\x5d The Shawshank Redemption \x281994\x2c R\x29 \x2d Other \x5b93\x2f100\x5d\x0a  \x3d\x3e Two imprisoned men bond over a number of years\x2c finding solace and eventual\x0a     redemption through acts of common decency.\x0a</data></match></read>
+    <read><length>171</length><match><data>\x5b2\x5d The Godfather \x281972\x2c R\x29 \x2d Other \x5b92\x2f100\x5d\x0a  \x3d\x3e The aging patriarch of an organized crime dynasty transfers control of his clandestine\x0a     empire to his reluctant son.\x0a</data></match></read>
+    <read><length>255</length><match><data>\x5b3\x5d The Dark Knight \x282008\x2c PG13\x29 \x2d Action \x5b90\x2f100\x5d\x0a  \x3d\x3e When Batman\x2c Gordon have Harvey Dent launch an assault on the mob\x2c they let the clown\x0a     out of the box\x2c the Joker\x2c bent on turning Gotham on itself and bringing any heroes\x0a     down to his level.\x0a</data></match></read>
+    <read><length>202</length><match><data>\x5b4\x5d Inception \x282010\x2c PG13\x29 \x2d Action \x5b88\x2f100\x5d\x0a  \x3d\x3e A thief who steals corporate secrets through use of dream\x2dsharing technology is given the\x0a     inverse task of planting an idea into the mind of a CEO.\x0a</data></match></read>
+    <read><length>187</length><match><data>\x5b5\x5d The Matrix \x281999\x2c R\x29 \x2d Action \x5b87\x2f100\x5d\x0a  \x3d\x3e A computer hacker learns from mysterious rebels about the true nature of his reality and\x0a     his role in the war against its controllers.\x0a</data></match></read>
+    <read><length>153</length><match><data>\x5b6\x5d Modern Times \x281936\x2c G\x29 \x2d Comedy \x5b86\x2f100\x5d\x0a  \x3d\x3e The Tramp struggles to live in modern industrial society with the help of a young\x0a     homeless woman.\x0a</data></match></read>
+    <read><length>289</length><match><data>\x5b7\x5d About Time \x282013\x2c R\x29 \x2d Romance \x5b78\x2f100\x5d\x0a  \x3d\x3e At the age of 21\x2c Tim discovers he can travel in time and change what happens and has\x0a     happened in his own life. His decision to make his world a better place by getting\x0a     a girlfriend turns out not to be as easy as you might think.\x0a</data></match></read>
+    <read><length>120</length><match><data>\x5b8\x5d Yes Man \x282008\x2c PG13\x29 \x2d Comedy \x5b69\x2f100\x5d\x0a  \x3d\x3e A guy challenges himself to say \x22yes\x22 to everything for an entire year.\x0a</data></match></read>
+    <read><length>176</length><match><data>\x5b9\x5d The Conjuring \x282013\x2c R\x29 \x2d Horror \x5b75\x2f100\x5d\x0a  \x3d\x3e Paranormal investigators Ed and Lorraine Warren work to help a family terrorized\x0a     by a dark presence in their farmhouse.\x0a</data></match></read>
+    <read><length>218</length><match><data>\x5b10\x5d The Lion King \x281994\x2c G\x29 \x2d Other \x5b85\x2f100\x5d\x0a  \x3d\x3e Lion cub and future king Simba searches for his identity. His eagerness to please others\x0a     and penchant for testing his boundaries sometimes gets him into trouble.\x0a</data></match></read>
+    <read><length>27</length><match><data>\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x0a10 movie\x28s\x29\x0a</data></match></read>
+    <read><length>16</length><match><data>Enter movie id: </data></match></read>
+    <write><data>1\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Successfully rented \x5bThe Shawshank Redemption\x5d! Enjoy!\x0a</data></match></read>
+    <read><length>77</length><match><data>\x0a1. List movies\x0a2. Rent movie\x0a3. Return movie\x0a4. Admin mode\x0a5. Exit\x0a\x0aChoice: </data></match></read>
+    <write><data>4 login\x0a</data></write>
+    <read><length>10</length><match><data>username: </data></match></read>
+    <write><data>admin\x0a</data></write>
+    <read><length>10</length><match><data>password: </data></match></read>
+    <write><data>tnMYwmA\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>\x5bERROR\x5d Permission Denied: Wrong credentials\x0a</data></match></read>
+    <read><length>77</length><match><data>\x0a1. List movies\x0a2. Rent movie\x0a3. Return movie\x0a4. Admin mode\x0a5. Exit\x0a\x0aChoice: </data></match></read>
+    <write><data>1 list\x0a</data></write>
+    <read><length>30</length><match><data>\x0aMovies \x28Full\x29\x0a\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x0a</data></match></read>
+    <read><length>185</length><match><data>\x5b1\x5d The Shawshank Redemption \x281994\x2c R\x29 \x2d Other \x5b93\x2f100\x5d\x0a  \x3d\x3e Two imprisoned men bond over a number of years\x2c finding solace and eventual\x0a     redemption through acts of common decency.\x0a</data></match></read>
+    <read><length>171</length><match><data>\x5b2\x5d The Godfather \x281972\x2c R\x29 \x2d Other \x5b92\x2f100\x5d\x0a  \x3d\x3e The aging patriarch of an organized crime dynasty transfers control of his clandestine\x0a     empire to his reluctant son.\x0a</data></match></read>
+    <read><length>255</length><match><data>\x5b3\x5d The Dark Knight \x282008\x2c PG13\x29 \x2d Action \x5b90\x2f100\x5d\x0a  \x3d\x3e When Batman\x2c Gordon have Harvey Dent launch an assault on the mob\x2c they let the clown\x0a     out of the box\x2c the Joker\x2c bent on turning Gotham on itself and bringing any heroes\x0a     down to his level.\x0a</data></match></read>
+    <read><length>202</length><match><data>\x5b4\x5d Inception \x282010\x2c PG13\x29 \x2d Action \x5b88\x2f100\x5d\x0a  \x3d\x3e A thief who steals corporate secrets through use of dream\x2dsharing technology is given the\x0a     inverse task of planting an idea into the mind of a CEO.\x0a</data></match></read>
+    <read><length>187</length><match><data>\x5b5\x5d The Matrix \x281999\x2c R\x29 \x2d Action \x5b87\x2f100\x5d\x0a  \x3d\x3e A computer hacker learns from mysterious rebels about the true nature of his reality and\x0a     his role in the war against its controllers.\x0a</data></match></read>
+    <read><length>153</length><match><data>\x5b6\x5d Modern Times \x281936\x2c G\x29 \x2d Comedy \x5b86\x2f100\x5d\x0a  \x3d\x3e The Tramp struggles to live in modern industrial society with the help of a young\x0a     homeless woman.\x0a</data></match></read>
+    <read><length>289</length><match><data>\x5b7\x5d About Time \x282013\x2c R\x29 \x2d Romance \x5b78\x2f100\x5d\x0a  \x3d\x3e At the age of 21\x2c Tim discovers he can travel in time and change what happens and has\x0a     happened in his own life. His decision to make his world a better place by getting\x0a     a girlfriend turns out not to be as easy as you might think.\x0a</data></match></read>
+    <read><length>120</length><match><data>\x5b8\x5d Yes Man \x282008\x2c PG13\x29 \x2d Comedy \x5b69\x2f100\x5d\x0a  \x3d\x3e A guy challenges himself to say \x22yes\x22 to everything for an entire year.\x0a</data></match></read>
+    <read><length>176</length><match><data>\x5b9\x5d The Conjuring \x282013\x2c R\x29 \x2d Horror \x5b75\x2f100\x5d\x0a  \x3d\x3e Paranormal investigators Ed and Lorraine Warren work to help a family terrorized\x0a     by a dark presence in their farmhouse.\x0a</data></match></read>
+    <read><length>218</length><match><data>\x5b10\x5d The Lion King \x281994\x2c G\x29 \x2d Other \x5b85\x2f100\x5d\x0a  \x3d\x3e Lion cub and future king Simba searches for his identity. His eagerness to please others\x0a     and penchant for testing his boundaries sometimes gets him into trouble.\x0a</data></match></read>
+    <read><length>27</length><match><data>\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x0a10 movie\x28s\x29\x0a</data></match></read>
+    <read><length>32</length><match><data>\x0aMovies \x28Rented\x29\x0a\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x0a</data></match></read>
+    <read><length>185</length><match><data>\x5b1\x5d The Shawshank Redemption \x281994\x2c R\x29 \x2d Other \x5b93\x2f100\x5d\x0a  \x3d\x3e Two imprisoned men bond over a number of years\x2c finding solace and eventual\x0a     redemption through acts of common decency.\x0a</data></match></read>
+    <read><length>26</length><match><data>\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x2d\x0a1 movie\x28s\x29\x0a</data></match></read>
+    <read><length>77</length><match><data>\x0a1. List movies\x0a2. Rent movie\x0a3. Return movie\x0a4. Admin mode\x0a5. Exit\x0a\x0aChoice: </data></match></read>
+    <write><data>5 quit\x0a</data></write>
+    <read><delim>\x0a</delim><match><data>Bye!\x0a</data></match></read>
+</replay>
+</pov>

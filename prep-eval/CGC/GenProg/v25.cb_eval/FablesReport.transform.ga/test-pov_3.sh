@@ -1,0 +1,1 @@
+../../../cgc_test/FablesReport/test-pov_3.sh

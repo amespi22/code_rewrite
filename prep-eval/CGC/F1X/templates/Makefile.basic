@@ -1,0 +1,9 @@
+BUILD_DIR=./build
+all:    CLEANME default_target
+include $(BUILD_DIR)/Makefile
+
+CLEANME:
+	@[ -d $(BUILD_DIR) ] || mkdir -p $(BUILD_DIR)
+	@cd $(BUILD_DIR) && rm -f CMakeCache.txt
+	@cd $(BUILD_DIR) && cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_LIBS=ON -DBINARY=${CB} -DCMAKE_VERBOSE_MAKEFILE=ON  ../
+

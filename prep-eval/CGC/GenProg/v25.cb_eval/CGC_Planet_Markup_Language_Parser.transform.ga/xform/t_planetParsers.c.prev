@@ -1,0 +1,3897 @@
+
+
+#include "cgc_planetParsers.h"
+int cgc_planetMenu(pPlanet pl)
+{
+    int choice;
+    choice = 0;
+    char selection[30];
+    cgc_size_t length;
+    length = 0;
+    pCountry pc;
+    pc = NULL;
+    if (pl == NULL) {
+	return 0;
+    }
+    while (1) {
+ {
+     void* tlv4;
+     tlv4 = selection;
+     cgc_size_t tlv3;
+     tlv3 = 30;
+    	cgc_bzero(tlv4,tlv3);
+ }
+	cgc_printf("\nPlanet: @s\n", pl->name);
+ {
+     const char tlv5 [ ] = "1) Display planet information\n";
+    	cgc_printf(tlv5);
+ }
+ {
+     const char tlv6 [ ] = "2) Set Period\n";
+    	cgc_printf(tlv6);
+ }
+ {
+     const char tlv7 [ ] = "3) Set Orbit Speed\n";
+    	cgc_printf(tlv7);
+ }
+ {
+     const char tlv8 [ ] = "4) Set Aphelion\n";
+    	cgc_printf(tlv8);
+ }
+ {
+     const char tlv9 [ ] = "5) Set Perihelion\n";
+    	cgc_printf(tlv9);
+ }
+ {
+     const char tlv10 [ ] = "6) Set Mean Radius\n";
+    	cgc_printf(tlv10);
+ }
+ {
+     const char tlv11 [ ] = "7) Set Equatorial Radius\n";
+    	cgc_printf(tlv11);
+ }
+ {
+     const char tlv12 [ ] = "8) Set Mass\n";
+    	cgc_printf(tlv12);
+ }
+ {
+     const char tlv13 [ ] = "9) Set Gravity\n";
+    	cgc_printf(tlv13);
+ }
+ {
+     const char tlv14 [ ] = "10) Set population\n";
+    	cgc_printf(tlv14);
+ }
+ {
+     const char tlv15 [ ] = "11) Add Country\n";
+    	cgc_printf(tlv15);
+ }
+ {
+     const char tlv16 [ ] = "12) Select country\n";
+    	cgc_printf(tlv16);
+ }
+ {
+     const char tlv17 [ ] = "13) Delete Planet and exit menu\n";
+    	cgc_printf(tlv17);
+ }
+ {
+     const char tlv18 [ ] = "14) Exit menu\n";
+    	cgc_printf(tlv18);
+ }
+ {
+     const char tlv19 [ ] = "Selection: ";
+    	cgc_printf(tlv19);
+ }
+ {
+     char* tlv22;
+      tlv22 = selection;
+     char tlv21;
+     tlv21 = '\n';
+     cgc_size_t tlv20;
+     tlv20 = 3;
+    	cgc_receive_until(tlv22,tlv21,tlv20);
+ }
+ {
+     const char* tlv23 = selection;
+    	choice = cgc_atoi(tlv23);
+ }
+	switch (choice) {
+	case 1:
+	    {
+		cgc_printPlanetInfo(pl);
+	    }
+	    break;
+	case 2:
+	    {
+  {
+      const char tlv75 [ ] = "\n-> ";
+    		cgc_printf(tlv75);
+  }
+	    }
+     {
+         char* tlv26;
+          tlv26 = selection;
+         char tlv25;
+         tlv25 = '\n';
+         cgc_size_t tlv24;
+         tlv24 = 10;
+    	    cgc_receive_until(tlv26,tlv25,tlv24);
+     }
+     {
+         const char* tlv61 = selection;
+    	    pl->period = cgc_atof(tlv61);
+     }
+	    break;
+	case 3:
+	    {
+  {
+      const char tlv76 [ ] = "\n-> ";
+    		cgc_printf(tlv76);
+  }
+	    }
+     {
+         char* tlv29;
+          tlv29 = selection;
+         char tlv28;
+         tlv28 = '\n';
+         cgc_size_t tlv27;
+         tlv27 = 10;
+    	    cgc_receive_until(tlv29,tlv28,tlv27);
+     }
+     {
+         const char* tlv62 = selection;
+    	    pl->orbitspeed = cgc_atof(tlv62);
+     }
+	    break;
+	case 4:
+	    {
+  {
+      const char tlv77 [ ] = "\n-> ";
+    		cgc_printf(tlv77);
+  }
+	    }
+     {
+         char* tlv32;
+          tlv32 = selection;
+         char tlv31;
+         tlv31 = '\n';
+         cgc_size_t tlv30;
+         tlv30 = 10;
+    	    cgc_receive_until(tlv32,tlv31,tlv30);
+     }
+     {
+         const char* tlv63 = selection;
+    	    pl->aphelion = cgc_atof(tlv63);
+     }
+	    break;
+	case 5:
+	    {
+  {
+      const char tlv78 [ ] = "\n-> ";
+    		cgc_printf(tlv78);
+  }
+	    }
+     {
+         char* tlv35;
+          tlv35 = selection;
+         char tlv34;
+         tlv34 = '\n';
+         cgc_size_t tlv33;
+         tlv33 = 10;
+    	    cgc_receive_until(tlv35,tlv34,tlv33);
+     }
+     {
+         const char* tlv64 = selection;
+    	    pl->perihelion = cgc_atof(tlv64);
+     }
+	    break;
+	case 6:
+	    {
+  {
+      const char tlv79 [ ] = "\n-> ";
+    		cgc_printf(tlv79);
+  }
+	    }
+     {
+         char* tlv38;
+          tlv38 = selection;
+         char tlv37;
+         tlv37 = '\n';
+         cgc_size_t tlv36;
+         tlv36 = 10;
+    	    cgc_receive_until(tlv38,tlv37,tlv36);
+     }
+     {
+         const char* tlv65 = selection;
+    	    pl->radius = cgc_atof(tlv65);
+     }
+	    break;
+	case 7:
+	    {
+  {
+      const char tlv80 [ ] = "\n-> ";
+    		cgc_printf(tlv80);
+  }
+	    }
+     {
+         char* tlv41;
+          tlv41 = selection;
+         char tlv40;
+         tlv40 = '\n';
+         cgc_size_t tlv39;
+         tlv39 = 10;
+    	    cgc_receive_until(tlv41,tlv40,tlv39);
+     }
+     {
+         const char* tlv66 = selection;
+    	    pl->eradius = cgc_atof(tlv66);
+     }
+	    break;
+	case 8:
+	    {
+  {
+      const char tlv81 [ ] = "\n-> ";
+    		cgc_printf(tlv81);
+  }
+	    }
+     {
+         char* tlv44;
+          tlv44 = selection;
+         char tlv43;
+         tlv43 = '\n';
+         cgc_size_t tlv42;
+         tlv42 = 10;
+    	    cgc_receive_until(tlv44,tlv43,tlv42);
+     }
+     {
+         const char* tlv67 = selection;
+    	    pl->mass = cgc_atof(tlv67);
+     }
+	    break;
+	case 9:
+	    {
+  {
+      const char tlv82 [ ] = "\n-> ";
+    		cgc_printf(tlv82);
+  }
+	    }
+     {
+         char* tlv47;
+          tlv47 = selection;
+         char tlv46;
+         tlv46 = '\n';
+         cgc_size_t tlv45;
+         tlv45 = 10;
+    	    cgc_receive_until(tlv47,tlv46,tlv45);
+     }
+     {
+         const char* tlv68 = selection;
+    	    pl->gravity = cgc_atof(tlv68);
+     }
+	    break;
+	case 10:
+	    {
+  {
+      const char tlv83 [ ] = "\n-> ";
+    		cgc_printf(tlv83);
+  }
+	    }
+     {
+         char* tlv50;
+          tlv50 = selection;
+         char tlv49;
+         tlv49 = '\n';
+         cgc_size_t tlv48;
+         tlv48 = 10;
+    	    cgc_receive_until(tlv50,tlv49,tlv48);
+     }
+     {
+         const char* tlv69 = selection;
+    	    pl->population = cgc_atoi(tlv69);
+     }
+	    break;
+	case 11:
+	    {
+		if (pl->country_count >= COUNTRYMAX) {
+      {
+          const char tlv89 [ ] = "Too many countries\n";
+    		    cgc_printf(tlv89);
+      }
+		    continue;
+		}
+	    }
+     {
+         const char tlv51 [ ] = "\nNew Name: ";
+    	    cgc_printf(tlv51);
+     }
+     {
+         char* tlv54;
+          tlv54 = selection;
+         char tlv53;
+         tlv53 = '\n';
+         cgc_size_t tlv52;
+         tlv52 = 19;
+    	    cgc_receive_until(tlv54,tlv53,tlv52);
+     }
+	    choice = 0;
+	    while (choice < COUNTRYMAX) {
+		if (pl->countries[choice] == NULL) {
+		    break;
+		}
+		choice++;
+	    }
+	    if (choice == COUNTRYMAX) {
+  {
+      const char tlv84 [ ] = "!!No country slots\n";
+    		cgc_printf(tlv84);
+  }
+		continue;
+	    }
+     int tlv1;
+     {
+         cgc_size_t tlv72;
+         tlv72 = sizeof ( Country );
+         int tlv71;
+         tlv71 = 0;
+         void** tlv70;
+         tlv70 = ( void * * ) ( & pc );
+         tlv1 = cgc_allocate(tlv72,tlv71,tlv70);
+     }
+	    if (tlv1 != 0) {
+  {
+      const char tlv85 [ ] = "!!Failed to allocate structure\n";
+    		cgc_printf(tlv85);
+  }
+		continue;
+	    }
+	    cgc_initCountry(pc);
+	    pl->countries[choice] = pc;
+	    length = 0;
+
+	    while (cgc_isalnum(selection[length])) {
+		pc->name[length] = selection[length];
+		length++;
+	    }
+	    pc->name[length] = '\x00';
+	    pl->country_count++;
+	    break;
+	case 12:
+	    {
+  {
+      const char tlv86 [ ] = "\nCountries:\n";
+    		cgc_printf(tlv86);
+  }
+	    }
+	    for (choice = 0; choice < pl->country_count; choice++) {
+		if (pl->countries[choice] != NULL) {
+		    cgc_printf("@d) @s\n", choice + 1, pl->countries[choice]);
+		}
+	    }
+     {
+         void* tlv56;
+         tlv56 = selection;
+         cgc_size_t tlv55;
+         tlv55 = 30;
+    	    cgc_bzero(tlv56,tlv55);
+     }
+     {
+         const char tlv57 [ ] = "\n-> ";
+    	    cgc_printf(tlv57);
+     }
+     {
+         char* tlv60;
+          tlv60 = selection;
+         char tlv59;
+         tlv59 = '\n';
+         cgc_size_t tlv58;
+         tlv58 = 3;
+    	    cgc_receive_until(tlv60,tlv59,tlv58);
+     }
+     {
+         const char* tlv73 = selection;
+    	    choice = cgc_atoi(tlv73);
+     }
+	    if (choice < 1 || choice > COUNTRYMAX) {
+  {
+      const char tlv87 [ ] = "Invalid choice...\n";
+    		cgc_printf(tlv87);
+  }
+		continue;
+	    } else {
+		if (pl->countries[choice - 1] == NULL) {
+      {
+          const char tlv90 [ ] = "Invalid choice...\n";
+    		    cgc_printf(tlv90);
+      }
+		    continue;
+		}
+	    }
+     int tlv2;
+     {
+         pCountry tlv74;
+         tlv74 = pl -> countries [ choice - 1 ];
+         tlv2 = cgc_countryMenu(tlv74);
+     }
+	    if (tlv2 == 0) {
+		pl->countries[choice - 1] = NULL;
+		pl->country_count--;
+	    }
+	    break;
+	case 13:
+	    {
+		cgc_freePlanet(pl);
+	    }
+	    return 0;
+	    break;
+	case 14:
+	    {
+		return 1;
+	    }
+	    break;
+	default:
+	    {
+  {
+      const char tlv88 [ ] = "Invalid...\n";
+    		cgc_printf(tlv88);
+  }
+	    }
+	    break;
+	};
+    }
+  end:
+    return 1;
+}
+
+void cgc_freePlanet(pPlanet pl)
+{
+    int index;
+    index = 0;
+    if (pl == NULL) {
+	return;
+    }
+    /// Free all of the associated countries
+    while (index < COUNTRYMAX) {
+	if (pl->countries[index] != NULL) {
+	    /// This function also frees the pointer so freePlanet does not have to.
+     {
+         pCountry tlv3;
+         tlv3 = pl -> countries [ index ];
+    	    cgc_freeCountry(tlv3);
+     }
+	    pl->countries[index] = NULL;
+	}
+	index++;
+    }
+
+    {
+        void* tlv2;
+        tlv2 = pl;
+        cgc_size_t tlv1;
+        tlv1 = sizeof ( Planet );
+        cgc_deallocate(tlv2,tlv1);
+    }
+    return;
+}
+
+void cgc_printPlanetInfo(pPlanet pl)
+{
+    int index;
+    index = 0;
+    if (pl == NULL) {
+	return;
+    }
+    if (pl->name[0] == '\x00') {
+ {
+     const char tlv1 [ ] = "Name: Unknown\n";
+    	cgc_printf(tlv1);
+ }
+    } else {
+	cgc_printf("Name: @s\n", pl->name);
+    }
+    if (pl->population >= 0) {
+	cgc_printf("\tPopulation: @d\n", pl->population);
+    }
+    if (pl->period >= 0.0) {
+	cgc_printf("\tPeriod: @f\n", pl->period);
+    }
+    if (pl->orbitspeed >= 0.0) {
+	cgc_printf("\tOrbit Speed: @f\n", pl->orbitspeed);
+    }
+    if (pl->aphelion >= 0.0) {
+	cgc_printf("\tAphelion: @f\n", pl->aphelion);
+    }
+    if (pl->perihelion >= 0.0) {
+	cgc_printf("\tPerihelion: @f\n", pl->perihelion);
+    }
+    if (pl->radius >= 0.0) {
+	cgc_printf("\tRadius: @f\n", pl->radius);
+    }
+    if (pl->eradius >= 0.0) {
+	cgc_printf("\tERadius: @f\n", pl->eradius);
+    }
+    if (pl->mass >= 0.0) {
+	cgc_printf("\tMass: @f\n", pl->mass);
+    }
+
+    if (pl->gravity >= 0.0) {
+	cgc_printf("\tGravity: @f\n", pl->gravity);
+    }
+    /// Print each country's information
+    while (index < COUNTRYMAX) {
+	if (pl->countries[index] != NULL) {
+     {
+         pCountry tlv2;
+         tlv2 = pl -> countries [ index ];
+    	    cgc_printCountryInfo(tlv2);
+     }
+	}
+	index++;
+    }
+    return;
+}
+
+void cgc_initPlanet(pPlanet pl)
+{
+    register int index;
+    index = 0;
+    if (pl == NULL) {
+	return;
+    }
+    {
+        void* tlv2;
+        tlv2 = pl -> name;
+        cgc_size_t tlv1;
+        tlv1 = 20;
+        cgc_bzero(tlv2,tlv1);
+    }
+    pl->period = -1.0;
+    pl->orbitspeed = -1.0;
+    pl->aphelion = -1.0;
+    pl->perihelion = -1.0;
+    pl->radius = -1.0;
+    pl->eradius = -1.0;
+    pl->mass = -1.0;
+    pl->gravity = -1.0;
+    pl->population = -1.0;
+    pl->country_count = 0;
+    while (index < COUNTRYMAX) {
+	pl->countries[index] = NULL;
+	index++;
+    }
+    return;
+}
+
+pPlanet cgc_planetTopLevel(pstring topLevel)
+{
+    int endIndex;
+    endIndex = 0;
+    int temp_index;
+    temp_index = 0;
+    pPlanet newPlanet;
+    newPlanet = NULL;
+    element el;
+    char* fl;
+     fl = NULL;
+    int lastGood;
+    lastGood = 0;
+    if (topLevel == NULL) {
+	goto end;
+    }
+    /// Skip any leading spaces
+    cgc_skipWhiteSpace(topLevel);
+    lastGood = topLevel->index;
+    if (topLevel->maxlength < 9) {
+	goto end;
+    }
+    char c[] = "{Planet}";
+    for (int i = 0; i < 8; i++) {
+	if (topLevel->buffer[topLevel->index + i] != c[i]) {
+	    goto end;
+	}
+    }
+    /// Skip 8 bytes of top level then any whitespace
+    topLevel->index += 8;
+    cgc_skipWhiteSpace(topLevel);
+    /// Allocate a new planet structure
+    int tlv1;
+    {
+        cgc_size_t tlv16;
+        tlv16 = sizeof ( Planet );
+        int tlv15;
+        tlv15 = 0;
+        void** tlv14;
+        tlv14 = ( void * * ) & newPlanet;
+        tlv1 = cgc_allocate(tlv16,tlv15,tlv14);
+    }
+    if (tlv1 != 0) {
+	goto end;
+    }
+    cgc_initPlanet(newPlanet);
+    /// Extract the next element name
+    {
+        pstring tlv17;
+        tlv17 = topLevel;
+        fl = cgc_pullNextElementName(tlv17);
+    }
+    {
+        pstring tlv9;
+        tlv9 = topLevel;
+        int* tlv8;
+        tlv8 = & lastGood;
+        cgc_getIndex(tlv9,tlv8);
+    }
+    while (fl != NULL) {
+	/// Convert the element name
+ {
+     char* tlv42;
+      tlv42 = fl;
+    	el = cgc_elementNameToEnum(tlv42);
+ }
+	/// The name is no longer needed so free it
+ {
+     void* tlv33;
+     tlv33 = fl;
+     cgc_size_t tlv32;
+     {
+         char* tlv62;
+          tlv62 = fl;
+         tlv32 = cgc_strlen(tlv62) + 1;
+     }
+    	cgc_deallocate(tlv33,tlv32);
+ }
+	switch (el) {
+	case name:
+	    {
+  {
+      pstring tlv52;
+      tlv52 = topLevel;
+    		fl = cgc_extractName(tlv52);
+  }
+	    }
+	    if (fl == NULL) {
+		goto error;
+	    }
+     {
+         void* tlv45;
+         tlv45 = newPlanet -> name;
+         cgc_size_t tlv44;
+         tlv44 = 20;
+    	    cgc_bzero(tlv45,tlv44);
+     }
+     {
+         char* tlv48;
+          tlv48 = newPlanet -> name;
+         char* tlv47;
+          tlv47 = fl;
+         cgc_size_t tlv46;
+         tlv46 = 19;
+    	    cgc_strncpy(tlv48,tlv47,tlv46);
+     }
+     {
+         void* tlv50;
+         tlv50 = fl;
+         cgc_size_t tlv49;
+         {
+             char* tlv63;
+              tlv63 = fl;
+             tlv49 = cgc_strlen(tlv63) + 1;
+         }
+    	    cgc_deallocate(tlv50,tlv49);
+     }
+	    fl = NULL;
+	    break;
+	case population:
+	    {
+  {
+      pstring tlv53;
+      tlv53 = topLevel;
+    		newPlanet->population = cgc_extractPopulation(tlv53);
+  }
+	    }
+	    if (newPlanet->population < 0) {
+		goto error;
+	    }
+	    break;
+	case period:
+	    /// Extract period and check result
+	    {
+  {
+      pstring tlv54;
+      tlv54 = topLevel;
+    		newPlanet->period = cgc_extractPeriod(tlv54);
+  }
+	    }
+	    if (newPlanet->period < 0.0) {
+		goto error;
+	    }
+	    break;
+	case orbitspeed:
+	    {
+  {
+      pstring tlv55;
+      tlv55 = topLevel;
+    		newPlanet->orbitspeed = cgc_extractOrbitSpeed(tlv55);
+  }
+	    }
+	    if (newPlanet->orbitspeed < 0.0) {
+		goto error;
+	    }
+	    break;
+	case aphelion:
+	    {
+  {
+      pstring tlv56;
+      tlv56 = topLevel;
+    		newPlanet->aphelion = cgc_extractAphelion(tlv56);
+  }
+	    }
+	    if (newPlanet->aphelion < 0.0) {
+		goto error;
+	    }
+	    break;
+	case perihelion:
+	    {
+  {
+      pstring tlv57;
+      tlv57 = topLevel;
+    		newPlanet->perihelion = cgc_extractPerihelion(tlv57);
+  }
+	    }
+	    if (newPlanet->perihelion < 0.0) {
+		goto error;
+	    }
+	    break;
+	case radius:
+	    {
+  {
+      pstring tlv58;
+      tlv58 = topLevel;
+    		newPlanet->radius = cgc_extractRadius(tlv58);
+  }
+	    }
+	    if (newPlanet->radius < 0.0) {
+		goto error;
+	    }
+	    break;
+	case eradius:
+	    {
+  {
+      pstring tlv59;
+      tlv59 = topLevel;
+    		newPlanet->eradius = cgc_extractERadius(tlv59);
+  }
+	    }
+	    if (newPlanet->eradius < 0.0) {
+		goto error;
+	    }
+	    break;
+	case mass:
+	    {
+  {
+      pstring tlv60;
+      tlv60 = topLevel;
+    		newPlanet->mass = cgc_extractMass(tlv60);
+  }
+	    }
+	    if (newPlanet->mass < 0.0) {
+		goto error;
+	    }
+	    break;
+	case gravity:
+	    {
+  {
+      pstring tlv61;
+      tlv61 = topLevel;
+    		newPlanet->gravity = cgc_extractGravity(tlv61);
+  }
+	    }
+	    if (newPlanet->gravity < 0.0) {
+		goto error;
+	    }
+	    break;
+	case country:
+	    {
+		if (newPlanet->country_count >= COUNTRYMAX) {
+		    cgc_printf("!!Only @d countries allowed\n", COUNTRYMAX);
+		    goto error;
+		}
+	    }
+     {
+         pstring tlv51;
+         tlv51 = topLevel;
+    	    newPlanet->countries[newPlanet->country_count] = cgc_countryTopLevel(tlv51);
+     }
+	    if (newPlanet->countries[newPlanet->country_count] == NULL) {
+		goto error;
+	    }
+	    newPlanet->country_count++;
+	    break;
+	default:
+	    {
+		cgc_printf("Not allowed under Planet\n", fl);
+	    }
+	    goto error;
+	    break;
+	};
+ {
+     pstring tlv35;
+     tlv35 = topLevel;
+     int* tlv34;
+     tlv34 = & lastGood;
+    	cgc_getIndex(tlv35,tlv34);
+ }
+ {
+     pstring tlv43;
+     tlv43 = topLevel;
+    	fl = cgc_pullNextElementName(tlv43);
+ }
+    }
+    /// Since no more valid elements need to be parsed, check the closing element
+    cgc_skipWhiteSpace(topLevel);
+    int tlv2;
+    {
+        pstring tlv19;
+        tlv19 = topLevel;
+        char tlv18;
+        tlv18 = '{';
+        tlv2 = cgc_atChar(tlv19,tlv18);
+    }
+    if (!tlv2) {
+ {
+     const char tlv36 [ ] = "!!Closing value failed for Planet\n";
+    	cgc_printf(tlv36);
+ }
+	goto error;
+    }
+    /// Skip the open brace
+    int tlv3;
+    {
+        pstring tlv20;
+        tlv20 = topLevel;
+        tlv3 = cgc_incChar(tlv20);
+    }
+    if (tlv3 < 0) {
+	goto error;
+    }
+    cgc_skipWhiteSpace(topLevel);
+    int tlv4;
+    {
+        pstring tlv22;
+        tlv22 = topLevel;
+        char tlv21;
+        tlv21 = '#';
+        tlv4 = cgc_atChar(tlv22,tlv21);
+    }
+    if (!tlv4) {
+ {
+     const char tlv37 [ ] = "!!Malformed closing element\n";
+    	cgc_printf(tlv37);
+ }
+	goto error;
+    }
+    /// Skip past #
+    int tlv5;
+    {
+        pstring tlv23;
+        tlv23 = topLevel;
+        tlv5 = cgc_incChar(tlv23);
+    }
+    if (tlv5 == -1) {
+	goto error;
+    }
+    {
+        pstring tlv11;
+        tlv11 = topLevel;
+        int* tlv10;
+        tlv10 = & temp_index;
+        cgc_getIndex(tlv11,tlv10);
+    }
+    {
+        pstring tlv24;
+        tlv24 = topLevel;
+        endIndex = cgc_skipAlpha(tlv24);
+    }
+    if (endIndex == -1) {
+	endIndex = 0;
+	goto error;
+    }
+    if (temp_index == endIndex) {
+	goto error;
+    }
+    {
+        pstring tlv27;
+        tlv27 = topLevel;
+        int tlv26;
+        tlv26 = temp_index;
+        int tlv25;
+        tlv25 = endIndex;
+        fl = cgc_copyData(tlv27,tlv26,tlv25);
+    }
+    if (fl == NULL) {
+	goto error;
+    }
+    int tlv6;
+    {
+        const char* tlv29 = fl;
+        const char tlv28 [ ] = "Planet";
+        tlv6 = cgc_strcmp(tlv29,tlv28);
+    }
+    if (tlv6 != 0) {
+ {
+     const char tlv38 [ ] = "!!Closing element malformed\n";
+    	cgc_printf(tlv38);
+ }
+ {
+     void* tlv40;
+     tlv40 = fl;
+     cgc_size_t tlv39;
+     tlv39 = ( endIndex - temp_index ) + 1;
+    	cgc_deallocate(tlv40,tlv39);
+ }
+	goto error;
+    }
+    {
+        void* tlv13;
+        tlv13 = fl;
+        cgc_size_t tlv12;
+        tlv12 = ( endIndex - temp_index ) + 1;
+        cgc_deallocate(tlv13,tlv12);
+    }
+    cgc_skipWhiteSpace(topLevel);
+    int tlv7;
+    {
+        pstring tlv31;
+        tlv31 = topLevel;
+        char tlv30;
+        tlv30 = '}';
+        tlv7 = cgc_atChar(tlv31,tlv30);
+    }
+    if (!tlv7) {
+ {
+     const char tlv41 [ ] = "!!Failed to find final closing brace\n";
+    	cgc_printf(tlv41);
+ }
+	goto error;
+    }
+    cgc_incChar(topLevel);
+
+    goto end;
+  error:
+    topLevel->index = lastGood;
+    cgc_printf("!!Error at: @s\n", topLevel->buffer + topLevel->index);
+    if (newPlanet != NULL) {
+	cgc_freePlanet(newPlanet);
+	newPlanet = NULL;
+    }
+  end:
+    return newPlanet;
+}
+
+double cgc_extractPeriod(pstring str)
+{
+    char* temp;
+     temp = NULL;
+    double period;
+    period = - 1.0;
+    int start;
+    start = 0;
+    int end;
+    end = 0;
+    /// These will be used specifically for the data
+    int ps;
+    ps = 0;
+    int pe;
+    pe = 0;
+    if (str == NULL) {
+	return period;
+    }
+    cgc_skipWhiteSpace(str);
+    int tlv1;
+    {
+        pstring tlv22;
+        tlv22 = str;
+        char tlv21;
+        tlv21 = '{';
+        tlv1 = cgc_atChar(tlv22,tlv21);
+    }
+    if (!tlv1) {
+ {
+     const char tlv57 [ ] = "!!Failed to locate opening brace\n";
+    	cgc_printf(tlv57);
+ }
+	return period;
+    }
+    /// Skip past the curly brace
+    int tlv2;
+    {
+        pstring tlv24;
+        tlv24 = str;
+        int tlv23;
+        tlv23 = 1;
+        tlv2 = cgc_skipLength(tlv24,tlv23);
+    }
+    if (tlv2 == -1) {
+ {
+     const char tlv58 [ ] = "!!Failed to skip opening brace\n";
+    	cgc_printf(tlv58);
+ }
+	return period;
+    }
+    /// Skip any additional whitespace
+    {
+        pstring tlv25;
+        tlv25 = str;
+        start = cgc_skipWhiteSpace(tlv25);
+    }
+    /// This should skip any to either whitespace or a closing '}'
+    {
+        pstring tlv26;
+        tlv26 = str;
+        end = cgc_skipToNonAlphaNum(tlv26);
+    }
+    if (end == -1) {
+ {
+     const char tlv59 [ ] = "!!Failed to locate the end of the element id\n";
+    	cgc_printf(tlv59);
+ }
+	return period;
+    }
+    /// Copy the element id from the string
+    {
+        pstring tlv29;
+        tlv29 = str;
+        int tlv28;
+        tlv28 = start;
+        int tlv27;
+        tlv27 = end;
+        temp = cgc_copyData(tlv29,tlv28,tlv27);
+    }
+    if (temp == NULL) {
+	cgc_printf("!!Copy from @d to @d failed\n", start, end);
+	return -1.0;
+    }
+    /// If the element id is not "Period" then this is the wrong function
+    int tlv3;
+    {
+        const char* tlv31 = temp;
+        const char tlv30 [ ] = "Period";
+        tlv3 = cgc_strcmp(tlv31,tlv30);
+    }
+    if (tlv3 != 0) {
+ {
+     const char tlv60 [ ] = "!!Element id is not \"Period\"\n";
+    	cgc_printf(tlv60);
+ }
+ {
+     void* tlv62;
+     tlv62 = temp;
+     cgc_size_t tlv61;
+     {
+         char* tlv78;
+          tlv78 = temp;
+         tlv61 = cgc_strlen(tlv78) + 1;
+     }
+    	cgc_deallocate(tlv62,tlv61);
+ }
+	temp = NULL;
+	return period;
+    }
+    /// The buffer is no longer needed so free it
+    {
+        void* tlv12;
+        tlv12 = temp;
+        cgc_size_t tlv11;
+        {
+            char* tlv75;
+             tlv75 = temp;
+            tlv11 = cgc_strlen(tlv75) + 1;
+        }
+        cgc_deallocate(tlv12,tlv11);
+    }
+    /// Skip to the end of the element id
+    cgc_skipWhiteSpace(str);
+    /// If it is not a closing brace then this is improperly formatted.
+    int tlv4;
+    {
+        pstring tlv33;
+        tlv33 = str;
+        char tlv32;
+        tlv32 = '}';
+        tlv4 = cgc_atChar(tlv33,tlv32);
+    }
+    if (!tlv4) {
+ {
+     const char tlv63 [ ] = "!!Failed to locate initial closing brace\n";
+    	cgc_printf(tlv63);
+ }
+	return -1.0;
+    }
+    /// Skip the closing brace as well as any whitespace
+    int tlv5;
+    {
+        pstring tlv35;
+        tlv35 = str;
+        int tlv34;
+        tlv34 = 1;
+        tlv5 = cgc_skipLength(tlv35,tlv34);
+    }
+    if (tlv5 == -1) {
+ {
+     const char tlv64 [ ] = "!!Failed to skip initial closing brace\n";
+    	cgc_printf(tlv64);
+ }
+	return period;
+    }
+    cgc_skipWhiteSpace(str);
+    /// Copy the start index to store the data
+    {
+        pstring tlv14;
+        tlv14 = str;
+        int* tlv13;
+        tlv13 = & ps;
+        cgc_getIndex(tlv14,tlv13);
+    }
+    /// The period data must be a float
+    {
+        pstring tlv36;
+        tlv36 = str;
+        pe = cgc_skipFloat(tlv36);
+    }
+    if (pe == -1) {
+ {
+     const char tlv65 [ ] = "!!Failed to locate the end of the period data\n";
+    	cgc_printf(tlv65);
+ }
+	return end;
+    }
+    /// The rest of this code is a check to ensure proper formatting except for the copy data
+    cgc_skipWhiteSpace(str);
+    /// If this is not an opening curly brace then fail
+    int tlv6;
+    {
+        pstring tlv38;
+        tlv38 = str;
+        char tlv37;
+        tlv37 = '{';
+        tlv6 = cgc_atChar(tlv38,tlv37);
+    }
+    if (!tlv6) {
+ {
+     const char tlv66 [ ] = "!!Failed to locate the final opening brace\n";
+    	cgc_printf(tlv66);
+ }
+	return -1.0;
+    }
+    /// Skip past the brace
+    int tlv7;
+    {
+        pstring tlv40;
+        tlv40 = str;
+        int tlv39;
+        tlv39 = 1;
+        tlv7 = cgc_skipLength(tlv40,tlv39);
+    }
+    if (tlv7 == -1) {
+ {
+     const char tlv67 [ ] = "!!Failed to skip the final opening brace\n";
+    	cgc_printf(tlv67);
+ }
+	return period;
+    }
+
+    cgc_skipWhiteSpace(str);
+    /// If this is not a # indicating the closing brace then fail
+    int tlv8;
+    {
+        pstring tlv42;
+        tlv42 = str;
+        char tlv41;
+        tlv41 = '#';
+        tlv8 = cgc_atChar(tlv42,tlv41);
+    }
+    if (!tlv8) {
+ {
+     const char tlv68 [ ] = "!!Failed to locate the closing mark\n";
+    	cgc_printf(tlv68);
+ }
+	return -1.0;
+    }
+    /// Skip past the # but save the start
+    {
+        pstring tlv44;
+        tlv44 = str;
+        int tlv43;
+        tlv43 = 1;
+        start = cgc_skipLength(tlv44,tlv43);
+    }
+    if (start == -1) {
+ {
+     const char tlv69 [ ] = "!!Failed to skip closing mark\n";
+    	cgc_printf(tlv69);
+ }
+	return period;
+    }
+    {
+        pstring tlv45;
+        tlv45 = str;
+        end = cgc_skipToNonAlphaNum(tlv45);
+    }
+    if (end == -1) {
+ {
+     const char tlv70 [ ] = "!!Failed to locate the end of the closing element id\n";
+    	cgc_printf(tlv70);
+ }
+	return -1.0;
+    }
+
+    {
+        pstring tlv48;
+        tlv48 = str;
+        int tlv47;
+        tlv47 = start;
+        int tlv46;
+        tlv46 = end;
+        temp = cgc_copyData(tlv48,tlv47,tlv46);
+    }
+    int tlv9;
+    {
+        const char* tlv50 = temp;
+        const char tlv49 [ ] = "Period";
+        tlv9 = cgc_strcmp(tlv50,tlv49);
+    }
+    if (tlv9 != 0) {
+	cgc_printf("!!Invalid closing element id: @s\n", temp);
+ {
+     void* tlv72;
+     tlv72 = temp;
+     cgc_size_t tlv71;
+     {
+         char* tlv79;
+          tlv79 = temp;
+         tlv71 = cgc_strlen(tlv79) + 1;
+     }
+    	cgc_deallocate(tlv72,tlv71);
+ }
+	return period;
+    }
+    {
+        void* tlv16;
+        tlv16 = temp;
+        cgc_size_t tlv15;
+        {
+            char* tlv76;
+             tlv76 = temp;
+            tlv15 = cgc_strlen(tlv76) + 1;
+        }
+        cgc_deallocate(tlv16,tlv15);
+    }
+    cgc_skipWhiteSpace(str);
+    /// Check the final curly brace
+    int tlv10;
+    {
+        pstring tlv52;
+        tlv52 = str;
+        char tlv51;
+        tlv51 = '}';
+        tlv10 = cgc_atChar(tlv52,tlv51);
+    }
+    if (!tlv10) {
+ {
+     const char tlv73 [ ] = "!!Failed to locate final closing brace\n";
+    	cgc_printf(tlv73);
+ }
+	return -1.0;
+    }
+    /// Skip past the closing brace
+    {
+        pstring tlv18;
+        tlv18 = str;
+        int tlv17;
+        tlv17 = 1;
+        cgc_skipLength(tlv18,tlv17);
+    }
+
+    /// Copy the name element data
+    {
+        pstring tlv55;
+        tlv55 = str;
+        int tlv54;
+        tlv54 = ps;
+        int tlv53;
+        tlv53 = pe;
+        temp = cgc_copyData(tlv55,tlv54,tlv53);
+    }
+    if (temp == NULL) {
+ {
+     const char tlv74 [ ] = "!!Failed to copy period data\n";
+    	cgc_printf(tlv74);
+ }
+	return -1;
+    }
+    {
+        const char* tlv56 = temp;
+        period = cgc_atof(tlv56);
+    }
+    {
+        void* tlv20;
+        tlv20 = temp;
+        cgc_size_t tlv19;
+        {
+            char* tlv77;
+             tlv77 = temp;
+            tlv19 = cgc_strlen(tlv77) + 1;
+        }
+        cgc_deallocate(tlv20,tlv19);
+    }
+    return period;
+}
+
+double cgc_extractOrbitSpeed(pstring str)
+{
+    char* temp;
+     temp = NULL;
+    double speed;
+    speed = - 1.0;
+    register int start;
+    start = 0;
+    register int end;
+    end = 0;
+    int ss;
+    ss = 0;
+    int se;
+    se = 0;
+    if (str == NULL) {
+	goto reterrvalue;
+    }
+    {
+        pstring tlv23;
+        tlv23 = str;
+        start = cgc_skipWhiteSpace(tlv23);
+    }
+    int tlv1;
+    {
+        pstring tlv25;
+        tlv25 = str;
+        char tlv24;
+        tlv24 = '{';
+        tlv1 = cgc_atChar(tlv25,tlv24);
+    }
+    if (!(tlv1 & 1)) {
+ {
+     const char tlv60 [ ] = "!!Failed to locate opening brace\n";
+    	cgc_printf(tlv60);
+ }
+	goto reterrspeed;
+    }
+    /// Skip past the curly brace
+    int tlv2;
+    {
+        pstring tlv27;
+        tlv27 = str;
+        int tlv26;
+        tlv26 = 1;
+        tlv2 = cgc_skipLength(tlv27,tlv26);
+    }
+    if (tlv2 == -1) {
+ {
+     const char tlv61 [ ] = "!!Failed to skip opening brace\n";
+    	cgc_printf(tlv61);
+ }
+	return speed;
+    }
+    /// Skip any additional whitespace
+    {
+        pstring tlv28;
+        tlv28 = str;
+        start = cgc_skipWhiteSpace(tlv28);
+    }
+    /// This should skip any to either whitespace or a closing '}'
+    {
+        pstring tlv29;
+        tlv29 = str;
+        end = cgc_skipToNonAlphaNum(tlv29);
+    }
+    if (end == -1) {
+ {
+     const char tlv62 [ ] = "!!Failed to locate the end of the element id\n";
+    	cgc_printf(tlv62);
+ }
+	goto reterrvalue;
+    }
+    /// Copy the element id from the string
+    {
+        pstring tlv32;
+        tlv32 = str;
+        int tlv31;
+        tlv31 = start;
+        int tlv30;
+        tlv30 = end;
+        temp = cgc_copyData(tlv32,tlv31,tlv30);
+    }
+    if (temp == NULL) {
+	cgc_printf("!!Copy from @d to @d failed\n", start, end);
+	return -1.0;
+    }
+    /// If the element id is not "OrbitSpeed" then this is the wrong function
+    int tlv3;
+    {
+        const char* tlv34 = temp;
+        const char tlv33 [ ] = "OrbitSpeed";
+        tlv3 = cgc_strcmp(tlv34,tlv33);
+    }
+    if (tlv3 != 0) {
+ {
+     const char tlv63 [ ] = "!!Element id is not \"OrbitSpeed\"\n";
+    	cgc_printf(tlv63);
+ }
+ {
+     void* tlv65;
+     tlv65 = temp;
+     cgc_size_t tlv64;
+     {
+         char* tlv87;
+          tlv87 = temp;
+         tlv64 = cgc_strlen(tlv87);
+     }
+    	cgc_bzero(tlv65,tlv64);
+ }
+ {
+     void* tlv67;
+     tlv67 = temp;
+     cgc_size_t tlv66;
+     {
+         char* tlv88;
+          tlv88 = temp;
+         tlv66 = cgc_strlen(tlv88) + 1;
+     }
+    	cgc_deallocate(tlv67,tlv66);
+ }
+	temp = NULL;
+	goto reterrvalue;
+    }
+    /// The buffer is no longer needed so free it
+    {
+        void* tlv12;
+        tlv12 = temp;
+        cgc_size_t tlv11;
+        {
+            char* tlv82;
+             tlv82 = temp;
+            tlv11 = cgc_strlen(tlv82) + 1;
+        }
+        cgc_bzero(tlv12,tlv11);
+    }
+    {
+        void* tlv14;
+        tlv14 = temp;
+        cgc_size_t tlv13;
+        {
+            char* tlv83;
+             tlv83 = temp;
+            tlv13 = cgc_strlen(tlv83) + 1;
+        }
+        cgc_deallocate(tlv14,tlv13);
+    }
+    /// Skip to the end of the element id
+    cgc_skipWhiteSpace(str);
+    /// If it is not a closing brace then this is improperly formatted.
+    int tlv4;
+    {
+        pstring tlv36;
+        tlv36 = str;
+        char tlv35;
+        tlv35 = '}';
+        tlv4 = cgc_atChar(tlv36,tlv35);
+    }
+    if (!tlv4) {
+ {
+     const char tlv68 [ ] = "!!Failed to locate initial closing brace\n";
+    	cgc_printf(tlv68);
+ }
+	goto reterrspeed;
+    }
+    /// Skip the closing brace as well as any whitespace
+    int tlv5;
+    {
+        pstring tlv38;
+        tlv38 = str;
+        int tlv37;
+        tlv37 = 1;
+        tlv5 = cgc_skipLength(tlv38,tlv37);
+    }
+    if (tlv5 == -1) {
+ {
+     const char tlv69 [ ] = "!!Failed to skip initial closing brace\n";
+    	cgc_printf(tlv69);
+ }
+	goto retspeed;
+    }
+    cgc_skipWhiteSpace(str);
+    /// Copy the start index to store the data
+    ss = str->index;
+    /// The period data must be a float
+    {
+        pstring tlv39;
+        tlv39 = str;
+        se = cgc_skipFloat(tlv39);
+    }
+    if (se == -1) {
+ {
+     const char tlv70 [ ] = "!!Failed to locate the end of the period data\n";
+    	cgc_printf(tlv70);
+ }
+	return -1.0;
+    }
+    /// The rest of this code is a check to ensure proper formatting except for the copy data
+    cgc_skipWhiteSpace(str);
+    /// If this is not an opening curly brace then fail
+    int tlv6;
+    {
+        pstring tlv41;
+        tlv41 = str;
+        char tlv40;
+        tlv40 = '{';
+        tlv6 = cgc_atChar(tlv41,tlv40);
+    }
+    if (!tlv6) {
+ {
+     const char tlv71 [ ] = "!!Failed to locate the final opening brace\n";
+    	cgc_printf(tlv71);
+ }
+	goto reterrvalue;
+    }
+    /// Skip past the brace
+    int tlv7;
+    {
+        pstring tlv43;
+        tlv43 = str;
+        int tlv42;
+        tlv42 = 1;
+        tlv7 = cgc_skipLength(tlv43,tlv42);
+    }
+    if (tlv7 == -1) {
+ {
+     const char tlv72 [ ] = "!!Failed to skip the final opening brace\n";
+    	cgc_printf(tlv72);
+ }
+	goto reterrspeed;
+    }
+
+    cgc_skipWhiteSpace(str);
+    /// If this is not a # indicating the closing brace then fail
+    int tlv8;
+    {
+        pstring tlv45;
+        tlv45 = str;
+        char tlv44;
+        tlv44 = '#';
+        tlv8 = cgc_atChar(tlv45,tlv44);
+    }
+    if (!tlv8) {
+ {
+     const char tlv73 [ ] = "!!Failed to locate the closing mark\n";
+    	cgc_printf(tlv73);
+ }
+	return -1.0;
+    }
+    /// Skip past the # but save the start
+    {
+        pstring tlv47;
+        tlv47 = str;
+        int tlv46;
+        tlv46 = 1;
+        start = cgc_skipLength(tlv47,tlv46);
+    }
+    if (start == -1) {
+ {
+     const char tlv74 [ ] = "!!Failed to skip closing mark\n";
+    	cgc_printf(tlv74);
+ }
+	goto reterrvalue;
+    }
+    {
+        pstring tlv48;
+        tlv48 = str;
+        end = cgc_skipToNonAlphaNum(tlv48);
+    }
+    if (end == -1) {
+ {
+     const char tlv75 [ ] = "!!Failed to locate the end of the closing element id\n";
+    	cgc_printf(tlv75);
+ }
+	return -1.0;
+    }
+
+    {
+        pstring tlv51;
+        tlv51 = str;
+        int tlv50;
+        tlv50 = start;
+        int tlv49;
+        tlv49 = end;
+        temp = cgc_copyData(tlv51,tlv50,tlv49);
+    }
+    int tlv9;
+    {
+        const char* tlv53 = temp;
+        const char tlv52 [ ] = "OrbitSpeed";
+        tlv9 = cgc_strcmp(tlv53,tlv52);
+    }
+    if (tlv9 != 0) {
+	cgc_printf("!!Invalid closing element id: @s\n", temp);
+ {
+     void* tlv77;
+     tlv77 = temp;
+     cgc_size_t tlv76;
+     {
+         char* tlv89;
+          tlv89 = temp;
+         tlv76 = cgc_strlen(tlv89) + 1;
+     }
+    	cgc_bzero(tlv77,tlv76);
+ }
+ {
+     void* tlv79;
+     tlv79 = temp;
+     cgc_size_t tlv78;
+     {
+         char* tlv90;
+          tlv90 = temp;
+         tlv78 = cgc_strlen(tlv90) + 1;
+     }
+    	cgc_deallocate(tlv79,tlv78);
+ }
+	return -1.0;
+    }
+    {
+        void* tlv16;
+        tlv16 = temp;
+        cgc_size_t tlv15;
+        {
+            char* tlv84;
+             tlv84 = temp;
+            tlv15 = cgc_strlen(tlv84) + 1;
+        }
+        cgc_bzero(tlv16,tlv15);
+    }
+    {
+        void* tlv18;
+        tlv18 = temp;
+        cgc_size_t tlv17;
+        {
+            char* tlv85;
+             tlv85 = temp;
+            tlv17 = cgc_strlen(tlv85) + 1;
+        }
+        cgc_deallocate(tlv18,tlv17);
+    }
+    cgc_skipWhiteSpace(str);
+    /// Check the final curly brace
+    int tlv10;
+    {
+        pstring tlv55;
+        tlv55 = str;
+        char tlv54;
+        tlv54 = '}';
+        tlv10 = cgc_atChar(tlv55,tlv54);
+    }
+    if (!tlv10) {
+ {
+     const char tlv80 [ ] = "!!Failed to locate final closing brace\n";
+    	cgc_printf(tlv80);
+ }
+	goto reterrspeed;
+    }
+    /// Skip past the closing brace
+    {
+        pstring tlv20;
+        tlv20 = str;
+        int tlv19;
+        tlv19 = 1;
+        cgc_skipLength(tlv20,tlv19);
+    }
+
+    /// Copy the name element data
+    {
+        pstring tlv58;
+        tlv58 = str;
+        int tlv57;
+        tlv57 = ss;
+        int tlv56;
+        tlv56 = se;
+        temp = cgc_copyData(tlv58,tlv57,tlv56);
+    }
+    if (temp == NULL) {
+ {
+     const char tlv81 [ ] = "!!Failed to copy period data\n";
+    	cgc_printf(tlv81);
+ }
+	goto retspeed;
+    }
+    {
+        const char* tlv59 = temp;
+        speed = cgc_atof(tlv59);
+    }
+    {
+        void* tlv22;
+        tlv22 = temp;
+        cgc_size_t tlv21;
+        {
+            char* tlv86;
+             tlv86 = temp;
+            tlv21 = cgc_strlen(tlv86) + 1;
+        }
+        cgc_deallocate(tlv22,tlv21);
+    }
+    goto retspeed;
+  reterrvalue:
+    return -1.0;
+  reterrspeed:
+    speed = -1.0;
+    return speed;
+  retspeed:
+    return speed;
+}
+
+double cgc_extractAphelion(pstring str)
+{
+    char* temp;
+     temp = NULL;
+    double aphelion;
+    aphelion = - 1.0;
+    int start;
+    start = 0;
+    int end;
+    end = 0;
+    /// These will be used specifically for the data
+    int ps;
+    ps = 0;
+    int pe;
+    pe = 0;
+    if (str == NULL) {
+	return -1.0;
+    }
+    {
+        pstring tlv21;
+        tlv21 = str;
+        start = cgc_skipWhiteSpace(tlv21);
+    }
+    int tlv1;
+    {
+        pstring tlv23;
+        tlv23 = str;
+        char tlv22;
+        tlv22 = '{';
+        tlv1 = cgc_atChar(tlv23,tlv22);
+    }
+    if (!tlv1) {
+ {
+     const char tlv58 [ ] = "!!Failed to locate opening brace\n";
+    	cgc_printf(tlv58);
+ }
+	return aphelion;
+    }
+    /// Skip past the curly brace
+    int tlv2;
+    {
+        pstring tlv25;
+        tlv25 = str;
+        int tlv24;
+        tlv24 = 1;
+        tlv2 = cgc_skipLength(tlv25,tlv24);
+    }
+    if (tlv2 == -1) {
+ {
+     const char tlv59 [ ] = "!!Failed to skip opening brace\n";
+    	cgc_printf(tlv59);
+ }
+	return aphelion;
+    }
+    /// Skip any additional whitespace
+    {
+        pstring tlv26;
+        tlv26 = str;
+        start = cgc_skipWhiteSpace(tlv26);
+    }
+    /// This should skip any to either whitespace or a closing '}'
+    {
+        pstring tlv27;
+        tlv27 = str;
+        end = cgc_skipToNonAlphaNum(tlv27);
+    }
+    if (end == -1) {
+ {
+     const char tlv60 [ ] = "!!Failed to locate the end of the element id\n";
+    	cgc_printf(tlv60);
+ }
+	return aphelion;
+    }
+    /// Copy the element id from the string
+    {
+        pstring tlv30;
+        tlv30 = str;
+        int tlv29;
+        tlv29 = start;
+        int tlv28;
+        tlv28 = end;
+        temp = cgc_copyData(tlv30,tlv29,tlv28);
+    }
+    if (temp == NULL) {
+	cgc_printf("!!Copy from @d to @d failed\n", start, end);
+	return -1.0;
+    }
+    /// If the element id is not "Aphelion" then this is the wrong function
+    int tlv3;
+    {
+        const char* tlv32 = temp;
+        const char tlv31 [ ] = "Aphelion";
+        tlv3 = cgc_strcmp(tlv32,tlv31);
+    }
+    if (tlv3 != 0) {
+ {
+     const char tlv61 [ ] = "!!Element id is not \"Aphelion\"\n";
+    	cgc_printf(tlv61);
+ }
+ {
+     void* tlv63;
+     tlv63 = temp;
+     cgc_size_t tlv62;
+     {
+         char* tlv79;
+          tlv79 = temp;
+         tlv62 = cgc_strlen(tlv79) + 1;
+     }
+    	cgc_deallocate(tlv63,tlv62);
+ }
+	temp = NULL;
+	return aphelion;
+    }
+    /// The buffer is no longer needed so free it
+    {
+        void* tlv12;
+        tlv12 = temp;
+        cgc_size_t tlv11;
+        {
+            char* tlv76;
+             tlv76 = temp;
+            tlv11 = cgc_strlen(tlv76) + 1;
+        }
+        cgc_deallocate(tlv12,tlv11);
+    }
+    /// Skip to the end of the element id
+    cgc_skipWhiteSpace(str);
+    /// If it is not a closing brace then this is improperly formatted.
+    int tlv4;
+    {
+        pstring tlv34;
+        tlv34 = str;
+        char tlv33;
+        tlv33 = '}';
+        tlv4 = cgc_atChar(tlv34,tlv33);
+    }
+    if (!tlv4) {
+ {
+     const char tlv64 [ ] = "!!Failed to locate initial closing brace\n";
+    	cgc_printf(tlv64);
+ }
+	return -1.0;
+    }
+    /// Skip the closing brace as well as any whitespace
+    int tlv5;
+    {
+        pstring tlv36;
+        tlv36 = str;
+        int tlv35;
+        tlv35 = 1;
+        tlv5 = cgc_skipLength(tlv36,tlv35);
+    }
+    if (tlv5 == -1) {
+ {
+     const char tlv65 [ ] = "!!Failed to skip initial closing brace\n";
+    	cgc_printf(tlv65);
+ }
+	return aphelion;
+    }
+    cgc_skipWhiteSpace(str);
+    /// Copy the start index to store the data
+    {
+        pstring tlv14;
+        tlv14 = str;
+        int* tlv13;
+        tlv13 = & ps;
+        cgc_getIndex(tlv14,tlv13);
+    }
+    /// The period data must be a float
+    {
+        pstring tlv37;
+        tlv37 = str;
+        pe = cgc_skipFloat(tlv37);
+    }
+    if (pe == -1) {
+ {
+     const char tlv66 [ ] = "!!Failed to locate the end of the period data\n";
+    	cgc_printf(tlv66);
+ }
+	return aphelion;
+    }
+    /// The rest of this code is a check to ensure proper formatting except for the copy data
+    cgc_skipWhiteSpace(str);
+    /// If this is not an opening curly brace then fail
+    int tlv6;
+    {
+        pstring tlv39;
+        tlv39 = str;
+        char tlv38;
+        tlv38 = '{';
+        tlv6 = cgc_atChar(tlv39,tlv38);
+    }
+    if (!tlv6) {
+ {
+     const char tlv67 [ ] = "!!Failed to locate the final opening brace\n";
+    	cgc_printf(tlv67);
+ }
+	return -1.0;
+    }
+    /// Skip past the brace
+    int tlv7;
+    {
+        pstring tlv41;
+        tlv41 = str;
+        int tlv40;
+        tlv40 = 1;
+        tlv7 = cgc_skipLength(tlv41,tlv40);
+    }
+    if (tlv7 == -1) {
+ {
+     const char tlv68 [ ] = "!!Failed to skip the final opening brace\n";
+    	cgc_printf(tlv68);
+ }
+	return aphelion;
+    }
+
+    cgc_skipWhiteSpace(str);
+    /// If this is not a # indicating the closing brace then fail
+    int tlv8;
+    {
+        pstring tlv43;
+        tlv43 = str;
+        char tlv42;
+        tlv42 = '#';
+        tlv8 = cgc_atChar(tlv43,tlv42);
+    }
+    if (!tlv8) {
+ {
+     const char tlv69 [ ] = "!!Failed to locate the closing mark\n";
+    	cgc_printf(tlv69);
+ }
+	return -1.0;
+    }
+    /// Skip past the # but save the start
+    {
+        pstring tlv45;
+        tlv45 = str;
+        int tlv44;
+        tlv44 = 1;
+        start = cgc_skipLength(tlv45,tlv44);
+    }
+    if (start == -1) {
+ {
+     const char tlv70 [ ] = "!!Failed to skip closing mark\n";
+    	cgc_printf(tlv70);
+ }
+	return aphelion;
+    }
+    {
+        pstring tlv46;
+        tlv46 = str;
+        end = cgc_skipToNonAlphaNum(tlv46);
+    }
+    if (end == -1) {
+ {
+     const char tlv71 [ ] = "!!Failed to locate the end of the closing element id\n";
+    	cgc_printf(tlv71);
+ }
+	return -1.0;
+    }
+
+    {
+        pstring tlv49;
+        tlv49 = str;
+        int tlv48;
+        tlv48 = start;
+        int tlv47;
+        tlv47 = end;
+        temp = cgc_copyData(tlv49,tlv48,tlv47);
+    }
+    int tlv9;
+    {
+        const char* tlv51 = temp;
+        const char tlv50 [ ] = "Aphelion";
+        tlv9 = cgc_strcmp(tlv51,tlv50);
+    }
+    if (tlv9 != 0) {
+	cgc_printf("!!Invalid closing element id: @s\n", temp);
+ {
+     void* tlv73;
+     tlv73 = temp;
+     cgc_size_t tlv72;
+     {
+         char* tlv80;
+          tlv80 = temp;
+         tlv72 = cgc_strlen(tlv80) + 1;
+     }
+    	cgc_deallocate(tlv73,tlv72);
+ }
+	return aphelion;
+    }
+    {
+        void* tlv16;
+        tlv16 = temp;
+        cgc_size_t tlv15;
+        {
+            char* tlv77;
+             tlv77 = temp;
+            tlv15 = cgc_strlen(tlv77) + 1;
+        }
+        cgc_deallocate(tlv16,tlv15);
+    }
+    cgc_skipWhiteSpace(str);
+    /// Check the final curly brace
+    int tlv10;
+    {
+        pstring tlv53;
+        tlv53 = str;
+        char tlv52;
+        tlv52 = '}';
+        tlv10 = cgc_atChar(tlv53,tlv52);
+    }
+    if (!tlv10) {
+ {
+     const char tlv74 [ ] = "!!Failed to locate final closing brace\n";
+    	cgc_printf(tlv74);
+ }
+	return -1.0;
+    }
+    /// Skip past the closing brace
+    {
+        pstring tlv18;
+        tlv18 = str;
+        int tlv17;
+        tlv17 = 1;
+        cgc_skipLength(tlv18,tlv17);
+    }
+
+    /// Copy the name element data
+    {
+        pstring tlv56;
+        tlv56 = str;
+        int tlv55;
+        tlv55 = ps;
+        int tlv54;
+        tlv54 = pe;
+        temp = cgc_copyData(tlv56,tlv55,tlv54);
+    }
+    if (temp == NULL) {
+ {
+     const char tlv75 [ ] = "!!Failed to copy period data\n";
+    	cgc_printf(tlv75);
+ }
+	return -1;
+    }
+    {
+        const char* tlv57 = temp;
+        aphelion = cgc_atof(tlv57);
+    }
+    {
+        void* tlv20;
+        tlv20 = temp;
+        cgc_size_t tlv19;
+        {
+            char* tlv78;
+             tlv78 = temp;
+            tlv19 = cgc_strlen(tlv78) + 1;
+        }
+        cgc_deallocate(tlv20,tlv19);
+    }
+    return aphelion;
+}
+
+double cgc_extractPerihelion(pstring str)
+{
+    char* temp;
+     temp = NULL;
+    double perihelion;
+    perihelion = - 1.0;
+    int start;
+    start = 0;
+    int end;
+    end = 0;
+    /// These will be used specifically for the data
+    int ps;
+    ps = 0;
+    int pe;
+    pe = 0;
+    if (str == NULL) {
+	return -1.0;
+    }
+    {
+        pstring tlv21;
+        tlv21 = str;
+        start = cgc_skipWhiteSpace(tlv21);
+    }
+    int tlv1;
+    {
+        pstring tlv23;
+        tlv23 = str;
+        char tlv22;
+        tlv22 = '{';
+        tlv1 = cgc_atChar(tlv23,tlv22);
+    }
+    if (!tlv1) {
+ {
+     const char tlv57 [ ] = "!!Failed to locate opening brace\n";
+    	cgc_printf(tlv57);
+ }
+	return perihelion;
+    }
+    /// Skip past the curly brace
+    int tlv2;
+    {
+        pstring tlv25;
+        tlv25 = str;
+        int tlv24;
+        tlv24 = 1;
+        tlv2 = cgc_skipLength(tlv25,tlv24);
+    }
+    if (tlv2 == -1) {
+ {
+     const char tlv58 [ ] = "!!Failed to skip opening brace\n";
+    	cgc_printf(tlv58);
+ }
+	return perihelion;
+    }
+    /// Skip any additional whitespace
+    {
+        pstring tlv26;
+        tlv26 = str;
+        start = cgc_skipWhiteSpace(tlv26);
+    }
+    /// This should skip any to either whitespace or a closing '}'
+    {
+        pstring tlv27;
+        tlv27 = str;
+        end = cgc_skipToNonAlphaNum(tlv27);
+    }
+    if (end == -1) {
+ {
+     const char tlv59 [ ] = "!!Failed to locate the end of the element id\n";
+    	cgc_printf(tlv59);
+ }
+	return perihelion;
+    }
+    /// Copy the element id from the string
+    {
+        pstring tlv30;
+        tlv30 = str;
+        int tlv29;
+        tlv29 = start;
+        int tlv28;
+        tlv28 = end;
+        temp = cgc_copyData(tlv30,tlv29,tlv28);
+    }
+    if (temp == NULL) {
+	cgc_printf("!!Copy from @d to @d failed\n", start, end);
+	return -1.0;
+    }
+    /// If the element id is not "Perihelion" then this is the wrong function
+    int tlv3;
+    {
+        const char* tlv32 = temp;
+        const char tlv31 [ ] = "Perihelion";
+        tlv3 = cgc_strcmp(tlv32,tlv31);
+    }
+    if (tlv3 != 0) {
+ {
+     const char tlv60 [ ] = "!!Element id is not \"Perihelion\"\n";
+    	cgc_printf(tlv60);
+ }
+ {
+     void* tlv62;
+     tlv62 = temp;
+     cgc_size_t tlv61;
+     {
+         char* tlv78;
+          tlv78 = temp;
+         tlv61 = cgc_strlen(tlv78) + 1;
+     }
+    	cgc_deallocate(tlv62,tlv61);
+ }
+	temp = NULL;
+	return perihelion;
+    }
+    /// The buffer is no longer needed so free it
+    {
+        void* tlv12;
+        tlv12 = temp;
+        cgc_size_t tlv11;
+        {
+            char* tlv75;
+             tlv75 = temp;
+            tlv11 = cgc_strlen(tlv75) + 1;
+        }
+        cgc_deallocate(tlv12,tlv11);
+    }
+    /// Skip to the end of the element id
+    cgc_skipWhiteSpace(str);
+    /// If it is not a closing brace then this is improperly formatted.
+    int tlv4;
+    {
+        pstring tlv34;
+        tlv34 = str;
+        char tlv33;
+        tlv33 = '}';
+        tlv4 = cgc_atChar(tlv34,tlv33);
+    }
+    if (!tlv4) {
+ {
+     const char tlv63 [ ] = "!!Failed to locate initial closing brace\n";
+    	cgc_printf(tlv63);
+ }
+	return -1.0;
+    }
+    /// Skip the closing brace as well as any whitespace
+    int tlv5;
+    {
+        pstring tlv36;
+        tlv36 = str;
+        int tlv35;
+        tlv35 = 1;
+        tlv5 = cgc_skipLength(tlv36,tlv35);
+    }
+    if (tlv5 == -1) {
+ {
+     const char tlv64 [ ] = "!!Failed to skip initial closing brace\n";
+    	cgc_printf(tlv64);
+ }
+	return perihelion;
+    }
+    cgc_skipWhiteSpace(str);
+    /// Copy the start index to store the data
+    {
+        pstring tlv14;
+        tlv14 = str;
+        int* tlv13;
+        tlv13 = & ps;
+        cgc_getIndex(tlv14,tlv13);
+    }
+    /// The period data must be a float
+    {
+        pstring tlv37;
+        tlv37 = str;
+        pe = cgc_skipFloat(tlv37);
+    }
+    if (pe == -1) {
+ {
+     const char tlv65 [ ] = "!!Failed to locate the end of the perihelion data\n";
+    	cgc_printf(tlv65);
+ }
+	return perihelion;
+    }
+    /// The rest of this code is a check to ensure proper formatting except for the copy data
+    cgc_skipWhiteSpace(str);
+    /// If this is not an opening curly brace then fail
+    int tlv6;
+    {
+        pstring tlv39;
+        tlv39 = str;
+        char tlv38;
+        tlv38 = '{';
+        tlv6 = cgc_atChar(tlv39,tlv38);
+    }
+    if (!tlv6) {
+ {
+     const char tlv66 [ ] = "!!Failed to locate the final opening brace\n";
+    	cgc_printf(tlv66);
+ }
+	return -1.0;
+    }
+    /// Skip past the brace
+    int tlv7;
+    {
+        pstring tlv40;
+        tlv40 = str;
+        tlv7 = cgc_incChar(tlv40);
+    }
+    if (tlv7 == -1) {
+ {
+     const char tlv67 [ ] = "!!Failed to skip the final opening brace\n";
+    	cgc_printf(tlv67);
+ }
+	return perihelion;
+    }
+
+    cgc_skipWhiteSpace(str);
+    /// If this is not a # indicating the closing brace then fail
+    int tlv8;
+    {
+        pstring tlv42;
+        tlv42 = str;
+        char tlv41;
+        tlv41 = '#';
+        tlv8 = cgc_atChar(tlv42,tlv41);
+    }
+    if (!tlv8) {
+ {
+     const char tlv68 [ ] = "!!Failed to locate the closing mark\n";
+    	cgc_printf(tlv68);
+ }
+	return -1.0;
+    }
+    /// Skip past the # but save the start
+    {
+        pstring tlv44;
+        tlv44 = str;
+        int tlv43;
+        tlv43 = 1;
+        start = cgc_skipLength(tlv44,tlv43);
+    }
+    if (start == -1) {
+ {
+     const char tlv69 [ ] = "!!Failed to skip closing mark\n";
+    	cgc_printf(tlv69);
+ }
+	return perihelion;
+    }
+    {
+        pstring tlv45;
+        tlv45 = str;
+        end = cgc_skipToNonAlphaNum(tlv45);
+    }
+    if (end == -1) {
+ {
+     const char tlv70 [ ] = "!!Failed to locate the end of the closing element id\n";
+    	cgc_printf(tlv70);
+ }
+	return -1.0;
+    }
+
+    {
+        pstring tlv48;
+        tlv48 = str;
+        int tlv47;
+        tlv47 = start;
+        int tlv46;
+        tlv46 = end;
+        temp = cgc_copyData(tlv48,tlv47,tlv46);
+    }
+    int tlv9;
+    {
+        const char* tlv50 = temp;
+        const char tlv49 [ ] = "Perihelion";
+        tlv9 = cgc_strcmp(tlv50,tlv49);
+    }
+    if (tlv9 != 0) {
+	cgc_printf("!!Invalid closing element id: @s\n", temp);
+ {
+     void* tlv72;
+     tlv72 = temp;
+     cgc_size_t tlv71;
+     {
+         char* tlv79;
+          tlv79 = temp;
+         tlv71 = cgc_strlen(tlv79) + 1;
+     }
+    	cgc_deallocate(tlv72,tlv71);
+ }
+	return perihelion;
+    }
+    {
+        void* tlv16;
+        tlv16 = temp;
+        cgc_size_t tlv15;
+        {
+            char* tlv76;
+             tlv76 = temp;
+            tlv15 = cgc_strlen(tlv76) + 1;
+        }
+        cgc_deallocate(tlv16,tlv15);
+    }
+    cgc_skipWhiteSpace(str);
+    /// Check the final curly brace
+    int tlv10;
+    {
+        pstring tlv52;
+        tlv52 = str;
+        char tlv51;
+        tlv51 = '}';
+        tlv10 = cgc_atChar(tlv52,tlv51);
+    }
+    if (!tlv10) {
+ {
+     const char tlv73 [ ] = "!!Failed to locate final closing brace\n";
+    	cgc_printf(tlv73);
+ }
+	return -1.0;
+    }
+    /// Skip past the closing brace
+    {
+        pstring tlv18;
+        tlv18 = str;
+        int tlv17;
+        tlv17 = 1;
+        cgc_skipLength(tlv18,tlv17);
+    }
+
+    /// Copy the name element data
+    {
+        pstring tlv55;
+        tlv55 = str;
+        int tlv54;
+        tlv54 = ps;
+        int tlv53;
+        tlv53 = pe;
+        temp = cgc_copyData(tlv55,tlv54,tlv53);
+    }
+    if (temp == NULL) {
+ {
+     const char tlv74 [ ] = "!!Failed to copy perihelion data\n";
+    	cgc_printf(tlv74);
+ }
+	return -1;
+    }
+    {
+        const char* tlv56 = temp;
+        perihelion = cgc_atof(tlv56);
+    }
+    {
+        void* tlv20;
+        tlv20 = temp;
+        cgc_size_t tlv19;
+        {
+            char* tlv77;
+             tlv77 = temp;
+            tlv19 = cgc_strlen(tlv77) + 1;
+        }
+        cgc_deallocate(tlv20,tlv19);
+    }
+    return perihelion;
+}
+
+double cgc_extractRadius(pstring str)
+{
+    char* temp;
+     temp = NULL;
+    double radius;
+    radius = - 1.0;
+    int start;
+    start = 0;
+    int end;
+    end = 0;
+    /// These will be used specifically for the data
+    int rs;
+    rs = 0;
+    int re;
+    re = 0;
+    if (str == NULL) {
+	return -1.0;
+    }
+    {
+        pstring tlv21;
+        tlv21 = str;
+        start = cgc_skipWhiteSpace(tlv21);
+    }
+    int tlv1;
+    {
+        pstring tlv23;
+        tlv23 = str;
+        char tlv22;
+        tlv22 = '{';
+        tlv1 = cgc_atChar(tlv23,tlv22);
+    }
+    if (!tlv1) {
+ {
+     const char tlv54 [ ] = "!!Failed to locate opening brace\n";
+    	cgc_printf(tlv54);
+ }
+	return radius;
+    }
+    /// Skip past the curly brace
+    int tlv2;
+    {
+        pstring tlv24;
+        tlv24 = str;
+        tlv2 = cgc_incChar(tlv24);
+    }
+    if (tlv2 == -1) {
+ {
+     const char tlv55 [ ] = "!!Failed to skip opening brace\n";
+    	cgc_printf(tlv55);
+ }
+	return radius;
+    }
+    /// Skip any additional whitespace
+    {
+        pstring tlv25;
+        tlv25 = str;
+        start = cgc_skipWhiteSpace(tlv25);
+    }
+    /// This should skip any to either whitespace or a closing '}'
+    {
+        pstring tlv26;
+        tlv26 = str;
+        end = cgc_skipToNonAlphaNum(tlv26);
+    }
+    if (end == -1) {
+ {
+     const char tlv56 [ ] = "!!Failed to locate the end of the element id\n";
+    	cgc_printf(tlv56);
+ }
+	return radius;
+    }
+    /// Copy the element id from the string
+    {
+        pstring tlv29;
+        tlv29 = str;
+        int tlv28;
+        tlv28 = start;
+        int tlv27;
+        tlv27 = end;
+        temp = cgc_copyData(tlv29,tlv28,tlv27);
+    }
+    if (temp == NULL) {
+	cgc_printf("!!Copy from @d to @d failed\n", start, end);
+	return -1.0;
+    }
+    /// If the element id is not "Radius" then this is the wrong function
+    int tlv3;
+    {
+        const char* tlv31 = temp;
+        const char tlv30 [ ] = "Radius";
+        tlv3 = cgc_strcmp(tlv31,tlv30);
+    }
+    if (tlv3 != 0) {
+ {
+     const char tlv57 [ ] = "!!Element id is not \"Radius\"\n";
+    	cgc_printf(tlv57);
+ }
+ {
+     void* tlv59;
+     tlv59 = temp;
+     cgc_size_t tlv58;
+     {
+         char* tlv75;
+          tlv75 = temp;
+         tlv58 = cgc_strlen(tlv75) + 1;
+     }
+    	cgc_deallocate(tlv59,tlv58);
+ }
+	temp = NULL;
+	return radius;
+    }
+    /// The buffer is no longer needed so free it
+    {
+        void* tlv12;
+        tlv12 = temp;
+        cgc_size_t tlv11;
+        {
+            char* tlv72;
+             tlv72 = temp;
+            tlv11 = cgc_strlen(tlv72) + 1;
+        }
+        cgc_deallocate(tlv12,tlv11);
+    }
+    /// Skip to the end of the element id
+    cgc_skipWhiteSpace(str);
+    /// If it is not a closing brace then this is improperly formatted.
+    int tlv4;
+    {
+        pstring tlv33;
+        tlv33 = str;
+        char tlv32;
+        tlv32 = '}';
+        tlv4 = cgc_atChar(tlv33,tlv32);
+    }
+    if (!tlv4) {
+ {
+     const char tlv60 [ ] = "!!Failed to locate initial closing brace\n";
+    	cgc_printf(tlv60);
+ }
+	return -1.0;
+    }
+    /// Skip the closing brace as well as any whitespace
+    int tlv5;
+    {
+        pstring tlv34;
+        tlv34 = str;
+        tlv5 = cgc_incChar(tlv34);
+    }
+    if (tlv5 == -1) {
+ {
+     const char tlv61 [ ] = "!!Failed to skip initial closing brace\n";
+    	cgc_printf(tlv61);
+ }
+	return radius;
+    }
+    cgc_skipWhiteSpace(str);
+    /// Copy the start index to store the data
+    {
+        pstring tlv14;
+        tlv14 = str;
+        int* tlv13;
+        tlv13 = & rs;
+        cgc_getIndex(tlv14,tlv13);
+    }
+    /// The radius data must be a float
+    {
+        pstring tlv35;
+        tlv35 = str;
+        re = cgc_skipFloat(tlv35);
+    }
+    if (re == -1) {
+ {
+     const char tlv62 [ ] = "!!Failed to locate the end of the radius data\n";
+    	cgc_printf(tlv62);
+ }
+	return radius;
+    }
+    /// The rest of this code is a check to ensure proper formatting except for the copy data
+    cgc_skipWhiteSpace(str);
+    /// If this is not an opening curly brace then fail
+    int tlv6;
+    {
+        pstring tlv37;
+        tlv37 = str;
+        char tlv36;
+        tlv36 = '{';
+        tlv6 = cgc_atChar(tlv37,tlv36);
+    }
+    if (!tlv6) {
+ {
+     const char tlv63 [ ] = "!!Failed to locate the final opening brace\n";
+    	cgc_printf(tlv63);
+ }
+	return -1.0;
+    }
+    /// Skip past the brace
+    int tlv7;
+    {
+        pstring tlv38;
+        tlv38 = str;
+        tlv7 = cgc_incChar(tlv38);
+    }
+    if (tlv7 == -1) {
+ {
+     const char tlv64 [ ] = "!!Failed to skip the final opening brace\n";
+    	cgc_printf(tlv64);
+ }
+	return radius;
+    }
+
+    cgc_skipWhiteSpace(str);
+    /// If this is not a # indicating the closing brace then fail
+    int tlv8;
+    {
+        pstring tlv40;
+        tlv40 = str;
+        char tlv39;
+        tlv39 = '#';
+        tlv8 = cgc_atChar(tlv40,tlv39);
+    }
+    if (!tlv8) {
+ {
+     const char tlv65 [ ] = "!!Failed to locate the closing mark\n";
+    	cgc_printf(tlv65);
+ }
+	return -1.0;
+    }
+    /// Skip past the # but save the start
+    {
+        pstring tlv41;
+        tlv41 = str;
+        start = cgc_incChar(tlv41);
+    }
+    if (start == -1) {
+ {
+     const char tlv66 [ ] = "!!Failed to skip closing mark\n";
+    	cgc_printf(tlv66);
+ }
+	return radius;
+    }
+    {
+        pstring tlv42;
+        tlv42 = str;
+        end = cgc_skipToNonAlphaNum(tlv42);
+    }
+    if (end == -1) {
+ {
+     const char tlv67 [ ] = "!!Failed to locate the end of the closing element id\n";
+    	cgc_printf(tlv67);
+ }
+	return -1.0;
+    }
+
+    {
+        pstring tlv45;
+        tlv45 = str;
+        int tlv44;
+        tlv44 = start;
+        int tlv43;
+        tlv43 = end;
+        temp = cgc_copyData(tlv45,tlv44,tlv43);
+    }
+    int tlv9;
+    {
+        const char* tlv47 = temp;
+        const char tlv46 [ ] = "Radius";
+        tlv9 = cgc_strcmp(tlv47,tlv46);
+    }
+    if (tlv9 != 0) {
+	cgc_printf("!!Invalid closing element id: @s\n", temp);
+ {
+     void* tlv69;
+     tlv69 = temp;
+     cgc_size_t tlv68;
+     {
+         char* tlv76;
+          tlv76 = temp;
+         tlv68 = cgc_strlen(tlv76) + 1;
+     }
+    	cgc_deallocate(tlv69,tlv68);
+ }
+	return radius;
+    }
+    {
+        void* tlv16;
+        tlv16 = temp;
+        cgc_size_t tlv15;
+        {
+            char* tlv73;
+             tlv73 = temp;
+            tlv15 = cgc_strlen(tlv73) + 1;
+        }
+        cgc_deallocate(tlv16,tlv15);
+    }
+    cgc_skipWhiteSpace(str);
+    /// Check the final curly brace
+    int tlv10;
+    {
+        pstring tlv49;
+        tlv49 = str;
+        char tlv48;
+        tlv48 = '}';
+        tlv10 = cgc_atChar(tlv49,tlv48);
+    }
+    if (!tlv10) {
+ {
+     const char tlv70 [ ] = "!!Failed to locate final closing brace\n";
+    	cgc_printf(tlv70);
+ }
+	return -1.0;
+    }
+    /// Skip past the closing brace
+    {
+        pstring tlv18;
+        tlv18 = str;
+        int tlv17;
+        tlv17 = 1;
+        cgc_skipLength(tlv18,tlv17);
+    }
+
+    /// Copy the name element data
+    {
+        pstring tlv52;
+        tlv52 = str;
+        int tlv51;
+        tlv51 = rs;
+        int tlv50;
+        tlv50 = re;
+        temp = cgc_copyData(tlv52,tlv51,tlv50);
+    }
+    if (temp == NULL) {
+ {
+     const char tlv71 [ ] = "!!Failed to copy radius data\n";
+    	cgc_printf(tlv71);
+ }
+	return -1.0;
+    }
+    {
+        const char* tlv53 = temp;
+        radius = cgc_atof(tlv53);
+    }
+    {
+        void* tlv20;
+        tlv20 = temp;
+        cgc_size_t tlv19;
+        {
+            char* tlv74;
+             tlv74 = temp;
+            tlv19 = cgc_strlen(tlv74) + 1;
+        }
+        cgc_deallocate(tlv20,tlv19);
+    }
+    return radius;
+}
+
+double cgc_extractERadius(pstring str)
+{
+    char* temp;
+     temp = NULL;
+    double eradius;
+    eradius = - 1.0;
+    int start;
+    start = 0;
+    int end;
+    end = 0;
+    /// These will be used specifically for the data
+    int es;
+    es = 0;
+    int ee;
+    ee = 0;
+    if (str == NULL) {
+	return -1.0;
+    }
+    {
+        pstring tlv21;
+        tlv21 = str;
+        start = cgc_skipWhiteSpace(tlv21);
+    }
+    int tlv1;
+    {
+        pstring tlv23;
+        tlv23 = str;
+        char tlv22;
+        tlv22 = '{';
+        tlv1 = cgc_atChar(tlv23,tlv22);
+    }
+    if (!tlv1) {
+ {
+     const char tlv57 [ ] = "!!Failed to locate opening brace\n";
+    	cgc_printf(tlv57);
+ }
+	return eradius;
+    }
+    /// Skip past the curly brace
+    int tlv2;
+    {
+        pstring tlv25;
+        tlv25 = str;
+        int tlv24;
+        tlv24 = 1;
+        tlv2 = cgc_skipLength(tlv25,tlv24);
+    }
+    if (tlv2 == -1) {
+ {
+     const char tlv58 [ ] = "!!Failed to skip opening brace\n";
+    	cgc_printf(tlv58);
+ }
+	return eradius;
+    }
+    /// Skip any additional whitespace
+    {
+        pstring tlv26;
+        tlv26 = str;
+        start = cgc_skipWhiteSpace(tlv26);
+    }
+    /// This should skip any to either whitespace or a closing '}'
+    {
+        pstring tlv27;
+        tlv27 = str;
+        end = cgc_skipToNonAlphaNum(tlv27);
+    }
+    if (end == -1) {
+ {
+     const char tlv59 [ ] = "!!Failed to locate the end of the element id\n";
+    	cgc_printf(tlv59);
+ }
+	return eradius;
+    }
+    /// Copy the element id from the string
+    {
+        pstring tlv30;
+        tlv30 = str;
+        int tlv29;
+        tlv29 = start;
+        int tlv28;
+        tlv28 = end;
+        temp = cgc_copyData(tlv30,tlv29,tlv28);
+    }
+    if (temp == NULL) {
+	cgc_printf("!!Copy from @d to @d failed\n", start, end);
+	return -1.0;
+    }
+    /// If the element id is not "ERadius" then this is the wrong function
+    int tlv3;
+    {
+        const char* tlv32 = temp;
+        const char tlv31 [ ] = "ERadius";
+        tlv3 = cgc_strcmp(tlv32,tlv31);
+    }
+    if (tlv3 != 0) {
+ {
+     const char tlv60 [ ] = "!!Element id is not \"ERadius\"\n";
+    	cgc_printf(tlv60);
+ }
+ {
+     void* tlv62;
+     tlv62 = temp;
+     cgc_size_t tlv61;
+     {
+         char* tlv78;
+          tlv78 = temp;
+         tlv61 = cgc_strlen(tlv78) + 1;
+     }
+    	cgc_deallocate(tlv62,tlv61);
+ }
+	temp = NULL;
+	return eradius;
+    }
+    /// The buffer is no longer needed so free it
+    {
+        void* tlv12;
+        tlv12 = temp;
+        cgc_size_t tlv11;
+        {
+            char* tlv75;
+             tlv75 = temp;
+            tlv11 = cgc_strlen(tlv75) + 1;
+        }
+        cgc_deallocate(tlv12,tlv11);
+    }
+    /// Skip to the end of the element id
+    cgc_skipWhiteSpace(str);
+    /// If it is not a closing brace then this is improperly formatted.
+    int tlv4;
+    {
+        pstring tlv34;
+        tlv34 = str;
+        char tlv33;
+        tlv33 = '}';
+        tlv4 = cgc_atChar(tlv34,tlv33);
+    }
+    if (!tlv4) {
+ {
+     const char tlv63 [ ] = "!!Failed to locate initial closing brace\n";
+    	cgc_printf(tlv63);
+ }
+	return -1.0;
+    }
+    /// Skip the closing brace as well as any whitespace
+    int tlv5;
+    {
+        pstring tlv36;
+        tlv36 = str;
+        int tlv35;
+        tlv35 = 1;
+        tlv5 = cgc_skipLength(tlv36,tlv35);
+    }
+    if (tlv5 == -1) {
+ {
+     const char tlv64 [ ] = "!!Failed to skip initial closing brace\n";
+    	cgc_printf(tlv64);
+ }
+	return eradius;
+    }
+    cgc_skipWhiteSpace(str);
+    /// Copy the start index to store the data
+    {
+        pstring tlv14;
+        tlv14 = str;
+        int* tlv13;
+        tlv13 = & es;
+        cgc_getIndex(tlv14,tlv13);
+    }
+    /// The eradius data must be a float
+    {
+        pstring tlv37;
+        tlv37 = str;
+        ee = cgc_skipFloat(tlv37);
+    }
+    if (ee == -1) {
+ {
+     const char tlv65 [ ] = "!!Failed to locate the end of the eradius data\n";
+    	cgc_printf(tlv65);
+ }
+	return eradius;
+    }
+    /// The rest of this code is a check to ensure proper formatting except for the copy data
+    cgc_skipWhiteSpace(str);
+    /// If this is not an opening curly brace then fail
+    int tlv6;
+    {
+        pstring tlv39;
+        tlv39 = str;
+        char tlv38;
+        tlv38 = '{';
+        tlv6 = cgc_atChar(tlv39,tlv38);
+    }
+    if (!tlv6) {
+ {
+     const char tlv66 [ ] = "!!Failed to locate the final opening brace\n";
+    	cgc_printf(tlv66);
+ }
+	return -1.0;
+    }
+    /// Skip past the brace
+    int tlv7;
+    {
+        pstring tlv40;
+        tlv40 = str;
+        tlv7 = cgc_incChar(tlv40);
+    }
+    if (tlv7 == -1) {
+ {
+     const char tlv67 [ ] = "!!Failed to skip the final opening brace\n";
+    	cgc_printf(tlv67);
+ }
+	return eradius;
+    }
+
+    cgc_skipWhiteSpace(str);
+    /// If this is not a # indicating the closing brace then fail
+    int tlv8;
+    {
+        pstring tlv42;
+        tlv42 = str;
+        char tlv41;
+        tlv41 = '#';
+        tlv8 = cgc_atChar(tlv42,tlv41);
+    }
+    if (!tlv8) {
+ {
+     const char tlv68 [ ] = "!!Failed to locate the closing mark\n";
+    	cgc_printf(tlv68);
+ }
+	return -1.0;
+    }
+    /// Skip past the # but save the start
+    {
+        pstring tlv44;
+        tlv44 = str;
+        int tlv43;
+        tlv43 = 1;
+        start = cgc_skipLength(tlv44,tlv43);
+    }
+    if (start == -1) {
+ {
+     const char tlv69 [ ] = "!!Failed to skip closing mark\n";
+    	cgc_printf(tlv69);
+ }
+	return eradius;
+    }
+    {
+        pstring tlv45;
+        tlv45 = str;
+        end = cgc_skipToNonAlphaNum(tlv45);
+    }
+    if (end == -1) {
+ {
+     const char tlv70 [ ] = "!!Failed to locate the end of the closing element id\n";
+    	cgc_printf(tlv70);
+ }
+	return -1.0;
+    }
+
+    {
+        pstring tlv48;
+        tlv48 = str;
+        int tlv47;
+        tlv47 = start;
+        int tlv46;
+        tlv46 = end;
+        temp = cgc_copyData(tlv48,tlv47,tlv46);
+    }
+    int tlv9;
+    {
+        const char* tlv50 = temp;
+        const char tlv49 [ ] = "ERadius";
+        tlv9 = cgc_strcmp(tlv50,tlv49);
+    }
+    if (tlv9 != 0) {
+	cgc_printf("!!Invalid closing element id: @s\n", temp);
+ {
+     void* tlv72;
+     tlv72 = temp;
+     cgc_size_t tlv71;
+     {
+         char* tlv79;
+          tlv79 = temp;
+         tlv71 = cgc_strlen(tlv79) + 1;
+     }
+    	cgc_deallocate(tlv72,tlv71);
+ }
+	return eradius;
+    }
+    {
+        void* tlv16;
+        tlv16 = temp;
+        cgc_size_t tlv15;
+        {
+            char* tlv76;
+             tlv76 = temp;
+            tlv15 = cgc_strlen(tlv76) + 1;
+        }
+        cgc_deallocate(tlv16,tlv15);
+    }
+    cgc_skipWhiteSpace(str);
+    /// Check the final curly brace
+    int tlv10;
+    {
+        pstring tlv52;
+        tlv52 = str;
+        char tlv51;
+        tlv51 = '}';
+        tlv10 = cgc_atChar(tlv52,tlv51);
+    }
+    if (!tlv10) {
+ {
+     const char tlv73 [ ] = "!!Failed to locate final closing brace\n";
+    	cgc_printf(tlv73);
+ }
+	return -1.0;
+    }
+    /// Skip past the closing brace
+    {
+        pstring tlv18;
+        tlv18 = str;
+        int tlv17;
+        tlv17 = 1;
+        cgc_skipLength(tlv18,tlv17);
+    }
+
+    /// Copy the eradius element data
+    {
+        pstring tlv55;
+        tlv55 = str;
+        int tlv54;
+        tlv54 = es;
+        int tlv53;
+        tlv53 = ee;
+        temp = cgc_copyData(tlv55,tlv54,tlv53);
+    }
+    if (temp == NULL) {
+ {
+     const char tlv74 [ ] = "!!Failed to copy eradius data\n";
+    	cgc_printf(tlv74);
+ }
+	return -1;
+    }
+    {
+        const char* tlv56 = temp;
+        eradius = cgc_atof(tlv56);
+    }
+    {
+        void* tlv20;
+        tlv20 = temp;
+        cgc_size_t tlv19;
+        {
+            char* tlv77;
+             tlv77 = temp;
+            tlv19 = cgc_strlen(tlv77) + 1;
+        }
+        cgc_deallocate(tlv20,tlv19);
+    }
+    return eradius;
+}
+
+double cgc_extractMass(pstring str)
+{
+    char* temp;
+     temp = NULL;
+    double mass;
+    mass = - 1.0;
+    int start;
+    start = 0;
+    int end;
+    end = 0;
+    /// These will be used specifically for the data
+    int es;
+    es = 0;
+    int ee;
+    ee = 0;
+    if (str == NULL) {
+	return -1.0;
+    }
+    {
+        pstring tlv21;
+        tlv21 = str;
+        start = cgc_skipWhiteSpace(tlv21);
+    }
+    int tlv1;
+    {
+        pstring tlv23;
+        tlv23 = str;
+        char tlv22;
+        tlv22 = '{';
+        tlv1 = cgc_atChar(tlv23,tlv22);
+    }
+    if (!tlv1) {
+ {
+     const char tlv57 [ ] = "!!Failed to locate opening brace\n";
+    	cgc_printf(tlv57);
+ }
+	return mass;
+    }
+    /// Skip past the curly brace
+    int tlv2;
+    {
+        pstring tlv25;
+        tlv25 = str;
+        int tlv24;
+        tlv24 = 1;
+        tlv2 = cgc_skipLength(tlv25,tlv24);
+    }
+    if (tlv2 == -1) {
+ {
+     const char tlv58 [ ] = "!!Failed to skip opening brace\n";
+    	cgc_printf(tlv58);
+ }
+	return mass;
+    }
+    /// Skip any additional whitespace
+    {
+        pstring tlv26;
+        tlv26 = str;
+        start = cgc_skipWhiteSpace(tlv26);
+    }
+    /// This should skip any to either whitespace or a closing '}'
+    {
+        pstring tlv27;
+        tlv27 = str;
+        end = cgc_skipToNonAlphaNum(tlv27);
+    }
+    if (end == -1) {
+ {
+     const char tlv59 [ ] = "!!Failed to locate the end of the element id\n";
+    	cgc_printf(tlv59);
+ }
+	return mass;
+    }
+    /// Copy the element id from the string
+    {
+        pstring tlv30;
+        tlv30 = str;
+        int tlv29;
+        tlv29 = start;
+        int tlv28;
+        tlv28 = end;
+        temp = cgc_copyData(tlv30,tlv29,tlv28);
+    }
+    if (temp == NULL) {
+	cgc_printf("!!Copy from @d to @d failed\n", start, end);
+	return -1.0;
+    }
+    /// If the element id is not "Mass" then this is the wrong function
+    int tlv3;
+    {
+        const char* tlv32 = temp;
+        const char tlv31 [ ] = "Mass";
+        tlv3 = cgc_strcmp(tlv32,tlv31);
+    }
+    if (tlv3 != 0) {
+ {
+     const char tlv60 [ ] = "!!Element id is not \"Mass\"\n";
+    	cgc_printf(tlv60);
+ }
+ {
+     void* tlv62;
+     tlv62 = temp;
+     cgc_size_t tlv61;
+     {
+         char* tlv78;
+          tlv78 = temp;
+         tlv61 = cgc_strlen(tlv78) + 1;
+     }
+    	cgc_deallocate(tlv62,tlv61);
+ }
+	temp = NULL;
+	return mass;
+    }
+    /// The buffer is no longer needed so free it
+    {
+        void* tlv12;
+        tlv12 = temp;
+        cgc_size_t tlv11;
+        {
+            char* tlv75;
+             tlv75 = temp;
+            tlv11 = cgc_strlen(tlv75) + 1;
+        }
+        cgc_deallocate(tlv12,tlv11);
+    }
+    /// Skip to the end of the element id
+    cgc_skipWhiteSpace(str);
+    /// If it is not a closing brace then this is improperly formatted.
+    int tlv4;
+    {
+        pstring tlv34;
+        tlv34 = str;
+        char tlv33;
+        tlv33 = '}';
+        tlv4 = cgc_atChar(tlv34,tlv33);
+    }
+    if (!tlv4) {
+ {
+     const char tlv63 [ ] = "!!Failed to locate initial closing brace\n";
+    	cgc_printf(tlv63);
+ }
+	return -1.0;
+    }
+    /// Skip the closing brace as well as any whitespace
+    int tlv5;
+    {
+        pstring tlv36;
+        tlv36 = str;
+        int tlv35;
+        tlv35 = 1;
+        tlv5 = cgc_skipLength(tlv36,tlv35);
+    }
+    if (tlv5 == -1) {
+ {
+     const char tlv64 [ ] = "!!Failed to skip initial closing brace\n";
+    	cgc_printf(tlv64);
+ }
+	return mass;
+    }
+    cgc_skipWhiteSpace(str);
+    /// Copy the start index to store the data
+    {
+        pstring tlv14;
+        tlv14 = str;
+        int* tlv13;
+        tlv13 = & es;
+        cgc_getIndex(tlv14,tlv13);
+    }
+    /// The mass data must be a float
+    {
+        pstring tlv37;
+        tlv37 = str;
+        ee = cgc_skipFloat(tlv37);
+    }
+    if (ee == -1) {
+ {
+     const char tlv65 [ ] = "!!Failed to locate the end of the mass data\n";
+    	cgc_printf(tlv65);
+ }
+	return mass;
+    }
+    /// The rest of this code is a check to ensure proper formatting except for the copy data
+    cgc_skipWhiteSpace(str);
+    /// If this is not an opening curly brace then fail
+    int tlv6;
+    {
+        pstring tlv39;
+        tlv39 = str;
+        char tlv38;
+        tlv38 = '{';
+        tlv6 = cgc_atChar(tlv39,tlv38);
+    }
+    if (!tlv6) {
+ {
+     const char tlv66 [ ] = "!!Failed to locate the final opening brace\n";
+    	cgc_printf(tlv66);
+ }
+	return -1.0;
+    }
+    /// Skip past the brace
+    int tlv7;
+    {
+        pstring tlv40;
+        tlv40 = str;
+        tlv7 = cgc_incChar(tlv40);
+    }
+    if (tlv7 == -1) {
+ {
+     const char tlv67 [ ] = "!!Failed to skip the final opening brace\n";
+    	cgc_printf(tlv67);
+ }
+	return mass;
+    }
+
+    cgc_skipWhiteSpace(str);
+    /// If this is not a # indicating the closing brace then fail
+    int tlv8;
+    {
+        pstring tlv42;
+        tlv42 = str;
+        char tlv41;
+        tlv41 = '#';
+        tlv8 = cgc_atChar(tlv42,tlv41);
+    }
+    if (!tlv8) {
+ {
+     const char tlv68 [ ] = "!!Failed to locate the closing mark\n";
+    	cgc_printf(tlv68);
+ }
+	return -1.0;
+    }
+    /// Skip past the # but save the start
+    {
+        pstring tlv44;
+        tlv44 = str;
+        int tlv43;
+        tlv43 = 1;
+        start = cgc_skipLength(tlv44,tlv43);
+    }
+    if (start == -1) {
+ {
+     const char tlv69 [ ] = "!!Failed to skip closing mark\n";
+    	cgc_printf(tlv69);
+ }
+	return mass;
+    }
+    {
+        pstring tlv45;
+        tlv45 = str;
+        end = cgc_skipToNonAlphaNum(tlv45);
+    }
+    if (end == -1) {
+ {
+     const char tlv70 [ ] = "!!Failed to locate the end of the closing element id\n";
+    	cgc_printf(tlv70);
+ }
+	return -1.0;
+    }
+
+    {
+        pstring tlv48;
+        tlv48 = str;
+        int tlv47;
+        tlv47 = start;
+        int tlv46;
+        tlv46 = end;
+        temp = cgc_copyData(tlv48,tlv47,tlv46);
+    }
+    int tlv9;
+    {
+        const char* tlv50 = temp;
+        const char tlv49 [ ] = "Mass";
+        tlv9 = cgc_strcmp(tlv50,tlv49);
+    }
+    if (tlv9 != 0) {
+	cgc_printf("!!Invalid closing element id: @s\n", temp);
+ {
+     void* tlv72;
+     tlv72 = temp;
+     cgc_size_t tlv71;
+     {
+         char* tlv79;
+          tlv79 = temp;
+         tlv71 = cgc_strlen(tlv79) + 1;
+     }
+    	cgc_deallocate(tlv72,tlv71);
+ }
+	return mass;
+    }
+    {
+        void* tlv16;
+        tlv16 = temp;
+        cgc_size_t tlv15;
+        {
+            char* tlv76;
+             tlv76 = temp;
+            tlv15 = cgc_strlen(tlv76) + 1;
+        }
+        cgc_deallocate(tlv16,tlv15);
+    }
+    cgc_skipWhiteSpace(str);
+    /// Check the final curly brace
+    int tlv10;
+    {
+        pstring tlv52;
+        tlv52 = str;
+        char tlv51;
+        tlv51 = '}';
+        tlv10 = cgc_atChar(tlv52,tlv51);
+    }
+    if (!tlv10) {
+ {
+     const char tlv73 [ ] = "!!Failed to locate final closing brace\n";
+    	cgc_printf(tlv73);
+ }
+	return -1.0;
+    }
+    /// Skip past the closing brace
+    {
+        pstring tlv18;
+        tlv18 = str;
+        int tlv17;
+        tlv17 = 1;
+        cgc_skipLength(tlv18,tlv17);
+    }
+
+    /// Copy the mass element data
+    {
+        pstring tlv55;
+        tlv55 = str;
+        int tlv54;
+        tlv54 = es;
+        int tlv53;
+        tlv53 = ee;
+        temp = cgc_copyData(tlv55,tlv54,tlv53);
+    }
+    if (temp == NULL) {
+ {
+     const char tlv74 [ ] = "!!Failed to copy mass data\n";
+    	cgc_printf(tlv74);
+ }
+	return -1;
+    }
+    {
+        const char* tlv56 = temp;
+        mass = cgc_atof(tlv56);
+    }
+    {
+        void* tlv20;
+        tlv20 = temp;
+        cgc_size_t tlv19;
+        {
+            char* tlv77;
+             tlv77 = temp;
+            tlv19 = cgc_strlen(tlv77) + 1;
+        }
+        cgc_deallocate(tlv20,tlv19);
+    }
+    return mass;
+}
+
+double cgc_extractGravity(pstring str)
+{
+    char* temp;
+     temp = NULL;
+    double gravity;
+    gravity = - 1.0;
+    int start;
+    start = 0;
+    int end;
+    end = 0;
+    /// These will be used specifically for the data
+    int es;
+    es = 0;
+    int ee;
+    ee = 0;
+    if (str == NULL) {
+	return -1.0;
+    }
+    {
+        pstring tlv21;
+        tlv21 = str;
+        start = cgc_skipWhiteSpace(tlv21);
+    }
+    int tlv1;
+    {
+        pstring tlv23;
+        tlv23 = str;
+        char tlv22;
+        tlv22 = '{';
+        tlv1 = cgc_atChar(tlv23,tlv22);
+    }
+    if (!tlv1) {
+ {
+     const char tlv57 [ ] = "!!Failed to locate opening brace\n";
+    	cgc_printf(tlv57);
+ }
+	return gravity;
+    }
+    /// Skip past the curly brace
+    int tlv2;
+    {
+        pstring tlv25;
+        tlv25 = str;
+        int tlv24;
+        tlv24 = 1;
+        tlv2 = cgc_skipLength(tlv25,tlv24);
+    }
+    if (tlv2 == -1) {
+ {
+     const char tlv58 [ ] = "!!Failed to skip opening brace\n";
+    	cgc_printf(tlv58);
+ }
+	return gravity;
+    }
+    /// Skip any additional whitespace
+    {
+        pstring tlv26;
+        tlv26 = str;
+        start = cgc_skipWhiteSpace(tlv26);
+    }
+    /// This should skip any to either whitespace or a closing '}'
+    {
+        pstring tlv27;
+        tlv27 = str;
+        end = cgc_skipToNonAlphaNum(tlv27);
+    }
+    if (end == -1) {
+ {
+     const char tlv59 [ ] = "!!Failed to locate the end of the element id\n";
+    	cgc_printf(tlv59);
+ }
+	return gravity;
+    }
+    /// Copy the element id from the string
+    {
+        pstring tlv30;
+        tlv30 = str;
+        int tlv29;
+        tlv29 = start;
+        int tlv28;
+        tlv28 = end;
+        temp = cgc_copyData(tlv30,tlv29,tlv28);
+    }
+    if (temp == NULL) {
+	cgc_printf("!!Copy from @d to @d failed\n", start, end);
+	return -1.0;
+    }
+    /// If the element id is not "Gravity" then this is the wrong function
+    int tlv3;
+    {
+        const char* tlv32 = temp;
+        const char tlv31 [ ] = "Gravity";
+        tlv3 = cgc_strcmp(tlv32,tlv31);
+    }
+    if (tlv3 != 0) {
+ {
+     const char tlv60 [ ] = "!!Element id is not \"Gravity\"\n";
+    	cgc_printf(tlv60);
+ }
+ {
+     void* tlv62;
+     tlv62 = temp;
+     cgc_size_t tlv61;
+     {
+         char* tlv78;
+          tlv78 = temp;
+         tlv61 = cgc_strlen(tlv78) + 1;
+     }
+    	cgc_deallocate(tlv62,tlv61);
+ }
+	temp = NULL;
+	return gravity;
+    }
+    /// The buffer is no longer needed so free it
+    {
+        void* tlv12;
+        tlv12 = temp;
+        cgc_size_t tlv11;
+        {
+            char* tlv75;
+             tlv75 = temp;
+            tlv11 = cgc_strlen(tlv75) + 1;
+        }
+        cgc_deallocate(tlv12,tlv11);
+    }
+    /// Skip to the end of the element id
+    cgc_skipWhiteSpace(str);
+    /// If it is not a closing brace then this is improperly formatted.
+    int tlv4;
+    {
+        pstring tlv34;
+        tlv34 = str;
+        char tlv33;
+        tlv33 = '}';
+        tlv4 = cgc_atChar(tlv34,tlv33);
+    }
+    if (!tlv4) {
+ {
+     const char tlv63 [ ] = "!!Failed to locate initial closing brace\n";
+    	cgc_printf(tlv63);
+ }
+	return -1.0;
+    }
+    /// Skip the closing brace as well as any whitespace
+    int tlv5;
+    {
+        pstring tlv36;
+        tlv36 = str;
+        int tlv35;
+        tlv35 = 1;
+        tlv5 = cgc_skipLength(tlv36,tlv35);
+    }
+    if (tlv5 == -1) {
+ {
+     const char tlv64 [ ] = "!!Failed to skip initial closing brace\n";
+    	cgc_printf(tlv64);
+ }
+	return gravity;
+    }
+    cgc_skipWhiteSpace(str);
+    /// Copy the start index to store the data
+    {
+        pstring tlv14;
+        tlv14 = str;
+        int* tlv13;
+        tlv13 = & es;
+        cgc_getIndex(tlv14,tlv13);
+    }
+    /// The gravity data must be a float
+    {
+        pstring tlv37;
+        tlv37 = str;
+        ee = cgc_skipFloat(tlv37);
+    }
+    if (ee == -1) {
+ {
+     const char tlv65 [ ] = "!!Failed to locate the end of the gravity data\n";
+    	cgc_printf(tlv65);
+ }
+	return gravity;
+    }
+    /// The rest of this code is a check to ensure proper formatting except for the copy data
+    cgc_skipWhiteSpace(str);
+    /// If this is not an opening curly brace then fail
+    int tlv6;
+    {
+        pstring tlv39;
+        tlv39 = str;
+        char tlv38;
+        tlv38 = '{';
+        tlv6 = cgc_atChar(tlv39,tlv38);
+    }
+    if (!tlv6) {
+ {
+     const char tlv66 [ ] = "!!Failed to locate the final opening brace\n";
+    	cgc_printf(tlv66);
+ }
+	return -1.0;
+    }
+    /// Skip past the brace
+    int tlv7;
+    {
+        pstring tlv40;
+        tlv40 = str;
+        tlv7 = cgc_incChar(tlv40);
+    }
+    if (tlv7 == -1) {
+ {
+     const char tlv67 [ ] = "!!Failed to skip the final opening brace\n";
+    	cgc_printf(tlv67);
+ }
+	return gravity;
+    }
+
+    cgc_skipWhiteSpace(str);
+    /// If this is not a # indicating the closing brace then fail
+    int tlv8;
+    {
+        pstring tlv42;
+        tlv42 = str;
+        char tlv41;
+        tlv41 = '#';
+        tlv8 = cgc_atChar(tlv42,tlv41);
+    }
+    if (!tlv8) {
+ {
+     const char tlv68 [ ] = "!!Failed to locate the closing mark\n";
+    	cgc_printf(tlv68);
+ }
+	return -1.0;
+    }
+    /// Skip past the # but save the start
+    {
+        pstring tlv44;
+        tlv44 = str;
+        int tlv43;
+        tlv43 = 1;
+        start = cgc_skipLength(tlv44,tlv43);
+    }
+    if (start == -1) {
+ {
+     const char tlv69 [ ] = "!!Failed to skip closing mark\n";
+    	cgc_printf(tlv69);
+ }
+	return gravity;
+    }
+    {
+        pstring tlv45;
+        tlv45 = str;
+        end = cgc_skipToNonAlphaNum(tlv45);
+    }
+    if (end == -1) {
+ {
+     const char tlv70 [ ] = "!!Failed to locate the end of the closing element id\n";
+    	cgc_printf(tlv70);
+ }
+	return -1.0;
+    }
+
+    {
+        pstring tlv48;
+        tlv48 = str;
+        int tlv47;
+        tlv47 = start;
+        int tlv46;
+        tlv46 = end;
+        temp = cgc_copyData(tlv48,tlv47,tlv46);
+    }
+    int tlv9;
+    {
+        const char* tlv50 = temp;
+        const char tlv49 [ ] = "Gravity";
+        tlv9 = cgc_strcmp(tlv50,tlv49);
+    }
+    if (tlv9 != 0) {
+	cgc_printf("!!Invalid closing element id: @s\n", temp);
+ {
+     void* tlv72;
+     tlv72 = temp;
+     cgc_size_t tlv71;
+     {
+         char* tlv79;
+          tlv79 = temp;
+         tlv71 = cgc_strlen(tlv79) + 1;
+     }
+    	cgc_deallocate(tlv72,tlv71);
+ }
+	return gravity;
+    }
+    {
+        void* tlv16;
+        tlv16 = temp;
+        cgc_size_t tlv15;
+        {
+            char* tlv76;
+             tlv76 = temp;
+            tlv15 = cgc_strlen(tlv76) + 1;
+        }
+        cgc_deallocate(tlv16,tlv15);
+    }
+    cgc_skipWhiteSpace(str);
+    /// Check the final curly brace
+    int tlv10;
+    {
+        pstring tlv52;
+        tlv52 = str;
+        char tlv51;
+        tlv51 = '}';
+        tlv10 = cgc_atChar(tlv52,tlv51);
+    }
+    if (!tlv10) {
+ {
+     const char tlv73 [ ] = "!!Failed to locate final closing brace\n";
+    	cgc_printf(tlv73);
+ }
+	return -1.0;
+    }
+    /// Skip past the closing brace
+    {
+        pstring tlv18;
+        tlv18 = str;
+        int tlv17;
+        tlv17 = 1;
+        cgc_skipLength(tlv18,tlv17);
+    }
+
+    /// Copy the gravity element data
+    {
+        pstring tlv55;
+        tlv55 = str;
+        int tlv54;
+        tlv54 = es;
+        int tlv53;
+        tlv53 = ee;
+        temp = cgc_copyData(tlv55,tlv54,tlv53);
+    }
+    if (temp == NULL) {
+ {
+     const char tlv74 [ ] = "!!Failed to copy gravity data\n";
+    	cgc_printf(tlv74);
+ }
+	return -1;
+    }
+    {
+        const char* tlv56 = temp;
+        gravity = cgc_atof(tlv56);
+    }
+    {
+        void* tlv20;
+        tlv20 = temp;
+        cgc_size_t tlv19;
+        {
+            char* tlv77;
+             tlv77 = temp;
+            tlv19 = cgc_strlen(tlv77) + 1;
+        }
+        cgc_deallocate(tlv20,tlv19);
+    }
+    return gravity;
+}
+

@@ -1,0 +1,35 @@
+digraph G {
+    let_run [label="let_run"];
+    new_game [label="new_game"];
+    shoot [label="shoot"];
+    reveal_board [label="reveal_board"];
+    start [label="start", shape=box];
+    quit [label="quit", shape=triangle];
+    place_bomb [label="place_bomb"];
+    let_run -> reveal_board;
+    let_run -> new_game;
+    let_run -> shoot;
+    let_run -> quit;
+    new_game -> reveal_board;
+    new_game -> new_game;
+    new_game -> shoot;
+    new_game -> quit;
+    shoot -> reveal_board;
+    shoot -> new_game;
+    shoot -> shoot;
+    shoot -> quit;
+    reveal_board -> reveal_board;
+    reveal_board -> let_run;
+    reveal_board -> quit;
+    reveal_board -> place_bomb;
+    reveal_board -> new_game;
+    start -> reveal_board;
+    start -> new_game;
+    start -> shoot;
+    start -> quit;
+    place_bomb -> reveal_board;
+    place_bomb -> let_run;
+    place_bomb -> quit;
+    place_bomb -> place_bomb;
+    place_bomb -> new_game;
+}

@@ -1,0 +1,19 @@
+digraph G {
+    loads [label="loads"];
+    nyan [label="nyan"];
+    option [label="option"];
+    start [label="start", shape=box];
+    quit [label="quit", shape=triangle];
+    invalid_menu [label="invalid_menu"];
+    dumps [label="dumps"];
+    invalid_menu -> option;
+    nyan -> option;
+    option -> loads;
+    option -> dumps;
+    option -> quit [label="0.1x"];
+    option -> nyan;
+    option -> invalid_menu;
+    start -> option;
+    loads -> option;
+    dumps -> option;
+}

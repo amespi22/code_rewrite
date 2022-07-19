@@ -1,0 +1,12 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE pov SYSTEM "/usr/share/cgc-docs/replay.dtd">
+<pov>
+<cbid>service</cbid>
+<seed>69883fd590d7254c923278e0ca4346a719932b59f8c618a6fb50895d6aa4b9ff5243f8ad926f029e4ed95139c79d0738</seed>
+<replay>
+    <read><length>22</length><match><data>\x3d\x3d\x3d\x3d\x3d\x3d 3M v0.2 \x3d\x3d\x3d\x3d\x3d\x3d\x0a</data></match></read>
+    <read><length>137</length><match><data>\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x0a 1. New memo\x0a 2. View memo\x0a 3. Update memo\x0a 4. Delete memo\x0a 5. Add custom AC word\x0a 6. Quit\x0a\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x3d\x0a</data></match></read>
+    <write><data>6\x0a</data></write>
+    <read><length>5</length><match><data>bye!\x0a</data></match></read>
+</replay>
+</pov>

@@ -46,7 +46,6 @@ def main():
     #    print(f"\t {type(k['parent'])} => {get_string2(k['parent'])}")
 
     x=get_function_info(functions=get_functions(t),fscope=printer.scopes,dont_eval=[])
-    print_scope_info(x)
 
     """
     for key,members in inspect.getmembers(ctx):
@@ -88,9 +87,13 @@ def get_type_var_info(ctx):
            typ=" ".join([get_string2(x) for x in c[0:2]])
            node=c[2]
         nodes=[(typ,node)]
+    else:
+        return None,None,None
     sym_dict=dict()
     up_nodes=list()
     for t,d in nodes:
+        if d is None or len(list(d.getChildren()))<1 :
+            continue
         c=list(d.getChild(0).getChildren())
         if len(c)>1:
             decl_info=""
@@ -445,7 +448,7 @@ class ScopeListener(CListener):
     def enterCompoundStatement(self,ctx:CParser.CompoundStatementContext):
         x=self.scopes.get(ctx,None)
         if x:
-            print("[DuplicateNodeError] {get_string(ctx)}")
+            print("[DuplicateNodeError] {get_string2(ctx)}")
         else:
             self.getParentScopes(ctx)
         pass
@@ -470,7 +473,7 @@ class ScopeListener(CListener):
     def enterSelectionStatement(self, ctx:CParser.SelectionStatementContext):
         x=self.scopes.get(ctx,None)
         if x:
-            print("[DuplicateNodeError] {get_string(ctx)}")
+            print("[DuplicateNodeError] {get_string2(ctx)}")
         else:
             self.getParentScopes(ctx)
         pass
@@ -495,7 +498,7 @@ class ScopeListener(CListener):
     def enterIterationStatement(self, ctx:CParser.IterationStatementContext):
         x=self.scopes.get(ctx,None)
         if x:
-            print("[DuplicateNodeError] {get_string(ctx)}")
+            print("[DuplicateNodeError] {get_string2(ctx)}")
         else:
             self.getParentScopes(ctx)
         pass
@@ -507,7 +510,7 @@ class ScopeListener(CListener):
         dprint(f"[enterFunctionDefinition]")
         dprint(f"{[(type(c[x]),get_string2(c[x])) for x in range(0,len(c)-1)]}")
         if x:
-            print("[DuplicateNodeError] {get_string(ctx)}")
+            print("[DuplicateNodeError] {get_string2(ctx)}")
         else:
             self.getParentScopes(ctx)
         pass
@@ -608,6 +611,12 @@ class ScopeListener(CListener):
     def exitAssignmentExpression(self, ctx:CParser.AssignmentExpressionContext):
         pass
     def enterAssignmentExpression(self, ctx:CParser.AssignmentExpressionContext):
+        if self.current_scope is None or self.cur_symbol_lut[self.current_scope] is None:
+            dprint(f"[WARNING] : self.current_scope = '{self.current_scope}'")
+            dprint(f"[WARNING] : self.cur_symbol_lut[self.current_scope] = '{self.cur_symbol_lut.get(self.current_scope,None)}'")
+            dprint(f"[WARNING] ctx : {get_string2(ctx)}")
+            pass
+            
         chld=list(ctx.getChildren())
         if len(chld)==3 and "=" in get_string2(chld[1]):
             #nodes=get_string2(ctx)
@@ -619,7 +628,7 @@ class ScopeListener(CListener):
                 ext="["+ext
             nodes=chld[2]
             dprint(f"var: {var} ({ovar}) = {get_string2(nodes)}")
-            typ=self.cur_symbol_lut[self.current_scope].get(var,"UNDEF")
+            typ=self.cur_symbol_lut[self.current_scope].get(var,"UNDEF") 
             dprint(f"var: {typ} {var} ({ovar}) = {get_string2(nodes)}")
             if ovar!=var:
                 typ=typ.rsplit(' *',1)[0]
@@ -667,10 +676,16 @@ class ScopeListener(CListener):
                    typ=" ".join([get_string2(x) for x in c[0:2]])
                    node=c[2]
                 nodes=[(typ,node)]
+            else:
+                return
 
             sym_dict=dict()
             up_nodes=list()
+            i=-1
             for t,d in nodes:
+                i+=1
+                if d is None or len(list(d.getChildren()))<1 :
+                    continue
                 if t in self.func_names:
                     continue
                 c=list(d.getChild(0).getChildren())
@@ -682,16 +697,28 @@ class ScopeListener(CListener):
                     d_=get_string2(c[0])
                     typ=t+" *"
                     sym_dict[d_]=typ
-                    dprint(f"sym_dict [{get_string2(d_)}] = {typ} ")
+                    dprint(f"[A-t-{i}] sym_dict [{get_string2(d_)}] = {typ} ")
                     up_nodes.extend([(typ,c[0],decl_info)])
+                    if type(c[0])!=tree.Tree.TerminalNodeImpl:
+                        c0=list(c[0].getChildren())
+                        if len(c0)>1:
+                            dl_info=""
+                            dl_nodes=list(c0[1:])
+                            for i in range(1,len(c)):
+                                dl_info+=" "+get_string2(c[i])
+                            dl_info+=decl_info
+                            typ+="*"
+                            d_=get_string2(c0[0])
+                            sym_dict[d_]=typ
+                            dprint(f"[B-t-{i}] sym_dict [{get_string2(d_)}] = {typ} ")
+                            up_nodes.extend([(typ,c0[0],dl_info)])
+                        
                 up_nodes.extend([(t,d,None)])
                 
+                dprint(f"[C-t-{i}] sym_dict [{get_string2(d)}] = {t} ")
+                sym_dict[get_string2(d)]=t
+                
             self.cur_declarations[-1].extend(up_nodes)
-            for a,b in nodes:
-                if a in self.func_names:
-                    continue
-                sym_dict[get_string2(b)]=a
-                dprint(f"sym_dict [{get_string2(b)}] = {a} ")
             try:
                 self.cur_symbol_lut[self.current_scope].update(sym_dict)
             except Exception as e:
@@ -705,36 +732,58 @@ class ScopeListener(CListener):
         pass
     def enterForDeclaration(self, ctx:CParser.ForDeclarationContext):
         chld=list(ctx.getChildren())
-        typ=get_string2(chld[0])
-        node=chld[1]
-        dec=list(find_multictx(node,[CParser.DeclaratorContext],None,None))
-        dprint(f"[enterForDeclaration]")
-        nodes=[(typ,d) for d in dec]
-        up_nodes=list()
-        sym_dict=dict()
-        for t,d in nodes:
-            if t in self.func_names:
-                continue
-            c=list(d.getChild(0).getChildren())
-            if len(c)>1:
-                decl_info=""
-                decl_nodes=list(c[1:])
-                for i in range(1,len(c)):
-                    decl_info+=" "+get_string2(c[i])
-                d_=get_string2(c[0])
-                typ=t+" *"
-                sym_dict[d_]=typ
-                dprint(f"sym_dict [{get_string2(d_)}] = {typ} ")
-                up_nodes.extend([(typ,c[0],decl_info)])
-            up_nodes.extend([(t,d,None)])
-            
-        self.cur_declarations[-1].extend(up_nodes)
-        for a,b in nodes:
-            if a in self.func_names:
-                continue
-            dprint(f"sym_dict [{get_string2(b)}] = {a} ")
-            sym_dict[get_string2(b)]=a
-        self.cur_symbol_lut[self.current_scope].update(sym_dict)
+        if len(chld)>=2:
+            typ=get_string2(chld[0])
+            try:
+               node=chld[1]
+            except:
+               print(f"[enterForDeclaration] len(chld)={len(chld)}")
+               raise
+            dec=list(find_multictx(node,[CParser.DeclaratorContext],None,None))
+            dprint(f"[enterForDeclaration]")
+            nodes=[(typ,d) for d in dec]
+            up_nodes=list()
+            sym_dict=dict()
+            if len(nodes)==0:
+                return
+            i=-1
+            for t,d in nodes:
+                i+=1
+                if d is None or len(list(d.getChildren()))<1 :
+                    continue
+                if t in self.func_names:
+                    continue
+                c=list(d.getChild(0).getChildren())
+                if len(c)>1:
+                    decl_info=""
+                    decl_nodes=list(c[1:])
+                    for i in range(1,len(c)):
+                        decl_info+=" "+get_string2(c[i])
+                    d_=get_string2(c[0])
+                    typ=t+" *"
+                    sym_dict[d_]=typ
+                    dprint(f"[A-t-{i}] sym_dict [{get_string2(d_)}] = {typ}  [# children={len(c)}]")
+                    up_nodes.extend([(typ,c[0],decl_info)])
+                    if type(c[0])!=tree.Tree.TerminalNodeImpl:
+                        c0=list(c[0].getChildren())
+                        if len(c0)>1:
+                            dl_info=""
+                            dl_nodes=list(c0[1:])
+                            for i in range(1,len(c)):
+                                dl_info+=" "+get_string2(c[i])
+                            dl_info+=decl_info
+                            typ+="*"
+                            d_=get_string2(c0[0])
+                            sym_dict[d_]=typ
+                            dprint(f"[B-t-{i}] sym_dict [{get_string2(d_)}] = {typ} ")
+                            up_nodes.extend([(typ,c0[0],dl_info)])
+                up_nodes.extend([(t,d,None)])
+                
+                dprint(f"[C-t-{i}] sym_dict [{get_string2(d)}] = {t} ")
+                sym_dict[get_string2(d)]=t
+                
+            self.cur_declarations[-1].extend(up_nodes)
+            self.cur_symbol_lut[self.current_scope].update(sym_dict)
         pass
 
     def exitParameterDeclaration(self, ctx:CParser.ParameterDeclarationContext):
@@ -757,6 +806,8 @@ class ScopeListener(CListener):
                 up_nodes=list()
                 sym_dict=dict()
                 for t,d in nodes:
+                    if d is None or len(list(d.getChildren()))<1 :
+                        continue
                     if t in self.func_names:
                         continue
                     dprint(f"[enterParameterDeclaration] {t} : {get_string2(d)}")
@@ -775,13 +826,18 @@ class ScopeListener(CListener):
                 
                 self.cur_declarations[-1].extend(up_nodes)
                 for a,b in nodes:
+                    if b is None or len(list(b.getChildren()))<1 :
+                        continue
                     if a in self.func_names:
                         continue
                     dprint(f"sym_dict [{get_string2(b)}] = {a} ")
                     sym_dict[get_string2(b)]=a
                 self.cur_symbol_lut[self.current_scope].update(sym_dict)
             else:
-                dprint(f"[CORNER CASE] ParameterDeclaration : children = {[(type(v),get_string2(v)) for v in chld]}")
+                dprint(f"[CORNER CASE] ParameterDeclaration : children = {[(type(v),get_string2(v)) for v in chld]} => setting default type to 'int'")
+                sym_dict=dict()
+                sym_dict[get_string2(chld[0])]="int";
+                self.cur_symbol_lut[self.current_scope].update(sym_dict)
                 pass
         pass
 
@@ -805,10 +861,12 @@ def dprint(instr,flush=False):
         global gbl_debug_msg
         if gbl_debug_msg[3]:
             if gbl_debug_msg[1]%50 == 0:
-                write_log()
-                gbl_debug_msg[0]=""
+                flush=True
             gbl_debug_msg[0]+=instr+"\n"
             gbl_debug_msg[1]+=1
+            if flush:
+                write_log()
+                gbl_debug_msg[0]=""
 
 def write_log():
     if gbl_debug_msg[3]:
@@ -1092,11 +1150,11 @@ def get_function_info(functions,fscope,dont_eval:list=None,okay_eval:list=None):
             s=[get_string2(n) for n in ignore_sibs]
             dprint(f"ignore sibs: {s}")
             for j,c in enumerate(decl_scopes):
-                dprint(f"{j} : type: {c[0]}, var: {get_string2(c[1])}")
+                dprint(f"{j} : |  decl_scope  | type: {c[0]}, var: {get_string2(c[1])}")
             for j,c in enumerate(assign_scopes):
-                dprint(f"{j} : type: {c[0]}, value: {get_string2(c[3])}")
+                dprint(f"{j} : | assign_scope | type: {c[0]}, value: {get_string2(c[3])}")
             for j,c in enumerate(compare_scopes):
-                dprint(f"{j} : type: {c[0]}, value: {get_string2(c[3])}")
+                dprint(f"{j} : |compare_scopes| type: {c[0]}, value: {get_string2(c[3])}")
             dprint(f"=======END=======")
 
             scope_vars[fname][p]=\
@@ -1110,41 +1168,16 @@ def get_function_info(functions,fscope,dont_eval:list=None,okay_eval:list=None):
     return scope_vars
 
 
-def print_scope_info(scope):
-    for fn,fs in scope.items():
-        print(get_func_name(fn))
-        i=0
-        for sn, s in fs.items():
-            print("{")
-            parent=s['parent'] if s['parent'] else sn
-            var_s=s['variables']
-            val_s=s['values']
-            cval_s=s['compvalues']
-            print(f"/* scope = {get_string2(parent)}*/")
-            for x in val_s+cval_s:
-                try:
-                    typ,var,varinfo,value=x
-                    type_info=typ
-                    def_var="i"
-                    if value:
-                        if value==def_var or value.endswith(f" {def_var}") or value.startswith(f"{def_var} ") \
-                        or f" {def_var} " in value:
-                                def_var+=def_var
-                        if varinfo != "":
-                            print("\t{ "+f"{typ} {def_var}{varinfo} = {value}; /* {var} */"+" }") 
-                        elif varinfo == "":
-                            print("\t{ "+f"{typ} {def_var}{varinfo}; {def_var}= {value}; /* {var} */"+" }") 
-                            print(f"loc to put in code = {get_end_loc(parent)}")
-                except Exception as e:
-                    print(f"Exception with x={x}")
-                    print(e)
-                    raise
-            print("}")
-            i+=1
+def is_operator(val):
+    if re.match(r"([()*-/%+\[\]]|->)",val):
+        return True
+    return False
 
 def is_literal(val):
     # if is a digit
     if re.match(r"\d+",val):
+        return True
+    elif re.match(r"('\w*'|\"\w*\")",val):
         return True
     return False
 
@@ -1176,11 +1209,13 @@ for i in range(0,len(number_equivalent_classes)):
 for i in range(0,len(floatp_equivalent_classes)):
     fpnumber_set=fpnumber_set|floatp_equivalent_classes[i] 
 
-def can_cast(ltyp,rtyp):
+def can_cast(ltyp,rtyp,ignore_int_hier=True):
     # determines if rtyp variable can be cast as ltyp
     equivalent_classes=None
+    hier=True
     if ltyp in number_set and rtyp in number_set:
         equivalent_classes=number_equivalent_classes 
+        hier=not ignore_int_hier
     elif ltyp in fpnumber_set and rtyp in fpnumber_set:
         equivalent_classes=floatp_equivalent_classes 
     if not equivalent_classes:
@@ -1192,22 +1227,36 @@ def can_cast(ltyp,rtyp):
             index[0]=i
         if rtyp.rstrip() in eq:
             index[1]=i
-    return index[0]<=index[1]
+    if index[0] is not None and index[1] is not None:
+        return index[0]<=index[1] if hier else True
+    return False
 
+def has_multiptr_refs(rhs_value):
+    x=re.sub(" ","",rhs_value)
+    has_multiptr=re.search(r"((\w+|\(\w+\))(\.|->|\[[^\]]+\])){2,}",x,flags=re.ASCII)
+    has_multidim_array=re.search(r"(\[[^\]]*]){2,}",x,flags=re.ASCII)
+    dprint(f"has_multiptr_refs '{x}' - {has_multiptr is not None} OR  {has_multidim_array is not None}")
+    return (has_multiptr is not None) or (has_multidim_array is not None)
 
 def is_function(name):
-    is_func=re.match(r"\s*(\S+)\s*\((((\S+),\s*)*\S+)?\)",name,flags=re.ASCII)
-    is_func_ptr=re.match(r"\s*(\(\s*\*\s*\S+\s*\))\s*(\(.*\))",name,flags=re.ASCII)
-    print(f"Checking {name} - is_func={is_func}, is_func_ptr={is_func_ptr}")
+    is_func=re.match(r"\s*(\w+)\s*\(((\s*(\S+),)*\s*\S+\s*)?\s*\)",name,flags=re.ASCII) is not None
+    is_func_ptr= (re.match(r"\s*(\(\s*\*\s*\S+\s*\))\s*(\(.*\))",name,flags=re.ASCII) is not None) or \
+                (re.match(r"\s*(\w+\s*)*\s*(\(\s*\*\s*\S+\s*\))\s*(\(.*\))",name,flags=re.ASCII) is not None)
+    dprint(f"Checking '{name}' - is_func={is_func}, is_func_ptr={is_func_ptr}")
     return is_func or is_func_ptr
 
 def is_okay_func_call(rhs_value,eval_me):
-    is_func=re.search(r"(\w+)\s*\((((\S+),\s*)*\S+)?\)",rhs_value[0],flags=re.ASCII)
-    if is_func and is_func.group(1) not in eval_me:
-        dprint(f"[is_okay_func_call] found {is_func.group(1)} in {eval_me} [{rhs_value[0]}]")
-        return True
-    else:
-        return False
+    is_func=re.search(r"(\w+)\s*\(((\s*(\w+)\s*,)*\s*\w+\s*)?\)",rhs_value,flags=re.ASCII)
+    is_func_ptr=re.match(r"\s*(\(\s*\*\s*\S+\s*\))\s*(\(.*\))",rhs_value,flags=re.ASCII)
+    is_func_call=re.match(r"\s*(\w+((\s*\.\s*\w+|\s*\[.*\]|\s*->\s*\w+)*))\s*(\(.*\))",rhs_value,flags=re.ASCII)
+    is_func_=[True if is_func else False,\
+             True if is_func_ptr else False,\
+             True if is_func_call else False]
+    is_valid_=[ True if is_func and is_func.group(1) in eval_me else False,\
+                True if is_func_call and is_func_call.group(1) in eval_me else False\
+              ]
+    dprint(f"is_func_ [{rhs_value[0]}] => '{is_func_}'")
+    return any(is_func_),any(is_valid_)
         
     
 # the point of this is to be able to disable fix_repair* functions from being executed
@@ -1229,7 +1278,19 @@ def generate_preface(var):
     prog+="#endif\n"
     return prog
 
-def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
+def uniquify(varlist):
+    svals=list()
+    uniq_varlist=list()
+    for x in varlist:
+        xs=get_string2(x)
+        if xs not in svals:
+           svals.append(xs)
+           uniq_varlist.append(x)
+    return uniq_varlist
+
+    
+
+def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None,ptr_t=None,defines=None):
     uniques=[]
     fn_body=[]
     rewrites=[]
@@ -1239,6 +1300,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
     ## function scope
     #def get_type_var_info(ctx) => return nodes, sym_dict, up_nodes
     all_fn_def=""
+    num_i=len(scope.items())
     for i,f_info in enumerate(scope.items()):
         fn,fs=f_info
         type_lut=dict()
@@ -1247,18 +1309,20 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
         fn_name=get_func_name(fn)
         print(f"Processing [{fn_name}] :",flush=True)
         try:
-            def_vars=dvars[fn_name]
+            ddef_vars=dvars[fn_name]
+            def_vars=uniquify(ddef_vars)
         except Exception as e:
             print(f"Can't find {fn_name} in dvars {dvars.keys()}")
             raise(e)
-        for d in def_vars:
-            dprint(f"[{fn_name}] : {type(d)} : {get_string2(d)}")
+        for dd,d in enumerate(def_vars):
+            dprint(f"def_vars[{dd}]: [{fn_name}] : {type(d)} : {get_string2(d)}")
         #strip_array_decs(def_vars)
         ## for each namespace scope in function scope
         s2_fn_def=""
         s2_fn_decls=""
         s2_body=""
         s2_calls=""
+        num_j=len(fs.items())
         for j, s_info in enumerate(fs.items()):
             sn,s=s_info
             uniq_init=[]
@@ -1270,11 +1334,35 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
             #val_s=s['vals_w_nodes']
             scope_uniq=[]
             end=s['scope_end']
+            dprint(f"sym_lut=>'{sym_lut}'\nval_s=>'{val_s}'\ncval_s=>'{cval_s}'")
 
             #s2_decls=""
             s2_fn=f"{fname}_{i}"
             ## for each value in the namespace scope
-            for def_var in def_vars:
+            num_d=len(def_vars)
+            
+            valid_def_vars=list()
+            for dd,def_var in enumerate(def_vars):
+                n,lut,un=get_type_var_info(def_var)
+                ltyp=n[0][0]
+                lname=get_string2(n[0][1])
+                if lname is None:
+                    continue
+                if lname.startswith('(') and is_function(f"{ltyp}{lname}"):
+                    dprint(f"{ltyp}{lname} is a function.\nSkipping.")
+                    continue
+            
+                if '(' in lname and is_function(lname):
+                    dprint(f"{lname} is a function.\nSkipping.")
+                    continue
+                llut=sym_lut.get(lname,None)
+                if not llut:
+                    if not ltyp:
+                        ltyp="int"
+                    sym_lut[lname]=ltyp
+                valid_def_vars.append(def_var)
+
+            for dd,def_var in enumerate(valid_def_vars):
                 n,lut,un=get_type_var_info(def_var)
                 #for nn in n:
                 #    print(f"{nn[0]} : {get_string2(nn[1])}")
@@ -1283,28 +1371,78 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
                 # we're just going to assume a singly declared variable
                 ltyp=n[0][0]
                 lname=get_string2(n[0][1])
-                if '(' in lname and is_function(lname):
-                    print(f"{lname} is a function.\nSkipping.")
-                    continue
-                
+                if '[' in lname:
+                    term=list(find_multictx(n[0][1],[tree.Tree.TerminalNodeImpl]))
+                    value_subterms= [get_string2(v) for v in term]
+                    while value_subterms[0]!='[':
+                        value_subterms=value_subterms[1:]
+                    while value_subterms[-1]!=']':
+                        value_subterms=value_subterms[0:-1]
+                    for v in value_subterms:
+                        if v==']':
+                            break
+                        is_op = is_operator(v) 
+                        is_lit= is_literal(v)
+                        if not is_op and not is_lit:
+                            vtype = sym_lut.get(v,None)
+                            if not vtype:
+                                vtype="int"
+                            ainfo=(vtype,v,None)
+                            is_macrodef=False
+                            if defines:
+                                srchk='|'.join(defines)
+                                if re.search(r"\b("+srchk+r")\b",v):
+                                    is_macrodef=True
+                            if is_macrodef:
+                                dprint(f"Skipping {v} => #define")
+                            elif (ainfo,None) in uniq_init:
+                                uniq_init.pop(uniq_init.index((ainfo,None)))
+                                uniq_init.insert(0,(ainfo,"1"))
+                            elif (ainfo,"1") not in uniq_init:
+                                uniq_init.insert(0,(ainfo,"1"))
                 #####
+                num_k=len(val_s+cval_s)
                 for k,x in enumerate(val_s+cval_s):
                     try:
                         type_info,var,varinfo,value_node=x
                         scope_uniq.append([])
-                        fn_ptr=is_okay_func_call(get_string(value_node),eval_me)
-                        dprint(f"[i={i}][j={j}][k={k}] | type: {type_info} ; var : {var} ; varinfo : {varinfo} ; value_node : {get_string2(value_node)}; fn_ptr : {fn_ptr}")
-                        if value_node and not fn_ptr:
-                            term=list(find_multictx(value_node,[tree.Tree.TerminalNodeImpl]))
-                            value=get_string2(value_node)
-                            value_subterms=[get_string2(v) for v in term]
-                            dprint(f"Subterms : {' '.join(value_subterms)}")
+                        if not value_node:
+                            dprint(f"empty value_node: continuing {x}")
+                            continue
+
+                        term=list(find_multictx(value_node,[tree.Tree.TerminalNodeImpl]))
+                        value_subterms= [get_string2(v) for v in term]
+                        val=" ".join(value_subterms)
+                        value=get_string2(value_node)
+                        rtyp=re.sub(r"\bconst\b",r' ',type_info)
+                        info=(ltyp,lname,value,rtyp)
+                        dont_check_me=any([\
+                                info[0]==x[0] and \
+                                info[1]==x[1] and \
+                                info[2]==x[2] and \
+                                info[3]==x[3] \
+                                for x in uniques])
+                        if dont_check_me:
+                            continue
+                        uniques.append(info)
+                        # if we can't cast the RHS to LHS type, then go to next
+                        if not can_cast(ltyp,rtyp): 
+                            continue
+                        is_fn,okay_fn=is_okay_func_call(val,eval_me)
+                        has_multiptrs=has_multiptr_refs(val)
+                        proceed=False if has_multiptrs else True if not is_fn else okay_fn
+                        dprint(f"[i={i}/{num_i}][j={j}/{num_j}][dd={dd}/{num_d}][k={k}/{num_k}] | type: {type_info} ; var : {var} ; varinfo : {varinfo} ; value_node : {get_string2(value_node)} ({type(value_node)});\n proceed : {proceed} [not({has_multiptrs}) && ( not ({is_fn}) || {okay_fn} )]")
+                        if proceed:
+                            scope_uniq[k].append(info)
+                            dprint(f"Subterms : {','.join(value_subterms)}")
                             # if any RHS uses a variable, obtain its type from var_s (variable look-up table)
                             # and add it to the unique scope list of required variables
                             for v in value_subterms:
-                                if not is_literal(v):
+                                is_op = is_operator(v) 
+                                is_lit= is_literal(v)
+                                if not is_op and not is_lit:
                                     vtype = sym_lut.get(v,None)
-                                    dprint(f" => is literal (False) {v} [vtype={vtype}]")
+                                    dprint(f" => is literal ({is_lit}) | is operator ({is_op}) {v} [vtype={vtype}]")
                                     if vtype:
                                         # check to see if there are any array versions
                                         vtyp=vtype
@@ -1314,39 +1452,36 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
                                                     dprint(f"BEFORE => literal (False) {v} => {vtyp}")
                                                     v=isym
                                                     vtyp=sym_lut[v]
-                                                    dprint(f"AFTER => literal (False) {v} => {vtyp}")
+                                                    ares=re.search(r"\[\s*(\w*)\s*\]",isym)
+                                                    if not ares:
+                                                        dprint(f"AFTER => literal (False) {v} => {vtyp}")
+                                                        break
+                                                    asize=ares.group(1)
+                                                    dprint(f"AFTER => literal (False) {v} => {vtyp} [size={asize}]")
+                                                    if len(asize)>0 and not is_literal(asize):
+                                                        dprint(f"Array size is variable => '{asize}'")
+                                                        asizetyp=sym_lut.get(asize,None)
+                                                        if asizetyp:
+                                                            ainfo=(asizetyp,asize,None)
+                                                            if ainfo not in [x[0] for x in uniq_init]:
+                                                                uniq_init.insert(0,(ainfo,"1"))
                                                     break
-                                        info=(vtyp,v,None)
+                                        subinfo=(vtyp,v,None)
                                         if type(vtype)!=str:
                                             vtyp=get_string2(vtype)
-                                        if info in uniq_init:
-                                            dprint(f"not unique: {info} ... continue!")
+                                        is_macrodef=False
+                                        if re.search(r"\b(void)\b",v):
+                                            is_macrodef=True
+                                        if is_macrodef:
+                                            dprint(f"Skipping {v} => #define")
+                                        elif subinfo in [x[0] for x in uniq_init]:
+                                            dprint(f"not unique: {subinfo} ... continue!")
                                             continue
                                         else:
-                                            dprint(f"unique : {info}")
-                                            uniq_init.append(info)
+                                            dprint(f"unique : {subinfo}")
+                                            uniq_init.append((subinfo,None))
                                 else:
-                                    dprint(f" => is literal (True) {v} [type_info : {type_info}]")
-                            # now we're looking at each set of variables and the RHS value
-                            rtyp=re.sub(r"\bconst\b",r' ',type_info)
-                            x=type_lut.get(rtyp,None)
-                            if not x:
-                                type_lut[rtyp]=[]
-                                #####
-                            if not can_cast(ltyp,rtyp): 
-                                # if we can't cast the RHS to LHS type, then go to next
-                                #print(f"CASTING FAIL: ltype: {ltyp}, lvar: {lname}, rtype : {rtyp}, rvalue: {value}")
-                                continue
-                            #print(f"CASTING PASS: ltype: {ltyp}, lvar: {lname}, rtype : {rtyp}, rvalue: {value}")
-                            info=(ltyp,lname,value,rtyp)
-                            dprint(f"[i={i}][j={j}][k={k}] | type : {rtyp}; def_var : {def_var}; value : {value}")
-                            if info in uniques:
-                                dprint(f"^^ not unique")
-                                continue
-                            else:
-                                dprint(f"^^ unique")
-                                uniques.append(info)
-                                scope_uniq[k].append(info)
+                                    dprint(f" => is literal ({is_lit}) | is operator ({is_op}) {v}")
                     except Exception as e:
                         print(f"Exception with x={x}")
                         print(e)
@@ -1359,82 +1494,135 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
             s1_calls=""
             s1_fn_decl=""
             s1_fn_def=""
+            has_ibody=False
             if len(scope_uniq)>0:
                 s0_calls=""
                 s0_fn_decl=""
                 s0_fn_def=""
                 s1_fn=f"{fname}_{i}_{j}"
+                has_jbody=False
                 for k in range(0,len(scope_uniq)):
                     s0_body_vals=""
                     s0_body_vars=""
                     valid=False
                     udecl_vars=[]
+                    has_kbody=False
                     # and then take the scope_uniq list and generate the initialized values
                     for u in scope_uniq[k]:
                         utyp,uname,uval,rtyp=u
                         utyp=re.sub(r"\bregister\b",r"",utyp)
                         has_uname=re.search(r"\b("+uname+r")\b",uval)
-                        if has_uname :
+                        comment=False
+                        if has_uname:
                             dprint("not valid - "+ f"{utyp} {uname}; {uname} = (({utyp}){uval});\n")
                         elif (utyp,uname) not in udecl_vars and utyp != "UNDEF":
-                            prefix=""
-                            suffix=""
-                            if "[" in uval:
-                                x_re=re.search(r"\[\s*(\S+)\s*\]",uval)
+                            prefix_=list()
+                            suffix_=list()
+                            if "/" in uval or "%" in uval:
+                                x_re=re.search(r"[/%]\s*(\w+)",uval)
+                                found=False
                                 if x_re:
                                     v=x_re.group(1)
-                                    if v in [x[1] for x in uniq_init]:
-                                        prefix=f"    {v} = 0;\n         "
+                                    if v in [x[0][1] for x in uniq_init]:
+                                        prefix_.append(f"    {v} = 1;\n         ")
+                                        found=True
+                                if not found:
+                                    prefix_.append(" /* [not yet implemented] modulo/divisor initialization \n")
+                                    suffix_.insert(0,"\n */ ")
+                                    comment=True
+                            if "[" in uval:
+                                x_re=re.search(r"(\w+)\s*\[\s*(\S+)\s*\]",uval)
+                                if x_re:
+                                    av=x_re.group(1)
+                                    v=x_re.group(2)
+                                    if av not in [x[0][1] for x in uniq_init]:
+                                        prefix_.append(f"if ({av})"+'{')
+                                        suffix_.insert(0,"}")
+                                    if v in [x[0][1] for x in uniq_init]:
+                                        prefix_.append(f"    {v} = 0;\n         ")
                                 else:
                                     x_list=re.findall(r"\[\s*((([^]]+)\s*)+)\]",uval)
                                     y=[x in x_[0] for x_ in x_list for x in ["+","-","*","/"]]
                                     dprint(f" =====> {x_list} '{uval}' => {y} ")
                                     if any(y):
-                                        prefix=" /* [not yet implemented] array based initialization \n"
-                                        suffix="\n */ "
+                                        if not comment:
+                                            prefix_.append(" /* [not yet implemented] array based initialization \n")
+                                            suffix_.insert(0,"\n */ ")
+                                            comment=True
+                                        else:
+                                            prefix_.append(" // [not yet implemented] array based initialization \n")
+                                            suffix_.insert(0,"\n")
                                         dprint(f" === FOUND IT ===> {x_list} [{uval}] ")
                                         
                                 
+                            prefix="".join(prefix_)
+                            suffix="".join(suffix_)
                             if "[ ]" in uname:
                                 xname=uname.replace("[ ]","")
                                 s0_body_vars+="    {"+prefix+f"{utyp}* {xname}; {xname} = ({utyp}*)({uval}); "+suffix+"}\n"
+                                if not comment:
+                                    has_kbody=True
+                            elif "[" in uname:
+                                xnames=uname.split('[')
+                                xname=xnames[0]
+                                for x in xnames[1:]:
+                                    x_=re.sub(']','',x)
+                                    val="[ ("+x_+")-1 ]"
+                                    xname+=val
+                                s0_body_vars+="    {"+prefix+f"{utyp} {uname}; {xname} = ({utyp})({uval}); "+suffix+"}\n"
+                                if not comment:
+                                    has_kbody=True
                             else:
                                 s0_body_vars+="    {"+prefix+f"{utyp} {uname}; {uname} = ({utyp})({uval}); "+suffix+"}\n"
+                                if not comment:
+                                    has_kbody=True
                             udecl_vars.append((utyp,uname))
                             valid=True
                         elif utyp != "UNDEF":
                             # we shouldn't really be hitting this line, but it's a fail-case
                             s0_body_vars+="    "+f"{uname} = ({utyp})({uval});"+"\n"
                             valid=True
+                            has_kbody=True
                         else:
                             dprint("not valid - "+ f"{utyp} {uname}; {uname} = (({utyp}){uval});\n")
                     # only need to generate if we've found a unique (type,variable) tuple
-                    if valid:
+                    if valid and has_kbody:
+                        has_jbody=True
+                        dprint(f"----")
                         for u in uniq_init:
-                            utyp,uname,uval=u
+                            utyp,uname,uval=u[0]; uinit=u[1]
+                            dprint(f"UNIQ_INIT: ('{utyp}','{uname}','{uval}','{uinit}');\n")
                             utyp=re.sub(r"\b(register)\b",r"",utyp).strip()
                             utyp_=re.sub(r"\b(static|const|register)\b",r"",utyp).strip()
                             ptr_=False
-                            if "*" in utyp:
+                            struct_ptr_base=None
+                            if ptr_t and utyp in list(ptr_t.keys()):
+                                struct_ptr_base=ptr_t.get(utyp)
+                                dprint(f"ptr_t: {utyp}, base(ptr_t): {struct_ptr_base}")
+                            if "*" in utyp or struct_ptr_base:
                                 ptr_=True
                                 ptr_cnt=utyp.count('*')
-                                xtyp=utyp.replace("*","").rstrip()
+                                xtyp=None
+                                if not struct_ptr_base:
+                                    xtyp=utyp.replace("*","").rstrip()
+                                else:
+                                    xtyp=struct_ptr_base
                                 xtyp_=re.sub(r"\b(static|const|register)\b",r"",xtyp).strip()
                                 xname=uname.replace(" ","")+"_ref"
                                 x1name=xname
                                 x2name=x1name
-                                size=""
+                                size="1"
                                 if "[" not in xname:
                                     # this is the code that handles pointers
                                     if xtyp_ != "void":
                                         uname=f"{uname} = &{x1name}"
                                         s0_body_vals+=f"{xtyp_} {x1name};\n"
-                                        s0_body_vals+=f"    bzero(&{xname},{size}sizeof({xtyp_}));\n"
+                                        s0_body_vals+=f"    bzero(&{xname},{size}*sizeof({xtyp_}));\n"
                                     else:
                                         # choosing int as the default type to cast a void* to
                                         uname=f"{uname} = (void*)&{x1name}"
                                         s0_body_vals+=f"int {x1name};\n"
-                                        s0_body_vals+=f"    bzero(&{xname},{size}sizeof(int));\n"
+                                        s0_body_vals+=f"    bzero(&{xname},{size}*sizeof(int));\n"
                                     s0_body_vals+=f"{utyp} {uname};\n"
                                     pass
                                 else:
@@ -1442,7 +1630,7 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
                                     first_index_found=False
                                     vals=[]
                                     while("]_ref" in x1name):
-                                        x_re=re.search(r"(\[(\s*\d*\s*)\])",x1name)
+                                        x_re=re.search(r"(\[(\s*[\d\w]*\s*)\])",x1name)
                                         v1=x_re.group(1)
                                         val=x_re.group(2)
                                         vals.append(val)
@@ -1482,9 +1670,18 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
                                 x1name=uname.replace("[ ]","[0]",1)
                                 s0_body_vals+=f"{utyp} {x1name};\n"
                                 s0_body_vals+=f"    bzero(&{x1name},sizeof({utyp_}));\n"
+                            elif "[" in uname:
+                                uname_re=re.search("(\S+)\s*\[\s*(.*)\s*\]$",uname)
+                                name=uname_re.group(1);
+                                size=uname_re.group(2);
+                                s0_body_vals+=f"{utyp} {uname};\n"
+                                s0_body_vals+=f"    bzero(&{name},( {size}*sizeof({utyp_}) ) );\n"
                             else:
                                 s0_body_vals+=f"{utyp} {uname};\n"
-                                s0_body_vals+=f"    bzero(&{uname},sizeof({utyp_}));\n"
+                                if not uinit:
+                                   s0_body_vals+=f"    bzero(&{uname},sizeof({utyp_}));\n"
+                                else:
+                                   s0_body_vals+=f"    {uname}={uinit};\n"
                             decl_vars.append(uname)
                         s0_body=f"{s0_body_vals}{s0_body_vars}"
                         # scope 0 function
@@ -1500,22 +1697,24 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
                         # set of scope 0 function calls
                         s0_calls+=f"{s0_call_fn}"
                     tdecl_vars.extend(udecl_vars)
-                s1_body=""
-                # scope 1 function call (used in scope 2 function definition)
-                s1_call_fn=f"{s1_fn}();\n"
-                s2_fn_decls+=f"void {s1_call_fn}"
-                bl_funcs.append(f"{s1_fn}")
-                s1_calls+=f"{s1_call_fn}"
-                #s1_fn_decl="\n"+s0_fn_decl+"\n"+f"void {s1_call_fn}"+"\n"
-                s1_body=f"{s0_calls}"
-                # scope 0 function definition (with body)
-                s1_fn_def+=s0_fn_def+f"void {s1_fn}()"+"{\n"+f"{s1_body}"+"}\n"
-                dprint("==== Scope 1 ====\n"+f"{s1_fn_def}")
-                #s2_decls+=f"{s1_fn_decl}\n"
-                s2_body+=f"{s1_fn}();"+"\n"
-                #loc = get_end_loc(end)
-                #rewrites.append((s1_call_fn,loc))
-                s2_fn_def+=s1_fn_def
+                if has_jbody:
+                    has_ibody=True
+                    s1_body=""
+                    # scope 1 function call (used in scope 2 function definition)
+                    s1_call_fn=f"{s1_fn}();\n"
+                    s2_fn_decls+=f"void {s1_call_fn}"
+                    bl_funcs.append(f"{s1_fn}")
+                    s1_calls+=f"{s1_call_fn}"
+                    #s1_fn_decl="\n"+s0_fn_decl+"\n"+f"void {s1_call_fn}"+"\n"
+                    s1_body=f"{s0_calls}"
+                    # scope 0 function definition (with body)
+                    s1_fn_def+=s0_fn_def+f"void {s1_fn}()"+"{\n"+f"{s1_body}"+"}\n"
+                    dprint("==== Scope 1 ====\n"+f"{s1_fn_def}")
+                    #s2_decls+=f"{s1_fn_decl}\n"
+                    s2_body+=f"{s1_fn}();"+"\n"
+                    #loc = get_end_loc(end)
+                    #rewrites.append((s1_call_fn,loc))
+                    s2_fn_def+=s1_fn_def
         s2_call_fn=f"{s2_fn}();\n"
         s2_fn_decls+=f"void {s2_fn}();\n"
         s2_calls+=f"{s2_call_fn}"
@@ -1527,11 +1726,11 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
         dprint("[Fix Ingredient functions]  -- START --")
         en_var="fix_ingred_enable"
         if not preface_included:
-            prepend=generate_preface(en_var)+f"\n{s2_fn_decls}\n\n"
+            prepend=generate_preface(en_var)+f"\n{s2_fn_decls}\n"
             preface_included=True
         else:
             #prepend=f"{s2_fn_def}"
-            prepend=f"{s2_fn_decls}\n\n"
+            prepend=f"{s2_fn_decls}\n"
         dprint(prepend)
         loc= get_start_loc(fn)
         rewrites.append((prepend,loc))
@@ -1555,47 +1754,6 @@ def get_fix_loc_subfns(scope,dvars,eval_me,id_="",root=None):
 
 
     
-
-def get_fix_loc_rewrites(scope,def_vars=["i"]):
-    rewrites = []
-    uniques=[]
-    for fn,fs in scope.items():
-        i=0
-        def_vars = get_all_vars(fn, False)
-        strip_array_decs(def_vars)
-        for sn, s in fs.items():
-            parent=s['parent'] if s['parent'] else sn
-            var_s=s['variables']
-            val_s=s['values']
-            end=s['scope_end']
-            for x in val_s:
-                try:
-                    type_info,var,varinfo,value=x
-                    typ=re.sub(r"\bconst\b",r' ',type_info)
-                    for def_var in def_vars:
-                        info=(typ,def_var,value)
-                        if info in uniques:
-                            continue
-                        else:
-                            uniques.append(info)
-                        if value:
-                            loc = get_end_loc(end)
-                            if value==def_var or value.endswith(f" {def_var}") or value.startswith(f"{def_var} ") \
-                            or f" {def_var} " in value:
-                                #rewrites.append((f"/* SKIPPED ({typ}) {def_var}{varinfo} - used in assignment '{value}'  */",loc))
-                                continue
-                            if varinfo != "":
-                                rep_str = ("\t{ "+f"{typ} {def_var}{varinfo} = {value}; /* {var} */"+" }") 
-                            elif varinfo == "":
-                                rep_str = ("\t{ "+f"{typ} {def_var}{varinfo}; {def_var}= {value}; /* {var} */"+" }") 
-                            rewrites.append((rep_str,loc))
-                except Exception as e:
-                    print(f"Exception with x={x}")
-                    print(e)
-                    raise
-            #print("}")
-            i+=1
-    return rewrites
 
 def strip_array_decs(lst):
     for i in range(len(lst)):
@@ -1684,12 +1842,14 @@ def get_func_args(ctx):
             for i in range(len(rs)):
                 if rs[i].startswith("(*"):
                     ts[i] = f"{ts[i]}*"
+                if rs[i].endswith("[]"):
+                    ts[i] = f"{ts[i]}*"
             #print(list(zip(ts, rs)))
             return list(zip(ts, rs))
         else:
                 #print("error")
                 #print(ctx.getText())
-                return None
+                return []
     except Exception as e:
         print("Threw exception in get_func_args of antlr_funcs.py")
         print(e)
@@ -1718,6 +1878,9 @@ def get_func_args_nodes(ctx):
 def get_conditionals(ctx):
     ftlc = find_ctx(ctx, "<class 'CParser.CParser.SelectionStatementContext'>")
     return ftlc
+
+def get_defines(ctx):
+    return find_ctx(ctx,"<class 'CParser.ComplexDefine'>")
 
 def get_functions(ctx):
     return find_ctx(ctx,"<class 'CParser.CParser.FunctionDefinitionContext'>")
@@ -1894,6 +2057,9 @@ def get_json_data(fname,infile):
     disable_eval=[]
     enable_eval=[]
     version=None
+    struct_ptrs={} 
+    keywords=[]
+    defines=[]
     with open(fname, 'r') as j:
         data = json.load(j)
         if 'DEPEND_VERSION' in data.keys():
@@ -1918,13 +2084,22 @@ def get_json_data(fname,infile):
         if 'enable_eval' in data.keys():
             enable_eval=list(data['enable_eval'])
 
+        if 'struct_ptrs' in data.keys():
+            struct_ptrs=dict(data['struct_ptrs'])
+
+        if 'defines' in data.keys():
+            defines=list(data['defines'])
+
+        if 'keyword_types' in data.keys():
+            keywords=list(data['keyword_types'])
+
         for i in enable_eval:
             if i in disable_eval:
                 # let's make sure that if it's allowed to be evaluated as a RHS assignment (non-destructive)
                 # then we don't disable it
                 disable_eval.remove(i)
             
-    return (d1,d2,rd,disable_eval,enable_eval)
+    return (d1,d2,rd,disable_eval,enable_eval,struct_ptrs,keywords,defines)
 
 def resolve_included(includes, infile, pragmas):
     # this function walks through, identifies the #includes and then resolves processing order

@@ -4,12 +4,12 @@
 #rootdir="/home/ubuntu/codeforces-crawler/CodeforcesSpider" #directory of this script
 rootdir=$(dirname -- ${BASH_SOURCE[0]}) #directory of this script
 currentTime=$(date +"%Y-%m-%d-%H-%M-%S")
-RUN_VERSION="trans"
+RUN_VERSION="base"
 rundir="$rootdir/prophet-run-$RUN_VERSION" # directory in which prophet is called from, a temporary output directory where everything will be copied to during the repair
 LOGFILE="$rootdir/prophet-summary-$RUN_VERSION.log"
 mkdir -p $rundir
 #versiondir="$rootdir/codeflaws" #root directory for the codeflaws versions
-versiondir="$CODEFLAWS_BASE/codeflaws-trans" #directory where the codeflaws.tar.gz is extracted
+versiondir="$CODEFLAWS_BASE/codeflaws" #directory where the codeflaws.tar.gz is extracted
 filename="$rootdir/run1" #should be a copy of the codeflaws-defect-detail-info.txt, or select several defects from codeflaws-defect-detail-info.txt
 
 # MAKE SURE YOU UPDATE THIS

@@ -26,3 +26,17 @@ The file, set_env.sh is only used if you need to re-generate the grammar files.
 ## File Naming
 - Please name your generated files `new_<filename>.c`.
 - The .gitignore file will ignore all things named in this way.
+
+## To run PREP evaluation on CodeFlaws:
+- `source ./set_env.sh`
+- Install the APR tools looking to evaluate with Codeflaws
+- cd $CODE_EXPAND_PATH/prep-eval/Codeflaws
+- `source ./setup.bash`  which
+  1. Clones the Codeflaws dataset from git 
+  2. Generates infrastructure to evaluate both original and PREP-enabled APR tool results
+  3. Applies PREP-transforms to this dataset and tests each transform
+  4. Copies baseline and PREP scripts for Codeflaws run and validation.
+- To evaluate PREP on Codeflaws
+  1. As a user, you need to install GenProg, f1x, and Prophet 
+  2. And then manually update 'run-version*.sh' scripts to account for these tool paths in the `codeflaws_repo/all-script/` subdirectory
+-  

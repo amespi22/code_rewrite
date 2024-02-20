@@ -1,0 +1,15 @@
+215-A-2550572.c: In function ‘main’:
+215-A-2550572.c:4:6: warning: implicit declaration of function ‘scanf’ [-Wimplicit-function-declaration]
+  for(scanf("%d",&n);i<n;i++)scanf("%d",A+i);
+      ^~~~~
+215-A-2550572.c:4:6: warning: incompatible implicit declaration of built-in function ‘scanf’
+215-A-2550572.c:4:6: note: include ‘<stdio.h>’ or provide a declaration of ‘scanf’
+215-A-2550572.c:5:6: warning: incompatible implicit declaration of built-in function ‘scanf’
+  for(scanf("%d",&m);j<m;j++)scanf("%d",B+j);
+      ^~~~~
+215-A-2550572.c:5:6: note: include ‘<stdio.h>’ or provide a declaration of ‘scanf’
+215-A-2550572.c:7:8: warning: implicit declaration of function ‘printf’ [-Wimplicit-function-declaration]
+  i=!({ printf("%d\n",r); });
+        ^~~~~~
+215-A-2550572.c:7:8: warning: incompatible implicit declaration of built-in function ‘printf’
+215-A-2550572.c:7:8: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’

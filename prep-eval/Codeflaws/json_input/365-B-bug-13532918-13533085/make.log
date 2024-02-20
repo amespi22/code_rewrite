@@ -1,0 +1,15 @@
+365-B-13532918.c: In function ‘main’:
+365-B-13532918.c:5:1: warning: implicit declaration of function ‘scanf’ [-Wimplicit-function-declaration]
+ scanf("%ld",&n);
+ ^~~~~
+365-B-13532918.c:5:1: warning: incompatible implicit declaration of built-in function ‘scanf’
+365-B-13532918.c:5:1: note: include ‘<stdio.h>’ or provide a declaration of ‘scanf’
+365-B-13532918.c:23:1: warning: implicit declaration of function ‘printf’ [-Wimplicit-function-declaration]
+ printf("%d",maxlen);
+ ^~~~~~
+365-B-13532918.c:23:1: warning: incompatible implicit declaration of built-in function ‘printf’
+365-B-13532918.c:23:1: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+365-B-13532918.c:23:10: warning: format ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long int’ [-Wformat=]
+ printf("%d",maxlen);
+         ~^
+         %ld

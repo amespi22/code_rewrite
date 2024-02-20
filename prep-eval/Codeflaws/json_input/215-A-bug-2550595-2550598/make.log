@@ -1,0 +1,31 @@
+215-A-2550595.c:1:1: warning: data definition has no type or storage class
+ A[50],B[50],i,j,M;
+ ^
+215-A-2550595.c:1:1: warning: type defaults to ‘int’ in declaration of ‘A’ [-Wimplicit-int]
+215-A-2550595.c:1:7: warning: type defaults to ‘int’ in declaration of ‘B’ [-Wimplicit-int]
+ A[50],B[50],i,j,M;
+       ^
+215-A-2550595.c:1:13: warning: type defaults to ‘int’ in declaration of ‘i’ [-Wimplicit-int]
+ A[50],B[50],i,j,M;
+             ^
+215-A-2550595.c:1:15: warning: type defaults to ‘int’ in declaration of ‘j’ [-Wimplicit-int]
+ A[50],B[50],i,j,M;
+               ^
+215-A-2550595.c:1:17: warning: type defaults to ‘int’ in declaration of ‘M’ [-Wimplicit-int]
+ A[50],B[50],i,j,M;
+                 ^
+215-A-2550595.c: In function ‘main’:
+215-A-2550595.c:4:6: warning: implicit declaration of function ‘scanf’ [-Wimplicit-function-declaration]
+  for(scanf("%d",&n);i<n;i++)scanf("%d",A+i);
+      ^~~~~
+215-A-2550595.c:4:6: warning: incompatible implicit declaration of built-in function ‘scanf’
+215-A-2550595.c:4:6: note: include ‘<stdio.h>’ or provide a declaration of ‘scanf’
+215-A-2550595.c:5:6: warning: incompatible implicit declaration of built-in function ‘scanf’
+  for(scanf("%d",&m);j<m;j++)scanf("%d",B+j);
+      ^~~~~
+215-A-2550595.c:5:6: note: include ‘<stdio.h>’ or provide a declaration of ‘scanf’
+215-A-2550595.c:7:5: warning: implicit declaration of function ‘printf’ [-Wimplicit-function-declaration]
+  i=!printf("%d\n",r);
+     ^~~~~~
+215-A-2550595.c:7:5: warning: incompatible implicit declaration of built-in function ‘printf’
+215-A-2550595.c:7:5: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’

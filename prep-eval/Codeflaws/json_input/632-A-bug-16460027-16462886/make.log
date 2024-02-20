@@ -1,0 +1,51 @@
+. /usr/include/inttypes.h
+.. /usr/include/features.h
+... /usr/include/x86_64-linux-gnu/sys/cdefs.h
+.... /usr/include/x86_64-linux-gnu/bits/wordsize.h
+.... /usr/include/x86_64-linux-gnu/bits/long-double.h
+... /usr/include/x86_64-linux-gnu/gnu/stubs.h
+.... /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
+.. /usr/lib/gcc/x86_64-linux-gnu/7/include/stdint.h
+... /usr/include/stdint.h
+.... /usr/include/x86_64-linux-gnu/bits/libc-header-start.h
+.... /usr/include/x86_64-linux-gnu/bits/types.h
+..... /usr/include/x86_64-linux-gnu/bits/wordsize.h
+..... /usr/include/x86_64-linux-gnu/bits/typesizes.h
+.... /usr/include/x86_64-linux-gnu/bits/wchar.h
+.... /usr/include/x86_64-linux-gnu/bits/wordsize.h
+.... /usr/include/x86_64-linux-gnu/bits/stdint-intn.h
+.... /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h
+. /usr/include/stdio.h
+.. /usr/include/x86_64-linux-gnu/bits/libc-header-start.h
+.. /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h
+.. /usr/include/x86_64-linux-gnu/bits/types/__FILE.h
+.. /usr/include/x86_64-linux-gnu/bits/types/FILE.h
+.. /usr/include/x86_64-linux-gnu/bits/libio.h
+... /usr/include/x86_64-linux-gnu/bits/_G_config.h
+.... /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h
+.... /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h
+... /usr/lib/gcc/x86_64-linux-gnu/7/include/stdarg.h
+.. /usr/include/x86_64-linux-gnu/bits/stdio_lim.h
+.. /usr/include/x86_64-linux-gnu/bits/sys_errlist.h
+. /usr/include/string.h
+.. /usr/include/x86_64-linux-gnu/bits/libc-header-start.h
+.. /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h
+632-A-16460027.c: In function ‘main’:
+632-A-16460027.c:23:18: warning: format ‘%lld’ expects argument of type ‘long long int *’, but argument 2 has type ‘int64_t * {aka long int *}’ [-Wformat=]
+  while(scanf("%lld%lld", &n, &v)!=EOF)
+               ~~~^       ~~
+               %ld
+632-A-16460027.c:23:22: warning: format ‘%lld’ expects argument of type ‘long long int *’, but argument 3 has type ‘int64_t * {aka long int *}’ [-Wformat=]
+  while(scanf("%lld%lld", &n, &v)!=EOF)
+                   ~~~^       ~~
+                   %ld
+632-A-16460027.c:41:14: warning: format ‘%lld’ expects argument of type ‘long long int’, but argument 2 has type ‘int64_t {aka long int}’ [-Wformat=]
+   printf("%lld\n", sum1);
+           ~~~^
+           %ld
+Multiple include guards may be useful for:
+/usr/include/x86_64-linux-gnu/bits/long-double.h
+/usr/include/x86_64-linux-gnu/bits/sys_errlist.h
+/usr/include/x86_64-linux-gnu/bits/typesizes.h
+/usr/include/x86_64-linux-gnu/gnu/stubs-64.h
+/usr/include/x86_64-linux-gnu/gnu/stubs.h

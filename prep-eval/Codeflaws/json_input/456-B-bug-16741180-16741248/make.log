@@ -1,0 +1,9 @@
+456-B-16741180.c: In function ‘main’:
+456-B-16741180.c:1:40: warning: implicit declaration of function ‘scanf’ [-Wimplicit-function-declaration]
+ int main(int argc, char *argv[]){int n;scanf("%d",&n);puts("n%4?0:4");return 0;
+                                        ^~~~~
+456-B-16741180.c:1:40: warning: incompatible implicit declaration of built-in function ‘scanf’
+456-B-16741180.c:1:40: note: include ‘<stdio.h>’ or provide a declaration of ‘scanf’
+456-B-16741180.c:1:55: warning: implicit declaration of function ‘puts’ [-Wimplicit-function-declaration]
+ int main(int argc, char *argv[]){int n;scanf("%d",&n);puts("n%4?0:4");return 0;
+                                                       ^~~~

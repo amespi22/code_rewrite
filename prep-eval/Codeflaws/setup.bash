@@ -12,6 +12,7 @@ export CODEFLAWS_BASE=$PWD
 git clone https://github.com/codeflaws/codeflaws.git codeflaws_repo
 wget -c http://www.comp.nus.edu.sg/~release/codeflaws/codeflaws.tar.gz
 tar xvzf codeflaws.tar.gz
+cp -r json_input codeflaws/
 cp -r codeflaws codeflaws-trans
 cp $CODEFLAWS_BASE/transform.bash codeflaws-trans/
 

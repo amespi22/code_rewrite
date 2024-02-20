@@ -1,0 +1,11 @@
+16-C-73707.c: In function ‘main’:
+16-C-73707.c:3:2: warning: implicit declaration of function ‘scanf’ [-Wimplicit-function-declaration]
+  scanf("%d%d%d%d",&a,&b,&x,&y);
+  ^~~~~
+16-C-73707.c:3:2: warning: incompatible implicit declaration of built-in function ‘scanf’
+16-C-73707.c:3:2: note: include ‘<stdio.h>’ or provide a declaration of ‘scanf’
+16-C-73707.c:5:2: warning: implicit declaration of function ‘printf’ [-Wimplicit-function-declaration]
+  printf("%d %d\n",a,b);
+  ^~~~~~
+16-C-73707.c:5:2: warning: incompatible implicit declaration of built-in function ‘printf’
+16-C-73707.c:5:2: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’

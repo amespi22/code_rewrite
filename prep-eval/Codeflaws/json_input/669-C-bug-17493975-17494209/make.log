@@ -1,0 +1,20 @@
+669-C-17493975.c: In function ‘print’:
+669-C-17493975.c:31:39: warning: implicit declaration of function ‘printf’ [-Wimplicit-function-declaration]
+         for (j = 0; j < MColums; j++) printf("%d ", Cells[i][j]);
+                                       ^~~~~~
+669-C-17493975.c:31:39: warning: incompatible implicit declaration of built-in function ‘printf’
+669-C-17493975.c:31:39: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+669-C-17493975.c:32:9: warning: incompatible implicit declaration of built-in function ‘printf’
+         printf("\n");
+         ^~~~~~
+669-C-17493975.c:32:9: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+669-C-17493975.c:35:5: warning: incompatible implicit declaration of built-in function ‘printf’
+     printf("\n");
+     ^~~~~~
+669-C-17493975.c:35:5: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+669-C-17493975.c: In function ‘main’:
+669-C-17493975.c:38:5: warning: implicit declaration of function ‘scanf’ [-Wimplicit-function-declaration]
+     scanf("%d%d%d", &NRows, &MColums, &NoMatches);
+     ^~~~~
+669-C-17493975.c:38:5: warning: incompatible implicit declaration of built-in function ‘scanf’
+669-C-17493975.c:38:5: note: include ‘<stdio.h>’ or provide a declaration of ‘scanf’

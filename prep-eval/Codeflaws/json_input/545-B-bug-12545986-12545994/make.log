@@ -1,0 +1,70 @@
+. /usr/include/stdio.h
+.. /usr/include/x86_64-linux-gnu/bits/libc-header-start.h
+... /usr/include/features.h
+.... /usr/include/x86_64-linux-gnu/sys/cdefs.h
+..... /usr/include/x86_64-linux-gnu/bits/wordsize.h
+..... /usr/include/x86_64-linux-gnu/bits/long-double.h
+.... /usr/include/x86_64-linux-gnu/gnu/stubs.h
+..... /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
+.. /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h
+.. /usr/include/x86_64-linux-gnu/bits/types.h
+... /usr/include/x86_64-linux-gnu/bits/wordsize.h
+... /usr/include/x86_64-linux-gnu/bits/typesizes.h
+.. /usr/include/x86_64-linux-gnu/bits/types/__FILE.h
+.. /usr/include/x86_64-linux-gnu/bits/types/FILE.h
+.. /usr/include/x86_64-linux-gnu/bits/libio.h
+... /usr/include/x86_64-linux-gnu/bits/_G_config.h
+.... /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h
+.... /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h
+... /usr/lib/gcc/x86_64-linux-gnu/7/include/stdarg.h
+.. /usr/include/x86_64-linux-gnu/bits/stdio_lim.h
+.. /usr/include/x86_64-linux-gnu/bits/sys_errlist.h
+. /usr/include/stdlib.h
+.. /usr/include/x86_64-linux-gnu/bits/libc-header-start.h
+.. /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h
+.. /usr/include/x86_64-linux-gnu/bits/floatn.h
+... /usr/include/x86_64-linux-gnu/bits/floatn-common.h
+.... /usr/include/x86_64-linux-gnu/bits/long-double.h
+.. /usr/include/x86_64-linux-gnu/bits/stdlib-float.h
+. /usr/include/math.h
+.. /usr/include/x86_64-linux-gnu/bits/libc-header-start.h
+.. /usr/include/x86_64-linux-gnu/bits/math-vector.h
+... /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h
+.. /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h
+.. /usr/include/x86_64-linux-gnu/bits/fp-logb.h
+.. /usr/include/x86_64-linux-gnu/bits/fp-fast.h
+.. /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h
+.. /usr/include/x86_64-linux-gnu/bits/mathcalls.h
+.. /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h
+.. /usr/include/x86_64-linux-gnu/bits/mathcalls.h
+.. /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h
+.. /usr/include/x86_64-linux-gnu/bits/mathcalls.h
+.. /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h
+545-B-12545986.c: In function ‘main’:
+545-B-12545986.c:15:13: warning: format ‘%s’ expects argument of type ‘char *’, but argument 2 has type ‘char (*)[100005]’ [-Wformat=]
+     scanf("%s",&s1);
+            ~^  ~~~
+545-B-12545986.c:16:13: warning: format ‘%s’ expects argument of type ‘char *’, but argument 2 has type ‘char (*)[100005]’ [-Wformat=]
+     scanf("%s",&s2);
+            ~^  ~~~
+545-B-12545986.c:17:5: warning: implicit declaration of function ‘strcpy’ [-Wimplicit-function-declaration]
+     strcpy(s3,s2);
+     ^~~~~~
+545-B-12545986.c:17:5: warning: incompatible implicit declaration of built-in function ‘strcpy’
+545-B-12545986.c:17:5: note: include ‘<string.h>’ or provide a declaration of ‘strcpy’
+545-B-12545986.c:18:9: warning: implicit declaration of function ‘strlen’ [-Wimplicit-function-declaration]
+     n = strlen(s1);
+         ^~~~~~
+545-B-12545986.c:18:9: warning: incompatible implicit declaration of built-in function ‘strlen’
+545-B-12545986.c:18:9: note: include ‘<string.h>’ or provide a declaration of ‘strlen’
+Multiple include guards may be useful for:
+/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h
+/usr/include/x86_64-linux-gnu/bits/fp-fast.h
+/usr/include/x86_64-linux-gnu/bits/fp-logb.h
+/usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h
+/usr/include/x86_64-linux-gnu/bits/math-vector.h
+/usr/include/x86_64-linux-gnu/bits/stdlib-float.h
+/usr/include/x86_64-linux-gnu/bits/sys_errlist.h
+/usr/include/x86_64-linux-gnu/bits/typesizes.h
+/usr/include/x86_64-linux-gnu/gnu/stubs-64.h
+/usr/include/x86_64-linux-gnu/gnu/stubs.h

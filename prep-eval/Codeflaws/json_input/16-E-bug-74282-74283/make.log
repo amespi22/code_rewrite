@@ -1,0 +1,15 @@
+16-E-74282.c: In function ‘dfs’:
+16-E-74282.c:4:6: warning: type of ‘mask’ defaults to ‘int’ [-Wimplicit-int]
+ void dfs(mask)
+      ^~~
+16-E-74282.c: In function ‘main’:
+16-E-74282.c:32:2: warning: implicit declaration of function ‘scanf’ [-Wimplicit-function-declaration]
+  scanf("%d",&n);
+  ^~~~~
+16-E-74282.c:32:2: warning: incompatible implicit declaration of built-in function ‘scanf’
+16-E-74282.c:32:2: note: include ‘<stdio.h>’ or provide a declaration of ‘scanf’
+16-E-74282.c:38:3: warning: implicit declaration of function ‘printf’ [-Wimplicit-function-declaration]
+   printf("%.6lf ",ans[(1<<n)-1][i]);
+   ^~~~~~
+16-E-74282.c:38:3: warning: incompatible implicit declaration of built-in function ‘printf’
+16-E-74282.c:38:3: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’

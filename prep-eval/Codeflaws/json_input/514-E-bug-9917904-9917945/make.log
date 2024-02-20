@@ -1,0 +1,30 @@
+. /usr/include/stdlib.h
+.. /usr/include/x86_64-linux-gnu/bits/libc-header-start.h
+... /usr/include/features.h
+.... /usr/include/x86_64-linux-gnu/sys/cdefs.h
+..... /usr/include/x86_64-linux-gnu/bits/wordsize.h
+..... /usr/include/x86_64-linux-gnu/bits/long-double.h
+.... /usr/include/x86_64-linux-gnu/gnu/stubs.h
+..... /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
+.. /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h
+.. /usr/include/x86_64-linux-gnu/bits/floatn.h
+... /usr/include/x86_64-linux-gnu/bits/floatn-common.h
+.... /usr/include/x86_64-linux-gnu/bits/long-double.h
+.. /usr/include/x86_64-linux-gnu/bits/stdlib-float.h
+. /usr/include/string.h
+.. /usr/include/x86_64-linux-gnu/bits/libc-header-start.h
+.. /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h
+514-E-9917904.c: In function ‘readint’:
+514-E-9917904.c:8:13: warning: implicit declaration of function ‘getchar’; did you mean ‘memchr’? [-Wimplicit-function-declaration]
+  while((c = getchar())<'-');
+             ^~~~~~~
+             memchr
+514-E-9917904.c: In function ‘putint’:
+514-E-9917904.c:16:12: warning: implicit declaration of function ‘putchar’ [-Wimplicit-function-declaration]
+  while(k>0)putchar(a/k%10+48),k/=10;
+            ^~~~~~~
+Multiple include guards may be useful for:
+/usr/include/x86_64-linux-gnu/bits/stdlib-float.h
+/usr/include/x86_64-linux-gnu/bits/wordsize.h
+/usr/include/x86_64-linux-gnu/gnu/stubs-64.h
+/usr/include/x86_64-linux-gnu/gnu/stubs.h

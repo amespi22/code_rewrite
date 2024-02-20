@@ -1,0 +1,7 @@
+456-B-16741116.c: In function ‘main’:
+456-B-16741116.c:1:40: warning: implicit declaration of function ‘gets’ [-Wimplicit-function-declaration]
+ int main(int argc, char *argv[]){int n;gets("%d",&n);puts(n%4?"0":"4");return 0;
+                                        ^~~~
+456-B-16741116.c:1:54: warning: implicit declaration of function ‘puts’ [-Wimplicit-function-declaration]
+ int main(int argc, char *argv[]){int n;gets("%d",&n);puts(n%4?"0":"4");return 0;
+                                                      ^~~~

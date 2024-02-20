@@ -1,0 +1,11 @@
+246-A-5489247.c: In function ‘main’:
+246-A-5489247.c:1:31: warning: implicit declaration of function ‘scanf’ [-Wimplicit-function-declaration]
+ int main(int n, char *argv[]){scanf("%d",&n);while(n--)printf("%d ",n);return 0;
+                               ^~~~~
+246-A-5489247.c:1:31: warning: incompatible implicit declaration of built-in function ‘scanf’
+246-A-5489247.c:1:31: note: include ‘<stdio.h>’ or provide a declaration of ‘scanf’
+246-A-5489247.c:1:56: warning: implicit declaration of function ‘printf’ [-Wimplicit-function-declaration]
+ int main(int n, char *argv[]){scanf("%d",&n);while(n--)printf("%d ",n);return 0;
+                                                        ^~~~~~
+246-A-5489247.c:1:56: warning: incompatible implicit declaration of built-in function ‘printf’
+246-A-5489247.c:1:56: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’

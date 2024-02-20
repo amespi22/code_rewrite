@@ -1,0 +1,16 @@
+136-B-1117154.c: In function ‘main’:
+136-B-1117154.c:3:5: warning: implicit declaration of function ‘scanf’ [-Wimplicit-function-declaration]
+ for(scanf("%d%d",&a,&c);a|b;x*=3,a/=3,c/=3)b+=(3+c%3-a%3)%3*x;
+     ^~~~~
+136-B-1117154.c:3:5: warning: incompatible implicit declaration of built-in function ‘scanf’
+136-B-1117154.c:3:5: note: include ‘<stdio.h>’ or provide a declaration of ‘scanf’
+136-B-1117154.c:4:1: warning: implicit declaration of function ‘printf’ [-Wimplicit-function-declaration]
+ printf("%d",b);exit(0);
+ ^~~~~~
+136-B-1117154.c:4:1: warning: incompatible implicit declaration of built-in function ‘printf’
+136-B-1117154.c:4:1: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+136-B-1117154.c:4:16: warning: implicit declaration of function ‘exit’ [-Wimplicit-function-declaration]
+ printf("%d",b);exit(0);
+                ^~~~
+136-B-1117154.c:4:16: warning: incompatible implicit declaration of built-in function ‘exit’
+136-B-1117154.c:4:16: note: include ‘<stdlib.h>’ or provide a declaration of ‘exit’

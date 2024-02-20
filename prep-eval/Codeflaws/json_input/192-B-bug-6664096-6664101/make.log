@@ -1,0 +1,34 @@
+. /usr/include/stdio.h
+.. /usr/include/x86_64-linux-gnu/bits/libc-header-start.h
+... /usr/include/features.h
+.... /usr/include/x86_64-linux-gnu/sys/cdefs.h
+..... /usr/include/x86_64-linux-gnu/bits/wordsize.h
+..... /usr/include/x86_64-linux-gnu/bits/long-double.h
+.... /usr/include/x86_64-linux-gnu/gnu/stubs.h
+..... /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
+.. /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h
+.. /usr/include/x86_64-linux-gnu/bits/types.h
+... /usr/include/x86_64-linux-gnu/bits/wordsize.h
+... /usr/include/x86_64-linux-gnu/bits/typesizes.h
+.. /usr/include/x86_64-linux-gnu/bits/types/__FILE.h
+.. /usr/include/x86_64-linux-gnu/bits/types/FILE.h
+.. /usr/include/x86_64-linux-gnu/bits/libio.h
+... /usr/include/x86_64-linux-gnu/bits/_G_config.h
+.... /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h
+.... /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h
+... /usr/lib/gcc/x86_64-linux-gnu/7/include/stdarg.h
+.. /usr/include/x86_64-linux-gnu/bits/stdio_lim.h
+.. /usr/include/x86_64-linux-gnu/bits/sys_errlist.h
+192-B-6664096.c: In function ‘dim’:
+192-B-6664096.c:50:17: warning: implicit declaration of function ‘malloc’ [-Wimplicit-function-declaration]
+     ptr = (int*)malloc( tamanto * sizeof( int ) );
+                 ^~~~~~
+192-B-6664096.c:50:17: warning: incompatible implicit declaration of built-in function ‘malloc’
+192-B-6664096.c:50:17: note: include ‘<stdlib.h>’ or provide a declaration of ‘malloc’
+Multiple include guards may be useful for:
+/usr/include/x86_64-linux-gnu/bits/libc-header-start.h
+/usr/include/x86_64-linux-gnu/bits/long-double.h
+/usr/include/x86_64-linux-gnu/bits/sys_errlist.h
+/usr/include/x86_64-linux-gnu/bits/typesizes.h
+/usr/include/x86_64-linux-gnu/gnu/stubs-64.h
+/usr/include/x86_64-linux-gnu/gnu/stubs.h

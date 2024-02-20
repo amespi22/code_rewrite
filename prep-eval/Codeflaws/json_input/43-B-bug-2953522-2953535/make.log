@@ -1,0 +1,13 @@
+43-B-2953522.c: In function ‘main’:
+43-B-2953522.c:5:5: warning: implicit declaration of function ‘gets’ [-Wimplicit-function-declaration]
+     gets(str);
+     ^~~~
+43-B-2953522.c:15:13: warning: implicit declaration of function ‘printf’ [-Wimplicit-function-declaration]
+             printf("NO\n");
+             ^~~~~~
+43-B-2953522.c:15:13: warning: incompatible implicit declaration of built-in function ‘printf’
+43-B-2953522.c:15:13: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+43-B-2953522.c:20:5: warning: incompatible implicit declaration of built-in function ‘printf’
+     printf("YES\n");
+     ^~~~~~
+43-B-2953522.c:20:5: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’

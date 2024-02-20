@@ -1,0 +1,11 @@
+305-C-3743141.c: In function ‘main’:
+305-C-3743141.c:6:2: warning: implicit declaration of function ‘printf’ [-Wimplicit-function-declaration]
+  printf("%x\n",100000);
+  ^~~~~~
+305-C-3743141.c:6:2: warning: incompatible implicit declaration of built-in function ‘printf’
+305-C-3743141.c:6:2: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+305-C-3743141.c:7:9: warning: implicit declaration of function ‘scanf’ [-Wimplicit-function-declaration]
+  while(~scanf("%lld",&n))
+         ^~~~~
+305-C-3743141.c:7:9: warning: incompatible implicit declaration of built-in function ‘scanf’
+305-C-3743141.c:7:9: note: include ‘<stdio.h>’ or provide a declaration of ‘scanf’

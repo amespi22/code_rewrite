@@ -1,0 +1,16 @@
+177-B2-1597105.c: In function ‘main’:
+177-B2-1597105.c:12:2: warning: implicit declaration of function ‘scanf’ [-Wimplicit-function-declaration]
+  scanf("%d",&n);
+  ^~~~~
+177-B2-1597105.c:12:2: warning: incompatible implicit declaration of built-in function ‘scanf’
+177-B2-1597105.c:12:2: note: include ‘<stdio.h>’ or provide a declaration of ‘scanf’
+177-B2-1597105.c:26:2: warning: implicit declaration of function ‘printf’ [-Wimplicit-function-declaration]
+  printf("%d\n",c+(n>1?1:0));
+  ^~~~~~
+177-B2-1597105.c:26:2: warning: incompatible implicit declaration of built-in function ‘printf’
+177-B2-1597105.c:26:2: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+177-B2-1597105.c:29:2: warning: implicit declaration of function ‘exit’ [-Wimplicit-function-declaration]
+  exit(0);
+  ^~~~
+177-B2-1597105.c:29:2: warning: incompatible implicit declaration of built-in function ‘exit’
+177-B2-1597105.c:29:2: note: include ‘<stdlib.h>’ or provide a declaration of ‘exit’

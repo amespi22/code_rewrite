@@ -1,0 +1,19 @@
+90-C-494712.c: In function ‘main’:
+90-C-494712.c:3:5: warning: implicit declaration of function ‘scanf’ [-Wimplicit-function-declaration]
+     scanf("%d%d%d",&n,&m,&k);
+     ^~~~~
+90-C-494712.c:3:5: warning: incompatible implicit declaration of built-in function ‘scanf’
+90-C-494712.c:3:5: note: include ‘<stdio.h>’ or provide a declaration of ‘scanf’
+90-C-494712.c:6:17: warning: implicit declaration of function ‘printf’ [-Wimplicit-function-declaration]
+     if(!(n&1)){ printf("0\n");return 0;}
+                 ^~~~~~
+90-C-494712.c:6:17: warning: incompatible implicit declaration of built-in function ‘printf’
+90-C-494712.c:6:17: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+90-C-494712.c:11:5: warning: incompatible implicit declaration of built-in function ‘printf’
+     printf("%d\n",(long long)(m*k)<min?(long long)(m*k):min);
+     ^~~~~~
+90-C-494712.c:11:5: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+90-C-494712.c:11:14: warning: format ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long long int’ [-Wformat=]
+     printf("%d\n",(long long)(m*k)<min?(long long)(m*k):min);
+             ~^    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+             %lld

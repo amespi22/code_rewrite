@@ -1,0 +1,93 @@
+. /usr/include/stdio.h
+.. /usr/include/x86_64-linux-gnu/bits/libc-header-start.h
+... /usr/include/features.h
+.... /usr/include/x86_64-linux-gnu/sys/cdefs.h
+..... /usr/include/x86_64-linux-gnu/bits/wordsize.h
+..... /usr/include/x86_64-linux-gnu/bits/long-double.h
+.... /usr/include/x86_64-linux-gnu/gnu/stubs.h
+..... /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
+.. /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h
+.. /usr/include/x86_64-linux-gnu/bits/types.h
+... /usr/include/x86_64-linux-gnu/bits/wordsize.h
+... /usr/include/x86_64-linux-gnu/bits/typesizes.h
+.. /usr/include/x86_64-linux-gnu/bits/types/__FILE.h
+.. /usr/include/x86_64-linux-gnu/bits/types/FILE.h
+.. /usr/include/x86_64-linux-gnu/bits/libio.h
+... /usr/include/x86_64-linux-gnu/bits/_G_config.h
+.... /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h
+.... /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h
+... /usr/lib/gcc/x86_64-linux-gnu/7/include/stdarg.h
+.. /usr/include/x86_64-linux-gnu/bits/stdio_lim.h
+.. /usr/include/x86_64-linux-gnu/bits/sys_errlist.h
+366-A-5318865.c: In function ‘main’:
+366-A-5318865.c:55:24: warning: format ‘%d’ expects argument of type ‘int’, but argument 4 has type ‘long int’ [-Wformat=]
+         printf("%d %d %d",e[0],a[0],(n - a[0]) );
+                       ~^            ~~~~~~~~~~
+                       %ld
+366-A-5318865.c:59:24: warning: format ‘%d’ expects argument of type ‘int’, but argument 4 has type ‘long int’ [-Wformat=]
+         printf("%d %d %d",e[0],a[1],(n - a[1]) );
+                       ~^            ~~~~~~~~~~
+                       %ld
+366-A-5318865.c:63:24: warning: format ‘%d’ expects argument of type ‘int’, but argument 4 has type ‘long int’ [-Wformat=]
+         printf("%d %d %d",e[1],b[0],(n - b[0]) );
+                       ~^            ~~~~~~~~~~
+                       %ld
+366-A-5318865.c:66:24: warning: format ‘%d’ expects argument of type ‘int’, but argument 4 has type ‘long int’ [-Wformat=]
+         printf("%d %d %d",e[1],b[1],(n - b[1]) );
+                       ~^            ~~~~~~~~~~
+                       %ld
+366-A-5318865.c:69:24: warning: format ‘%d’ expects argument of type ‘int’, but argument 4 has type ‘long int’ [-Wformat=]
+         printf("%d %d %d",e[2],c[0],(n - c[0]) );
+                       ~^            ~~~~~~~~~~
+                       %ld
+366-A-5318865.c:72:24: warning: format ‘%d’ expects argument of type ‘int’, but argument 4 has type ‘long int’ [-Wformat=]
+         printf("%d %d %d",e[2],c[1],(n - c[1]));
+                       ~^            ~~~~~~~~~~
+                       %ld
+366-A-5318865.c:75:24: warning: format ‘%d’ expects argument of type ‘int’, but argument 4 has type ‘long int’ [-Wformat=]
+         printf("%d %d %d",e[3],d[0],(n - d[0]) );
+                       ~^            ~~~~~~~~~~
+                       %ld
+366-A-5318865.c:78:24: warning: format ‘%d’ expects argument of type ‘int’, but argument 4 has type ‘long int’ [-Wformat=]
+         printf("%d %d %d",e[3],d[1],(n - d[1]) );
+                       ~^            ~~~~~~~~~~
+                       %ld
+366-A-5318865.c:109:24: warning: format ‘%d’ expects argument of type ‘int’, but argument 4 has type ‘long int’ [-Wformat=]
+         printf("%d %d %d",e[0],a[0],(n - a[0]) );
+                       ~^            ~~~~~~~~~~
+                       %ld
+366-A-5318865.c:113:24: warning: format ‘%d’ expects argument of type ‘int’, but argument 4 has type ‘long int’ [-Wformat=]
+         printf("%d %d %d",e[0],a[1],(n - a[1]) );
+                       ~^            ~~~~~~~~~~
+                       %ld
+366-A-5318865.c:117:24: warning: format ‘%d’ expects argument of type ‘int’, but argument 4 has type ‘long int’ [-Wformat=]
+         printf("%d %d %d",e[1],b[0],(n - b[0]) );
+                       ~^            ~~~~~~~~~~
+                       %ld
+366-A-5318865.c:120:24: warning: format ‘%d’ expects argument of type ‘int’, but argument 4 has type ‘long int’ [-Wformat=]
+         printf("%d %d %d",e[1],b[1],(n - b[1]) );
+                       ~^            ~~~~~~~~~~
+                       %ld
+366-A-5318865.c:123:24: warning: format ‘%d’ expects argument of type ‘int’, but argument 4 has type ‘long int’ [-Wformat=]
+         printf("%d %d %d",e[2],c[0],(n - c[0]) );
+                       ~^            ~~~~~~~~~~
+                       %ld
+366-A-5318865.c:126:24: warning: format ‘%d’ expects argument of type ‘int’, but argument 4 has type ‘long int’ [-Wformat=]
+         printf("%d %d %d",e[2],c[1],(n - c[1]));
+                       ~^            ~~~~~~~~~~
+                       %ld
+366-A-5318865.c:129:24: warning: format ‘%d’ expects argument of type ‘int’, but argument 4 has type ‘long int’ [-Wformat=]
+         printf("%d %d %d",e[3],d[0],(n - d[0]) );
+                       ~^            ~~~~~~~~~~
+                       %ld
+366-A-5318865.c:132:24: warning: format ‘%d’ expects argument of type ‘int’, but argument 4 has type ‘long int’ [-Wformat=]
+         printf("%d %d %d",e[3],d[1],(n - d[1]) );
+                       ~^            ~~~~~~~~~~
+                       %ld
+Multiple include guards may be useful for:
+/usr/include/x86_64-linux-gnu/bits/libc-header-start.h
+/usr/include/x86_64-linux-gnu/bits/long-double.h
+/usr/include/x86_64-linux-gnu/bits/sys_errlist.h
+/usr/include/x86_64-linux-gnu/bits/typesizes.h
+/usr/include/x86_64-linux-gnu/gnu/stubs-64.h
+/usr/include/x86_64-linux-gnu/gnu/stubs.h

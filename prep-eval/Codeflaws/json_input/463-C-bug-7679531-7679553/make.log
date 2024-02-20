@@ -1,0 +1,35 @@
+463-C-7679531.c: In function ‘main’:
+463-C-7679531.c:3:2: warning: implicit declaration of function ‘scanf’ [-Wimplicit-function-declaration]
+  scanf("%d",&n);
+  ^~~~~
+463-C-7679531.c:3:2: warning: incompatible implicit declaration of built-in function ‘scanf’
+463-C-7679531.c:3:2: note: include ‘<stdio.h>’ or provide a declaration of ‘scanf’
+463-C-7679531.c:3:10: warning: format ‘%d’ expects argument of type ‘int *’, but argument 2 has type ‘long long int *’ [-Wformat=]
+  scanf("%d",&n);
+         ~^  ~~
+         %lld
+463-C-7679531.c:6:12: warning: format ‘%d’ expects argument of type ‘int *’, but argument 2 has type ‘long long int *’ [-Wformat=]
+    scanf("%d",a+i*n+j),d[i+j]+=a[i*n+j],e[i-j+n]+=a[i*n+j];
+           ~^  ~~~~~~~
+           %lld
+463-C-7679531.c:11:2: warning: implicit declaration of function ‘printf’ [-Wimplicit-function-declaration]
+  printf("%lld\n%d %d %d %d",y+z,p,q,r,s);
+  ^~~~~~
+463-C-7679531.c:11:2: warning: incompatible implicit declaration of built-in function ‘printf’
+463-C-7679531.c:11:2: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+463-C-7679531.c:11:17: warning: format ‘%d’ expects argument of type ‘int’, but argument 3 has type ‘long long int’ [-Wformat=]
+  printf("%lld\n%d %d %d %d",y+z,p,q,r,s);
+                ~^
+                %lld
+463-C-7679531.c:11:20: warning: format ‘%d’ expects argument of type ‘int’, but argument 4 has type ‘long long int’ [-Wformat=]
+  printf("%lld\n%d %d %d %d",y+z,p,q,r,s);
+                   ~^
+                   %lld
+463-C-7679531.c:11:23: warning: format ‘%d’ expects argument of type ‘int’, but argument 5 has type ‘long long int’ [-Wformat=]
+  printf("%lld\n%d %d %d %d",y+z,p,q,r,s);
+                      ~^
+                      %lld
+463-C-7679531.c:11:26: warning: format ‘%d’ expects argument of type ‘int’, but argument 6 has type ‘long long int’ [-Wformat=]
+  printf("%lld\n%d %d %d %d",y+z,p,q,r,s);
+                         ~^
+                         %lld

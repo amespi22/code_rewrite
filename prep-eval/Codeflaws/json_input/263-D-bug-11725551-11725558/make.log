@@ -1,0 +1,37 @@
+. /usr/include/stdlib.h
+.. /usr/include/x86_64-linux-gnu/bits/libc-header-start.h
+... /usr/include/features.h
+.... /usr/include/x86_64-linux-gnu/sys/cdefs.h
+..... /usr/include/x86_64-linux-gnu/bits/wordsize.h
+..... /usr/include/x86_64-linux-gnu/bits/long-double.h
+.... /usr/include/x86_64-linux-gnu/gnu/stubs.h
+..... /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
+.. /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h
+.. /usr/include/x86_64-linux-gnu/bits/floatn.h
+... /usr/include/x86_64-linux-gnu/bits/floatn-common.h
+.... /usr/include/x86_64-linux-gnu/bits/long-double.h
+.. /usr/include/x86_64-linux-gnu/bits/stdlib-float.h
+263-D-11725551.c: In function ‘f’:
+263-D-11725551.c:10:1: warning: implicit declaration of function ‘printf’ [-Wimplicit-function-declaration]
+ printf("%d %d\n",x ,s);
+ ^~~~~~
+263-D-11725551.c:10:1: warning: incompatible implicit declaration of built-in function ‘printf’
+263-D-11725551.c:10:1: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+263-D-11725551.c: In function ‘main’:
+263-D-11725551.c:21:5: warning: implicit declaration of function ‘scanf’ [-Wimplicit-function-declaration]
+     scanf("%d %d %d",&n,&s,&w);
+     ^~~~~
+263-D-11725551.c:21:5: warning: incompatible implicit declaration of built-in function ‘scanf’
+263-D-11725551.c:21:5: note: include ‘<stdio.h>’ or provide a declaration of ‘scanf’
+263-D-11725551.c:29:29: warning: implicit declaration of function ‘memset’ [-Wimplicit-function-declaration]
+     for(i=1;i<=n;i++) f(i), memset(H , 0 , 100007);
+                             ^~~~~~
+263-D-11725551.c:29:29: warning: incompatible implicit declaration of built-in function ‘memset’
+263-D-11725551.c:29:29: note: include ‘<string.h>’ or provide a declaration of ‘memset’
+Multiple include guards may be useful for:
+/usr/include/x86_64-linux-gnu/bits/libc-header-start.h
+/usr/include/x86_64-linux-gnu/bits/stdlib-float.h
+/usr/include/x86_64-linux-gnu/bits/wordsize.h
+/usr/include/x86_64-linux-gnu/gnu/stubs-64.h
+/usr/include/x86_64-linux-gnu/gnu/stubs.h
+/usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h

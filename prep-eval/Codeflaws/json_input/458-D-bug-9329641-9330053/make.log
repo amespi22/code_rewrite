@@ -1,0 +1,21 @@
+458-D-9329641.c: In function ‘main’:
+458-D-9329641.c:4:3: warning: implicit declaration of function ‘scanf’ [-Wimplicit-function-declaration]
+   scanf("%d%d%d",&n,&m,&k);
+   ^~~~~
+458-D-9329641.c:4:3: warning: incompatible implicit declaration of built-in function ‘scanf’
+458-D-9329641.c:4:3: note: include ‘<stdio.h>’ or provide a declaration of ‘scanf’
+458-D-9329641.c:6:17: warning: implicit declaration of function ‘log’ [-Wimplicit-function-declaration]
+     f[i]=f[i-1]+log(i);
+                 ^~~
+458-D-9329641.c:6:17: warning: incompatible implicit declaration of built-in function ‘log’
+458-D-9329641.c:6:17: note: include ‘<math.h>’ or provide a declaration of ‘log’
+458-D-9329641.c:10:15: warning: implicit declaration of function ‘exp’ [-Wimplicit-function-declaration]
+       a+=k>=r?exp(2*f[n]-f[i]-f[n-i]-f[j]-f[n-j]+f[m-r]-f[k-r]-f[m]+f[k]):0;
+               ^~~
+458-D-9329641.c:10:15: warning: incompatible implicit declaration of built-in function ‘exp’
+458-D-9329641.c:10:15: note: include ‘<math.h>’ or provide a declaration of ‘exp’
+458-D-9329641.c:13:3: warning: implicit declaration of function ‘printf’ [-Wimplicit-function-declaration]
+   printf("%.9f\n",(double)a);
+   ^~~~~~
+458-D-9329641.c:13:3: warning: incompatible implicit declaration of built-in function ‘printf’
+458-D-9329641.c:13:3: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
